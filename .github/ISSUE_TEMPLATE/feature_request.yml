@@ -1,0 +1,36 @@
+name: Feature request
+description: Propose a contract, catalog, or library improvement
+title: "[feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Foundational features belong in this repo ([CANONICAL_SCOPE](https://github.com/Ambient-Team/ambient-core/blob/main/docs/CANONICAL_SCOPE.md)). App-specific UI or deploy belongs in your application repo.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: Who benefits and what governance or interoperability gap this closes.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Contracts YAML, catalog pack, API shape, or module behavior.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - contracts
+        - catalog
+        - ambient_pipeline
+        - Maestro / inference
+        - ambient_agent
+        - other
+    validations:
+      required: true

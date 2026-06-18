@@ -18,8 +18,6 @@ def _repo_roots() -> list[Path]:
         Path.cwd().parent.parent,
         here.parents[2],
     ]
-    for root in (Path("/Workspace/Repos/ambient-systems-platform"),):
-        candidates.append(root)
     seen: set[Path] = set()
     unique: list[Path] = []
     for path in candidates:

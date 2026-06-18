@@ -1,8 +1,13 @@
 """
 Lightweight agent runtime (open extension point).
 
-Commercial orchestration and SaaS-specific agents stay in ambient-systems-platform.
-This package reserves namespaces and shared primitives for future open-source agent flows.
+SaaS-specific orchestration and tenant agents belong in downstream application repositories.
+Maestro (`ambient_inference`) owns multi-model inference; this package holds neutral boundaries
+and future shared primitives for agentic workflows on top of governed data.
+
+See docs/AGENTS.md in the repository root.
 """
 
-__all__: list[str] = []
+from ambient_agent.boundaries import AgentRunContext, InferenceClient
+
+__all__ = ["AgentRunContext", "InferenceClient"]

@@ -1,17 +1,17 @@
 # Security
 
-**ambient-core** is the public MIT open-source foundation for Ambient Systems (contracts, catalog, governance helpers, Maestro inference). Platform runtime security (Unity Catalog RLS, masking, multi-tenant isolation in production) is implemented in [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform) and described in the private [ambient-systems](https://github.com/Ambient-Team/ambient-systems) documentation vault—not in this repository.
+**Ambient Core** is an MIT library and schema foundation (contracts, catalog, governance, Maestro). Report security issues **in this codebase** here; deployment and tenant isolation for a specific product are out of scope unless the flaw is in shipped library or service defaults in this tree.
 
 ## Supported versions
 
-Security fixes are applied on the **`main`** branch and released via git tags (`vX.Y.Z`). The production platform pins a specific tag in its `pyproject.toml`; upgrade the pin after taking a new core release.
+Security fixes are applied on the **`main`** branch and released via git tags (`vX.Y.Z`). Downstream projects should upgrade their pin after taking a new release.
 
 ## Reporting a vulnerability
 
 If you discover a security issue in **this repository** (for example credential leakage in examples, unsafe defaults in the Maestro service, or a dependency concern):
 
 1. **Do not** open a public GitHub issue with exploit details.
-2. Use [GitHub Security Advisories](https://github.com/Ambient-Team/ambient-core/security/advisories) for this repository, or the maintainer contact on their GitHub profile.
+2. Use **GitHub Security Advisories** for this repository, or the maintainer contact on their GitHub profile.
 3. If credentials were committed, rotate them immediately after confirmation.
 
 We will acknowledge reports in a reasonable timeframe and coordinate a fix and disclosure.
@@ -25,4 +25,4 @@ We will acknowledge reports in a reasonable timeframe and coordinate a fix and d
 
 ## Scope
 
-This repo does not host the Firebase app, Databricks workspaces, or live infrastructure. Reports about production tenant isolation or cloud configuration belong in **ambient-systems-platform** (same GitHub contact pattern) when that repo is public, or via Issues/Advisories on the repo that hosts the deployment.
+This repo does not host live multi-tenant applications or cloud workspaces. Reports about production tenant isolation or cloud configuration should go to the **repository that deploys** those services, in addition to any issue in the Maestro or library code defined here.

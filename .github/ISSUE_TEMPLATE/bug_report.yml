@@ -1,0 +1,42 @@
+name: Bug report
+description: Something broke or docs are wrong
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Ambient Core. Search [existing issues](https://github.com/Ambient-Team/ambient-core/issues) first.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you expected vs what you saw.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: Commands, tag version, minimal YAML snippet if relevant
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: e.g. v0.2.1 or main @ abc1234
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - contracts
+        - catalog
+        - ambient_pipeline
+        - Maestro / inference
+        - CI / packaging
+        - documentation
+        - other
+    validations:
+      required: true

@@ -30,16 +30,16 @@ Edit YAML under `industries/` and `core/`; regenerate after changes.
 
 ## Consumers
 
-- **Core-only / integrators** — use `manifest.json` and Python loaders (`ambient_pipeline.catalog_loader`, `AMBIENT_CATALOG_DIR`); or bundle `runtime/` into your own app.
-- **ambient-systems-platform** — React app imports generated JS via submodule checkout (`ambient-core/catalog/runtime/`) and platform wiring; see platform `catalog/README.md` and `src/platform/referenceCatalog.js` in that repo.
+- **Integrators** — use `manifest.json` and Python loaders (`ambient_pipeline.catalog_loader`, `AMBIENT_CATALOG_DIR`); or bundle `runtime/` into your own app.
+- **Monorepo consumers** — import generated JS from a pinned `ambient-core/catalog/runtime/` checkout (single app bridge module is a common pattern).
 
 ## Terminology
 
 **Industry (vertical pack)** — Asset or sector context (Real Estate, Manufacturing, Healthcare, …). One pack per row in [`core/industries.yaml`](core/industries.yaml). There is **no** catalog industry named FP&A.
 
-**FP&A (product function)** — Financial planning and analysis sold **across** verticals: close packs, covenant liquidity, board reporting, and similar. Expressed in catalog metadata (`fpaWorkflow`, benchmarks) and in platform FP&A workspace UI. FP&A is not a second industry dimension on top of the org vertical.
+**FP&A (product function)** — Financial planning and analysis **across** verticals: close packs, covenant liquidity, board reporting, and similar. Expressed in catalog metadata (`fpaWorkflow`, benchmarks). FP&A is not a second industry dimension on top of the org vertical.
 
-**User role (department)** — In the production app, member department (Finance, Marketing, Operations, Development) is **not** used to resolve the reference catalog today; future role-based rules would be a separate layer.
+**User role (department)** — Optional app-level dimension (Finance, Marketing, Operations, and so on). Not used to resolve the reference catalog in the generator; future role-based rules would be a separate layer in a consumer app.
 
 **`core/shared/fpa_metrics.yaml`** — The fourteen-metric corporate finance / close suite copied into every vertical with distinct numeric ids. Keys like `Allmanufacturingfpa-current-ratio` use `fpa-` as a historical key segment only; each metric’s `industry` field is the vertical (e.g. Manufacturing), not FP&A.
 
@@ -65,14 +65,14 @@ Validation enforces globally unique ids, same-industry `metricIds` on data optio
 4. Add common data-option ids in [`common_data_options.yaml`](core/shared/common_data_options.yaml) under `optionIds`, plus any `metricRefs` overrides under `metricRefs.{IndustryName}` when defaults do not apply.
 5. Run `ambient-catalog-generate` and fix validation errors.
 
-## Platform consumption
+## Downstream consumption
 
-In **ambient-systems-platform**, organization **vertical** (org profile industry) selects which expanded pack filters KPI templates (`resolveCatalogIndustry` in generated `catalogIndustries.js`). User **department** does not change catalog resolution.
+In a typical application, organization **vertical** (industry profile) selects which expanded pack filters KPI templates (`resolveCatalogIndustry` in generated `catalogIndustries.js`). User **department** does not change catalog resolution unless the app adds that layer.
 
 ## Boundaries
 
 - **Catalog** — intent (what KPIs exist, what sources they need, field hints).
 - **Contracts** — physical Gold/data-product shapes and lineage (`../contracts/`).
-- **Org OLTP** — tenant state and verified values (Firestore in the platform app).
+- **Org operational store** — tenant state and verified values in a consumer app’s OLTP layer (not defined in this repo).
 
 Hosted catalog API later replaces **transport** only; this folder remains the repo source of truth until then.

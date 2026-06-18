@@ -19,11 +19,9 @@ def resolve_catalog_root(start: Path | None = None) -> Path:
         Path.cwd(),
         Path.cwd().parent,
         Path.cwd().parent.parent,
-        Path("/Workspace/Repos/ambient-systems-platform"),
-        Path("/Workspace/Repos/ambient-systems-platform/ambient-core"),
     ]
     for root in candidates:
-        for rel in ("catalog", "ambient-core/catalog"):
+        for rel in ("ambient-core/catalog", "catalog"):
             path = root / rel if "/" not in rel else root.joinpath(*rel.split("/"))
             if (path / "manifest.json").is_file():
                 return path

@@ -3,7 +3,7 @@
   "output": {
     "filePath": "repomix-output.md",
     "style": "markdown",
-    "headerText": "Docs: docs/USAGE.md, docs/CORE_VS_PLATFORM.md, docs/ECOSYSTEM.md. Ecosystem: ambient-core (MIT SSOT contracts/catalog) | platform (SaaS consumer) | vault (private doctrine). Commercial activity frozen.",
+    "headerText": "Ambient Core — canonical OSS foundation: contracts, catalog, ambient_pipeline, Maestro. Docs: docs/USAGE.md, docs/ECOSYSTEM.md, docs/INTEGRATING.md.",
     "showLineNumbers": true
   },
   "ignore": {

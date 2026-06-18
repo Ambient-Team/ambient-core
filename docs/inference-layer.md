@@ -2,7 +2,7 @@
 
 Headless, API-first intelligence: **open-weight models only**, intelligent routing, and a **model council** orchestrator. Clients call Maestro over HTTP; consumption apps should not host GPU inference or embed API keys for proprietary LLMs.
 
-**Related:** [contracts/maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) (run artifact contract). Platform consumers: [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform) (`docs/inference-layer.md`, Docker Compose).
+**Related:** [contracts/maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) (run artifact contract). Downstream apps call this service over HTTP; deploy wiring lives in the consumer repository.
 
 ---
 
@@ -53,17 +53,11 @@ Optional:
 - **AMBIENT_MAESTRO_API_KEY** — if set, clients must send `X-Api-Key` or `Authorization: Bearer`
 - **MAESTRO_DATABASE_URL** — default `sqlite:///./maestro_runs.db`; use Postgres in platform Docker Compose
 
-### Docker Compose (optional — platform repo)
+### Docker Compose (optional — consumer repo)
 
-**Production-like stack** (Postgres + Ollama + Maestro together) lives in the platform repo, not required for core-only development above.
+A **production-like stack** (Postgres + Ollama + Maestro together) is typically wired in the **application repository** that deploys Maestro—not required for core-only development above.
 
-For that layout, use:
-
-```bash
-docker compose -f docker/inference.compose.yaml up --build
-```
-
-(from [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform))
+Use your consumer’s compose file and image build that clones or installs this project at a pinned tag.
 
 ### End-to-end (live Ollama / vLLM)
 

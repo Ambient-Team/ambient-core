@@ -1,25 +1,23 @@
-# Using ambient-core without the platform
+# Using ambient-core
 
-Quick start for integrators who want contracts, catalog, governance helpers, or Maestro **without** cloning [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform). See [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) for the split.
-
-**Monorepo or platform clone:** pin a tagged release and submodule — [INTEGRATING.md](INTEGRATING.md).
+Quick start for contracts, catalog, governance helpers, and Maestro. For embedding in another repo, see [INTEGRATING.md](INTEGRATING.md). Foundation vs full product: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
 
 ## Install
 
 **From a git clone (recommended for catalog + pipeline tests):**
 
 ```bash
-git clone https://github.com/Ambient-Team/ambient-core.git
+git clone <repository-url>
 cd ambient-core
 py -3.12 -m venv .venv
 # Windows: .venv\Scripts\activate
 pip install -e ".[all]"
 ```
 
-**From a pinned git URL (downstream apps, same pattern as the platform):**
+**From a pinned git URL (downstream apps):**
 
 ```bash
-pip install "ambient-core[dev] @ git+https://github.com/Ambient-Team/ambient-core.git@v0.2.1"
+pip install "ambient-core[dev] @ git+<repository-url>@v0.2.1"
 ```
 
 PyPI is **not** the documented distribution path unless publishing is added later.
@@ -59,7 +57,6 @@ uvicorn main:app --app-dir services/maestro --reload --port 8088
 ```
 
 - Env vars, Ollama, security: [inference-layer.md](inference-layer.md).
-- Optional Postgres+Ollama stack: platform `docker/inference.compose.yaml` (not required here).
 
 **4. Pipeline governance (Spark)** — pytest with governance modules.
 
@@ -70,8 +67,8 @@ pytest
 ```
 
 - Needs Java 17+ for Spark tests.
-- **Wheel note:** `ambient_contracts`, `ambient_inference`, `ambient_cli`, `ambient_agent` ship in the wheel; **`lib/ambient_pipeline/`** needs a git checkout today (`pythonpath = lib` in tests). Platform OLAP extends this under `olap/lib/ambient_pipeline` — see [CONTRIBUTING.md](CONTRIBUTING.md).
+- **Wheel note:** `ambient_contracts`, `ambient_inference`, `ambient_cli`, `ambient_agent` ship in the wheel; **`lib/ambient_pipeline/`** needs a git checkout today (`pythonpath = lib` in tests).
 
 ## Contributing and releases
 
-[CONTRIBUTING.md](CONTRIBUTING.md) — scope, workflows, tagging, platform follow-up.
+[CONTRIBUTING.md](CONTRIBUTING.md) — scope, workflows, tagging, consumer follow-up.
