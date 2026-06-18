@@ -53,9 +53,11 @@ Optional:
 - **AMBIENT_MAESTRO_API_KEY** — if set, clients must send `X-Api-Key` or `Authorization: Bearer`
 - **MAESTRO_DATABASE_URL** — default `sqlite:///./maestro_runs.db`; use Postgres in platform Docker Compose
 
-### Docker Compose (platform repo)
+### Docker Compose (optional — platform repo)
 
-For Postgres + Ollama + Maestro on one machine, use the platform stack:
+**Production-like stack** (Postgres + Ollama + Maestro together) lives in the platform repo, not required for core-only development above.
+
+For that layout, use:
 
 ```bash
 docker compose -f docker/inference.compose.yaml up --build

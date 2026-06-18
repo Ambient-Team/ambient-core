@@ -1,5 +1,9 @@
 # Contributing to ambient-core
 
+Start with [ECOSYSTEM.md](ECOSYSTEM.md) for how this repo relates to the private **ambient-systems** vault and **ambient-systems-platform**. Strategy and commercial playbook stay in the vault; SaaS UI and lakehouse deploy stay in the platform.
+
+Integrator quick start (no platform clone): [USAGE.md](USAGE.md). Core vs platform split: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
+
 ## Scope
 
 This repository is **open and reusable** without the Ambient SaaS platform. Put foundational, general-purpose assets here:
@@ -38,4 +42,20 @@ pytest
 
 ## Releases
 
-Tag `vX.Y.Z` on `main`; bump the git pin in ambient-systems-platform `pyproject.toml` and `docker/maestro.Dockerfile`.
+Tag `vX.Y.Z` on `main`; then complete **Platform follow-up** below.
+
+## Platform follow-up (after core merge)
+
+- Tag **`vX.Y.Z`** on `main` in ambient-core.
+- Platform PR: bump **`ambient-core @ git+…@vX.Y.Z`** in `pyproject.toml` (`core` / `inference`) and Maestro Docker pin if used.
+- Update **`ambient-core/` submodule** (if used); run **`ambient-catalog-generate --check`** when the app imports `catalog/runtime/`.
+- Drop or sync duplicate **`contracts/`** at platform root (SSOT is here).
+- Run platform CI per `docs/testing.md` (`validate-contracts`, catalog validate, pytest).
+
+## How packages fit (maintainers)
+
+- **Pip / git tag** — `ambient_contracts`, `ambient_inference`, `ambient_cli`, `ambient_agent` (+ bundled YAML). Bump tag when APIs or contracts change.
+- **Submodule / checkout** — `catalog/`, `lib/ambient_pipeline/` on disk. Bump SHA when manifest, runtime JS, or checkout-only pipeline code changes.
+- **`ambient-pipeline` (platform `olap/lib/`)** — Databricks/Firestore-only glue; depends on pinned `ambient-core`. Merge shared changes from `lib/ambient_pipeline/` here when modules overlap.
+
+**Rule of thumb:** tag → Python + bundled contracts; submodule → catalog artifacts; manual merge → overlapping pipeline files.
