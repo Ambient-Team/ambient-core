@@ -1,0 +1,26 @@
+# Task types → model selection and fallback chains.
+classifier_model_id: qwen2.5-1.5b-instruct
+
+defaults:
+  task_type: general_chat
+  max_cost_tier: high
+
+policies:
+  research_qa:
+    draft_model_ids:
+      - qwen2.5-32b-instruct
+      - deepseek-r1-distill-qwen-14b
+    synthesizer_model_id: llama-3.3-70b-instruct
+    fallback_chain:
+      - qwen2.5-32b-instruct
+      - deepseek-r1-distill-qwen-14b
+
+  general_chat:
+    primary_model_id: qwen2.5-32b-instruct
+    fallback_chain:
+      - deepseek-r1-distill-qwen-14b
+      - qwen2.5-1.5b-instruct
+
+  classifier:
+    primary_model_id: qwen2.5-1.5b-instruct
+    fallback_chain: []
