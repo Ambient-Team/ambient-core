@@ -11,6 +11,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 
 ## Understand the system
 
+- [POSITIONING.md](POSITIONING.md) — how Ambient Core compares to agent/RAG frameworks and data-governance tools.
 - [ECOSYSTEM.md](ECOSYSTEM.md) — components, how they connect, maintainer priorities, release flow.
 - [ARCHITECTURE.md](ARCHITECTURE.md) — Python packages and repository layout.
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — what must be edited only here (no downstream mirrors).

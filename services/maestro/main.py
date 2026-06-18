@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import hmac
 from contextlib import asynccontextmanager
 from typing import Annotated, AsyncIterator
 
@@ -13,6 +14,7 @@ from ambient_inference.schemas import CreateRunRequest, RunEvent, RunRecord
 from ambient_inference.store import RunStore
 
 from deps import get_orchestrator, get_registry, get_store, init_app_state, settings
+from middleware import MaxRequestBodyMiddleware
 
 
 @asynccontextmanager
@@ -24,6 +26,14 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Ambient Maestro", version="0.1.0", lifespan=lifespan)
+app.add_middleware(MaxRequestBodyMiddleware, max_bytes=settings.max_request_body_bytes)
+
+
+def _api_key_matches(provided: str, expected: str) -> bool:
+    try:
+        return hmac.compare_digest(provided.encode("utf-8"), expected.encode("utf-8"))
+    except ValueError:
+        return False
 
 
 def _check_api_key(
@@ -34,7 +44,7 @@ def _check_api_key(
     if not expected:
         return
     provided = x_api_key or request.headers.get("Authorization", "").removeprefix("Bearer ").strip()
-    if provided != expected:
+    if not _api_key_matches(provided, expected):
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 
