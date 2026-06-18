@@ -1,0 +1,88 @@
+product:
+  name: Tenant Metrics
+  version: 1.1
+  owner: data-engineering@solutions-flux.ca
+  description: "Cleansed, deduplicated, GDPR-pseudonymized organization metrics. Single source of truth for all downstream KPI calculations."
+  domain: Core
+  type: Source-aligned
+
+schema:
+  table: silver.metrics
+  primary_key: metric_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: metric_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+      description: "Multi-tenant isolation key"
+    - name: name
+      type: string
+      required: true
+    - name: value
+      type: double
+      required: false
+    - name: unit
+      type: string
+      required: false
+    - name: industry
+      type: string
+      required: true
+    - name: type
+      type: string
+      required: true
+      enum: [Financial, Operational]
+    # ... full provenance columns (never dropped)
+    - name: _bronze_row_hash
+      type: string
+      required: true
+      description: "SHA-256 immutable row hash for deduplication and lineage"
+
+quality:
+  iso8000_tier: SILVER
+  completeness_sla: ">= 95% non-null value per org partition"
+  accuracy_rules:
+    - "value within industry benchmark range OR flagged _iso8000_out_of_range"
+  anomaly_detection: true
+  quarantine: true
+
+freshness:
+  sla: "15 minutes from ingestion trigger"
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_ingestion_ts", "_bronze_row_hash", "_silver_run_id", "_silver_transform_ts"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  gdpr_article: "25"
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+    - "Direct: read-only service principal on Unity Catalog views"
+    - "Adapter: Firestore sync (explicit contract only — see consumption-adapter-v1)"
+  forbidden: "Direct Bronze access by any consumer"
+
+firestore:
+  paths:
+    - collection: tenantMetrics
+      logical_key: TENANT_METRICS
+      schema_version: v1.1
+      legacy: true
+    - collection: tenantMetrics_v1_1
+      logical_key: TENANT_METRICS
+      schema_version: v1.1
+  required_document_fields:
+    - org_id
+    - metric_id
+    - name
+    - industry
+    - type
+    - _bronze_row_hash
+  recommended_document_fields: []

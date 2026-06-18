@@ -1,0 +1,148 @@
+product:
+  name: Org KPI
+  version: 1.1
+  owner: analytics@solutions-flux.ca (joint with platform)
+  description: "Business-ready, vertical-specific KPIs computed from Tenant Metrics. Includes Real Estate (DSCR, Cap Rate, NOI, Vacancy Rate, GRM), Vertical Farming (Cost/kg, Energy Efficiency, Yield/m²), and Finance (EBITDA Margin, Revenue Growth, Expense Ratio, ROE). Single source of truth for executive reporting and recommendations."
+  domain: Analytics
+  type: Aggregate
+
+schema:
+  table: gold.org_kpis_{vertical}  # vertical-specific tables or unified view
+  primary_key: _bronze_org_id + _gold_period
+  partition_key: _bronze_org_id
+  columns:
+    - name: _bronze_org_id
+      type: string
+      required: true
+      description: "Multi-tenant isolation key"
+    - name: industry
+      type: string
+      required: true
+      enum: [Real Estate, Vertical Farming, Finance, Cross-Industry]
+    - name: kpi_dscr
+      type: double
+      required: false
+    - name: kpi_cap_rate_pct
+      type: double
+      required: false
+    - name: kpi_vacancy_rate_pct
+      type: double
+      required: false
+    - name: kpi_noi
+      type: double
+      required: false
+    # ... additional vertical KPIs (full list documented in notebook)
+    - name: _gold_run_id
+      type: string
+      required: true
+    - name: _gold_computed_ts
+      type: timestamp
+      required: true
+    - name: _gold_period
+      type: string
+      required: true
+      enum: [daily, weekly, monthly, quarterly]
+
+quality:
+  iso8000_tier: GOLD
+  completeness_sla: ">= 98% non-null KPI values per org/period"
+  accuracy_rules:
+    - "Formulas follow MSCI/NCREIF/CBRE (Real Estate) or CEA (Vertical Farming) methodology"
+    - "All inputs validated at Silver layer"
+  anomaly_detection: true
+  quarantine: false  # upstream Silver quarantine applies
+
+freshness:
+  sla: "Recomputed on every successful pipeline run (event-driven or scheduled)"
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_org_id", "_bronze_run_id", "_silver_run_id", "_gold_run_id", "_gold_computed_ts"]
+  source: "silver.metrics (Tenant Metrics Product)"
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  gdpr_article: "25"
+  retention_days: 3650
+
+operational_financial_bridge:
+  description: |
+    Single Source of Truth mapping from operational telemetry to institutional financial KPIs.
+    Consumption layers read bridge status only — never recompute DSCR, Cap Rate, or NOI locally.
+  required_for_close: true
+  financial_kpi_keys:
+    - kpi_dscr
+    - kpi_cap_rate_pct
+    - kpi_noi
+    - kpi_ebitda_margin_pct
+    - kpi_cash_flow
+  operational_driver_keys:
+    - kpi_energy_cost
+    - kpi_sensor_anomaly_count
+    - kpi_equipment_uptime_pct
+    - kpi_yield_per_sqm
+  firestore_fields:
+    - operational_financial_aligned
+    - variance_detected_count
+    - bridge_mappings
+
+residency:
+  location_ids:
+    type: array<string>
+    required: false
+    description: "Org entity tags for matrix reporting (Quebec, Hong Kong, etc.)"
+  residency_zone:
+    type: string
+    required: false
+    description: "Primary sovereign boundary for this org KPI snapshot"
+  dab_stamp_id:
+    type: string
+    required: false
+    description: "Declarative Automation Bundle deployment stamp identifier"
+
+delta_sharing:
+  enabled: true
+  share_name: ambient_org_kpis
+  recipient_modes: [power_bi, tableau, snowflake, erp_adapter]
+  reporting_cycle_target_minutes: 30
+  note: "Pre-modeled Gold KPIs — FP&A consumes without building pipelines"
+
+consumption_contract:
+  allowed_paths:
+    - "Direct: read-only service principal on Unity Catalog Gold tables/views"
+    - "Adapter: Firestore sync (explicit consumption adapter contract only)"
+    - "Delta Sharing: Power BI, Snowflake, Tableau, ERP adapters (Gold only)"
+    - "BI tools: Tableau, Power BI, Looker (Gold schema access)"
+    - "Microsoft Fabric: OneLake shortcut to Gold ADLS external location; Direct Lake semantic model (read-only)"
+  forbidden: "Any direct Silver/Bronze access or embedding of KPI logic in consumption layers"
+
+consumption:
+  fabric:
+    enabled: false
+    direct_lake: true
+    shortcut_paths: []
+    rls_mapping: unity_catalog_to_semantic_model
+    purview_catalog: optional
+
+firestore:
+  paths:
+    - collection: orgKpis
+      logical_key: ORG_KPIS
+      schema_version: v1.1
+      legacy: true
+    - collection: orgKpis_v1_1
+      logical_key: ORG_KPIS
+      schema_version: v1.1
+  required_document_fields:
+    - org_id
+    - industry
+    - _gold_run_id
+    - _gold_computed_ts
+    - _gold_period
+  recommended_document_fields:
+    - operational_financial_aligned
+    - variance_detected_count
+    - location_ids
+    - residency_zone

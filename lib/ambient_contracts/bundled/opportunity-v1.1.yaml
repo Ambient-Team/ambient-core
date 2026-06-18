@@ -1,0 +1,93 @@
+product:
+  name: Optimization Opportunity
+  version: 1.0
+  owner: analytics@solutions-flux.ca (joint with platform)
+  description: "Computed optimization recommendations derived from patented WIPO WO2022240365 logic. Includes confidence scores, estimated ROI impact, linked metrics, and full lineage. Bridges static reference recommendations to governed data products."
+  domain: AI / Optimization
+  type: Derived
+
+schema:
+  table: gold.optimization_opportunities
+  primary_key: opportunity_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: opportunity_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: title
+      type: string
+      required: true
+    - name: description
+      type: string
+      required: true
+    - name: industry
+      type: string
+      required: true
+    - name: confidence_score
+      type: double
+      required: true
+    - name: estimated_monthly_impact
+      type: double
+      required: true
+    - name: linked_metric_ids
+      type: array<string>
+      required: true
+    - name: _gold_run_id
+      type: string
+      required: true
+    - name: _gold_computed_ts
+      type: timestamp
+      required: true
+
+quality:
+  iso8000_tier: GOLD
+  completeness_sla: ">= 95% for all computed opportunities"
+  accuracy_rules:
+    - "Confidence and impact scores derived from governed Gold KPIs"
+    - "Lineage back to source metrics traceable"
+
+freshness:
+  sla: "Recomputed on every successful Gold pipeline run"
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_org_id", "_gold_run_id", "linked_metric_ids"]
+  source: "gold.org_kpis_* + WIPO logic (governed in platform)"
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: false
+  retention_days: 3650
+
+consumption_contract:
+  allowed_paths:
+    - "React dashboard (in-app recommendations via Firestore adapter)"
+    - "Hong Kong advisory exports (PDF/benchmark packs)"
+    - "Future AI feature store integration"
+  forbidden: "Static reference files in frontend; all logic must be governed in Gold"
+
+firestore:
+  paths:
+    - collection: optimizationOpportunities
+      logical_key: OPPORTUNITY
+      schema_version: v1.1
+      legacy: true
+    - collection: optimizationOpportunities_v1_1
+      logical_key: OPPORTUNITY
+      schema_version: v1.1
+  required_document_fields:
+    - org_id
+    - opportunity_id
+    - title
+    - description
+    - industry
+    - confidence_score
+    - estimated_monthly_impact
+    - linked_metric_ids
+    - _gold_run_id
+    - _gold_computed_ts
+  recommended_document_fields: []

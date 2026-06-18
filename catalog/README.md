@@ -1,0 +1,67 @@
+# Reference catalog (platform layer)
+
+Industry-neutral **reference data** for metrics, data-source templates, and benchmarks. This tree is **not** part of the consumption app (`src/`), **not** OLAP pipeline code (`olap/`), and **not** governed data-product contracts (`contracts/`).
+
+## Layout
+
+- **`core/`** — cross-industry YAML (benchmarks, bridge rules, [`industries.yaml`](core/industries.yaml) registry).
+- **`core/shared/`** — templates expanded into every industry pack at generate time:
+  - [`fpa_metrics.yaml`](core/shared/fpa_metrics.yaml) — cross-industry corporate finance / close metric definitions (no per-industry `id`; filename uses historical `fpa-` slug, not a catalog industry).
+  - [`fpa_industry_ids.yaml`](core/shared/fpa_industry_ids.yaml) — stable numeric ids per vertical for each close-metric slug.
+  - [`common_data_options.yaml`](core/shared/common_data_options.yaml) — Financial statements, HR, accounting, payroll templates with `metricRefs` by metric name.
+- **`industries/`** — one YAML file per vertical (`real_estate.yaml`, …). Shape: `industry`, `metrics`, `dataOptions` for **sector-specific** entries only; shared close metrics and common options are not duplicated here.
+- **`schema/`** — JSON Schema for metrics ([`metric-v1.json`](schema/metric-v1.json)) and data options ([`data-option-v1.json`](schema/data-option-v1.json)).
+- **`crosswalk.yaml`** — optional links from catalog metrics to `contracts/` products.
+- **`manifest.json`** — machine-readable export for OLAP/ML (regenerated).
+- **`runtime/`** — generated JS; the app loads it only through [`src/platform/referenceCatalog.js`](../src/platform/referenceCatalog.js).
+
+## Commands
+
+```bash
+npm run catalog:generate   # YAML → catalog/runtime/*.js + manifest.json
+npm run catalog:validate   # CI: validate YAML + ensure runtime is fresh
+```
+
+Edit YAML under `industries/` and `core/`; do not hand-edit generated files in `runtime/` except `catalogEnrichment.js`.
+
+## Terminology
+
+**Industry (vertical pack)** — Asset or sector context (Real Estate, Manufacturing, Healthcare, …). One pack per row in [`core/industries.yaml`](core/industries.yaml). In the consumption app, `organizations/{orgId}.profile.industry` selects which pack filters KPI and data-library templates. There is **no** catalog industry named FP&A.
+
+**FP&A (product function)** — Financial planning and analysis sold **across** verticals: close packs, covenant liquidity, board reporting, and similar. Expressed in catalog metadata (`fpaWorkflow`, benchmarks) and in the FP&A workspace UI ([`fpaPackCategories.js`](../src/features/fpa-workspace/fpaPackCategories.js)). FP&A is not a second industry dimension on top of the org vertical.
+
+**User role (department)** — `users.role` (Finance, Marketing, Operations, Development) is the member’s department on the team. It is **not** used to resolve the reference catalog today; future role-based contributions would be a separate rules layer.
+
+**`core/shared/fpa_metrics.yaml`** — The fourteen-metric corporate finance / close suite copied into every vertical with distinct numeric ids. Keys like `Allmanufacturingfpa-current-ratio` use `fpa-` as a historical key segment only; each metric’s `industry` field is the vertical (e.g. Manufacturing), not FP&A.
+
+**`industryTags` on metrics** — Search and enrichment taxonomy (`Corporate Finance`, `SaaS`, `All`, …). These are not catalog industry values. Generator validation rejects tags that name a **different** registered vertical than `metric.industry`.
+
+**`metricRefs` on common data options** — Metric names resolved to numeric ids **within the same vertical** after expansion (see [`common_data_options.yaml`](core/shared/common_data_options.yaml)).
+
+## Expansion rules
+
+At `catalog:generate` time, for each pack listed in `core/industries.yaml`:
+
+1. **Cross-industry close metrics** — merge templates from `core/shared/fpa_metrics.yaml`, assign `id` from `fpa_industry_ids.yaml`, set `industry` to the vertical pack, and use catalog keys `All{slug}fpa-{metricSlug}` (e.g. `Allmanufacturingfpa-current-ratio`). Do not register FP&A in `industries.yaml`.
+2. **Common data options** — merge templates from `common_data_options.yaml`, resolve `metricRefs` to numeric ids in that vertical, assign option ids from `optionIds`.
+3. **Pack YAML wins** — entries in `industries/*.yaml` override expanded keys on conflict.
+
+Validation enforces globally unique ids, same-industry `metricIds` on data options, benchmark keys, and minimum metrics/options per industry **after** expansion.
+
+## Add a new industry pack
+
+1. Add a registry row in [`core/industries.yaml`](core/industries.yaml) (`file`, optional `displayLabel`).
+2. Create [`industries/your_sector.yaml`](industries/) with vertical-specific `metrics` and `dataOptions` only.
+3. Add close-metric id rows for the new vertical in [`fpa_industry_ids.yaml`](core/shared/fpa_industry_ids.yaml) (one id per slug in `fpa_metrics.yaml`; keep ids unique across the whole catalog).
+4. Add common data-option ids in [`common_data_options.yaml`](core/shared/common_data_options.yaml) under `optionIds`, plus any `metricRefs` overrides under `metricRefs.{IndustryName}` when defaults do not apply.
+5. Run `npm run catalog:generate` and fix validation errors.
+
+Consumption app: organization **vertical** (`organizations/{orgId}.profile.industry`) is set at org creation and selects which expanded pack filters KPI templates (`resolveCatalogIndustry` in generated `catalogIndustries.js`). User **department** (`users.role`) does not change catalog resolution.
+
+## Boundaries
+
+- **Catalog** — intent (what KPIs exist, what sources they need, field hints).
+- **Contracts** — physical Gold/data-product shapes and lineage.
+- **Org OLTP** — tenant subscriptions, uploads, manual/verified values (Firestore).
+
+Hosted catalog API later replaces **transport** only; this folder remains the repo source of truth until then.

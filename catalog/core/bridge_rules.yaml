@@ -1,0 +1,21 @@
+rules:
+- pattern: dscr|debt service coverage
+  flags: i
+  financial: "Covenant headroom \u2014 lender DSCR tests"
+  operational: "NOI and debt service \u2014 feeds DSCR"
+- pattern: cap(italization)?\s*rate
+  flags: i
+  financial: "Yield and valuation \u2014 cap rate sensitivity"
+  operational: "NOI vs. asset value \u2014 cap rate input"
+- pattern: energy|kwh|power
+  flags: i
+  operational: "Energy spike / efficiency \u2014 variance before close"
+  financial: "Opex and NOI impact \u2014 debt covenant pressure"
+- pattern: sensor|iot|telemetry|anomal
+  flags: i
+  operational: "Field telemetry \u2014 explains P&L variance"
+  financial: Validated financial impact after attestation
+- pattern: noi|net operating income
+  flags: i
+  financial: "Core profitability \u2014 DSCR and cap rate driver"
+  operational: Ops efficiency flows to NOI

@@ -1,0 +1,534 @@
+product:
+  name: Pipeline Observability
+  version: 1.0
+  owner: platform-engineering@solutions-flux.ca
+  ingestion_method: lakeflow_declarative
+  pipeline_type: declarative
+  production_pipeline: olap/declarative/observability_declarative.sql
+  description: |
+    Single source of truth for medallion pipeline execution health, freshness, run history,
+    and statistical anomalies. Enables DataPipelinesPage and automated alerting to detect
+    SLA breaches, stale data, and degradation. Partitioned by org_id (multi-tenant).
+    All tables are immutable append-only or idempotent. Freshness SLA enforced via
+    daily Gold materialization; anomalies detected via historical statistical baselines.
+  domain: Platform
+  type: Observability
+  produced_by:
+    - pipeline: olap/declarative/observability_declarative.sql
+      deployment: databricks_asset_bundle
+      bundle: ambient-systems-observability
+      pipeline_resource: resources/observability.pipeline.yml#observability_declarative_pilot
+      job_resource: databricks.yml#resources.jobs.observability_declarative_job
+      job_reference_snapshot: olap/jobs/observability_declarative_job.json
+      retired_workspace_pipeline_id: 6c6aa0c8-944c-4c79-9f97-86fa9342bc2e
+      retired_workspace_pipeline_note: "Orphan pre-rebuild pipeline; delete after new bundle pipeline verified"
+      assertion_sql_prod: olap/ddl/observability-contract-assertions.prod.sql
+      assertion_sql_dev: olap/ddl/observability-contract-assertions.dev.sql
+      ingestion_method: lakeflow_declarative
+      pipeline_type: declarative
+      stage: gold
+      frequency: daily
+      schedule: "0 2 * * *"  # 2 AM UTC
+      serverless: true
+      firestore_sync:
+        enabled: true
+        collection: pipelineHealth
+        document_key: "org_id|pipeline_name|stage"
+        executor: 04_unity_catalog_governance.py
+        note: "Post-refresh task only; materialize_observability=false after cutover"
+    - notebook: 04_unity_catalog_governance.py
+      stage: gold
+      frequency: daily
+      schedule: "0 2 * * *"  # 2 AM UTC — legacy parallel run Days 1-7 only
+      status: deprecated_after_cutover
+      materialize_observability: true
+      firestore_sync:
+        enabled: true
+        collection: pipelineHealth
+        document_key: "org_id|pipeline_name|stage"
+
+schema:
+  primary_tables:
+    - table_name: pipeline_health
+      description: |
+        Current execution status per org/pipeline/stage.
+        Single row per (org_id, pipeline_name, stage) — updated by upsert on each run completion.
+        Tracks current status (running/completed/failed), latest run_id, and SLA violation flags.
+      partition_key: _bronze_org_id
+      clustering_keys: [pipeline_name, stage]
+      columns:
+        - name: _bronze_org_id
+          type: string
+          required: true
+          description: "Multi-tenant isolation key; customer org identifier"
+        - name: pipeline_name
+          type: string
+          required: true
+          enum: [medallion_full, medallion_bronze, medallion_silver, medallion_gold, observability_declarative]
+        - name: stage
+          type: string
+          required: true
+          enum: [bronze, silver, gold]
+        - name: current_status
+          type: string
+          required: true
+          enum: [idle, submitted, running, completed, failed, stale]
+          description: "Latest known state. 'stale' if no run > SLA window."
+        - name: latest_run_id
+          type: string
+          required: false
+          description: "UUID of the most recent pipeline run"
+        - name: last_started_ts
+          type: timestamp
+          required: false
+          description: "When the latest run was submitted to Databricks"
+        - name: last_completed_ts
+          type: timestamp
+          required: false
+          description: "When the latest run finished (or failed); null if still running"
+        - name: last_completed_status
+          type: string
+          required: false
+          enum: [succeeded, failed, timed_out, cancelled]
+          description: "Outcome of the most recent completed run"
+        - name: duration_secs
+          type: long
+          required: false
+          description: "Elapsed seconds from start to finish of the latest run"
+        - name: error_message
+          type: string
+          required: false
+          description: "Truncated error message if last run failed; null if succeeded"
+        - name: sla_freshness_breach
+          type: boolean
+          required: true
+          description: "True if last successful run is older than freshness_sla_hours"
+        - name: sla_freshness_hours
+          type: integer
+          required: true
+          description: "Configured max age in hours before 'stale' flag (from contract property)"
+        - name: quality_check_passed
+          type: boolean
+          required: true
+          description: |
+            True if the most recent completed run passed all quality gates
+            (row counts, null %, schema validation). Set by the Gold transformation.
+        - name: _gold_run_id
+          type: string
+          required: true
+          description: "Provenance: UUID of the Gold notebook execution"
+        - name: _gold_computed_ts
+          type: timestamp
+          required: true
+          description: "When this record was materialized in Gold"
+        - name: _bronze_ingest_ts
+          type: timestamp
+          required: false
+          description: "When the raw run event arrived in Firestore (Bronze)"
+
+    - table_name: freshness
+      description: |
+        Temporal tracking of last successful data ingest/transform per org/stage.
+        Used by alerting to detect stale or missed runs. One row per (org_id, stage, metric).
+        Immutable append-only; partitioned by week for efficient historical queries.
+      partition_key: _bronze_org_id
+      clustering_keys: [stage, metric_name]
+      columns:
+        - name: _bronze_org_id
+          type: string
+          required: true
+          description: "Multi-tenant isolation key"
+        - name: stage
+          type: string
+          required: true
+          enum: [bronze, silver, gold]
+        - name: metric_name
+          type: string
+          required: true
+          enum: [last_successful_run, last_data_arrival, last_transformation_complete]
+        - name: last_success_ts
+          type: timestamp
+          required: true
+          description: "Timestamp of the last successful event for this metric"
+        - name: age_hours
+          type: double
+          required: true
+          description: "Hours since last_success_ts (computed for convenience)"
+        - name: sla_breach_flag
+          type: boolean
+          required: true
+          description: "True if age_hours > configured SLA threshold"
+        - name: sla_threshold_hours
+          type: integer
+          required: true
+          description: "Configured SLA in hours (from contract property)"
+        - name: partition_date
+          type: date
+          required: true
+          description: "Date partition for efficient range queries; equals last_success_ts date"
+        - name: _gold_run_id
+          type: string
+          required: true
+        - name: _gold_computed_ts
+          type: timestamp
+          required: true
+
+    - table_name: run_history
+      description: |
+        Immutable append-only audit log of all pipeline run attempts.
+        Every invocation (submit, start, complete) is logged as a separate row with full context.
+        Enables forensics, retry tracking, and compliance audits (BCBS 239, GDPR).
+      partition_key: _bronze_org_id
+      clustering_keys: [pipeline_name, run_date]
+      columns:
+        - name: _bronze_org_id
+          type: string
+          required: true
+        - name: run_id
+          type: string
+          required: true
+          description: "Unique identifier for this pipeline execution (UUID)"
+        - name: pipeline_name
+          type: string
+          required: true
+          enum: [medallion_full, medallion_bronze, medallion_silver, medallion_gold, observability_declarative]
+        - name: stage
+          type: string
+          required: true
+          enum: [bronze, silver, gold]
+        - name: triggered_by
+          type: string
+          required: true
+          enum: [http, gcs_event, scheduler, manual, api]
+          description: "What triggered this run (HTTP from React, GCS finalize, scheduler, etc.)"
+        - name: triggered_by_user_id
+          type: string
+          required: false
+          description: "Firebase UID of the user who triggered the run (if http/manual)"
+        - name: submitted_ts
+          type: timestamp
+          required: true
+          description: "When the Cloud Function submitted to Databricks"
+        - name: started_ts
+          type: timestamp
+          required: false
+          description: "When the Databricks job actually started"
+        - name: completed_ts
+          type: timestamp
+          required: false
+          description: "When the Databricks job finished"
+        - name: final_status
+          type: string
+          required: true
+          enum: [submitted, running, completed, failed, timed_out, rejected, cancelled]
+          description: "Final state of this run"
+        - name: outcome
+          type: string
+          required: false
+          enum: [succeeded, failed, timeout, skipped]
+          description: "If final_status == completed, the outcome"
+        - name: duration_secs
+          type: long
+          required: false
+          description: "Total wall-clock seconds from submitted to completed"
+        - name: databricks_job_run_id
+          type: long
+          required: false
+          description: "Databricks Job Run ID (for direct API queries)"
+        - name: databricks_job_id
+          type: string
+          required: false
+          description: "Databricks Job ID"
+        - name: rows_processed
+          type: long
+          required: false
+          description: "Total rows ingested/transformed (if available from Databricks API)"
+        - name: quality_metrics
+          type: map<string, double>
+          required: false
+          description: |
+            Optional quality indicators from the notebook:
+            { "completeness_pct": 98.5, "null_ratio": 0.015, "schema_validation_passed": true }
+        - name: error_message
+          type: string
+          required: false
+          description: "Truncated error or stack trace if outcome == failed"
+        - name: retry_count
+          type: integer
+          required: false
+          description: "Number of times this org/stage was retried within 60-second window"
+        - name: input_config
+          type: struct
+          required: false
+          description: |
+            Run parameters:
+            { "org_id": "demo-org", "period": "daily", "data_source": "firestore", "force_full": false }
+        - name: run_date
+          type: date
+          required: true
+          description: "Partition column: date(submitted_ts) for efficient historical queries"
+        - name: _gold_run_id
+          type: string
+          required: true
+        - name: _gold_computed_ts
+          type: timestamp
+          required: true
+        - name: _bronze_ingest_ts
+          type: timestamp
+          required: false
+
+    - table_name: anomaly_score
+      description: |
+        Optional statistical anomaly detection per org/stage.
+        Compares recent run metrics (duration, rows, quality) against rolling baseline (14-day window).
+        Scores are z-scores; threshold >= 2.5 triggers alerting.
+        Immutable append-only; one row per day per org/stage.
+      partition_key: _bronze_org_id
+      clustering_keys: [stage, metric_type]
+      columns:
+        - name: _bronze_org_id
+          type: string
+          required: true
+        - name: stage
+          type: string
+          required: true
+          enum: [bronze, silver, gold]
+        - name: metric_type
+          type: string
+          required: true
+          enum: [duration_secs, rows_processed, error_rate, null_ratio]
+          description: "Which metric is being scored"
+        - name: metric_value
+          type: double
+          required: true
+          description: "Latest observed value for this metric"
+        - name: baseline_mean
+          type: double
+          required: true
+          description: "Mean of this metric over the last 14 days"
+        - name: baseline_stddev
+          type: double
+          required: true
+          description: "Standard deviation; prevents divide-by-zero anomalies"
+        - name: z_score
+          type: double
+          required: true
+          description: "(metric_value - baseline_mean) / max(baseline_stddev, 0.01)"
+        - name: is_anomaly
+          type: boolean
+          required: true
+          description: "True if abs(z_score) >= 2.5"
+        - name: anomaly_severity
+          type: string
+          required: false
+          enum: [none, mild, moderate, severe]
+          description: "Severity: none (z<2.5), mild (2.5-3.0), moderate (3.0-4.0), severe (z>4.0)"
+        - name: observation_date
+          type: date
+          required: true
+          description: "Date when this metric was observed (partition column)"
+        - name: _gold_run_id
+          type: string
+          required: true
+        - name: _gold_computed_ts
+          type: timestamp
+          required: true
+
+    - table_name: audit_performance_events
+      description: |
+        Immutable performance audit trail linked to pipeline runs and data quality.
+        One row per (org_id, run_id, action). BCBS 239 compliance evidence for
+        duration, throughput, quality scores, and SLA breaches.
+      partition_key: _bronze_org_id
+      clustering_keys: [run_date, action]
+      columns:
+        - name: _bronze_org_id
+          type: string
+          required: true
+          description: "Multi-tenant isolation key"
+        - name: audit_event_id
+          type: string
+          required: true
+          description: "Deterministic event identifier (sha256 of org + run + action)"
+        - name: action
+          type: string
+          required: true
+          enum: [pipeline_run_completed, sla_breach_detected, quality_gate_failed, stage_perf_recorded]
+        - name: duration_secs
+          type: long
+          required: false
+          description: "Wall-clock seconds from submit to complete"
+        - name: rows_processed
+          type: long
+          required: false
+          description: "Total rows ingested/transformed"
+        - name: quality_score
+          type: double
+          required: false
+          description: "DQ overall score (0-100) from data_quality_scorecard"
+        - name: sla_breach
+          type: boolean
+          required: true
+          description: "True if freshness SLA was breached for this run context"
+        - name: stage
+          type: string
+          required: false
+          enum: [bronze, silver, gold]
+        - name: pipeline_name
+          type: string
+          required: false
+          enum: [medallion_full, medallion_bronze, medallion_silver, medallion_gold, observability_declarative]
+        - name: run_id
+          type: string
+          required: true
+          description: "Pipeline execution UUID"
+        - name: _gold_run_id
+          type: string
+          required: true
+          description: "Provenance: UUID of Gold notebook execution"
+        - name: _gold_computed_ts
+          type: timestamp
+          required: true
+          description: "When this audit event was materialized"
+        - name: run_date
+          type: date
+          required: true
+          description: "Partition column: date of the pipeline run"
+        - name: spark_perf
+          type: map<string, double>
+          required: false
+          description: "Optional stage-level Spark metrics from pipeline_perf"
+
+quality:
+  iso8000_tier: GOLD
+  freshness_sla_hours: 24
+  quality_sla:
+    pipeline_health:
+      "Completeness": ">= 98% of active orgs have a non-null current_status row"
+      "Accuracy": "Status matches the most recent entry in run_history"
+      "Timeliness": "Updated within 30 minutes of run completion"
+    run_history:
+      "Completeness": ">= 99% of Databricks job completions are logged"
+      "Accuracy": "run_id, timestamps, and final_status match Databricks job run metadata"
+      "Immutability": "Append-only; no updates or deletes"
+      "Auditability": "Every row traceable to triggering user/system via triggered_by_user_id"
+    freshness:
+      "Accuracy": "last_success_ts retrieved from run_history completion records"
+      "Recency": "Recomputed daily; age_hours is < 24 hours old"
+    anomaly_score:
+      "Accuracy": "Baselines computed from 14-day historical window; z-scores validated"
+      "Sensitivity": "Tuning: threshold z >= 2.5 targets ~0.6% false positive rate"
+    audit_performance_events:
+      "Completeness": ">= 99% of completed runs produce an audit event"
+      "Accuracy": "duration_secs and rows_processed match run_history"
+      "Immutability": "Append-only; no updates or deletes"
+      "Auditability": "Every event traceable to run_id and _gold_run_id"
+
+alerting:
+  rules:
+    - rule_id: "FRESHNESS_BREACH"
+      description: "Alert if last successful run is older than SLA"
+      query: "SELECT * FROM gold.freshness WHERE sla_breach_flag = true AND stage IN ('gold')"
+      severity: "HIGH"
+      trigger: "Email + Slack"
+      window: "Check every 6 hours; require 2 consecutive breaches to trigger"
+    - rule_id: "PIPELINE_FAILED"
+      description: "Alert on any pipeline failure"
+      query: "SELECT * FROM gold.run_history WHERE final_status = 'failed' AND run_date = CURRENT_DATE()"
+      severity: "HIGH"
+      trigger: "Email + PagerDuty"
+      window: "Real-time"
+    - rule_id: "ANOMALY_DETECTED"
+      description: "Alert if z-score >= 3.0 (moderate+ anomaly)"
+      query: "SELECT * FROM gold.anomaly_score WHERE z_score >= 3.0 AND observation_date = CURRENT_DATE()"
+      severity: "MEDIUM"
+      trigger: "Slack #data-engineering"
+      window: "Real-time"
+    - rule_id: "QUALITY_GATE_FAILED"
+      description: "Alert if quality_check_passed = false"
+      query: "SELECT * FROM gold.pipeline_health WHERE quality_check_passed = false"
+      severity: "MEDIUM"
+      trigger: "Slack"
+      window: "Check every 30 minutes"
+    - rule_id: "PERFORMANCE_SLA_BREACH"
+      description: "Alert on performance audit SLA breaches in last 24h"
+      query: "SELECT * FROM gold.audit_performance_events WHERE sla_breach = true AND run_date >= DATE_SUB(CURRENT_DATE(), 1)"
+      severity: "HIGH"
+      trigger: "Email + Slack"
+      window: "Check every 6 hours"
+
+lineage:
+  upstream:
+    - schema: bronze
+      table: raw_pipeline_events
+      source: "/Volumes/ambient_systems/bronze/raw_pipeline_events/"
+      format: json
+      ingestion_method: lakeflow_declarative
+      frequency: "real-time"
+    - schema: bronze
+      table: pipelineRuns  # Firestore-synced table (legacy parallel Days 1-7)
+      frequency: "real-time"
+      status: deprecated_after_cutover
+  downstream:
+    - consumer: DataPipelinesPage (React)
+      endpoint: "Gold SQL API or Firestore views"
+    - consumer: Observability Dashboard (Tableau)
+      endpoint: "ADLS Gen2 / Direct SQL"
+    - consumer: Alert System (Cloud Scheduler + Pub/Sub)
+      endpoint: "Gold tables via scheduled SQL"
+
+operational_financial_validation:
+  description: |
+    Pipeline Observability doubles as the operational-to-financial alignment signal for the
+    Command Centre. When quality_check_passed is false or dq_anomaly_count > 0, consumption
+    UI surfaces covenant risk (watermelon KPI guard).
+  firestore_consumption_fields:
+    - operational_financial_aligned
+    - ops_financial_variance_count
+    - location_ids
+    - residency_zone
+  watermelon_kpi_guard:
+    enabled: true
+    triggers:
+      - sla_freshness_breach
+      - quality_check_passed == false
+      - dq_anomaly_count > 0
+
+firestore_sync:
+  consumption_adapter: v1
+  org_gold_path: organizations/{orgId}/gold/{docId}
+  audit_performance_events:
+    enabled: true
+    collection: auditPerformanceEvents
+    document_key: "org_id|audit_event_id"
+    executor: 04_unity_catalog_governance.py
+  residency_aware: true
+  recommended_performance_fields:
+    - duration_secs
+    - quality_score
+    - sla_breach
+    - rows_processed
+    - spark_perf
+    - dab_stamp_id
+  optional_fields:
+    - operational_financial_aligned
+    - location_ids
+    - residency_zone
+    - dab_stamp_id
+
+governance:
+  rbac:
+    - role: platform-engineering
+      permissions: [read, write, delete, admin]
+    - role: data-engineering
+      permissions: [read, write]
+    - role: analytics
+      permissions: [read]
+  retention:
+    pipeline_health: "Replaced daily (1 row per org/stage)"
+    run_history: "7 years (BCBS 239, GDPR compliance)"
+    freshness: "1 year"
+    anomaly_score: "1 year"
+    audit_performance_events: "7 years (BCBS 239 compliance)"
+  classification: "INTERNAL"
+  compliance: ["BCBS 239", "GDPR", "ISO 8000"]

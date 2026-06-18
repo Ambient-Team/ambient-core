@@ -1,0 +1,8 @@
+# Reference catalog crosswalk: catalog metrics → governed data-product contracts.
+# Many catalog metrics have no contract until a Gold product exists.
+links: []
+  # Example:
+  # - catalogMetricKey: abc123
+  #   metricId: 1
+  #   contractFile: tenant-metrics-v1.1.yaml
+  #   contractProductId: org_metric_snapshot

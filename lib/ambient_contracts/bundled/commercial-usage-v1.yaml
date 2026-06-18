@@ -1,0 +1,59 @@
+product:
+  name: Commercial Usage Snapshot
+  version: 1.0
+  owner: platform-engineering@solutions-flux.ca
+  description: |
+    Org-level platform usage vs committed credits for CFO visibility and sales-led expansion.
+    Produced by the commercial sync control plane; not a customer industry KPI.
+  domain: Platform
+  type: Observability
+
+schema:
+  primary_key: org_id
+  columns:
+    - name: org_id
+      type: string
+      required: true
+    - name: tier
+      type: string
+      required: true
+    - name: period_start
+      type: string
+      required: false
+    - name: period_end
+      type: string
+      required: false
+    - name: committed_credits
+      type: double
+      required: true
+    - name: credits_used
+      type: double
+      required: true
+    - name: pipeline_runs
+      type: long
+      required: false
+    - name: rows_processed_m
+      type: double
+      required: false
+    - name: active_data_sources
+      type: long
+      required: false
+    - name: _snapshot_ts
+      type: string
+      required: true
+
+lineage:
+  bcbs239: false
+  provenance_columns: ["org_id", "_snapshot_ts"]
+  sources:
+    - "Firestore: organizations/{orgId}.commercial (platform-written mirror)"
+    - "functions/commercial_sync.py (hourly entitlements sync)"
+    - "functions/commercial/usage.py + trigger_databricks_pipeline.py (metering events)"
+
+governance:
+  multi_tenant: true
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: org admin UI mirror (organizations.commercial)"
+  forbidden: "Industry catalog MRR/ARR customer metrics"
