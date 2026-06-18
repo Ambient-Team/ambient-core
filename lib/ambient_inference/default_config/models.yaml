@@ -35,3 +35,30 @@ models:
     backend_env: MAESTRO_BACKEND_LLAMA70B_URL
     backend_model: llama3.3:70b
     cost_tier: high
+
+  - id: phi-4-mini
+    family: phi
+    license: mit
+    capabilities: [chat, fast, local]
+    context_tokens: 131072
+    backend_env: MAESTRO_BACKEND_PHI_URL
+    backend_model: phi4:mini
+    cost_tier: low
+
+  - id: qwen2.5-coder-14b
+    family: qwen
+    license: apache-2.0
+    capabilities: [chat, reasoning, code, tool_calling]
+    context_tokens: 131072
+    backend_env: MAESTRO_BACKEND_QWEN_CODER_URL
+    backend_model: qwen2.5-coder:14b
+    cost_tier: medium
+
+  - id: gemma3-12b-instruct
+    family: gemma
+    license: gemma
+    capabilities: [chat, reasoning]
+    context_tokens: 131072
+    backend_env: MAESTRO_BACKEND_GEMMA_URL
+    backend_model: gemma3:12b
+    cost_tier: medium

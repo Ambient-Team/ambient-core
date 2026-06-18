@@ -41,6 +41,9 @@ jobs:
       - name: Validate inference registry
         run: validate-inference-registry
 
+      - name: Validate agent config
+        run: validate-agent-config
+
       - name: Validate reference catalog
         run: python scripts/generate_reference_catalog.py --check
 
