@@ -35,3 +35,5 @@ The platform may still mirror `contracts/` at its repo root while migration comp
 - **Core (this repo):** contract YAML SSOT, catalog semantics, governance logic, Maestro API and run contract
 - **Platform:** React app, Firestore mirror, Databricks jobs, secrets, external resource allowlist, deploy bundles
 - **Vault:** doctrine, master strategy, confidential finance/legal—not runtime code
+
+Component priorities and platform tie-in: [ECOSYSTEM.md — Purpose and platform connection](ECOSYSTEM.md#purpose-and-platform-connection).

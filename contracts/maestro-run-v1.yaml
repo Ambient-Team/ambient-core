@@ -1,7 +1,7 @@
 product:
   name: Maestro Run Artifact
   version: 1.0
-  owner: platform-engineering@solutions-flux.ca
+  owner: platform-engineering
   description: |
     Persisted inference run from the Maestro API — routing plan, council drafts,
     synthesis output, and per-model provenance. Open-weight backends only.

@@ -11,7 +11,7 @@ Security fixes are applied on the **`main`** branch and released via git tags (`
 If you discover a security issue in **this repository** (for example credential leakage in examples, unsafe defaults in the Maestro service, or a dependency concern):
 
 1. **Do not** open a public GitHub issue with exploit details.
-2. Use [GitHub Security Advisories](https://github.com/Ambient-Team/ambient-core/security/advisories) for this repository if you have access, or contact the maintainers through your existing Ambient Systems / Solutions Flux D'IA channel.
+2. Use [GitHub Security Advisories](https://github.com/Ambient-Team/ambient-core/security/advisories) for this repository, or the maintainer contact on their GitHub profile.
 3. If credentials were committed, rotate them immediately after confirmation.
 
 We will acknowledge reports in a reasonable timeframe and coordinate a fix and disclosure.
@@ -25,4 +25,4 @@ We will acknowledge reports in a reasonable timeframe and coordinate a fix and d
 
 ## Scope
 
-This repo does not host the Firebase app, Databricks workspaces, or live infrastructure. Reports about production tenant isolation or cloud configuration should go to the platform operators and vault-documented runbooks, not only to ambient-core.
+This repo does not host the Firebase app, Databricks workspaces, or live infrastructure. Reports about production tenant isolation or cloud configuration belong in **ambient-systems-platform** (same GitHub contact pattern) when that repo is public, or via Issues/Advisories on the repo that hosts the deployment.

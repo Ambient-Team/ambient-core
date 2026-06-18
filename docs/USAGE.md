@@ -2,6 +2,8 @@
 
 Quick start for integrators who want contracts, catalog, governance helpers, or Maestro **without** cloning [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform). See [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) for the split.
 
+**Monorepo or platform clone:** pin a tagged release and submodule — [INTEGRATING.md](INTEGRATING.md).
+
 ## Install
 
 **From a git clone (recommended for catalog + pipeline tests):**

@@ -1,7 +1,7 @@
 product:
   name: Data Quality & Lineage
   version: 1.1
-  owner: platform-team@solutions-flux.ca
+  owner: platform-team
   description: "Per-org, per-run ISO 8000-aligned data quality scorecard and full BCBS 239 lineage audit trail. Provides visibility into completeness, accuracy, anomaly count, and end-to-end provenance."
   domain: Platform
   type: Observability

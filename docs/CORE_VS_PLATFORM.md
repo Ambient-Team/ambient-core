@@ -22,8 +22,7 @@ When to use **ambient-core** alone versus **[ambient-systems-platform](https://g
 
 - **Contract YAML** — `contracts/` in ambient-core; bundled under `lib/ambient_contracts/bundled/` for wheels.
 - **Catalog YAML** — `catalog/` in ambient-core; generated artifacts via `ambient-catalog-generate`.
-- Platform **consumes** core via **git-pinned pip** (`ambient-core @ git+…@vX.Y.Z`) and/or a **git submodule** at `ambient-core/`.
-- A duplicate `contracts/` tree at the platform repo root, if still present, is **transitional** — edit here first, then sync or remove the mirror.
+- Platform **consumes** core via **git-pinned pip** (`ambient-core @ git+…@vX.Y.Z`) and/or git submodule at `ambient-core/` at the **same tag**. Do not keep a second `contracts/` or `catalog/` tree in the platform repo ([INTEGRATING.md](INTEGRATING.md)).
 
 ## Commercial wording
 
@@ -33,5 +32,6 @@ When to use **ambient-core** alone versus **[ambient-systems-platform](https://g
 
 ## Read next
 
+- [ECOSYSTEM.md — Purpose and platform connection](ECOSYSTEM.md#purpose-and-platform-connection) — component table and maintainer priorities
 - [USAGE.md](USAGE.md) — integrator quick start without cloning the platform
 - [CONTRIBUTING.md](CONTRIBUTING.md) — core changes and platform follow-up checklist

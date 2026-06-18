@@ -1,7 +1,7 @@
 product:
   name: Tenant Metrics
   version: 1.1
-  owner: data-engineering@solutions-flux.ca
+  owner: data-engineering
   description: "Cleansed, deduplicated, GDPR-pseudonymized organization metrics. Single source of truth for all downstream KPI calculations."
   domain: Core
   type: Source-aligned

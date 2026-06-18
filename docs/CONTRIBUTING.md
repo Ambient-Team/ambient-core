@@ -4,6 +4,8 @@ Start with [ECOSYSTEM.md](ECOSYSTEM.md) for how this repo relates to the private
 
 Integrator quick start (no platform clone): [USAGE.md](USAGE.md). Core vs platform split: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
 
+Unsure which repository to use? See [ECOSYSTEM.md — Where to work (contributors)](ECOSYSTEM.md#where-to-work-contributors).
+
 ## Scope
 
 This repository is **open and reusable** without the Ambient SaaS platform. Put foundational, general-purpose assets here:
@@ -48,14 +50,14 @@ Tag `vX.Y.Z` on `main`; then complete **Platform follow-up** below.
 
 - Tag **`vX.Y.Z`** on `main` in ambient-core.
 - Platform PR: bump **`ambient-core @ git+…@vX.Y.Z`** in `pyproject.toml` (`core` / `inference`) and Maestro Docker pin if used.
-- Update **`ambient-core/` submodule** (if used); run **`ambient-catalog-generate --check`** when the app imports `catalog/runtime/`.
-- Drop or sync duplicate **`contracts/`** at platform root (SSOT is here).
+- Update **`ambient-core/`** submodule to the **same tag** (`git checkout vX.Y.Z` inside submodule); run **`ambient-catalog-generate --check`** with `AMBIENT_CORE_ROOT` set when validating from a monorepo.
+- Ensure the consumer repo has **no mirror** of `contracts/` or `catalog/` outside `ambient-core/` ([INTEGRATING.md](INTEGRATING.md)).
 - Run platform CI per `docs/testing.md` (`validate-contracts`, catalog validate, pytest).
 
 ## How packages fit (maintainers)
 
 - **Pip / git tag** — `ambient_contracts`, `ambient_inference`, `ambient_cli`, `ambient_agent` (+ bundled YAML). Bump tag when APIs or contracts change.
 - **Submodule / checkout** — `catalog/`, `lib/ambient_pipeline/` on disk. Bump SHA when manifest, runtime JS, or checkout-only pipeline code changes.
-- **`ambient-pipeline` (platform `olap/lib/`)** — Databricks/Firestore-only glue; depends on pinned `ambient-core`. Merge shared changes from `lib/ambient_pipeline/` here when modules overlap.
+- **`ambient-pipeline` (platform `olap/lib/`)** — Databricks/Firestore-only glue only; shared modules live in core ([CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)).
 
-**Rule of thumb:** tag → Python + bundled contracts; submodule → catalog artifacts; manual merge → overlapping pipeline files.
+**Rule of thumb:** one tag `vX.Y.Z` → pip, submodule SHA, and Docker pin together; see [INTEGRATING.md](INTEGRATING.md).

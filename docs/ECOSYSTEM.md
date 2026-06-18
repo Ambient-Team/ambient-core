@@ -45,6 +45,65 @@ flowchart TB
   vault -.->|strategy and catalog narrative| core
 ```
 
+## Purpose and platform connection
+
+**ambient-core** supplies vendor-neutral contracts, catalog semantics, lakehouse governance helpers, and headless AI (Maestro). The commercial platform **[ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform)** installs and pins this repository, then layers React/Firebase OLTP, Databricks OLAP, multi-tenancy, billing, and production deploy. Core is the open foundation; the platform is what operators run end to end.
+
+| Component | Purpose in ambient-core (open) | How it ties into the commercial platform |
+|-----------|--------------------------------|------------------------------------------|
+| `contracts/` | Single source of truth for all data-product schemas (YAML). Defines what Gold-layer products must look like. | Platform consumes these contracts for validation, lineage, quality scoring, and consumption adapters (Firestore mirror, OLAP, etc.). |
+| `catalog/` | Reference catalog of metrics, benchmarks, industries, and data options. | Platform uses generated `manifest.json` and `runtime/` files for UI dropdowns, auto-mapping, validation rules, and KPI templates. |
+| `lib/ambient_pipeline/` | Reusable governance primitives (provenance stamping, PII pseudonymization, Silver validation, catalog mapping). | Platform Databricks OLAP jobs and notebooks import and extend these helpers for consistent Bronze → Silver → Gold processing. Shared modules may still overlap with `olap/lib/ambient_pipeline` until deduplication completes. |
+| `lib/ambient_inference/` + `services/maestro/` | Open-weight model registry, intelligent router, Maestro council orchestrator, and OpenAI-compatible inference service. | Platform React app and backend call Maestro via HTTP for AI features (research Q&A, agentic workflows, operational insights) without embedding LLMs in the UI tier. |
+
+### Open-source priority (maintainers)
+
+| Priority | Component | Why |
+|----------|-----------|-----|
+| 1 | `contracts/` | Foundational SSOT |
+| 2 | Maestro (`ambient_inference` + service) | Core AI capability |
+| 3 | `ambient_pipeline/` | Governance primitives |
+| 4 | Catalog system | Very useful; more mature work can follow contracts and Maestro |
+
+### How the pieces fit together
+
+- **Contracts + catalog** define what data and metrics should exist.
+- **Pipeline primitives** define how to safely move and validate data (Bronze → Gold).
+- **Maestro** provides intelligence on top of governed data (reasoning, drafting, synthesis).
+- **The commercial platform** is the full product that uses ambient-core as a dependency (pip + git tag), adds React UI, Firebase integration, Databricks deployment, billing, and related glue, and deploys everything together for end users.
+
+```mermaid
+flowchart LR
+  contracts[contracts]
+  catalog[catalog]
+  pipeline[ambient_pipeline]
+  maestro[Maestro]
+  platform[ambient_systems_platform]
+  contracts --> pipeline
+  catalog --> pipeline
+  pipeline --> maestro
+  maestro --> platform
+  contracts --> platform
+  catalog --> platform
+```
+
+### Where to work (contributors)
+
+```mermaid
+flowchart TD
+  A[New Feature / Fix] --> B{Is it foundational?}
+  B -->|Yes: contracts, catalog, governance, Maestro, general utils| C[Work in ambient-core]
+  B -->|No: UI, Firebase, multi-tenancy, billing, platform-specific glue| D[Work in ambient-systems-platform]
+  C --> E[PR to ambient-core main]
+  E --> F[Code review + CI green]
+  F --> G[Tag new version vX.Y.Z]
+  G --> H[Bump version in ambient-systems-platform]
+  H --> I[Test platform with new core]
+  I --> J[Merge to platform]
+```
+
+After core changes merge, tag a release on `main`, then follow platform pin, submodule, and test steps in [CONTRIBUTING.md — Releases](CONTRIBUTING.md#releases) and [Platform follow-up](CONTRIBUTING.md#platform-follow-up-after-core-merge).
+
 ## Responsibilities (what lives where)
 
 **In ambient-core**
@@ -60,7 +119,7 @@ flowchart TB
 - User-facing app, Cloud Functions, Firestore rules and schemas.
 - Databricks Asset Bundles, OLAP notebooks, lakehouse deploy.
 - Platform-specific secrets, external resource allowlist, commercial usage wiring.
-- May still mirror `contracts/` during transition; authoritative edits belong in **ambient-core** first.
+- Must **not** mirror `contracts/` or `catalog/` at the platform repo root; use the **`ambient-core/`** submodule at the **same git tag** as the pip pin ([INTEGRATING.md](INTEGRATING.md)).
 
 **In ambient-systems (vault)**
 
@@ -71,7 +130,7 @@ flowchart TB
 ## Data and release flow
 
 1. **Contracts** — Edit `contracts/*.yaml` here; copy to `lib/ambient_contracts/bundled/` for wheels (CI enforces sync). Platform installs the published or pinned package.
-2. **Catalog** — Edit YAML under `catalog/`; run `ambient-catalog-generate`; platform may import generated `catalog/runtime/` via submodule or sync.
+2. **Catalog** — Edit YAML under `catalog/` here; run `ambient-catalog-generate`; consumers import `catalog/runtime/` via submodule at the pinned tag.
 3. **Maestro** — Inference logic and `maestro-run-v1` contract ship in `ambient_inference`; platform runs compose/Docker and HTTP clients only at the boundary.
 4. **Releases** — Tag `vX.Y.Z` on `main` here; bump the git pin in platform `pyproject.toml` and `docker/maestro.Dockerfile` (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
@@ -119,6 +178,7 @@ A documented sync from ambient-core into the commercial/documentation vault (for
 ## Related docs in this repo
 
 - [USAGE.md](USAGE.md) — use ambient-core without the platform
+- [INTEGRATING.md](INTEGRATING.md) — pin and import a tagged release
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — responsibility split
 - [ARCHITECTURE.md](ARCHITECTURE.md) — packages and layer boundary
 - [CONTRIBUTING.md](CONTRIBUTING.md) — development, releases, platform follow-up

@@ -1,7 +1,7 @@
 product:
   name: Commercial Usage Snapshot
   version: 1.0
-  owner: platform-engineering@solutions-flux.ca
+  owner: platform-engineering
   description: |
     Org-level platform usage vs committed credits for CFO visibility and sales-led expansion.
     Produced by the commercial sync control plane; not a customer industry KPI.

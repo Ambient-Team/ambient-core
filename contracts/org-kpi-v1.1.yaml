@@ -1,7 +1,7 @@
 product:
   name: Org KPI
   version: 1.1
-  owner: analytics@solutions-flux.ca (joint with platform)
+  owner: analytics (joint with platform)
   description: "Business-ready, vertical-specific KPIs computed from Tenant Metrics. Includes Real Estate (DSCR, Cap Rate, NOI, Vacancy Rate, GRM), Vertical Farming (Cost/kg, Energy Efficiency, Yield/m²), and Finance (EBITDA Margin, Revenue Growth, Expense Ratio, ROE). Single source of truth for executive reporting and recommendations."
   domain: Analytics
   type: Aggregate
