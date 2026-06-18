@@ -9,7 +9,7 @@ from typing import Any
 from ambient_agent.boundaries import AgentRunContext, InferenceClient
 from ambient_agent.executor import execute
 from ambient_agent.maestro_client import MaestroHttpClient
-from ambient_agent.validate import load_agent_profiles
+from ambient_agent.config import load_agent_profiles
 
 
 @dataclass(frozen=True)

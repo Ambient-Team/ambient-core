@@ -1,0 +1,22 @@
+"""Tests for ambient_contracts catalog manifest loader."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from ambient_contracts.catalog_manifest import load_manifest, resolve_manifest_path
+
+
+def test_manifest_loads_from_repo() -> None:
+    path = resolve_manifest_path()
+    assert path.is_file()
+    manifest = load_manifest()
+    assert manifest.get("version") == 1
+    assert len(manifest.get("metrics", [])) >= 1
+
+
+def test_manifest_matches_catalog_file() -> None:
+    root = Path(__file__).resolve().parents[1]
+    on_disk = json.loads((root / "catalog" / "manifest.json").read_text(encoding="utf-8"))
+    assert load_manifest()["metrics"][0]["catalogMetricKey"] == on_disk["metrics"][0]["catalogMetricKey"]

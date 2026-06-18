@@ -51,3 +51,10 @@ jobs:
         run: pytest
         env:
           AMBIENT_SPARK_TESTS: "1"
+
+      - name: Wheel smoke (ambient_agent import)
+        run: |
+          pip wheel . -w dist --no-deps
+          python -m venv /tmp/wheel-smoke-venv
+          /tmp/wheel-smoke-venv/bin/pip install -q dist/ambient_core-*.whl
+          /tmp/wheel-smoke-venv/bin/python -c "import ambient_agent; from ambient_agent.executor import execute"

@@ -80,6 +80,14 @@ Tests skip gracefully when Maestro is unreachable or `/ready` reports no backend
 
 Modules: `tools.py` (built-ins), `registry.py` (`register_tool`), `executor.py`, `maestro_client.py`, `loop.py` (`run_plan_execute`). Direct calls to the `maestro_run` tool id are blocked; synthesis goes through the loop.
 
+### Plan-execute tool arguments (v1)
+
+`run_plan_execute` does **not** parse tool calls from an LLM. It walks the profile’s fixed `tool_ids` list and supplies arguments via built-in defaults in `loop.py` (for example `catalog_resolve_metric` uses a truncated copy of `user_message` as `metric_id`). Registered platform tools invoked through `run_plan_execute` receive an empty `{}` args dict unless the loop is extended. For tools that need explicit inputs, call `execute(tool_id, args, context, trace)` directly from your worker code.
+
+### Tool registry (process scope)
+
+`register_tool()` uses a **single process-global** namespace: not isolated per tenant or per run. Registering the same `tool_id` twice raises `ValueError`. Call `clear_extensions()` in tests. Intended for worker/API startup (see platform extensions below), not per-request registration in a multi-tenant process without a reload strategy.
+
 **Phase 2 (not in v0.2.3):** ReAct loops with LLM-parsed tool calls require Maestro `CreateRunRequest` tool-calling support.
 
 ## Three layers (do not merge them)
