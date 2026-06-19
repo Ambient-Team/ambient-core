@@ -1,0 +1,30 @@
+---
+description: Documentation uses prose and lists, not markdown pipe tables
+globs: "{docs/**/*.md,**/README.md,contracts/README.md,examples/**/*.md}"
+alwaysApply: false
+---
+
+# Markdown documentation style
+
+When editing documentation in this repository (`docs/`, any `README.md`, `contracts/README.md`, `examples/**/*.md`):
+
+- Do **not** use markdown pipe tables (`| col | col |` with `|---|` separator rows).
+- Use short paragraphs, bullet lists (`- **Term** — explanation`), or numbered steps instead.
+- Code blocks, links, and mermaid diagrams are fine.
+- Tables inside fenced code blocks (examples of what to avoid) are allowed.
+
+**Avoid**
+
+```markdown
+| Thing | Purpose |
+|-------|---------|
+| contracts | SSOT |
+```
+
+**Prefer**
+
+```markdown
+- **contracts/** — SSOT for data-product YAML.
+```
+
+CI enforces this via `python scripts/check_markdown_prose.py`.

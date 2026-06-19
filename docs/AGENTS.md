@@ -25,13 +25,15 @@ sequenceDiagram
 - **`ambient_agent`** picks a **profile**, runs **core tools** in order, then **one synthesis Maestro run** with observations in the prompt.
 - **Your app** supplies tenancy, UI, and optional tools via `register_tool()` at process startup.
 
+## Documentation conventions
+
+When editing markdown in this repository (`docs/`, READMEs, `examples/**/*.md`), use **prose and bullet lists**, not markdown pipe tables. Example: `- **contracts/** — SSOT for data-product YAML.` CI checks with `python scripts/check_markdown_prose.py`. See [CONTRIBUTING.md](CONTRIBUTING.md#documentation-style).
+
 ## Declarative config (core)
 
-| File | Purpose |
-|------|---------|
-| [`lib/ambient_agent/tool_definitions.yaml`](../lib/ambient_agent/tool_definitions.yaml) | Core tool ids, parameters, descriptions |
-| [`lib/ambient_agent/agent_profiles.yaml`](../lib/ambient_agent/agent_profiles.yaml) | Agent types: Maestro mode, `task_type`, ordered `tool_ids` |
-| [`lib/ambient_inference/default_config/council_profiles.yaml`](../lib/ambient_inference/default_config/council_profiles.yaml) | Council modes referenced by profile `maestro_mode` |
+- [`lib/ambient_agent/tool_definitions.yaml`](../lib/ambient_agent/tool_definitions.yaml) — core tool ids, parameters, descriptions
+- [`lib/ambient_agent/agent_profiles.yaml`](../lib/ambient_agent/agent_profiles.yaml) — agent types: Maestro mode, `task_type`, ordered `tool_ids`
+- [`lib/ambient_inference/default_config/council_profiles.yaml`](../lib/ambient_inference/default_config/council_profiles.yaml) — council modes referenced by profile `maestro_mode`
 
 Validate after edits:
 
@@ -40,15 +42,15 @@ validate-agent-config
 validate-inference-registry
 ```
 
+**Plan-execute v1:** each profile runs its `tool_ids` **once** per `run_plan_execute` call. `max_tool_rounds` in `agent_profiles.yaml` is **reserved** for future ReAct / LLM-parsed tool loops; the loop does not read it today.
+
 ## Agent types (profiles)
 
-| Profile id | Maestro mode | Router task (typical) | Core tools | Core vs platform |
-|------------|--------------|------------------------|------------|------------------|
-| `researcher` | `council_research` | `research_qa` | catalog_*, contracts_list | Core only; platform adds metrics/OLAP tools |
-| `analyst` | `single_chat` | `general_chat` | catalog_resolve_metric, structured_json | Platform adds fulfillment / tenant metrics |
-| `auditor` | `single_chat` | `general_chat` | contracts_validate, contracts_list | Platform adds policy store / tickets |
-| `summarizer` | `council_research` or `single_chat` | configurable | catalog_*, maestro_run (via loop) | Platform adds doc sources |
-| `optimizer` | `council_research` | `research_qa` | contracts_list, catalog_* | Platform adds pipeline triggers |
+- **`researcher`** — Maestro `council_research`, typical router task `research_qa`; core tools: catalog_*, `contracts_list`. Platform adds metrics/OLAP tools.
+- **`analyst`** — `single_chat`, `general_chat`; `catalog_resolve_metric`, `structured_json`. Platform adds fulfillment / tenant metrics.
+- **`auditor`** — `single_chat`, `general_chat`; `contracts_validate`, `contracts_list`. Platform adds policy store / tickets.
+- **`summarizer`** — `council_research` or `single_chat`; catalog_*, Maestro synthesis via loop. Platform adds doc sources.
+- **`optimizer`** — `council_research`, `research_qa`; `contracts_list`, catalog_*. Platform adds pipeline triggers.
 
 **Not in core YAML:** web search, Firestore writes, Databricks job triggers, `metricFulfillment`, billing — implement in the platform repo and register at runtime.
 
@@ -101,6 +103,23 @@ Model routing, registry, council. See [inference-layer.md](inference-layer.md).
 **3. Application agents (downstream repos)**  
 Org context, session state, human-in-the-loop UI, and **registered** tools for your OLTP/OLAP.
 
+## Governed data tools
+
+Core built-ins read **published** catalog and contract metadata from disk (manifest + YAML). They do not query live Gold tables or run Spark jobs.
+
+- **`catalog_list_metrics` / `catalog_resolve_metric`** — metric definitions, industries, methodology
+- **`contracts_list` / `contracts_validate`** — governed product inventory and structural validation
+
+Details, path env vars, and crosswalk: [governed-data.md](governed-data.md).
+
+`run_plan_execute` passes default tool args derived from `user_message` (for example the first 128 characters as `metric_id` for `catalog_resolve_metric`). Production workers should call `execute()` with explicit args when inputs are not the raw user string — see [loop.py](../lib/ambient_agent/loop.py).
+
+Optional `AgentRunContext.contract_refs` and `catalog_refs` are copied into the synthesis prompt as policy hints; they do not block tools or replace your authZ layer.
+
+## Production hardening
+
+Core does not authenticate end users or isolate tenants in the tool registry. Before exposing agents in production, read [agent-security.md](agent-security.md) (threat model and application checklist).
+
 ## Platform extensions
 
 In **ambient-systems-platform** (or your fork):
@@ -134,6 +153,8 @@ Platform consumer flow: [ambient-systems-platform `docs/ambient-core.md`](https:
 
 ## Related
 
+- [governed-data.md](governed-data.md) — catalog and contracts for agents, UI, and jobs
+- [agent-security.md](agent-security.md) — production threat model and checklist
 - [ECOSYSTEM.md](ECOSYSTEM.md) — components and release flow
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — exclusive scope
 - [inference-layer.md](inference-layer.md) — Maestro operations

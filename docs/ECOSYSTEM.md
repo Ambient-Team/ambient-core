@@ -18,7 +18,9 @@ This tree is **canonical for everyone**: contracts, reference catalog, shared pi
 
 **Maestro** (`lib/ambient_inference/`, `services/maestro/`) — model registry, router, council orchestration, OpenAI-compatible HTTP API; run artifact contract `maestro-run-v1`.
 
-**Agents** (`lib/ambient_agent/`) — neutral extension point and boundaries for orchestrators; product agents stay downstream. See [AGENTS.md](AGENTS.md).
+**Agents** (`lib/ambient_agent/`) — neutral extension point and boundaries for orchestrators; product agents stay downstream. See [AGENTS.md](AGENTS.md) and [agent-security.md](agent-security.md).
+
+Integrator guides for governed data and pipeline helpers: [governed-data.md](governed-data.md), [pipeline.md](pipeline.md).
 
 **Packaging** — `ambient_contracts`, `ambient_cli`, `ambient_agent`, CLIs, tests, and CI.
 
@@ -53,12 +55,10 @@ flowchart LR
 
 ### How consumers typically use each component
 
-| Component | Provided here | Typical use in a downstream app |
-|-----------|---------------|----------------------------------|
-| `contracts/` | Gold/data-product YAML SSOT | Validation, lineage, quality scoring, adapter shapes |
-| `catalog/` | Reference KPIs and industries | UI templates, auto-mapping, `manifest.json` in notebooks |
-| `lib/ambient_pipeline/` | Shared governance modules | Lakehouse jobs; app-specific glue stays in the consumer repo |
-| Maestro | HTTP inference service + library | Call over HTTP; do not fork orchestration into the UI tier |
+- **`contracts/`** — provided here as Gold/data-product YAML SSOT; downstream use for validation, lineage, quality scoring, adapter shapes
+- **`catalog/`** — reference KPIs and industries; UI templates, auto-mapping, `manifest.json` in notebooks
+- **`lib/ambient_pipeline/`** — shared governance modules for lakehouse jobs; app-specific glue stays in the consumer repo
+- **Maestro** — HTTP inference service + library; call over HTTP; do not fork orchestration into the UI tier
 
 Details: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md), [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) (foundation vs full product).
 

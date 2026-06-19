@@ -62,6 +62,9 @@ Full map: **[docs/README.md](docs/README.md)**.
 
 - **Start** — [USAGE.md](docs/USAGE.md)
 - **Embed a release** — [INTEGRATING.md](docs/INTEGRATING.md)
+- **Governed data** — [governed-data.md](docs/governed-data.md) (catalog + contracts)
+- **Pipeline helpers** — [pipeline.md](docs/pipeline.md)
+- **Agents** — [AGENTS.md](docs/AGENTS.md)
 - **Positioning** — [POSITIONING.md](docs/POSITIONING.md)
 - **Components & releases** — [ECOSYSTEM.md](docs/ECOSYSTEM.md)
 - **Maestro** — [inference-layer.md](docs/inference-layer.md)

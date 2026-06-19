@@ -22,3 +22,5 @@ This folder documents how an **external assistant shell** (for example [OpenClaw
 
 - [docs/AGENTS.md](../../../docs/AGENTS.md)
 - [docs/INTEGRATING.md](../../../docs/INTEGRATING.md)
+- [docs/governed-data.md](../../../docs/governed-data.md)
+- [docs/agent-security.md](../../../docs/agent-security.md)

@@ -47,6 +47,9 @@ jobs:
       - name: Validate reference catalog
         run: python scripts/generate_reference_catalog.py --check
 
+      - name: Check markdown prose (no pipe tables)
+        run: python scripts/check_markdown_prose.py
+
       - name: Run pytest
         run: pytest
         env:

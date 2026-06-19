@@ -32,6 +32,7 @@ Edit YAML under `industries/` and `core/`; regenerate after changes.
 
 - **Integrators** — use `manifest.json` and Python loaders (`ambient_pipeline.catalog_loader`, `AMBIENT_CATALOG_DIR`); or bundle `runtime/` into your own app.
 - **Monorepo consumers** — import generated JS from a pinned `ambient-core/catalog/runtime/` checkout (single app bridge module is a common pattern).
+- **Docs** — [docs/governed-data.md](../docs/governed-data.md), [docs/catalog-consumption.md](../docs/catalog-consumption.md), [docs/crosswalk.md](../docs/crosswalk.md).
 
 ## Terminology
 

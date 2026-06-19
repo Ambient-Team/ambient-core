@@ -23,12 +23,10 @@ Maestro is an **orchestration / control layer** for open-weight models. It does 
 
 This is analogous to SDN (Software-Defined Networking):
 
-| SDN concept | Maestro equivalent | Role |
-|-------------|-------------------|------|
-| Data plane | Ollama / vLLM (actual models) | Inference |
-| Control plane | Maestro (`lib/ambient_inference`, `services/maestro`) | Routing, council, run lifecycle |
-| Southbound API | OpenAI-compatible calls via `ModelGateway` | How Maestro talks to backends |
-| Northbound API | `POST /v1/runs`, stream, run lookup | How applications talk to Maestro |
+- **Data plane** (SDN) → **Ollama / vLLM** in Maestro — actual models; inference
+- **Control plane** → **Maestro** (`lib/ambient_inference`, `services/maestro`) — routing, council, run lifecycle
+- **Southbound API** → OpenAI-compatible calls via `ModelGateway` — how Maestro talks to backends
+- **Northbound API** → `POST /v1/runs`, stream, run lookup — how applications talk to Maestro
 
 ```mermaid
 flowchart TB
@@ -164,15 +162,13 @@ Defined in [`config/council_profiles.yaml`](../config/council_profiles.yaml).
 
 Registry ids in [`config/models.yaml`](../config/models.yaml) (and [`models.recommended.yaml`](../lib/ambient_inference/default_config/models.recommended.yaml) as an optional `MAESTRO_MODELS_FILE` alias). Backend URLs are **environment variables**; model tags below are typical **Ollama** library names—verify with `ollama pull` on your host because tags change over time.
 
-| Role | Registry id | Typical Ollama tag | Env var |
-|------|-------------|-------------------|---------|
-| Classifier / fast chat | `qwen2.5-1.5b-instruct` | `qwen2.5:1.5b-instruct` | `MAESTRO_BACKEND_CLASSIFIER_URL` |
-| Fast summarizer / auditor | `phi-4-mini` | `phi4:mini` | `MAESTRO_BACKEND_PHI_URL` |
-| General chat / drafts | `qwen2.5-32b-instruct` | `qwen2.5:32b-instruct` | `MAESTRO_BACKEND_QWEN32B_URL` |
-| Code-oriented (capability tag) | `qwen2.5-coder-14b` | `qwen2.5-coder:14b` | `MAESTRO_BACKEND_QWEN_CODER_URL` |
-| Reasoning fallback | `deepseek-r1-distill-qwen-14b` | `deepseek-r1:14b` | `MAESTRO_BACKEND_DEEPSEEK14B_URL` |
-| Balanced instruct | `gemma3-12b-instruct` | `gemma3:12b` | `MAESTRO_BACKEND_GEMMA_URL` |
-| Council chair / synthesis | `llama-3.3-70b-instruct` | `llama3.3:70b` | `MAESTRO_BACKEND_LLAMA70B_URL` |
+- **Classifier / fast chat** — registry id `qwen2.5-1.5b-instruct`, typical Ollama tag `qwen2.5:1.5b-instruct`, env `MAESTRO_BACKEND_CLASSIFIER_URL`
+- **Fast summarizer / auditor** — `phi-4-mini`, `phi4:mini`, `MAESTRO_BACKEND_PHI_URL`
+- **General chat / drafts** — `qwen2.5-32b-instruct`, `qwen2.5:32b-instruct`, `MAESTRO_BACKEND_QWEN32B_URL`
+- **Code-oriented (capability tag)** — `qwen2.5-coder-14b`, `qwen2.5-coder:14b`, `MAESTRO_BACKEND_QWEN_CODER_URL`
+- **Reasoning fallback** — `deepseek-r1-distill-qwen-14b`, `deepseek-r1:14b`, `MAESTRO_BACKEND_DEEPSEEK14B_URL`
+- **Balanced instruct** — `gemma3-12b-instruct`, `gemma3:12b`, `MAESTRO_BACKEND_GEMMA_URL`
+- **Council chair / synthesis** — `llama-3.3-70b-instruct`, `llama3.3:70b`, `MAESTRO_BACKEND_LLAMA70B_URL`
 
 Task types **`summarizer_fast`** and **`auditor_chat`** in [`routing_policies.yaml`](../config/routing_policies.yaml) target `phi-4-mini` when configured. Agent profiles in [`lib/ambient_agent/agent_profiles.yaml`](../lib/ambient_agent/agent_profiles.yaml) map to Maestro modes (`council_research`, `single_chat`) and router `task_type` values—see [AGENTS.md](AGENTS.md).
 

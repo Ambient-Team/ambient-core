@@ -7,6 +7,7 @@ from typing import Any
 from ambient_agent.boundaries import AgentRunContext
 from ambient_agent.registry import get_extension
 from ambient_agent.tools import BUILTIN_HANDLERS
+from ambient_agent.arg_validate import validate_builtin_tool_args
 
 
 def execute(
@@ -20,4 +21,6 @@ def execute(
     handler = BUILTIN_HANDLERS.get(tool_id) or get_extension(tool_id)
     if handler is None:
         raise KeyError(f"unknown tool: {tool_id}")
+    if tool_id in BUILTIN_HANDLERS:
+        args = validate_builtin_tool_args(tool_id, args)
     return handler(args, context, trace)

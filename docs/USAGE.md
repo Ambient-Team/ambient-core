@@ -68,6 +68,18 @@ pytest
 
 - Needs Java 17+ for Spark tests.
 - **Wheel note:** `ambient_contracts`, `ambient_inference`, `ambient_cli`, `ambient_agent` ship in the wheel; **`lib/ambient_pipeline/`** needs a git checkout today (`pythonpath = lib` in tests).
+- End-to-end narrative: [pipeline.md](pipeline.md).
+
+**5. Agents (plan-execute)** — profiles, core tools, Maestro synthesis.
+
+```bash
+pip install -e ".[all]"
+validate-agent-config
+```
+
+- Worker API: [AGENTS.md](AGENTS.md); governed metadata tools: [governed-data.md](governed-data.md); production checklist: [agent-security.md](agent-security.md).
+- Example worker: [examples/agents/minimal_worker.py](../examples/agents/minimal_worker.py).
+- Live E2E (Maestro required): `pytest -m agent_e2e -q` — see AGENTS.md.
 
 ## Contributing and releases
 

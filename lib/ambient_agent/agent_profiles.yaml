@@ -1,4 +1,5 @@
 # Reusable agent profiles — plan-execute over core tools, then Maestro synthesis.
+# max_tool_rounds is reserved for future multi-round tool loops; v1 runs each tool_ids entry once.
 profiles:
   researcher:
     description: Gathers catalog and contract context for a research question; council synthesis.
