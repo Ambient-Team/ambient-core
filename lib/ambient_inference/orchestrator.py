@@ -25,6 +25,15 @@ class MaestroOrchestrator:
         self._council = council
         self._store = store
 
+    @property
+    def store(self) -> RunStore:
+        """Public access to the run store (events, run records)."""
+        return self._store
+
+    async def aclose(self) -> None:
+        """Release inference resources (model gateway HTTP client)."""
+        await self._council.aclose()
+
     async def run(
         self,
         request: CreateRunRequest,

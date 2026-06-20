@@ -53,6 +53,7 @@ Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). 
 - **`lib/ambient_pipeline/`** — governance primitives for Spark/lakehouse jobs.
 - **`lib/ambient_inference/`** + **`services/maestro/`** — inference library and FastAPI service.
 - **`lib/ambient_contracts`**, **`ambient_cli`**, **`ambient_agent`** (extension point) — load, validate, and ship.
+- **`lib/ambient_calc`** — open-source reference calculator: safe formula evaluation from contract inputs to metric values, shared across all industries.
 
 Layout and packages: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Scope rules: [docs/CANONICAL_SCOPE.md](docs/CANONICAL_SCOPE.md).
 
@@ -65,6 +66,7 @@ Full map: **[docs/README.md](docs/README.md)**.
 - **Governed data** — [governed-data.md](docs/governed-data.md) (catalog + contracts)
 - **Pipeline helpers** — [pipeline.md](docs/pipeline.md)
 - **Agents** — [AGENTS.md](docs/AGENTS.md)
+- **Conventions** — [CONVENTIONS.md](docs/CONVENTIONS.md) (catalogue/contract naming, the core layer, the calculation spec)
 - **Positioning** — [POSITIONING.md](docs/POSITIONING.md)
 - **Components & releases** — [ECOSYSTEM.md](docs/ECOSYSTEM.md)
 - **Maestro** — [inference-layer.md](docs/inference-layer.md)

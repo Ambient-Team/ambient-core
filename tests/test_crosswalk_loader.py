@@ -13,5 +13,5 @@ def test_load_crosswalk_links_includes_dscr_sample():
         None,
     )
     assert dscr is not None
-    assert dscr.get("contractFile") == "tenant-metrics-v1.1.yaml"
+    assert dscr.get("contractFile") == "tenant-metrics-v1.yaml"
     assert dscr.get("catalogMetricKey") == "1cvcTcHNt1VYX867UUG7"

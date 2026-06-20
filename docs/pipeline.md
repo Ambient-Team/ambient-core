@@ -10,7 +10,7 @@ For catalog vs contracts and path env vars, see [governed-data.md](governed-data
 
 **In your app repo:** job definitions, DABs, orchestration; tenant upload UX and entitlements; Firestore sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
 
-[observability-pipeline-v1.0.yaml](../contracts/observability-pipeline-v1.0.yaml) describes pipeline health products and may reference SQL, bundles, or notebooks that are maintained **downstream** — treat it as the interface contract, not as code in this repo.
+[observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) describes pipeline health products and may reference SQL, bundles, or notebooks that are maintained **downstream** — treat it as the interface contract, not as code in this repo.
 
 ## Install and test
 
@@ -43,7 +43,7 @@ flowchart LR
   Contract --> Gold
 ```
 
-1. **Resolve contract** — `ContractLoader.load("tenant-metrics-v1.1.yaml")` (or another product). Call `enforce_bronze_lineage()` before writing Silver/Gold that depends on bronze provenance columns.
+1. **Resolve contract** — `ContractLoader.load("tenant-metrics-v1.yaml")` (or another product). Call `enforce_bronze_lineage()` before writing Silver/Gold that depends on bronze provenance columns.
 2. **Map uploads to catalog shape** — `bronze_catalog_map` and `catalog_loader.load_data_option()` use industry YAML and mapping JSON from uploads. See tests in [tests/pipeline/test_bronze_catalog_map.py](../tests/pipeline/test_bronze_catalog_map.py) and [tests/pipeline/test_catalog_sample_csv_bronze.py](../tests/pipeline/test_catalog_sample_csv_bronze.py).
 3. **Stamp lineage** — `BronzeProvenanceStamper` adds `_bronze_*` columns and row hashes ([lib/ambient_pipeline/provenance.py](../lib/ambient_pipeline/provenance.py)).
 4. **Validate Silver quality** — `SilverValidator` applies ISO 8000–style checks ([lib/ambient_pipeline/validation.py](../lib/ambient_pipeline/validation.py)).

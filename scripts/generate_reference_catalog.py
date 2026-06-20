@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate catalog/ YAML and generate catalog/runtime/*.js + catalog/manifest.json.
 
-Industry packs are verticals (Real Estate, Manufacturing, …). Shared fpa_metrics.yaml
+Industry packs are verticals (Real Estate, Manufacturing, …). Shared core_metrics.yaml
 holds cross-industry corporate finance / close metrics expanded into each pack—not an
 FP&A catalog industry.
 """
@@ -102,9 +102,19 @@ def _industry_key_prefix(industry: str) -> str:
     return "All" + re.sub(r"[^a-z0-9]", "", industry.lower())
 
 
+def _industry_token(industry: str) -> str:
+    """Normalized industry token for slug keys, e.g. 'Real Estate' -> 'real_estate'."""
+    return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", industry.lower())).strip("_")
+
+
+def _core_key(industry: str, slug: str) -> str:
+    """Canonical key for a core-layer entry expanded into an industry pack."""
+    return f"{_industry_token(industry)}.core.{slug.replace('-', '_')}"
+
+
 def _load_shared_fpa() -> tuple[dict, dict]:
-    templates_path = SHARED_DIR / "fpa_metrics.yaml"
-    ids_path = SHARED_DIR / "fpa_industry_ids.yaml"
+    templates_path = SHARED_DIR / "core_metrics.yaml"
+    ids_path = SHARED_DIR / "core_ids.yaml"
     if not templates_path.is_file() or not ids_path.is_file():
         return {}, {}
     templates = _load_yaml(templates_path).get("templates") or {}
@@ -168,20 +178,20 @@ def _expand_fpa_metrics(pack_industry: str, pack_metrics: dict) -> dict:
     if not templates:
         return {}
     id_map = industry_ids.get(pack_industry) or {}
-    prefix = _industry_key_prefix(pack_industry)
     expanded: dict = {}
     for slug, template in templates.items():
-        key = f"{prefix}fpa-{slug}"
+        key = _core_key(pack_industry, slug)
         if key in pack_metrics:
             continue
         metric_id = id_map.get(slug)
         if metric_id is None:
             raise ValueError(
-                f"Missing FPA id for {pack_industry!r} slug {slug!r} in fpa_industry_ids.yaml"
+                f"Missing core id for {pack_industry!r} slug {slug!r} in core_ids.yaml"
             )
         metric = copy.deepcopy(template)
         metric["id"] = metric_id
         metric["industry"] = pack_industry
+        metric["segment"] = "core"
         expanded[key] = metric
     return expanded
 
@@ -194,14 +204,10 @@ def _expand_common_data_options(
     templates, option_ids = _load_shared_data_option_templates()
     if not templates:
         return {}
-    prefix = _industry_key_prefix(pack_industry)
     industry_option_ids = option_ids.get(pack_industry) or {}
     expanded: dict = {}
     for template_key, template in templates.items():
-        suffix = template.get("keySuffix")
-        if not suffix:
-            raise ValueError(f"Data option template {template_key} missing keySuffix")
-        catalog_key = f"{prefix}{suffix}"
+        catalog_key = _core_key(pack_industry, template_key)
         if catalog_key in pack_options:
             continue
         option_id = industry_option_ids.get(template_key)
@@ -225,6 +231,7 @@ def _expand_common_data_options(
         option = copy.deepcopy(option)
         option["id"] = option_id
         option["industry"] = pack_industry
+        option["segment"] = "core"
         option["metricIds"] = metric_ids
         expanded[catalog_key] = option
     return expanded

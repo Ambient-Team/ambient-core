@@ -46,7 +46,7 @@ def test_contracts_validate_rejects_path_traversal():
 
     out = execute(
         "contracts_validate",
-        {"contract_file": "../tenant-metrics-v1.1.yaml"},
+        {"contract_file": "../tenant-metrics-v1.yaml"},
         AgentRunContext(run_id="r"),
         [],
     )
@@ -69,7 +69,7 @@ def test_synthesis_user_message_with_braces_skip_maestro():
 def test_synthesis_includes_contract_refs_hint():
     ctx = AgentRunContext(
         run_id="test-refs",
-        contract_refs=("tenant-metrics-v1.1.yaml",),
+        contract_refs=("tenant-metrics-v1.yaml",),
     )
     result = run_plan_execute(
         "auditor",
@@ -77,7 +77,7 @@ def test_synthesis_includes_contract_refs_hint():
         ctx,
         skip_maestro=True,
     )
-    assert "Allowed contract refs: tenant-metrics-v1.1.yaml" in result.content
+    assert "Allowed contract refs: tenant-metrics-v1.yaml" in result.content
 
 
 def test_catalog_resolve_metric_string_id_matches_numeric_manifest_id():

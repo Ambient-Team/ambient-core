@@ -26,6 +26,10 @@ export const CATALOG_INDUSTRY_OPTIONS = [
   {
     "value": "Restaurants",
     "label": "Restaurants"
+  },
+  {
+    "value": "Life Sciences",
+    "label": "Life Sciences"
   }
 ];
 

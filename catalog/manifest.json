@@ -30,11 +30,16 @@
       "value": "Restaurants",
       "label": "Restaurants",
       "pack": "restaurants.yaml"
+    },
+    {
+      "value": "Life Sciences",
+      "label": "Life Sciences",
+      "pack": "life_sciences.yaml"
     }
   ],
   "metrics": [
     {
-      "catalogMetricKey": "Allrealestatefpa-current-ratio",
+      "catalogMetricKey": "real_estate.core.current_ratio",
       "id": 926,
       "name": "Current Ratio",
       "industry": "Real Estate",
@@ -66,11 +71,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-quick-ratio",
+      "catalogMetricKey": "real_estate.core.quick_ratio",
       "id": 932,
       "name": "Quick Ratio (Acid Test)",
       "industry": "Real Estate",
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "type": "Financial",
       "unit": "Ratio",
       "requiredSources": [
@@ -98,16 +103,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-gross-margin",
+      "catalogMetricKey": "real_estate.core.gross_margin",
       "id": 938,
       "name": "Gross Profit Margin",
       "industry": "Real Estate",
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "real_estate.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -128,21 +133,21 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-operating-margin",
+      "catalogMetricKey": "real_estate.core.operating_margin",
       "id": 944,
       "name": "Operating Margin (EBIT)",
       "industry": "Real Estate",
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "real_estate.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllrealestateqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "real_estate.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -163,11 +168,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-ebitda-margin",
+      "catalogMetricKey": "real_estate.core.ebitda_margin",
       "id": 950,
       "name": "EBITDA Margin",
       "industry": "Real Estate",
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -188,26 +193,26 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-net-margin",
+      "catalogMetricKey": "real_estate.core.net_margin",
       "id": 956,
       "name": "Net Profit Margin",
       "industry": "Real Estate",
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "Allrealestate5aMhHPzshRFSHX4PjOMH",
+          "catalogOptionKey": "real_estate.core.hr_records",
           "name": "HR records",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllrealestateQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "real_estate.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllrealestateqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "real_estate.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -228,11 +233,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-revenue-growth",
+      "catalogMetricKey": "real_estate.core.revenue_growth",
       "id": 962,
       "name": "Revenue Growth Rate",
       "industry": "Real Estate",
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -253,11 +258,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-working-capital",
+      "catalogMetricKey": "real_estate.core.working_capital",
       "id": 968,
       "name": "Working Capital",
       "industry": "Real Estate",
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -285,11 +290,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-dso",
+      "catalogMetricKey": "real_estate.core.dso",
       "id": 974,
       "name": "Days Sales Outstanding (DSO)",
       "industry": "Real Estate",
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -324,11 +329,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-dpo",
+      "catalogMetricKey": "real_estate.core.dpo",
       "id": 980,
       "name": "Days Payable Outstanding (DPO)",
       "industry": "Real Estate",
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -363,11 +368,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-ccc",
+      "catalogMetricKey": "real_estate.core.ccc",
       "id": 986,
       "name": "Cash Conversion Cycle",
       "industry": "Real Estate",
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -411,11 +416,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-operating-cash-flow",
+      "catalogMetricKey": "real_estate.core.operating_cash_flow",
       "id": 992,
       "name": "Operating Cash Flow",
       "industry": "Real Estate",
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -450,11 +455,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-burn-rate",
+      "catalogMetricKey": "real_estate.core.burn_rate",
       "id": 998,
       "name": "Monthly Burn Rate",
       "industry": "Real Estate",
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -475,7 +480,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrealestatefpa-runway",
+      "catalogMetricKey": "real_estate.core.runway",
       "id": 1004,
       "name": "Cash Runway",
       "industry": "Real Estate",
@@ -500,6 +505,16 @@
       ]
     },
     {
+      "catalogMetricKey": "real_estate.core.headcount",
+      "id": 1082,
+      "name": "Headcount (FTE)",
+      "industry": "Real Estate",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
+    },
+    {
       "catalogMetricKey": "1cvcTcHNt1VYX867UUG7",
       "id": 8,
       "name": "Debt Service Coverage Ratio (DSCR)",
@@ -509,7 +524,7 @@
       "unit": "Number",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "real_estate.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -623,7 +638,7 @@
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "real_estate.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -670,7 +685,7 @@
       "unit": "Percentage",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "real_estate.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -719,7 +734,7 @@
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "real_estate.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -753,7 +768,7 @@
       "unit": "Percentage",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "real_estate.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -799,7 +814,7 @@
       "unit": "Percentage",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "real_estate.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -815,7 +830,7 @@
       "id": 1010,
       "name": "Monthly Recurring Revenue (MRR)",
       "industry": "Real Estate",
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -854,7 +869,7 @@
       "id": 1016,
       "name": "Annual Recurring Revenue (ARR)",
       "industry": "Real Estate",
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "type": "Financial",
       "unit": "Currency/year",
       "requiredSources": [
@@ -879,7 +894,7 @@
       "id": 1022,
       "name": "Net Revenue Retention (NRR)",
       "industry": "Real Estate",
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -916,7 +931,7 @@
       "id": 1028,
       "name": "Gross Revenue Churn Rate",
       "industry": "Real Estate",
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -1005,7 +1020,7 @@
       "id": 1040,
       "name": "Customer Lifetime Value (LTV)",
       "industry": "Real Estate",
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -1089,7 +1104,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-current-ratio",
+      "catalogMetricKey": "vertical_farming.core.current_ratio",
       "id": 927,
       "name": "Current Ratio",
       "industry": "Vertical Farming",
@@ -1098,7 +1113,7 @@
       "unit": "Ratio",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "vertical_farming.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -1131,11 +1146,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-quick-ratio",
+      "catalogMetricKey": "vertical_farming.core.quick_ratio",
       "id": 933,
       "name": "Quick Ratio (Acid Test)",
       "industry": "Vertical Farming",
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "type": "Financial",
       "unit": "Ratio",
       "requiredSources": [
@@ -1163,16 +1178,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-gross-margin",
+      "catalogMetricKey": "vertical_farming.core.gross_margin",
       "id": 939,
       "name": "Gross Profit Margin",
       "industry": "Vertical Farming",
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "vertical_farming.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -1182,7 +1197,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -1203,16 +1218,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-operating-margin",
+      "catalogMetricKey": "vertical_farming.core.operating_margin",
       "id": 945,
       "name": "Operating Margin (EBIT)",
       "industry": "Vertical Farming",
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "vertical_farming.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -1238,16 +1253,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-ebitda-margin",
+      "catalogMetricKey": "vertical_farming.core.ebitda_margin",
       "id": 951,
       "name": "EBITDA Margin",
       "industry": "Vertical Farming",
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "vertical_farming.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -1273,16 +1288,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-net-margin",
+      "catalogMetricKey": "vertical_farming.core.net_margin",
       "id": 957,
       "name": "Net Profit Margin",
       "industry": "Vertical Farming",
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "vertical_farming.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -1308,11 +1323,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-revenue-growth",
+      "catalogMetricKey": "vertical_farming.core.revenue_growth",
       "id": 963,
       "name": "Revenue Growth Rate",
       "industry": "Vertical Farming",
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -1333,11 +1348,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-working-capital",
+      "catalogMetricKey": "vertical_farming.core.working_capital",
       "id": 969,
       "name": "Working Capital",
       "industry": "Vertical Farming",
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -1365,11 +1380,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-dso",
+      "catalogMetricKey": "vertical_farming.core.dso",
       "id": 975,
       "name": "Days Sales Outstanding (DSO)",
       "industry": "Vertical Farming",
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -1404,11 +1419,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-dpo",
+      "catalogMetricKey": "vertical_farming.core.dpo",
       "id": 981,
       "name": "Days Payable Outstanding (DPO)",
       "industry": "Vertical Farming",
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -1443,11 +1458,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-ccc",
+      "catalogMetricKey": "vertical_farming.core.ccc",
       "id": 987,
       "name": "Cash Conversion Cycle",
       "industry": "Vertical Farming",
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -1491,16 +1506,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-operating-cash-flow",
+      "catalogMetricKey": "vertical_farming.core.operating_cash_flow",
       "id": 993,
       "name": "Operating Cash Flow",
       "industry": "Vertical Farming",
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "vertical_farming.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -1540,11 +1555,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-burn-rate",
+      "catalogMetricKey": "vertical_farming.core.burn_rate",
       "id": 999,
       "name": "Monthly Burn Rate",
       "industry": "Vertical Farming",
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -1565,7 +1580,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allverticalfarmingfpa-runway",
+      "catalogMetricKey": "vertical_farming.core.runway",
       "id": 1005,
       "name": "Cash Runway",
       "industry": "Vertical Farming",
@@ -1588,6 +1603,16 @@
           ]
         }
       ]
+    },
+    {
+      "catalogMetricKey": "vertical_farming.core.headcount",
+      "id": 1085,
+      "name": "Headcount (FTE)",
+      "industry": "Vertical Farming",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
     },
     {
       "catalogMetricKey": "0MJiYgAPcgkzE3xEgOFE",
@@ -1619,12 +1644,12 @@
       "unit": "$/kg",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllverticalfarmingqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "vertical_farming.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -1694,7 +1719,7 @@
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -1719,12 +1744,12 @@
       "unit": "$/kg",
       "requiredSources": [
         {
-          "catalogOptionKey": "Allverticalfarming5aMhHPzshRFSHX4PjOMH",
+          "catalogOptionKey": "vertical_farming.core.hr_records",
           "name": "HR records",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllverticalfarmingqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "vertical_farming.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -1773,9 +1798,9 @@
       "id": 15,
       "name": "Yield per Square Meter",
       "industry": "Vertical Farming",
-      "methodology": "Yield per Square Meter = Total Harvested Produce (kg) / Total Growing Area (mÂ²)",
+      "methodology": "Yield per Square Meter = Total Harvested Produce (kg) / Total Growing Area (m²)",
       "type": "Operational",
-      "unit": "kg/mÂ²",
+      "unit": "kg/m²",
       "requiredSources": [
         {
           "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
@@ -1811,9 +1836,9 @@
       "id": 17,
       "name": "Energy Consumption per Square Meter",
       "industry": "Vertical Farming",
-      "methodology": "Energy Consumption per Square Meter = Total Energy Consumed (kWh) / Total Growing Area (mÂ²)",
+      "methodology": "Energy Consumption per Square Meter = Total Energy Consumed (kWh) / Total Growing Area (m²)",
       "type": "Operational",
-      "unit": "kWh/mÂ²",
+      "unit": "kWh/m²",
       "requiredSources": [
         {
           "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
@@ -1831,7 +1856,7 @@
       "id": 1011,
       "name": "Monthly Recurring Revenue (MRR)",
       "industry": "Vertical Farming",
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -1870,7 +1895,7 @@
       "id": 1017,
       "name": "Annual Recurring Revenue (ARR)",
       "industry": "Vertical Farming",
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "type": "Financial",
       "unit": "Currency/year",
       "requiredSources": [
@@ -1895,7 +1920,7 @@
       "id": 1023,
       "name": "Net Revenue Retention (NRR)",
       "industry": "Vertical Farming",
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -1932,7 +1957,7 @@
       "id": 1029,
       "name": "Gross Revenue Churn Rate",
       "industry": "Vertical Farming",
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -2021,7 +2046,7 @@
       "id": 1041,
       "name": "Customer Lifetime Value (LTV)",
       "industry": "Vertical Farming",
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -2105,7 +2130,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-current-ratio",
+      "catalogMetricKey": "transportation.core.current_ratio",
       "id": 928,
       "name": "Current Ratio",
       "industry": "Transportation",
@@ -2114,7 +2139,7 @@
       "unit": "Ratio",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "transportation.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -2147,11 +2172,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-quick-ratio",
+      "catalogMetricKey": "transportation.core.quick_ratio",
       "id": 934,
       "name": "Quick Ratio (Acid Test)",
       "industry": "Transportation",
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "type": "Financial",
       "unit": "Ratio",
       "requiredSources": [
@@ -2179,16 +2204,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-gross-margin",
+      "catalogMetricKey": "transportation.core.gross_margin",
       "id": 940,
       "name": "Gross Profit Margin",
       "industry": "Transportation",
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "transportation.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -2198,7 +2223,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AlltransportationQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "transportation.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -2219,16 +2244,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-operating-margin",
+      "catalogMetricKey": "transportation.core.operating_margin",
       "id": 946,
       "name": "Operating Margin (EBIT)",
       "industry": "Transportation",
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "transportation.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -2238,7 +2263,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AlltransportationQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "transportation.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -2259,16 +2284,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-ebitda-margin",
+      "catalogMetricKey": "transportation.core.ebitda_margin",
       "id": 952,
       "name": "EBITDA Margin",
       "industry": "Transportation",
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "transportation.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -2294,16 +2319,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-net-margin",
+      "catalogMetricKey": "transportation.core.net_margin",
       "id": 958,
       "name": "Net Profit Margin",
       "industry": "Transportation",
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "transportation.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -2313,7 +2338,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AlltransportationQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "transportation.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -2334,11 +2359,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-revenue-growth",
+      "catalogMetricKey": "transportation.core.revenue_growth",
       "id": 964,
       "name": "Revenue Growth Rate",
       "industry": "Transportation",
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -2359,11 +2384,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-working-capital",
+      "catalogMetricKey": "transportation.core.working_capital",
       "id": 970,
       "name": "Working Capital",
       "industry": "Transportation",
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -2391,11 +2416,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-dso",
+      "catalogMetricKey": "transportation.core.dso",
       "id": 976,
       "name": "Days Sales Outstanding (DSO)",
       "industry": "Transportation",
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -2430,11 +2455,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-dpo",
+      "catalogMetricKey": "transportation.core.dpo",
       "id": 982,
       "name": "Days Payable Outstanding (DPO)",
       "industry": "Transportation",
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -2469,11 +2494,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-ccc",
+      "catalogMetricKey": "transportation.core.ccc",
       "id": 988,
       "name": "Cash Conversion Cycle",
       "industry": "Transportation",
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -2517,16 +2542,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-operating-cash-flow",
+      "catalogMetricKey": "transportation.core.operating_cash_flow",
       "id": 994,
       "name": "Operating Cash Flow",
       "industry": "Transportation",
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "transportation.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -2566,11 +2591,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-burn-rate",
+      "catalogMetricKey": "transportation.core.burn_rate",
       "id": 1000,
       "name": "Monthly Burn Rate",
       "industry": "Transportation",
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -2591,7 +2616,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Alltransportationfpa-runway",
+      "catalogMetricKey": "transportation.core.runway",
       "id": 1006,
       "name": "Cash Runway",
       "industry": "Transportation",
@@ -2616,6 +2641,16 @@
       ]
     },
     {
+      "catalogMetricKey": "transportation.core.headcount",
+      "id": 1084,
+      "name": "Headcount (FTE)",
+      "industry": "Transportation",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
+    },
+    {
       "catalogMetricKey": "DtBqsvp9S9HBlcxsvAgd",
       "id": 14,
       "name": "Driver Turnover Rate",
@@ -2625,12 +2660,12 @@
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "Alltransportation5aMhHPzshRFSHX4PjOMH",
+          "catalogOptionKey": "transportation.core.hr_records",
           "name": "HR records",
           "fields": []
         },
         {
-          "catalogOptionKey": "AlltransportationqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "transportation.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         }
@@ -2773,7 +2808,7 @@
       "unit": "USD/mile",
       "requiredSources": [
         {
-          "catalogOptionKey": "AlltransportationqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "transportation.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -2803,7 +2838,7 @@
       "id": 1012,
       "name": "Monthly Recurring Revenue (MRR)",
       "industry": "Transportation",
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -2842,7 +2877,7 @@
       "id": 1018,
       "name": "Annual Recurring Revenue (ARR)",
       "industry": "Transportation",
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "type": "Financial",
       "unit": "Currency/year",
       "requiredSources": [
@@ -2867,7 +2902,7 @@
       "id": 1024,
       "name": "Net Revenue Retention (NRR)",
       "industry": "Transportation",
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -2904,7 +2939,7 @@
       "id": 1030,
       "name": "Gross Revenue Churn Rate",
       "industry": "Transportation",
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -2993,7 +3028,7 @@
       "id": 1042,
       "name": "Customer Lifetime Value (LTV)",
       "industry": "Transportation",
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -3077,7 +3112,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-current-ratio",
+      "catalogMetricKey": "manufacturing.core.current_ratio",
       "id": 929,
       "name": "Current Ratio",
       "industry": "Manufacturing",
@@ -3086,7 +3121,7 @@
       "unit": "Ratio",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "manufacturing.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -3119,11 +3154,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-quick-ratio",
+      "catalogMetricKey": "manufacturing.core.quick_ratio",
       "id": 935,
       "name": "Quick Ratio (Acid Test)",
       "industry": "Manufacturing",
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "type": "Financial",
       "unit": "Ratio",
       "requiredSources": [
@@ -3151,16 +3186,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-gross-margin",
+      "catalogMetricKey": "manufacturing.core.gross_margin",
       "id": 941,
       "name": "Gross Profit Margin",
       "industry": "Manufacturing",
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "manufacturing.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -3170,7 +3205,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AllmanufacturingQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "manufacturing.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -3191,16 +3226,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-operating-margin",
+      "catalogMetricKey": "manufacturing.core.operating_margin",
       "id": 947,
       "name": "Operating Margin (EBIT)",
       "industry": "Manufacturing",
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "manufacturing.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -3210,12 +3245,12 @@
           ]
         },
         {
-          "catalogOptionKey": "AllmanufacturingQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "manufacturing.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllmanufacturingqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "manufacturing.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -3236,16 +3271,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-ebitda-margin",
+      "catalogMetricKey": "manufacturing.core.ebitda_margin",
       "id": 953,
       "name": "EBITDA Margin",
       "industry": "Manufacturing",
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "manufacturing.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -3271,16 +3306,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-net-margin",
+      "catalogMetricKey": "manufacturing.core.net_margin",
       "id": 959,
       "name": "Net Profit Margin",
       "industry": "Manufacturing",
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "manufacturing.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -3290,17 +3325,17 @@
           ]
         },
         {
-          "catalogOptionKey": "Allmanufacturing5aMhHPzshRFSHX4PjOMH",
+          "catalogOptionKey": "manufacturing.core.hr_records",
           "name": "HR records",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllmanufacturingQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "manufacturing.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllmanufacturingqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "manufacturing.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -3321,11 +3356,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-revenue-growth",
+      "catalogMetricKey": "manufacturing.core.revenue_growth",
       "id": 965,
       "name": "Revenue Growth Rate",
       "industry": "Manufacturing",
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -3346,11 +3381,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-working-capital",
+      "catalogMetricKey": "manufacturing.core.working_capital",
       "id": 971,
       "name": "Working Capital",
       "industry": "Manufacturing",
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -3378,11 +3413,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-dso",
+      "catalogMetricKey": "manufacturing.core.dso",
       "id": 977,
       "name": "Days Sales Outstanding (DSO)",
       "industry": "Manufacturing",
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -3417,11 +3452,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-dpo",
+      "catalogMetricKey": "manufacturing.core.dpo",
       "id": 983,
       "name": "Days Payable Outstanding (DPO)",
       "industry": "Manufacturing",
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -3456,11 +3491,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-ccc",
+      "catalogMetricKey": "manufacturing.core.ccc",
       "id": 989,
       "name": "Cash Conversion Cycle",
       "industry": "Manufacturing",
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -3517,16 +3552,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-operating-cash-flow",
+      "catalogMetricKey": "manufacturing.core.operating_cash_flow",
       "id": 995,
       "name": "Operating Cash Flow",
       "industry": "Manufacturing",
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "manufacturing.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -3566,11 +3601,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-burn-rate",
+      "catalogMetricKey": "manufacturing.core.burn_rate",
       "id": 1001,
       "name": "Monthly Burn Rate",
       "industry": "Manufacturing",
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -3591,7 +3626,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allmanufacturingfpa-runway",
+      "catalogMetricKey": "manufacturing.core.runway",
       "id": 1007,
       "name": "Cash Runway",
       "industry": "Manufacturing",
@@ -3614,6 +3649,16 @@
           ]
         }
       ]
+    },
+    {
+      "catalogMetricKey": "manufacturing.core.headcount",
+      "id": 1081,
+      "name": "Headcount (FTE)",
+      "industry": "Manufacturing",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
     },
     {
       "catalogMetricKey": "MfgOee901CatalogMetricKey01",
@@ -3788,7 +3833,7 @@
       "id": 1013,
       "name": "Monthly Recurring Revenue (MRR)",
       "industry": "Manufacturing",
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -3827,7 +3872,7 @@
       "id": 1019,
       "name": "Annual Recurring Revenue (ARR)",
       "industry": "Manufacturing",
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "type": "Financial",
       "unit": "Currency/year",
       "requiredSources": [
@@ -3852,7 +3897,7 @@
       "id": 1025,
       "name": "Net Revenue Retention (NRR)",
       "industry": "Manufacturing",
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -3889,7 +3934,7 @@
       "id": 1031,
       "name": "Gross Revenue Churn Rate",
       "industry": "Manufacturing",
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -3978,7 +4023,7 @@
       "id": 1043,
       "name": "Customer Lifetime Value (LTV)",
       "industry": "Manufacturing",
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -4066,7 +4111,7 @@
       "id": 1073,
       "name": "Capacity Utilization",
       "industry": "Manufacturing",
-      "methodology": "Capacity Utilization = (Actual Output / Maximum Possible Output) Ã— 100",
+      "methodology": "Capacity Utilization = (Actual Output / Maximum Possible Output) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -4086,7 +4131,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-current-ratio",
+      "catalogMetricKey": "healthcare.core.current_ratio",
       "id": 930,
       "name": "Current Ratio",
       "industry": "Healthcare",
@@ -4095,7 +4140,7 @@
       "unit": "Ratio",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "healthcare.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -4128,11 +4173,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-quick-ratio",
+      "catalogMetricKey": "healthcare.core.quick_ratio",
       "id": 936,
       "name": "Quick Ratio (Acid Test)",
       "industry": "Healthcare",
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "type": "Financial",
       "unit": "Ratio",
       "requiredSources": [
@@ -4160,16 +4205,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-gross-margin",
+      "catalogMetricKey": "healthcare.core.gross_margin",
       "id": 942,
       "name": "Gross Profit Margin",
       "industry": "Healthcare",
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "healthcare.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -4179,7 +4224,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AllhealthcareQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "healthcare.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -4200,16 +4245,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-operating-margin",
+      "catalogMetricKey": "healthcare.core.operating_margin",
       "id": 948,
       "name": "Operating Margin (EBIT)",
       "industry": "Healthcare",
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "healthcare.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -4219,12 +4264,12 @@
           ]
         },
         {
-          "catalogOptionKey": "AllhealthcareQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "healthcare.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllhealthcareqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "healthcare.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -4245,16 +4290,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-ebitda-margin",
+      "catalogMetricKey": "healthcare.core.ebitda_margin",
       "id": 954,
       "name": "EBITDA Margin",
       "industry": "Healthcare",
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "healthcare.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -4280,16 +4325,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-net-margin",
+      "catalogMetricKey": "healthcare.core.net_margin",
       "id": 960,
       "name": "Net Profit Margin",
       "industry": "Healthcare",
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "healthcare.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -4299,12 +4344,12 @@
           ]
         },
         {
-          "catalogOptionKey": "AllhealthcareQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "healthcare.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllhealthcareqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "healthcare.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -4325,11 +4370,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-revenue-growth",
+      "catalogMetricKey": "healthcare.core.revenue_growth",
       "id": 966,
       "name": "Revenue Growth Rate",
       "industry": "Healthcare",
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -4350,11 +4395,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-working-capital",
+      "catalogMetricKey": "healthcare.core.working_capital",
       "id": 972,
       "name": "Working Capital",
       "industry": "Healthcare",
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -4382,11 +4427,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-dso",
+      "catalogMetricKey": "healthcare.core.dso",
       "id": 978,
       "name": "Days Sales Outstanding (DSO)",
       "industry": "Healthcare",
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -4421,11 +4466,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-dpo",
+      "catalogMetricKey": "healthcare.core.dpo",
       "id": 984,
       "name": "Days Payable Outstanding (DPO)",
       "industry": "Healthcare",
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -4460,11 +4505,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-ccc",
+      "catalogMetricKey": "healthcare.core.ccc",
       "id": 990,
       "name": "Cash Conversion Cycle",
       "industry": "Healthcare",
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -4508,16 +4553,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-operating-cash-flow",
+      "catalogMetricKey": "healthcare.core.operating_cash_flow",
       "id": 996,
       "name": "Operating Cash Flow",
       "industry": "Healthcare",
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "healthcare.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -4557,11 +4602,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-burn-rate",
+      "catalogMetricKey": "healthcare.core.burn_rate",
       "id": 1002,
       "name": "Monthly Burn Rate",
       "industry": "Healthcare",
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -4582,7 +4627,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allhealthcarefpa-runway",
+      "catalogMetricKey": "healthcare.core.runway",
       "id": 1008,
       "name": "Cash Runway",
       "industry": "Healthcare",
@@ -4605,6 +4650,16 @@
           ]
         }
       ]
+    },
+    {
+      "catalogMetricKey": "healthcare.core.headcount",
+      "id": 1080,
+      "name": "Headcount (FTE)",
+      "industry": "Healthcare",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
     },
     {
       "catalogMetricKey": "HcVol911CatalogMetricKey01",
@@ -4694,7 +4749,7 @@
       "unit": "Ratio",
       "requiredSources": [
         {
-          "catalogOptionKey": "Allhealthcare5aMhHPzshRFSHX4PjOMH",
+          "catalogOptionKey": "healthcare.core.hr_records",
           "name": "HR records",
           "fields": []
         },
@@ -4739,7 +4794,7 @@
       "id": 1014,
       "name": "Monthly Recurring Revenue (MRR)",
       "industry": "Healthcare",
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -4778,7 +4833,7 @@
       "id": 1020,
       "name": "Annual Recurring Revenue (ARR)",
       "industry": "Healthcare",
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "type": "Financial",
       "unit": "Currency/year",
       "requiredSources": [
@@ -4803,7 +4858,7 @@
       "id": 1026,
       "name": "Net Revenue Retention (NRR)",
       "industry": "Healthcare",
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -4840,7 +4895,7 @@
       "id": 1032,
       "name": "Gross Revenue Churn Rate",
       "industry": "Healthcare",
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -4929,7 +4984,7 @@
       "id": 1044,
       "name": "Customer Lifetime Value (LTV)",
       "industry": "Healthcare",
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -5013,7 +5068,97 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-current-ratio",
+      "catalogMetricKey": "healthcare.provider.bed_occupancy_rate",
+      "id": 1400,
+      "name": "Bed Occupancy Rate",
+      "industry": "Healthcare",
+      "methodology": "Bed Occupancy = (Occupied Beds / Available Beds) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.provider.or_utilization",
+      "id": 1401,
+      "name": "Operating Room Utilization",
+      "industry": "Healthcare",
+      "methodology": "OR Utilization = (OR Time Used / OR Time Available) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.provider.ed_wait_time",
+      "id": 1402,
+      "name": "ED Wait Time",
+      "industry": "Healthcare",
+      "methodology": "Mean minutes from ED arrival to provider (directly measured).",
+      "type": "Operational",
+      "unit": "Minutes",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.provider.case_mix_index",
+      "id": 1403,
+      "name": "Case Mix Index",
+      "industry": "Healthcare",
+      "methodology": "Average DRG weight across discharges (directly measured).",
+      "type": "Operational",
+      "unit": "Index",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.provider.cost_per_discharge",
+      "id": 1404,
+      "name": "Cost per Discharge",
+      "industry": "Healthcare",
+      "methodology": "Cost per Discharge = Total Operating Cost / Discharges",
+      "type": "Financial",
+      "unit": "Currency",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.revenue_cycle.ar_days",
+      "id": 1405,
+      "name": "AR Days",
+      "industry": "Healthcare",
+      "methodology": "AR Days = (Accounts Receivable / Net Patient Revenue) × Days",
+      "type": "Financial",
+      "unit": "Days",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.revenue_cycle.clean_claim_rate",
+      "id": 1406,
+      "name": "Clean Claim Rate",
+      "industry": "Healthcare",
+      "methodology": "Clean Claim Rate = (Clean Claims / Total Claims) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.quality.mortality_rate",
+      "id": 1407,
+      "name": "Inpatient Mortality Rate",
+      "industry": "Healthcare",
+      "methodology": "Mortality Rate = (Inpatient Deaths / Discharges) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "healthcare.quality.infection_rate",
+      "id": 1408,
+      "name": "Healthcare-Associated Infection Rate",
+      "industry": "Healthcare",
+      "methodology": "HAI Rate = (Infections / Patient Days) × 1000",
+      "type": "Operational",
+      "unit": "Per 1000 patient-days",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "restaurants.core.current_ratio",
       "id": 931,
       "name": "Current Ratio",
       "industry": "Restaurants",
@@ -5022,7 +5167,7 @@
       "unit": "Ratio",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "restaurants.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -5055,11 +5200,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-quick-ratio",
+      "catalogMetricKey": "restaurants.core.quick_ratio",
       "id": 937,
       "name": "Quick Ratio (Acid Test)",
       "industry": "Restaurants",
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "type": "Financial",
       "unit": "Ratio",
       "requiredSources": [
@@ -5087,16 +5232,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-gross-margin",
+      "catalogMetricKey": "restaurants.core.gross_margin",
       "id": 943,
       "name": "Gross Profit Margin",
       "industry": "Restaurants",
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "restaurants.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -5106,7 +5251,7 @@
           ]
         },
         {
-          "catalogOptionKey": "AllrestaurantsQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "restaurants.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
@@ -5127,16 +5272,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-operating-margin",
+      "catalogMetricKey": "restaurants.core.operating_margin",
       "id": 949,
       "name": "Operating Margin (EBIT)",
       "industry": "Restaurants",
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "restaurants.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -5146,12 +5291,12 @@
           ]
         },
         {
-          "catalogOptionKey": "AllrestaurantsQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "restaurants.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllrestaurantsqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "restaurants.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -5172,16 +5317,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-ebitda-margin",
+      "catalogMetricKey": "restaurants.core.ebitda_margin",
       "id": 955,
       "name": "EBITDA Margin",
       "industry": "Restaurants",
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "restaurants.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -5207,16 +5352,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-net-margin",
+      "catalogMetricKey": "restaurants.core.net_margin",
       "id": 961,
       "name": "Net Profit Margin",
       "industry": "Restaurants",
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "restaurants.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -5226,12 +5371,12 @@
           ]
         },
         {
-          "catalogOptionKey": "AllrestaurantsQO2mQ9iQZXjtLrZYLXcK",
+          "catalogOptionKey": "restaurants.core.accounting_software",
           "name": "Accounting Software",
           "fields": []
         },
         {
-          "catalogOptionKey": "AllrestaurantsqXzIFYqjk5et3S78BYew",
+          "catalogOptionKey": "restaurants.core.payroll_records",
           "name": "Payroll records",
           "fields": []
         },
@@ -5252,11 +5397,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-revenue-growth",
+      "catalogMetricKey": "restaurants.core.revenue_growth",
       "id": 967,
       "name": "Revenue Growth Rate",
       "industry": "Restaurants",
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -5277,11 +5422,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-working-capital",
+      "catalogMetricKey": "restaurants.core.working_capital",
       "id": 973,
       "name": "Working Capital",
       "industry": "Restaurants",
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -5309,11 +5454,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-dso",
+      "catalogMetricKey": "restaurants.core.dso",
       "id": 979,
       "name": "Days Sales Outstanding (DSO)",
       "industry": "Restaurants",
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -5348,11 +5493,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-dpo",
+      "catalogMetricKey": "restaurants.core.dpo",
       "id": 985,
       "name": "Days Payable Outstanding (DPO)",
       "industry": "Restaurants",
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -5387,11 +5532,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-ccc",
+      "catalogMetricKey": "restaurants.core.ccc",
       "id": 991,
       "name": "Cash Conversion Cycle",
       "industry": "Restaurants",
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "type": "Financial",
       "unit": "Days",
       "requiredSources": [
@@ -5435,16 +5580,16 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-operating-cash-flow",
+      "catalogMetricKey": "restaurants.core.operating_cash_flow",
       "id": 997,
       "name": "Operating Cash Flow",
       "industry": "Restaurants",
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
         {
-          "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+          "catalogOptionKey": "restaurants.core.financial_statements",
           "name": "Financial statements",
           "fields": [
             "date",
@@ -5484,11 +5629,11 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-burn-rate",
+      "catalogMetricKey": "restaurants.core.burn_rate",
       "id": 1003,
       "name": "Monthly Burn Rate",
       "industry": "Restaurants",
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -5509,7 +5654,7 @@
       ]
     },
     {
-      "catalogMetricKey": "Allrestaurantsfpa-runway",
+      "catalogMetricKey": "restaurants.core.runway",
       "id": 1009,
       "name": "Cash Runway",
       "industry": "Restaurants",
@@ -5532,6 +5677,16 @@
           ]
         }
       ]
+    },
+    {
+      "catalogMetricKey": "restaurants.core.headcount",
+      "id": 1083,
+      "name": "Headcount (FTE)",
+      "industry": "Restaurants",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
     },
     {
       "catalogMetricKey": "RestFood921CatalogMetricKey01",
@@ -5582,7 +5737,7 @@
       "unit": "%",
       "requiredSources": [
         {
-          "catalogOptionKey": "Allrestaurants5aMhHPzshRFSHX4PjOMH",
+          "catalogOptionKey": "restaurants.core.hr_records",
           "name": "HR records",
           "fields": []
         },
@@ -5696,7 +5851,7 @@
       "id": 1015,
       "name": "Monthly Recurring Revenue (MRR)",
       "industry": "Restaurants",
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "type": "Financial",
       "unit": "Currency/month",
       "requiredSources": [
@@ -5735,7 +5890,7 @@
       "id": 1021,
       "name": "Annual Recurring Revenue (ARR)",
       "industry": "Restaurants",
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "type": "Financial",
       "unit": "Currency/year",
       "requiredSources": [
@@ -5760,7 +5915,7 @@
       "id": 1027,
       "name": "Net Revenue Retention (NRR)",
       "industry": "Restaurants",
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "type": "Financial",
       "unit": "%",
       "requiredSources": [
@@ -5797,7 +5952,7 @@
       "id": 1033,
       "name": "Gross Revenue Churn Rate",
       "industry": "Restaurants",
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "type": "Operational",
       "unit": "%",
       "requiredSources": [
@@ -5886,7 +6041,7 @@
       "id": 1045,
       "name": "Customer Lifetime Value (LTV)",
       "industry": "Restaurants",
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "type": "Financial",
       "unit": "Currency (e.g., USD)",
       "requiredSources": [
@@ -5968,11 +6123,375 @@
           ]
         }
       ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.current_ratio",
+      "id": 1300,
+      "name": "Current Ratio",
+      "industry": "Life Sciences",
+      "methodology": "Current Ratio = Current Assets / Current Liabilities",
+      "type": "Financial",
+      "unit": "Ratio",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.quick_ratio",
+      "id": 1301,
+      "name": "Quick Ratio (Acid Test)",
+      "industry": "Life Sciences",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
+      "type": "Financial",
+      "unit": "Ratio",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.gross_margin",
+      "id": 1302,
+      "name": "Gross Profit Margin",
+      "industry": "Life Sciences",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        },
+        {
+          "catalogOptionKey": "life_sciences.core.accounting_software",
+          "name": "Accounting Software",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.operating_margin",
+      "id": 1303,
+      "name": "Operating Margin (EBIT)",
+      "industry": "Life Sciences",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        },
+        {
+          "catalogOptionKey": "life_sciences.core.accounting_software",
+          "name": "Accounting Software",
+          "fields": []
+        },
+        {
+          "catalogOptionKey": "life_sciences.core.payroll_records",
+          "name": "Payroll records",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.ebitda_margin",
+      "id": 1304,
+      "name": "EBITDA Margin",
+      "industry": "Life Sciences",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.net_margin",
+      "id": 1305,
+      "name": "Net Profit Margin",
+      "industry": "Life Sciences",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        },
+        {
+          "catalogOptionKey": "life_sciences.core.hr_records",
+          "name": "HR records",
+          "fields": []
+        },
+        {
+          "catalogOptionKey": "life_sciences.core.accounting_software",
+          "name": "Accounting Software",
+          "fields": []
+        },
+        {
+          "catalogOptionKey": "life_sciences.core.payroll_records",
+          "name": "Payroll records",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.revenue_growth",
+      "id": 1306,
+      "name": "Revenue Growth Rate",
+      "industry": "Life Sciences",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.working_capital",
+      "id": 1307,
+      "name": "Working Capital",
+      "industry": "Life Sciences",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.dso",
+      "id": 1308,
+      "name": "Days Sales Outstanding (DSO)",
+      "industry": "Life Sciences",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
+      "type": "Financial",
+      "unit": "Days",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.dpo",
+      "id": 1309,
+      "name": "Days Payable Outstanding (DPO)",
+      "industry": "Life Sciences",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
+      "type": "Financial",
+      "unit": "Days",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.ccc",
+      "id": 1310,
+      "name": "Cash Conversion Cycle",
+      "industry": "Life Sciences",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
+      "type": "Financial",
+      "unit": "Days",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.operating_cash_flow",
+      "id": 1311,
+      "name": "Operating Cash Flow",
+      "industry": "Life Sciences",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.burn_rate",
+      "id": 1312,
+      "name": "Monthly Burn Rate",
+      "industry": "Life Sciences",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
+      "type": "Financial",
+      "unit": "Currency/month",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.runway",
+      "id": 1313,
+      "name": "Cash Runway",
+      "industry": "Life Sciences",
+      "methodology": "Runway (months) = Current Cash Balance / Monthly Net Burn",
+      "type": "Financial",
+      "unit": "Months",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.core.headcount",
+      "id": 1314,
+      "name": "Headcount (FTE)",
+      "industry": "Life Sciences",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": []
+    },
+    {
+      "catalogMetricKey": "life_sciences.rnd.pipeline_active_count",
+      "id": 1330,
+      "name": "Active Pipeline Programs",
+      "industry": "Life Sciences",
+      "methodology": "Count of active R&D programs in the period (directly measured).",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.rnd.clinical_trial_summary",
+          "name": "De-identified clinical trial summary",
+          "fields": [
+            "date",
+            "program_id",
+            "phase",
+            "patients_enrolled",
+            "phases_passed",
+            "phases_attempted",
+            "total_trial_cost"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.rnd.trial_cost_per_patient",
+      "id": 1331,
+      "name": "Trial Cost per Patient",
+      "industry": "Life Sciences",
+      "methodology": "Trial Cost per Patient = Total Trial Cost / Patients Enrolled",
+      "type": "Financial",
+      "unit": "Currency",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.rnd.clinical_trial_summary",
+          "name": "De-identified clinical trial summary",
+          "fields": [
+            "date",
+            "program_id",
+            "phase",
+            "patients_enrolled",
+            "phases_passed",
+            "phases_attempted",
+            "total_trial_cost"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.rnd.phase_success_rate",
+      "id": 1332,
+      "name": "Phase Success Rate",
+      "industry": "Life Sciences",
+      "methodology": "Phase Success Rate = (Phases Passed / Phases Attempted) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.rnd.clinical_trial_summary",
+          "name": "De-identified clinical trial summary",
+          "fields": [
+            "date",
+            "program_id",
+            "phase",
+            "patients_enrolled",
+            "phases_passed",
+            "phases_attempted",
+            "total_trial_cost"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.supply_chain.batch_yield",
+      "id": 1333,
+      "name": "Batch Yield",
+      "industry": "Life Sciences",
+      "methodology": "Batch Yield = (Good Units / Total Units) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.supply_chain.production_batch_records",
+          "name": "Production batch records",
+          "fields": [
+            "date",
+            "batch_id",
+            "good_units",
+            "total_units",
+            "total_cogs",
+            "units_produced"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "life_sciences.supply_chain.cogs_per_unit",
+      "id": 1334,
+      "name": "COGS per Unit",
+      "industry": "Life Sciences",
+      "methodology": "COGS per Unit = Total COGS / Units Produced",
+      "type": "Financial",
+      "unit": "Currency",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "life_sciences.supply_chain.production_batch_records",
+          "name": "Production batch records",
+          "fields": [
+            "date",
+            "batch_id",
+            "good_units",
+            "total_units",
+            "total_cogs",
+            "units_produced"
+          ]
+        }
+      ]
     }
   ],
   "dataOptions": [
     {
-      "catalogOptionKey": "AllrealestateGvoI0Vg2YijGfgoBaqqe",
+      "catalogOptionKey": "real_estate.core.financial_statements",
       "id": 1082,
       "name": "Financial statements",
       "industry": "Real Estate",
@@ -5992,7 +6511,7 @@
       ]
     },
     {
-      "catalogOptionKey": "Allrealestate5aMhHPzshRFSHX4PjOMH",
+      "catalogOptionKey": "real_estate.core.hr_records",
       "id": 1076,
       "name": "HR records",
       "industry": "Real Estate",
@@ -6002,7 +6521,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllrealestateQO2mQ9iQZXjtLrZYLXcK",
+      "catalogOptionKey": "real_estate.core.accounting_software",
       "id": 1088,
       "name": "Accounting Software",
       "industry": "Real Estate",
@@ -6014,7 +6533,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllrealestateqXzIFYqjk5et3S78BYew",
+      "catalogOptionKey": "real_estate.core.payroll_records",
       "id": 1094,
       "name": "Payroll records",
       "industry": "Real Estate",
@@ -6375,7 +6894,7 @@
       ]
     },
     {
-      "catalogOptionKey": "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe",
+      "catalogOptionKey": "vertical_farming.core.financial_statements",
       "id": 1083,
       "name": "Financial statements",
       "industry": "Vertical Farming",
@@ -6395,7 +6914,7 @@
       ]
     },
     {
-      "catalogOptionKey": "Allverticalfarming5aMhHPzshRFSHX4PjOMH",
+      "catalogOptionKey": "vertical_farming.core.hr_records",
       "id": 1077,
       "name": "HR records",
       "industry": "Vertical Farming",
@@ -6405,7 +6924,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK",
+      "catalogOptionKey": "vertical_farming.core.accounting_software",
       "id": 1089,
       "name": "Accounting Software",
       "industry": "Vertical Farming",
@@ -6417,7 +6936,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllverticalfarmingqXzIFYqjk5et3S78BYew",
+      "catalogOptionKey": "vertical_farming.core.payroll_records",
       "id": 1095,
       "name": "Payroll records",
       "industry": "Vertical Farming",
@@ -6695,7 +7214,7 @@
       ]
     },
     {
-      "catalogOptionKey": "AlltransportationGvoI0Vg2YijGfgoBaqqe",
+      "catalogOptionKey": "transportation.core.financial_statements",
       "id": 1084,
       "name": "Financial statements",
       "industry": "Transportation",
@@ -6715,7 +7234,7 @@
       ]
     },
     {
-      "catalogOptionKey": "Alltransportation5aMhHPzshRFSHX4PjOMH",
+      "catalogOptionKey": "transportation.core.hr_records",
       "id": 1078,
       "name": "HR records",
       "industry": "Transportation",
@@ -6725,7 +7244,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AlltransportationQO2mQ9iQZXjtLrZYLXcK",
+      "catalogOptionKey": "transportation.core.accounting_software",
       "id": 1090,
       "name": "Accounting Software",
       "industry": "Transportation",
@@ -6737,7 +7256,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AlltransportationqXzIFYqjk5et3S78BYew",
+      "catalogOptionKey": "transportation.core.payroll_records",
       "id": 1096,
       "name": "Payroll records",
       "industry": "Transportation",
@@ -7058,7 +7577,7 @@
       ]
     },
     {
-      "catalogOptionKey": "AllmanufacturingGvoI0Vg2YijGfgoBaqqe",
+      "catalogOptionKey": "manufacturing.core.financial_statements",
       "id": 1085,
       "name": "Financial statements",
       "industry": "Manufacturing",
@@ -7078,7 +7597,7 @@
       ]
     },
     {
-      "catalogOptionKey": "Allmanufacturing5aMhHPzshRFSHX4PjOMH",
+      "catalogOptionKey": "manufacturing.core.hr_records",
       "id": 1079,
       "name": "HR records",
       "industry": "Manufacturing",
@@ -7088,7 +7607,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllmanufacturingQO2mQ9iQZXjtLrZYLXcK",
+      "catalogOptionKey": "manufacturing.core.accounting_software",
       "id": 1091,
       "name": "Accounting Software",
       "industry": "Manufacturing",
@@ -7100,7 +7619,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllmanufacturingqXzIFYqjk5et3S78BYew",
+      "catalogOptionKey": "manufacturing.core.payroll_records",
       "id": 1097,
       "name": "Payroll records",
       "industry": "Manufacturing",
@@ -7426,7 +7945,7 @@
       ]
     },
     {
-      "catalogOptionKey": "AllhealthcareGvoI0Vg2YijGfgoBaqqe",
+      "catalogOptionKey": "healthcare.core.financial_statements",
       "id": 1086,
       "name": "Financial statements",
       "industry": "Healthcare",
@@ -7446,7 +7965,7 @@
       ]
     },
     {
-      "catalogOptionKey": "Allhealthcare5aMhHPzshRFSHX4PjOMH",
+      "catalogOptionKey": "healthcare.core.hr_records",
       "id": 1080,
       "name": "HR records",
       "industry": "Healthcare",
@@ -7456,7 +7975,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllhealthcareQO2mQ9iQZXjtLrZYLXcK",
+      "catalogOptionKey": "healthcare.core.accounting_software",
       "id": 1092,
       "name": "Accounting Software",
       "industry": "Healthcare",
@@ -7468,7 +7987,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllhealthcareqXzIFYqjk5et3S78BYew",
+      "catalogOptionKey": "healthcare.core.payroll_records",
       "id": 1098,
       "name": "Payroll records",
       "industry": "Healthcare",
@@ -7752,7 +8271,7 @@
       ]
     },
     {
-      "catalogOptionKey": "AllrestaurantsGvoI0Vg2YijGfgoBaqqe",
+      "catalogOptionKey": "restaurants.core.financial_statements",
       "id": 1087,
       "name": "Financial statements",
       "industry": "Restaurants",
@@ -7772,7 +8291,7 @@
       ]
     },
     {
-      "catalogOptionKey": "Allrestaurants5aMhHPzshRFSHX4PjOMH",
+      "catalogOptionKey": "restaurants.core.hr_records",
       "id": 1081,
       "name": "HR records",
       "industry": "Restaurants",
@@ -7782,7 +8301,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllrestaurantsQO2mQ9iQZXjtLrZYLXcK",
+      "catalogOptionKey": "restaurants.core.accounting_software",
       "id": 1093,
       "name": "Accounting Software",
       "industry": "Restaurants",
@@ -7794,7 +8313,7 @@
       "fields": []
     },
     {
-      "catalogOptionKey": "AllrestaurantsqXzIFYqjk5et3S78BYew",
+      "catalogOptionKey": "restaurants.core.payroll_records",
       "id": 1099,
       "name": "Payroll records",
       "industry": "Restaurants",
@@ -8067,6 +8586,97 @@
         "leads",
         "new_customers",
         "currency"
+      ]
+    },
+    {
+      "catalogOptionKey": "life_sciences.core.financial_statements",
+      "id": 1320,
+      "name": "Financial statements",
+      "industry": "Life Sciences",
+      "metricIds": [
+        1300,
+        1302,
+        1303,
+        1305,
+        1304,
+        1311
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ]
+    },
+    {
+      "catalogOptionKey": "life_sciences.core.hr_records",
+      "id": 1321,
+      "name": "HR records",
+      "industry": "Life Sciences",
+      "metricIds": [
+        1305
+      ],
+      "fields": []
+    },
+    {
+      "catalogOptionKey": "life_sciences.core.accounting_software",
+      "id": 1322,
+      "name": "Accounting Software",
+      "industry": "Life Sciences",
+      "metricIds": [
+        1302,
+        1303,
+        1305
+      ],
+      "fields": []
+    },
+    {
+      "catalogOptionKey": "life_sciences.core.payroll_records",
+      "id": 1323,
+      "name": "Payroll records",
+      "industry": "Life Sciences",
+      "metricIds": [
+        1305,
+        1303
+      ],
+      "fields": []
+    },
+    {
+      "catalogOptionKey": "life_sciences.rnd.clinical_trial_summary",
+      "id": 1340,
+      "name": "De-identified clinical trial summary",
+      "industry": "Life Sciences",
+      "metricIds": [
+        1330,
+        1331,
+        1332
+      ],
+      "fields": [
+        "date",
+        "program_id",
+        "phase",
+        "patients_enrolled",
+        "phases_passed",
+        "phases_attempted",
+        "total_trial_cost"
+      ]
+    },
+    {
+      "catalogOptionKey": "life_sciences.supply_chain.production_batch_records",
+      "id": 1341,
+      "name": "Production batch records",
+      "industry": "Life Sciences",
+      "metricIds": [
+        1333,
+        1334
+      ],
+      "fields": [
+        "date",
+        "batch_id",
+        "good_units",
+        "total_units",
+        "total_cogs",
+        "units_produced"
       ]
     }
   ]

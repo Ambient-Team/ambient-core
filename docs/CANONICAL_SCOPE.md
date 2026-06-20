@@ -13,6 +13,7 @@ How to consume a release: [INTEGRATING.md](INTEGRATING.md).
 - **`lib/ambient_inference/`** + **`services/maestro/`** — model registry, router, council, OpenAI-compatible HTTP service, `maestro-run-v1` run contract.
 - **`config/`** — Maestro model registry and routing defaults (overridable at deploy).
 - **`lib/ambient_agent/`** — open agent extension point.
+- **`lib/ambient_calc/`** — open-source reference calculator (safe evaluator + formula execution for catalogue metrics).
 - **`lib/ambient_cli/`** — `validate-contracts`, `ambient-catalog-generate`, `validate-inference-registry`.
 - **Scripts, tests, and CI** that validate and ship the above.
 

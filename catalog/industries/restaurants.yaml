@@ -25,6 +25,13 @@ metrics:
     frequency: weekly
     higherIsBetter: false
     fpaWorkflow: Margin control — primary lever in restaurant P&L alongside labor.
+    segment: financial
+    slug: food_cost_pct
+    calc:
+      expr: food_cogs / food_revenue * 100
+      inputs:
+      - food_cogs
+      - food_revenue
   RestLabor922CatalogMetricKey02:
     id: 922
     name: Labor Cost Percentage
@@ -50,6 +57,13 @@ metrics:
     frequency: weekly
     higherIsBetter: false
     fpaWorkflow: Prime cost management — labor plus food defines controllable margin.
+    segment: financial
+    slug: labor_cost_pct
+    calc:
+      expr: total_labor / total_revenue * 100
+      inputs:
+      - total_labor
+      - total_revenue
   RestTurn923CatalogMetricKey03:
     id: 923
     name: Table Turn Time
@@ -69,6 +83,9 @@ metrics:
     frequency: daily
     higherIsBetter: false
     fpaWorkflow: Throughput — turn time drives covers and revenue per seat hour.
+    segment: operations
+    slug: table_turnover
+    input: true
   RestWaste924CatalogMetricKey04:
     id: 924
     name: Food Waste and Spoilage
@@ -89,6 +106,9 @@ metrics:
     frequency: weekly
     higherIsBetter: false
     fpaWorkflow: Cost control — waste directly inflates food cost percentage.
+    segment: operations
+    slug: food_waste
+    input: true
   RestSss925CatalogMetricKey05:
     id: 925
     name: Same-Store Sales Growth
@@ -96,8 +116,7 @@ metrics:
     industry: Restaurants
     type: Financial
     unit: '%'
-    methodology: (Current Period SSS Revenue − Prior Year SSS Revenue) / Prior Year
-      SSS Revenue × 100
+    methodology: (Current Period SSS Revenue − Prior Year SSS Revenue) / Prior Year SSS Revenue × 100
     datasource:
     - POS daily close
     sensorFieldData:
@@ -110,6 +129,13 @@ metrics:
     frequency: monthly
     higherIsBetter: true
     fpaWorkflow: Growth narrative — separates comp performance from new unit expansion.
+    segment: financial
+    slug: same_store_sales_growth
+    calc:
+      expr: (current_sss - prior_sss) / prior_sss * 100
+      inputs:
+      - current_sss
+      - prior_sss
   Allrestaurantssaas-mrr:
     datasource:
     - Subscription billing records
@@ -119,7 +145,7 @@ metrics:
     industry: Restaurants
     industryTags:
     - SaaS
-    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
     name: Monthly Recurring Revenue (MRR)
     sensorFieldData:
     - Not Applicable
@@ -136,8 +162,14 @@ metrics:
       hardMax: 1000000000
     validationRule: currency
     benchmarkKey: mrr
-    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
-      model and ARR bridge.
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
   Allrestaurantssaas-arr:
     datasource:
     - Subscription billing records
@@ -147,7 +179,7 @@ metrics:
     industry: Restaurants
     industryTags:
     - SaaS
-    methodology: ARR = MRR Ã— 12
+    methodology: ARR = MRR × 12
     name: Annual Recurring Revenue (ARR)
     sensorFieldData:
     - Not Applicable
@@ -164,20 +196,22 @@ metrics:
       hardMax: 10000000000
     validationRule: currency
     benchmarkKey: arr
-    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
-      boards and investors.
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
   Allrestaurantssaas-nrr:
     datasource:
     - Subscription billing records
     - Product usage logs
-    description: Revenue retained and expanded from existing customers, net of churn
-      and contraction.
+    description: Revenue retained and expanded from existing customers, net of churn and contraction.
     id: 1027
     industry: Restaurants
     industryTags:
     - SaaS
-    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
-      MRR) Ã— 100
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100
     name: Net Revenue Retention (NRR)
     sensorFieldData:
     - Not Applicable
@@ -194,8 +228,16 @@ metrics:
       hardMax: 300
     validationRule: percentage_unbounded
     benchmarkKey: nrr
-    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
-      SaaS growth quality.
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
   Allrestaurantssaas-gross-churn:
     datasource:
     - Subscription billing records
@@ -205,7 +247,7 @@ metrics:
     industry: Restaurants
     industryTags:
     - SaaS
-    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
     name: Gross Revenue Churn Rate
     sensorFieldData:
     - Not Applicable
@@ -222,8 +264,14 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_churn
-    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
-      investment case.
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
   Allrestaurantssaas-cac:
     datasource:
     - Marketing spend records
@@ -251,8 +299,14 @@ metrics:
       hardMax: 10000000
     validationRule: currency
     benchmarkKey: cac
-    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
-      allocation.
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
   Allrestaurantssaas-ltv:
     datasource:
     - Subscription billing records
@@ -262,7 +316,7 @@ metrics:
     industry: Restaurants
     industryTags:
     - SaaS
-    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
     name: Customer Lifetime Value (LTV)
     sensorFieldData:
     - Not Applicable
@@ -279,14 +333,20 @@ metrics:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: ltv
-    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
-      decisions.
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
   Allrestaurantssaas-ltv-cac:
     datasource:
     - Subscription billing records
     - Marketing spend records
-    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
-      unit economics.
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.
     id: 1051
     industry: Restaurants
     industryTags:
@@ -308,8 +368,12 @@ metrics:
       hardMax: 100
     validationRule: ratio
     benchmarkKey: ltv_cac
-    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
-      for scaling spend.
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
   Allrestaurantssaas-rule-of-40:
     datasource:
     - Subscription billing records
@@ -336,14 +400,19 @@ metrics:
       hardMax: 200
     validationRule: percentage_unbounded
     benchmarkKey: rule_of_40
-    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
-      for SaaS planning.
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
 dataOptions:
   RestPos921CatalogOptionKey01:
     id: 921
     name: POS daily close
-    description: End-of-day sales, tender, labor punches summary, and check times
-      by location.
+    description: End-of-day sales, tender, labor punches summary, and check times by location.
     industry: Restaurants
     format: Document
     template: Transactional Data Template
@@ -366,8 +435,7 @@ dataOptions:
   RestInv922CatalogOptionKey02:
     id: 922
     name: Inventory count export
-    description: Periodic stock counts, usage, and waste/spoilage adjustments by SKU
-      category.
+    description: Periodic stock counts, usage, and waste/spoilage adjustments by SKU category.
     industry: Restaurants
     format: Document
     template: Document
@@ -386,8 +454,8 @@ dataOptions:
   RestLabor923CatalogOptionKey03:
     id: 923
     name: Labor scheduling export
-    description: Scheduled vs actual hours and labor cost by role and location (aggregated
-      staff counts only).
+    description: Scheduled vs actual hours and labor cost by role and location (aggregated staff counts
+      only).
     industry: Restaurants
     format: Document
     template: Document
@@ -402,8 +470,7 @@ dataOptions:
     - 922
     lastUpdated: '2026-06-14 00:00:00'
   Allrestaurantsds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - date
     - account_code
@@ -577,8 +644,7 @@ dataOptions:
     name: CRM / Sales pipeline
     template: Document
   Allrestaurantsds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn
-      analysis.
+    description: Product engagement and usage telemetry used for retention and churn analysis.
     fields:
     - date
     - customer_id

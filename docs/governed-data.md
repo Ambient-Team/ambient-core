@@ -83,13 +83,13 @@ validate-agent-config   # if you ship or fork agent profiles
 
 ## Data-product inventory
 
-- [tenant-metrics-v1.1.yaml](../contracts/tenant-metrics-v1.1.yaml) — Silver tenant metric snapshots; bronze lineage; multi-tenant isolation
-- [org-kpi-v1.1.yaml](../contracts/org-kpi-v1.1.yaml) — Gold org KPIs by vertical
-- [quality-v1.1.yaml](../contracts/quality-v1.1.yaml) — Data quality and lineage product
-- [opportunity-v1.1.yaml](../contracts/opportunity-v1.1.yaml) — Optimization opportunity outputs
-- [operational-financial-bridge-v1.0.yaml](../contracts/operational-financial-bridge-v1.0.yaml) — Operational–financial bridge
+- [tenant-metrics-v1.yaml](../contracts/tenant-metrics-v1.yaml) — Silver tenant metric snapshots; bronze lineage; multi-tenant isolation
+- [org-kpi-v1.yaml](../contracts/org-kpi-v1.yaml) — Gold org KPIs by vertical
+- [quality-v1.yaml](../contracts/quality-v1.yaml) — Data quality and lineage product
+- [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) — Optimization opportunity outputs
+- [operational-financial-bridge-v1.yaml](../contracts/operational-financial-bridge-v1.yaml) — Operational–financial bridge
 - [commercial-usage-v1.yaml](../contracts/commercial-usage-v1.yaml) — Commercial usage snapshot
-- [observability-pipeline-v1.0.yaml](../contracts/observability-pipeline-v1.0.yaml) — Medallion/pipeline health (often references platform deploy assets)
+- [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) — Medallion/pipeline health (often references platform deploy assets)
 - [maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) — Maestro run artifact schema (inference, not medallion data)
 
 Open the YAML for table names, required columns, and consumption rules. `validate-contracts` checks structural keys (`product`, `schema`, `lineage`, `governance`); deeper semantics are enforced in pipeline code and tests.

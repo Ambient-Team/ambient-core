@@ -8,7 +8,7 @@ export { deriveMetricValidation };
 
 export const REFERENCE_DATA = {
   "metrics": {
-    "Allrealestatefpa-current-ratio": {
+    "real_estate.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39,22 +39,30 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "current_ratio",
-      "fpaWorkflow": "Liquidity & solvency review â€” feeds covenant monitoring and the monthly board liquidity pack.",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 926,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-quick-ratio": {
+    "real_estate.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory â€” most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
       "industryTags": [
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "name": "Quick Ratio (Acid Test)",
       "sensorFieldData": [
         "Not Applicable"
@@ -73,11 +81,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "quick_ratio",
-      "fpaWorkflow": "Liquidity stress testing â€” pairs with cash-flow forecasting for downside scenarios.",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
       "id": 932,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-gross-margin": {
+    "real_estate.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -88,7 +105,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "name": "Gross Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -107,11 +124,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_margin",
-      "fpaWorkflow": "Unit-economics and pricing review â€” anchors contribution-margin and budget-vs-actual analysis.",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
       "id": 938,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-operating-margin": {
+    "real_estate.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -121,7 +146,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "name": "Operating Margin (EBIT)",
       "sensorFieldData": [
         "Not Applicable"
@@ -140,11 +165,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "operating_margin",
-      "fpaWorkflow": "Opex efficiency review â€” drives the monthly variance bridge and cost-control actions.",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
       "id": 944,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-ebitda-margin": {
+    "real_estate.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -155,7 +188,7 @@ export const REFERENCE_DATA = {
         "Financial Services",
         "All"
       ],
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "name": "EBITDA Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -174,11 +207,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "ebitda_margin",
-      "fpaWorkflow": "Valuation & lender reporting â€” primary profitability proxy in models and covenant tests.",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
       "id": 950,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-net-margin": {
+    "real_estate.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -188,7 +229,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "name": "Net Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -207,11 +248,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "net_margin",
-      "fpaWorkflow": "Board P&L reporting â€” the headline profitability line for the monthly close pack.",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
       "id": 956,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-revenue-growth": {
+    "real_estate.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -222,7 +271,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "name": "Revenue Growth Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -241,11 +290,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "revenue_growth",
-      "fpaWorkflow": "Growth planning â€” drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
       "id": 962,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-working-capital": {
+    "real_estate.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -256,7 +313,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "name": "Working Capital",
       "sensorFieldData": [
         "Not Applicable"
@@ -275,11 +332,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "working_capital",
-      "fpaWorkflow": "Working-capital management â€” feeds the 13-week cash forecast and treasury planning.",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 968,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-dso": {
+    "real_estate.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -290,7 +355,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "name": "Days Sales Outstanding (DSO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -309,11 +374,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dso",
-      "fpaWorkflow": "Receivables & collections review â€” directly improves the cash-conversion cycle and forecast accuracy.",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
       "id": 974,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-dpo": {
+    "real_estate.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -324,7 +398,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "name": "Days Payable Outstanding (DPO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -343,11 +417,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dpo",
-      "fpaWorkflow": "Payables optimization â€” balances supplier terms against the cash-conversion cycle.",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
       "id": 980,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-ccc": {
+    "real_estate.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -358,7 +441,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "name": "Cash Conversion Cycle",
       "sensorFieldData": [
         "Not Applicable"
@@ -377,11 +460,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days_signed",
       "benchmarkKey": "ccc",
-      "fpaWorkflow": "Cash-efficiency program â€” a north-star working-capital KPI tracked in the treasury review.",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
       "id": 986,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-operating-cash-flow": {
+    "real_estate.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -392,7 +482,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "name": "Operating Cash Flow",
       "sensorFieldData": [
         "Not Applicable"
@@ -411,11 +501,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "operating_cash_flow",
-      "fpaWorkflow": "Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow statement.",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
       "id": 992,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-burn-rate": {
+    "real_estate.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -427,7 +526,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "name": "Monthly Burn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -446,11 +545,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "burn_rate",
-      "fpaWorkflow": "Runway management â€” paired with cash balance to govern the spend plan and fundraising timing.",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
       "id": 998,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
     },
-    "Allrealestatefpa-runway": {
+    "real_estate.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -480,9 +587,41 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "number",
       "benchmarkKey": "runway",
-      "fpaWorkflow": "Board & investor reporting â€” the survival metric that gates hiring and spend decisions.",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
       "id": 1004,
-      "industry": "Real Estate"
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1082,
+      "industry": "Real Estate",
+      "segment": "core"
     },
     "1cvcTcHNt1VYX867UUG7": {
       "datasource": [
@@ -504,9 +643,17 @@ export const REFERENCE_DATA = {
       "type": "Financial",
       "unit": "Number",
       "benchmarkKey": "dscr",
-      "fpaWorkflow": "Liquidity & covenant review â€” lender DSCR tests and monthly board liquidity pack.",
-      "financialImpact": "Covenant headroom â€” breach risk for debt service and refinancing",
-      "operationalSignal": "NOI and opex from property operations feed DSCR numerator and denominator"
+      "fpaWorkflow": "Liquidity & covenant review — lender DSCR tests and monthly board liquidity pack.",
+      "financialImpact": "Covenant headroom — breach risk for debt service and refinancing",
+      "operationalSignal": "NOI and opex from property operations feed DSCR numerator and denominator",
+      "segment": "financial",
+      "slug": "dscr",
+      "calc": {
+        "expr": "noi / annual_debt_service",
+        "inputs": [
+          "annual_debt_service"
+        ]
+      }
     },
     "EDCn8khPJg44trzt4JTA": {
       "datasource": [
@@ -526,7 +673,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 3,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "%"
+      "unit": "%",
+      "segment": "operations",
+      "slug": "vacancy_rate",
+      "calc": {
+        "expr": "vacant_units / total_units * 100",
+        "inputs": [
+          "vacant_units",
+          "total_units"
+        ]
+      }
     },
     "Ob4nc825yNcKAA91kCua": {
       "datasource": [
@@ -546,7 +702,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 60,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "%"
+      "unit": "%",
+      "segment": "financial",
+      "slug": "loan_to_value",
+      "calc": {
+        "expr": "mortgage_amount / appraised_value * 100",
+        "inputs": [
+          "mortgage_amount",
+          "appraised_value"
+        ]
+      }
     },
     "VLDD4ijNDixuJ7EDJtw3": {
       "datasource": [
@@ -566,7 +731,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 10,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "Number"
+      "unit": "Number",
+      "segment": "financial",
+      "slug": "grm",
+      "calc": {
+        "expr": "property_price / gross_rental_income",
+        "inputs": [
+          "property_price",
+          "gross_rental_income"
+        ]
+      }
     },
     "YsoV0l2DLsptgTldBESm": {
       "datasource": [
@@ -586,7 +760,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 400000,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "Currency (e.g., USD)"
+      "unit": "Currency (e.g., USD)",
+      "segment": "financial",
+      "slug": "noi",
+      "calc": {
+        "expr": "gross_rental_income - operating_expenses",
+        "inputs": [
+          "gross_rental_income",
+          "operating_expenses"
+        ]
+      }
     },
     "o4HkbNgvPm6RAPEcAzHV": {
       "datasource": [
@@ -607,7 +790,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 6,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "Percentage"
+      "unit": "Percentage",
+      "segment": "financial",
+      "slug": "roi",
+      "calc": {
+        "expr": "net_profit / cost_of_investment * 100",
+        "inputs": [
+          "net_profit",
+          "cost_of_investment"
+        ]
+      }
     },
     "o5PSXR0Vw3Jy35QyRrJ8": {
       "datasource": [
@@ -627,7 +819,17 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 250000,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "Currency (e.g., USD)"
+      "unit": "Currency (e.g., USD)",
+      "segment": "financial",
+      "slug": "re_cash_flow",
+      "calc": {
+        "expr": "rental_income - operating_expenses - debt_service",
+        "inputs": [
+          "rental_income",
+          "operating_expenses",
+          "debt_service"
+        ]
+      }
     },
     "rbIvVbYWRuUUr4rzZGRH": {
       "datasource": [
@@ -649,9 +851,17 @@ export const REFERENCE_DATA = {
       "type": "Financial",
       "unit": "Percentage",
       "benchmarkKey": "cap_rate",
-      "fpaWorkflow": "Valuation & lender reporting â€” yield sensitivity for divestiture and acquisition cases.",
-      "financialImpact": "Yield and valuation â€” cap rate moves drive NAV and lender collateral tests",
-      "operationalSignal": "NOI from operations and appraisal inputs drive cap rate numerator and denominator"
+      "fpaWorkflow": "Valuation & lender reporting — yield sensitivity for divestiture and acquisition cases.",
+      "financialImpact": "Yield and valuation — cap rate moves drive NAV and lender collateral tests",
+      "operationalSignal": "NOI from operations and appraisal inputs drive cap rate numerator and denominator",
+      "segment": "financial",
+      "slug": "cap_rate",
+      "calc": {
+        "expr": "noi / property_value * 100",
+        "inputs": [
+          "property_value"
+        ]
+      }
     },
     "wCpkOtGniudQu8pSh22k": {
       "datasource": [
@@ -671,7 +881,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 8,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "Percentage"
+      "unit": "Percentage",
+      "segment": "financial",
+      "slug": "cash_on_cash_return",
+      "calc": {
+        "expr": "net_cash_flow / initial_cash_investment * 100",
+        "inputs": [
+          "net_cash_flow",
+          "initial_cash_investment"
+        ]
+      }
     },
     "Allrealestatesaas-mrr": {
       "datasource": [
@@ -684,7 +903,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "name": "Monthly Recurring Revenue (MRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -703,7 +922,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast â€” the foundation of the SaaS operating model and ARR bridge."
+      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
     },
     "Allrealestatesaas-arr": {
       "datasource": [
@@ -716,7 +944,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "name": "Annual Recurring Revenue (ARR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -735,7 +963,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation â€” the headline scale metric for SaaS boards and investors."
+      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
     },
     "Allrealestatesaas-nrr": {
       "datasource": [
@@ -748,7 +982,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "name": "Net Revenue Retention (NRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -767,7 +1001,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling â€” the strongest signal of durable SaaS growth quality."
+      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
     },
     "Allrealestatesaas-gross-churn": {
       "datasource": [
@@ -780,7 +1025,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "name": "Gross Revenue Churn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -799,7 +1044,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review â€” informs the renewal forecast and customer-success investment case."
+      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
+      "segment": "subscription",
+      "slug": "gross_churn",
+      "calc": {
+        "expr": "churned_mrr / starting_mrr * 100",
+        "inputs": [
+          "churned_mrr",
+          "starting_mrr"
+        ]
+      }
     },
     "Allrealestatesaas-cac": {
       "datasource": [
@@ -832,7 +1086,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency â€” feeds CAC payback and the marketing budget allocation."
+      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
     },
     "Allrealestatesaas-ltv": {
       "datasource": [
@@ -845,7 +1108,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "name": "Customer Lifetime Value (LTV)",
       "sensorFieldData": [
         "Not Applicable"
@@ -864,14 +1127,24 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling â€” combined with CAC to gate growth-spend decisions."
+      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
     },
     "Allrealestatesaas-ltv-cac": {
       "datasource": [
         "Subscription billing records",
         "Marketing spend records"
       ],
-      "description": "Ratio of customer lifetime value to acquisition cost â€” core SaaS unit economics.",
+      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
       "id": 1046,
       "industry": "Real Estate",
       "industryTags": [
@@ -896,7 +1169,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1) for scaling spend."
+      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
+      "calc": {
+        "expr": "ltv / cac",
+        "inputs": []
+      }
     },
     "Allrealestatesaas-rule-of-40": {
       "datasource": [
@@ -928,9 +1207,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review â€” a single composite health score for SaaS planning."
+      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
+      "calc": {
+        "expr": "revenue_growth_pct + profit_margin_pct",
+        "inputs": [
+          "revenue_growth_pct",
+          "profit_margin_pct"
+        ]
+      }
     },
-    "Allverticalfarmingfpa-current-ratio": {
+    "vertical_farming.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -961,22 +1249,30 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "current_ratio",
-      "fpaWorkflow": "Liquidity & solvency review â€” feeds covenant monitoring and the monthly board liquidity pack.",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 927,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-quick-ratio": {
+    "vertical_farming.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory â€” most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
       "industryTags": [
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "name": "Quick Ratio (Acid Test)",
       "sensorFieldData": [
         "Not Applicable"
@@ -995,11 +1291,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "quick_ratio",
-      "fpaWorkflow": "Liquidity stress testing â€” pairs with cash-flow forecasting for downside scenarios.",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
       "id": 933,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-gross-margin": {
+    "vertical_farming.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1010,7 +1315,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "name": "Gross Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -1029,11 +1334,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_margin",
-      "fpaWorkflow": "Unit-economics and pricing review â€” anchors contribution-margin and budget-vs-actual analysis.",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
       "id": 939,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-operating-margin": {
+    "vertical_farming.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1043,7 +1356,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "name": "Operating Margin (EBIT)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1062,11 +1375,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "operating_margin",
-      "fpaWorkflow": "Opex efficiency review â€” drives the monthly variance bridge and cost-control actions.",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
       "id": 945,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-ebitda-margin": {
+    "vertical_farming.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1077,7 +1398,7 @@ export const REFERENCE_DATA = {
         "Financial Services",
         "All"
       ],
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "name": "EBITDA Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -1096,11 +1417,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "ebitda_margin",
-      "fpaWorkflow": "Valuation & lender reporting â€” primary profitability proxy in models and covenant tests.",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
       "id": 951,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-net-margin": {
+    "vertical_farming.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1110,7 +1439,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "name": "Net Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -1129,11 +1458,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "net_margin",
-      "fpaWorkflow": "Board P&L reporting â€” the headline profitability line for the monthly close pack.",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
       "id": 957,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-revenue-growth": {
+    "vertical_farming.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1144,7 +1481,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "name": "Revenue Growth Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -1163,11 +1500,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "revenue_growth",
-      "fpaWorkflow": "Growth planning â€” drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
       "id": 963,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-working-capital": {
+    "vertical_farming.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -1178,7 +1523,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "name": "Working Capital",
       "sensorFieldData": [
         "Not Applicable"
@@ -1197,11 +1542,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "working_capital",
-      "fpaWorkflow": "Working-capital management â€” feeds the 13-week cash forecast and treasury planning.",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 969,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-dso": {
+    "vertical_farming.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -1212,7 +1565,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "name": "Days Sales Outstanding (DSO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1231,11 +1584,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dso",
-      "fpaWorkflow": "Receivables & collections review â€” directly improves the cash-conversion cycle and forecast accuracy.",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
       "id": 975,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-dpo": {
+    "vertical_farming.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -1246,7 +1608,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "name": "Days Payable Outstanding (DPO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1265,11 +1627,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dpo",
-      "fpaWorkflow": "Payables optimization â€” balances supplier terms against the cash-conversion cycle.",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
       "id": 981,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-ccc": {
+    "vertical_farming.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -1280,7 +1651,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "name": "Cash Conversion Cycle",
       "sensorFieldData": [
         "Not Applicable"
@@ -1299,11 +1670,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days_signed",
       "benchmarkKey": "ccc",
-      "fpaWorkflow": "Cash-efficiency program â€” a north-star working-capital KPI tracked in the treasury review.",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
       "id": 987,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-operating-cash-flow": {
+    "vertical_farming.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -1314,7 +1692,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "name": "Operating Cash Flow",
       "sensorFieldData": [
         "Not Applicable"
@@ -1333,11 +1711,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "operating_cash_flow",
-      "fpaWorkflow": "Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow statement.",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
       "id": 993,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-burn-rate": {
+    "vertical_farming.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -1349,7 +1736,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "name": "Monthly Burn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -1368,11 +1755,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "burn_rate",
-      "fpaWorkflow": "Runway management â€” paired with cash balance to govern the spend plan and fundraising timing.",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
       "id": 999,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
-    "Allverticalfarmingfpa-runway": {
+    "vertical_farming.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -1402,9 +1797,41 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "number",
       "benchmarkKey": "runway",
-      "fpaWorkflow": "Board & investor reporting â€” the survival metric that gates hiring and spend decisions.",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
       "id": 1005,
-      "industry": "Vertical Farming"
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1085,
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
     "0MJiYgAPcgkzE3xEgOFE": {
       "datasource": [
@@ -1425,7 +1852,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 1000,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "Currency (e.g., USD)"
+      "unit": "Currency (e.g., USD)",
+      "segment": "financial",
+      "slug": "predictive_maintenance_savings",
+      "calc": {
+        "expr": "repair_cost_avoided - predictive_maintenance_cost",
+        "inputs": [
+          "repair_cost_avoided",
+          "predictive_maintenance_cost"
+        ]
+      }
     },
     "6IfrKxlTi9pbGzpuLL5u": {
       "datasource": [
@@ -1445,7 +1881,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 2,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "$/kg"
+      "unit": "$/kg",
+      "segment": "operations",
+      "slug": "total_cost",
+      "calc": {
+        "expr": "total_production_cost + total_operational_cost",
+        "inputs": [
+          "total_production_cost",
+          "total_operational_cost"
+        ]
+      }
     },
     "8B9bFHS6GSsjzHx9ppKu": {
       "datasource": [
@@ -1466,9 +1911,18 @@ export const REFERENCE_DATA = {
       "tech": "DEEP TECH",
       "type": "Operational",
       "unit": "kWh/lux-hour",
-      "fpaWorkflow": "Opex efficiency review â€” energy spikes explain variance before close.",
-      "operationalSignal": "Field telemetry â€” light and power sensors",
-      "financialImpact": "Opex and margin â€” flows to NOI and covenant headroom"
+      "fpaWorkflow": "Opex efficiency review — energy spikes explain variance before close.",
+      "operationalSignal": "Field telemetry — light and power sensors",
+      "financialImpact": "Opex and margin — flows to NOI and covenant headroom",
+      "segment": "operations",
+      "slug": "energy_light_efficiency",
+      "calc": {
+        "expr": "energy_consumed / total_light_delivered",
+        "inputs": [
+          "energy_consumed",
+          "total_light_delivered"
+        ]
+      }
     },
     "E5khIDv93onvwtXBUsJH": {
       "datasource": [
@@ -1489,7 +1943,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 50,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "Index"
+      "unit": "Index",
+      "segment": "operations",
+      "slug": "crop_health_index",
+      "calc": {
+        "expr": "sum_health_scores / total_crops * 100",
+        "inputs": [
+          "sum_health_scores",
+          "total_crops"
+        ]
+      }
     },
     "F6IlgQNV6qNtUhk3BVtT": {
       "datasource": [
@@ -1509,7 +1972,17 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 10,
       "tech": "FINTECH",
       "type": "Financial",
-      "unit": "%"
+      "unit": "%",
+      "segment": "financial",
+      "slug": "vf_net_profit",
+      "calc": {
+        "expr": "produce_revenue - total_production_cost - total_operational_cost",
+        "inputs": [
+          "produce_revenue",
+          "total_production_cost",
+          "total_operational_cost"
+        ]
+      }
     },
     "WeTkxvZyeWX51XfBGsuR": {
       "datasource": [
@@ -1530,7 +2003,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 0.5,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "$/kg"
+      "unit": "$/kg",
+      "segment": "operations",
+      "slug": "labor_cost_per_kg",
+      "calc": {
+        "expr": "total_labor_costs / total_harvested_kg",
+        "inputs": [
+          "total_labor_costs",
+          "total_harvested_kg"
+        ]
+      }
     },
     "f3yEk5mEWwKhAFFQFyje": {
       "datasource": [
@@ -1551,7 +2033,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 1,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "kg/liter"
+      "unit": "kg/liter",
+      "segment": "operations",
+      "slug": "water_use_efficiency",
+      "calc": {
+        "expr": "total_harvested_kg / total_water_liters",
+        "inputs": [
+          "total_harvested_kg",
+          "total_water_liters"
+        ]
+      }
     },
     "jnQw1pD0motTKBZ9csPD": {
       "datasource": [
@@ -1561,7 +2052,7 @@ export const REFERENCE_DATA = {
       "description": "Amount of produce harvested per square meter of growing area.",
       "id": 15,
       "industry": "Vertical Farming",
-      "methodology": "Yield per Square Meter = Total Harvested Produce (kg) / Total Growing Area (mÂ²)",
+      "methodology": "Yield per Square Meter = Total Harvested Produce (kg) / Total Growing Area (m²)",
       "name": "Yield per Square Meter",
       "sensorFieldData": [
         "Crop monitoring systems"
@@ -1571,7 +2062,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 5,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "kg/mÂ²"
+      "unit": "kg/m²",
+      "segment": "operations",
+      "slug": "yield_per_sqm",
+      "calc": {
+        "expr": "total_harvested_kg / total_growing_area",
+        "inputs": [
+          "total_harvested_kg",
+          "total_growing_area"
+        ]
+      }
     },
     "yGoqLDC3Mrk1OeH36jkB": {
       "datasource": [
@@ -1581,7 +2081,7 @@ export const REFERENCE_DATA = {
       "description": "Amount of energy consumed per square meter of growing area.",
       "id": 17,
       "industry": "Vertical Farming",
-      "methodology": "Energy Consumption per Square Meter = Total Energy Consumed (kWh) / Total Growing Area (mÂ²)",
+      "methodology": "Energy Consumption per Square Meter = Total Energy Consumed (kWh) / Total Growing Area (m²)",
       "name": "Energy Consumption per Square Meter",
       "sensorFieldData": [
         "Energy meters"
@@ -1591,7 +2091,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 50,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "kWh/mÂ²"
+      "unit": "kWh/m²",
+      "segment": "operations",
+      "slug": "energy_per_sqm",
+      "calc": {
+        "expr": "total_energy_kwh / total_growing_area",
+        "inputs": [
+          "total_energy_kwh",
+          "total_growing_area"
+        ]
+      }
     },
     "Allverticalfarmingsaas-mrr": {
       "datasource": [
@@ -1604,7 +2113,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "name": "Monthly Recurring Revenue (MRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1623,7 +2132,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast â€” the foundation of the SaaS operating model and ARR bridge."
+      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
     },
     "Allverticalfarmingsaas-arr": {
       "datasource": [
@@ -1636,7 +2154,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "name": "Annual Recurring Revenue (ARR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1655,7 +2173,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation â€” the headline scale metric for SaaS boards and investors."
+      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
     },
     "Allverticalfarmingsaas-nrr": {
       "datasource": [
@@ -1668,7 +2192,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "name": "Net Revenue Retention (NRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1687,7 +2211,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling â€” the strongest signal of durable SaaS growth quality."
+      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
     },
     "Allverticalfarmingsaas-gross-churn": {
       "datasource": [
@@ -1700,7 +2235,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "name": "Gross Revenue Churn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -1719,7 +2254,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review â€” informs the renewal forecast and customer-success investment case."
+      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
+      "segment": "subscription",
+      "slug": "gross_churn",
+      "calc": {
+        "expr": "churned_mrr / starting_mrr * 100",
+        "inputs": [
+          "churned_mrr",
+          "starting_mrr"
+        ]
+      }
     },
     "Allverticalfarmingsaas-cac": {
       "datasource": [
@@ -1752,7 +2296,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency â€” feeds CAC payback and the marketing budget allocation."
+      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
     },
     "Allverticalfarmingsaas-ltv": {
       "datasource": [
@@ -1765,7 +2318,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "name": "Customer Lifetime Value (LTV)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1784,14 +2337,24 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling â€” combined with CAC to gate growth-spend decisions."
+      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
     },
     "Allverticalfarmingsaas-ltv-cac": {
       "datasource": [
         "Subscription billing records",
         "Marketing spend records"
       ],
-      "description": "Ratio of customer lifetime value to acquisition cost â€” core SaaS unit economics.",
+      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
       "id": 1047,
       "industry": "Vertical Farming",
       "industryTags": [
@@ -1816,7 +2379,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1) for scaling spend."
+      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
+      "calc": {
+        "expr": "ltv / cac",
+        "inputs": []
+      }
     },
     "Allverticalfarmingsaas-rule-of-40": {
       "datasource": [
@@ -1848,9 +2417,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review â€” a single composite health score for SaaS planning."
+      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
+      "calc": {
+        "expr": "revenue_growth_pct + profit_margin_pct",
+        "inputs": [
+          "revenue_growth_pct",
+          "profit_margin_pct"
+        ]
+      }
     },
-    "Alltransportationfpa-current-ratio": {
+    "transportation.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -1881,22 +2459,30 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "current_ratio",
-      "fpaWorkflow": "Liquidity & solvency review â€” feeds covenant monitoring and the monthly board liquidity pack.",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 928,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-quick-ratio": {
+    "transportation.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory â€” most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
       "industryTags": [
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "name": "Quick Ratio (Acid Test)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1915,11 +2501,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "quick_ratio",
-      "fpaWorkflow": "Liquidity stress testing â€” pairs with cash-flow forecasting for downside scenarios.",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
       "id": 934,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-gross-margin": {
+    "transportation.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1930,7 +2525,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "name": "Gross Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -1949,11 +2544,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_margin",
-      "fpaWorkflow": "Unit-economics and pricing review â€” anchors contribution-margin and budget-vs-actual analysis.",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
       "id": 940,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-operating-margin": {
+    "transportation.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1963,7 +2566,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "name": "Operating Margin (EBIT)",
       "sensorFieldData": [
         "Not Applicable"
@@ -1982,11 +2585,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "operating_margin",
-      "fpaWorkflow": "Opex efficiency review â€” drives the monthly variance bridge and cost-control actions.",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
       "id": 946,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-ebitda-margin": {
+    "transportation.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -1997,7 +2608,7 @@ export const REFERENCE_DATA = {
         "Financial Services",
         "All"
       ],
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "name": "EBITDA Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -2016,11 +2627,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "ebitda_margin",
-      "fpaWorkflow": "Valuation & lender reporting â€” primary profitability proxy in models and covenant tests.",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
       "id": 952,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-net-margin": {
+    "transportation.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2030,7 +2649,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "name": "Net Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -2049,11 +2668,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "net_margin",
-      "fpaWorkflow": "Board P&L reporting â€” the headline profitability line for the monthly close pack.",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
       "id": 958,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-revenue-growth": {
+    "transportation.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2064,7 +2691,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "name": "Revenue Growth Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -2083,11 +2710,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "revenue_growth",
-      "fpaWorkflow": "Growth planning â€” drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
       "id": 964,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-working-capital": {
+    "transportation.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -2098,7 +2733,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "name": "Working Capital",
       "sensorFieldData": [
         "Not Applicable"
@@ -2117,11 +2752,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "working_capital",
-      "fpaWorkflow": "Working-capital management â€” feeds the 13-week cash forecast and treasury planning.",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 970,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-dso": {
+    "transportation.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -2132,7 +2775,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "name": "Days Sales Outstanding (DSO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2151,11 +2794,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dso",
-      "fpaWorkflow": "Receivables & collections review â€” directly improves the cash-conversion cycle and forecast accuracy.",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
       "id": 976,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-dpo": {
+    "transportation.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -2166,7 +2818,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "name": "Days Payable Outstanding (DPO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2185,11 +2837,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dpo",
-      "fpaWorkflow": "Payables optimization â€” balances supplier terms against the cash-conversion cycle.",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
       "id": 982,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-ccc": {
+    "transportation.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -2200,7 +2861,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "name": "Cash Conversion Cycle",
       "sensorFieldData": [
         "Not Applicable"
@@ -2219,11 +2880,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days_signed",
       "benchmarkKey": "ccc",
-      "fpaWorkflow": "Cash-efficiency program â€” a north-star working-capital KPI tracked in the treasury review.",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
       "id": 988,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-operating-cash-flow": {
+    "transportation.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -2234,7 +2902,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "name": "Operating Cash Flow",
       "sensorFieldData": [
         "Not Applicable"
@@ -2253,11 +2921,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "operating_cash_flow",
-      "fpaWorkflow": "Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow statement.",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
       "id": 994,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-burn-rate": {
+    "transportation.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -2269,7 +2946,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "name": "Monthly Burn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -2288,11 +2965,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "burn_rate",
-      "fpaWorkflow": "Runway management â€” paired with cash balance to govern the spend plan and fundraising timing.",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
       "id": 1000,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
     },
-    "Alltransportationfpa-runway": {
+    "transportation.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -2322,9 +3007,41 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "number",
       "benchmarkKey": "runway",
-      "fpaWorkflow": "Board & investor reporting â€” the survival metric that gates hiring and spend decisions.",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
       "id": 1006,
-      "industry": "Transportation"
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1084,
+      "industry": "Transportation",
+      "segment": "core"
     },
     "DtBqsvp9S9HBlcxsvAgd": {
       "datasource": [
@@ -2345,7 +3062,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 20,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "%"
+      "unit": "%",
+      "segment": "operations",
+      "slug": "driver_turnover",
+      "calc": {
+        "expr": "drivers_left / total_drivers * 100",
+        "inputs": [
+          "drivers_left",
+          "total_drivers"
+        ]
+      }
     },
     "SAZkxRxYFtf1EIxBXWMk": {
       "datasource": [
@@ -2367,7 +3093,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 5,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "Miles per Gallon (MPG)"
+      "unit": "Miles per Gallon (MPG)",
+      "segment": "operations",
+      "slug": "fuel_efficiency",
+      "calc": {
+        "expr": "total_miles / total_fuel",
+        "inputs": [
+          "total_miles",
+          "total_fuel"
+        ]
+      }
     },
     "biA3oIK816fwfInBKg2e": {
       "datasource": [
@@ -2389,7 +3124,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 85,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "%"
+      "unit": "%",
+      "segment": "operations",
+      "slug": "on_time_delivery_rate",
+      "calc": {
+        "expr": "on_time_deliveries / total_deliveries * 100",
+        "inputs": [
+          "on_time_deliveries",
+          "total_deliveries"
+        ]
+      }
     },
     "iIaKhCCf0BGvHX1W1i7n": {
       "datasource": [
@@ -2411,7 +3155,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 20,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "Percentage"
+      "unit": "Percentage",
+      "segment": "operations",
+      "slug": "fleet_utilization",
+      "calc": {
+        "expr": "fleet_time_in_use / fleet_available_time * 100",
+        "inputs": [
+          "fleet_time_in_use",
+          "fleet_available_time"
+        ]
+      }
     },
     "vXlB5QC3mZJw1auWaIfK": {
       "datasource": [
@@ -2433,7 +3186,16 @@ export const REFERENCE_DATA = {
       "targetRangeLow": 0.02,
       "tech": "DEEP TECH",
       "type": "Operational",
-      "unit": "USD/mile"
+      "unit": "USD/mile",
+      "segment": "operations",
+      "slug": "maintenance_cost_per_mile",
+      "calc": {
+        "expr": "total_maintenance_costs / total_miles",
+        "inputs": [
+          "total_maintenance_costs",
+          "total_miles"
+        ]
+      }
     },
     "Alltransportationsaas-mrr": {
       "datasource": [
@@ -2446,7 +3208,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "name": "Monthly Recurring Revenue (MRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2465,7 +3227,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast â€” the foundation of the SaaS operating model and ARR bridge."
+      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
     },
     "Alltransportationsaas-arr": {
       "datasource": [
@@ -2478,7 +3249,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "name": "Annual Recurring Revenue (ARR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2497,7 +3268,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation â€” the headline scale metric for SaaS boards and investors."
+      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
     },
     "Alltransportationsaas-nrr": {
       "datasource": [
@@ -2510,7 +3287,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "name": "Net Revenue Retention (NRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2529,7 +3306,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling â€” the strongest signal of durable SaaS growth quality."
+      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
     },
     "Alltransportationsaas-gross-churn": {
       "datasource": [
@@ -2542,7 +3330,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "name": "Gross Revenue Churn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -2561,7 +3349,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review â€” informs the renewal forecast and customer-success investment case."
+      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
+      "segment": "subscription",
+      "slug": "gross_churn",
+      "calc": {
+        "expr": "churned_mrr / starting_mrr * 100",
+        "inputs": [
+          "churned_mrr",
+          "starting_mrr"
+        ]
+      }
     },
     "Alltransportationsaas-cac": {
       "datasource": [
@@ -2594,7 +3391,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency â€” feeds CAC payback and the marketing budget allocation."
+      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
     },
     "Alltransportationsaas-ltv": {
       "datasource": [
@@ -2607,7 +3413,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "name": "Customer Lifetime Value (LTV)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2626,14 +3432,24 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling â€” combined with CAC to gate growth-spend decisions."
+      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
     },
     "Alltransportationsaas-ltv-cac": {
       "datasource": [
         "Subscription billing records",
         "Marketing spend records"
       ],
-      "description": "Ratio of customer lifetime value to acquisition cost â€” core SaaS unit economics.",
+      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
       "id": 1048,
       "industry": "Transportation",
       "industryTags": [
@@ -2658,7 +3474,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1) for scaling spend."
+      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
+      "calc": {
+        "expr": "ltv / cac",
+        "inputs": []
+      }
     },
     "Alltransportationsaas-rule-of-40": {
       "datasource": [
@@ -2690,9 +3512,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review â€” a single composite health score for SaaS planning."
+      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
+      "calc": {
+        "expr": "revenue_growth_pct + profit_margin_pct",
+        "inputs": [
+          "revenue_growth_pct",
+          "profit_margin_pct"
+        ]
+      }
     },
-    "Allmanufacturingfpa-current-ratio": {
+    "manufacturing.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -2723,22 +3554,30 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "current_ratio",
-      "fpaWorkflow": "Liquidity & solvency review â€” feeds covenant monitoring and the monthly board liquidity pack.",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 929,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-quick-ratio": {
+    "manufacturing.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory â€” most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
       "industryTags": [
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "name": "Quick Ratio (Acid Test)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2757,11 +3596,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "quick_ratio",
-      "fpaWorkflow": "Liquidity stress testing â€” pairs with cash-flow forecasting for downside scenarios.",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
       "id": 935,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-gross-margin": {
+    "manufacturing.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2772,7 +3620,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "name": "Gross Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -2791,11 +3639,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_margin",
-      "fpaWorkflow": "Unit-economics and pricing review â€” anchors contribution-margin and budget-vs-actual analysis.",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
       "id": 941,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-operating-margin": {
+    "manufacturing.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2805,7 +3661,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "name": "Operating Margin (EBIT)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2824,11 +3680,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "operating_margin",
-      "fpaWorkflow": "Opex efficiency review â€” drives the monthly variance bridge and cost-control actions.",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
       "id": 947,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-ebitda-margin": {
+    "manufacturing.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2839,7 +3703,7 @@ export const REFERENCE_DATA = {
         "Financial Services",
         "All"
       ],
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "name": "EBITDA Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -2858,11 +3722,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "ebitda_margin",
-      "fpaWorkflow": "Valuation & lender reporting â€” primary profitability proxy in models and covenant tests.",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
       "id": 953,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-net-margin": {
+    "manufacturing.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2872,7 +3744,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "name": "Net Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -2891,11 +3763,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "net_margin",
-      "fpaWorkflow": "Board P&L reporting â€” the headline profitability line for the monthly close pack.",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
       "id": 959,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-revenue-growth": {
+    "manufacturing.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -2906,7 +3786,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "name": "Revenue Growth Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -2925,11 +3805,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "revenue_growth",
-      "fpaWorkflow": "Growth planning â€” drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
       "id": 965,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-working-capital": {
+    "manufacturing.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -2940,7 +3828,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "name": "Working Capital",
       "sensorFieldData": [
         "Not Applicable"
@@ -2959,11 +3847,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "working_capital",
-      "fpaWorkflow": "Working-capital management â€” feeds the 13-week cash forecast and treasury planning.",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 971,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-dso": {
+    "manufacturing.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -2974,7 +3870,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "name": "Days Sales Outstanding (DSO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -2993,11 +3889,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dso",
-      "fpaWorkflow": "Receivables & collections review â€” directly improves the cash-conversion cycle and forecast accuracy.",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
       "id": 977,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-dpo": {
+    "manufacturing.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -3008,7 +3913,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "name": "Days Payable Outstanding (DPO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3027,11 +3932,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dpo",
-      "fpaWorkflow": "Payables optimization â€” balances supplier terms against the cash-conversion cycle.",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
       "id": 983,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-ccc": {
+    "manufacturing.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -3042,7 +3956,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "name": "Cash Conversion Cycle",
       "sensorFieldData": [
         "Not Applicable"
@@ -3061,11 +3975,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days_signed",
       "benchmarkKey": "ccc",
-      "fpaWorkflow": "Cash-efficiency program â€” a north-star working-capital KPI tracked in the treasury review.",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
       "id": 989,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-operating-cash-flow": {
+    "manufacturing.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -3076,7 +3997,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "name": "Operating Cash Flow",
       "sensorFieldData": [
         "Not Applicable"
@@ -3095,11 +4016,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "operating_cash_flow",
-      "fpaWorkflow": "Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow statement.",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
       "id": 995,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-burn-rate": {
+    "manufacturing.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -3111,7 +4041,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "name": "Monthly Burn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -3130,11 +4060,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "burn_rate",
-      "fpaWorkflow": "Runway management â€” paired with cash balance to govern the spend plan and fundraising timing.",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
       "id": 1001,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
     },
-    "Allmanufacturingfpa-runway": {
+    "manufacturing.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -3164,9 +4102,41 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "number",
       "benchmarkKey": "runway",
-      "fpaWorkflow": "Board & investor reporting â€” the survival metric that gates hiring and spend decisions.",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
       "id": 1007,
-      "industry": "Manufacturing"
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1081,
+      "industry": "Manufacturing",
+      "segment": "core"
     },
     "MfgOee901CatalogMetricKey01": {
       "id": 901,
@@ -3196,7 +4166,17 @@ export const REFERENCE_DATA = {
       "benchmarkKey": "oee",
       "frequency": "weekly",
       "higherIsBetter": true,
-      "fpaWorkflow": "Capacity planning — ties shop-floor efficiency to unit economics and capex cases."
+      "fpaWorkflow": "Capacity planning — ties shop-floor efficiency to unit economics and capex cases.",
+      "segment": "operations",
+      "slug": "oee",
+      "calc": {
+        "expr": "availability * performance * quality",
+        "inputs": [
+          "availability",
+          "performance",
+          "quality"
+        ]
+      }
     },
     "MfgScrap902CatalogMetricKey02": {
       "id": 902,
@@ -3224,7 +4204,16 @@ export const REFERENCE_DATA = {
       },
       "frequency": "weekly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Margin protection — scrap drives COGS variance and customer chargebacks."
+      "fpaWorkflow": "Margin protection — scrap drives COGS variance and customer chargebacks.",
+      "segment": "operations",
+      "slug": "scrap_rate",
+      "calc": {
+        "expr": "scrapped_units / total_units * 100",
+        "inputs": [
+          "scrapped_units",
+          "total_units"
+        ]
+      }
     },
     "MfgInvTurn903CatalogMetricKey03": {
       "id": 903,
@@ -3248,7 +4237,16 @@ export const REFERENCE_DATA = {
       "benchmarkKey": "inventory_turnover",
       "frequency": "monthly",
       "higherIsBetter": true,
-      "fpaWorkflow": "Working-capital review — links ops throughput to cash tied in stock."
+      "fpaWorkflow": "Working-capital review — links ops throughput to cash tied in stock.",
+      "segment": "financial",
+      "slug": "inventory_turnover",
+      "calc": {
+        "expr": "cogs / average_inventory",
+        "inputs": [
+          "cogs",
+          "average_inventory"
+        ]
+      }
     },
     "MfgDownt904CatalogMetricKey04": {
       "id": 904,
@@ -3271,7 +4269,10 @@ export const REFERENCE_DATA = {
       "tech": "DEEP TECH",
       "frequency": "weekly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Ops-to-finance bridge — downtime explains revenue and labor efficiency gaps."
+      "fpaWorkflow": "Ops-to-finance bridge — downtime explains revenue and labor efficiency gaps.",
+      "segment": "operations",
+      "slug": "unplanned_downtime",
+      "input": true
     },
     "MfgUnitCogs905CatalogMetricKey05": {
       "id": 905,
@@ -3295,7 +4296,16 @@ export const REFERENCE_DATA = {
       "validationRule": "currency",
       "frequency": "monthly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Pricing and margin — baseline for make-vs-buy and contract manufacturing bids."
+      "fpaWorkflow": "Pricing and margin — baseline for make-vs-buy and contract manufacturing bids.",
+      "segment": "financial",
+      "slug": "unit_cogs",
+      "calc": {
+        "expr": "total_manufacturing_cogs / units_produced",
+        "inputs": [
+          "total_manufacturing_cogs",
+          "units_produced"
+        ]
+      }
     },
     "Allmanufacturingsaas-mrr": {
       "datasource": [
@@ -3308,7 +4318,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "name": "Monthly Recurring Revenue (MRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3327,7 +4337,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast â€” the foundation of the SaaS operating model and ARR bridge."
+      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
     },
     "Allmanufacturingsaas-arr": {
       "datasource": [
@@ -3340,7 +4359,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "name": "Annual Recurring Revenue (ARR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3359,7 +4378,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation â€” the headline scale metric for SaaS boards and investors."
+      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
     },
     "Allmanufacturingsaas-nrr": {
       "datasource": [
@@ -3372,7 +4397,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "name": "Net Revenue Retention (NRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3391,7 +4416,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling â€” the strongest signal of durable SaaS growth quality."
+      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
     },
     "Allmanufacturingsaas-gross-churn": {
       "datasource": [
@@ -3404,7 +4440,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "name": "Gross Revenue Churn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -3423,7 +4459,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review â€” informs the renewal forecast and customer-success investment case."
+      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
+      "segment": "subscription",
+      "slug": "gross_churn",
+      "calc": {
+        "expr": "churned_mrr / starting_mrr * 100",
+        "inputs": [
+          "churned_mrr",
+          "starting_mrr"
+        ]
+      }
     },
     "Allmanufacturingsaas-cac": {
       "datasource": [
@@ -3456,7 +4501,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency â€” feeds CAC payback and the marketing budget allocation."
+      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
     },
     "Allmanufacturingsaas-ltv": {
       "datasource": [
@@ -3469,7 +4523,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "name": "Customer Lifetime Value (LTV)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3488,14 +4542,24 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling â€” combined with CAC to gate growth-spend decisions."
+      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
     },
     "Allmanufacturingsaas-ltv-cac": {
       "datasource": [
         "Subscription billing records",
         "Marketing spend records"
       ],
-      "description": "Ratio of customer lifetime value to acquisition cost â€” core SaaS unit economics.",
+      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
       "id": 1049,
       "industry": "Manufacturing",
       "industryTags": [
@@ -3520,7 +4584,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1) for scaling spend."
+      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
+      "calc": {
+        "expr": "ltv / cac",
+        "inputs": []
+      }
     },
     "Allmanufacturingsaas-rule-of-40": {
       "datasource": [
@@ -3552,7 +4622,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review â€” a single composite health score for SaaS planning."
+      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
+      "calc": {
+        "expr": "revenue_growth_pct + profit_margin_pct",
+        "inputs": [
+          "revenue_growth_pct",
+          "profit_margin_pct"
+        ]
+      }
     },
     "Allmanufacturingmfg-capacity-utilization": {
       "datasource": [
@@ -3564,7 +4643,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "Manufacturing"
       ],
-      "methodology": "Capacity Utilization = (Actual Output / Maximum Possible Output) Ã— 100",
+      "methodology": "Capacity Utilization = (Actual Output / Maximum Possible Output) × 100",
       "name": "Capacity Utilization",
       "sensorFieldData": [
         "Machine run-time counters"
@@ -3583,9 +4662,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "capacity_utilization",
-      "fpaWorkflow": "Capacity & capex planning â€” informs make-vs-buy and expansion investment cases."
+      "fpaWorkflow": "Capacity & capex planning — informs make-vs-buy and expansion investment cases.",
+      "segment": "operations",
+      "slug": "capacity_utilization",
+      "calc": {
+        "expr": "actual_output / max_output * 100",
+        "inputs": [
+          "actual_output",
+          "max_output"
+        ]
+      }
     },
-    "Allhealthcarefpa-current-ratio": {
+    "healthcare.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3616,22 +4704,30 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "current_ratio",
-      "fpaWorkflow": "Liquidity & solvency review â€” feeds covenant monitoring and the monthly board liquidity pack.",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 930,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-quick-ratio": {
+    "healthcare.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory â€” most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
       "industryTags": [
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "name": "Quick Ratio (Acid Test)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3650,11 +4746,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "quick_ratio",
-      "fpaWorkflow": "Liquidity stress testing â€” pairs with cash-flow forecasting for downside scenarios.",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
       "id": 936,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-gross-margin": {
+    "healthcare.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -3665,7 +4770,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "name": "Gross Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -3684,11 +4789,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_margin",
-      "fpaWorkflow": "Unit-economics and pricing review â€” anchors contribution-margin and budget-vs-actual analysis.",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
       "id": 942,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-operating-margin": {
+    "healthcare.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -3698,7 +4811,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "name": "Operating Margin (EBIT)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3717,11 +4830,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "operating_margin",
-      "fpaWorkflow": "Opex efficiency review â€” drives the monthly variance bridge and cost-control actions.",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
       "id": 948,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-ebitda-margin": {
+    "healthcare.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -3732,7 +4853,7 @@ export const REFERENCE_DATA = {
         "Financial Services",
         "All"
       ],
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "name": "EBITDA Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -3751,11 +4872,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "ebitda_margin",
-      "fpaWorkflow": "Valuation & lender reporting â€” primary profitability proxy in models and covenant tests.",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
       "id": 954,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-net-margin": {
+    "healthcare.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -3765,7 +4894,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "name": "Net Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -3784,11 +4913,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "net_margin",
-      "fpaWorkflow": "Board P&L reporting â€” the headline profitability line for the monthly close pack.",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
       "id": 960,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-revenue-growth": {
+    "healthcare.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -3799,7 +4936,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "name": "Revenue Growth Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -3818,11 +4955,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "revenue_growth",
-      "fpaWorkflow": "Growth planning â€” drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
       "id": 966,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-working-capital": {
+    "healthcare.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -3833,7 +4978,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "name": "Working Capital",
       "sensorFieldData": [
         "Not Applicable"
@@ -3852,11 +4997,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "working_capital",
-      "fpaWorkflow": "Working-capital management â€” feeds the 13-week cash forecast and treasury planning.",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 972,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-dso": {
+    "healthcare.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -3867,7 +5020,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "name": "Days Sales Outstanding (DSO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3886,11 +5039,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dso",
-      "fpaWorkflow": "Receivables & collections review â€” directly improves the cash-conversion cycle and forecast accuracy.",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
       "id": 978,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-dpo": {
+    "healthcare.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -3901,7 +5063,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "name": "Days Payable Outstanding (DPO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -3920,11 +5082,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dpo",
-      "fpaWorkflow": "Payables optimization â€” balances supplier terms against the cash-conversion cycle.",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
       "id": 984,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-ccc": {
+    "healthcare.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -3935,7 +5106,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "name": "Cash Conversion Cycle",
       "sensorFieldData": [
         "Not Applicable"
@@ -3954,11 +5125,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days_signed",
       "benchmarkKey": "ccc",
-      "fpaWorkflow": "Cash-efficiency program â€” a north-star working-capital KPI tracked in the treasury review.",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
       "id": 990,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-operating-cash-flow": {
+    "healthcare.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -3969,7 +5147,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "name": "Operating Cash Flow",
       "sensorFieldData": [
         "Not Applicable"
@@ -3988,11 +5166,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "operating_cash_flow",
-      "fpaWorkflow": "Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow statement.",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
       "id": 996,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-burn-rate": {
+    "healthcare.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -4004,7 +5191,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "name": "Monthly Burn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -4023,11 +5210,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "burn_rate",
-      "fpaWorkflow": "Runway management â€” paired with cash balance to govern the spend plan and fundraising timing.",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
       "id": 1002,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
     },
-    "Allhealthcarefpa-runway": {
+    "healthcare.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -4057,9 +5252,41 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "number",
       "benchmarkKey": "runway",
-      "fpaWorkflow": "Board & investor reporting â€” the survival metric that gates hiring and spend decisions.",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
       "id": 1008,
-      "industry": "Healthcare"
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1080,
+      "industry": "Healthcare",
+      "segment": "core"
     },
     "HcVol911CatalogMetricKey01": {
       "id": 911,
@@ -4082,7 +5309,10 @@ export const REFERENCE_DATA = {
       "tech": "DEEP TECH",
       "frequency": "weekly",
       "higherIsBetter": true,
-      "fpaWorkflow": "Capacity planning — volume drives staffing ratios and revenue forecasts."
+      "fpaWorkflow": "Capacity planning — volume drives staffing ratios and revenue forecasts.",
+      "segment": "provider",
+      "slug": "patient_volume",
+      "input": true
     },
     "HcLos912CatalogMetricKey02": {
       "id": 912,
@@ -4105,7 +5335,16 @@ export const REFERENCE_DATA = {
       "validationRule": "days",
       "frequency": "monthly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Throughput and bed management — ALOS affects margin per bed and backlog."
+      "fpaWorkflow": "Throughput and bed management — ALOS affects margin per bed and backlog.",
+      "segment": "provider",
+      "slug": "average_length_of_stay",
+      "calc": {
+        "expr": "inpatient_days / discharges",
+        "inputs": [
+          "inpatient_days",
+          "discharges"
+        ]
+      }
     },
     "HcReadmit913CatalogMetricKey03": {
       "id": 913,
@@ -4132,7 +5371,16 @@ export const REFERENCE_DATA = {
       },
       "frequency": "monthly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Quality-to-cost — readmissions drive variable cost and value-based contract risk."
+      "fpaWorkflow": "Quality-to-cost — readmissions drive variable cost and value-based contract risk.",
+      "segment": "quality",
+      "slug": "readmission_rate_30d",
+      "calc": {
+        "expr": "readmissions / eligible_discharges * 100",
+        "inputs": [
+          "readmissions",
+          "eligible_discharges"
+        ]
+      }
     },
     "HcStaff914CatalogMetricKey04": {
       "id": 914,
@@ -4155,7 +5403,16 @@ export const REFERENCE_DATA = {
       "tech": "DEEP TECH",
       "frequency": "weekly",
       "higherIsBetter": true,
-      "fpaWorkflow": "Labor efficiency — primary driver of operating margin in acute settings."
+      "fpaWorkflow": "Labor efficiency — primary driver of operating margin in acute settings.",
+      "segment": "provider",
+      "slug": "staffing_ratio",
+      "calc": {
+        "expr": "staff_hours / occupied_beds",
+        "inputs": [
+          "staff_hours",
+          "occupied_beds"
+        ]
+      }
     },
     "HcDenial915CatalogMetricKey05": {
       "id": 915,
@@ -4182,7 +5439,16 @@ export const REFERENCE_DATA = {
       },
       "frequency": "monthly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Cash collection — denials delay revenue recognition and increase AR days."
+      "fpaWorkflow": "Cash collection — denials delay revenue recognition and increase AR days.",
+      "segment": "revenue_cycle",
+      "slug": "claim_denial_rate",
+      "calc": {
+        "expr": "denied_claims / submitted_claims * 100",
+        "inputs": [
+          "denied_claims",
+          "submitted_claims"
+        ]
+      }
     },
     "Allhealthcaresaas-mrr": {
       "datasource": [
@@ -4195,7 +5461,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "name": "Monthly Recurring Revenue (MRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4214,7 +5480,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast â€” the foundation of the SaaS operating model and ARR bridge."
+      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
     },
     "Allhealthcaresaas-arr": {
       "datasource": [
@@ -4227,7 +5502,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "name": "Annual Recurring Revenue (ARR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4246,7 +5521,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation â€” the headline scale metric for SaaS boards and investors."
+      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
     },
     "Allhealthcaresaas-nrr": {
       "datasource": [
@@ -4259,7 +5540,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "name": "Net Revenue Retention (NRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4278,7 +5559,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling â€” the strongest signal of durable SaaS growth quality."
+      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
     },
     "Allhealthcaresaas-gross-churn": {
       "datasource": [
@@ -4291,7 +5583,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "name": "Gross Revenue Churn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -4310,7 +5602,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review â€” informs the renewal forecast and customer-success investment case."
+      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
+      "segment": "subscription",
+      "slug": "gross_churn",
+      "calc": {
+        "expr": "churned_mrr / starting_mrr * 100",
+        "inputs": [
+          "churned_mrr",
+          "starting_mrr"
+        ]
+      }
     },
     "Allhealthcaresaas-cac": {
       "datasource": [
@@ -4343,7 +5644,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency â€” feeds CAC payback and the marketing budget allocation."
+      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
     },
     "Allhealthcaresaas-ltv": {
       "datasource": [
@@ -4356,7 +5666,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "name": "Customer Lifetime Value (LTV)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4375,14 +5685,24 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling â€” combined with CAC to gate growth-spend decisions."
+      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
     },
     "Allhealthcaresaas-ltv-cac": {
       "datasource": [
         "Subscription billing records",
         "Marketing spend records"
       ],
-      "description": "Ratio of customer lifetime value to acquisition cost â€” core SaaS unit economics.",
+      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
       "id": 1050,
       "industry": "Healthcare",
       "industryTags": [
@@ -4407,7 +5727,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1) for scaling spend."
+      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
+      "calc": {
+        "expr": "ltv / cac",
+        "inputs": []
+      }
     },
     "Allhealthcaresaas-rule-of-40": {
       "datasource": [
@@ -4439,9 +5765,259 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review â€” a single composite health score for SaaS planning."
+      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
+      "calc": {
+        "expr": "revenue_growth_pct + profit_margin_pct",
+        "inputs": [
+          "revenue_growth_pct",
+          "profit_margin_pct"
+        ]
+      }
     },
-    "Allrestaurantsfpa-current-ratio": {
+    "healthcare.provider.bed_occupancy_rate": {
+      "id": 1400,
+      "name": "Bed Occupancy Rate",
+      "industry": "Healthcare",
+      "segment": "provider",
+      "slug": "bed_occupancy_rate",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Bed Occupancy = (Occupied Beds / Available Beds) × 100",
+      "description": "Bed Occupancy Rate (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "occupied_beds / available_beds * 100",
+        "inputs": [
+          "occupied_beds",
+          "available_beds"
+        ]
+      }
+    },
+    "healthcare.provider.or_utilization": {
+      "id": 1401,
+      "name": "Operating Room Utilization",
+      "industry": "Healthcare",
+      "segment": "provider",
+      "slug": "or_utilization",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "OR Utilization = (OR Time Used / OR Time Available) × 100",
+      "description": "Operating Room Utilization (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "or_time_used / or_time_available * 100",
+        "inputs": [
+          "or_time_used",
+          "or_time_available"
+        ]
+      }
+    },
+    "healthcare.provider.ed_wait_time": {
+      "id": 1402,
+      "name": "ED Wait Time",
+      "industry": "Healthcare",
+      "segment": "provider",
+      "slug": "ed_wait_time",
+      "type": "Operational",
+      "unit": "Minutes",
+      "methodology": "Mean minutes from ED arrival to provider (directly measured).",
+      "description": "ED Wait Time (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "input": true
+    },
+    "healthcare.provider.case_mix_index": {
+      "id": 1403,
+      "name": "Case Mix Index",
+      "industry": "Healthcare",
+      "segment": "provider",
+      "slug": "case_mix_index",
+      "type": "Operational",
+      "unit": "Index",
+      "methodology": "Average DRG weight across discharges (directly measured).",
+      "description": "Case Mix Index (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "input": true
+    },
+    "healthcare.provider.cost_per_discharge": {
+      "id": 1404,
+      "name": "Cost per Discharge",
+      "industry": "Healthcare",
+      "segment": "provider",
+      "slug": "cost_per_discharge",
+      "type": "Financial",
+      "unit": "Currency",
+      "methodology": "Cost per Discharge = Total Operating Cost / Discharges",
+      "description": "Cost per Discharge (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "total_operating_cost / discharges",
+        "inputs": [
+          "total_operating_cost",
+          "discharges"
+        ]
+      }
+    },
+    "healthcare.revenue_cycle.ar_days": {
+      "id": 1405,
+      "name": "AR Days",
+      "industry": "Healthcare",
+      "segment": "revenue_cycle",
+      "slug": "ar_days",
+      "type": "Financial",
+      "unit": "Days",
+      "methodology": "AR Days = (Accounts Receivable / Net Patient Revenue) × Days",
+      "description": "AR Days (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "accounts_receivable / net_patient_revenue * days",
+        "inputs": [
+          "accounts_receivable",
+          "net_patient_revenue",
+          "days"
+        ]
+      }
+    },
+    "healthcare.revenue_cycle.clean_claim_rate": {
+      "id": 1406,
+      "name": "Clean Claim Rate",
+      "industry": "Healthcare",
+      "segment": "revenue_cycle",
+      "slug": "clean_claim_rate",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Clean Claim Rate = (Clean Claims / Total Claims) × 100",
+      "description": "Clean Claim Rate (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "clean_claims / total_claims * 100",
+        "inputs": [
+          "clean_claims",
+          "total_claims"
+        ]
+      }
+    },
+    "healthcare.quality.mortality_rate": {
+      "id": 1407,
+      "name": "Inpatient Mortality Rate",
+      "industry": "Healthcare",
+      "segment": "quality",
+      "slug": "mortality_rate",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Mortality Rate = (Inpatient Deaths / Discharges) × 100",
+      "description": "Inpatient Mortality Rate (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "inpatient_deaths / discharges * 100",
+        "inputs": [
+          "inpatient_deaths",
+          "discharges"
+        ]
+      }
+    },
+    "healthcare.quality.infection_rate": {
+      "id": 1408,
+      "name": "Healthcare-Associated Infection Rate",
+      "industry": "Healthcare",
+      "segment": "quality",
+      "slug": "infection_rate",
+      "type": "Operational",
+      "unit": "Per 1000 patient-days",
+      "methodology": "HAI Rate = (Infections / Patient Days) × 1000",
+      "description": "Healthcare-Associated Infection Rate (aggregated, de-identified).",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "infections / patient_days * 1000",
+        "inputs": [
+          "infections",
+          "patient_days"
+        ]
+      }
+    },
+    "restaurants.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -4472,22 +6048,30 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "current_ratio",
-      "fpaWorkflow": "Liquidity & solvency review â€” feeds covenant monitoring and the monthly board liquidity pack.",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 931,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-quick-ratio": {
+    "restaurants.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory â€” most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
       "industryTags": [
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
       "name": "Quick Ratio (Acid Test)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4506,11 +6090,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "quick_ratio",
-      "fpaWorkflow": "Liquidity stress testing â€” pairs with cash-flow forecasting for downside scenarios.",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
       "id": 937,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-gross-margin": {
+    "restaurants.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -4521,7 +6114,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
       "name": "Gross Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -4540,11 +6133,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_margin",
-      "fpaWorkflow": "Unit-economics and pricing review â€” anchors contribution-margin and budget-vs-actual analysis.",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
       "id": 943,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-operating-margin": {
+    "restaurants.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -4554,7 +6155,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Margin = (Operating Income / Revenue) Ã— 100",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
       "name": "Operating Margin (EBIT)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4573,11 +6174,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "operating_margin",
-      "fpaWorkflow": "Opex efficiency review â€” drives the monthly variance bridge and cost-control actions.",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
       "id": 949,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-ebitda-margin": {
+    "restaurants.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -4588,7 +6197,7 @@ export const REFERENCE_DATA = {
         "Financial Services",
         "All"
       ],
-      "methodology": "EBITDA Margin = (EBITDA / Revenue) Ã— 100",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
       "name": "EBITDA Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -4607,11 +6216,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "ebitda_margin",
-      "fpaWorkflow": "Valuation & lender reporting â€” primary profitability proxy in models and covenant tests.",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
       "id": 955,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-net-margin": {
+    "restaurants.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -4621,7 +6238,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Profit Margin = (Net Income / Revenue) Ã— 100",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
       "name": "Net Profit Margin",
       "sensorFieldData": [
         "Not Applicable"
@@ -4640,11 +6257,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "net_margin",
-      "fpaWorkflow": "Board P&L reporting â€” the headline profitability line for the monthly close pack.",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
       "id": 961,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-revenue-growth": {
+    "restaurants.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -4655,7 +6280,7 @@ export const REFERENCE_DATA = {
         "SaaS",
         "All"
       ],
-      "methodology": "Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue) / Prior Period Revenue) Ã— 100",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
       "name": "Revenue Growth Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -4674,11 +6299,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "revenue_growth",
-      "fpaWorkflow": "Growth planning â€” drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
       "id": 967,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-working-capital": {
+    "restaurants.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -4689,7 +6322,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Working Capital = Current Assets âˆ’ Current Liabilities",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
       "name": "Working Capital",
       "sensorFieldData": [
         "Not Applicable"
@@ -4708,11 +6341,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "working_capital",
-      "fpaWorkflow": "Working-capital management â€” feeds the 13-week cash forecast and treasury planning.",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
       "id": 973,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-dso": {
+    "restaurants.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -4723,7 +6364,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
       "name": "Days Sales Outstanding (DSO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4742,11 +6383,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dso",
-      "fpaWorkflow": "Receivables & collections review â€” directly improves the cash-conversion cycle and forecast accuracy.",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
       "id": 979,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-dpo": {
+    "restaurants.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -4757,7 +6407,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "DPO = (Accounts Payable / COGS) Ã— Number of Days",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
       "name": "Days Payable Outstanding (DPO)",
       "sensorFieldData": [
         "Not Applicable"
@@ -4776,11 +6426,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days",
       "benchmarkKey": "dpo",
-      "fpaWorkflow": "Payables optimization â€” balances supplier terms against the cash-conversion cycle.",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
       "id": 985,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-ccc": {
+    "restaurants.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -4791,7 +6450,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "CCC = DSO + Days Inventory Outstanding âˆ’ DPO",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
       "name": "Cash Conversion Cycle",
       "sensorFieldData": [
         "Not Applicable"
@@ -4810,11 +6469,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "days_signed",
       "benchmarkKey": "ccc",
-      "fpaWorkflow": "Cash-efficiency program â€” a north-star working-capital KPI tracked in the treasury review.",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
       "id": 991,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-operating-cash-flow": {
+    "restaurants.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -4825,7 +6491,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase in Working Capital",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
       "name": "Operating Cash Flow",
       "sensorFieldData": [
         "Not Applicable"
@@ -4844,11 +6510,20 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency_signed",
       "benchmarkKey": "operating_cash_flow",
-      "fpaWorkflow": "Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow statement.",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
       "id": 997,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-burn-rate": {
+    "restaurants.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -4860,7 +6535,7 @@ export const REFERENCE_DATA = {
         "Corporate Finance",
         "All"
       ],
-      "methodology": "Net Burn = Cash Out âˆ’ Cash In (per month)",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
       "name": "Monthly Burn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -4879,11 +6554,19 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "burn_rate",
-      "fpaWorkflow": "Runway management â€” paired with cash balance to govern the spend plan and fundraising timing.",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
       "id": 1003,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
     },
-    "Allrestaurantsfpa-runway": {
+    "restaurants.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -4913,9 +6596,41 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "number",
       "benchmarkKey": "runway",
-      "fpaWorkflow": "Board & investor reporting â€” the survival metric that gates hiring and spend decisions.",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
       "id": 1009,
-      "industry": "Restaurants"
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1083,
+      "industry": "Restaurants",
+      "segment": "core"
     },
     "RestFood921CatalogMetricKey01": {
       "id": 921,
@@ -4944,7 +6659,16 @@ export const REFERENCE_DATA = {
       "benchmarkKey": "food_cost_pct",
       "frequency": "weekly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Margin control — primary lever in restaurant P&L alongside labor."
+      "fpaWorkflow": "Margin control — primary lever in restaurant P&L alongside labor.",
+      "segment": "financial",
+      "slug": "food_cost_pct",
+      "calc": {
+        "expr": "food_cogs / food_revenue * 100",
+        "inputs": [
+          "food_cogs",
+          "food_revenue"
+        ]
+      }
     },
     "RestLabor922CatalogMetricKey02": {
       "id": 922,
@@ -4973,7 +6697,16 @@ export const REFERENCE_DATA = {
       "benchmarkKey": "labor_cost_pct",
       "frequency": "weekly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Prime cost management — labor plus food defines controllable margin."
+      "fpaWorkflow": "Prime cost management — labor plus food defines controllable margin.",
+      "segment": "financial",
+      "slug": "labor_cost_pct",
+      "calc": {
+        "expr": "total_labor / total_revenue * 100",
+        "inputs": [
+          "total_labor",
+          "total_revenue"
+        ]
+      }
     },
     "RestTurn923CatalogMetricKey03": {
       "id": 923,
@@ -4995,7 +6728,10 @@ export const REFERENCE_DATA = {
       "tech": "DEEP TECH",
       "frequency": "daily",
       "higherIsBetter": false,
-      "fpaWorkflow": "Throughput — turn time drives covers and revenue per seat hour."
+      "fpaWorkflow": "Throughput — turn time drives covers and revenue per seat hour.",
+      "segment": "operations",
+      "slug": "table_turnover",
+      "input": true
     },
     "RestWaste924CatalogMetricKey04": {
       "id": 924,
@@ -5018,7 +6754,10 @@ export const REFERENCE_DATA = {
       "validationRule": "currency",
       "frequency": "weekly",
       "higherIsBetter": false,
-      "fpaWorkflow": "Cost control — waste directly inflates food cost percentage."
+      "fpaWorkflow": "Cost control — waste directly inflates food cost percentage.",
+      "segment": "operations",
+      "slug": "food_waste",
+      "input": true
     },
     "RestSss925CatalogMetricKey05": {
       "id": 925,
@@ -5041,7 +6780,16 @@ export const REFERENCE_DATA = {
       "validationRule": "percentage",
       "frequency": "monthly",
       "higherIsBetter": true,
-      "fpaWorkflow": "Growth narrative — separates comp performance from new unit expansion."
+      "fpaWorkflow": "Growth narrative — separates comp performance from new unit expansion.",
+      "segment": "financial",
+      "slug": "same_store_sales_growth",
+      "calc": {
+        "expr": "(current_sss - prior_sss) / prior_sss * 100",
+        "inputs": [
+          "current_sss",
+          "prior_sss"
+        ]
+      }
     },
     "Allrestaurantssaas-mrr": {
       "datasource": [
@@ -5054,7 +6802,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)",
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
       "name": "Monthly Recurring Revenue (MRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -5073,7 +6821,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast â€” the foundation of the SaaS operating model and ARR bridge."
+      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
     },
     "Allrestaurantssaas-arr": {
       "datasource": [
@@ -5086,7 +6843,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "ARR = MRR Ã— 12",
+      "methodology": "ARR = MRR × 12",
       "name": "Annual Recurring Revenue (ARR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -5105,7 +6862,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation â€” the headline scale metric for SaaS boards and investors."
+      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
     },
     "Allrestaurantssaas-nrr": {
       "datasource": [
@@ -5118,7 +6881,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting MRR) Ã— 100",
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
       "name": "Net Revenue Retention (NRR)",
       "sensorFieldData": [
         "Not Applicable"
@@ -5137,7 +6900,18 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling â€” the strongest signal of durable SaaS growth quality."
+      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
     },
     "Allrestaurantssaas-gross-churn": {
       "datasource": [
@@ -5150,7 +6924,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) Ã— 100",
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
       "name": "Gross Revenue Churn Rate",
       "sensorFieldData": [
         "Not Applicable"
@@ -5169,7 +6943,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage",
       "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review â€” informs the renewal forecast and customer-success investment case."
+      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
+      "segment": "subscription",
+      "slug": "gross_churn",
+      "calc": {
+        "expr": "churned_mrr / starting_mrr * 100",
+        "inputs": [
+          "churned_mrr",
+          "starting_mrr"
+        ]
+      }
     },
     "Allrestaurantssaas-cac": {
       "datasource": [
@@ -5202,7 +6985,16 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency â€” feeds CAC payback and the marketing budget allocation."
+      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
     },
     "Allrestaurantssaas-ltv": {
       "datasource": [
@@ -5215,7 +7007,7 @@ export const REFERENCE_DATA = {
       "industryTags": [
         "SaaS"
       ],
-      "methodology": "LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate",
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
       "name": "Customer Lifetime Value (LTV)",
       "sensorFieldData": [
         "Not Applicable"
@@ -5234,14 +7026,24 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "currency",
       "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling â€” combined with CAC to gate growth-spend decisions."
+      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
     },
     "Allrestaurantssaas-ltv-cac": {
       "datasource": [
         "Subscription billing records",
         "Marketing spend records"
       ],
-      "description": "Ratio of customer lifetime value to acquisition cost â€” core SaaS unit economics.",
+      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
       "id": 1051,
       "industry": "Restaurants",
       "industryTags": [
@@ -5266,7 +7068,13 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "ratio",
       "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1) for scaling spend."
+      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
+      "calc": {
+        "expr": "ltv / cac",
+        "inputs": []
+      }
     },
     "Allrestaurantssaas-rule-of-40": {
       "datasource": [
@@ -5298,7 +7106,765 @@ export const REFERENCE_DATA = {
       },
       "validationRule": "percentage_unbounded",
       "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review â€” a single composite health score for SaaS planning."
+      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
+      "calc": {
+        "expr": "revenue_growth_pct + profit_margin_pct",
+        "inputs": [
+          "revenue_growth_pct",
+          "profit_margin_pct"
+        ]
+      }
+    },
+    "life_sciences.core.current_ratio": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet"
+      ],
+      "description": "Short-term liquidity: ability to cover current liabilities with current assets.",
+      "industryTags": [
+        "Corporate Finance",
+        "Financial Services",
+        "All"
+      ],
+      "methodology": "Current Ratio = Current Assets / Current Liabilities",
+      "name": "Current Ratio",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 2,
+      "targetRangeLow": 1.2,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 20
+      },
+      "validationRule": "ratio",
+      "benchmarkKey": "current_ratio",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "id": 1300,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.quick_ratio": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet"
+      ],
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
+      "name": "Quick Ratio (Acid Test)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1.5,
+      "targetRangeLow": 1,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 20
+      },
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
+      "id": 1301,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.gross_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of revenue retained after the direct cost of goods sold.",
+      "industryTags": [
+        "Corporate Finance",
+        "SaaS",
+        "All"
+      ],
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
+      "name": "Gross Profit Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 70,
+      "targetRangeLow": 40,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "gross_margin",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "id": 1302,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.operating_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Operating profitability after operating expenses (EBIT margin).",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
+      "name": "Operating Margin (EBIT)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 25,
+      "targetRangeLow": 10,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_margin",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "id": 1303,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.ebitda_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Core operating cash profitability before interest, tax, depreciation and amortization.",
+      "industryTags": [
+        "Corporate Finance",
+        "Financial Services",
+        "All"
+      ],
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
+      "name": "EBITDA Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 30,
+      "targetRangeLow": 15,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "ebitda_margin",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
+      "id": 1304,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.net_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Bottom-line profitability after all costs, interest and tax.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
+      "name": "Net Profit Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 20,
+      "targetRangeLow": 8,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "net_margin",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "id": 1305,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.revenue_growth": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Period-over-period revenue growth rate.",
+      "industryTags": [
+        "Corporate Finance",
+        "SaaS",
+        "All"
+      ],
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
+      "name": "Revenue Growth Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 30,
+      "targetRangeLow": 10,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 1000
+      },
+      "validationRule": "percentage_unbounded",
+      "benchmarkKey": "revenue_growth",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
+      "id": 1306,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.working_capital": {
+      "datasource": [
+        "Financial statements",
+        "Balance sheet",
+        "Trial balance"
+      ],
+      "description": "Operating liquidity available to fund day-to-day operations.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
+      "name": "Working Capital",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1000000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "working_capital",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "id": 1307,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.dso": {
+      "datasource": [
+        "Accounts receivable aging",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Average number of days to collect cash after a sale.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
+      "name": "Days Sales Outstanding (DSO)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 45,
+      "targetRangeLow": 30,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 365
+      },
+      "validationRule": "days",
+      "benchmarkKey": "dso",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
+      "id": 1308,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.dpo": {
+      "datasource": [
+        "Accounts payable aging",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Average number of days the business takes to pay its suppliers.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
+      "name": "Days Payable Outstanding (DPO)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 30,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 365
+      },
+      "validationRule": "days",
+      "benchmarkKey": "dpo",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
+      "id": 1309,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.ccc": {
+      "datasource": [
+        "Accounts receivable aging",
+        "Accounts payable aging",
+        "Inventory records"
+      ],
+      "description": "Days to convert investments in inventory and receivables back into cash.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
+      "name": "Cash Conversion Cycle",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 20,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": -180,
+        "hardMax": 365
+      },
+      "validationRule": "days_signed",
+      "benchmarkKey": "ccc",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
+      "id": 1310,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.operating_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash generated by core operations during the period.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
+      "name": "Operating Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1000000,
+      "targetRangeLow": 200000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "operating_cash_flow",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
+      "id": 1311,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.burn_rate": {
+      "datasource": [
+        "Bank statements",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Net cash consumed per month (negative net operating cash flow).",
+      "industryTags": [
+        "SaaS",
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
+      "name": "Monthly Burn Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 200000,
+      "targetRangeLow": 50000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency/month",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "burn_rate",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
+      "id": 1312,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.runway": {
+      "datasource": [
+        "Bank statements",
+        "Financial statements"
+      ],
+      "description": "Number of months of cash remaining at the current net burn rate.",
+      "industryTags": [
+        "SaaS",
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Runway (months) = Current Cash Balance / Monthly Net Burn",
+      "name": "Cash Runway",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 24,
+      "targetRangeLow": 12,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Months",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 240
+      },
+      "validationRule": "number",
+      "benchmarkKey": "runway",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
+      "id": 1313,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 1314,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.rnd.pipeline_active_count": {
+      "id": 1330,
+      "name": "Active Pipeline Programs",
+      "industry": "Life Sciences",
+      "segment": "rnd",
+      "slug": "pipeline_active_count",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Count of active R&D programs in the period (directly measured).",
+      "description": "Active Pipeline Programs",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "input": true
+    },
+    "life_sciences.rnd.trial_cost_per_patient": {
+      "id": 1331,
+      "name": "Trial Cost per Patient",
+      "industry": "Life Sciences",
+      "segment": "rnd",
+      "slug": "trial_cost_per_patient",
+      "type": "Financial",
+      "unit": "Currency",
+      "methodology": "Trial Cost per Patient = Total Trial Cost / Patients Enrolled",
+      "description": "Trial Cost per Patient",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "total_trial_cost / patients_enrolled",
+        "inputs": [
+          "total_trial_cost",
+          "patients_enrolled"
+        ]
+      }
+    },
+    "life_sciences.rnd.phase_success_rate": {
+      "id": 1332,
+      "name": "Phase Success Rate",
+      "industry": "Life Sciences",
+      "segment": "rnd",
+      "slug": "phase_success_rate",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Phase Success Rate = (Phases Passed / Phases Attempted) × 100",
+      "description": "Phase Success Rate",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "phases_passed / phases_attempted * 100",
+        "inputs": [
+          "phases_passed",
+          "phases_attempted"
+        ]
+      }
+    },
+    "life_sciences.supply_chain.batch_yield": {
+      "id": 1333,
+      "name": "Batch Yield",
+      "industry": "Life Sciences",
+      "segment": "supply_chain",
+      "slug": "batch_yield",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Batch Yield = (Good Units / Total Units) × 100",
+      "description": "Batch Yield",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "good_units / total_units * 100",
+        "inputs": [
+          "good_units",
+          "total_units"
+        ]
+      }
+    },
+    "life_sciences.supply_chain.cogs_per_unit": {
+      "id": 1334,
+      "name": "COGS per Unit",
+      "industry": "Life Sciences",
+      "segment": "supply_chain",
+      "slug": "cogs_per_unit",
+      "type": "Financial",
+      "unit": "Currency",
+      "methodology": "COGS per Unit = Total COGS / Units Produced",
+      "description": "COGS per Unit",
+      "datasource": [
+        "De-identified operational export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "calc": {
+        "expr": "total_cogs / units_produced",
+        "inputs": [
+          "total_cogs",
+          "units_produced"
+        ]
+      }
     }
   }
 };

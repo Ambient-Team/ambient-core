@@ -1,0 +1,53 @@
+product:
+  name: Healthcare Quality Outcomes
+  version: 1.0
+  owner: analytics
+  description: "De-identified, cohort-level quality outcomes Gold product: readmission, mortality, and infection rates. Cohort grain only, no PHI."
+  domain: Healthcare
+  type: Derived
+
+schema:
+  table: gold.healthcare_quality_outcomes
+  primary_key: quality_outcomes_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: quality_outcomes_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: cohort_id
+      type: string
+      required: true
+    - name: readmission_rate_30d
+      type: double
+      required: false
+    - name: mortality_rate
+      type: double
+      required: false
+    - name: infection_rate
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 3650
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any patient-identifiable field; cohort sizes below privacy threshold; direct Bronze access"

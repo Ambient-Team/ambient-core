@@ -47,6 +47,21 @@ jobs:
       - name: Validate reference catalog
         run: python scripts/generate_reference_catalog.py --check
 
+      - name: Catalogue hygiene (no dead trees, no mojibake)
+        run: python scripts/check_catalog_hygiene.py
+
+      - name: Catalogue naming conventions
+        run: python scripts/check_naming.py
+
+      - name: Contract meta-schema and versions
+        run: python scripts/check_contract_schema.py
+
+      - name: Metric formulas
+        run: python scripts/check_formulas.py
+
+      - name: PHI policy (healthcare/life-sciences)
+        run: python scripts/check_phi.py
+
       - name: Check markdown prose (no pipe tables)
         run: python scripts/check_markdown_prose.py
 

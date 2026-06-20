@@ -6,7 +6,7 @@ Source file: [catalog/crosswalk.yaml](../catalog/crosswalk.yaml). Broader contex
 
 ## Why it exists
 
-Many catalog metrics describe KPI **intent** before a Gold product exists. When a contract governs the physical shape (for example [tenant-metrics-v1.1.yaml](../contracts/tenant-metrics-v1.1.yaml)), the crosswalk documents which manifest metric maps to which contract file and product id for integrators, docs, and app logic.
+Many catalog metrics describe KPI **intent** before a Gold product exists. When a contract governs the physical shape (for example [tenant-metrics-v1.yaml](../contracts/tenant-metrics-v1.yaml)), the crosswalk documents which manifest metric maps to which contract file and product id for integrators, docs, and app logic.
 
 ## Entry fields
 
@@ -14,7 +14,7 @@ Each item under `links:`:
 
 - **`catalogMetricKey`** — stable key from `manifest.json` (e.g. `1cvcTcHNt1VYX867UUG7`)
 - **`metricId`** — numeric `id` from the same manifest row (sanity check for humans/tools)
-- **`contractFile`** — basename under `contracts/` (e.g. `tenant-metrics-v1.1.yaml`)
+- **`contractFile`** — basename under `contracts/` (e.g. `tenant-metrics-v1.yaml`)
 - **`contractProductId`** — logical product id in your stack (e.g. Firestore `logical_key` / consumption id such as `TENANT_METRICS`)
 
 ## Example in this repo
@@ -23,7 +23,7 @@ Debt Service Coverage Ratio (DSCR) in the Real Estate pack:
 
 - `catalogMetricKey`: `1cvcTcHNt1VYX867UUG7`
 - `metricId`: `8`
-- `contractFile`: `tenant-metrics-v1.1.yaml`
+- `contractFile`: `tenant-metrics-v1.yaml`
 - `contractProductId`: `TENANT_METRICS`
 
 ## Maintainer workflow

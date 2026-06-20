@@ -28,7 +28,7 @@ tools:
     returns: array
 
   - id: contracts_validate
-    description: Validate one contract file by basename (e.g. quality-v1.1.yaml) or all contracts if omitted.
+    description: Validate one contract file by basename (e.g. quality-v1.yaml) or all contracts if omitted.
     parameters:
       contract_file:
         type: string

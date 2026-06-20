@@ -1,9 +1,11 @@
 defaultIndustry: Real Estate
 packs:
-  - file: real_estate.yaml
-    displayLabel: Real Estate (commercial)
-  - file: vertical_farming.yaml
-  - file: transportation.yaml
-  - file: manufacturing.yaml
-  - file: healthcare.yaml
-  - file: restaurants.yaml
+- file: real_estate.yaml
+  displayLabel: Real Estate (commercial)
+- file: vertical_farming.yaml
+- file: transportation.yaml
+- file: manufacturing.yaml
+- file: healthcare.yaml
+- file: restaurants.yaml
+- file: life_sciences.yaml
+  displayLabel: Life Sciences

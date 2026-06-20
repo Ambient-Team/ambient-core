@@ -18,11 +18,15 @@ metrics:
     type: Financial
     unit: Number
     benchmarkKey: dscr
-    fpaWorkflow: Liquidity & covenant review â€” lender DSCR tests and monthly board
-      liquidity pack.
-    financialImpact: Covenant headroom â€” breach risk for debt service and refinancing
-    operationalSignal: NOI and opex from property operations feed DSCR numerator and
-      denominator
+    fpaWorkflow: Liquidity & covenant review — lender DSCR tests and monthly board liquidity pack.
+    financialImpact: Covenant headroom — breach risk for debt service and refinancing
+    operationalSignal: NOI and opex from property operations feed DSCR numerator and denominator
+    segment: financial
+    slug: dscr
+    calc:
+      expr: noi / annual_debt_service
+      inputs:
+      - annual_debt_service
   EDCn8khPJg44trzt4JTA:
     datasource:
     - Property management systems
@@ -40,6 +44,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: '%'
+    segment: operations
+    slug: vacancy_rate
+    calc:
+      expr: vacant_units / total_units * 100
+      inputs:
+      - vacant_units
+      - total_units
   Ob4nc825yNcKAA91kCua:
     datasource:
     - Mortgage documents
@@ -57,6 +68,13 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: '%'
+    segment: financial
+    slug: loan_to_value
+    calc:
+      expr: mortgage_amount / appraised_value * 100
+      inputs:
+      - mortgage_amount
+      - appraised_value
   VLDD4ijNDixuJ7EDJtw3:
     datasource:
     - Property valuation reports
@@ -74,6 +92,13 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: Number
+    segment: financial
+    slug: grm
+    calc:
+      expr: property_price / gross_rental_income
+      inputs:
+      - property_price
+      - gross_rental_income
   YsoV0l2DLsptgTldBESm:
     datasource:
     - Financial statements
@@ -91,6 +116,13 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: Currency (e.g., USD)
+    segment: financial
+    slug: noi
+    calc:
+      expr: gross_rental_income - operating_expenses
+      inputs:
+      - gross_rental_income
+      - operating_expenses
   o4HkbNgvPm6RAPEcAzHV:
     datasource:
     - Financial statements
@@ -109,6 +141,13 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: Percentage
+    segment: financial
+    slug: roi
+    calc:
+      expr: net_profit / cost_of_investment * 100
+      inputs:
+      - net_profit
+      - cost_of_investment
   o5PSXR0Vw3Jy35QyRrJ8:
     datasource:
     - Financial statements
@@ -126,6 +165,14 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: Currency (e.g., USD)
+    segment: financial
+    slug: re_cash_flow
+    calc:
+      expr: rental_income - operating_expenses - debt_service
+      inputs:
+      - rental_income
+      - operating_expenses
+      - debt_service
   rbIvVbYWRuUUr4rzZGRH:
     datasource:
     - Property valuation reports
@@ -144,12 +191,15 @@ metrics:
     type: Financial
     unit: Percentage
     benchmarkKey: cap_rate
-    fpaWorkflow: Valuation & lender reporting â€” yield sensitivity for divestiture
-      and acquisition cases.
-    financialImpact: Yield and valuation â€” cap rate moves drive NAV and lender collateral
-      tests
-    operationalSignal: NOI from operations and appraisal inputs drive cap rate numerator
-      and denominator
+    fpaWorkflow: Valuation & lender reporting — yield sensitivity for divestiture and acquisition cases.
+    financialImpact: Yield and valuation — cap rate moves drive NAV and lender collateral tests
+    operationalSignal: NOI from operations and appraisal inputs drive cap rate numerator and denominator
+    segment: financial
+    slug: cap_rate
+    calc:
+      expr: noi / property_value * 100
+      inputs:
+      - property_value
   wCpkOtGniudQu8pSh22k:
     datasource:
     - Financial statements
@@ -157,8 +207,7 @@ metrics:
     description: Annual return on invested cash.
     id: 5
     industry: Real Estate
-    methodology: Cash-on-Cash Return = (Net Cash Flow / Initial Cash Investment) *
-      100
+    methodology: Cash-on-Cash Return = (Net Cash Flow / Initial Cash Investment) * 100
     name: Cash-on-Cash Return
     sensorFieldData:
     - Not Applicable
@@ -168,6 +217,13 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: Percentage
+    segment: financial
+    slug: cash_on_cash_return
+    calc:
+      expr: net_cash_flow / initial_cash_investment * 100
+      inputs:
+      - net_cash_flow
+      - initial_cash_investment
   Allrealestatesaas-mrr:
     datasource:
     - Subscription billing records
@@ -177,7 +233,7 @@ metrics:
     industry: Real Estate
     industryTags:
     - SaaS
-    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
     name: Monthly Recurring Revenue (MRR)
     sensorFieldData:
     - Not Applicable
@@ -194,8 +250,14 @@ metrics:
       hardMax: 1000000000
     validationRule: currency
     benchmarkKey: mrr
-    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
-      model and ARR bridge.
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
   Allrealestatesaas-arr:
     datasource:
     - Subscription billing records
@@ -205,7 +267,7 @@ metrics:
     industry: Real Estate
     industryTags:
     - SaaS
-    methodology: ARR = MRR Ã— 12
+    methodology: ARR = MRR × 12
     name: Annual Recurring Revenue (ARR)
     sensorFieldData:
     - Not Applicable
@@ -222,20 +284,22 @@ metrics:
       hardMax: 10000000000
     validationRule: currency
     benchmarkKey: arr
-    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
-      boards and investors.
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
   Allrealestatesaas-nrr:
     datasource:
     - Subscription billing records
     - Product usage logs
-    description: Revenue retained and expanded from existing customers, net of churn
-      and contraction.
+    description: Revenue retained and expanded from existing customers, net of churn and contraction.
     id: 1022
     industry: Real Estate
     industryTags:
     - SaaS
-    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
-      MRR) Ã— 100
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100
     name: Net Revenue Retention (NRR)
     sensorFieldData:
     - Not Applicable
@@ -252,8 +316,16 @@ metrics:
       hardMax: 300
     validationRule: percentage_unbounded
     benchmarkKey: nrr
-    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
-      SaaS growth quality.
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
   Allrealestatesaas-gross-churn:
     datasource:
     - Subscription billing records
@@ -263,7 +335,7 @@ metrics:
     industry: Real Estate
     industryTags:
     - SaaS
-    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
     name: Gross Revenue Churn Rate
     sensorFieldData:
     - Not Applicable
@@ -280,8 +352,14 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_churn
-    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
-      investment case.
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
   Allrealestatesaas-cac:
     datasource:
     - Marketing spend records
@@ -309,8 +387,14 @@ metrics:
       hardMax: 10000000
     validationRule: currency
     benchmarkKey: cac
-    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
-      allocation.
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
   Allrealestatesaas-ltv:
     datasource:
     - Subscription billing records
@@ -320,7 +404,7 @@ metrics:
     industry: Real Estate
     industryTags:
     - SaaS
-    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
     name: Customer Lifetime Value (LTV)
     sensorFieldData:
     - Not Applicable
@@ -337,14 +421,20 @@ metrics:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: ltv
-    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
-      decisions.
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
   Allrealestatesaas-ltv-cac:
     datasource:
     - Subscription billing records
     - Marketing spend records
-    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
-      unit economics.
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.
     id: 1046
     industry: Real Estate
     industryTags:
@@ -366,8 +456,12 @@ metrics:
       hardMax: 100
     validationRule: ratio
     benchmarkKey: ltv_cac
-    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
-      for scaling spend.
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
   Allrealestatesaas-rule-of-40:
     datasource:
     - Subscription billing records
@@ -394,8 +488,14 @@ metrics:
       hardMax: 200
     validationRule: percentage_unbounded
     benchmarkKey: rule_of_40
-    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
-      for SaaS planning.
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
 dataOptions:
   2j9pysT31hgn2DQcejtz:
     description: Records of income received from renting a property.
@@ -591,8 +691,7 @@ dataOptions:
     name: Loan documents
     template: Document
   Allrealestateds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - date
     - account_code
@@ -766,8 +865,7 @@ dataOptions:
     name: CRM / Sales pipeline
     template: Document
   Allrealestateds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn
-      analysis.
+    description: Product engagement and usage telemetry used for retention and churn analysis.
     fields:
     - date
     - customer_id

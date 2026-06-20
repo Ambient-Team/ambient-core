@@ -8,7 +8,7 @@ export { inferFieldRule };
 
 export const REFERENCE_DATA = {
   "dataOptions": {
-    "AllrealestateGvoI0Vg2YijGfgoBaqqe": {
+    "real_estate.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -29,6 +29,7 @@ export const REFERENCE_DATA = {
       ],
       "id": 1082,
       "industry": "Real Estate",
+      "segment": "core",
       "metricIds": [
         1,
         2,
@@ -38,7 +39,7 @@ export const REFERENCE_DATA = {
         8
       ]
     },
-    "Allrealestate5aMhHPzshRFSHX4PjOMH": {
+    "real_estate.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -54,11 +55,12 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1076,
       "industry": "Real Estate",
+      "segment": "core",
       "metricIds": [
         956
       ]
     },
-    "AllrealestateQO2mQ9iQZXjtLrZYLXcK": {
+    "real_estate.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -74,13 +76,14 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1088,
       "industry": "Real Estate",
+      "segment": "core",
       "metricIds": [
         938,
         944,
         956
       ]
     },
-    "AllrealestateqXzIFYqjk5et3S78BYew": {
+    "real_estate.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -96,6 +99,7 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1094,
       "industry": "Real Estate",
+      "segment": "core",
       "metricIds": [
         956,
         944
@@ -561,7 +565,7 @@ export const REFERENCE_DATA = {
       "name": "Marketing spend records",
       "template": "Transactional Data Template"
     },
-    "AllverticalfarmingGvoI0Vg2YijGfgoBaqqe": {
+    "vertical_farming.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -582,6 +586,7 @@ export const REFERENCE_DATA = {
       ],
       "id": 1083,
       "industry": "Vertical Farming",
+      "segment": "core",
       "metricIds": [
         927,
         939,
@@ -591,7 +596,7 @@ export const REFERENCE_DATA = {
         993
       ]
     },
-    "Allverticalfarming5aMhHPzshRFSHX4PjOMH": {
+    "vertical_farming.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -607,11 +612,12 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1077,
       "industry": "Vertical Farming",
+      "segment": "core",
       "metricIds": [
         18
       ]
     },
-    "AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK": {
+    "vertical_farming.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -627,13 +633,14 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1089,
       "industry": "Vertical Farming",
+      "segment": "core",
       "metricIds": [
         20,
         21,
         939
       ]
     },
-    "AllverticalfarmingqXzIFYqjk5et3S78BYew": {
+    "vertical_farming.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -649,6 +656,7 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1095,
       "industry": "Vertical Farming",
+      "segment": "core",
       "metricIds": [
         18,
         20
@@ -991,7 +999,7 @@ export const REFERENCE_DATA = {
       "name": "Marketing spend records",
       "template": "Transactional Data Template"
     },
-    "AlltransportationGvoI0Vg2YijGfgoBaqqe": {
+    "transportation.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -1012,6 +1020,7 @@ export const REFERENCE_DATA = {
       ],
       "id": 1084,
       "industry": "Transportation",
+      "segment": "core",
       "metricIds": [
         928,
         940,
@@ -1021,7 +1030,7 @@ export const REFERENCE_DATA = {
         994
       ]
     },
-    "Alltransportation5aMhHPzshRFSHX4PjOMH": {
+    "transportation.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -1037,11 +1046,12 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1078,
       "industry": "Transportation",
+      "segment": "core",
       "metricIds": [
         14
       ]
     },
-    "AlltransportationQO2mQ9iQZXjtLrZYLXcK": {
+    "transportation.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -1057,13 +1067,14 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1090,
       "industry": "Transportation",
+      "segment": "core",
       "metricIds": [
         940,
         946,
         958
       ]
     },
-    "AlltransportationqXzIFYqjk5et3S78BYew": {
+    "transportation.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -1079,6 +1090,7 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1096,
       "industry": "Transportation",
+      "segment": "core",
       "metricIds": [
         14,
         13
@@ -1484,7 +1496,7 @@ export const REFERENCE_DATA = {
       "name": "Marketing spend records",
       "template": "Transactional Data Template"
     },
-    "AllmanufacturingGvoI0Vg2YijGfgoBaqqe": {
+    "manufacturing.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -1505,6 +1517,7 @@ export const REFERENCE_DATA = {
       ],
       "id": 1085,
       "industry": "Manufacturing",
+      "segment": "core",
       "metricIds": [
         929,
         941,
@@ -1514,7 +1527,7 @@ export const REFERENCE_DATA = {
         995
       ]
     },
-    "Allmanufacturing5aMhHPzshRFSHX4PjOMH": {
+    "manufacturing.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -1530,11 +1543,12 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1079,
       "industry": "Manufacturing",
+      "segment": "core",
       "metricIds": [
         959
       ]
     },
-    "AllmanufacturingQO2mQ9iQZXjtLrZYLXcK": {
+    "manufacturing.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -1550,13 +1564,14 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1091,
       "industry": "Manufacturing",
+      "segment": "core",
       "metricIds": [
         941,
         947,
         959
       ]
     },
-    "AllmanufacturingqXzIFYqjk5et3S78BYew": {
+    "manufacturing.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -1572,6 +1587,7 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1097,
       "industry": "Manufacturing",
+      "segment": "core",
       "metricIds": [
         959,
         947
@@ -1940,7 +1956,7 @@ export const REFERENCE_DATA = {
       "name": "Inventory records",
       "template": "Document"
     },
-    "AllhealthcareGvoI0Vg2YijGfgoBaqqe": {
+    "healthcare.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -1961,6 +1977,7 @@ export const REFERENCE_DATA = {
       ],
       "id": 1086,
       "industry": "Healthcare",
+      "segment": "core",
       "metricIds": [
         930,
         942,
@@ -1970,7 +1987,7 @@ export const REFERENCE_DATA = {
         996
       ]
     },
-    "Allhealthcare5aMhHPzshRFSHX4PjOMH": {
+    "healthcare.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -1986,11 +2003,12 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1080,
       "industry": "Healthcare",
+      "segment": "core",
       "metricIds": [
         914
       ]
     },
-    "AllhealthcareQO2mQ9iQZXjtLrZYLXcK": {
+    "healthcare.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -2006,13 +2024,14 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1092,
       "industry": "Healthcare",
+      "segment": "core",
       "metricIds": [
         942,
         948,
         960
       ]
     },
-    "AllhealthcareqXzIFYqjk5et3S78BYew": {
+    "healthcare.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -2028,6 +2047,7 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1098,
       "industry": "Healthcare",
+      "segment": "core",
       "metricIds": [
         960,
         948
@@ -2348,7 +2368,7 @@ export const REFERENCE_DATA = {
       "name": "Marketing spend records",
       "template": "Transactional Data Template"
     },
-    "AllrestaurantsGvoI0Vg2YijGfgoBaqqe": {
+    "restaurants.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -2369,6 +2389,7 @@ export const REFERENCE_DATA = {
       ],
       "id": 1087,
       "industry": "Restaurants",
+      "segment": "core",
       "metricIds": [
         931,
         943,
@@ -2378,7 +2399,7 @@ export const REFERENCE_DATA = {
         997
       ]
     },
-    "Allrestaurants5aMhHPzshRFSHX4PjOMH": {
+    "restaurants.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -2394,11 +2415,12 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1081,
       "industry": "Restaurants",
+      "segment": "core",
       "metricIds": [
         922
       ]
     },
-    "AllrestaurantsQO2mQ9iQZXjtLrZYLXcK": {
+    "restaurants.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -2414,13 +2436,14 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1093,
       "industry": "Restaurants",
+      "segment": "core",
       "metricIds": [
         943,
         949,
         961
       ]
     },
-    "AllrestaurantsqXzIFYqjk5et3S78BYew": {
+    "restaurants.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -2436,6 +2459,7 @@ export const REFERENCE_DATA = {
       "fields": [],
       "id": 1099,
       "industry": "Restaurants",
+      "segment": "core",
       "metricIds": [
         961,
         949
@@ -2744,6 +2768,147 @@ export const REFERENCE_DATA = {
       ],
       "name": "Marketing spend records",
       "template": "Transactional Data Template"
+    },
+    "life_sciences.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1320,
+      "industry": "Life Sciences",
+      "segment": "core",
+      "metricIds": [
+        1300,
+        1302,
+        1303,
+        1305,
+        1304,
+        1311
+      ]
+    },
+    "life_sciences.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1321,
+      "industry": "Life Sciences",
+      "segment": "core",
+      "metricIds": [
+        1305
+      ]
+    },
+    "life_sciences.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1322,
+      "industry": "Life Sciences",
+      "segment": "core",
+      "metricIds": [
+        1302,
+        1303,
+        1305
+      ]
+    },
+    "life_sciences.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1323,
+      "industry": "Life Sciences",
+      "segment": "core",
+      "metricIds": [
+        1305,
+        1303
+      ]
+    },
+    "life_sciences.rnd.clinical_trial_summary": {
+      "id": 1340,
+      "name": "De-identified clinical trial summary",
+      "industry": "Life Sciences",
+      "segment": "rnd",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        "date",
+        "program_id",
+        "phase",
+        "patients_enrolled",
+        "phases_passed",
+        "phases_attempted",
+        "total_trial_cost"
+      ],
+      "metricIds": [
+        1330,
+        1331,
+        1332
+      ],
+      "lastUpdated": "2026-06-20 00:00:00"
+    },
+    "life_sciences.supply_chain.production_batch_records": {
+      "id": 1341,
+      "name": "Production batch records",
+      "industry": "Life Sciences",
+      "segment": "supply_chain",
+      "format": "Transactional Data Template",
+      "template": "Transactional Data Template",
+      "fields": [
+        "date",
+        "batch_id",
+        "good_units",
+        "total_units",
+        "total_cogs",
+        "units_produced"
+      ],
+      "metricIds": [
+        1333,
+        1334
+      ],
+      "lastUpdated": "2026-06-20 00:00:00"
     }
   }
 };

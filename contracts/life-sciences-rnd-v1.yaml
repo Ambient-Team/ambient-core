@@ -1,0 +1,56 @@
+product:
+  name: Life Sciences R&D
+  version: 1.0
+  owner: analytics
+  description: "Aggregated life-sciences R&D Gold product: pipeline counts, trial cost per patient, and phase success by program. De-identified."
+  domain: Life Sciences
+  type: Derived
+
+schema:
+  table: gold.life_sciences_rnd
+  primary_key: rnd_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: rnd_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: program_id
+      type: string
+      required: true
+    - name: phase
+      type: string
+      required: false
+    - name: pipeline_active_count
+      type: long
+      required: false
+    - name: trial_cost_per_patient
+      type: double
+      required: false
+    - name: phase_success_rate
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 3650
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any subject-identifiable trial field; direct Bronze access"

@@ -46,7 +46,7 @@ def main() -> int:
         print(f"sample metric id={sample_id}: not found")
 
     loader = ContractLoader()
-    contract = loader.load("tenant-metrics-v1.1.yaml")
+    contract = loader.load("tenant-metrics-v1.yaml")
     product = contract.get("product", {})
     schema = contract.get("schema", {})
     print(
