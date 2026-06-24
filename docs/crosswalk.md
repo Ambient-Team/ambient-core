@@ -2,7 +2,7 @@
 
 The crosswalk records **optional** links between reference catalog metrics and governed **data-product contracts**. It does not define new metrics or schemas.
 
-Source file: [catalog/crosswalk.yaml](../catalog/crosswalk.yaml). Broader context: [governed-data.md](governed-data.md).
+Source file: [catalog/crosswalk.yaml](../catalog/crosswalk.yaml). Broader context: [governed-data.md](governed-data.md). Prefer **canonical** catalogue keys (`industry.segment.slug`) in new links when the manifest exposes them; legacy `catalogMetricKey` values remain valid during the alias deprecation window ([CONVENTIONS.md](CONVENTIONS.md#alias-policy)).
 
 ## Why it exists
 

@@ -41,5 +41,6 @@ A consumer **may** keep small **app-only** pipeline modules (for example Databri
 ## Related
 
 - [INTEGRATING.md](INTEGRATING.md) — import process for consumers
+- [CONVENTIONS.md](CONVENTIONS.md) — catalogue keys, contract versions, formats and storage
 - [ECOSYSTEM.md](ECOSYSTEM.md) — components and release flow
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs full product

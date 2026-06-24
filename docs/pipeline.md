@@ -2,7 +2,7 @@
 
 Ambient Core does **not** ship a medallion job runner or Databricks bundle. It ships **contracts**, **catalog** semantics, and Python modules under `lib/ambient_pipeline/` that your lakehouse jobs import. Schedules, notebooks, and deploy glue belong in your application repository.
 
-For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md).
+For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
 ## What lives where
 
@@ -27,6 +27,8 @@ Java 17+ is required for Spark tests.
 **Packaging note:** The published wheel includes `ambient_contracts`, `ambient_inference`, `ambient_cli`, and `ambient_agent`. **`ambient_pipeline` requires a git checkout** (tests use `pythonpath = lib` in `pyproject.toml`). Import it from `lib/ambient_pipeline` in notebooks and jobs pinned to the same core tag.
 
 ## Typical job flow
+
+The steps below are the pipeline implementation of the precursor → plain-text extract → YAML-governed → forward-store flow in [governed-data.md](governed-data.md).
 
 ```mermaid
 flowchart LR
@@ -80,4 +82,5 @@ Core agents read **metadata** via `catalog_*` and `contracts_*` tools; they do n
 
 - [USAGE.md](USAGE.md) — recipe 4 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
+- [CONVENTIONS.md](CONVENTIONS.md) — formats, bronze boundary, forward stores
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — scope split

@@ -25,7 +25,7 @@ Read [docs/governed-data.md](../docs/governed-data.md) for how contracts relate 
 
 ## Authoring and validation
 
-New or changed contracts must include top-level sections **`product`**, **`schema`**, **`lineage`**, and **`governance`** (validated by `validate-contracts`). `product` needs `name`, `version`, and `owner`; optional sections include `quality`, `freshness`, `firestore`, and `consumption_contract` with additional rules in the validator. Filenames follow `product-slug-vMAJOR.yaml` and are additionally checked against the meta-schema `schema/contract-v1.json` by `scripts/check_contract_schema.py`.
+New or changed contracts must include top-level sections **`product`**, **`schema`**, **`lineage`**, and **`governance`** (validated by `validate-contracts`). `product` needs `name`, `version`, and `owner`; optional sections include `quality`, `freshness`, `firestore`, and `consumption_contract` with additional rules in the validator. Filenames follow `product-slug-vMAJOR.yaml` and are additionally checked against the meta-schema `schema/contract-v1.json` by `scripts/check_contract_schema.py`. Filename major version must match `product.version` — see [docs/CONVENTIONS.md](../docs/CONVENTIONS.md#contract-files-and-versions).
 
 - Edit files here, then sync bundled copies before release — [docs/CONTRIBUTING.md](../docs/CONTRIBUTING.md).
 - Run `validate-contracts` locally and in CI. Rules are implemented in [lib/ambient_contracts/validate.py](../lib/ambient_contracts/validate.py).

@@ -48,11 +48,15 @@ pytest
 2. Copy to bundled package data: `cp contracts/*.yaml lib/ambient_contracts/bundled/` (CI enforces sync).
 3. Run `validate-contracts`.
 
+Naming, filename major versions, and format rules: [CONVENTIONS.md](CONVENTIONS.md).
+
 ## Catalog changes
 
 1. Edit YAML under `catalog/`.
 2. Run `ambient-catalog-generate` (or `python scripts/generate_reference_catalog.py`).
 3. Run `ambient-catalog-generate --check` before pushing.
+
+Catalogue keys, segment enum, integer id bands, and aliases: [CONVENTIONS.md](CONVENTIONS.md).
 
 Integrator-facing guides after catalog or contract changes: [governed-data.md](governed-data.md), [catalog-consumption.md](catalog-consumption.md), [crosswalk.md](crosswalk.md).
 

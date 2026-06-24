@@ -1,6 +1,6 @@
 # Catalog consumption (integrators)
 
-Authoring and generator commands live in [catalog/README.md](../catalog/README.md). This page explains **how to read** catalog output in apps, jobs, and agents. For contracts and shared env vars, see [governed-data.md](governed-data.md).
+Authoring and generator commands live in [catalog/README.md](../catalog/README.md). This page explains **how to read** catalog output in apps, jobs, and agents. For contracts and shared env vars, see [governed-data.md](governed-data.md). When **authoring** YAML, use catalogue keys and ids per [CONVENTIONS.md](CONVENTIONS.md).
 
 ## When to use what
 
@@ -29,7 +29,7 @@ Top-level keys in [catalog/manifest.json](../catalog/manifest.json):
 Common fields on each **metric** object:
 
 - **`id`** — numeric metric id (stringified when passed to `catalog_resolve_metric`)
-- **`catalogMetricKey`** — stable string key (e.g. `Allrealestatefpa-current-ratio`)
+- **`catalogMetricKey`** — stable string key from the generator (legacy keys may appear until retired; new YAML uses `industry.segment.slug` per [CONVENTIONS.md](CONVENTIONS.md))
 - **`name`** — display name
 - **`industry`** — vertical label (e.g. `Real Estate`)
 - **`methodology`** — human-readable definition
@@ -49,5 +49,6 @@ Hand-edit only `catalog/runtime/catalogEnrichment.js` when documented in catalog
 ## Related
 
 - [crosswalk.md](crosswalk.md) — metric → contract links
+- [CONVENTIONS.md](CONVENTIONS.md) — catalogue keys and formats
 - [pipeline.md](pipeline.md) — bronze mapping using catalog loaders
 - [INTEGRATING.md](INTEGRATING.md) — pin and env vars in monorepos

@@ -4,7 +4,7 @@ What Ambient Core provides today versus planned deferrals. For consumption guide
 
 ## Shipped (documentation and runtime)
 
-- **Governed data** — [governed-data.md](governed-data.md), [catalog-consumption.md](catalog-consumption.md), [crosswalk.md](crosswalk.md), [contracts/README.md](../contracts/README.md)
+- **Governed data** — [CONVENTIONS.md](CONVENTIONS.md), [governed-data.md](governed-data.md), [catalog-consumption.md](catalog-consumption.md), [crosswalk.md](crosswalk.md), [contracts/README.md](../contracts/README.md)
 - **Pipeline helpers** — [pipeline.md](pipeline.md), `ambient_pipeline` (checkout), examples under `examples/pipeline/`
 - **Agents** — plan-execute loop, core tools, policy hints (`contract_refs` / `catalog_refs`), synthesis templating hardening, builtin arg checks
 - **Crosswalk** — YAML SSOT + `ambient_contracts.crosswalk.load_crosswalk_links()`
@@ -24,6 +24,7 @@ What Ambient Core provides today versus planned deferrals. For consumption guide
 ## Suggested integrator order
 
 1. [INTEGRATING.md](INTEGRATING.md) — pin tag, env vars, CI gates  
-2. [governed-data.md](governed-data.md) — catalog + contracts consumption  
-3. [pipeline.md](pipeline.md) or [AGENTS.md](AGENTS.md) depending on lakehouse vs worker focus  
-4. [agent-security.md](agent-security.md) before production agents  
+2. [CONVENTIONS.md](CONVENTIONS.md) — skim formats and catalogue naming before authoring YAML  
+3. [governed-data.md](governed-data.md) — catalog + contracts consumption  
+4. [pipeline.md](pipeline.md) or [AGENTS.md](AGENTS.md) depending on lakehouse vs worker focus  
+5. [agent-security.md](agent-security.md) before production agents  

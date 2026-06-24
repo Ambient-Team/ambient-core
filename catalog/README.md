@@ -2,6 +2,8 @@
 
 Industry-neutral **reference data** for metrics, data-source templates, and benchmarks. YAML and schemas live here in **ambient-core**; this tree is **not** governed data-product contracts (`contracts/` at repo root).
 
+**Authoring rules** (metric keys `industry.segment.slug`, segment enum, integer id bands, aliases, `calc` blocks): [docs/CONVENTIONS.md](../docs/CONVENTIONS.md).
+
 ## Layout
 
 - **`core/`** — cross-industry YAML (benchmarks, bridge rules, [`industries.yaml`](core/industries.yaml) registry).
@@ -34,7 +36,7 @@ Edit YAML under `industries/` and `core/`; regenerate after changes.
 
 - **Integrators** — use `manifest.json` and Python loaders (`ambient_pipeline.catalog_loader`, `AMBIENT_CATALOG_DIR`); or bundle `runtime/` into your own app.
 - **Monorepo consumers** — import generated JS from a pinned `ambient-core/catalog/runtime/` checkout (single app bridge module is a common pattern).
-- **Docs** — [docs/governed-data.md](../docs/governed-data.md), [docs/catalog-consumption.md](../docs/catalog-consumption.md), [docs/crosswalk.md](../docs/crosswalk.md).
+- **Docs** — [docs/CONVENTIONS.md](../docs/CONVENTIONS.md), [docs/governed-data.md](../docs/governed-data.md), [docs/catalog-consumption.md](../docs/catalog-consumption.md), [docs/crosswalk.md](../docs/crosswalk.md).
 
 ## Terminology
 

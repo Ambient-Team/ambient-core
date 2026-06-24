@@ -2,12 +2,31 @@
 
 This guide answers how **catalog** and **contracts** are used in practice and how to build on top of them without duplicating SSOT in your application repository.
 
+Naming, integer ids, serialization formats, and where databases sit relative to git are defined in [CONVENTIONS.md](CONVENTIONS.md). This page focuses on consumption and the end-to-end data flow.
+
 For catalog YAML authoring, see [catalog/README.md](../catalog/README.md). For contract file layout in this repo, see [contracts/README.md](../contracts/README.md). For agents that read metadata via tools, see [AGENTS.md](AGENTS.md) and [agent-security.md](agent-security.md).
+
+## Plain text SSOT and data flow
+
+Ambient Core owns the **middle** layer: human-authored **YAML** for contracts and catalog semantics (plus Maestro **config**), and machine-generated **JSON** for `catalog/manifest.json`, JSON Schemas, and bronze mapping files. Do not maintain a second editable copy of those trees in a consumer repo — pin a tagged checkout or submodule ([INTEGRATING.md](INTEGRATING.md), [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)).
+
+Operational databases and lakehouse Bronze are **precursors**: data is extracted to plain text (typically **CSV/TSV** or **JSON**) at the upload boundary before governance runs. Silver → Gold and similar **forward** stores are Parquet/Delta or service SQL in deployment; their shapes are still defined by YAML in `contracts/`. Details: [CONVENTIONS.md — Data formats and storage](CONVENTIONS.md#data-formats-and-storage).
+
+```mermaid
+flowchart LR
+  precursor[Precursor_OLTP_or_Bronze]
+  extract[Plain_text_extract_CSV_JSONL]
+  yaml[YAML_contracts_and_catalog_in_git]
+  forward[Forward_Parquet_Delta_or_Maestro_SQL]
+  precursor --> extract --> yaml --> forward
+```
+
+Medallion job steps that implement this path are in [pipeline.md](pipeline.md).
 
 ## Two layers
 
-- **Catalog** — reference KPIs, industries, data-source templates, benchmarks (semantic intent, not physical tables). SSOT: `catalog/` → generated `manifest.json` and `catalog/runtime/*.js`.
-- **Contracts** — governed **data-product** interfaces: schema, lineage, quality, consumption rules. SSOT: `contracts/` (bundled in wheels as `ambient_contracts.bundled`).
+- **Catalog** — reference KPIs, industries, data-source templates, benchmarks (semantic intent, not physical tables). SSOT: authored **YAML** under `catalog/` → generated **`manifest.json`** (JSON) and `catalog/runtime/*.js`.
+- **Contracts** — governed **data-product** interfaces: schema, lineage, quality, consumption rules. SSOT: **YAML** in `contracts/` (bundled in wheels as `ambient_contracts.bundled`).
 
 Catalog metrics do **not** replace contracts. A metric may exist in the catalog long before a Gold product is defined. Optional links are recorded in [crosswalk.yaml](../catalog/crosswalk.yaml) — see [crosswalk.md](crosswalk.md).
 
@@ -122,5 +141,6 @@ Try the minimal Python walkthrough: [examples/pipeline/minimal_governed_data.py]
 - [crosswalk.md](crosswalk.md) — metric → contract links
 - [USAGE.md](USAGE.md) — install recipes
 - [pipeline.md](pipeline.md) — bronze → contract flow with `ambient_pipeline`
+- [CONVENTIONS.md](CONVENTIONS.md) — catalogue keys, contract versions, formats and storage
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — what must change only here
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs full product repo

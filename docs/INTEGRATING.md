@@ -83,6 +83,7 @@ Run your application repository’s CI as well.
 - [ ] CI — `AMBIENT_CORE_ROOT` (and catalog/contracts dirs) set before contract/catalog validation.
 - [ ] Agents — `validate-agent-config` if you fork profiles or tools; worker hardening per [agent-security.md](agent-security.md).
 - [ ] No mirrors — no `contracts/*.yaml` or `catalog/manifest.json` outside the `ambient-core/` checkout (stub README pointers are fine).
+- [ ] Authoring rules — read [CONVENTIONS.md](CONVENTIONS.md) before changing catalog keys, contract major versions, or ingestion formats; do not use binary spreadsheets or PDFs as SSOT in the consumer repo (extract to CSV/JSON/YAML at the boundary).
 - [ ] Catalog JS — import from `ambient-core/catalog/runtime/` (single bridge module in the app is a common pattern).
 - [ ] Notebooks and jobs — resolve contracts under `ambient-core/contracts/`.
 - [ ] Pipeline — shared modules from `ambient-core/lib`; app-only glue stays in the consumer repo.

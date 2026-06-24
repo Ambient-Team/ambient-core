@@ -105,7 +105,7 @@ Org context, session state, human-in-the-loop UI, and **registered** tools for y
 
 ## Governed data tools
 
-Core built-ins read **published** catalog and contract metadata from disk (manifest + YAML). They do not query live Gold tables or run Spark jobs.
+Core built-ins read **published** catalog and contract metadata from disk (YAML source tree and generated **JSON** manifest). They do not query live Gold tables, forward Parquet/Delta stores, or run Spark jobs — use `register_tool()` in your platform for those ([CONVENTIONS.md](CONVENTIONS.md), [governed-data.md](governed-data.md)).
 
 - **`catalog_list_metrics` / `catalog_resolve_metric`** — metric definitions, industries, methodology
 - **`contracts_list` / `contracts_validate`** — governed product inventory and structural validation
@@ -154,6 +154,7 @@ Platform consumer flow: [ambient-systems-platform `docs/ambient-core.md`](https:
 ## Related
 
 - [governed-data.md](governed-data.md) — catalog and contracts for agents, UI, and jobs
+- [CONVENTIONS.md](CONVENTIONS.md) — formats, storage, and catalogue naming
 - [agent-security.md](agent-security.md) — production threat model and checklist
 - [ECOSYSTEM.md](ECOSYSTEM.md) — components and release flow
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — exclusive scope

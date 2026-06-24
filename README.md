@@ -66,7 +66,7 @@ Full map: **[docs/README.md](docs/README.md)**.
 - **Governed data** — [governed-data.md](docs/governed-data.md) (catalog + contracts)
 - **Pipeline helpers** — [pipeline.md](docs/pipeline.md)
 - **Agents** — [AGENTS.md](docs/AGENTS.md)
-- **Conventions** — [CONVENTIONS.md](docs/CONVENTIONS.md) (catalogue/contract naming, the core layer, the calculation spec)
+- **Conventions** — [CONVENTIONS.md](docs/CONVENTIONS.md) (catalogue/contract naming, core layer, calculation spec, data formats and storage)
 - **Positioning** — [POSITIONING.md](docs/POSITIONING.md)
 - **Components & releases** — [ECOSYSTEM.md](docs/ECOSYSTEM.md)
 - **Maestro** — [inference-layer.md](docs/inference-layer.md)

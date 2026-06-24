@@ -20,7 +20,7 @@ This tree is **canonical for everyone**: contracts, reference catalog, shared pi
 
 **Agents** (`lib/ambient_agent/`) — neutral extension point and boundaries for orchestrators; product agents stay downstream. See [AGENTS.md](AGENTS.md) and [agent-security.md](agent-security.md).
 
-Integrator guides for governed data and pipeline helpers: [governed-data.md](governed-data.md), [pipeline.md](pipeline.md).
+Integrator guides for governed data and pipeline helpers: [governed-data.md](governed-data.md), [pipeline.md](pipeline.md), [CONVENTIONS.md](CONVENTIONS.md) (naming, formats, storage).
 
 **Packaging** — `ambient_contracts`, `ambient_cli`, `ambient_agent`, CLIs, tests, and CI.
 
