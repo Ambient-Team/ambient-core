@@ -40,7 +40,7 @@ inference = [
     "sqlalchemy>=2.0,<3",
 ]
 pipeline = [
-    "pyspark>=3.5.0,<4",
+    "pyspark>=3.5.0,<5",
 ]
 postgres = ["psycopg[binary]>=3.2,<4"]
 dev = [
