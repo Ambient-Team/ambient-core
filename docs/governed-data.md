@@ -8,14 +8,14 @@ For catalog YAML authoring, see [catalog/README.md](../catalog/README.md). For c
 
 ## Plain text SSOT and data flow
 
-Ambient Core owns the **middle** layer: human-authored **YAML** for contracts and catalog semantics (plus Maestro **config**), and machine-generated **JSON** for `catalog/manifest.json`, JSON Schemas, and bronze mapping files. Do not maintain a second editable copy of those trees in a consumer repo — pin a tagged checkout or submodule ([INTEGRATING.md](INTEGRATING.md), [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)).
+Ambient Core owns the **middle** layer: human-authored **YAML** for contracts and catalog semantics (plus Maestro **config**), and machine-generated **JSON** (`catalog/manifest.json`, JSON Schemas, bronze mapping payloads) and **JavaScript** (`catalog/runtime/*.js` from `ambient-catalog-generate`). Do not maintain a second editable copy of those trees in a consumer repo — pin a tagged checkout or submodule ([INTEGRATING.md](INTEGRATING.md), [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)).
 
-Operational databases and lakehouse Bronze are **precursors**: data is extracted to plain text (typically **CSV/TSV** or **JSON**) at the upload boundary before governance runs. Silver → Gold and similar **forward** stores are Parquet/Delta or service SQL in deployment; their shapes are still defined by YAML in `contracts/`. Details: [CONVENTIONS.md — Data formats and storage](CONVENTIONS.md#data-formats-and-storage).
+Operational databases and lakehouse Bronze are **precursors**: data is extracted to plain text (typically **CSV/TSV** or **JSON**) at the upload boundary before governance runs. Maestro emits **JSONL** run-complete lines at the service boundary ([CONVENTIONS.md](CONVENTIONS.md#choosing-a-format)). Silver → Gold and similar **forward** stores are Parquet/Delta or service SQL in deployment; their shapes are still defined by YAML in `contracts/`. Details: [CONVENTIONS.md — Data formats and storage](CONVENTIONS.md#data-formats-and-storage).
 
 ```mermaid
 flowchart LR
   precursor[Precursor_OLTP_or_Bronze]
-  extract[Plain_text_extract_CSV_JSONL]
+  extract[Plain_text_extract_CSV_or_JSON]
   yaml[YAML_contracts_and_catalog_in_git]
   forward[Forward_Parquet_Delta_or_Maestro_SQL]
   precursor --> extract --> yaml --> forward

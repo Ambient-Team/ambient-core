@@ -16,8 +16,8 @@ Industry-neutral **reference data** for metrics, data-source templates, and benc
 - **`industries/`** — one YAML file per vertical (`real_estate.yaml`, …). Shape: `industry`, `metrics`, `dataOptions` for **sector-specific** entries only; shared close metrics and common options are not duplicated here.
 - **`schema/`** — JSON Schema for metrics ([`metric-v1.json`](schema/metric-v1.json)) and data options ([`data-option-v1.json`](schema/data-option-v1.json)).
 - **`crosswalk.yaml`** — optional links from catalog metrics to `contracts/` products.
-- **`manifest.json`** — machine-readable export for OLAP/ML (regenerated).
-- **`runtime/`** — generated JS modules (do not hand-edit except `catalogEnrichment.js`).
+- **`manifest.json`** — machine-readable export for OLAP/ML (regenerated JSON; do not hand-edit).
+- **`runtime/`** — generated JavaScript modules (regenerated; do not hand-edit except `catalogEnrichment.js`). Format roles: [docs/CONVENTIONS.md](../docs/CONVENTIONS.md#choosing-a-format).
 
 ## Commands
 

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Validate catalog/ YAML and generate catalog/runtime/*.js + catalog/manifest.json.
 
+Output formats (see docs/CONVENTIONS.md): YAML in, JSON manifest + generated JS out.
+Run ``ambient-catalog-generate --check`` in CI to detect drift.
+
 Industry packs are verticals (Real Estate, Manufacturing, …). Shared core_metrics.yaml
 holds cross-industry corporate finance / close metrics expanded into each pack—not an
 FP&A catalog industry.

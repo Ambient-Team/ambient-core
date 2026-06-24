@@ -10,7 +10,7 @@ Authoring and generator commands live in [catalog/README.md](../catalog/README.m
 - **Front-end industry picker, metric browser, enrichment** — generated JS in `catalog/runtime/*.js` (e.g. `catalogIndustries.js`)
 - **Link a catalog metric to a governed Gold contract** — [catalog/crosswalk.yaml](../catalog/crosswalk.yaml); see [crosswalk.md](crosswalk.md)
 
-The manifest is the **stable export** for machines; industry YAML is the **editable source** for vertical-specific metrics and `dataOptions`. After YAML edits, run `ambient-catalog-generate` so `manifest.json` and `runtime/` stay in sync.
+The manifest is the **stable JSON export** for machines; industry YAML is the **editable source** for vertical-specific metrics and `dataOptions`. Generated **`catalog/runtime/*.js`** mirrors the same semantics for front-end bundlers — see [CONVENTIONS.md](CONVENTIONS.md#choosing-a-format). After YAML edits, run `ambient-catalog-generate` so `manifest.json` and `runtime/` stay in sync.
 
 ## Path resolution
 
@@ -42,7 +42,7 @@ Use `id` for agent resolve and OLAP joins; use `catalogMetricKey` for crosswalk 
 ## JavaScript runtime vs JSON only
 
 - **JSON / Python backends** — `manifest.json` or `load_manifest()` is enough for list/resolve and server-side mapping.
-- **Browser or Node UI** — import generated modules from `catalog/runtime/` so industry resolution and metric keys match the generator (single bridge module in your app re-exporting from the pinned core submodule is a common pattern).
+- **Browser or Node UI** — import generated modules from `catalog/runtime/` so industry resolution and metric keys match the generator (single bridge module in your app re-exporting from the pinned core submodule is a common pattern). Prefer JSON manifest for APIs; prefer generated `.js` when the app already bundles ES modules from core.
 
 Hand-edit only `catalog/runtime/catalogEnrichment.js` when documented in catalog README; other `runtime/` files are generator output.
 

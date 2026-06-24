@@ -134,7 +134,7 @@ pytest tests/test_e2e_ollama.py -m gpu -q
 
 ## Run telemetry and tuning
 
-Each completed or failed run emits one **`maestro_run_complete`** JSON object on stdout (structured logging per [CONVENTIONS.md](CONVENTIONS.md) — forward-cursor operational telemetry, not catalog SSOT). The **run store** (`runs`, `run_events`) is SQL via **MAESTRO_DATABASE_URL** — see [CONVENTIONS.md — forward cursors](CONVENTIONS.md#where-databases-fit-precursors-and-forward-cursors).
+Each completed or failed run emits one **`maestro_run_complete`** JSONL line (one JSON object on stdout and in logger `ambient_inference.maestro`) — forward-cursor operational telemetry, not catalog SSOT; see [CONVENTIONS.md](CONVENTIONS.md#choosing-a-format). The **run store** (`runs`, `run_events`) is SQL via **MAESTRO_DATABASE_URL** — see [CONVENTIONS.md — forward cursors](CONVENTIONS.md#where-databases-fit-precursors-and-forward-cursors).
 
 Adjust [`config/routing_policies.yaml`](../config/routing_policies.yaml) and [`council_profiles.yaml`](../config/council_profiles.yaml) based on failures and latency; add unit tests under [`tests/`](../tests/) when changing router behavior.
 

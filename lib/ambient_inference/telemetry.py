@@ -10,7 +10,7 @@ logger = logging.getLogger("ambient_inference.maestro")
 
 
 def log_run_summary(record: RunRecord) -> None:
-    """Emit one JSON line per run for routing/council tuning (stdout + logger)."""
+    """Emit one JSONL line per run (maestro_run_complete) for routing/council tuning."""
     plan = record.routing_plan
     artifact = record.artifact
     provenance = []

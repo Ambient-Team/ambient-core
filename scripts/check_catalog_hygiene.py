@@ -9,6 +9,8 @@ Enforces two standardization rules:
 2. No UTF-8 mojibake. Catalogue YAML, contract YAML, and docs must be clean UTF-8;
    double-encoded sequences (for example ``Ã—`` for ``×``) are rejected.
 
+Plain-text format roles (YAML SSOT, generated JSON/JS): ``docs/CONVENTIONS.md``.
+
 Run: ``python scripts/check_catalog_hygiene.py``
 """
 

@@ -54,7 +54,7 @@ Naming, filename major versions, and format rules: [CONVENTIONS.md](CONVENTIONS.
 
 1. Edit YAML under `catalog/`.
 2. Run `ambient-catalog-generate` (or `python scripts/generate_reference_catalog.py`).
-3. Run `ambient-catalog-generate --check` before pushing.
+3. Run `ambient-catalog-generate --check` before pushing (manifest JSON and `catalog/runtime/*.js` must match YAML).
 
 Catalogue keys, segment enum, integer id bands, and aliases: [CONVENTIONS.md](CONVENTIONS.md).
 
