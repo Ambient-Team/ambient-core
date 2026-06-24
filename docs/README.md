@@ -19,6 +19,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 - [POSITIONING.md](POSITIONING.md) — how Ambient Core compares to agent/RAG frameworks and data-governance tools.
 - [ECOSYSTEM.md](ECOSYSTEM.md) — components, how they connect, maintainer priorities, release flow.
 - [ARCHITECTURE.md](ARCHITECTURE.md) — Python packages and repository layout.
+- [CONVENTIONS.md](CONVENTIONS.md) — naming/versioning rules, the core layer, and the data-format & storage standard (which format to use when; where databases fit).
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — what must be edited only here (no downstream mirrors).
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs a full application repository.
 - [integrator-roadmap.md](integrator-roadmap.md) — what is shipped vs deferred for integrators.
