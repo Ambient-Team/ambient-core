@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
 
+from ambient_contracts.manifest_models import CatalogManifest, parse_catalog_manifest
 from ambient_contracts.paths import resolve_catalog_root
 
 
@@ -59,7 +59,8 @@ def resolve_manifest_path() -> Path:
         return resolve_catalog_root() / "manifest.json"
 
 
-def load_manifest() -> dict[str, Any]:
+def load_manifest() -> CatalogManifest:
     path = resolve_manifest_path()
     with path.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+        doc = json.load(handle)
+    return parse_catalog_manifest(doc)

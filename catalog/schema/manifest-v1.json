@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambient.systems/catalog/manifest-v1.json",
+  "title": "CatalogManifest",
+  "type": "object",
+  "required": ["version", "industries", "metrics", "dataOptions"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "industries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/industryEntry" }
+    },
+    "financialSectorProfiles": {
+      "type": "object",
+      "additionalProperties": { "type": "object" }
+    },
+    "transportationSectorProfiles": {
+      "type": "object",
+      "additionalProperties": { "type": "object" }
+    },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/manifestMetric" }
+    },
+    "dataOptions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/manifestDataOption" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "industryEntry": {
+      "type": "object",
+      "required": ["value", "label", "pack"],
+      "properties": {
+        "value": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "pack": { "type": "string", "minLength": 1 },
+        "sectorProfileIds": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "requiredSource": {
+      "type": "object",
+      "required": ["catalogOptionKey", "fields"],
+      "properties": {
+        "catalogOptionKey": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manifestMetric": {
+      "type": "object",
+      "required": [
+        "catalogMetricKey",
+        "id",
+        "name",
+        "industry",
+        "methodology",
+        "type",
+        "unit",
+        "requiredSources"
+      ],
+      "properties": {
+        "catalogMetricKey": { "type": "string", "minLength": 1 },
+        "id": { "type": "integer", "minimum": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "industry": { "type": "string" },
+        "methodology": { "type": "string" },
+        "type": { "enum": ["Financial", "Operational"] },
+        "unit": { "type": "string" },
+        "requiredSources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/requiredSource" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manifestDataOption": {
+      "type": "object",
+      "required": [
+        "catalogOptionKey",
+        "id",
+        "name",
+        "industry",
+        "metricIds",
+        "fields"
+      ],
+      "properties": {
+        "catalogOptionKey": { "type": "string", "minLength": 1 },
+        "id": { "type": "integer", "minimum": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "industry": { "type": "string" },
+        "metricIds": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

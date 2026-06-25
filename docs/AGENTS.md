@@ -92,6 +92,10 @@ Modules: `tools.py` (built-ins), `registry.py` (`register_tool`), `executor.py`,
 
 **Phase 2 (not in v0.2.3):** ReAct loops with LLM-parsed tool calls require Maestro `CreateRunRequest` tool-calling support.
 
+### One analysis lens per run
+
+`run_plan_execute` walks a single agent **profile** and core tools for **one lens** per call (the catalog industry implied by the worker’s metric filters and `AgentRunContext`, not validated in core). A holding company with multiple economic engines (real estate, depository banking, consumer lending, and so on) should use **separate tenant orgs** and **per-org runs**—or platform-orchestrated multiple runs—not one “bank” profile to explain moves driven by branch real estate or unrelated books. See [governed-data.md](governed-data.md#analysis-lens-and-multi-org-tenancy).
+
 ## Three layers (do not merge them)
 
 **1. Governed data (contracts + catalog + pipeline)**  

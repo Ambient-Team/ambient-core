@@ -30,6 +30,18 @@ Medallion job steps that implement this path are in [pipeline.md](pipeline.md).
 
 Catalog metrics do **not** replace contracts. A metric may exist in the catalog long before a Gold product is defined. Optional links are recorded in [crosswalk.yaml](../catalog/crosswalk.yaml) — see [crosswalk.md](crosswalk.md).
 
+## Analysis lens and multi-org tenancy
+
+**Catalog industry and segment** describe an **analysis lens** (which KPIs and peer comparisons apply), not the legal entity’s self-classification. **ambient-core** supplies the taxonomy: industry packs in [catalog/core/industries.yaml](../catalog/core/industries.yaml), metrics, sector profiles, and contracts. A **multi-tenant platform** (not in this repo) supplies `org_id`, entitlements, which catalog pack and Gold contract bind to each org, and peer cohort membership.
+
+A single banking group on a paid platform is often modeled as **several tenant organizations**—for example owned branch real estate (Real Estate lens), consumer depository banking (Banking lens), C&I and commercial CRE lending (Commercial Finance lens), residential mortgage lender book (Consumer Finance `residential_mortgage` segment), unsecured cards (Consumer Finance `consumer_lending`), pooled or advised fund books (**Funds** lens), listed REIT or trust **vehicle** reporting (**Trusts** lens), and investment banking or fintech SaaS (Financial Services lens). Each org is compared to peers in **that** lens. Consolidated equity may move because real estate is revalued; that driver should be analyzed with real estate KPIs on the RE org, not by stretching banking metrics across the whole group. Do **not** use a legacy “REITs” industry class or `reits` segment—vehicle FFO and payout belong on **Trusts**; property NOI and vacancy belong on **Real Estate**.
+
+**Risk and payments** are not separate catalog industries or standalone `finance-risk-v1` / payments contracts. Credit, liquidity, market, and payment-volume metrics live on the existing pack and matching `finance-*-v1` Gold product for that economic engine (for example NPL on Commercial Finance, VaR on investment banking, card volume on Consumer Finance). Institution-wide liquidity and stress metrics stay on Banking. Macro peer share and HHI across the market belong in platform benchmarking, not per-org Gold schema.
+
+Upload fields such as `entity_segment` on some catalog data options support **segmented extracts** within a lens; they do not assert that the tenant org “is” a bank or insurer in the legal sense. `AgentRunContext.metadata` (for example `org_id`) is forwarded to Maestro as opaque hints; core does **not** validate tenancy or lens choice—see [agent-security.md](agent-security.md). Platform boundaries: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). Terminology: [catalog/README.md](../catalog/README.md#terminology).
+
+For **product work cycles** on the same governed metrics—**benchmarking**, **assurance**, **investor disclosure**, **covenant monitoring**, **planning and variance**, and **optimization**—core supplies definitions and contracts; the paid platform supplies workflows and UI. See [work-cycles.md](work-cycles.md) and the child lifecycle docs linked from that hub.
+
 ## Path resolution
 
 Python and CLIs resolve paths via [lib/ambient_contracts/paths.py](../lib/ambient_contracts/paths.py):

@@ -1496,6 +1496,160 @@ export const REFERENCE_DATA = {
       "name": "Marketing spend records",
       "template": "Transactional Data Template"
     },
+    "aviation.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1815,
+      "industry": "Aviation",
+      "segment": "core",
+      "metricIds": [
+        1800,
+        1802,
+        1803,
+        1805,
+        1804,
+        1811
+      ]
+    },
+    "aviation.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1816,
+      "industry": "Aviation",
+      "segment": "core",
+      "metricIds": [
+        1805
+      ]
+    },
+    "aviation.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1817,
+      "industry": "Aviation",
+      "segment": "core",
+      "metricIds": [
+        1802,
+        1803,
+        1805
+      ]
+    },
+    "aviation.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1818,
+      "industry": "Aviation",
+      "segment": "core",
+      "metricIds": [
+        1805,
+        1803
+      ]
+    },
+    "aviation.network_carrier.operational_statistics_summary": {
+      "id": 1832,
+      "name": "Airline operational statistics summary",
+      "description": "Period aggregates for ASK, RPM, OTP, and fuel (no flight-level PII).",
+      "industry": "Aviation",
+      "segment": "network_carrier",
+      "format": "Document",
+      "fields": [
+        "period_start_date",
+        "period_end_date",
+        "available_seat_kilometers",
+        "revenue_passenger_kilometers"
+      ],
+      "metricIds": [
+        1820,
+        1821,
+        1822,
+        1823,
+        1824,
+        1830,
+        1831
+      ]
+    },
+    "aviation.airport.traffic_revenue_summary": {
+      "id": 1833,
+      "name": "Airport traffic and revenue summary",
+      "description": "Enplanements and aeronautical versus commercial revenue splits (aggregated).",
+      "industry": "Aviation",
+      "segment": "airport",
+      "format": "Document",
+      "fields": [
+        "period_start_date",
+        "period_end_date",
+        "enplaned_passengers"
+      ],
+      "metricIds": [
+        1825,
+        1826,
+        1827
+      ]
+    },
+    "aviation.travel_distribution.booking_summary": {
+      "id": 1834,
+      "name": "Travel distribution booking summary",
+      "description": "Gross bookings, platform revenue, and session counts (aggregated).",
+      "industry": "Aviation",
+      "segment": "travel_distribution",
+      "format": "Document",
+      "fields": [
+        "period_start_date",
+        "period_end_date"
+      ],
+      "metricIds": [
+        1828,
+        1829
+      ]
+    },
     "manufacturing.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
@@ -2909,6 +3063,1225 @@ export const REFERENCE_DATA = {
         1334
       ],
       "lastUpdated": "2026-06-20 00:00:00"
+    },
+    "banking.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1515,
+      "industry": "Banking",
+      "segment": "core",
+      "metricIds": [
+        1500,
+        1502,
+        1503,
+        1505,
+        1504,
+        1511
+      ]
+    },
+    "banking.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1516,
+      "industry": "Banking",
+      "segment": "core",
+      "metricIds": [
+        1505
+      ]
+    },
+    "banking.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1517,
+      "industry": "Banking",
+      "segment": "core",
+      "metricIds": [
+        1502,
+        1503,
+        1505
+      ]
+    },
+    "banking.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1518,
+      "industry": "Banking",
+      "segment": "core",
+      "metricIds": [
+        1505,
+        1503
+      ]
+    },
+    "banking.depository.regulatory_summary": {
+      "id": 1560,
+      "name": "Aggregated regulatory and financial summary",
+      "description": "Period-level depository bank aggregates (NIM, credit, deposits, capital). Not investment banking.",
+      "industry": "Banking",
+      "segment": "depository",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "entity_segment",
+        "net_interest_income",
+        "average_earning_assets",
+        "non_performing_loans",
+        "total_loans",
+        "total_deposits",
+        "operating_expense",
+        "total_revenue"
+      ],
+      "metricIds": [
+        1530,
+        1531,
+        1532,
+        1533,
+        1534,
+        1554,
+        1556,
+        1557,
+        1558,
+        1559,
+        1567,
+        1568
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "financial_services.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1615,
+      "industry": "Financial Services",
+      "segment": "core",
+      "metricIds": [
+        1600,
+        1602,
+        1603,
+        1605,
+        1604,
+        1611
+      ]
+    },
+    "financial_services.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1616,
+      "industry": "Financial Services",
+      "segment": "core",
+      "metricIds": [
+        1605
+      ]
+    },
+    "financial_services.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1617,
+      "industry": "Financial Services",
+      "segment": "core",
+      "metricIds": [
+        1602,
+        1603,
+        1605
+      ]
+    },
+    "financial_services.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1618,
+      "industry": "Financial Services",
+      "segment": "core",
+      "metricIds": [
+        1605,
+        1603
+      ]
+    },
+    "financial_services.investment_banking.trading_summary": {
+      "id": 1561,
+      "name": "Aggregated investment banking summary",
+      "description": "Trading and advisory fee revenue (markets and IB division; no deposit book).",
+      "industry": "Financial Services",
+      "segment": "investment_banking",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "division",
+        "trading_revenue",
+        "advisory_fee_revenue",
+        "total_revenue"
+      ],
+      "metricIds": [
+        1535,
+        1553
+      ],
+      "lastUpdated": "2026-06-24 00:00:00"
+    },
+    "Allfinancesaas-subscription-billing": {
+      "description": "Subscription and billing records for recurring-revenue analysis.",
+      "fields": [
+        "date",
+        "customer_id",
+        "plan_name",
+        "mrr",
+        "billing_period",
+        "status",
+        "start_date",
+        "end_date"
+      ],
+      "format": "Transactional Data Template",
+      "id": 1570,
+      "industry": "Financial Services",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1580,
+        1581,
+        1582,
+        1583
+      ],
+      "name": "Subscription billing records",
+      "template": "Transactional Data Template"
+    },
+    "Allfinancesaas-crm-pipeline": {
+      "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
+      "fields": [
+        "date",
+        "opportunity_id",
+        "account_name",
+        "stage",
+        "amount",
+        "close_date",
+        "owner",
+        "probability"
+      ],
+      "format": "Software",
+      "id": 1571,
+      "industry": "Financial Services",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1580,
+        1584
+      ],
+      "name": "CRM / Sales pipeline",
+      "template": "Document"
+    },
+    "Allfinancesaas-product-usage": {
+      "description": "Product engagement telemetry for retention and churn analysis.",
+      "fields": [
+        "date",
+        "customer_id",
+        "active_users",
+        "sessions",
+        "feature_adoption",
+        "usage_minutes"
+      ],
+      "format": "Software",
+      "id": 1572,
+      "industry": "Financial Services",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1582,
+        1583
+      ],
+      "name": "Product usage logs",
+      "template": "Document"
+    },
+    "Allfinancesaas-marketing-spend": {
+      "description": "Marketing and sales spend by channel for CAC and efficiency.",
+      "fields": [
+        "date",
+        "channel",
+        "campaign",
+        "spend",
+        "leads",
+        "new_customers",
+        "currency"
+      ],
+      "format": "Transactional Data Template",
+      "id": 1573,
+      "industry": "Financial Services",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1584,
+        1585
+      ],
+      "name": "Marketing spend records",
+      "template": "Transactional Data Template"
+    },
+    "funds.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1918,
+      "industry": "Funds",
+      "segment": "core",
+      "metricIds": [
+        1970,
+        1972,
+        1973,
+        1975,
+        1974,
+        1981
+      ]
+    },
+    "funds.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1919,
+      "industry": "Funds",
+      "segment": "core",
+      "metricIds": [
+        1975
+      ]
+    },
+    "funds.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1920,
+      "industry": "Funds",
+      "segment": "core",
+      "metricIds": [
+        1972,
+        1973,
+        1975
+      ]
+    },
+    "funds.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1921,
+      "industry": "Funds",
+      "segment": "core",
+      "metricIds": [
+        1975,
+        1973
+      ]
+    },
+    "funds.fund.fund_summary": {
+      "id": 1916,
+      "name": "Aggregated fund summary",
+      "description": "AUM, flows, fees, and custody aggregates by book_type. No LP or client identifiers.",
+      "industry": "Funds",
+      "segment": "fund",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "fund_vehicle_id",
+        "book_type",
+        "assets_under_management",
+        "inflows",
+        "outflows",
+        "beginning_aum",
+        "management_fees",
+        "average_aum",
+        "custody_fees",
+        "average_auc",
+        "failed_settlements",
+        "total_settlement_instructions"
+      ],
+      "metricIds": [
+        1900,
+        1901,
+        1902,
+        1911,
+        1912,
+        1913,
+        1914
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "funds.fund.fund_performance_summary": {
+      "id": 1917,
+      "name": "Aggregated fund performance summary",
+      "description": "Closed-end and alternatives performance without LP names.",
+      "industry": "Funds",
+      "segment": "fund",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        "date",
+        "fund_vehicle_id",
+        "fund_irr",
+        "distributions",
+        "nav",
+        "paid_in_capital",
+        "called_capital",
+        "committed_capital",
+        "performance_fees",
+        "total_fund_revenue"
+      ],
+      "metricIds": [
+        1903,
+        1904,
+        1905,
+        1906,
+        1907,
+        1908,
+        1909,
+        1910
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "trusts.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1946,
+      "industry": "Trusts",
+      "segment": "core",
+      "metricIds": [
+        1985,
+        1987,
+        1988,
+        1990,
+        1989,
+        1996
+      ]
+    },
+    "trusts.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1947,
+      "industry": "Trusts",
+      "segment": "core",
+      "metricIds": [
+        1990
+      ]
+    },
+    "trusts.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1948,
+      "industry": "Trusts",
+      "segment": "core",
+      "metricIds": [
+        1987,
+        1988,
+        1990
+      ]
+    },
+    "trusts.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1949,
+      "industry": "Trusts",
+      "segment": "core",
+      "metricIds": [
+        1990,
+        1988
+      ]
+    },
+    "trusts.trust.trust_vehicle_summary": {
+      "id": 1945,
+      "name": "Aggregated trust vehicle summary",
+      "description": "Trust and listed-vehicle reporting (FFO, distributions, NOI). No beneficiary identifiers.",
+      "industry": "Trusts",
+      "segment": "trust",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "trust_vehicle_id",
+        "vehicle_type",
+        "funds_from_operations",
+        "ffo",
+        "distributions",
+        "current_noi",
+        "prior_noi",
+        "trust_assets_under_administration",
+        "trustee_fees",
+        "average_trust_aua"
+      ],
+      "metricIds": [
+        1940,
+        1941,
+        1942,
+        1943,
+        1944
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "insurance.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1621,
+      "industry": "Insurance",
+      "segment": "core",
+      "metricIds": [
+        1620,
+        1622,
+        1623,
+        1625,
+        1624,
+        1631
+      ]
+    },
+    "insurance.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1622,
+      "industry": "Insurance",
+      "segment": "core",
+      "metricIds": [
+        1625
+      ]
+    },
+    "insurance.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1623,
+      "industry": "Insurance",
+      "segment": "core",
+      "metricIds": [
+        1622,
+        1623,
+        1625
+      ]
+    },
+    "insurance.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1624,
+      "industry": "Insurance",
+      "segment": "core",
+      "metricIds": [
+        1625,
+        1623
+      ]
+    },
+    "insurance.property_casualty.loss_summary": {
+      "id": 1565,
+      "name": "Aggregated insurance loss summary",
+      "description": "Earned premiums, losses, and expenses by line_of_business (property_casualty, life, health, reinsurance).",
+      "industry": "Insurance",
+      "segment": "property_casualty",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "line_of_business",
+        "entity_segment",
+        "incurred_losses",
+        "underwriting_expense",
+        "earned_premiums",
+        "premium_growth",
+        "benefits_paid",
+        "catastrophe_losses",
+        "prior_reserve_development"
+      ],
+      "metricIds": [
+        1547,
+        1548,
+        1549,
+        1555,
+        1574,
+        1575
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "consumer_finance.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1715,
+      "industry": "Consumer Finance",
+      "segment": "core",
+      "metricIds": [
+        1700,
+        1702,
+        1703,
+        1705,
+        1704,
+        1711
+      ]
+    },
+    "consumer_finance.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1716,
+      "industry": "Consumer Finance",
+      "segment": "core",
+      "metricIds": [
+        1705
+      ]
+    },
+    "consumer_finance.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1717,
+      "industry": "Consumer Finance",
+      "segment": "core",
+      "metricIds": [
+        1702,
+        1703,
+        1705
+      ]
+    },
+    "consumer_finance.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1718,
+      "industry": "Consumer Finance",
+      "segment": "core",
+      "metricIds": [
+        1705,
+        1703
+      ]
+    },
+    "consumer_finance.consumer_lending.loan_tape_summary": {
+      "id": 1730,
+      "name": "Aggregated consumer loan tape summary",
+      "description": "Period aggregates by product line (cards, auto, personal). No account numbers. line_of_business distinguishes product; not mortgage collateral.",
+      "industry": "Consumer Finance",
+      "segment": "consumer_lending",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "product_line",
+        "interest_income",
+        "average_receivables",
+        "net_charge_offs",
+        "delinquent_balance_30_plus",
+        "total_receivables",
+        "origination_volume_growth",
+        "payment_volume",
+        "bnpl_origination_growth",
+        "embedded_channel_revenue",
+        "total_consumer_finance_revenue",
+        "rtp_payment_volume",
+        "merchant_acquiring_volume"
+      ],
+      "metricIds": [
+        1720,
+        1721,
+        1722,
+        1723,
+        1724,
+        1725,
+        1726,
+        1727,
+        1728
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "consumer_finance.residential_mortgage.residential_mortgage_book_summary": {
+      "id": 1794,
+      "name": "Aggregated residential mortgage book summary",
+      "description": "Lender-view mortgage portfolio aggregates. No borrower or loan identifiers.",
+      "industry": "Consumer Finance",
+      "segment": "residential_mortgage",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "product_line",
+        "interest_income",
+        "average_mortgage_balances",
+        "delinquent_balance_30_plus",
+        "total_mortgage_balances",
+        "weighted_ltv_numerator",
+        "origination_volume"
+      ],
+      "metricIds": [
+        1790,
+        1791,
+        1792,
+        1793
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "commercial_finance.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1755,
+      "industry": "Commercial Finance",
+      "segment": "core",
+      "metricIds": [
+        1740,
+        1742,
+        1743,
+        1745,
+        1744,
+        1751
+      ]
+    },
+    "commercial_finance.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1756,
+      "industry": "Commercial Finance",
+      "segment": "core",
+      "metricIds": [
+        1745
+      ]
+    },
+    "commercial_finance.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1757,
+      "industry": "Commercial Finance",
+      "segment": "core",
+      "metricIds": [
+        1742,
+        1743,
+        1745
+      ]
+    },
+    "commercial_finance.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1758,
+      "industry": "Commercial Finance",
+      "segment": "core",
+      "metricIds": [
+        1745,
+        1743
+      ]
+    },
+    "commercial_finance.commercial_lending.commercial_loan_book_summary": {
+      "id": 1770,
+      "name": "Aggregated commercial loan book summary",
+      "description": "Period aggregates by book segment (C&I, middle market). No borrower identifiers or account numbers.",
+      "industry": "Commercial Finance",
+      "segment": "commercial_lending",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "entity_segment",
+        "outstanding_commercial_loans",
+        "interest_income",
+        "average_commercial_loans",
+        "non_performing_commercial_loans",
+        "total_commercial_loans",
+        "net_charge_offs",
+        "delinquent_balance_30_plus",
+        "origination_volume",
+        "weighted_ltv_numerator",
+        "drawn_commitments",
+        "total_commitments",
+        "sustainable_loan_balance"
+      ],
+      "metricIds": [
+        1760,
+        1761,
+        1762,
+        1763,
+        1764,
+        1765,
+        1771,
+        1772,
+        1773,
+        1774,
+        1777
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "commercial_finance.commercial_lending.commercial_treasury_summary": {
+      "id": 1778,
+      "name": "Aggregated commercial treasury summary",
+      "description": "Treasury services fees, commercial deposits, and B2B payment volume. No client identifiers.",
+      "industry": "Commercial Finance",
+      "segment": "commercial_lending",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "entity_segment",
+        "treasury_fee_revenue",
+        "average_commercial_deposits",
+        "commercial_payment_volume"
+      ],
+      "metricIds": [
+        1775,
+        1776
+      ],
+      "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "retail.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        "date",
+        "statement_type",
+        "period_start_date",
+        "period_end_date"
+      ],
+      "id": 1641,
+      "industry": "Retail",
+      "segment": "core",
+      "metricIds": [
+        1640,
+        1642,
+        1643,
+        1645,
+        1644,
+        1651
+      ]
+    },
+    "retail.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1642,
+      "industry": "Retail",
+      "segment": "core",
+      "metricIds": [
+        1645
+      ]
+    },
+    "retail.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1643,
+      "industry": "Retail",
+      "segment": "core",
+      "metricIds": [
+        1642,
+        1643,
+        1645
+      ]
+    },
+    "retail.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "id": 1644,
+      "industry": "Retail",
+      "segment": "core",
+      "metricIds": [
+        1645,
+        1643
+      ]
+    },
+    "retail.operations.store_sales_summary": {
+      "id": 1680,
+      "name": "Store sales summary export",
+      "description": "Aggregated comp and total sales, traffic, and selling area by store or banner. No payment instrument detail.",
+      "industry": "Retail",
+      "segment": "operations",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "store_id",
+        "current_period_sales",
+        "prior_period_sales",
+        "net_sales",
+        "selling_square_footage",
+        "transactions",
+        "visitors"
+      ],
+      "metricIds": [
+        1670,
+        1673,
+        1674
+      ],
+      "lastUpdated": "2026-06-24 00:00:00"
+    },
+    "retail.financial.inventory_summary": {
+      "id": 1681,
+      "name": "Inventory valuation export",
+      "description": "Period COGS, average inventory, and shrink adjustments (aggregated).",
+      "industry": "Retail",
+      "segment": "financial",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        "date",
+        "banner",
+        "cogs",
+        "average_inventory_value",
+        "shrinkage_value",
+        "sales"
+      ],
+      "metricIds": [
+        1671,
+        1672
+      ],
+      "lastUpdated": "2026-06-24 00:00:00"
     }
   }
 };

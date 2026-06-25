@@ -1,13 +1,3 @@
-# Legacy catalogue key aliases.
-#
-# Maps a retired catalogue key to its current canonical key (see docs/CONVENTIONS.md).
-# Aliases are retained for at least one minor release so downstream consumers keyed on
-# the old identifier keep resolving, then removed. Alias targets must be unique.
-#
-# The bulk entries below cover the rename of the shared FP&A layer to the explicit
-# 'core' layer: All<Industry>fpa-<slug> -> <industry>.core.<slug>, and the shared
-# data-source templates: All<Industry><suffix> -> <industry>.core.<template>.
-
 aliases:
   Allhealthcare5aMhHPzshRFSHX4PjOMH: healthcare.core.hr_records
   AllhealthcareGvoI0Vg2YijGfgoBaqqe: healthcare.core.financial_statements
@@ -122,3 +112,68 @@ aliases:
   HcReadmit913CatalogMetricKey03: healthcare.quality.readmission_rate_30d
   HcStaff914CatalogMetricKey04: healthcare.provider.staffing_ratio
   HcVol911CatalogMetricKey01: healthcare.provider.patient_volume
+  commercial_banking.commercial_lending.commercial_loan_book_summary: commercial_finance.commercial_lending.commercial_loan_book_summary
+  commercial_banking.commercial_lending.commercial_loan_growth: commercial_finance.commercial_lending.commercial_loan_growth
+  commercial_banking.commercial_lending.delinquency_rate_30d: commercial_finance.commercial_lending.delinquency_rate_30d
+  commercial_banking.commercial_lending.net_charge_off_rate: commercial_finance.commercial_lending.net_charge_off_rate
+  commercial_banking.commercial_lending.non_performing_loan_ratio: commercial_finance.commercial_lending.non_performing_loan_ratio
+  commercial_banking.commercial_lending.origination_volume_growth: commercial_finance.commercial_lending.origination_volume_growth
+  commercial_banking.commercial_lending.portfolio_yield: commercial_finance.commercial_lending.portfolio_yield
+  commercial_banking.core.accounting_software: commercial_finance.core.accounting_software
+  commercial_banking.core.burn_rate: commercial_finance.core.burn_rate
+  commercial_banking.core.ccc: commercial_finance.core.ccc
+  commercial_banking.core.current_ratio: commercial_finance.core.current_ratio
+  commercial_banking.core.dpo: commercial_finance.core.dpo
+  commercial_banking.core.dso: commercial_finance.core.dso
+  commercial_banking.core.ebitda_margin: commercial_finance.core.ebitda_margin
+  commercial_banking.core.financial_statements: commercial_finance.core.financial_statements
+  commercial_banking.core.gross_margin: commercial_finance.core.gross_margin
+  commercial_banking.core.headcount: commercial_finance.core.headcount
+  commercial_banking.core.hr_records: commercial_finance.core.hr_records
+  commercial_banking.core.net_margin: commercial_finance.core.net_margin
+  commercial_banking.core.operating_cash_flow: commercial_finance.core.operating_cash_flow
+  commercial_banking.core.operating_margin: commercial_finance.core.operating_margin
+  commercial_banking.core.payroll_records: commercial_finance.core.payroll_records
+  commercial_banking.core.quick_ratio: commercial_finance.core.quick_ratio
+  commercial_banking.core.revenue_growth: commercial_finance.core.revenue_growth
+  commercial_banking.core.runway: commercial_finance.core.runway
+  commercial_banking.core.working_capital: commercial_finance.core.working_capital
+  finance.banking.efficiency_ratio: banking.depository.efficiency_ratio
+  finance.banking.loan_to_deposit_ratio: banking.depository.loan_to_deposit_ratio
+  finance.banking.net_interest_margin: banking.depository.net_interest_margin
+  finance.banking.non_performing_loan_ratio: banking.depository.non_performing_loan_ratio
+  finance.banking.regulatory_summary: banking.depository.regulatory_summary
+  finance.banking.tier1_capital_ratio: banking.depository.tier1_capital_ratio
+  finance.capital_markets.trading_revenue_ratio: financial_services.investment_banking.trading_revenue_ratio
+  finance.insurance.combined_ratio: insurance.property_casualty.combined_ratio
+  finance.insurance.loss_ratio: insurance.property_casualty.loss_ratio
+  finance.insurance.loss_summary: insurance.property_casualty.loss_summary
+  finance.insurance.premium_growth: insurance.property_casualty.premium_growth
+  finance.investment_banking.advisory_fee_ratio: financial_services.investment_banking.advisory_fee_ratio
+  finance.investment_banking.trading_revenue_ratio: financial_services.investment_banking.trading_revenue_ratio
+  finance.investment_banking.trading_summary: financial_services.investment_banking.trading_summary
+  financial_services.private_markets.capital_deployment_rate: funds.fund.capital_deployment_rate
+  financial_services.private_markets.dpi: funds.fund.dpi
+  financial_services.private_markets.fund_irr: funds.fund.fund_irr
+  financial_services.private_markets.fund_leverage_ratio: funds.fund.fund_leverage_ratio
+  financial_services.private_markets.fund_performance: funds.fund.fund_performance_summary
+  financial_services.private_markets.liquidity_gate_frequency: funds.fund.liquidity_gate_frequency
+  financial_services.private_markets.strategy_return_volatility: funds.fund.strategy_return_volatility
+  financial_services.private_markets.tvpi: funds.fund.tvpi
+  financial_services.reits.ffo_payout_ratio: trusts.trust.ffo_payout_ratio
+  financial_services.reits.funds_from_operations: trusts.trust.funds_from_operations
+  financial_services.reits.same_store_noi_growth: trusts.trust.same_store_noi_growth
+  financial_services.reits.supplemental: trusts.trust.trust_vehicle_summary
+  financial_services.wealth_management.advisory_fee_yield: funds.fund.management_fee_yield
+  financial_services.wealth_management.advisory_summary: funds.fund.fund_summary
+  financial_services.wealth_management.assets_under_advice: funds.fund.assets_under_management
+  financial_services.wealth_management.assets_under_custody: funds.fund.assets_under_custody
+  financial_services.wealth_management.commission_yield: funds.fund.performance_fee_share
+  financial_services.wealth_management.custody_fee_yield: funds.fund.custody_fee_yield
+  financial_services.wealth_management.net_flow_rate: funds.fund.net_flow_rate
+  financial_services.wealth_management.safekeeping_asset_growth: funds.fund.safekeeping_asset_growth
+  financial_services.wealth_management.settlement_fail_rate: funds.fund.settlement_fail_rate
+  insurance.insurance.combined_ratio: insurance.property_casualty.combined_ratio
+  insurance.insurance.loss_ratio: insurance.property_casualty.loss_ratio
+  insurance.insurance.loss_summary: insurance.property_casualty.loss_summary
+  insurance.insurance.premium_growth: insurance.property_casualty.premium_growth

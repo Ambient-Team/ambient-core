@@ -31,17 +31,12 @@ def main() -> int:
     print("validate-contracts: ok (all bundled/checkout contracts)")
 
     manifest = load_manifest()
-    metrics = manifest.get("metrics", [])
-    print(f"catalog metrics in manifest: {len(metrics)}")
+    print(f"catalog metrics in manifest: {len(manifest.metrics)}")
 
     sample_id = "8"
-    found = None
-    for metric in metrics:
-        if str(metric.get("id")) == sample_id:
-            found = metric
-            break
+    found = manifest.resolve_metric(sample_id)
     if found:
-        print(f"sample metric id={sample_id}: {found.get('name')!r}")
+        print(f"sample metric id={sample_id}: {found.name!r}")
     else:
         print(f"sample metric id={sample_id}: not found")
 

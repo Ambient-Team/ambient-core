@@ -1,0 +1,68 @@
+product:
+  name: Finance Investment Banking
+  version: 1.1
+  owner: analytics
+  description: "Investment banking and markets Gold product: trading and advisory mix, VaR, counterparty exposure, market making, prime brokerage, and venue volume by division."
+  domain: Finance
+  type: Derived
+
+schema:
+  table: gold.finance_investment_banking
+  primary_key: investment_banking_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: investment_banking_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: division
+      type: string
+      required: true
+    - name: trading_revenue_ratio
+      type: double
+      required: false
+    - name: advisory_fee_ratio
+      type: double
+      required: false
+    - name: value_at_risk_99
+      type: double
+      required: false
+    - name: stressed_var_99
+      type: double
+      required: false
+    - name: counterparty_exposure_ratio
+      type: double
+      required: false
+    - name: market_making_revenue_share
+      type: double
+      required: false
+    - name: prime_brokerage_balance_growth
+      type: double
+      required: false
+    - name: trading_venue_volume_growth
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any client-identifiable field; direct Bronze access"

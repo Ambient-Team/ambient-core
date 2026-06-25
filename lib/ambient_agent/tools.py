@@ -15,12 +15,14 @@ from ambient_contracts.catalog_manifest import load_manifest
 
 def _catalog_list_metrics(args: dict[str, Any], _ctx: AgentRunContext, _trace: list) -> dict[str, Any]:
     manifest = load_manifest()
-    metrics = manifest.get("metrics", [])
     industry = args.get("industry")
     if industry:
-        metrics = [m for m in metrics if m.get("industry") == industry]
+        metrics = manifest.metrics_for_industry(str(industry))
+    else:
+        metrics = list(manifest.metrics)
     limit = int(args.get("limit") or 50)
-    return {"metrics": metrics[:limit], "total": len(metrics)}
+    page = [m.to_tool_dict() for m in metrics[:limit]]
+    return {"metrics": page, "total": len(metrics)}
 
 
 def _catalog_resolve_metric(args: dict[str, Any], _ctx: AgentRunContext, _trace: list) -> dict[str, Any]:
@@ -28,10 +30,9 @@ def _catalog_resolve_metric(args: dict[str, Any], _ctx: AgentRunContext, _trace:
     if not metric_id:
         raise ValueError("metric_id required")
     manifest = load_manifest()
-    want = str(metric_id).strip()
-    for metric in manifest.get("metrics", []):
-        if str(metric.get("id")) == want:
-            return {"metric": metric}
+    found = manifest.resolve_metric(str(metric_id))
+    if found is not None:
+        return {"metric": found.to_tool_dict()}
     return {"metric": None, "metric_id": metric_id}
 
 

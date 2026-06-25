@@ -1,0 +1,147 @@
+# Trust vehicles and trust administration (listed REIT and similar vehicles; property operations stay on Real Estate).
+industry: Trusts
+metrics:
+  trusts.trust.funds_from_operations:
+    id: 1940
+    name: Funds From Operations
+    description: Trust or REIT FFO for the period (vehicle reporting, aggregated).
+    industry: Trusts
+    type: Financial
+    unit: Currency
+    methodology: FFO per NAREIT or trust reporting definition (directly reported aggregate).
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Trust earnings — dividend coverage for vehicle investors.
+    segment: trust
+    slug: funds_from_operations
+    input: true
+  trusts.trust.ffo_payout_ratio:
+    id: 1941
+    name: FFO Payout Ratio
+    description: Distributions paid relative to FFO.
+    industry: Trusts
+    type: Financial
+    unit: '%'
+    methodology: FFO Payout = (Distributions / FFO) × 100
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Distribution safety — retained cash for growth and debt service.
+    segment: trust
+    slug: ffo_payout_ratio
+    calc:
+      expr: distributions / ffo * 100
+      inputs:
+      - distributions
+      - ffo
+  trusts.trust.same_store_noi_growth:
+    id: 1942
+    name: Same-Store NOI Growth
+    description: Year-over-year NOI growth on a same-store basis at the trust vehicle level.
+    industry: Trusts
+    type: Financial
+    unit: '%'
+    methodology: Same-Store NOI Growth = ((Current NOI − Prior NOI) / Prior NOI) × 100
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Vehicle organic performance — excludes acquisition noise (property ops on Real Estate orgs).
+    segment: trust
+    slug: same_store_noi_growth
+    calc:
+      expr: (current_noi - prior_noi) / prior_noi * 100
+      inputs:
+      - current_noi
+      - prior_noi
+  trusts.trust.trust_assets_under_administration:
+    id: 1943
+    name: Trust Assets Under Administration
+    description: Assets administered under trust mandates at period end (aggregated).
+    industry: Trusts
+    type: Financial
+    unit: Currency
+    methodology: Directly measured AUA at reporting date
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Trust administration scale — fiduciary book size.
+    segment: trust
+    slug: trust_assets_under_administration
+    input: true
+  trusts.trust.trustee_fee_yield:
+    id: 1944
+    name: Trustee Fee Yield
+    description: Trustee and administration fees relative to average trust AUA.
+    industry: Trusts
+    type: Financial
+    unit: '%'
+    methodology: Trustee Fee Yield = Trustee Fees / Average Trust AUA × 100
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Trust services revenue — pricing on administered assets.
+    segment: trust
+    slug: trustee_fee_yield
+    calc:
+      expr: trustee_fees / average_trust_aua * 100
+      inputs:
+      - trustee_fees
+      - average_trust_aua
+dataOptions:
+  trusts.trust.trust_vehicle_summary:
+    id: 1945
+    name: Aggregated trust vehicle summary
+    description: Trust and listed-vehicle reporting (FFO, distributions, NOI). No beneficiary identifiers.
+    industry: Trusts
+    segment: trust
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - date
+    - trust_vehicle_id
+    - vehicle_type
+    - funds_from_operations
+    - ffo
+    - distributions
+    - current_noi
+    - prior_noi
+    - trust_assets_under_administration
+    - trustee_fees
+    - average_trust_aua
+    metricIds:
+    - 1940
+    - 1941
+    - 1942
+    - 1943
+    - 1944
+    lastUpdated: '2026-06-25 00:00:00'

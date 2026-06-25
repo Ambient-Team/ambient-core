@@ -7,12 +7,19 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 1. [USAGE.md](USAGE.md) — install, extras, and command recipes.
 2. [INTEGRATING.md](INTEGRATING.md) — pin a tagged release in another repo (pip, submodule, CI env vars).
 3. [governed-data.md](governed-data.md) — catalog vs contracts; how UI, jobs, and agents consume SSOT.
-4. [catalog-consumption.md](catalog-consumption.md) — manifest vs industry YAML; manifest field glossary.
-5. [crosswalk.md](crosswalk.md) — catalog metric → contract links.
-6. [pipeline.md](pipeline.md) — lakehouse governance helpers and test walkthroughs.
-7. [inference-layer.md](inference-layer.md) — run and extend Maestro.
-8. [AGENTS.md](AGENTS.md) — agent profiles, core tools, plan-execute loop (`tool_definitions.yaml`, `agent_profiles.yaml`).
-9. [agent-security.md](agent-security.md) — production threat model for agent workers.
+4. [work-cycles.md](work-cycles.md) — hub: benchmarking, assurance, investor disclosure (core vs platform).
+5. [benchmarking-lifecycle.md](benchmarking-lifecycle.md) — compare vs improve; peer gaps and decomposition.
+6. [assurance-lifecycle.md](assurance-lifecycle.md) — defend metrics; quality, lineage, ops–finance bridge.
+7. [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md) — mandates, fundraising, disclosure packs.
+8. [covenant-lifecycle.md](covenant-lifecycle.md) — lender thresholds, DSCR and capital headroom.
+9. [planning-variance-lifecycle.md](planning-variance-lifecycle.md) — budget and forecast vs actuals.
+10. [optimization-lifecycle.md](optimization-lifecycle.md) — governed opportunities and prioritization.
+11. [catalog-consumption.md](catalog-consumption.md) — manifest vs industry YAML; manifest field glossary.
+12. [crosswalk.md](crosswalk.md) — catalog metric → contract links.
+13. [pipeline.md](pipeline.md) — lakehouse governance helpers and test walkthroughs.
+14. [inference-layer.md](inference-layer.md) — run and extend Maestro.
+15. [AGENTS.md](AGENTS.md) — agent profiles, core tools, plan-execute loop (`tool_definitions.yaml`, `agent_profiles.yaml`).
+16. [agent-security.md](agent-security.md) — production threat model for agent workers.
 
 ## Understand the system
 

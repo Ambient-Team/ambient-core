@@ -1,0 +1,59 @@
+product:
+  name: Finance Trusts
+  version: 1.0
+  owner: analytics
+  description: "Trust and listed REIT vehicle Gold product: FFO, payout, same-store NOI at vehicle level, and trust administration scale (aggregated by trust vehicle)."
+  domain: Trusts
+  type: Derived
+
+schema:
+  table: gold.finance_trusts
+  primary_key: trust_vehicle_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: trust_vehicle_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: vehicle_type
+      type: string
+      required: true
+    - name: funds_from_operations
+      type: double
+      required: false
+    - name: ffo_payout_ratio
+      type: double
+      required: false
+    - name: same_store_noi_growth
+      type: double
+      required: false
+    - name: trust_assets_under_administration
+      type: double
+      required: false
+    - name: trustee_fee_yield
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any beneficiary or investor-identifiable field; direct Bronze access"

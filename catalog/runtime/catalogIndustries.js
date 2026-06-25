@@ -13,7 +13,11 @@ export const CATALOG_INDUSTRY_OPTIONS = [
   },
   {
     "value": "Transportation",
-    "label": "Transportation"
+    "label": "Transportation (multimodal)"
+  },
+  {
+    "value": "Aviation",
+    "label": "Aviation"
   },
   {
     "value": "Manufacturing",
@@ -30,6 +34,38 @@ export const CATALOG_INDUSTRY_OPTIONS = [
   {
     "value": "Life Sciences",
     "label": "Life Sciences"
+  },
+  {
+    "value": "Banking",
+    "label": "Banking (depository)"
+  },
+  {
+    "value": "Financial Services",
+    "label": "Financial Services"
+  },
+  {
+    "value": "Funds",
+    "label": "Funds"
+  },
+  {
+    "value": "Trusts",
+    "label": "Trusts"
+  },
+  {
+    "value": "Insurance",
+    "label": "Insurance"
+  },
+  {
+    "value": "Consumer Finance",
+    "label": "Consumer Finance"
+  },
+  {
+    "value": "Commercial Finance",
+    "label": "Commercial Finance"
+  },
+  {
+    "value": "Retail",
+    "label": "Retail"
   }
 ];
 

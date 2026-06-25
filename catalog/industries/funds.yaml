@@ -1,0 +1,398 @@
+# Pooled, advised, and institutional fund economics (sunsets legacy wealth, asset management, and private markets segments).
+industry: Funds
+metrics:
+  funds.fund.assets_under_management:
+    id: 1900
+    name: Assets Under Management
+    description: Total fund assets at period end across open-end, advised, and institutional books (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Currency
+    methodology: Directly measured AUM at reporting date.
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Scale — base for fees, flows, and custody.
+    segment: fund
+    slug: assets_under_management
+    input: true
+  funds.fund.net_flow_rate:
+    id: 1901
+    name: Net Flow Rate
+    description: Net fund flows as a percentage of beginning AUM.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Net Flow Rate = ((Inflows − Outflows) / Beginning AUM) × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Organic growth — separate from market appreciation.
+    segment: fund
+    slug: net_flow_rate
+    calc:
+      expr: (inflows - outflows) / beginning_aum * 100
+      inputs:
+      - inflows
+      - outflows
+      - beginning_aum
+  funds.fund.management_fee_yield:
+    id: 1902
+    name: Management Fee Yield
+    description: Management and advisory fees relative to average AUM.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Fee Yield = (Management Fees / Average AUM) × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Pricing and mix — revenue per dollar of assets.
+    segment: fund
+    slug: management_fee_yield
+    calc:
+      expr: management_fees / average_aum * 100
+      inputs:
+      - management_fees
+      - average_aum
+  funds.fund.performance_fee_share:
+    id: 1903
+    name: Performance Fee Share
+    description: Carried interest and performance fees as a share of total fund revenue (aggregated).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Performance Fee Share = (Performance Fees / Total Fund Revenue) × 100
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Alternatives economics — GP incentive alignment.
+    segment: fund
+    slug: performance_fee_share
+    calc:
+      expr: performance_fees / total_fund_revenue * 100
+      inputs:
+      - performance_fees
+      - total_fund_revenue
+  funds.fund.fund_irr:
+    id: 1904
+    name: Fund IRR
+    description: Internal rate of return for a fund vintage (aggregated, no LP identifiers).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: IRR from aggregated cash flows and NAV (directly reported).
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Closed-end performance — LP reporting.
+    segment: fund
+    slug: fund_irr
+    input: true
+  funds.fund.tvpi:
+    id: 1905
+    name: TVPI
+    description: Total value to paid-in capital (distributions plus NAV).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: TVPI = (Distributions + NAV) / Paid-In Capital
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Fund multiple — gross performance before fees.
+    segment: fund
+    slug: tvpi
+    calc:
+      expr: (distributions + nav) / paid_in_capital
+      inputs:
+      - distributions
+      - nav
+      - paid_in_capital
+  funds.fund.dpi:
+    id: 1906
+    name: DPI
+    description: Distributions to paid-in capital (cash returned).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: DPI = Distributions / Paid-In Capital
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Realized returns — liquidity to LPs.
+    segment: fund
+    slug: dpi
+    calc:
+      expr: distributions / paid_in_capital
+      inputs:
+      - distributions
+      - paid_in_capital
+  funds.fund.capital_deployment_rate:
+    id: 1907
+    name: Capital Deployment Rate
+    description: Called capital relative to commitments (deployment pace).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Deployment Rate = (Called Capital / Committed Capital) × 100
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Dry powder — pacing of new investments.
+    segment: fund
+    slug: capital_deployment_rate
+    calc:
+      expr: called_capital / committed_capital * 100
+      inputs:
+      - called_capital
+      - committed_capital
+  funds.fund.fund_leverage_ratio:
+    id: 1908
+    name: Fund Leverage Ratio
+    description: Fund-level leverage relative to net asset value (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: Leverage Ratio = Total Fund Debt / NAV
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Fund risk — gearing and margin sensitivity.
+    segment: fund
+    slug: fund_leverage_ratio
+    input: true
+  funds.fund.liquidity_gate_frequency:
+    id: 1909
+    name: Liquidity Gate Frequency
+    description: Share of funds with active liquidity gates or suspensions in period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Gate Frequency = Gated Funds / Total Funds × 100
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Investor liquidity risk — redemptions and fund structures.
+    segment: fund
+    slug: liquidity_gate_frequency
+    input: true
+  funds.fund.strategy_return_volatility:
+    id: 1910
+    name: Strategy Return Volatility
+    description: Annualized volatility of fund or strategy returns (aggregated sleeve).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Standard deviation of periodic returns annualized
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Risk limits — allocator due diligence.
+    segment: fund
+    slug: strategy_return_volatility
+    input: true
+  funds.fund.assets_under_custody:
+    id: 1911
+    name: Assets Under Custody
+    description: Fund and client assets held in custody (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Currency
+    methodology: Directly measured AUC at reporting date
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Securities services scale — safekeeping attach.
+    segment: fund
+    slug: assets_under_custody
+    input: true
+  funds.fund.custody_fee_yield:
+    id: 1912
+    name: Custody Fee Yield
+    description: Custody and safekeeping fees relative to average AUC.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Custody Fee Yield = Custody Fees / Average AUC × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Securities services revenue.
+    segment: fund
+    slug: custody_fee_yield
+    calc:
+      expr: custody_fees / average_auc * 100
+      inputs:
+      - custody_fees
+      - average_auc
+  funds.fund.settlement_fail_rate:
+    id: 1913
+    name: Settlement Fail Rate
+    description: Failed settlements as a share of total settlement instructions.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Fail Rate = Failed Settlements / Total Instructions × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Operational risk — capital and client service.
+    segment: fund
+    slug: settlement_fail_rate
+    calc:
+      expr: failed_settlements / total_settlement_instructions * 100
+      inputs:
+      - failed_settlements
+      - total_settlement_instructions
+  funds.fund.safekeeping_asset_growth:
+    id: 1914
+    name: Safekeeping Asset Growth
+    description: Year-over-year growth in safekeeping and custody assets.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Growth = ((Current AUC − Prior) / Prior) × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Wallet growth — custody-led relationships.
+    segment: fund
+    slug: safekeeping_asset_growth
+    input: true
+dataOptions:
+  funds.fund.fund_summary:
+    id: 1916
+    name: Aggregated fund summary
+    description: AUM, flows, fees, and custody aggregates by book_type. No LP or client identifiers.
+    industry: Funds
+    segment: fund
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - date
+    - fund_vehicle_id
+    - book_type
+    - assets_under_management
+    - inflows
+    - outflows
+    - beginning_aum
+    - management_fees
+    - average_aum
+    - custody_fees
+    - average_auc
+    - failed_settlements
+    - total_settlement_instructions
+    metricIds:
+    - 1900
+    - 1901
+    - 1902
+    - 1911
+    - 1912
+    - 1913
+    - 1914
+    lastUpdated: '2026-06-25 00:00:00'
+  funds.fund.fund_performance_summary:
+    id: 1917
+    name: Aggregated fund performance summary
+    description: Closed-end and alternatives performance without LP names.
+    industry: Funds
+    segment: fund
+    format: Document
+    template: Document
+    fields:
+    - date
+    - fund_vehicle_id
+    - fund_irr
+    - distributions
+    - nav
+    - paid_in_capital
+    - called_capital
+    - committed_capital
+    - performance_fees
+    - total_fund_revenue
+    metricIds:
+    - 1903
+    - 1904
+    - 1905
+    - 1906
+    - 1907
+    - 1908
+    - 1909
+    - 1910
+    lastUpdated: '2026-06-25 00:00:00'
