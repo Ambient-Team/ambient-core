@@ -335,6 +335,309 @@ metrics:
     segment: fund
     slug: safekeeping_asset_growth
     input: true
+  funds.fund.rvpi:
+    id: 1922
+    name: RVPI
+    description: Residual value to paid-in capital (unrealized NAV relative to contributed capital).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: RVPI = NAV / Paid-In Capital
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Unrealized multiple — complement to DPI and TVPI.
+    segment: fund
+    slug: rvpi
+    calc:
+      expr: nav / paid_in_capital
+      inputs:
+      - nav
+      - paid_in_capital
+  funds.operations.investment_close_rate:
+    id: 1923
+    name: Investment Close Rate
+    description: Share of qualified opportunities that closed as new investments in the period (aggregated).
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Close Rate = (Closed Investments / Qualified Opportunities) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Sourcing efficiency — pipeline conversion to deployment.
+    segment: operations
+    slug: investment_close_rate
+    benchmarkKey: investment_close_rate
+    calc:
+      expr: closed_investments / qualified_opportunities * 100
+      inputs:
+      - closed_investments
+      - qualified_opportunities
+  funds.operations.average_investment_size:
+    id: 1924
+    name: Average Investment Size
+    description: Average capital deployed per new investment in the period (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Currency
+    methodology: Average Size = Deployed Capital / New Investments
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Check-size mix — pacing and stage strategy.
+    segment: operations
+    slug: average_investment_size
+    calc:
+      expr: deployed_capital / new_investments
+      inputs:
+      - deployed_capital
+      - new_investments
+  funds.operations.new_investments_count:
+    id: 1925
+    name: New Investments Count
+    description: Count of new investments closed in the period (aggregated).
+    industry: Funds
+    type: Operational
+    unit: Count
+    methodology: Directly measured count at reporting date.
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Deployment volume — deal velocity.
+    segment: operations
+    slug: new_investments_count
+    input: true
+  funds.operations.qualified_opportunities_count:
+    id: 1926
+    name: Qualified Opportunities Count
+    description: Count of opportunities that passed initial screening in the period (aggregated).
+    industry: Funds
+    type: Operational
+    unit: Count
+    methodology: Directly measured count at reporting date.
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Pipeline depth — sourcing funnel numerator/denominator.
+    segment: operations
+    slug: qualified_opportunities_count
+    input: true
+  funds.operations.active_portfolio_company_count:
+    id: 1927
+    name: Active Portfolio Company Count
+    description: Count of active portfolio companies at period end (aggregated).
+    industry: Funds
+    type: Operational
+    unit: Count
+    methodology: Directly measured count at reporting date.
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Portfolio scale — support and monitoring load.
+    segment: operations
+    slug: active_portfolio_company_count
+    input: true
+  funds.operations.follow_on_investment_rate:
+    id: 1928
+    name: Follow-On Investment Rate
+    description: Share of eligible portfolio companies that received follow-on capital in the period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Follow-On Rate = (Follow-On Investments / Eligible Portfolio Companies) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Portfolio support — reserve deployment and winners.
+    segment: operations
+    slug: follow_on_investment_rate
+    calc:
+      expr: follow_on_investments / eligible_portfolio_companies * 100
+      inputs:
+      - follow_on_investments
+      - eligible_portfolio_companies
+  funds.operations.portfolio_write_down_rate:
+    id: 1929
+    name: Portfolio Write-Down Rate
+    description: Impaired or written-down carrying value as a share of portfolio cost basis.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Write-Down Rate = (Impaired Carrying Value / Portfolio Cost Basis) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Portfolio quality — loss recognition and reserves.
+    segment: operations
+    slug: portfolio_write_down_rate
+    calc:
+      expr: impaired_carrying_value / portfolio_cost_basis * 100
+      inputs:
+      - impaired_carrying_value
+      - portfolio_cost_basis
+  funds.operations.co_investment_participation_rate:
+    id: 1930
+    name: Co-Investment Participation Rate
+    description: Share of closed deals that included external co-investors or syndicate participants.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Co-Investment Rate = (Deals with Co-Investors / Total Closed Deals) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Syndication — capital efficiency and LP alignment.
+    segment: operations
+    slug: co_investment_participation_rate
+    calc:
+      expr: deals_with_co_investors / total_closed_deals * 100
+      inputs:
+      - deals_with_co_investors
+      - total_closed_deals
+  funds.operations.fundraising_commitment_progress:
+    id: 1931
+    name: Fundraising Commitment Progress
+    description: Committed capital relative to fundraising target for a vintage (aggregated).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Progress = (Committed Capital / Fundraising Target) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Fund formation — LP commitment pacing.
+    segment: operations
+    slug: fundraising_commitment_progress
+    calc:
+      expr: committed_capital / fundraising_target * 100
+      inputs:
+      - committed_capital
+      - fundraising_target
+  funds.operations.management_fee_operating_coverage:
+    id: 1932
+    name: Management Fee Operating Coverage
+    description: Management fees relative to operating expenses at the manager level (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: Coverage = Management Fees / Operating Expenses
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: GP sustainability — fee revenue vs run rate.
+    segment: operations
+    slug: management_fee_operating_coverage
+    calc:
+      expr: management_fees / operating_expenses
+      inputs:
+      - management_fees
+      - operating_expenses
+  funds.operations.program_investment_conversion_rate:
+    id: 1933
+    name: Program Investment Conversion Rate
+    description: Share of program or cohort participants that became portfolio investments in the period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Conversion Rate = (Program Investments / Program Participants) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Accelerator and cohort funnel — program to deployment.
+    segment: operations
+    slug: program_investment_conversion_rate
+    benchmarkKey: program_investment_conversion_rate
+    calc:
+      expr: program_investments / program_participants * 100
+      inputs:
+      - program_investments
+      - program_participants
+  funds.operations.inbound_attributed_pipeline_share:
+    id: 1934
+    name: Inbound Attributed Pipeline Share
+    description: Share of qualified opportunities attributed to inbound channels in the period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Inbound Share = (Inbound Qualified Opportunities / Total Qualified Opportunities) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Sourcing mix — content, events, and referral leverage.
+    segment: operations
+    slug: inbound_attributed_pipeline_share
+    benchmarkKey: inbound_attributed_pipeline_share
+    calc:
+      expr: inbound_qualified_opportunities / total_qualified_opportunities * 100
+      inputs:
+      - inbound_qualified_opportunities
+      - total_qualified_opportunities
 dataOptions:
   funds.fund.fund_summary:
     id: 1916
@@ -395,4 +698,49 @@ dataOptions:
     - 1908
     - 1909
     - 1910
+    - 1922
     lastUpdated: '2026-06-25 00:00:00'
+  funds.operations.investment_program_summary:
+    id: 1936
+    name: Aggregated investment program summary
+    description: Private-capital GP sourcing, deployment, portfolio, and funnel aggregates. No LP, founder, or deal identifiers.
+    industry: Funds
+    segment: operations
+    format: Document
+    template: Document
+    fields:
+    - date
+    - reporting_entity_id
+    - closed_investments
+    - qualified_opportunities
+    - deployed_capital
+    - new_investments
+    - follow_on_investments
+    - eligible_portfolio_companies
+    - impaired_carrying_value
+    - portfolio_cost_basis
+    - deals_with_co_investors
+    - total_closed_deals
+    - committed_capital
+    - fundraising_target
+    - management_fees
+    - operating_expenses
+    - program_investments
+    - program_participants
+    - inbound_qualified_opportunities
+    - total_qualified_opportunities
+    - active_portfolio_company_count
+    metricIds:
+    - 1923
+    - 1924
+    - 1925
+    - 1926
+    - 1927
+    - 1928
+    - 1929
+    - 1930
+    - 1931
+    - 1932
+    - 1933
+    - 1934
+    lastUpdated: '2026-06-28 00:00:00'

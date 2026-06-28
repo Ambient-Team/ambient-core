@@ -77,7 +77,8 @@
       "label": "Funds",
       "pack": "funds.yaml",
       "sectorProfileIds": [
-        "fund"
+        "fund",
+        "private_capital_gp"
       ]
     },
     {
@@ -183,6 +184,29 @@
         "funds.fund.assets_under_management",
         "funds.fund.management_fee_yield",
         "funds.fund.tvpi"
+      ]
+    },
+    "private_capital_gp": {
+      "primaryRevenueDriver": "Management fees, performance fees, and carry on deployed capital",
+      "globalAssetConcentration": "moderate",
+      "coreRiskProfile": "Illiquid portfolio risk and power-law return dispersion",
+      "regulatoryIntensity": "moderate_high",
+      "capitalModel": "capital_light",
+      "cyclicality": "mixed",
+      "regulatoryFrameworks": [
+        "Private fund rules",
+        "Fiduciary duty"
+      ],
+      "catalogIndustry": "Funds",
+      "catalogSegments": [
+        "fund",
+        "operations"
+      ],
+      "representativeMetricKeys": [
+        "funds.operations.investment_close_rate",
+        "funds.fund.capital_deployment_rate",
+        "funds.fund.tvpi",
+        "funds.fund.rvpi"
       ]
     },
     "trust": {
@@ -9371,6 +9395,489 @@
       ]
     },
     {
+      "catalogMetricKey": "funds.fund.rvpi",
+      "id": 1922,
+      "name": "RVPI",
+      "industry": "Funds",
+      "methodology": "RVPI = NAV / Paid-In Capital",
+      "type": "Financial",
+      "unit": "Ratio",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.fund.fund_performance_summary",
+          "name": "Aggregated fund performance summary",
+          "fields": [
+            "date",
+            "fund_vehicle_id",
+            "fund_irr",
+            "distributions",
+            "nav",
+            "paid_in_capital",
+            "called_capital",
+            "committed_capital",
+            "performance_fees",
+            "total_fund_revenue"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.investment_close_rate",
+      "id": 1923,
+      "name": "Investment Close Rate",
+      "industry": "Funds",
+      "methodology": "Close Rate = (Closed Investments / Qualified Opportunities) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.average_investment_size",
+      "id": 1924,
+      "name": "Average Investment Size",
+      "industry": "Funds",
+      "methodology": "Average Size = Deployed Capital / New Investments",
+      "type": "Financial",
+      "unit": "Currency",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.new_investments_count",
+      "id": 1925,
+      "name": "New Investments Count",
+      "industry": "Funds",
+      "methodology": "Directly measured count at reporting date.",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.qualified_opportunities_count",
+      "id": 1926,
+      "name": "Qualified Opportunities Count",
+      "industry": "Funds",
+      "methodology": "Directly measured count at reporting date.",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.active_portfolio_company_count",
+      "id": 1927,
+      "name": "Active Portfolio Company Count",
+      "industry": "Funds",
+      "methodology": "Directly measured count at reporting date.",
+      "type": "Operational",
+      "unit": "Count",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.follow_on_investment_rate",
+      "id": 1928,
+      "name": "Follow-On Investment Rate",
+      "industry": "Funds",
+      "methodology": "Follow-On Rate = (Follow-On Investments / Eligible Portfolio Companies) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.portfolio_write_down_rate",
+      "id": 1929,
+      "name": "Portfolio Write-Down Rate",
+      "industry": "Funds",
+      "methodology": "Write-Down Rate = (Impaired Carrying Value / Portfolio Cost Basis) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.co_investment_participation_rate",
+      "id": 1930,
+      "name": "Co-Investment Participation Rate",
+      "industry": "Funds",
+      "methodology": "Co-Investment Rate = (Deals with Co-Investors / Total Closed Deals) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.fundraising_commitment_progress",
+      "id": 1931,
+      "name": "Fundraising Commitment Progress",
+      "industry": "Funds",
+      "methodology": "Progress = (Committed Capital / Fundraising Target) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.management_fee_operating_coverage",
+      "id": 1932,
+      "name": "Management Fee Operating Coverage",
+      "industry": "Funds",
+      "methodology": "Coverage = Management Fees / Operating Expenses",
+      "type": "Financial",
+      "unit": "Ratio",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.program_investment_conversion_rate",
+      "id": 1933,
+      "name": "Program Investment Conversion Rate",
+      "industry": "Funds",
+      "methodology": "Conversion Rate = (Program Investments / Program Participants) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogMetricKey": "funds.operations.inbound_attributed_pipeline_share",
+      "id": 1934,
+      "name": "Inbound Attributed Pipeline Share",
+      "industry": "Funds",
+      "methodology": "Inbound Share = (Inbound Qualified Opportunities / Total Qualified Opportunities) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "funds.operations.investment_program_summary",
+          "name": "Aggregated investment program summary",
+          "fields": [
+            "date",
+            "reporting_entity_id",
+            "closed_investments",
+            "qualified_opportunities",
+            "deployed_capital",
+            "new_investments",
+            "follow_on_investments",
+            "eligible_portfolio_companies",
+            "impaired_carrying_value",
+            "portfolio_cost_basis",
+            "deals_with_co_investors",
+            "total_closed_deals",
+            "committed_capital",
+            "fundraising_target",
+            "management_fees",
+            "operating_expenses",
+            "program_investments",
+            "program_participants",
+            "inbound_qualified_opportunities",
+            "total_qualified_opportunities",
+            "active_portfolio_company_count"
+          ]
+        }
+      ]
+    },
+    {
       "catalogMetricKey": "trusts.core.current_ratio",
       "id": 1985,
       "name": "Current Ratio",
@@ -14411,7 +14918,8 @@
         1907,
         1908,
         1909,
-        1910
+        1910,
+        1922
       ],
       "fields": [
         "date",
@@ -14424,6 +14932,49 @@
         "committed_capital",
         "performance_fees",
         "total_fund_revenue"
+      ]
+    },
+    {
+      "catalogOptionKey": "funds.operations.investment_program_summary",
+      "id": 1936,
+      "name": "Aggregated investment program summary",
+      "industry": "Funds",
+      "metricIds": [
+        1923,
+        1924,
+        1925,
+        1926,
+        1927,
+        1928,
+        1929,
+        1930,
+        1931,
+        1932,
+        1933,
+        1934
+      ],
+      "fields": [
+        "date",
+        "reporting_entity_id",
+        "closed_investments",
+        "qualified_opportunities",
+        "deployed_capital",
+        "new_investments",
+        "follow_on_investments",
+        "eligible_portfolio_companies",
+        "impaired_carrying_value",
+        "portfolio_cost_basis",
+        "deals_with_co_investors",
+        "total_closed_deals",
+        "committed_capital",
+        "fundraising_target",
+        "management_fees",
+        "operating_expenses",
+        "program_investments",
+        "program_participants",
+        "inbound_qualified_opportunities",
+        "total_qualified_opportunities",
+        "active_portfolio_company_count"
       ]
     },
     {

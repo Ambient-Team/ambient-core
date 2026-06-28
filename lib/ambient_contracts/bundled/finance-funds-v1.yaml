@@ -1,6 +1,6 @@
 product:
   name: Finance Funds
-  version: 1.0
+  version: 1.1
   owner: analytics
   description: "Pooled and institutional fund Gold product: AUM, flows, fee yields, closed-end performance, fund risk, and custody (aggregated by fund vehicle)."
   domain: Funds
@@ -42,6 +42,9 @@ schema:
       type: double
       required: false
     - name: dpi
+      type: double
+      required: false
+    - name: rvpi
       type: double
       required: false
     - name: capital_deployment_rate

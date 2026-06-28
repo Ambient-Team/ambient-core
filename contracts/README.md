@@ -29,6 +29,7 @@ Gold **contracts** under `finance-*-v1.yaml` map to metrics in several **catalog
 - **`finance-consumer-finance-v1.yaml`** — Consumer lending, BNPL, embedded finance, payments, and residential mortgage lender book by product_line
 - **`finance-investment-banking-v1.yaml`** — Investment banking and markets (trading and advisory mix, VaR, counterparty, prime brokerage, venue volume)
 - **`finance-funds-v1.yaml`** — Pooled and institutional funds (AUM, flows, fees, closed-end performance, custody)
+- **`finance-private-capital-ops-v1.yaml`** — Private-capital GP operations (sourcing, deployment, portfolio, co-investment, fundraising, program funnel)
 - **`finance-trusts-v1.yaml`** — Trust and listed REIT vehicles (FFO, payout, vehicle same-store NOI, trustee administration)
 - **`finance-insurance-v1.yaml`** — P&C and life underwriting plus reserve development and catastrophe loss ratio
 

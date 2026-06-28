@@ -70,6 +70,29 @@ export const FINANCIAL_SECTOR_PROFILES = {
       "funds.fund.tvpi"
     ]
   },
+  "private_capital_gp": {
+    "primaryRevenueDriver": "Management fees, performance fees, and carry on deployed capital",
+    "globalAssetConcentration": "moderate",
+    "coreRiskProfile": "Illiquid portfolio risk and power-law return dispersion",
+    "regulatoryIntensity": "moderate_high",
+    "capitalModel": "capital_light",
+    "cyclicality": "mixed",
+    "regulatoryFrameworks": [
+      "Private fund rules",
+      "Fiduciary duty"
+    ],
+    "catalogIndustry": "Funds",
+    "catalogSegments": [
+      "fund",
+      "operations"
+    ],
+    "representativeMetricKeys": [
+      "funds.operations.investment_close_rate",
+      "funds.fund.capital_deployment_rate",
+      "funds.fund.tvpi",
+      "funds.fund.rvpi"
+    ]
+  },
   "trust": {
     "primaryRevenueDriver": "Trust vehicle distributions and trustee administration fees",
     "globalAssetConcentration": "moderate",

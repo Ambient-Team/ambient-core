@@ -3564,9 +3564,57 @@ export const REFERENCE_DATA = {
         1907,
         1908,
         1909,
-        1910
+        1910,
+        1922
       ],
       "lastUpdated": "2026-06-25 00:00:00"
+    },
+    "funds.operations.investment_program_summary": {
+      "id": 1936,
+      "name": "Aggregated investment program summary",
+      "description": "Private-capital GP sourcing, deployment, portfolio, and funnel aggregates. No LP, founder, or deal identifiers.",
+      "industry": "Funds",
+      "segment": "operations",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        "date",
+        "reporting_entity_id",
+        "closed_investments",
+        "qualified_opportunities",
+        "deployed_capital",
+        "new_investments",
+        "follow_on_investments",
+        "eligible_portfolio_companies",
+        "impaired_carrying_value",
+        "portfolio_cost_basis",
+        "deals_with_co_investors",
+        "total_closed_deals",
+        "committed_capital",
+        "fundraising_target",
+        "management_fees",
+        "operating_expenses",
+        "program_investments",
+        "program_participants",
+        "inbound_qualified_opportunities",
+        "total_qualified_opportunities",
+        "active_portfolio_company_count"
+      ],
+      "metricIds": [
+        1923,
+        1924,
+        1925,
+        1926,
+        1927,
+        1928,
+        1929,
+        1930,
+        1931,
+        1932,
+        1933,
+        1934
+      ],
+      "lastUpdated": "2026-06-28 00:00:00"
     },
     "trusts.core.financial_statements": {
       "name": "Financial statements",

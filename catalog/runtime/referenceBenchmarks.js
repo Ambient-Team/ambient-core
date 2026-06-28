@@ -165,6 +165,39 @@ export const BENCHMARKS = {
       "All"
     ]
   },
+  "investment_close_rate": {
+    "label": "Investment Close Rate",
+    "unit": "%",
+    "healthyLow": 2,
+    "healthyHigh": 15,
+    "higherIsBetter": true,
+    "source": "Illustrative private-capital sourcing guidance",
+    "industries": [
+      "Funds"
+    ]
+  },
+  "program_investment_conversion_rate": {
+    "label": "Program Investment Conversion Rate",
+    "unit": "%",
+    "healthyLow": 1,
+    "healthyHigh": 10,
+    "higherIsBetter": true,
+    "source": "Illustrative accelerator and cohort funnel guidance",
+    "industries": [
+      "Funds"
+    ]
+  },
+  "inbound_attributed_pipeline_share": {
+    "label": "Inbound Attributed Pipeline Share",
+    "unit": "%",
+    "healthyLow": 20,
+    "healthyHigh": 60,
+    "higherIsBetter": true,
+    "source": "Illustrative inbound sourcing mix guidance",
+    "industries": [
+      "Funds"
+    ]
+  },
   "mrr": {
     "label": "Monthly Recurring Revenue",
     "unit": "Currency/month",

@@ -37,6 +37,7 @@ packs:
   displayLabel: Funds
   sectorProfileIds:
   - fund
+  - private_capital_gp
 - file: trusts.yaml
   displayLabel: Trusts
   sectorProfileIds:

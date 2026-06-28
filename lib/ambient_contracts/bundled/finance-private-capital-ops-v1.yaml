@@ -1,17 +1,17 @@
 product:
-  name: Finance Funds
-  version: 1.1
+  name: Finance Private Capital Ops
+  version: 1.0
   owner: analytics
-  description: "Pooled and institutional fund Gold product: AUM, flows, fee yields, closed-end performance, fund risk, and custody (aggregated by fund vehicle)."
+  description: "Private-capital GP Gold product: sourcing, deployment, portfolio, co-investment, fundraising progress, manager economics, and program funnel (aggregated by reporting entity)."
   domain: Funds
   type: Derived
 
 schema:
-  table: gold.finance_funds
-  primary_key: fund_vehicle_id
+  table: gold.finance_private_capital_ops
+  primary_key: reporting_entity_id
   partition_key: _bronze_org_id
   columns:
-    - name: fund_vehicle_id
+    - name: reporting_entity_id
       type: string
       required: true
     - name: _bronze_org_id
@@ -20,55 +20,40 @@ schema:
     - name: period
       type: date
       required: true
-    - name: book_type
-      type: string
-      required: true
-    - name: assets_under_management
+    - name: investment_close_rate
       type: double
       required: false
-    - name: net_flow_rate
+    - name: average_investment_size
       type: double
       required: false
-    - name: management_fee_yield
+    - name: new_investments_count
       type: double
       required: false
-    - name: performance_fee_share
+    - name: qualified_opportunities_count
       type: double
       required: false
-    - name: fund_irr
+    - name: active_portfolio_company_count
       type: double
       required: false
-    - name: tvpi
+    - name: follow_on_investment_rate
       type: double
       required: false
-    - name: dpi
+    - name: portfolio_write_down_rate
       type: double
       required: false
-    - name: rvpi
+    - name: co_investment_participation_rate
       type: double
       required: false
-    - name: capital_deployment_rate
+    - name: fundraising_commitment_progress
       type: double
       required: false
-    - name: fund_leverage_ratio
+    - name: management_fee_operating_coverage
       type: double
       required: false
-    - name: liquidity_gate_frequency
+    - name: program_investment_conversion_rate
       type: double
       required: false
-    - name: strategy_return_volatility
-      type: double
-      required: false
-    - name: assets_under_custody
-      type: double
-      required: false
-    - name: custody_fee_yield
-      type: double
-      required: false
-    - name: settlement_fail_rate
-      type: double
-      required: false
-    - name: safekeeping_asset_growth
+    - name: inbound_attributed_pipeline_share
       type: double
       required: false
     - name: _gold_run_id
@@ -89,4 +74,4 @@ governance:
 consumption_contract:
   allowed_paths:
     - "Internal: Gold KPI calculators"
-  forbidden: "Any LP, client, or investor-identifiable field; direct Bronze access"
+  forbidden: "Any LP, founder, deal, or investor-identifiable field; direct Bronze access"

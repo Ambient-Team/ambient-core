@@ -287,6 +287,58 @@ links:
   metricId: 1914
   contractFile: finance-funds-v1.yaml
   contractProductId: FINANCE_FUNDS
+- catalogMetricKey: funds.fund.rvpi
+  metricId: 1922
+  contractFile: finance-funds-v1.yaml
+  contractProductId: FINANCE_FUNDS
+- catalogMetricKey: funds.operations.investment_close_rate
+  metricId: 1923
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.average_investment_size
+  metricId: 1924
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.new_investments_count
+  metricId: 1925
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.qualified_opportunities_count
+  metricId: 1926
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.active_portfolio_company_count
+  metricId: 1927
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.follow_on_investment_rate
+  metricId: 1928
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.portfolio_write_down_rate
+  metricId: 1929
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.co_investment_participation_rate
+  metricId: 1930
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.fundraising_commitment_progress
+  metricId: 1931
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.management_fee_operating_coverage
+  metricId: 1932
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.program_investment_conversion_rate
+  metricId: 1933
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
+- catalogMetricKey: funds.operations.inbound_attributed_pipeline_share
+  metricId: 1934
+  contractFile: finance-private-capital-ops-v1.yaml
+  contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
 - catalogMetricKey: trusts.trust.funds_from_operations
   metricId: 1940
   contractFile: finance-trusts-v1.yaml
