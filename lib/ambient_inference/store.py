@@ -7,7 +7,14 @@ from typing import Any
 from sqlalchemy import DateTime, String, Text, create_engine, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
-from ambient_inference.schemas import RunArtifact, RunEvent, RunRecord, RunStatus, RoutingPlan
+from ambient_inference.schemas import (
+    RunArtifact,
+    RunEvent,
+    RunRecord,
+    RunStatus,
+    RoutingPlan,
+    utcnow,
+)
 
 
 class Base(DeclarativeBase):
@@ -82,7 +89,7 @@ class RunStore:
                 row.artifact_json = artifact.model_dump_json()
             if error is not None:
                 row.error = error
-            row.updated_at = datetime.utcnow()
+            row.updated_at = utcnow()
             session.commit()
 
     def get_run(self, run_id: str) -> RunRecord | None:
@@ -99,7 +106,7 @@ class RunStore:
                     run_id=event.run_id,
                     event_type=event.type.value,
                     payload_json=json.dumps(event.payload),
-                    created_at=datetime.utcnow(),
+                    created_at=utcnow(),
                 )
             )
             session.commit()
