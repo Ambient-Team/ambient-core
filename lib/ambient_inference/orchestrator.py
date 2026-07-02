@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import logging
+
 from ambient_inference.council import CouncilEngine, EventCallback
 from ambient_inference.gateway import GatewayError
 from ambient_inference.router import Router
@@ -12,6 +14,8 @@ from ambient_inference.schemas import (
 )
 from ambient_inference.store import RunStore
 from ambient_inference.telemetry import log_run_summary
+
+logger = logging.getLogger(__name__)
 
 
 class MaestroOrchestrator:
@@ -33,6 +37,30 @@ class MaestroOrchestrator:
     async def aclose(self) -> None:
         """Release inference resources (model gateway HTTP client)."""
         await self._council.aclose()
+
+    async def _mark_failed(
+        self,
+        record: RunRecord,
+        exc: Exception,
+        emit: EventCallback,
+    ) -> None:
+        record.status = RunStatus.failed
+        record.error = str(exc)
+        self._store.update_run(record.run_id, status=RunStatus.failed, error=str(exc))
+        await emit(
+            RunEvent(
+                type=RunEventType.error,
+                run_id=record.run_id,
+                payload={"message": str(exc)},
+            )
+        )
+        await emit(
+            RunEvent(
+                type=RunEventType.done,
+                run_id=record.run_id,
+                payload={"status": "failed"},
+            )
+        )
 
     async def run(
         self,
@@ -84,23 +112,14 @@ class MaestroOrchestrator:
                 )
             )
         except (GatewayError, ValueError, KeyError) as exc:
-            record.status = RunStatus.failed
-            record.error = str(exc)
-            self._store.update_run(record.run_id, status=RunStatus.failed, error=str(exc))
-            await emit(
-                RunEvent(
-                    type=RunEventType.error,
-                    run_id=record.run_id,
-                    payload={"message": str(exc)},
-                )
+            # Expected operational failures (backend down, bad config/plan).
+            logger.warning("run %s failed: %s", record.run_id, exc)
+            await self._mark_failed(record, exc, emit)
+        except Exception as exc:  # defensive: never leave a run stuck "running"
+            logger.error(
+                "run %s failed with unexpected error", record.run_id, exc_info=True
             )
-            await emit(
-                RunEvent(
-                    type=RunEventType.done,
-                    run_id=record.run_id,
-                    payload={"status": "failed"},
-                )
-            )
+            await self._mark_failed(record, exc, emit)
         refreshed = self._store.get_run(record.run_id)
         final = refreshed or record
         log_run_summary(final)
