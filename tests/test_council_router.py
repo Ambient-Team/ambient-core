@@ -57,6 +57,54 @@ async def test_council_parallel_synthesize(registry, sample_messages):
 
 
 @pytest.mark.asyncio
+async def test_router_classifier_failure_falls_back(registry, sample_messages, caplog):
+    class BoomClassifierGateway(FakeGateway):
+        async def complete(self, model_id, messages, *, step, draft_id=None, json_mode=False, fallback_chain=None):
+            if step == "classifier":
+                raise RuntimeError("classifier backend down")
+            return await super().complete(
+                model_id, messages, step=step, draft_id=draft_id, json_mode=json_mode, fallback_chain=fallback_chain
+            )
+
+    gateway = BoomClassifierGateway(registry)
+    router = Router(registry, gateway, use_classifier=True)
+    with caplog.at_level("WARNING", logger="ambient_inference.router"):
+        plan = await router.plan(CreateRunRequest(mode="council_research", messages=sample_messages))
+
+    # Classifier failure must not raise; routing falls back to profile default.
+    assert plan.classifier_used is False
+    assert plan.task_type == "research_qa"
+    assert any("classifier call failed" in r.message for r in caplog.records)
+
+
+@pytest.mark.asyncio
+async def test_orchestrator_marks_failed_on_unexpected_error(registry, sample_messages, tmp_path):
+    from ambient_inference.orchestrator import MaestroOrchestrator
+    from ambient_inference.store import RunStore
+
+    class BoomGateway(FakeGateway):
+        async def complete(self, *args, **kwargs):
+            raise RuntimeError("kaboom")
+
+    gateway = BoomGateway(registry)
+    router = Router(registry, gateway, use_classifier=False)
+    store = RunStore(f"sqlite:///{tmp_path / 'runs.db'}")
+    orch = MaestroOrchestrator(router, CouncilEngine(gateway), store)
+
+    record = await orch.run(CreateRunRequest(mode="single_chat", messages=sample_messages))
+
+    # An unexpected (non-GatewayError) failure must still be recorded, not orphaned.
+    assert record.status.value == "failed"
+    assert "kaboom" in (record.error or "")
+    stored = store.get_run(record.run_id)
+    assert stored is not None
+    assert stored.status.value == "failed"
+    events = [e.type.value for e in store.list_events(record.run_id)]
+    assert "error" in events
+    assert "done" in events
+
+
+@pytest.mark.asyncio
 async def test_orchestrator_persists_run(registry, sample_messages, tmp_path):
     from ambient_inference.orchestrator import MaestroOrchestrator
     from ambient_inference.store import RunStore
