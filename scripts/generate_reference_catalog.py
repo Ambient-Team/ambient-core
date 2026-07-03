@@ -28,6 +28,10 @@ INDUSTRY_DIR = CATALOG / "industries"
 CORE_DIR = CATALOG / "core"
 SHARED_DIR = CORE_DIR / "shared"
 
+if str(ROOT / "lib") not in sys.path:
+    sys.path.insert(0, str(ROOT / "lib"))
+from ambient_calc import CalcError, formula_names  # noqa: E402
+
 INDUSTRY_PACK_MIN_METRICS = 3
 INDUSTRY_PACK_MIN_DATA_OPTIONS = 2
 
@@ -739,6 +743,126 @@ export function resolveCatalogIndustry(orgIndustry) {{
     (RUNTIME / "catalogIndustries.js").write_text(content, encoding="utf-8", newline="\n")
 
 
+def _norm_field(value: object) -> str:
+    return str(value or "").strip().lower()
+
+
+def _metric_slug(key: str, metric: dict) -> str:
+    slug = metric.get("slug")
+    if slug:
+        return _norm_field(slug)
+    if "." in key:
+        return _norm_field(key.rsplit(".", 1)[-1].replace("-", "_"))
+    return _norm_field(key.replace("-", "_"))
+
+
+def build_metric_input_recipe(
+    metric: dict,
+    linked_options: list[dict],
+    known_slugs: set[str],
+) -> tuple[list[dict], str]:
+    """Resolve a metric's required inputs to the data options that supply them.
+
+    ``linked_options`` are the data options whose ``metricIds`` reference this metric,
+    each shaped ``{"catalogOptionKey", "id", "name", "fields"}``. Returns
+    ``(inputs, inputCoverage)`` where each input is::
+
+        {"name", "kind": "measured"|"derived", "covered": bool, "satisfiedBy": [...]}
+
+    Each ``satisfiedBy`` source carries ``via``:
+
+    - ``field`` — the input is an explicit, mappable column on a linked data option;
+    - ``upload`` — the input is supplied by a linked upload's document/template rather
+      than an enumerated field (accounting line items and aggregates are intentionally
+      not enumerated as fields — see ``catalog_input_field_policy.yaml``).
+
+    ``inputCoverage`` is one of:
+
+    - ``complete`` — every measured input is an explicit mappable field;
+    - ``upload`` — feedable, but at least one measured input comes from an upload;
+    - ``none`` — no data option references this metric (it cannot be fed as wired);
+    - ``derived`` — computed only from other metrics (nothing to upload directly);
+    - ``unspecified`` — the metric declares neither ``calc`` nor ``input``.
+    """
+    field_index: dict[str, list[dict]] = {}
+    for opt in linked_options:
+        for field in opt.get("fields") or []:
+            field_index.setdefault(_norm_field(field), []).append(opt)
+
+    def field_sources(name: str) -> list[dict]:
+        return [
+            {
+                "catalogOptionKey": opt["catalogOptionKey"],
+                "id": opt.get("id"),
+                "name": opt.get("name"),
+                "field": name,
+                "via": "field",
+            }
+            for opt in field_index.get(_norm_field(name), [])
+        ]
+
+    def upload_sources() -> list[dict]:
+        return [
+            {
+                "catalogOptionKey": opt["catalogOptionKey"],
+                "id": opt.get("id"),
+                "name": opt.get("name"),
+                "via": "upload",
+            }
+            for opt in linked_options
+        ]
+
+    calc = metric.get("calc") or {}
+    expr = calc.get("expr")
+    measured_names: list[str] = []
+    derived_names: list[str] = []
+    if expr:
+        measured_names = [str(n) for n in (calc.get("inputs") or [])]
+        measured_set = {_norm_field(n) for n in measured_names}
+        try:
+            names = formula_names(expr)
+        except CalcError:
+            names = set()
+        derived_names = sorted(
+            n
+            for n in names
+            if _norm_field(n) in known_slugs and _norm_field(n) not in measured_set
+        )
+    elif metric.get("input"):
+        measured_names = [str(metric.get("slug") or "")]
+
+    inputs: list[dict] = []
+    for name in measured_names:
+        sources = field_sources(name)
+        if sources:
+            inputs.append(
+                {"name": name, "kind": "measured", "covered": True, "satisfiedBy": sources}
+            )
+        elif linked_options:
+            inputs.append(
+                {"name": name, "kind": "measured", "covered": True, "satisfiedBy": upload_sources()}
+            )
+        else:
+            inputs.append({"name": name, "kind": "measured", "covered": False, "satisfiedBy": []})
+    for name in derived_names:
+        inputs.append({"name": name, "kind": "derived", "covered": True, "satisfiedBy": []})
+
+    measured_inputs = [i for i in inputs if i["kind"] == "measured"]
+    if not inputs:
+        coverage = "unspecified"
+    elif not measured_inputs:
+        coverage = "derived"
+    elif any(not i["covered"] for i in measured_inputs):
+        coverage = "none"
+    elif all(
+        all(s.get("via") == "field" for s in i["satisfiedBy"]) for i in measured_inputs
+    ):
+        coverage = "complete"
+    else:
+        coverage = "upload"
+    return inputs, coverage
+
+
 def write_manifest(
     metrics: dict,
     data_options: dict,
@@ -746,22 +870,37 @@ def write_manifest(
     financial_sector_profiles: dict,
     transportation_sector_profiles: dict,
 ) -> None:
-    metric_by_id = {m.get("id"): {"key": k, **m} for k, m in metrics.items()}
+    slugs_by_industry: dict[str, set[str]] = {}
+    for key, metric in metrics.items():
+        slugs_by_industry.setdefault(str(metric.get("industry", "")), set()).add(
+            _metric_slug(key, metric)
+        )
+
     entries = []
     for key, metric in metrics.items():
-        required_sources = []
-        for mid in metric.get("requiredSourceMetricIds") or []:
-            pass
-        for opt_key, opt in data_options.items():
-            mids = opt.get("metricIds") or []
-            if metric.get("id") in mids:
-                required_sources.append(
-                    {
-                        "catalogOptionKey": opt_key,
-                        "name": opt.get("name"),
-                        "fields": opt.get("fields") or [],
-                    }
-                )
+        linked_options = [
+            {
+                "catalogOptionKey": opt_key,
+                "id": opt.get("id"),
+                "name": opt.get("name"),
+                "fields": opt.get("fields") or [],
+            }
+            for opt_key, opt in data_options.items()
+            if metric.get("id") in (opt.get("metricIds") or [])
+        ]
+        required_sources = [
+            {"catalogOptionKey": o["catalogOptionKey"], "name": o["name"], "fields": o["fields"]}
+            for o in linked_options
+        ]
+        recipe_inputs, coverage = build_metric_input_recipe(
+            metric,
+            linked_options,
+            slugs_by_industry.get(str(metric.get("industry", "")), set()),
+        )
+        calc = metric.get("calc") or {}
+        calc_out = None
+        if calc.get("expr"):
+            calc_out = {"expr": calc.get("expr"), "inputs": list(calc.get("inputs") or [])}
         entries.append(
             {
                 "catalogMetricKey": key,
@@ -772,6 +911,10 @@ def write_manifest(
                 "type": metric.get("type"),
                 "unit": metric.get("unit"),
                 "requiredSources": required_sources,
+                "calc": calc_out,
+                "directlyReported": bool(metric.get("input")) and calc_out is None,
+                "inputs": recipe_inputs,
+                "inputCoverage": coverage,
             }
         )
     manifest = {

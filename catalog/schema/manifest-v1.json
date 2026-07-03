@@ -56,6 +56,41 @@
       },
       "additionalProperties": false
     },
+    "metricCalc": {
+      "type": "object",
+      "required": ["expr", "inputs"],
+      "properties": {
+        "expr": { "type": "string", "minLength": 1 },
+        "inputs": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "metricInputSource": {
+      "type": "object",
+      "required": ["catalogOptionKey", "via"],
+      "properties": {
+        "catalogOptionKey": { "type": "string", "minLength": 1 },
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "field": { "type": "string" },
+        "via": { "enum": ["field", "upload"] }
+      },
+      "additionalProperties": false
+    },
+    "metricInput": {
+      "type": "object",
+      "required": ["name", "kind", "covered", "satisfiedBy"],
+      "properties": {
+        "name": { "type": "string" },
+        "kind": { "enum": ["measured", "derived"] },
+        "covered": { "type": "boolean" },
+        "satisfiedBy": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/metricInputSource" }
+        }
+      },
+      "additionalProperties": false
+    },
     "manifestMetric": {
       "type": "object",
       "required": [
@@ -79,6 +114,17 @@
         "requiredSources": {
           "type": "array",
           "items": { "$ref": "#/$defs/requiredSource" }
+        },
+        "calc": {
+          "oneOf": [{ "$ref": "#/$defs/metricCalc" }, { "type": "null" }]
+        },
+        "directlyReported": { "type": "boolean" },
+        "inputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/metricInput" }
+        },
+        "inputCoverage": {
+          "enum": ["complete", "upload", "none", "derived", "unspecified"]
         }
       },
       "additionalProperties": false

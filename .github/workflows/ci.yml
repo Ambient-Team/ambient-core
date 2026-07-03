@@ -59,6 +59,9 @@ jobs:
       - name: Metric formulas
         run: python scripts/check_formulas.py
 
+      - name: Metric input coverage (data options -> KPIs)
+        run: python scripts/check_metric_inputs.py
+
       - name: PHI policy (healthcare/life-sciences)
         run: python scripts/check_phi.py
 
