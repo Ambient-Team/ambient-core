@@ -36,8 +36,35 @@ Common fields on each **metric** object:
 - **`type`** — e.g. `Financial`, `Operational`
 - **`unit`** — display unit
 - **`requiredSources`** — list of data options with `catalogOptionKey`, `name`, `fields`
+- **`calc`** — the machine-readable formula (`expr` + declared `inputs`), or `null` for directly-reported metrics
+- **`directlyReported`** — `true` when the metric value is uploaded directly (`input: true`, no `calc`)
+- **`inputs`** — the input-coverage recipe (see below)
+- **`inputCoverage`** — one-word summary of how feedable the metric is (see below)
 
 Use `id` for agent resolve and OLAP joins; use `catalogMetricKey` for crosswalk entries and stable keys across regenerations when ids are reassigned only through controlled generator changes.
+
+## From data options to KPIs (input coverage)
+
+Definitions tell you *what* a metric is; the **input-coverage recipe** tells you *what to upload so `calc` actually runs*. For every metric the generator resolves each required input to the data option(s) that supply it and records the result on the metric object.
+
+Each entry in **`inputs`** has:
+
+- **`name`** — the input variable used by `calc.expr` (or the metric's own slug for directly-reported metrics)
+- **`kind`** — `measured` (a value you supply) or `derived` (computed from another catalog metric)
+- **`covered`** — whether a linked data option can supply it
+- **`satisfiedBy`** — the supplying data option(s), each with `catalogOptionKey`, `name`, and a `via`:
+  - **`field`** — the input is an explicit, mappable column on that data option (map this column)
+  - **`upload`** — the input comes from that option's document/template contents rather than an enumerated field (upload that document). Accounting aggregates and ratios are intentionally not enumerated as fields — see [catalog/core/shared/catalog_input_field_policy.yaml](../catalog/core/shared/catalog_input_field_policy.yaml).
+
+The metric-level **`inputCoverage`** summarizes feedability:
+
+- **`complete`** — every measured input is an explicit mappable field
+- **`upload`** — feedable, but at least one input comes from a linked upload's document/template
+- **`none`** — no data option references this metric; it cannot be fed as currently wired
+- **`derived`** — computed only from other metrics (nothing to upload directly)
+- **`unspecified`** — the metric declares neither `calc` nor `input`
+
+Operator flow, then, is: pick the metric, read its `inputs`, upload each `satisfiedBy` data option (mapping `via: field` columns and attaching `via: upload` documents), run the pipeline, and the KPI computes. Run [scripts/check_metric_inputs.py](../scripts/check_metric_inputs.py) for a per-industry coverage report (which metrics are `complete` / `upload` / `none`); it is informational and does not block CI. The reverse direction (**which metrics a data option feeds**) is on each `dataOptions[].metricIds`.
 
 ## JavaScript runtime vs JSON only
 

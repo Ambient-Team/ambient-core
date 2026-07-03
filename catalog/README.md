@@ -38,6 +38,7 @@ Edit YAML under `industries/` and `core/`; regenerate after changes.
 
 - **Integrators** — use `manifest.json` and Python loaders (`ambient_pipeline.catalog_loader`, `AMBIENT_CATALOG_DIR`); or bundle `runtime/` into your own app.
 - **Monorepo consumers** — import generated JS from a pinned `ambient-core/catalog/runtime/` checkout (single app bridge module is a common pattern).
+- **Data → KPIs** — each metric in `manifest.json` carries an input-coverage recipe (`calc`, `inputs`, `inputCoverage`) that maps `calc` inputs to the data options/fields that supply them; see [docs/catalog-consumption.md](../docs/catalog-consumption.md#from-data-options-to-kpis-input-coverage). Run `python scripts/check_metric_inputs.py` for a coverage report.
 - **Docs** — [docs/CONVENTIONS.md](../docs/CONVENTIONS.md), [docs/governed-data.md](../docs/governed-data.md), [docs/catalog-consumption.md](../docs/catalog-consumption.md), [docs/crosswalk.md](../docs/crosswalk.md).
 
 ## Terminology
