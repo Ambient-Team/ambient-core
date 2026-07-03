@@ -55,6 +55,53 @@ class RequiredSource:
 
 
 @dataclass(frozen=True)
+class MetricCalc:
+    expr: str
+    inputs: tuple[str, ...]
+
+    def to_tool_dict(self) -> dict[str, Any]:
+        return {"expr": self.expr, "inputs": list(self.inputs)}
+
+
+@dataclass(frozen=True)
+class MetricInputSource:
+    catalog_option_key: str
+    via: str
+    field: str | None = None
+    id: int | None = None
+    name: str | None = None
+
+    def to_tool_dict(self) -> dict[str, Any]:
+        out: dict[str, Any] = {
+            "catalogOptionKey": self.catalog_option_key,
+            "via": self.via,
+        }
+        if self.field is not None:
+            out["field"] = self.field
+        if self.id is not None:
+            out["id"] = self.id
+        if self.name is not None:
+            out["name"] = self.name
+        return out
+
+
+@dataclass(frozen=True)
+class MetricInput:
+    name: str
+    kind: str
+    covered: bool
+    satisfied_by: tuple[MetricInputSource, ...]
+
+    def to_tool_dict(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "kind": self.kind,
+            "covered": self.covered,
+            "satisfiedBy": [s.to_tool_dict() for s in self.satisfied_by],
+        }
+
+
+@dataclass(frozen=True)
 class CatalogMetric:
     catalog_metric_key: str
     id: int
@@ -64,9 +111,13 @@ class CatalogMetric:
     type: str
     unit: str
     required_sources: tuple[RequiredSource, ...]
+    calc: MetricCalc | None = None
+    directly_reported: bool = False
+    inputs: tuple[MetricInput, ...] = ()
+    input_coverage: str | None = None
 
     def to_tool_dict(self) -> dict[str, Any]:
-        return {
+        out: dict[str, Any] = {
             "catalogMetricKey": self.catalog_metric_key,
             "id": self.id,
             "name": self.name,
@@ -75,7 +126,13 @@ class CatalogMetric:
             "type": self.type,
             "unit": self.unit,
             "requiredSources": [s.to_tool_dict() for s in self.required_sources],
+            "directlyReported": self.directly_reported,
+            "inputs": [i.to_tool_dict() for i in self.inputs],
         }
+        out["calc"] = self.calc.to_tool_dict() if self.calc is not None else None
+        if self.input_coverage is not None:
+            out["inputCoverage"] = self.input_coverage
+        return out
 
 
 @dataclass(frozen=True)
@@ -135,6 +192,45 @@ def _parse_required_source(raw: object, path: str) -> RequiredSource:
     return RequiredSource(catalog_option_key=key, name=name, fields=fields)
 
 
+def _parse_metric_calc(raw: object, path: str) -> MetricCalc:
+    obj = _expect_mapping(raw, path)
+    expr = _expect_str(obj.get("expr"), f"{path}.expr")
+    inputs_raw = _expect_list(obj.get("inputs"), f"{path}.inputs")
+    return MetricCalc(expr=expr, inputs=tuple(str(i) for i in inputs_raw))
+
+
+def _parse_metric_input_source(raw: object, path: str) -> MetricInputSource:
+    obj = _expect_mapping(raw, path)
+    key = _expect_str(obj.get("catalogOptionKey"), f"{path}.catalogOptionKey")
+    via = _expect_str(obj.get("via"), f"{path}.via")
+    field = obj.get("field")
+    if field is not None and not isinstance(field, str):
+        raise ValueError(f"{path}.field: expected string or null")
+    oid = obj.get("id")
+    if oid is not None and (isinstance(oid, bool) or not isinstance(oid, int)):
+        raise ValueError(f"{path}.id: expected integer or null")
+    name_val = obj.get("name")
+    if name_val is not None and not isinstance(name_val, str):
+        raise ValueError(f"{path}.name: expected string or null")
+    return MetricInputSource(catalog_option_key=key, via=via, field=field, id=oid, name=name_val)
+
+
+def _parse_metric_input(raw: object, path: str) -> MetricInput:
+    obj = _expect_mapping(raw, path)
+    name = obj.get("name")
+    if not isinstance(name, str):
+        raise ValueError(f"{path}.name: expected string")
+    kind = _expect_str(obj.get("kind"), f"{path}.kind")
+    covered = obj.get("covered")
+    if not isinstance(covered, bool):
+        raise ValueError(f"{path}.covered: expected boolean")
+    sats_raw = _expect_list(obj.get("satisfiedBy"), f"{path}.satisfiedBy")
+    sats = tuple(
+        _parse_metric_input_source(s, f"{path}.satisfiedBy[{i}]") for i, s in enumerate(sats_raw)
+    )
+    return MetricInput(name=name, kind=kind, covered=covered, satisfied_by=sats)
+
+
 def _parse_metric(raw: object, path: str) -> CatalogMetric:
     obj = _expect_mapping(raw, path)
     key = _expect_str(obj.get("catalogMetricKey"), f"{path}.catalogMetricKey")
@@ -152,6 +248,23 @@ def _parse_metric(raw: object, path: str) -> CatalogMetric:
     sources = tuple(
         _parse_required_source(s, f"{path}.requiredSources[{i}]") for i, s in enumerate(sources_raw)
     )
+
+    # Optional input-coverage recipe (added in manifest v0.2.7; absent in older files).
+    calc_raw = obj.get("calc")
+    calc = _parse_metric_calc(calc_raw, f"{path}.calc") if calc_raw is not None else None
+    directly_reported = bool(obj.get("directlyReported"))
+    inputs_raw = obj.get("inputs")
+    if inputs_raw is None:
+        inputs: tuple[MetricInput, ...] = ()
+    else:
+        inputs = tuple(
+            _parse_metric_input(i, f"{path}.inputs[{j}]")
+            for j, i in enumerate(_expect_list(inputs_raw, f"{path}.inputs"))
+        )
+    coverage_val = obj.get("inputCoverage")
+    if coverage_val is not None and not isinstance(coverage_val, str):
+        raise ValueError(f"{path}.inputCoverage: expected string or null")
+
     return CatalogMetric(
         catalog_metric_key=key,
         id=mid,
@@ -161,6 +274,10 @@ def _parse_metric(raw: object, path: str) -> CatalogMetric:
         type=mtype,
         unit=unit,
         required_sources=sources,
+        calc=calc,
+        directly_reported=directly_reported,
+        inputs=inputs,
+        input_coverage=coverage_val,
     )
 
 
