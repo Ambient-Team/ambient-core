@@ -56,18 +56,3 @@ profiles:
       Observations:
       {observations}
       User question: {user_message}
-
-  optimizer:
-    description: Explores contracts and catalog for optimization-style reasoning (neutral, no tenant data).
-    maestro_mode: council_research
-    tool_ids:
-      - contracts_list
-      - catalog_list_metrics
-      - catalog_resolve_metric
-      - run_context_append
-    max_tool_rounds: 1
-    synthesis_prompt_template: |
-      Suggest optimization opportunities grounded only in the observations (no invented metrics).
-      Observations:
-      {observations}
-      User question: {user_message}

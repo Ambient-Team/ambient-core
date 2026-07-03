@@ -74,7 +74,7 @@ This is the main **paid** insight after benchmarking: users need to see which pa
 
 ### 7. Improvement and practice transfer
 
-- **Core** — `fpaWorkflow` strings on catalog metrics; [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) defines the **shape** of governed optimization recommendations (confidence, lineage)—populated in deployment, not by OSS alone.
+- **Core** — `fpaWorkflow` strings on catalog metrics guide where improvement effort maps.
 - **Platform** — Post-benchmark improvement plans, ROI estimates, workflows, ticketing, and sustainment—commercial product scope.
 
 ## How the platform should use catalog mechanics
@@ -84,7 +84,7 @@ When showing “what is improvable,” the platform should:
 1. Resolve the focal metric’s `calc` block and dependency chain from the manifest or YAML.
 2. Compare focal and pace-setter values **per input or sub-metric** where data exists, using the same operational definitions.
 3. Attribute remaining gap to **documented structural factors** stored in platform metadata (not invented in core).
-4. Surface `fpaWorkflow` and bridge hints for interpretation; write opportunities to Gold per `opportunity-v1` when recommendations are generated.
+4. Surface `fpaWorkflow` and bridge hints for interpretation when recommendations are generated.
 
 Core will **not** store peer time series, draw waterfall UI, or classify gap slices without platform logic.
 
@@ -121,7 +121,6 @@ Optional future core enhancements (not required for the lifecycle doc): export c
 ## Related
 
 - [work-cycles.md](work-cycles.md) — hub for benchmarking, assurance, and disclosure cycles
-- [optimization-lifecycle.md](optimization-lifecycle.md) — ranked actions and opportunity-v1 handoff
 - [governed-data.md](governed-data.md) — catalog vs contracts; analysis lens and tenancy
 - [catalog-consumption.md](catalog-consumption.md) — manifest, segment filtering, metadata conventions
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — what is not in OSS

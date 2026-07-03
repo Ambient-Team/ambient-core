@@ -15,7 +15,6 @@ Gold **contracts** under `finance-*-v1.yaml` map to metrics in several **catalog
 - **`tenant-metrics-v1.yaml`** — Silver tenant metrics; bronze provenance; multi-tenant
 - **`org-kpi-v1.yaml`** — Gold org KPIs
 - **`quality-v1.yaml`** — Data quality and lineage
-- **`opportunity-v1.yaml`** — Optimization opportunities
 - **`operational-financial-bridge-v1.yaml`** — Operational–financial bridge
 - **`commercial-usage-v1.yaml`** — Commercial usage snapshot
 - **`observability-pipeline-v1.yaml`** — Pipeline/medallion observability (may reference platform assets)

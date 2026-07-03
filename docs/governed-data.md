@@ -40,7 +40,7 @@ A single banking group on a paid platform is often modeled as **several tenant o
 
 Upload fields such as `entity_segment` on some catalog data options support **segmented extracts** within a lens; they do not assert that the tenant org “is” a bank or insurer in the legal sense. `AgentRunContext.metadata` (for example `org_id`) is forwarded to Maestro as opaque hints; core does **not** validate tenancy or lens choice—see [agent-security.md](agent-security.md). Platform boundaries: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). Terminology: [catalog/README.md](../catalog/README.md#terminology).
 
-For **product work cycles** on the same governed metrics—**benchmarking**, **assurance**, **investor disclosure**, **covenant monitoring**, **planning and variance**, and **optimization**—core supplies definitions and contracts; the paid platform supplies workflows and UI. See [work-cycles.md](work-cycles.md) and the child lifecycle docs linked from that hub.
+For **product work cycles** on the same governed metrics—**benchmarking**, **assurance**, **investor disclosure**, and **planning and variance**—core supplies definitions and contracts; the paid platform supplies workflows and UI. See [work-cycles.md](work-cycles.md) and the child lifecycle docs linked from that hub.
 
 ## Path resolution
 
@@ -117,7 +117,6 @@ validate-agent-config   # if you ship or fork agent profiles
 - [tenant-metrics-v1.yaml](../contracts/tenant-metrics-v1.yaml) — Silver tenant metric snapshots; bronze lineage; multi-tenant isolation
 - [org-kpi-v1.yaml](../contracts/org-kpi-v1.yaml) — Gold org KPIs by vertical
 - [quality-v1.yaml](../contracts/quality-v1.yaml) — Data quality and lineage product
-- [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) — Optimization opportunity outputs
 - [operational-financial-bridge-v1.yaml](../contracts/operational-financial-bridge-v1.yaml) — Operational–financial bridge
 - [commercial-usage-v1.yaml](../contracts/commercial-usage-v1.yaml) — Commercial usage snapshot
 - [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) — Medallion/pipeline health (often references platform deploy assets)

@@ -88,10 +88,8 @@ Core does not validate these; document them in your worker so synthesis and logg
 - **`assurance_framework`** or **`control_pack_id`** — assurance scope.
 - **`disclosure_mandate_id`** — investor or exchange mandate set.
 - **`investor_audience`** — coarse audience (listed, LP, lender, internal).
-- **`covenant_pack_id`** or **`facility_id`** — covenant monitoring scope.
 - **`plan_version_id`** — budget or forecast version for variance.
 - **`scenario_id`** — plan scenario label.
-- **`optimization_run_id`** — optional opportunity generation batch.
 - **`reporting_group_id`** — optional link to a legal or group holding company for rollup UI only; does not change catalog resolution in core.
 
 See [governed-data.md](governed-data.md#analysis-lens-and-multi-org-tenancy), [work-cycles.md](work-cycles.md), and [catalog/README.md](../catalog/README.md#terminology).

@@ -56,7 +56,7 @@ flowchart LR
 
 ### 5. Remediation, fundraising, and data room
 
-- **Core** — `fpaWorkflow` hints on metrics; [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) governs the **shape** of optimization or remediation recommendations (confidence, lineage)—populated in deployment.
+- **Core** — `fpaWorkflow` hints on metrics guide where remediation recommendations map.
 - **Platform** — CapEx and retrofit roadmaps, sustainability action owners, data-room exports, equity or debt storytelling tied to catalog metric keys.
 
 ## Overlap: benchmark cycle vs disclosure cycle on the same org
@@ -75,7 +75,7 @@ Listed issuers may face **regulatory or exchange** sustainability disclosure pre
 
 **Gap (platform).** Missing intensity metrics or undisclosed PUE where mandate requires them—gap to **requirement**, not to a peer REIT.
 
-**Remediation (platform).** Efficiency and procurement initiatives; optional opportunities written to Gold per `opportunity-v1`. Empirical filings and figures remain in external research or issuer disclosures.
+**Remediation (platform).** Efficiency and procurement initiatives tracked in the platform. Empirical filings and figures remain in external research or issuer disclosures.
 
 ## Related
 
@@ -84,4 +84,3 @@ Listed issuers may face **regulatory or exchange** sustainability disclosure pre
 - [assurance-lifecycle.md](assurance-lifecycle.md)
 - [governed-data.md](governed-data.md)
 - [catalog-consumption.md](catalog-consumption.md)
-- [opportunity-v1.yaml](../contracts/opportunity-v1.yaml)
