@@ -12,8 +12,6 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    env:
-      SYNC_BRANCH: hub-sync/${{ steps.hub.outputs.short }}
     steps:
       - uses: actions/checkout@v4
 
