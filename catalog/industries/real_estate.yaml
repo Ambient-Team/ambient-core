@@ -496,6 +496,74 @@ metrics:
       inputs:
       - revenue_growth_pct
       - profit_margin_pct
+  real_estate.operations.same_store_noi_growth:
+    id: 1058
+    name: Same-Store NOI Growth
+    description: Year-over-year NOI growth on stabilized comparable properties (property-operator view).
+    industry: Real Estate
+    type: Financial
+    unit: '%'
+    methodology: Same-Store NOI Growth = ((Current NOI − Prior NOI) / Prior NOI) × 100 on comparable set
+    datasource:
+    - Property management systems
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Operating performance — excludes acquisition/disposition noise.
+    segment: operations
+    slug: same_store_noi_growth
+    input: true
+  real_estate.operations.operating_expense_ratio:
+    id: 1059
+    name: Operating Expense Ratio
+    description: Operating expenses relative to effective gross income (property operations).
+    industry: Real Estate
+    type: Financial
+    unit: '%'
+    methodology: OER = (Operating Expenses / Effective Gross Income) × 100
+    datasource:
+    - Property management systems
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Cost discipline — opex leakage vs revenue.
+    segment: operations
+    slug: operating_expense_ratio
+    calc:
+      expr: operating_expenses / effective_gross_income * 100
+      inputs:
+      - operating_expenses
+      - effective_gross_income
+  real_estate.operations.energy_cost_per_sf:
+    id: 1060
+    name: Energy Cost per Square Foot
+    description: Energy spend per rentable square foot (aggregated portfolio).
+    industry: Real Estate
+    type: Operational
+    unit: Currency
+    methodology: Energy Cost per SF = Total Energy Cost / Rentable Square Feet
+    datasource:
+    - Energy bills
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: false
+    fpaWorkflow: Sustainability and opex — efficiency programs and capex planning.
+    segment: operations
+    slug: energy_cost_per_sf
+    calc:
+      expr: total_energy_cost / rentable_square_feet
+      inputs:
+      - total_energy_cost
+      - rentable_square_feet
 dataOptions:
   2j9pysT31hgn2DQcejtz:
     description: Records of income received from renting a property.

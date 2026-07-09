@@ -12,11 +12,12 @@ def test_manifest_loads_from_repo() -> None:
     path = resolve_manifest_path()
     assert path.is_file()
     manifest = load_manifest()
-    assert manifest.get("version") == 1
-    assert len(manifest.get("metrics", [])) >= 1
+    assert manifest.version == 1
+    assert len(manifest.metrics) >= 1
 
 
 def test_manifest_matches_catalog_file() -> None:
     root = Path(__file__).resolve().parents[2]
     on_disk = json.loads((root / "catalog" / "manifest.json").read_text(encoding="utf-8"))
-    assert load_manifest()["metrics"][0]["catalogMetricKey"] == on_disk["metrics"][0]["catalogMetricKey"]
+    loaded = load_manifest()
+    assert loaded.metrics[0].catalog_metric_key == on_disk["metrics"][0]["catalogMetricKey"]

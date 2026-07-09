@@ -90,6 +90,19 @@ Run your application repository’s CI as well.
 
 Follow-up details: [CONTRIBUTING.md](CONTRIBUTING.md#consumer-follow-up-after-a-release).
 
+## Product work cycles (platform)
+
+If you ship workflows on governed KPIs, pin ambient-core for catalog metrics, `benchmarks.yaml`, sector profiles, `ambient_calc`, and contracts (`quality-v1`, `operational-financial-bridge-v1`, `opportunity-v1`, and others). Implement tenancy, UI, and cycle-specific logic in your application repository:
+
+- **Benchmarking** — peer actuals, normalization, waterfalls, improvement; [benchmarking-lifecycle.md](benchmarking-lifecycle.md).
+- **Assurance** — control packs, evidence, DQ and bridge reconciliation, attestation exports; [assurance-lifecycle.md](assurance-lifecycle.md).
+- **Investor disclosure / fundraising** — mandate mapping, gap-to-requirement, data room; [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md).
+- **Covenant monitoring** — facilities, thresholds, headroom; [covenant-lifecycle.md](covenant-lifecycle.md).
+- **Planning and variance** — budgets, scenarios, variance bridges; [planning-variance-lifecycle.md](planning-variance-lifecycle.md).
+- **Optimization** — opportunities, ranking, fulfillment; [optimization-lifecycle.md](optimization-lifecycle.md).
+
+Overview and metadata conventions: [work-cycles.md](work-cycles.md).
+
 ## Appendix B — Maestro
 
 - **Source** — `lib/ambient_inference/`, `services/maestro/` in this repo only.

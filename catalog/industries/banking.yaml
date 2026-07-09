@@ -1,0 +1,308 @@
+# Deposit-taking banks and credit unions only. Long-term catalog convergence with Real Estate lending is expected; fee/markets businesses live in financial_services.yaml.
+industry: Banking
+metrics:
+  banking.depository.net_interest_margin:
+    id: 1530
+    name: Net Interest Margin
+    description: Spread between interest earned and interest paid, relative to earning
+      assets (aggregated regulatory summary).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: NIM = (Net Interest Income / Average Earning Assets) × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Net interest income planning — primary profitability driver for depositories.
+    segment: depository
+    slug: net_interest_margin
+    calc:
+      expr: net_interest_income / average_earning_assets * 100
+      inputs:
+      - net_interest_income
+      - average_earning_assets
+  banking.depository.non_performing_loan_ratio:
+    id: 1531
+    name: Non-Performing Loan Ratio
+    description: Share of loans past due or non-accrual (aggregated credit quality).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: NPL Ratio = (Non-Performing Loans / Total Loans) × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Credit risk monitoring — feeds provision and capital planning.
+    segment: depository
+    slug: non_performing_loan_ratio
+    calc:
+      expr: non_performing_loans / total_loans * 100
+      inputs:
+      - non_performing_loans
+      - total_loans
+  banking.depository.loan_to_deposit_ratio:
+    id: 1532
+    name: Loan-to-Deposit Ratio
+    description: Lending funded by deposits (liquidity and balance-sheet structure).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: LTD = (Total Loans / Total Deposits) × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Liquidity structure — deposit growth vs loan book expansion.
+    segment: depository
+    slug: loan_to_deposit_ratio
+    calc:
+      expr: total_loans / total_deposits * 100
+      inputs:
+      - total_loans
+      - total_deposits
+  banking.depository.efficiency_ratio:
+    id: 1533
+    name: Efficiency Ratio
+    description: Non-interest expense relative to revenue (cost-to-income).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: Efficiency Ratio = (Operating Expense / Total Revenue) × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Operating leverage — expense discipline vs revenue scale.
+    segment: depository
+    slug: efficiency_ratio
+    calc:
+      expr: operating_expense / total_revenue * 100
+      inputs:
+      - operating_expense
+      - total_revenue
+  banking.depository.tier1_capital_ratio:
+    id: 1534
+    name: Tier 1 Capital Ratio
+    description: Tier 1 capital to risk-weighted assets from aggregated regulatory
+      filing (no account-level detail).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: Tier 1 Ratio = (Tier 1 Capital / Risk-Weighted Assets) × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Capital adequacy — covenant and dividend capacity.
+    segment: depository
+    slug: tier1_capital_ratio
+    input: true
+  banking.depository.cost_of_funds:
+    id: 1554
+    name: Cost of Funds
+    description: Average rate paid on interest-bearing liabilities (aggregated).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: Cost of Funds = Interest Expense on Deposits and Borrowings / Average Interest-Bearing Liabilities × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Funding cost — margin pressure vs asset yields.
+    segment: depository
+    slug: cost_of_funds
+    input: true
+  banking.depository.stable_funding_ratio:
+    id: 1556
+    name: Stable Funding Ratio
+    description: Share of funding from stable retail and long-term sources (proxy or regulatory).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: Stable Funding Ratio = Stable Funding / Total Funding × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Liability structure — run risk and NIM stability.
+    segment: depository
+    slug: stable_funding_ratio
+    input: true
+  banking.depository.liquidity_coverage_ratio:
+    id: 1557
+    name: Liquidity Coverage Ratio
+    description: High-quality liquid assets relative to net cash outflows (LCR).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: LCR = HQLA / Net Cash Outflows over 30 days × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Liquidity risk — regulatory and stress readiness.
+    segment: depository
+    slug: liquidity_coverage_ratio
+    input: true
+  banking.depository.net_stable_funding_ratio:
+    id: 1558
+    name: Net Stable Funding Ratio
+    description: Available stable funding relative to required stable funding (NSFR).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: NSFR = Available Stable Funding / Required Stable Funding × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Structural liquidity — long-term funding adequacy.
+    segment: depository
+    slug: net_stable_funding_ratio
+    input: true
+  banking.depository.interest_rate_risk_eve_sensitivity:
+    id: 1559
+    name: Interest Rate Risk EVE Sensitivity
+    description: Change in economic value of equity for a defined parallel rate shock (aggregated ALM).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: EVE sensitivity = ΔEVE / Base EVE for standard shock
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: ALM — rate risk to capital and NIM.
+    segment: depository
+    slug: interest_rate_risk_eve_sensitivity
+    input: true
+  banking.depository.operational_risk_loss_ratio:
+    id: 1567
+    name: Operational Risk Loss Ratio
+    description: Operational losses as a share of gross income (aggregated).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: Op Risk Loss Ratio = Operational Losses / Gross Income × 100
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Non-financial risk — capital and control investment.
+    segment: depository
+    slug: operational_risk_loss_ratio
+    calc:
+      expr: operational_losses / gross_income * 100
+      inputs:
+      - operational_losses
+      - gross_income
+  banking.depository.stress_test_cet1_delta:
+    id: 1568
+    name: Stress Test CET1 Delta
+    description: Decline in CET1 ratio under supervisory severely adverse scenario (aggregated).
+    industry: Banking
+    type: Financial
+    unit: '%'
+    methodology: CET1 Delta = Stressed CET1 − Baseline CET1
+    datasource:
+    - Aggregated regulatory and financial summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Capital planning — dividend and buffer capacity under stress.
+    segment: depository
+    slug: stress_test_cet1_delta
+    input: true
+dataOptions:
+  banking.depository.regulatory_summary:
+    id: 1560
+    name: Aggregated regulatory and financial summary
+    description: Period-level depository bank aggregates (NIM, credit, deposits, capital).
+      Not investment banking.
+    industry: Banking
+    segment: depository
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - date
+    - entity_segment
+    - net_interest_income
+    - average_earning_assets
+    - non_performing_loans
+    - total_loans
+    - total_deposits
+    - operating_expense
+    - total_revenue
+    - tier1_capital_ratio
+    metricIds:
+    - 1530
+    - 1531
+    - 1532
+    - 1533
+    - 1534
+    - 1554
+    - 1556
+    - 1557
+    - 1558
+    - 1559
+    - 1567
+    - 1568
+    lastUpdated: '2026-06-25 00:00:00'

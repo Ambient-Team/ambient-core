@@ -7,7 +7,6 @@ templates:
     description: 'Short-term liquidity: ability to cover current liabilities with current assets.'
     industryTags:
     - Corporate Finance
-    - Financial Services
     - All
     methodology: Current Ratio = Current Assets / Current Liabilities
     name: Current Ratio
@@ -137,7 +136,6 @@ templates:
     description: Core operating cash profitability before interest, tax, depreciation and amortization.
     industryTags:
     - Corporate Finance
-    - Financial Services
     - All
     methodology: EBITDA Margin = (EBITDA / Revenue) × 100
     name: EBITDA Margin

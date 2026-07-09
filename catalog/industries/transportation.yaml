@@ -18,7 +18,7 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: '%'
-    segment: operations
+    segment: road_freight
     slug: driver_turnover
     calc:
       expr: drivers_left / total_drivers * 100
@@ -44,7 +44,7 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: Miles per Gallon (MPG)
-    segment: operations
+    segment: road_freight
     slug: fuel_efficiency
     calc:
       expr: total_miles / total_fuel
@@ -70,7 +70,7 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: '%'
-    segment: operations
+    segment: road_freight
     slug: on_time_delivery_rate
     calc:
       expr: on_time_deliveries / total_deliveries * 100
@@ -96,7 +96,7 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: Percentage
-    segment: operations
+    segment: road_freight
     slug: fleet_utilization
     calc:
       expr: fleet_time_in_use / fleet_available_time * 100
@@ -122,7 +122,7 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: USD/mile
-    segment: operations
+    segment: road_freight
     slug: maintenance_cost_per_mile
     calc:
       expr: total_maintenance_costs / total_miles
@@ -401,6 +401,351 @@ metrics:
       inputs:
       - revenue_growth_pct
       - profit_margin_pct
+  transportation.rail_freight.train_utilization:
+    id: 1860
+    name: Train Utilization
+    description: Loaded train-miles or tonnage moved relative to available train capacity (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: '%'
+    methodology: Train Utilization = (Loaded Train-Miles / Available Train-Miles) × 100
+    datasource:
+    - Rail freight operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Rail asset use — distinct from road fleet utilization.
+    segment: rail_freight
+    slug: train_utilization
+    calc:
+      expr: loaded_train_miles / available_train_miles * 100
+      inputs:
+      - loaded_train_miles
+      - available_train_miles
+  transportation.rail_freight.cost_per_ton_mile:
+    id: 1861
+    name: Cost per Ton-Mile
+    description: Total rail freight operating cost per ton-mile moved (aggregated).
+    industry: Transportation
+    type: Financial
+    unit: USD per ton-mile
+    methodology: Cost per Ton-Mile = Total Operating Cost / Ton-Miles Moved
+    datasource:
+    - Rail freight operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Unit economics — pricing versus truck and barge competition.
+    segment: rail_freight
+    slug: cost_per_ton_mile
+    calc:
+      expr: total_operating_cost / ton_miles_moved
+      inputs:
+      - total_operating_cost
+      - ton_miles_moved
+  transportation.rail_freight.on_time_train_performance:
+    id: 1862
+    name: On-Time Train Performance
+    description: Share of rail shipments arriving within contractual or service window (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: '%'
+    methodology: OTP = (On-Time Shipments / Total Shipments) × 100
+    datasource:
+    - Rail freight operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Service reliability — rail-specific definition.
+    segment: rail_freight
+    slug: on_time_train_performance
+    calc:
+      expr: on_time_shipments / total_shipments * 100
+      inputs:
+      - on_time_shipments
+      - total_shipments
+  transportation.rail_passenger.ridership_per_train_mile:
+    id: 1863
+    name: Ridership per Train-Mile
+    description: Passenger boardings per train-mile operated (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: Passengers per train-mile
+    methodology: Ridership per Train-Mile = Total Boardings / Train-Miles Operated
+    datasource:
+    - Rail passenger operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    fpaWorkflow: Passenger rail productivity — load and schedule design.
+    segment: rail_passenger
+    slug: ridership_per_train_mile
+    calc:
+      expr: total_boardings / train_miles_operated
+      inputs:
+      - total_boardings
+      - train_miles_operated
+  transportation.rail_passenger.farebox_recovery:
+    id: 1864
+    name: Rail Farebox Recovery Ratio
+    description: Passenger fare revenue as a share of fully allocated operating cost (aggregated).
+    industry: Transportation
+    type: Financial
+    unit: '%'
+    methodology: Farebox Recovery = (Fare Revenue / Operating Cost) × 100
+    datasource:
+    - Rail passenger operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Subsidy dependence — intercity and commuter rail.
+    segment: rail_passenger
+    slug: farebox_recovery
+    calc:
+      expr: fare_revenue / operating_cost * 100
+      inputs:
+      - fare_revenue
+      - operating_cost
+  transportation.maritime_shipping.vessel_utilization:
+    id: 1865
+    name: Vessel Utilization
+    description: Operating days at sea or laden days relative to available vessel days (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: '%'
+    methodology: Vessel Utilization = (Operating Days / Available Days) × 100
+    datasource:
+    - Maritime fleet operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Fleet employment — dry dock and positioning time.
+    segment: maritime_shipping
+    slug: vessel_utilization
+    calc:
+      expr: operating_days / available_days * 100
+      inputs:
+      - operating_days
+      - available_days
+  transportation.maritime_shipping.time_charter_equivalent:
+    id: 1866
+    name: Time Charter Equivalent (TCE)
+    description: Daily revenue net of voyage costs per day chartered (aggregated).
+    industry: Transportation
+    type: Financial
+    unit: Currency per day
+    methodology: TCE = (Voyage Revenue − Voyage Costs) / On-Hire Days
+    datasource:
+    - Maritime fleet operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Shipping yield — bunker and route economics.
+    segment: maritime_shipping
+    slug: time_charter_equivalent
+    calc:
+      expr: (voyage_revenue - voyage_costs) / on_hire_days
+      inputs:
+      - voyage_revenue
+      - voyage_costs
+      - on_hire_days
+  transportation.maritime_shipping.schedule_reliability:
+    id: 1867
+    name: Schedule Reliability
+    description: Share of port calls or voyages completed within published schedule window (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: '%'
+    methodology: Reliability = (On-Schedule Voyages / Total Voyages) × 100
+    datasource:
+    - Maritime fleet operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Liner service quality — customer SLAs.
+    segment: maritime_shipping
+    slug: schedule_reliability
+    calc:
+      expr: on_schedule_voyages / total_voyages * 100
+      inputs:
+      - on_schedule_voyages
+      - total_voyages
+  transportation.public_transit.farebox_recovery_ratio:
+    id: 1868
+    name: Transit Farebox Recovery Ratio
+    description: Fare and subsidy-eligible revenue as a share of operating expenses (aggregated).
+    industry: Transportation
+    type: Financial
+    unit: '%'
+    methodology: Farebox Recovery = (Operating Revenue / Operating Expenses) × 100
+    datasource:
+    - Public transit operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Municipal funding gap — bus and rail transit.
+    segment: public_transit
+    slug: farebox_recovery_ratio
+    calc:
+      expr: operating_revenue / operating_expenses * 100
+      inputs:
+      - operating_revenue
+      - operating_expenses
+  transportation.public_transit.ridership_per_vehicle_hour:
+    id: 1869
+    name: Ridership per Vehicle Hour
+    description: Unlinked passenger trips per vehicle revenue hour (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: Passengers per vehicle hour
+    methodology: Ridership per Vehicle Hour = Unlinked Trips / Vehicle Revenue Hours
+    datasource:
+    - Public transit operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    fpaWorkflow: Service productivity — headway and crowding tradeoffs.
+    segment: public_transit
+    slug: ridership_per_vehicle_hour
+    calc:
+      expr: unlinked_trips / vehicle_revenue_hours
+      inputs:
+      - unlinked_trips
+      - vehicle_revenue_hours
+  transportation.public_transit.on_time_performance:
+    id: 1870
+    name: On-Time Performance
+    description: Share of transit trips departing or arriving within agency on-time standard (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: '%'
+    methodology: OTP = (On-Time Trips / Total Trips) × 100
+    datasource:
+    - Public transit operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Service quality — distinct from aviation OTP thresholds.
+    segment: public_transit
+    slug: on_time_performance
+    calc:
+      expr: on_time_trips / total_trips * 100
+      inputs:
+      - on_time_trips
+      - total_trips
+  transportation.freight_forwarding.gross_margin_per_shipment:
+    id: 1871
+    name: Gross Margin per Shipment
+    description: Average gross profit per shipment handled by the forwarder (aggregated).
+    industry: Transportation
+    type: Financial
+    unit: Currency
+    methodology: Margin per Shipment = Gross Profit / Shipments Handled
+    datasource:
+    - Freight forwarding operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: 3PL unit economics — buy versus sell rate spread.
+    segment: freight_forwarding
+    slug: gross_margin_per_shipment
+    calc:
+      expr: gross_profit / shipments_handled
+      inputs:
+      - gross_profit
+      - shipments_handled
+  transportation.freight_forwarding.on_time_delivery_shipper:
+    id: 1872
+    name: On-Time Delivery (Shipper SLA)
+    description: Share of forwarder-managed shipments delivered within customer SLA (aggregated).
+    industry: Transportation
+    type: Operational
+    unit: '%'
+    methodology: OTD = (On-Time Shipments / Total Shipments) × 100
+    datasource:
+    - Freight forwarding operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Shipper-facing reliability — distinct from owned-fleet road OTD.
+    segment: freight_forwarding
+    slug: on_time_delivery_shipper
+    calc:
+      expr: on_time_shipments / total_shipments * 100
+      inputs:
+      - on_time_shipments
+      - total_shipments
 dataOptions:
   5tZAB2WLZbRDQdj6l7X6:
     description: Data collected from in-vehicle sensors to monitor vehicle performance.

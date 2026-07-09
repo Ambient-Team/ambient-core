@@ -1,0 +1,80 @@
+product:
+  name: Finance Depository Banking
+  version: 1.1
+  owner: analytics
+  description: "Deposit-taking bank Gold product: NIM, credit quality, loan-to-deposit, efficiency, tier-1 capital, funding and liquidity ratios, ALM sensitivity, operational risk, and stress CET1 by business_line. Excludes investment banking, fund books, and commercial or consumer loan books (see finance-funds-v1, finance-commercial-finance-v1, and finance-consumer-finance-v1)."
+  domain: Banking
+  type: Derived
+
+schema:
+  table: gold.finance_banking
+  primary_key: banking_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: banking_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: business_line
+      type: string
+      required: true
+    - name: net_interest_margin
+      type: double
+      required: false
+    - name: non_performing_loan_ratio
+      type: double
+      required: false
+    - name: loan_to_deposit_ratio
+      type: double
+      required: false
+    - name: efficiency_ratio
+      type: double
+      required: false
+    - name: tier1_capital_ratio
+      type: double
+      required: false
+    - name: cost_of_funds
+      type: double
+      required: false
+    - name: stable_funding_ratio
+      type: double
+      required: false
+    - name: liquidity_coverage_ratio
+      type: double
+      required: false
+    - name: net_stable_funding_ratio
+      type: double
+      required: false
+    - name: interest_rate_risk_eve_sensitivity
+      type: double
+      required: false
+    - name: operational_risk_loss_ratio
+      type: double
+      required: false
+    - name: stress_test_cet1_delta
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any account or customer-identifiable field; direct Bronze access"

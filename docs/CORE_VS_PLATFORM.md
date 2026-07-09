@@ -16,6 +16,13 @@ What you get from **this repository alone** versus what belongs in a **separate 
 - **Lakehouse or warehouse deploy** (bundle definitions, scheduled jobs, workspace-specific notebooks).
 - **App-specific pipeline glue** (secrets resolution, Firestore or tenant sync IDs, storage path conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
 - **Production inference deploy** — optional Compose, Postgres, and GPU backends wired in the consumer’s infra (see [inference-layer.md](inference-layer.md) for Maestro behavior defined here).
+- **Business-line organizations** — splitting a conglomerate into multiple tenant orgs, each with its own catalog industry, contracts, uploads, and peer set; optional holding-company rollup is platform analytics, not a second catalog industry in core.
+- **Benchmark gap decomposition and improvement workflows** — peer actuals storage, structural versus improvable waterfall/bridge UI, normalization policy, and post-benchmark action tracking on top of core metrics and contracts; see [benchmarking-lifecycle.md](benchmarking-lifecycle.md).
+- **Assurance and attestation workflows** — control packs, evidence sign-off, DQ and bridge reconciliation UI, external reviewer exports; see [assurance-lifecycle.md](assurance-lifecycle.md).
+- **Investor disclosure and fundraising workflows** — mandate mapping, gap-to-requirement, data-room and remediation narratives; see [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md).
+- **Covenant monitoring workflows** — facility schedules, threshold tests, waivers, and alerts on catalog metrics; see [covenant-lifecycle.md](covenant-lifecycle.md).
+- **Planning and variance workflows** — plan versions, scenarios, and variance bridges vs actuals; see [planning-variance-lifecycle.md](planning-variance-lifecycle.md).
+- **Optimization workflows** — ranked opportunities, ROI, and fulfillment on [opportunity-v1](../contracts/opportunity-v1.yaml); see [optimization-lifecycle.md](optimization-lifecycle.md).
 - Operator secrets, billing UI, and end-to-end tests against a live multi-tenant deployment.
 
 ## Source of truth

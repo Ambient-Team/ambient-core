@@ -39,6 +39,7 @@ GENERATED_RUNTIME_FILES = (
     "catalogIndustries.js",
     "catalogInputFieldPolicy.js",
     "catalogManifest.js",
+    "catalogSectorProfiles.js",
 )
 
 
@@ -67,8 +68,93 @@ def build_industry_entries(packs: list[dict]) -> list[dict]:
         if not value:
             raise ValueError(f"Industry pack {file_name} missing top-level industry")
         label = pack_entry.get("displayLabel") or value
-        entries.append({"value": value, "label": label, "pack": file_name})
+        entry: dict = {"value": value, "label": label, "pack": file_name}
+        profile_ids = pack_entry.get("sectorProfileIds")
+        if profile_ids:
+            entry["sectorProfileIds"] = list(profile_ids)
+        entries.append(entry)
     return entries
+
+
+def load_financial_sector_profiles() -> dict:
+    path = CORE_DIR / "financial_sector_profiles.yaml"
+    if not path.is_file():
+        return {}
+    data = _load_yaml(path)
+    profiles = data.get("profiles") or {}
+    return profiles if isinstance(profiles, dict) else {}
+
+
+def load_transportation_sector_profiles() -> dict:
+    path = CORE_DIR / "transportation_sector_profiles.yaml"
+    if not path.is_file():
+        return {}
+    data = _load_yaml(path)
+    profiles = data.get("profiles") or {}
+    return profiles if isinstance(profiles, dict) else {}
+
+
+def _load_catalog_aliases() -> dict[str, str]:
+    path = CATALOG / "aliases.yaml"
+    if not path.is_file():
+        return {}
+    data = _load_yaml(path)
+    aliases = data.get("aliases") or {}
+    return aliases if isinstance(aliases, dict) else {}
+
+
+def _resolve_metric_key(key: str, metrics: dict, aliases: dict[str, str]) -> str | None:
+    seen: set[str] = set()
+    current = key
+    while current not in seen:
+        if current in metrics:
+            return current
+        seen.add(current)
+        nxt = aliases.get(current)
+        if not nxt:
+            return None
+        current = nxt
+    return None
+
+
+def validate_sector_profiles(
+    financial_profiles: dict,
+    transportation_profiles: dict,
+    metrics: dict,
+    industry_entries: list[dict],
+) -> list[str]:
+    errors: list[str] = []
+    aliases = _load_catalog_aliases()
+    financial_ids = set(financial_profiles.keys())
+    transportation_ids = set(transportation_profiles.keys())
+    all_profile_ids = financial_ids | transportation_ids
+    if financial_ids & transportation_ids:
+        overlap = sorted(financial_ids & transportation_ids)
+        errors.append(f"Sector profile id(s) appear in both financial and transportation YAML: {overlap}")
+
+    for entry in industry_entries:
+        for pid in entry.get("sectorProfileIds") or []:
+            if pid not in all_profile_ids:
+                errors.append(
+                    f"sectorProfileIds {pid!r} on pack {entry.get('pack')!r} "
+                    f"is not in financial_sector_profiles.yaml or transportation_sector_profiles.yaml"
+                )
+
+    def _validate_profile_keys(profiles: dict, label: str) -> None:
+        for pid, profile in profiles.items():
+            if not isinstance(profile, dict):
+                errors.append(f"{label} sector profile {pid!r} is not a mapping")
+                continue
+            for mkey in profile.get("representativeMetricKeys") or []:
+                if _resolve_metric_key(str(mkey), metrics, aliases) is None:
+                    errors.append(
+                        f"{label} sector profile {pid!r} representativeMetricKey {mkey!r} "
+                        f"does not resolve in catalog metrics"
+                    )
+
+    _validate_profile_keys(financial_profiles, "Financial")
+    _validate_profile_keys(transportation_profiles, "Transportation")
+    return errors
 
 
 def _industry_pack_paths() -> list[Path]:
@@ -606,6 +692,24 @@ export function getMetricBridgeHint(metricsName, metricType) {{
     (RUNTIME / "metricBridgeHints.js").write_text(content, encoding="utf-8", newline="\n")
 
 
+def write_catalog_sector_profiles(
+    financial_profiles: dict,
+    transportation_profiles: dict,
+) -> None:
+    financial_js = js_object(financial_profiles)
+    transportation_js = js_object(transportation_profiles)
+    content = f"""/**
+ * AUTO-GENERATED from catalog/core/financial_sector_profiles.yaml and
+ * catalog/core/transportation_sector_profiles.yaml — do not edit by hand.
+ * Run: npm run catalog:generate
+ */
+export const FINANCIAL_SECTOR_PROFILES = {financial_js};
+
+export const TRANSPORTATION_SECTOR_PROFILES = {transportation_js};
+"""
+    (RUNTIME / "catalogSectorProfiles.js").write_text(content, encoding="utf-8", newline="\n")
+
+
 def write_catalog_industries(default_industry: str, industry_entries: list[dict]) -> None:
     options_js = js_object(
         [{"value": e["value"], "label": e["label"]} for e in industry_entries]
@@ -639,6 +743,8 @@ def write_manifest(
     metrics: dict,
     data_options: dict,
     industry_entries: list[dict],
+    financial_sector_profiles: dict,
+    transportation_sector_profiles: dict,
 ) -> None:
     metric_by_id = {m.get("id"): {"key": k, **m} for k, m in metrics.items()}
     entries = []
@@ -675,9 +781,16 @@ def write_manifest(
                 "value": e["value"],
                 "label": e["label"],
                 "pack": e["pack"],
+                **(
+                    {"sectorProfileIds": e["sectorProfileIds"]}
+                    if e.get("sectorProfileIds")
+                    else {}
+                ),
             }
             for e in industry_entries
         ],
+        "financialSectorProfiles": financial_sector_profiles,
+        "transportationSectorProfiles": transportation_sector_profiles,
         "metrics": entries,
         "dataOptions": [
             {
@@ -771,6 +884,24 @@ def extract_core_from_runtime() -> None:
         )
 
 
+def validate_manifest_on_disk(path: Path) -> list[str]:
+    """Parse manifest.json with the same loader consumers use (dogfood typed boundary)."""
+    lib = ROOT / "lib"
+    if str(lib) not in sys.path:
+        sys.path.insert(0, str(lib))
+    from ambient_contracts.manifest_models import parse_catalog_manifest
+
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"manifest.json: invalid JSON: {exc}"]
+    try:
+        parse_catalog_manifest(doc)
+    except ValueError as exc:
+        return [f"manifest.json: {exc}"]
+    return []
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--extract", action="store_true", help="Extract catalog/core from current JS (one-time)")
@@ -789,6 +920,8 @@ def main() -> int:
     default_industry, registry_packs = load_industry_registry()
     industry_entries = build_industry_entries(registry_packs)
     metrics, data_options, benchmarks, bridge_rules, _crosswalk = load_catalog()
+    sector_profiles = load_financial_sector_profiles()
+    transportation_sector_profiles = load_transportation_sector_profiles()
     exact, patterns = load_input_field_policy()
     errors = validate(
         metrics,
@@ -796,6 +929,14 @@ def main() -> int:
         benchmarks,
         industry_entries,
         default_industry,
+    )
+    errors.extend(
+        validate_sector_profiles(
+            sector_profiles,
+            transportation_sector_profiles,
+            metrics,
+            industry_entries,
+        )
     )
     if errors:
         for err in errors:
@@ -820,7 +961,20 @@ def main() -> int:
     write_bridge_hints(bridge_rules)
     write_catalog_industries(default_industry, industry_entries)
     write_catalog_input_field_policy(exact, patterns)
-    write_manifest(metrics, data_options, industry_entries)
+    write_catalog_sector_profiles(sector_profiles, transportation_sector_profiles)
+    write_manifest(
+        metrics,
+        data_options,
+        industry_entries,
+        sector_profiles,
+        transportation_sector_profiles,
+    )
+
+    manifest_parse_errors = validate_manifest_on_disk(manifest_path)
+    if manifest_parse_errors:
+        for err in manifest_parse_errors:
+            print(f"catalog validation error: {err}", file=sys.stderr)
+        return 1
 
     if args.check:
         stale: list[str] = []

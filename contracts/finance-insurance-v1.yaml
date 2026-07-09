@@ -1,0 +1,59 @@
+product:
+  name: Finance Insurance
+  version: 1.1
+  owner: analytics
+  description: "Aggregated insurer Gold product: combined and loss ratios, premium growth, reserve development, and catastrophe loss ratio by line of business."
+  domain: Insurance
+  type: Derived
+
+schema:
+  table: gold.finance_insurance
+  primary_key: insurance_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: insurance_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: line_of_business
+      type: string
+      required: true
+    - name: combined_ratio
+      type: double
+      required: false
+    - name: loss_ratio
+      type: double
+      required: false
+    - name: premium_growth
+      type: double
+      required: false
+    - name: reserve_development_ratio
+      type: double
+      required: false
+    - name: catastrophe_loss_ratio
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any policyholder-identifiable field; direct Bronze access"

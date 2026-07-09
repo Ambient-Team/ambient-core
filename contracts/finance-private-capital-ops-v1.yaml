@@ -1,0 +1,77 @@
+product:
+  name: Finance Private Capital Ops
+  version: 1.0
+  owner: analytics
+  description: "Private-capital GP Gold product: sourcing, deployment, portfolio, co-investment, fundraising progress, manager economics, and program funnel (aggregated by reporting entity)."
+  domain: Funds
+  type: Derived
+
+schema:
+  table: gold.finance_private_capital_ops
+  primary_key: reporting_entity_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: reporting_entity_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: investment_close_rate
+      type: double
+      required: false
+    - name: average_investment_size
+      type: double
+      required: false
+    - name: new_investments_count
+      type: double
+      required: false
+    - name: qualified_opportunities_count
+      type: double
+      required: false
+    - name: active_portfolio_company_count
+      type: double
+      required: false
+    - name: follow_on_investment_rate
+      type: double
+      required: false
+    - name: portfolio_write_down_rate
+      type: double
+      required: false
+    - name: co_investment_participation_rate
+      type: double
+      required: false
+    - name: fundraising_commitment_progress
+      type: double
+      required: false
+    - name: management_fee_operating_coverage
+      type: double
+      required: false
+    - name: program_investment_conversion_rate
+      type: double
+      required: false
+    - name: inbound_attributed_pipeline_share
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any LP, founder, deal, or investor-identifiable field; direct Bronze access"

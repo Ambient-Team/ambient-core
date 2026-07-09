@@ -1,0 +1,92 @@
+product:
+  name: Finance Funds
+  version: 1.1
+  owner: analytics
+  description: "Pooled and institutional fund Gold product: AUM, flows, fee yields, closed-end performance, fund risk, and custody (aggregated by fund vehicle)."
+  domain: Funds
+  type: Derived
+
+schema:
+  table: gold.finance_funds
+  primary_key: fund_vehicle_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: fund_vehicle_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: book_type
+      type: string
+      required: true
+    - name: assets_under_management
+      type: double
+      required: false
+    - name: net_flow_rate
+      type: double
+      required: false
+    - name: management_fee_yield
+      type: double
+      required: false
+    - name: performance_fee_share
+      type: double
+      required: false
+    - name: fund_irr
+      type: double
+      required: false
+    - name: tvpi
+      type: double
+      required: false
+    - name: dpi
+      type: double
+      required: false
+    - name: rvpi
+      type: double
+      required: false
+    - name: capital_deployment_rate
+      type: double
+      required: false
+    - name: fund_leverage_ratio
+      type: double
+      required: false
+    - name: liquidity_gate_frequency
+      type: double
+      required: false
+    - name: strategy_return_volatility
+      type: double
+      required: false
+    - name: assets_under_custody
+      type: double
+      required: false
+    - name: custody_fee_yield
+      type: double
+      required: false
+    - name: settlement_fail_rate
+      type: double
+      required: false
+    - name: safekeeping_asset_growth
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any LP, client, or investor-identifiable field; direct Bronze access"

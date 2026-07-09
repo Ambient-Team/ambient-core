@@ -1,0 +1,83 @@
+product:
+  name: Finance Consumer Finance
+  version: 1.0
+  owner: analytics
+  description: "Consumer lending, BNPL, embedded finance, payments, and residential mortgage lender book Gold product by product_line. No account or borrower identifiers."
+  domain: Consumer Finance
+  type: Derived
+
+schema:
+  table: gold.finance_consumer_finance
+  primary_key: consumer_finance_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: consumer_finance_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: product_line
+      type: string
+      required: true
+    - name: portfolio_yield
+      type: double
+      required: false
+    - name: net_charge_off_rate
+      type: double
+      required: false
+    - name: delinquency_rate_30d
+      type: double
+      required: false
+    - name: origination_volume_growth
+      type: double
+      required: false
+    - name: payment_volume
+      type: double
+      required: false
+    - name: bnpl_origination_growth
+      type: double
+      required: false
+    - name: embedded_finance_revenue_share
+      type: double
+      required: false
+    - name: rtp_payment_volume
+      type: double
+      required: false
+    - name: merchant_acquiring_volume
+      type: double
+      required: false
+    - name: mortgage_portfolio_yield
+      type: double
+      required: false
+    - name: mortgage_delinquency_rate_30d
+      type: double
+      required: false
+    - name: mortgage_weighted_average_ltv
+      type: double
+      required: false
+    - name: mortgage_origination_volume_growth
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any account or borrower-identifiable field; direct Bronze access"

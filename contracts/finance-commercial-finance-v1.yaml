@@ -1,0 +1,83 @@
+product:
+  name: Finance Commercial Finance
+  version: 1.1
+  owner: analytics
+  description: "Commercial, CRE, treasury, and B2B payment Gold product: lending yield and credit, concentration, revolver usage, treasury fees, and sustainable finance share by book_segment. Not institution-wide depository NIM."
+  domain: Commercial Finance
+  type: Derived
+
+schema:
+  table: gold.finance_commercial_finance
+  primary_key: commercial_finance_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: commercial_finance_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: book_segment
+      type: string
+      required: true
+    - name: commercial_loan_growth
+      type: double
+      required: false
+    - name: portfolio_yield
+      type: double
+      required: false
+    - name: non_performing_loan_ratio
+      type: double
+      required: false
+    - name: net_charge_off_rate
+      type: double
+      required: false
+    - name: origination_volume_growth
+      type: double
+      required: false
+    - name: delinquency_rate_30d
+      type: double
+      required: false
+    - name: weighted_average_ltv
+      type: double
+      required: false
+    - name: portfolio_dscr
+      type: double
+      required: false
+    - name: sector_concentration_index
+      type: double
+      required: false
+    - name: revolver_utilization_rate
+      type: double
+      required: false
+    - name: treasury_fee_yield
+      type: double
+      required: false
+    - name: commercial_payment_volume
+      type: double
+      required: false
+    - name: sustainable_finance_share
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any borrower-identifiable field; direct Bronze access"

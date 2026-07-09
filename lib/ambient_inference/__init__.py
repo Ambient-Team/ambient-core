@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-__version__ = "0.2.3"
+__version__ = "0.2.6"
 
 # public name -> submodule it lives in
 _PUBLIC = {

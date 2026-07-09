@@ -20,7 +20,7 @@ The **core layer** (`catalog/core/shared/core_metrics.yaml`) holds metrics share
 
 Every metric and data option carries a unique integer `id`, and uniqueness across the whole catalogue is enforced by the generator and by `scripts/check_naming.py`. Two kinds of id exist:
 
-- **Author-assigned native ids.** Each vertical's hand-written metrics occupy a small dedicated band: healthcare native ids use `900–999` (currently `911–915`), and life-sciences native ids use the `1200–1299` band. When adding a vertical, reserve a fresh band here before assigning ids.
+- **Author-assigned native ids.** Each vertical's hand-written metrics occupy a small dedicated band: healthcare native ids use `900–999` (currently `911–915`), life-sciences native ids use the `1200–1299` band, banking and fee-market verticals use `1530–1605` (split across Banking, Financial Services, and Insurance packs), retail native ids use `1670–1689`, consumer finance natives use `1720–1799`, commercial finance natives use `1760–1789` (core expansion ids `1740–1754`), aviation natives use `1820–1859`, multimodal transportation natives (rail, maritime, transit, 3PL) use `1860–1899`, **Funds** natives use `1900–1917` and GP extension natives **`1922–1939`** (core expansion ids `1970–1984`; common data-option ids `1918–1921`), and **Trusts** natives use `1940–1949`. When adding a vertical, reserve a fresh band here before assigning ids.
 - **Generated core-layer ids.** The shared core metrics are expanded into each pack with ids allocated per industry in `catalog/core/shared/core_ids.yaml`; these occupy the higher `900–1099` range and are managed by the generator rather than chosen by hand.
 
 When adding a vertical, reserve a new native band here first.
@@ -39,6 +39,65 @@ Metrics carry a `segment` field placing them within the layered model. Allowed v
 - `digital_health` — health-technology recurring revenue.
 - `rnd` — life-sciences research and development.
 - `supply_chain` — life-sciences / manufacturing production and supply.
+- `depository` — deposit-taking bank book only (NIM, deposits, loan book, regulatory capital). Lives in the **Banking** catalog pack; not investment banking or wealth.
+- `banking` — reserved segment label; prefer `depository` for new Banking-pack metrics.
+- `investment_banking` — markets and advisory businesses without deposit funding (trading and mandate fee intensity).
+- `fund` — pooled, advised, and institutional fund economics (AUM, flows, fees, closed-end performance, custody). Use the **Funds** industry pack; not a separate wealth, asset management, or private markets segment. On the same pack, segment **`operations`** holds private-capital **GP** metrics (sourcing, deployment, portfolio, co-investment, fundraising, program funnel)—aggregated at manager roll-up, not per LP or deal.
+- `trust` — trust vehicles and trust administration (FFO, payout, vehicle-level same-store NOI). Use the **Trusts** industry pack; operational property metrics stay on **Real Estate**. Do not add a `reits` segment or REITs industry class.
+- `insurance` — P&C and life insurers (combined and loss ratios, premium growth); prefer segment `property_casualty`, `life`, `health`, or `reinsurance` for new metrics.
+- `life` — life insurance benefit and mortality experience.
+- `health` — health insurance underwriting (reserved for future metrics).
+- `property_casualty` — P&C combined and loss ratios, premium growth.
+- `reinsurance` — reinsurance treaties (reserved for future metrics).
+- `consumer_lending` — unsecured consumer and card portfolios (Consumer Finance industry).
+- `commercial_lending` — C&I, middle-market, and commercial CRE loan books (Commercial Finance industry).
+- `residential_mortgage` — residential mortgage lender book (Consumer Finance industry); property-operator collateral metrics stay on Real Estate.
+- `network_carrier` — mainline passenger airlines (Aviation pack).
+- `regional_carrier` — regional and capacity-purchase flying (reserved).
+- `airport` — airport operators (aeronautical and commercial revenue).
+- `travel_distribution` — OTAs, GDS, and metasearch (Aviation pack).
+- `air_cargo` — dedicated and belly cargo (Aviation pack).
+- `mro` — maintenance, repair, and overhaul (reserved).
+- `aircraft_leasing` — lessors (reserved).
+- `road_freight` — trucking and road fleet logistics (Transportation pack).
+- `rail_freight` — freight railroads.
+- `rail_passenger` — intercity and commuter passenger rail.
+- `maritime_shipping` — ocean shipping and liner operators.
+- `public_transit` — bus and urban rail agencies.
+- `freight_forwarding` — 3PL and freight forwarders.
+
+## Lens vs entity
+
+Catalog **segments** describe business lines **within an industry pack** (the analysis lens), not SEC or statutory reportable segments unless your platform maps them intentionally one-to-one. Do not alias metrics across lenses (for example banking NIM vs real estate NOI, or road fleet utilization vs airline load factor)—each lens keeps its own keys; see analogous-concepts notes under transportation profiles in this document.
+
+**Deposits and lending** are related on a balance sheet (`banking.depository.loan_to_deposit_ratio`) but are not the same economic line: institutions can gather deposits with a thin loan book, or lend with non-deposit funding. The **Banking** pack groups institution-wide depository and funding metrics under segment `depository`; **Commercial Finance** covers commercial and CRE lender books; **Consumer Finance** covers unsecured consumer credit and residential mortgage lender books; **Real Estate** covers property operations and collateral economics for RE orgs; **Funds** covers pooled and institutional fund books (`segment: fund`) and private-capital GP operating KPIs (`segment: operations` on the same pack; Gold shape `finance-private-capital-ops-v1`); fee-based accelerator or education programs billed as subscriptions compare on **Financial Services** (`subscription` segment) as a separate tenant org when needed; **Trusts** covers REIT and trust **vehicle** investor reporting (FFO, payout)—not a separate REITs picker. Risk and payments are not separate catalog industries—embed credit, liquidity, market, and payment-volume metrics on the pack and `finance-*-v1` contract for that lens. Macro peer benchmarks stay on the platform ([benchmarking-lifecycle.md](benchmarking-lifecycle.md)), not org Gold tables. A platform may assign books to different tenant orgs rather than forcing one legal name to one catalog picker.
+
+**Gold contracts** — Each `finance-*-v1.yaml` product owns optional columns for its lens; backward-compatible column adds bump `product.version` minor (for example `1.1`) without a new filename. There is no `finance-risk-v1` or payments-industry contract; treasury and payment flows use Commercial or Consumer Finance columns where relevant.
+
+## Financial sector comparison profiles
+
+Cross-sector comparison metadata (primary revenue driver, regulatory intensity, capital light vs balance-sheet heavy, cyclicality) lives in [`catalog/core/financial_sector_profiles.yaml`](../catalog/core/financial_sector_profiles.yaml). The catalog generator exports profiles to `catalog/manifest.json` (`financialSectorProfiles`) and [`catalog/runtime/catalogSectorProfiles.js`](../catalog/runtime/catalogSectorProfiles.js). Industry packs may list `sectorProfileIds` in [`catalog/core/industries.yaml`](../catalog/core/industries.yaml).
+
+Allowed enum values in profiles include `globalAssetConcentration` (`highest`, `very_high`, `moderate`, `low_moderate`, `lowest`), `regulatoryIntensity` (`extremely_high`, `high`, `moderate_high`, `evolving`), `capitalModel` (`balance_sheet_heavy`, `capital_light`), and `cyclicality` (`highly_cyclical`, `defensive`, `mixed`).
+
+## Transportation and aviation sector comparison profiles
+
+Cross-modal comparison metadata (revenue drivers, asset intensity, regulation, cyclicality) for **Aviation** and **Transportation** lives in [`catalog/core/transportation_sector_profiles.yaml`](../catalog/core/transportation_sector_profiles.yaml). The catalog generator exports profiles to `catalog/manifest.json` (`transportationSectorProfiles`) and [`catalog/runtime/catalogSectorProfiles.js`](../catalog/runtime/catalogSectorProfiles.js) as `TRANSPORTATION_SECTOR_PROFILES`. Industry packs list `sectorProfileIds` in [`catalog/core/industries.yaml`](../catalog/core/industries.yaml).
+
+**Integer ID bands (native metrics):** Aviation natives use **1820–1859** (data options through **1834**); Aviation core expansion ids use **1800–1814**; multimodal Transportation natives (rail, maritime, transit, 3PL) use **1860–1899**. Road-fleet legacy natives in the Transportation pack retain author ids **10–14** with segment `road_freight`.
+
+### Analogous concepts across modes
+
+Some KPI themes recur (utilization, energy, punctuality, unit economics), but **definitions and catalog keys are modal-specific**. Do not add aliases that equate road `fleet_utilization` to airline `load_factor`, or road `on_time_delivery_rate` to aviation `on_time_performance`.
+
+- **Capacity use** — road `fleet_utilization` (time in use); aviation `load_factor` (RPM/ASM); maritime `vessel_utilization`; rail `train_utilization`.
+- **Energy** — road `fuel_efficiency` (MPG); aviation `fuel_cost_pct_operating`; maritime bunker cost flows through TCE and voyage economics.
+- **Reliability** — road `on_time_delivery_rate`; aviation, rail, transit, and forwarder each carry their own OTP or OTD slugs.
+- **Unit economics** — road `maintenance_cost_per_mile`; aviation `casm` and `rasm`; maritime `time_charter_equivalent`; transit `ridership_per_vehicle_hour`.
+- **Corporate close** — every industry pack still exposes `industry.core.*` from the shared core layer for comparable financial close metrics.
+- **Subscription SaaS** — logistics and telematics SaaS metrics remain on the **Transportation** pack (`subscription` segment). Air **travel_distribution** uses booking take-rate and conversion metrics on the **Aviation** pack.
+
+**Catalog industries:** **Aviation** (air ecosystem) and **Transportation (multimodal)** (surface freight, rail, maritime, public transit, forwarding) are separate pickers, analogous to Banking versus Financial Services.
 
 ## Alias policy
 
