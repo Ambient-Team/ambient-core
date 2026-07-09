@@ -1,0 +1,65 @@
+﻿# Receives ambient_hub_sync from Ambient-Team/ambient-systems hub.
+# Opens a PR on repository_dispatch; does not push to main.
+# Secret on spoke: HUB_FETCH_TOKEN with read access to ambient-systems.
+
+
+name: Hub sync receiver
+
+on:
+  repository_dispatch:
+    types:
+      - ambient_hub_sync
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show payload
+        run: |
+          echo "sourceRepo=${{ github.event.client_payload.sourceRepo }}"
+          echo "sourceSha=${{ github.event.client_payload.sourceSha }}"
+          echo "ruleIds=${{ github.event.client_payload.ruleIds }}"
+          echo "payloadProfiles=${{ github.event.client_payload.payloadProfiles }}"
+
+      - name: Check out spoke default branch
+        uses: actions/checkout@v4
+
+      - name: Create sync branch
+        id: branch
+        run: |
+          SHORT="${{ github.event.client_payload.sourceSha }}"
+          SHORT="${SHORT:0:7}"
+          BRANCH="hub-sync/$(date -u +%Y%m%d)-${SHORT}"
+          git checkout -b "$BRANCH"
+          echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Apply hub sync
+        env:
+          HUB_FETCH_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+        run: |
+          echo "TODO: fetch hub files at ${{ github.event.client_payload.sourceSha }} and apply updates."
+          echo "See MAPPING.md in ambient-systems for payload fields."
+          # Example marker file for review-only PRs until real sync is implemented:
+          mkdir -p .hub-sync
+          printf '%s\n' "${{ github.event.client_payload.sourceSha }}" > .hub-sync/last-hub-sha.txt
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit; skipping PR."
+            exit 0
+          fi
+          git commit -m "hub sync from ${{ github.event.client_payload.sourceSha }}"
+          git push -u origin "${{ steps.branch.outputs.name }}"
+          gh pr create \
+            --title "Hub sync ${{ github.event.client_payload.sourceSha }}" \
+            --body "Automated hub sync from ambient-systems. Rule ids: ${{ github.event.client_payload.ruleIds }}. Review before merge."
