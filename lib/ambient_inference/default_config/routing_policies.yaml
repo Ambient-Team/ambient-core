@@ -18,8 +18,20 @@ policies:
   general_chat:
     primary_model_id: qwen2.5-32b-instruct
     fallback_chain:
+      - qwen2.5-coder-14b
       - deepseek-r1-distill-qwen-14b
+      - phi-4-mini
       - qwen2.5-1.5b-instruct
+
+  summarizer_fast:
+    primary_model_id: phi-4-mini
+    fallback_chain:
+      - qwen2.5-1.5b-instruct
+
+  auditor_chat:
+    primary_model_id: phi-4-mini
+    fallback_chain:
+      - gemma3-12b-instruct
 
   classifier:
     primary_model_id: qwen2.5-1.5b-instruct

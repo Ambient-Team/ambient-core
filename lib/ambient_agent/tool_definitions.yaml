@@ -1,0 +1,69 @@
+# Core-only agent tools (MIT). Platform-specific tools register at runtime — see docs/AGENTS.md.
+tools:
+  - id: catalog_list_metrics
+    description: List reference catalog metrics from manifest.json (optional industry filter).
+    parameters:
+      industry:
+        type: string
+        required: false
+      limit:
+        type: integer
+        required: false
+        default: 50
+    returns: object
+    requires_env: [AMBIENT_CORE_ROOT]
+
+  - id: catalog_resolve_metric
+    description: Resolve a single metric by id from the reference catalog manifest.
+    parameters:
+      metric_id:
+        type: string
+        required: true
+    returns: object
+    requires_env: [AMBIENT_CORE_ROOT]
+
+  - id: contracts_list
+    description: List data-product contract YAML filenames in the contracts directory.
+    parameters: {}
+    returns: array
+
+  - id: contracts_validate
+    description: Validate one contract file by basename (e.g. quality-v1.1.yaml) or all contracts if omitted.
+    parameters:
+      contract_file:
+        type: string
+        required: false
+    returns: object
+
+  - id: structured_json
+    description: Parse a JSON string and return the decoded object (validation helper).
+    parameters:
+      text:
+        type: string
+        required: true
+    returns: object
+
+  - id: run_context_append
+    description: Append a labeled observation to the in-memory agent trace for this run.
+    parameters:
+      label:
+        type: string
+        required: true
+      payload:
+        type: object
+        required: true
+    returns: object
+
+  - id: maestro_run
+    description: Run Maestro HTTP /v1/runs (mode + messages). Usually invoked by the agent loop, not manually.
+    parameters:
+      mode:
+        type: string
+        required: true
+      messages:
+        type: array
+        required: true
+      org_id:
+        type: string
+        required: false
+    returns: object

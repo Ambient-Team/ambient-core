@@ -7,7 +7,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 1. [USAGE.md](USAGE.md) — install, extras, and command recipes.
 2. [INTEGRATING.md](INTEGRATING.md) — pin a tagged release in another repo (pip, submodule, CI env vars).
 3. [inference-layer.md](inference-layer.md) — run and extend Maestro.
-4. [AGENTS.md](AGENTS.md) — agentic workflows: Maestro vs `ambient_agent` vs your app.
+4. [AGENTS.md](AGENTS.md) — agent profiles, core tools, plan-execute loop (`tool_definitions.yaml`, `agent_profiles.yaml`).
 
 ## Understand the system
 

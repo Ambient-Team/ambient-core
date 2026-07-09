@@ -31,6 +31,8 @@ cd ambient-core
 py -3.12 -m venv .venv
 pip install -e ".[all]"
 validate-contracts
+validate-agent-config
+validate-inference-registry
 pytest
 ```
 

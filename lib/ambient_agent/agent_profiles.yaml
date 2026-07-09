@@ -1,0 +1,72 @@
+# Reusable agent profiles — plan-execute over core tools, then Maestro synthesis.
+profiles:
+  researcher:
+    description: Gathers catalog and contract context for a research question; council synthesis.
+    maestro_mode: council_research
+    tool_ids:
+      - catalog_list_metrics
+      - catalog_resolve_metric
+      - contracts_list
+      - run_context_append
+    max_tool_rounds: 1
+    synthesis_prompt_template: |
+      You are a research assistant. Use the observations below to answer the user question.
+      Observations:
+      {observations}
+      User question: {user_message}
+
+  analyst:
+    description: Resolves catalog metrics and structured facts for analytical questions.
+    maestro_mode: single_chat
+    tool_ids:
+      - catalog_resolve_metric
+      - structured_json
+      - run_context_append
+    max_tool_rounds: 1
+    synthesis_prompt_template: |
+      You are a financial and operational analyst. Answer using the observations.
+      Observations:
+      {observations}
+      User question: {user_message}
+
+  auditor:
+    description: Checks contract shapes and lists governed data products.
+    maestro_mode: single_chat
+    tool_ids:
+      - contracts_list
+      - contracts_validate
+      - run_context_append
+    max_tool_rounds: 1
+    synthesis_prompt_template: |
+      You are a governance auditor. Summarize compliance-related findings from the observations.
+      Observations:
+      {observations}
+      User question: {user_message}
+
+  summarizer:
+    description: Produces executive summaries from catalog context.
+    maestro_mode: council_research
+    tool_ids:
+      - catalog_list_metrics
+      - run_context_append
+    max_tool_rounds: 1
+    synthesis_prompt_template: |
+      Produce a concise executive summary for leadership.
+      Observations:
+      {observations}
+      User question: {user_message}
+
+  optimizer:
+    description: Explores contracts and catalog for optimization-style reasoning (neutral, no tenant data).
+    maestro_mode: council_research
+    tool_ids:
+      - contracts_list
+      - catalog_list_metrics
+      - catalog_resolve_metric
+      - run_context_append
+    max_tool_rounds: 1
+    synthesis_prompt_template: |
+      Suggest optimization opportunities grounded only in the observations (no invented metrics).
+      Observations:
+      {observations}
+      User question: {user_message}

@@ -1,4 +1,6 @@
-# Open-weight model registry. Backend URLs are env var names only (never secrets in Git).
+# Recommended open-weight registry (2026). Same entries as default models.yaml.
+# Point MAESTRO_MODELS_FILE at this file only if you want an explicit "recommended" profile name;
+# otherwise the bundled models.yaml already includes these ids.
 models:
   - id: qwen2.5-1.5b-instruct
     family: qwen
