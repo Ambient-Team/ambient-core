@@ -18,9 +18,22 @@ jobs:
       - name: Resolve hub coordinates
         id: hub
         env:
-          PAYLOAD_SHA: ${{ github.event.client_payload.sha }}
-          PAYLOAD_REPO: ${{ github.event.client_payload.source_repo }}
+          CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
+          PAYLOAD_REPO=$(echo "$CLIENT_PAYLOAD" | jq -r '
+            if (.data | type) == "object" then .data.source_repo
+            elif .source_repo != null then .source_repo
+            elif .sourceRepo != null then .sourceRepo
+            else empty end')
+          PAYLOAD_SHA=$(echo "$CLIENT_PAYLOAD" | jq -r '
+            if (.data | type) == "object" then .data.sha
+            elif .sha != null then .sha
+            elif .sourceSha != null then .sourceSha
+            else empty end')
+          if [ -z "$PAYLOAD_REPO" ] || [ -z "$PAYLOAD_SHA" ]; then
+            echo "error: could not resolve source_repo and sha from client_payload" >&2
+            exit 1
+          fi
           SHORT=$(printf '%.7s' "$PAYLOAD_SHA")
           echo "repo=$PAYLOAD_REPO" >> "$GITHUB_OUTPUT"
           echo "sha=$PAYLOAD_SHA" >> "$GITHUB_OUTPUT"
