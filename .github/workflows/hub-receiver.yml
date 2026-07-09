@@ -1,5 +1,3 @@
-# Receives ambient_hub_sync from EngineerID/ambient-systems hub.
-
 name: Hub sync receiver
 
 on:
@@ -15,15 +13,18 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout spoke repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Resolve hub coordinates
         id: hub
+        env:
+          PAYLOAD_SHA: ${{ github.event.client_payload.sha }}
+          PAYLOAD_REPO: ${{ github.event.client_payload.source_repo }}
         run: |
-          echo "repo=${{ github.event.client_payload.source_repo }}" >> "$GITHUB_OUTPUT"
-          echo "sha=${{ github.event.client_payload.sha }}" >> "$GITHUB_OUTPUT"
-          echo "rules=${{ github.event.client_payload.ruleIds }}" >> "$GITHUB_OUTPUT"
+          SHORT="${PAYLOAD_SHA:0:7}"
+          echo "repo=$PAYLOAD_REPO" >> "$GITHUB_OUTPUT"
+          echo "sha=$PAYLOAD_SHA" >> "$GITHUB_OUTPUT"
+          echo "short=$SHORT" >> "$GITHUB_OUTPUT"
 
       - name: Fetch real files from hub
         env:
@@ -31,7 +32,6 @@ jobs:
         run: |
           SRC_REPO="${{ steps.hub.outputs.repo }}"
           SRC_SHA="${{ steps.hub.outputs.sha }}"
-          echo "Authenticating to hub ($SRC_REPO) at commit $SRC_SHA"
           FILES_TO_SYNC=(
             "MAPPING.md:docs/hub/upstream-mapping.md"
             "company/strategy/03_data-product-contracts.md:docs/hub/data-product-contracts-intent.md"
@@ -39,28 +39,22 @@ jobs:
           for map in "${FILES_TO_SYNC[@]}"; do
             HUB_PATH="${map%%:*}"
             LOCAL_PATH="${map##*:}"
-            echo "Fetching $HUB_PATH -> $LOCAL_PATH"
             mkdir -p "$(dirname "$LOCAL_PATH")"
-            HTTP_STATUS=$(curl -s -w "%{http_code}" -o "$LOCAL_PATH" \
+            HTTP_STATUS=$(curl -s -w "%{{http_code}}" -o "$LOCAL_PATH" \
               -H "Authorization: token $HUB_TOKEN" \
               -H "Accept: application/vnd.github.v3.raw" \
               -L "https://api.github.com/repos/$SRC_REPO/contents/$HUB_PATH?ref=$SRC_SHA")
             if [ "$HTTP_STATUS" -ne 200 ]; then
-              echo "Error fetching $HUB_PATH (HTTP $HTTP_STATUS). Check path or HUB_FETCH_TOKEN."
+              echo "Error fetching $HUB_PATH HTTP $HTTP_STATUS"
               exit 1
             fi
-            echo "Synced $HUB_PATH"
           done
 
       - name: Create pull request for review
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: chore: sync upstream from ambient-systems hub
-          branch: hub-sync/${{ steps.hub.outputs.sha }}
+          branch: hub-sync/${{ steps.hub.outputs.short }}
           title: Hub sync updates from ambient-systems
           body: |
-            Automated file sync from the hub.
-            Source repository: ${{ steps.hub.outputs.repo }}
-            Upstream commit: ${{ steps.hub.outputs.sha }}
-            Rule ids: ${{ steps.hub.outputs.rules }}
-            Review before merge.
+            Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}.
