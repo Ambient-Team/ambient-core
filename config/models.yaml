@@ -1,0 +1,37 @@
+# Open-weight model registry. Backend URLs are env var names only (never secrets in Git).
+models:
+  - id: qwen2.5-1.5b-instruct
+    family: qwen
+    license: apache-2.0
+    capabilities: [chat, classifier]
+    context_tokens: 32768
+    backend_env: MAESTRO_BACKEND_CLASSIFIER_URL
+    backend_model: qwen2.5:1.5b-instruct
+    cost_tier: low
+
+  - id: qwen2.5-32b-instruct
+    family: qwen
+    license: apache-2.0
+    capabilities: [chat, reasoning, long_context]
+    context_tokens: 32768
+    backend_env: MAESTRO_BACKEND_QWEN32B_URL
+    backend_model: qwen2.5:32b-instruct
+    cost_tier: medium
+
+  - id: deepseek-r1-distill-qwen-14b
+    family: deepseek
+    license: mit
+    capabilities: [chat, reasoning]
+    context_tokens: 65536
+    backend_env: MAESTRO_BACKEND_DEEPSEEK14B_URL
+    backend_model: deepseek-r1:14b
+    cost_tier: low
+
+  - id: llama-3.3-70b-instruct
+    family: llama
+    license: llama3.3
+    capabilities: [chat, reasoning, synthesis]
+    context_tokens: 128000
+    backend_env: MAESTRO_BACKEND_LLAMA70B_URL
+    backend_model: llama3.3:70b
+    cost_tier: high
