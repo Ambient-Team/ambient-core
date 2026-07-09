@@ -487,7 +487,6 @@ templates:
     frequency: monthly
     tech: FINTECH
     input: true
-    slug: headcount
 industryIds:
   Healthcare:
     current-ratio: 930

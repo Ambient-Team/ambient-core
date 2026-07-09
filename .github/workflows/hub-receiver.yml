@@ -12,6 +12,8 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      SYNC_BRANCH: hub-sync/${{ steps.hub.outputs.short }}
     steps:
       - uses: actions/checkout@v4
 
@@ -61,21 +63,44 @@ jobs:
             -L "https://api.github.com/repos/${{ steps.hub.outputs.repo }}/contents/company/strategy/03_data-product-contracts.md?ref=${{ steps.hub.outputs.sha }}")
           test "$HTTP_STATUS" -eq 200
 
+      - name: Hygiene on hub mirror markdown
+        run: |
+          set -euo pipefail
+          if [ -d docs/hub ]; then
+            find docs/hub -type f -name '*.md' -print0 | xargs -0 sed -i 's/[[:space:]]*$//'
+          fi
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Check hub markdown prose
+        run: pip install -e ".[all]" && python scripts/check_markdown_prose.py
 
       - name: Commit sync branch
         id: commit
+        env:
+          HUB_SYNC_PUSH_TOKEN: ${{ secrets.HUB_SYNC_PUSH_TOKEN }}
         run: |
+          set -euo pipefail
+          SYNC_BRANCH="hub-sync/${{ steps.hub.outputs.short }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "hub-sync/${{ steps.hub.outputs.short }}"
+          git checkout -b "${SYNC_BRANCH}"
           git add -A
           if git diff --staged --quiet; then
             echo "empty=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "hub sync from ${{ steps.hub.outputs.sha }}"
-          git push -u origin "hub-sync/${{ steps.hub.outputs.short }}"
+          if [ -n "${HUB_SYNC_PUSH_TOKEN:-}" ]; then
+            git push "https://x-access-token:${HUB_SYNC_PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${SYNC_BRANCH}"
+          else
+            echo "::warning::HUB_SYNC_PUSH_TOKEN not set; CI may not run on the PR."
+            git push -u origin "${SYNC_BRANCH}"
+          fi
           echo "empty=false" >> "$GITHUB_OUTPUT"
+          echo "branch=${SYNC_BRANCH}" >> "$GITHUB_OUTPUT"
 
       - name: Open pull request
         if: steps.commit.outputs.empty == 'false'
@@ -88,5 +113,17 @@ jobs:
               title: `Hub sync ${{ steps.hub.outputs.short }}`,
               head: `hub-sync/${{ steps.hub.outputs.short }}`,
               base: 'main',
-              body: `Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}.`
+              body: `Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}. Wait for CI on this PR before merge.`
             });
+
+      - name: Trigger CI on hub-sync branch
+        if: steps.commit.outputs.empty == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.HUB_SYNC_PUSH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "HUB_SYNC_PUSH_TOKEN not set; skip CI kick."
+            exit 0
+          fi
+          gh workflow run ci.yml --ref "hub-sync/${{ steps.hub.outputs.short }}"

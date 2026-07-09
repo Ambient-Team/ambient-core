@@ -60,7 +60,7 @@ def test_dependency_order_and_cycle_detection():
 
 def test_core_formulas_compute_from_catalog():
     templates = yaml.safe_load(CORE.read_text(encoding="utf-8"))["templates"]
-    metrics = [dict(slug=k, **v) for k, v in templates.items()]
+    metrics = [{**v, "slug": k} for k, v in templates.items()]
     inputs = {
         "current_assets": 500, "current_liabilities": 250, "inventory": 100,
         "revenue": 1000, "cogs": 600, "operating_income": 200, "ebitda": 260,
