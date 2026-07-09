@@ -30,18 +30,18 @@ jobs:
         env:
           HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
         run: |
-          mkdir -p "$(dirname "docs/hub/upstream-mapping.md")"
+          mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/upstream-mapping.md" \
             -H "Authorization: token $HUB_TOKEN" \
             -H "Accept: application/vnd.github.v3.raw" \
             -L "https://api.github.com/repos/${{ steps.hub.outputs.repo }}/contents/MAPPING.md?ref=${{ steps.hub.outputs.sha }}")
           test "$HTTP_STATUS" -eq 200
 
-      - name: Fetch data product contracts intent
+      - name: Fetch contracts intent
         env:
           HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
         run: |
-          mkdir -p "$(dirname "docs/hub/data-product-contracts-intent.md")"
+          mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/data-product-contracts-intent.md" \
             -H "Authorization: token $HUB_TOKEN" \
             -H "Accept: application/vnd.github.v3.raw" \
@@ -49,21 +49,31 @@ jobs:
           test "$HTTP_STATUS" -eq 200
 
 
-      - name: Open pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Commit sync branch
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "hub-sync/${{ steps.hub.outputs.short }}"
           git add -A
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "empty=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit --trailer "Co-authored-by: Cursor <cursoragent@cursor.com>" -m "hub sync from ${{ steps.hub.outputs.sha }}"
-          BRANCH="hub-sync/${{ steps.hub.outputs.short }}"
-          git checkout -b "$BRANCH
+          git commit -m "hub sync from ${{ steps.hub.outputs.sha }}"
+          git push -u origin "hub-sync/${{ steps.hub.outputs.short }}"
+          echo "empty=false" >> "$GITHUB_OUTPUT"
 
-Made with [Cursor](https://cursor.com)"
-          git push -u origin "$BRANCH"
-          gh pr create --title "Hub sync ${{ steps.hub.outputs.short }}" --body "Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}."
+      - name: Open pull request
+        if: steps.commit.outputs.empty == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Hub sync ${{ steps.hub.outputs.short }}`,
+              head: `hub-sync/${{ steps.hub.outputs.short }}`,
+              base: 'main',
+              body: `Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}.`
+            });
