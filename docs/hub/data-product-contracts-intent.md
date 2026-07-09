@@ -1,11 +1,11 @@
 # Ambient Systems Data Product Contracts
 
-**Version:** 3  
-**Date:** July 2, 2026  
-**Author:** Ivan Damnjanovic  
-**Status:** Living catalog — production contracts  
-**Owner:** Platform Technical Team  
-**Linked roadmap:** 02_platform-roadmap.md (Horizon 1)  
+**Version:** 3
+**Date:** July 2, 2026
+**Author:** Ivan Damnjanovic
+**Status:** Living catalog — production contracts
+**Owner:** Platform Technical Team
+**Linked roadmap:** 02_platform-roadmap.md (Horizon 1)
 **YAML source of truth:** `contracts/` in Ambient-Team/ambient-core — https://github.com/Ambient-Team/ambient-core/tree/v0.2.6/contracts (platform pins tag **v0.2.6** via submodule; see ambient-systems-platform docs/ambient-core.md)
 
 ---
@@ -50,45 +50,45 @@ These core contracts map to the Firestore Gold mirror under each org gold collec
 
 ### Tenant Metrics Product (v1)
 
-**YAML:** `contracts/tenant-metrics-v1.yaml`  
-**Layer:** Silver  
-**Purpose:** Cleansed, deduplicated, GDPR-pseudonymized, range-validated tenant metrics.  
+**YAML:** `contracts/tenant-metrics-v1.yaml`
+**Layer:** Silver
+**Purpose:** Cleansed, deduplicated, GDPR-pseudonymized, range-validated tenant metrics.
 **Consumption:** Internal (Gold KPIs) + authorized BI tools.
 
 ### Org KPI Product (v1)
 
-**YAML:** `contracts/org-kpi-v1.yaml`  
-**Layer:** Gold  
-**Purpose:** Vertical-specific KPIs (DSCR, Cap Rate, NOI, cost and efficiency metrics, etc.) using industry-standard methodologies.  
+**YAML:** `contracts/org-kpi-v1.yaml`
+**Layer:** Gold
+**Purpose:** Vertical-specific KPIs (DSCR, Cap Rate, NOI, cost and efficiency metrics, etc.) using industry-standard methodologies.
 **Consumption:** React via Firestore Consumption Adapter; Tableau/Power BI via direct Gold where policy allows.
 
 ### Data Quality and Lineage Product (v1)
 
-**YAML:** `contracts/quality-v1.yaml`  
-**Layer:** Gold  
-**Purpose:** Per-org, per-run ISO 8000-aligned quality scorecard and audit trail.  
+**YAML:** `contracts/quality-v1.yaml`
+**Layer:** Gold
+**Purpose:** Per-org, per-run ISO 8000-aligned quality scorecard and audit trail.
 **Consumption:** Internal monitoring + consumption-layer pipeline health views.
 
 ### Optimization Opportunity Product (v1)
 
-**YAML:** `contracts/opportunity-v1.yaml`  
-**Layer:** Gold  
-**Purpose:** Governed optimization recommendations with provenance and confidence scores (WIPO WO2022240365 reference lineage).  
+**YAML:** `contracts/opportunity-v1.yaml`
+**Layer:** Gold
+**Purpose:** Governed optimization recommendations with provenance and confidence scores (WIPO WO2022240365 reference lineage).
 **Status:** Contract live; full platform workflow materialization on Horizon 2 (see core docs/CORE_VS_PLATFORM.md).
 
 ### Observability Pipeline Product (v1)
 
-**YAML:** `contracts/observability-pipeline-v1.yaml`  
-**Layer:** Gold  
-**Purpose:** Pipeline health, freshness, run history, anomaly detection.  
-**Consumption:** React data-pipeline views via Firestore sync; alerting and BI tools.  
+**YAML:** `contracts/observability-pipeline-v1.yaml`
+**Layer:** Gold
+**Purpose:** Pipeline health, freshness, run history, anomaly detection.
+**Consumption:** React data-pipeline views via Firestore sync; alerting and BI tools.
 **Note:** Audit-oriented fields may use logical contract `observability-pipeline-audit-v1` in the registry.
 
 ### Operational Financial Bridge Product (v1)
 
-**YAML:** `contracts/operational-financial-bridge-v1.yaml`  
-**Layer:** Gold  
-**Purpose:** Operational-to-financial alignment and variance signals for FP&A consumption.  
+**YAML:** `contracts/operational-financial-bridge-v1.yaml`
+**Layer:** Gold
+**Purpose:** Operational-to-financial alignment and variance signals for FP&A consumption.
 **Consumption:** Firestore mirror + BI paths per contract.
 
 ---
