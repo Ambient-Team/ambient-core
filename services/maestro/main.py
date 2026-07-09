@@ -8,6 +8,7 @@ from typing import Annotated, AsyncIterator
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
+from ambient_inference import __version__ as AMBIENT_VERSION
 from ambient_inference.orchestrator import MaestroOrchestrator
 from ambient_inference.registry import ModelRegistry
 from ambient_inference.schemas import CreateRunRequest, RunEvent, RunRecord
@@ -22,10 +23,10 @@ async def lifespan(app: FastAPI):
     orchestrator = init_app_state()
     app.state.orchestrator = orchestrator
     yield
-    await orchestrator._council._gateway.aclose()  # noqa: SLF001
+    await orchestrator.aclose()
 
 
-app = FastAPI(title="Ambient Maestro", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="Ambient Maestro", version=AMBIENT_VERSION, lifespan=lifespan)
 app.add_middleware(MaxRequestBodyMiddleware, max_bytes=settings.max_request_body_bytes)
 
 
@@ -94,7 +95,7 @@ async def create_run_stream(
     queue: asyncio.Queue[RunEvent | None] = asyncio.Queue()
 
     async def fanout(event: RunEvent) -> None:
-        orchestrator._store.append_event(event)  # noqa: SLF001
+        orchestrator.store.append_event(event)
         await queue.put(event)
 
     async def runner() -> None:

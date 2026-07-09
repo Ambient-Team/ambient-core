@@ -3,8 +3,7 @@ metrics:
   MfgOee901CatalogMetricKey01:
     id: 901
     name: Overall Equipment Effectiveness (OEE)
-    description: Composite utilization of manufacturing equipment (availability ×
-      performance × quality).
+    description: Composite utilization of manufacturing equipment (availability × performance × quality).
     industry: Manufacturing
     type: Operational
     unit: '%'
@@ -26,8 +25,15 @@ metrics:
     benchmarkKey: oee
     frequency: weekly
     higherIsBetter: true
-    fpaWorkflow: Capacity planning — ties shop-floor efficiency to unit economics
-      and capex cases.
+    fpaWorkflow: Capacity planning — ties shop-floor efficiency to unit economics and capex cases.
+    segment: operations
+    slug: oee
+    calc:
+      expr: availability * performance * quality
+      inputs:
+      - availability
+      - performance
+      - quality
   MfgScrap902CatalogMetricKey02:
     id: 902
     name: Scrap Rate
@@ -52,6 +58,13 @@ metrics:
     frequency: weekly
     higherIsBetter: false
     fpaWorkflow: Margin protection — scrap drives COGS variance and customer chargebacks.
+    segment: operations
+    slug: scrap_rate
+    calc:
+      expr: scrapped_units / total_units * 100
+      inputs:
+      - scrapped_units
+      - total_units
   MfgInvTurn903CatalogMetricKey03:
     id: 903
     name: Inventory Turnover
@@ -73,6 +86,13 @@ metrics:
     frequency: monthly
     higherIsBetter: true
     fpaWorkflow: Working-capital review — links ops throughput to cash tied in stock.
+    segment: financial
+    slug: inventory_turnover
+    calc:
+      expr: cogs / average_inventory
+      inputs:
+      - cogs
+      - average_inventory
   MfgDownt904CatalogMetricKey04:
     id: 904
     name: Unplanned Downtime
@@ -92,8 +112,10 @@ metrics:
     tech: DEEP TECH
     frequency: weekly
     higherIsBetter: false
-    fpaWorkflow: Ops-to-finance bridge — downtime explains revenue and labor efficiency
-      gaps.
+    fpaWorkflow: Ops-to-finance bridge — downtime explains revenue and labor efficiency gaps.
+    segment: operations
+    slug: unplanned_downtime
+    input: true
   MfgUnitCogs905CatalogMetricKey05:
     id: 905
     name: Unit Cost of Goods Sold
@@ -114,8 +136,14 @@ metrics:
     validationRule: currency
     frequency: monthly
     higherIsBetter: false
-    fpaWorkflow: Pricing and margin — baseline for make-vs-buy and contract manufacturing
-      bids.
+    fpaWorkflow: Pricing and margin — baseline for make-vs-buy and contract manufacturing bids.
+    segment: financial
+    slug: unit_cogs
+    calc:
+      expr: total_manufacturing_cogs / units_produced
+      inputs:
+      - total_manufacturing_cogs
+      - units_produced
   Allmanufacturingsaas-mrr:
     datasource:
     - Subscription billing records
@@ -125,7 +153,7 @@ metrics:
     industry: Manufacturing
     industryTags:
     - SaaS
-    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
     name: Monthly Recurring Revenue (MRR)
     sensorFieldData:
     - Not Applicable
@@ -142,8 +170,14 @@ metrics:
       hardMax: 1000000000
     validationRule: currency
     benchmarkKey: mrr
-    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
-      model and ARR bridge.
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
   Allmanufacturingsaas-arr:
     datasource:
     - Subscription billing records
@@ -153,7 +187,7 @@ metrics:
     industry: Manufacturing
     industryTags:
     - SaaS
-    methodology: ARR = MRR Ã— 12
+    methodology: ARR = MRR × 12
     name: Annual Recurring Revenue (ARR)
     sensorFieldData:
     - Not Applicable
@@ -170,20 +204,22 @@ metrics:
       hardMax: 10000000000
     validationRule: currency
     benchmarkKey: arr
-    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
-      boards and investors.
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
   Allmanufacturingsaas-nrr:
     datasource:
     - Subscription billing records
     - Product usage logs
-    description: Revenue retained and expanded from existing customers, net of churn
-      and contraction.
+    description: Revenue retained and expanded from existing customers, net of churn and contraction.
     id: 1025
     industry: Manufacturing
     industryTags:
     - SaaS
-    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
-      MRR) Ã— 100
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100
     name: Net Revenue Retention (NRR)
     sensorFieldData:
     - Not Applicable
@@ -200,8 +236,16 @@ metrics:
       hardMax: 300
     validationRule: percentage_unbounded
     benchmarkKey: nrr
-    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
-      SaaS growth quality.
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
   Allmanufacturingsaas-gross-churn:
     datasource:
     - Subscription billing records
@@ -211,7 +255,7 @@ metrics:
     industry: Manufacturing
     industryTags:
     - SaaS
-    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
     name: Gross Revenue Churn Rate
     sensorFieldData:
     - Not Applicable
@@ -228,8 +272,14 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_churn
-    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
-      investment case.
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
   Allmanufacturingsaas-cac:
     datasource:
     - Marketing spend records
@@ -257,8 +307,14 @@ metrics:
       hardMax: 10000000
     validationRule: currency
     benchmarkKey: cac
-    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
-      allocation.
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
   Allmanufacturingsaas-ltv:
     datasource:
     - Subscription billing records
@@ -268,7 +324,7 @@ metrics:
     industry: Manufacturing
     industryTags:
     - SaaS
-    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
     name: Customer Lifetime Value (LTV)
     sensorFieldData:
     - Not Applicable
@@ -285,14 +341,20 @@ metrics:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: ltv
-    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
-      decisions.
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
   Allmanufacturingsaas-ltv-cac:
     datasource:
     - Subscription billing records
     - Marketing spend records
-    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
-      unit economics.
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.
     id: 1049
     industry: Manufacturing
     industryTags:
@@ -314,8 +376,12 @@ metrics:
       hardMax: 100
     validationRule: ratio
     benchmarkKey: ltv_cac
-    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
-      for scaling spend.
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
   Allmanufacturingsaas-rule-of-40:
     datasource:
     - Subscription billing records
@@ -342,8 +408,14 @@ metrics:
       hardMax: 200
     validationRule: percentage_unbounded
     benchmarkKey: rule_of_40
-    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
-      for SaaS planning.
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
   Allmanufacturingmfg-capacity-utilization:
     datasource:
     - Production output logs
@@ -352,8 +424,7 @@ metrics:
     industry: Manufacturing
     industryTags:
     - Manufacturing
-    methodology: Capacity Utilization = (Actual Output / Maximum Possible Output)
-      Ã— 100
+    methodology: Capacity Utilization = (Actual Output / Maximum Possible Output) × 100
     name: Capacity Utilization
     sensorFieldData:
     - Machine run-time counters
@@ -370,14 +441,19 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: capacity_utilization
-    fpaWorkflow: Capacity & capex planning â€” informs make-vs-buy and expansion investment
-      cases.
+    fpaWorkflow: Capacity & capex planning — informs make-vs-buy and expansion investment cases.
+    segment: operations
+    slug: capacity_utilization
+    calc:
+      expr: actual_output / max_output * 100
+      inputs:
+      - actual_output
+      - max_output
 dataOptions:
   MfgMes901CatalogOptionKey01:
     id: 901
     name: MES production export
-    description: Shop-floor production counts, run times, and work-order completion
-      by line or cell.
+    description: Shop-floor production counts, run times, and work-order completion by line or cell.
     industry: Manufacturing
     format: Document
     template: Transactional Data Template
@@ -397,8 +473,7 @@ dataOptions:
   MfgErp902CatalogOptionKey02:
     id: 902
     name: ERP general ledger (manufacturing)
-    description: Period GL balances for COGS, inventory, and manufacturing overhead
-      accounts.
+    description: Period GL balances for COGS, inventory, and manufacturing overhead accounts.
     industry: Manufacturing
     format: Document
     template: Financial Statement Template
@@ -417,8 +492,7 @@ dataOptions:
   MfgCmms903CatalogOptionKey03:
     id: 903
     name: CMMS maintenance logs
-    description: Work orders, downtime reason codes, and mean time between failures
-      by asset.
+    description: Work orders, downtime reason codes, and mean time between failures by asset.
     industry: Manufacturing
     format: Document
     template: Document
@@ -434,8 +508,7 @@ dataOptions:
   MfgQual904CatalogOptionKey04:
     id: 904
     name: Quality inspection logs
-    description: Lot-level pass/fail, defect codes, and rework disposition (no customer
-      PII).
+    description: Lot-level pass/fail, defect codes, and rework disposition (no customer PII).
     industry: Manufacturing
     format: Document
     template: Transactional Data Template
@@ -449,8 +522,7 @@ dataOptions:
     - 902
     lastUpdated: '2026-06-14 00:00:00'
   Allmanufacturingds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - date
     - account_code
@@ -624,8 +696,7 @@ dataOptions:
     name: CRM / Sales pipeline
     template: Document
   Allmanufacturingds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn
-      analysis.
+    description: Product engagement and usage telemetry used for retention and churn analysis.
     fields:
     - date
     - customer_id

@@ -1,20 +1,51 @@
-# Bronze intake field policy — excluded names are computed in gold OLAP, not requested at upload.
 excludeExact:
-  - net_profit
-  - gross_profit
-  - operating_income
-  - operating_profit
-  - ebit
-  - ebitda
-  - total_income
-  - total_expenses
-  - total_assets
-  - total_liabilities
-  - equity
-  - current_assets
-  - current_liabilities
+- net_profit
+- gross_profit
+- operating_income
+- operating_profit
+- ebit
+- ebitda
+- total_income
+- total_expenses
+- total_assets
+- total_liabilities
+- equity
+- current_assets
+- current_liabilities
 excludePatterns:
-  - '_margin$'
-  - '_ratio$'
-  - '_percent$'
-  - '_pct$'
+- _margin$
+- _ratio$
+- _percent$
+- _pct$
+phiExact:
+- mrn
+- medical_record_number
+- patient_name
+- patient_id
+- ssn
+- social_security
+- date_of_birth
+- dob
+- home_address
+- phone_number
+- email
+- member_id
+- subscriber_id
+- insurance_id
+- first_name
+- last_name
+- full_name
+phiPatterns:
+- mrn
+- ssn
+- patient_name
+- date_of_birth
+- ^dob$
+- member_id
+- subscriber
+- social_security
+- ^address
+- phone
+- email
+- first_name
+- last_name

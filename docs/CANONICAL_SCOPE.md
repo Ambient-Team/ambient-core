@@ -13,6 +13,7 @@ How to consume a release: [INTEGRATING.md](INTEGRATING.md).
 - **`lib/ambient_inference/`** + **`services/maestro/`** — model registry, router, council, OpenAI-compatible HTTP service, `maestro-run-v1` run contract.
 - **`config/`** — Maestro model registry and routing defaults (overridable at deploy).
 - **`lib/ambient_agent/`** — open agent extension point.
+- **`lib/ambient_calc/`** — open-source reference calculator (safe evaluator + formula execution for catalogue metrics).
 - **`lib/ambient_cli/`** — `validate-contracts`, `ambient-catalog-generate`, `validate-inference-registry`.
 - **Scripts, tests, and CI** that validate and ship the above.
 
@@ -40,5 +41,6 @@ A consumer **may** keep small **app-only** pipeline modules (for example Databri
 ## Related
 
 - [INTEGRATING.md](INTEGRATING.md) — import process for consumers
+- [CONVENTIONS.md](CONVENTIONS.md) — catalogue keys, contract versions, formats and storage
 - [ECOSYSTEM.md](ECOSYSTEM.md) — components and release flow
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs full product

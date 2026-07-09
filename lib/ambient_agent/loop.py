@@ -35,6 +35,29 @@ def _default_tool_args(tool_id: str, user_message: str) -> dict[str, Any]:
     return {}
 
 
+def _policy_context_block(context: AgentRunContext) -> str:
+    """Optional policy hints for synthesis (not authorization)."""
+    lines: list[str] = []
+    if context.contract_refs:
+        lines.append("Allowed contract refs: " + ", ".join(context.contract_refs))
+    if context.catalog_refs:
+        lines.append("Allowed catalog refs: " + ", ".join(context.catalog_refs))
+    if not lines:
+        return ""
+    return "\n".join(lines) + "\n\n"
+
+
+def _build_synthesis_user(template: str, observations: str, user_message: str) -> str:
+    """Fill profile templates without interpreting braces in user_message."""
+    if "{observations}" not in template:
+        return f"{template}\n\nObservations:\n{observations}\n\nUser question: {user_message}"
+    head, _, tail = template.partition("{observations}")
+    if "{user_message}" in tail:
+        before_user, _, after_user = tail.partition("{user_message}")
+        return head + observations + before_user + user_message + after_user
+    return head + observations + tail + f"\n\nUser question: {user_message}"
+
+
 def run_plan_execute(
     profile_id: str,
     user_message: str,
@@ -59,7 +82,8 @@ def run_plan_execute(
 
     obs_text = json.dumps(observations, indent=2, default=str)
     template = profile.get("synthesis_prompt_template", "")
-    synthesis_user = template.format(observations=obs_text, user_message=user_message)
+    body = _build_synthesis_user(template, obs_text, user_message)
+    synthesis_user = _policy_context_block(context) + body
 
     maestro_record: dict[str, Any] = {}
     content = ""

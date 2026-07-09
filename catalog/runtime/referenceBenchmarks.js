@@ -159,7 +159,7 @@ export const BENCHMARKS = {
     "healthyLow": 12,
     "healthyHigh": 24,
     "higherIsBetter": true,
-    "source": "Venture norms (target â‰¥ 18 months)",
+    "source": "Venture norms (target ≥ 18 months)",
     "industries": [
       "SaaS",
       "All"
@@ -193,7 +193,7 @@ export const BENCHMARKS = {
     "healthyLow": 100,
     "healthyHigh": 120,
     "higherIsBetter": true,
-    "source": "Best-in-class SaaS â‰¥ 120%",
+    "source": "Best-in-class SaaS ≥ 120%",
     "industries": [
       "SaaS"
     ]
@@ -237,7 +237,7 @@ export const BENCHMARKS = {
     "healthyLow": 3,
     "healthyHigh": 5,
     "higherIsBetter": true,
-    "source": "SaaS guardrail (â‰¥ 3:1)",
+    "source": "SaaS guardrail (≥ 3:1)",
     "industries": [
       "SaaS"
     ]
@@ -248,7 +248,7 @@ export const BENCHMARKS = {
     "healthyLow": 40,
     "healthyHigh": 60,
     "higherIsBetter": true,
-    "source": "SaaS composite health (â‰¥ 40%)",
+    "source": "SaaS composite health (≥ 40%)",
     "industries": [
       "SaaS"
     ]
@@ -259,7 +259,7 @@ export const BENCHMARKS = {
     "healthyLow": 60,
     "healthyHigh": 85,
     "higherIsBetter": true,
-    "source": "World-class OEE â‰ˆ 85%",
+    "source": "World-class OEE ≈ 85%",
     "industries": [
       "Manufacturing"
     ]
@@ -314,7 +314,7 @@ export const BENCHMARKS = {
     "healthyLow": 1.5,
     "healthyHigh": 2.5,
     "higherIsBetter": true,
-    "source": "Lender covenant norms (â‰¥ 1.25x)",
+    "source": "Lender covenant norms (≥ 1.25x)",
     "industries": [
       "Real Estate"
     ]

@@ -14,6 +14,7 @@ industryIds:
     operating-cash-flow: 996
     burn-rate: 1002
     runway: 1008
+    headcount: 1080
   Manufacturing:
     current-ratio: 929
     quick-ratio: 935
@@ -29,6 +30,7 @@ industryIds:
     operating-cash-flow: 995
     burn-rate: 1001
     runway: 1007
+    headcount: 1081
   Real Estate:
     current-ratio: 926
     quick-ratio: 932
@@ -44,6 +46,7 @@ industryIds:
     operating-cash-flow: 992
     burn-rate: 998
     runway: 1004
+    headcount: 1082
   Restaurants:
     current-ratio: 931
     quick-ratio: 937
@@ -59,6 +62,7 @@ industryIds:
     operating-cash-flow: 997
     burn-rate: 1003
     runway: 1009
+    headcount: 1083
   Transportation:
     current-ratio: 928
     quick-ratio: 934
@@ -74,6 +78,7 @@ industryIds:
     operating-cash-flow: 994
     burn-rate: 1000
     runway: 1006
+    headcount: 1084
   Vertical Farming:
     current-ratio: 927
     quick-ratio: 933
@@ -89,3 +94,20 @@ industryIds:
     operating-cash-flow: 993
     burn-rate: 999
     runway: 1005
+    headcount: 1085
+  Life Sciences:
+    current-ratio: 1300
+    quick-ratio: 1301
+    gross-margin: 1302
+    operating-margin: 1303
+    ebitda-margin: 1304
+    net-margin: 1305
+    revenue-growth: 1306
+    working-capital: 1307
+    dso: 1308
+    dpo: 1309
+    ccc: 1310
+    operating-cash-flow: 1311
+    burn-rate: 1312
+    runway: 1313
+    headcount: 1314

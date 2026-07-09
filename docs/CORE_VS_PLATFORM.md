@@ -21,8 +21,10 @@ What you get from **this repository alone** versus what belongs in a **separate 
 ## Source of truth
 
 - **Contract YAML** — `contracts/` here; bundled under `lib/ambient_contracts/bundled/` for wheels.
-- **Catalog YAML** — `catalog/` here; generated artifacts via `ambient-catalog-generate`.
+- **Catalog YAML** — `catalog/` here; generated JSON manifest and JS via `ambient-catalog-generate`.
+- **Plain text first** — definitions and semantics live in git as YAML (and generated JSON); binary uploads and live databases are precursors or forward stores, not a second SSOT ([CONVENTIONS.md](CONVENTIONS.md)).
 - Consumers should **not** maintain a second editable copy of `contracts/` or `catalog/`; pin a tag and use submodule checkout or `AMBIENT_CORE_ROOT` ([INTEGRATING.md](INTEGRATING.md)).
+- **Platform deployments** wire precursor OLTP/Bronze and forward lakehouse or Maestro Postgres **instances**; core still owns the YAML definitions those stores implement.
 
 ## `commercial-usage-v1.yaml`
 
@@ -34,3 +36,4 @@ A **data contract** describing metering and usage shapes for BI or finance expor
 - [USAGE.md](USAGE.md) — quick start
 - [INTEGRATING.md](INTEGRATING.md) — pin a release in another repo
 - [CONTRIBUTING.md](CONTRIBUTING.md) — releases and consumer follow-up
+- [CONVENTIONS.md](CONVENTIONS.md) — naming, formats, and storage

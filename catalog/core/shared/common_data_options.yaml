@@ -1,12 +1,8 @@
-# Shared data-source templates expanded into every industry pack at generate time.
-# metricRefs resolve to numeric metricIds for that industry after metrics are merged.
-
 dataOptionTemplates:
   financial_statements:
     keySuffix: GvoI0Vg2YijGfgoBaqqe
     name: Financial statements
-    description: Records of a company's financial activities (income, expenses, assets,
-      liabilities).
+    description: Records of a company's financial activities (income, expenses, assets, liabilities).
     format: Document
     template: Financial Statement Template
     lastUpdated: '2024-07-31 14:25:05'
@@ -36,7 +32,6 @@ dataOptionTemplates:
       - Cash Flow
       - Cash-on-Cash Return
       - Debt Service Coverage Ratio (DSCR)
-
   hr_records:
     keySuffix: 5aMhHPzshRFSHX4PjOMH
     name: HR records
@@ -62,7 +57,6 @@ dataOptionTemplates:
       - Staffing Ratio
       Restaurants:
       - Labor Cost Percentage
-
   accounting_software:
     keySuffix: QO2mQ9iQZXjtLrZYLXcK
     name: Accounting Software
@@ -86,7 +80,6 @@ dataOptionTemplates:
       - Cost per Kilogram of Produce
       - Profit Margin
       - Gross Profit Margin
-
   payroll_records:
     keySuffix: qXzIFYqjk5et3S78BYew
     name: Payroll records
@@ -111,7 +104,6 @@ dataOptionTemplates:
       Transportation:
       - Driver Turnover Rate
       - Maintenance Cost per Mile
-
 optionIds:
   Healthcare:
     financial_statements: 1086
@@ -143,3 +135,8 @@ optionIds:
     hr_records: 1077
     accounting_software: 1089
     payroll_records: 1095
+  Life Sciences:
+    financial_statements: 1320
+    hr_records: 1321
+    accounting_software: 1322
+    payroll_records: 1323

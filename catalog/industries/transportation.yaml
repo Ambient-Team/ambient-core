@@ -5,8 +5,7 @@ metrics:
     - HR records
     - Payroll records
     - Exit interviews
-    description: The percentage of drivers that leave the company within a specific
-      period.
+    description: The percentage of drivers that leave the company within a specific period.
     id: 14
     industry: Transportation
     methodology: (Number of drivers who left / Total number of drivers) * 100
@@ -19,6 +18,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: '%'
+    segment: operations
+    slug: driver_turnover
+    calc:
+      expr: drivers_left / total_drivers * 100
+      inputs:
+      - drivers_left
+      - total_drivers
   SAZkxRxYFtf1EIxBXWMk:
     datasource:
     - Fuel logs
@@ -38,13 +44,19 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: Miles per Gallon (MPG)
+    segment: operations
+    slug: fuel_efficiency
+    calc:
+      expr: total_miles / total_fuel
+      inputs:
+      - total_miles
+      - total_fuel
   biA3oIK816fwfInBKg2e:
     datasource:
     - Delivery logs
     - GPS tracking data
     - Customer confirmations
-    description: The percentage of deliveries made on or before the scheduled delivery
-      time.
+    description: The percentage of deliveries made on or before the scheduled delivery time.
     id: 12
     industry: Transportation
     methodology: (Number of on-time deliveries / Total deliveries) * 100
@@ -58,6 +70,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: '%'
+    segment: operations
+    slug: on_time_delivery_rate
+    calc:
+      expr: on_time_deliveries / total_deliveries * 100
+      inputs:
+      - on_time_deliveries
+      - total_deliveries
   iIaKhCCf0BGvHX1W1i7n:
     datasource:
     - Fleet management systems
@@ -77,6 +96,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: Percentage
+    segment: operations
+    slug: fleet_utilization
+    calc:
+      expr: fleet_time_in_use / fleet_available_time * 100
+      inputs:
+      - fleet_time_in_use
+      - fleet_available_time
   vXlB5QC3mZJw1auWaIfK:
     datasource:
     - Maintenance logs
@@ -96,6 +122,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: USD/mile
+    segment: operations
+    slug: maintenance_cost_per_mile
+    calc:
+      expr: total_maintenance_costs / total_miles
+      inputs:
+      - total_maintenance_costs
+      - total_miles
   Alltransportationsaas-mrr:
     datasource:
     - Subscription billing records
@@ -105,7 +138,7 @@ metrics:
     industry: Transportation
     industryTags:
     - SaaS
-    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
     name: Monthly Recurring Revenue (MRR)
     sensorFieldData:
     - Not Applicable
@@ -122,8 +155,14 @@ metrics:
       hardMax: 1000000000
     validationRule: currency
     benchmarkKey: mrr
-    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
-      model and ARR bridge.
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
   Alltransportationsaas-arr:
     datasource:
     - Subscription billing records
@@ -133,7 +172,7 @@ metrics:
     industry: Transportation
     industryTags:
     - SaaS
-    methodology: ARR = MRR Ã— 12
+    methodology: ARR = MRR × 12
     name: Annual Recurring Revenue (ARR)
     sensorFieldData:
     - Not Applicable
@@ -150,20 +189,22 @@ metrics:
       hardMax: 10000000000
     validationRule: currency
     benchmarkKey: arr
-    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
-      boards and investors.
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
   Alltransportationsaas-nrr:
     datasource:
     - Subscription billing records
     - Product usage logs
-    description: Revenue retained and expanded from existing customers, net of churn
-      and contraction.
+    description: Revenue retained and expanded from existing customers, net of churn and contraction.
     id: 1024
     industry: Transportation
     industryTags:
     - SaaS
-    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
-      MRR) Ã— 100
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100
     name: Net Revenue Retention (NRR)
     sensorFieldData:
     - Not Applicable
@@ -180,8 +221,16 @@ metrics:
       hardMax: 300
     validationRule: percentage_unbounded
     benchmarkKey: nrr
-    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
-      SaaS growth quality.
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
   Alltransportationsaas-gross-churn:
     datasource:
     - Subscription billing records
@@ -191,7 +240,7 @@ metrics:
     industry: Transportation
     industryTags:
     - SaaS
-    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
     name: Gross Revenue Churn Rate
     sensorFieldData:
     - Not Applicable
@@ -208,8 +257,14 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_churn
-    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
-      investment case.
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
   Alltransportationsaas-cac:
     datasource:
     - Marketing spend records
@@ -237,8 +292,14 @@ metrics:
       hardMax: 10000000
     validationRule: currency
     benchmarkKey: cac
-    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
-      allocation.
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
   Alltransportationsaas-ltv:
     datasource:
     - Subscription billing records
@@ -248,7 +309,7 @@ metrics:
     industry: Transportation
     industryTags:
     - SaaS
-    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
     name: Customer Lifetime Value (LTV)
     sensorFieldData:
     - Not Applicable
@@ -265,14 +326,20 @@ metrics:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: ltv
-    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
-      decisions.
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
   Alltransportationsaas-ltv-cac:
     datasource:
     - Subscription billing records
     - Marketing spend records
-    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
-      unit economics.
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.
     id: 1048
     industry: Transportation
     industryTags:
@@ -294,8 +361,12 @@ metrics:
       hardMax: 100
     validationRule: ratio
     benchmarkKey: ltv_cac
-    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
-      for scaling spend.
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
   Alltransportationsaas-rule-of-40:
     datasource:
     - Subscription billing records
@@ -322,8 +393,14 @@ metrics:
       hardMax: 200
     validationRule: percentage_unbounded
     benchmarkKey: rule_of_40
-    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
-      for SaaS planning.
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
 dataOptions:
   5tZAB2WLZbRDQdj6l7X6:
     description: Data collected from in-vehicle sensors to monitor vehicle performance.
@@ -467,8 +544,7 @@ dataOptions:
     name: Fuel logs
     template: Document
   Alltransportationds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - date
     - account_code
@@ -642,8 +718,7 @@ dataOptions:
     name: CRM / Sales pipeline
     template: Document
   Alltransportationds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn
-      analysis.
+    description: Product engagement and usage telemetry used for retention and churn analysis.
     fields:
     - date
     - customer_id

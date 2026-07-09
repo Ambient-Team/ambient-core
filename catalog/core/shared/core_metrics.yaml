@@ -4,8 +4,7 @@ templates:
     - Financial statements
     - Trial balance
     - Balance sheet
-    description: 'Short-term liquidity: ability to cover current liabilities with
-      current assets.'
+    description: 'Short-term liquidity: ability to cover current liabilities with current assets.'
     industryTags:
     - Corporate Finance
     - Financial Services
@@ -27,19 +26,23 @@ templates:
       hardMax: 20
     validationRule: ratio
     benchmarkKey: current_ratio
-    fpaWorkflow: Liquidity & solvency review â€” feeds covenant monitoring and the
-      monthly board liquidity pack.
+    fpaWorkflow: Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity
+      pack.
+    calc:
+      expr: current_assets / current_liabilities
+      inputs:
+      - current_assets
+      - current_liabilities
   quick-ratio:
     datasource:
     - Financial statements
     - Trial balance
     - Balance sheet
-    description: Acid-test liquidity excluding inventory â€” most conservative short-term
-      solvency view.
+    description: Acid-test liquidity excluding inventory — most conservative short-term solvency view.
     industryTags:
     - Corporate Finance
     - All
-    methodology: Quick Ratio = (Current Assets âˆ’ Inventory) / Current Liabilities
+    methodology: Quick Ratio = (Current Assets − Inventory) / Current Liabilities
     name: Quick Ratio (Acid Test)
     sensorFieldData:
     - Not Applicable
@@ -56,8 +59,13 @@ templates:
       hardMax: 20
     validationRule: ratio
     benchmarkKey: quick_ratio
-    fpaWorkflow: Liquidity stress testing â€” pairs with cash-flow forecasting for
-      downside scenarios.
+    fpaWorkflow: Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.
+    calc:
+      expr: (current_assets - inventory) / current_liabilities
+      inputs:
+      - current_assets
+      - inventory
+      - current_liabilities
   gross-margin:
     datasource:
     - Financial statements
@@ -67,7 +75,7 @@ templates:
     - Corporate Finance
     - SaaS
     - All
-    methodology: Gross Margin = ((Revenue âˆ’ COGS) / Revenue) Ã— 100
+    methodology: Gross Margin = ((Revenue − COGS) / Revenue) × 100
     name: Gross Profit Margin
     sensorFieldData:
     - Not Applicable
@@ -84,8 +92,13 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_margin
-    fpaWorkflow: Unit-economics and pricing review â€” anchors contribution-margin
-      and budget-vs-actual analysis.
+    fpaWorkflow: Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual
+      analysis.
+    calc:
+      expr: (revenue - cogs) / revenue * 100
+      inputs:
+      - revenue
+      - cogs
   operating-margin:
     datasource:
     - Financial statements
@@ -94,7 +107,7 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: Operating Margin = (Operating Income / Revenue) Ã— 100
+    methodology: Operating Margin = (Operating Income / Revenue) × 100
     name: Operating Margin (EBIT)
     sensorFieldData:
     - Not Applicable
@@ -111,19 +124,22 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: operating_margin
-    fpaWorkflow: Opex efficiency review â€” drives the monthly variance bridge and
-      cost-control actions.
+    fpaWorkflow: Opex efficiency review — drives the monthly variance bridge and cost-control actions.
+    calc:
+      expr: operating_income / revenue * 100
+      inputs:
+      - operating_income
+      - revenue
   ebitda-margin:
     datasource:
     - Financial statements
     - General ledger
-    description: Core operating cash profitability before interest, tax, depreciation
-      and amortization.
+    description: Core operating cash profitability before interest, tax, depreciation and amortization.
     industryTags:
     - Corporate Finance
     - Financial Services
     - All
-    methodology: EBITDA Margin = (EBITDA / Revenue) Ã— 100
+    methodology: EBITDA Margin = (EBITDA / Revenue) × 100
     name: EBITDA Margin
     sensorFieldData:
     - Not Applicable
@@ -140,8 +156,12 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: ebitda_margin
-    fpaWorkflow: Valuation & lender reporting â€” primary profitability proxy in models
-      and covenant tests.
+    fpaWorkflow: Valuation & lender reporting — primary profitability proxy in models and covenant tests.
+    calc:
+      expr: ebitda / revenue * 100
+      inputs:
+      - ebitda
+      - revenue
   net-margin:
     datasource:
     - Financial statements
@@ -150,7 +170,7 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: Net Profit Margin = (Net Income / Revenue) Ã— 100
+    methodology: Net Profit Margin = (Net Income / Revenue) × 100
     name: Net Profit Margin
     sensorFieldData:
     - Not Applicable
@@ -167,8 +187,12 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: net_margin
-    fpaWorkflow: Board P&L reporting â€” the headline profitability line for the monthly
-      close pack.
+    fpaWorkflow: Board P&L reporting — the headline profitability line for the monthly close pack.
+    calc:
+      expr: net_income / revenue * 100
+      inputs:
+      - net_income
+      - revenue
   revenue-growth:
     datasource:
     - Financial statements
@@ -178,8 +202,8 @@ templates:
     - Corporate Finance
     - SaaS
     - All
-    methodology: Revenue Growth = ((Current Period Revenue âˆ’ Prior Period Revenue)
-      / Prior Period Revenue) Ã— 100
+    methodology: Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue)
+      × 100
     name: Revenue Growth Rate
     sensorFieldData:
     - Not Applicable
@@ -196,8 +220,12 @@ templates:
       hardMax: 1000
     validationRule: percentage_unbounded
     benchmarkKey: revenue_growth
-    fpaWorkflow: Growth planning â€” drives top-line forecast, hiring plan and the
-      rolling re-forecast.
+    fpaWorkflow: Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.
+    calc:
+      expr: (revenue - revenue_prior) / revenue_prior * 100
+      inputs:
+      - revenue
+      - revenue_prior
   working-capital:
     datasource:
     - Financial statements
@@ -207,7 +235,7 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: Working Capital = Current Assets âˆ’ Current Liabilities
+    methodology: Working Capital = Current Assets − Current Liabilities
     name: Working Capital
     sensorFieldData:
     - Not Applicable
@@ -224,8 +252,12 @@ templates:
       hardMax: 1000000000
     validationRule: currency_signed
     benchmarkKey: working_capital
-    fpaWorkflow: Working-capital management â€” feeds the 13-week cash forecast and
-      treasury planning.
+    fpaWorkflow: Working-capital management — feeds the 13-week cash forecast and treasury planning.
+    calc:
+      expr: current_assets - current_liabilities
+      inputs:
+      - current_assets
+      - current_liabilities
   dso:
     datasource:
     - Accounts receivable aging
@@ -235,7 +267,7 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: DSO = (Accounts Receivable / Total Credit Sales) Ã— Number of Days
+    methodology: DSO = (Accounts Receivable / Total Credit Sales) × Number of Days
     name: Days Sales Outstanding (DSO)
     sensorFieldData:
     - Not Applicable
@@ -252,8 +284,14 @@ templates:
       hardMax: 365
     validationRule: days
     benchmarkKey: dso
-    fpaWorkflow: Receivables & collections review â€” directly improves the cash-conversion
-      cycle and forecast accuracy.
+    fpaWorkflow: Receivables & collections review — directly improves the cash-conversion cycle and forecast
+      accuracy.
+    calc:
+      expr: accounts_receivable / total_credit_sales * days
+      inputs:
+      - accounts_receivable
+      - total_credit_sales
+      - days
   dpo:
     datasource:
     - Accounts payable aging
@@ -263,7 +301,7 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: DPO = (Accounts Payable / COGS) Ã— Number of Days
+    methodology: DPO = (Accounts Payable / COGS) × Number of Days
     name: Days Payable Outstanding (DPO)
     sensorFieldData:
     - Not Applicable
@@ -280,19 +318,23 @@ templates:
       hardMax: 365
     validationRule: days
     benchmarkKey: dpo
-    fpaWorkflow: Payables optimization â€” balances supplier terms against the cash-conversion
-      cycle.
+    fpaWorkflow: Payables optimization — balances supplier terms against the cash-conversion cycle.
+    calc:
+      expr: accounts_payable / cogs * days
+      inputs:
+      - accounts_payable
+      - cogs
+      - days
   ccc:
     datasource:
     - Accounts receivable aging
     - Accounts payable aging
     - Inventory records
-    description: Days to convert investments in inventory and receivables back into
-      cash.
+    description: Days to convert investments in inventory and receivables back into cash.
     industryTags:
     - Corporate Finance
     - All
-    methodology: CCC = DSO + Days Inventory Outstanding âˆ’ DPO
+    methodology: CCC = DSO + Days Inventory Outstanding − DPO
     name: Cash Conversion Cycle
     sensorFieldData:
     - Not Applicable
@@ -309,8 +351,11 @@ templates:
       hardMax: 365
     validationRule: days_signed
     benchmarkKey: ccc
-    fpaWorkflow: Cash-efficiency program â€” a north-star working-capital KPI tracked
-      in the treasury review.
+    fpaWorkflow: Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.
+    calc:
+      expr: dso + days_inventory_outstanding - dpo
+      inputs:
+      - days_inventory_outstanding
   operating-cash-flow:
     datasource:
     - Financial statements
@@ -320,8 +365,7 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: Operating Cash Flow = Net Income + Non-Cash Charges âˆ’ Increase
-      in Working Capital
+    methodology: Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital
     name: Operating Cash Flow
     sensorFieldData:
     - Not Applicable
@@ -338,8 +382,13 @@ templates:
       hardMax: 1000000000
     validationRule: currency_signed
     benchmarkKey: operating_cash_flow
-    fpaWorkflow: Cash-flow forecasting â€” the anchor of the direct/indirect cash-flow
-      statement.
+    fpaWorkflow: Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.
+    calc:
+      expr: net_income + non_cash_charges - increase_in_working_capital
+      inputs:
+      - net_income
+      - non_cash_charges
+      - increase_in_working_capital
   burn-rate:
     datasource:
     - Bank statements
@@ -350,7 +399,7 @@ templates:
     - SaaS
     - Corporate Finance
     - All
-    methodology: Net Burn = Cash Out âˆ’ Cash In (per month)
+    methodology: Net Burn = Cash Out − Cash In (per month)
     name: Monthly Burn Rate
     sensorFieldData:
     - Not Applicable
@@ -367,8 +416,13 @@ templates:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: burn_rate
-    fpaWorkflow: Runway management â€” paired with cash balance to govern the spend
-      plan and fundraising timing.
+    fpaWorkflow: Runway management — paired with cash balance to govern the spend plan and fundraising
+      timing.
+    calc:
+      expr: cash_out - cash_in
+      inputs:
+      - cash_out
+      - cash_in
   runway:
     datasource:
     - Bank statements
@@ -395,5 +449,28 @@ templates:
       hardMax: 240
     validationRule: number
     benchmarkKey: runway
-    fpaWorkflow: Board & investor reporting â€” the survival metric that gates hiring
-      and spend decisions.
+    fpaWorkflow: Board & investor reporting — the survival metric that gates hiring and spend decisions.
+    calc:
+      expr: current_cash_balance / burn_rate
+      inputs:
+      - current_cash_balance
+  headcount:
+    name: Headcount (FTE)
+    description: Period-end count of active full-time-equivalent employees. A directly measured input,
+      not a derived ratio.
+    type: Operational
+    unit: Count
+    methodology: Period-end count of active employees expressed as full-time equivalents (directly measured,
+      not calculated).
+    datasource:
+    - HR records
+    - Payroll records
+    industryTags:
+    - Corporate
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    input: true

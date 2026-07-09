@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambient.systems/contracts/contract-v1.json",
+  "title": "DataProductContract",
+  "type": "object",
+  "required": ["product", "schema", "lineage", "governance"],
+  "properties": {
+    "product": {
+      "type": "object",
+      "required": ["name", "version", "owner"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": ["string", "number"] },
+        "owner": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "domain": { "type": "string" },
+        "type": { "type": "string" }
+      }
+    },
+    "schema": {
+      "type": "object",
+      "description": "Single-table (table/columns) or multi-table (primary_tables) layout.",
+      "properties": {
+        "table": { "type": "string", "minLength": 1 },
+        "primary_key": { "type": "string" },
+        "partition_key": { "type": "string" },
+        "primary_tables": { "type": "array" },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "type"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "type": { "type": "string", "minLength": 1 },
+              "required": { "type": "boolean" },
+              "description": { "type": "string" },
+              "enum": { "type": "array" }
+            }
+          }
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "properties": {
+        "provenance_columns": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "governance": { "type": "object" }
+  }
+}

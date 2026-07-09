@@ -23,6 +23,10 @@ class CouncilEngine:
     def __init__(self, gateway: ModelGateway) -> None:
         self._gateway = gateway
 
+    async def aclose(self) -> None:
+        """Release the underlying model gateway's HTTP client."""
+        await self._gateway.aclose()
+
     async def execute(
         self,
         plan: RoutingPlan,

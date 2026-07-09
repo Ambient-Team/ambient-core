@@ -28,8 +28,9 @@ def _catalog_resolve_metric(args: dict[str, Any], _ctx: AgentRunContext, _trace:
     if not metric_id:
         raise ValueError("metric_id required")
     manifest = load_manifest()
+    want = str(metric_id).strip()
     for metric in manifest.get("metrics", []):
-        if metric.get("id") == metric_id:
+        if str(metric.get("id")) == want:
             return {"metric": metric}
     return {"metric": None, "metric_id": metric_id}
 
@@ -39,10 +40,24 @@ def _contracts_list(_args: dict[str, Any], _ctx: AgentRunContext, _trace: list) 
     return sorted(p.name for p in directory.glob("*.yaml"))
 
 
+def _safe_contract_basename(name: str) -> str | None:
+    if not name or not isinstance(name, str):
+        return None
+    if ".." in name or "/" in name or "\\" in name:
+        return None
+    base = Path(name).name
+    if base != name:
+        return None
+    return base
+
+
 def _contracts_validate(args: dict[str, Any], _ctx: AgentRunContext, _trace: list) -> dict[str, Any]:
     name = args.get("contract_file")
     if name:
-        path = resolve_contracts_dir() / name
+        safe = _safe_contract_basename(str(name))
+        if not safe:
+            return {"ok": False, "errors": ["invalid contract_file"]}
+        path = resolve_contracts_dir() / safe
         if not path.is_file():
             return {"ok": False, "errors": [f"not found: {name}"]}
         errors = validate_contract_file(path)

@@ -1,8 +1,33 @@
-# Reference catalog crosswalk: catalog metrics → governed data-product contracts.
-# Many catalog metrics have no contract until a Gold product exists.
-links: []
-  # Example:
-  # - catalogMetricKey: abc123
-  #   metricId: 1
-  #   contractFile: tenant-metrics-v1.1.yaml
-  #   contractProductId: org_metric_snapshot
+links:
+- catalogMetricKey: 1cvcTcHNt1VYX867UUG7
+  metricId: 8
+  contractFile: tenant-metrics-v1.yaml
+  contractProductId: TENANT_METRICS
+- catalogMetricKey: healthcare.provider.bed_occupancy_rate
+  metricId: 1400
+  contractFile: healthcare-provider-ops-v1.yaml
+  contractProductId: HEALTHCARE_PROVIDER_OPS
+- catalogMetricKey: healthcare.provider.cost_per_discharge
+  metricId: 1404
+  contractFile: healthcare-provider-ops-v1.yaml
+  contractProductId: HEALTHCARE_PROVIDER_OPS
+- catalogMetricKey: healthcare.revenue_cycle.ar_days
+  metricId: 1405
+  contractFile: healthcare-revenue-cycle-v1.yaml
+  contractProductId: HEALTHCARE_REVENUE_CYCLE
+- catalogMetricKey: healthcare.revenue_cycle.clean_claim_rate
+  metricId: 1406
+  contractFile: healthcare-revenue-cycle-v1.yaml
+  contractProductId: HEALTHCARE_REVENUE_CYCLE
+- catalogMetricKey: healthcare.quality.mortality_rate
+  metricId: 1407
+  contractFile: healthcare-quality-outcomes-v1.yaml
+  contractProductId: HEALTHCARE_QUALITY_OUTCOMES
+- catalogMetricKey: healthcare.quality.infection_rate
+  metricId: 1408
+  contractFile: healthcare-quality-outcomes-v1.yaml
+  contractProductId: HEALTHCARE_QUALITY_OUTCOMES
+- catalogMetricKey: life_sciences.rnd.trial_cost_per_patient
+  metricId: 1331
+  contractFile: life-sciences-rnd-v1.yaml
+  contractProductId: LIFE_SCIENCES_RND

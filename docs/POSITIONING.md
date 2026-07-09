@@ -8,15 +8,13 @@ For how this repository relates to a full product repo, see [CORE_VS_PLATFORM.md
 
 ## At a glance
 
-| Tool / family | Primary job | What Ambient Core adds |
-|---------------|-------------|-------------------------|
-| **LangChain** | Agent and chain orchestration | An opinion on what your data *means* |
-| **LlamaIndex** | Connecting LLMs to data (RAG) | Contract-defined Gold shapes, not just retrieval |
-| **Haystack** | Production NLP/search pipelines | The governance layer that sits upstream |
-| **dbt / Great Expectations / Soda** | Quality tests and assertions | A versioned product *interface* — plus intelligence |
-| **DataHub / OpenMetadata** | Catalog, lineage, discovery | Enforceable contracts and inference in one tree |
-| **ODCS** | A *spec* for data contracts | A working implementation, with catalog and inference attached |
-| **Collibra** | Enterprise governance suite | A small, MIT, fully inspectable foundation |
+- **LangChain** — primary job: agent and chain orchestration. Ambient Core adds an opinion on what your data *means*.
+- **LlamaIndex** — connecting LLMs to data (RAG). Ambient Core adds contract-defined Gold shapes, not just retrieval.
+- **Haystack** — production NLP/search pipelines. Ambient Core adds the governance layer that sits upstream.
+- **dbt / Great Expectations / Soda** — quality tests and assertions. Ambient Core adds a versioned product *interface* plus intelligence.
+- **DataHub / OpenMetadata** — catalog, lineage, discovery. Ambient Core adds enforceable contracts and inference in one tree.
+- **ODCS** — a *spec* for data contracts. Ambient Core adds a working implementation with catalog and inference attached.
+- **Collibra** — enterprise governance suite. Ambient Core is a small, MIT, fully inspectable foundation.
 
 ## Versus agent and RAG frameworks
 

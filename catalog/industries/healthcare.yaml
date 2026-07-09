@@ -3,8 +3,7 @@ metrics:
   HcVol911CatalogMetricKey01:
     id: 911
     name: Patient Volume
-    description: Count of patient encounters or admissions in the reporting period
-      (aggregated, de-identified).
+    description: Count of patient encounters or admissions in the reporting period (aggregated, de-identified).
     industry: Healthcare
     type: Operational
     unit: Count
@@ -21,6 +20,9 @@ metrics:
     frequency: weekly
     higherIsBetter: true
     fpaWorkflow: Capacity planning — volume drives staffing ratios and revenue forecasts.
+    segment: provider
+    slug: patient_volume
+    input: true
   HcLos912CatalogMetricKey02:
     id: 912
     name: Average Length of Stay
@@ -41,11 +43,17 @@ metrics:
     frequency: monthly
     higherIsBetter: false
     fpaWorkflow: Throughput and bed management — ALOS affects margin per bed and backlog.
+    segment: provider
+    slug: average_length_of_stay
+    calc:
+      expr: inpatient_days / discharges
+      inputs:
+      - inpatient_days
+      - discharges
   HcReadmit913CatalogMetricKey03:
     id: 913
     name: Readmission Rate (30-day proxy)
-    description: Share of discharges with a related readmission within 30 days (aggregated
-      quality signal).
+    description: Share of discharges with a related readmission within 30 days (aggregated quality signal).
     industry: Healthcare
     type: Operational
     unit: '%'
@@ -64,8 +72,14 @@ metrics:
       hardMax: 100
     frequency: monthly
     higherIsBetter: false
-    fpaWorkflow: Quality-to-cost — readmissions drive variable cost and value-based
-      contract risk.
+    fpaWorkflow: Quality-to-cost — readmissions drive variable cost and value-based contract risk.
+    segment: quality
+    slug: readmission_rate_30d
+    calc:
+      expr: readmissions / eligible_discharges * 100
+      inputs:
+      - readmissions
+      - eligible_discharges
   HcStaff914CatalogMetricKey04:
     id: 914
     name: Staffing Ratio
@@ -86,6 +100,13 @@ metrics:
     frequency: weekly
     higherIsBetter: true
     fpaWorkflow: Labor efficiency — primary driver of operating margin in acute settings.
+    segment: provider
+    slug: staffing_ratio
+    calc:
+      expr: staff_hours / occupied_beds
+      inputs:
+      - staff_hours
+      - occupied_beds
   HcDenial915CatalogMetricKey05:
     id: 915
     name: Claim Denial Rate
@@ -108,8 +129,14 @@ metrics:
       hardMax: 100
     frequency: monthly
     higherIsBetter: false
-    fpaWorkflow: Cash collection — denials delay revenue recognition and increase
-      AR days.
+    fpaWorkflow: Cash collection — denials delay revenue recognition and increase AR days.
+    segment: revenue_cycle
+    slug: claim_denial_rate
+    calc:
+      expr: denied_claims / submitted_claims * 100
+      inputs:
+      - denied_claims
+      - submitted_claims
   Allhealthcaresaas-mrr:
     datasource:
     - Subscription billing records
@@ -119,7 +146,7 @@ metrics:
     industry: Healthcare
     industryTags:
     - SaaS
-    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
     name: Monthly Recurring Revenue (MRR)
     sensorFieldData:
     - Not Applicable
@@ -136,8 +163,14 @@ metrics:
       hardMax: 1000000000
     validationRule: currency
     benchmarkKey: mrr
-    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
-      model and ARR bridge.
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
   Allhealthcaresaas-arr:
     datasource:
     - Subscription billing records
@@ -147,7 +180,7 @@ metrics:
     industry: Healthcare
     industryTags:
     - SaaS
-    methodology: ARR = MRR Ã— 12
+    methodology: ARR = MRR × 12
     name: Annual Recurring Revenue (ARR)
     sensorFieldData:
     - Not Applicable
@@ -164,20 +197,22 @@ metrics:
       hardMax: 10000000000
     validationRule: currency
     benchmarkKey: arr
-    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
-      boards and investors.
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
   Allhealthcaresaas-nrr:
     datasource:
     - Subscription billing records
     - Product usage logs
-    description: Revenue retained and expanded from existing customers, net of churn
-      and contraction.
+    description: Revenue retained and expanded from existing customers, net of churn and contraction.
     id: 1026
     industry: Healthcare
     industryTags:
     - SaaS
-    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
-      MRR) Ã— 100
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100
     name: Net Revenue Retention (NRR)
     sensorFieldData:
     - Not Applicable
@@ -194,8 +229,16 @@ metrics:
       hardMax: 300
     validationRule: percentage_unbounded
     benchmarkKey: nrr
-    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
-      SaaS growth quality.
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
   Allhealthcaresaas-gross-churn:
     datasource:
     - Subscription billing records
@@ -205,7 +248,7 @@ metrics:
     industry: Healthcare
     industryTags:
     - SaaS
-    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
     name: Gross Revenue Churn Rate
     sensorFieldData:
     - Not Applicable
@@ -222,8 +265,14 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_churn
-    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
-      investment case.
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
   Allhealthcaresaas-cac:
     datasource:
     - Marketing spend records
@@ -251,8 +300,14 @@ metrics:
       hardMax: 10000000
     validationRule: currency
     benchmarkKey: cac
-    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
-      allocation.
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
   Allhealthcaresaas-ltv:
     datasource:
     - Subscription billing records
@@ -262,7 +317,7 @@ metrics:
     industry: Healthcare
     industryTags:
     - SaaS
-    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
     name: Customer Lifetime Value (LTV)
     sensorFieldData:
     - Not Applicable
@@ -279,14 +334,20 @@ metrics:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: ltv
-    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
-      decisions.
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
   Allhealthcaresaas-ltv-cac:
     datasource:
     - Subscription billing records
     - Marketing spend records
-    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
-      unit economics.
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.
     id: 1050
     industry: Healthcare
     industryTags:
@@ -308,8 +369,12 @@ metrics:
       hardMax: 100
     validationRule: ratio
     benchmarkKey: ltv_cac
-    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
-      for scaling spend.
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
   Allhealthcaresaas-rule-of-40:
     datasource:
     - Subscription billing records
@@ -336,14 +401,220 @@ metrics:
       hardMax: 200
     validationRule: percentage_unbounded
     benchmarkKey: rule_of_40
-    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
-      for SaaS planning.
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
+  healthcare.provider.bed_occupancy_rate:
+    id: 1400
+    name: Bed Occupancy Rate
+    industry: Healthcare
+    segment: provider
+    slug: bed_occupancy_rate
+    type: Operational
+    unit: '%'
+    methodology: Bed Occupancy = (Occupied Beds / Available Beds) × 100
+    description: Bed Occupancy Rate (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: occupied_beds / available_beds * 100
+      inputs:
+      - occupied_beds
+      - available_beds
+  healthcare.provider.or_utilization:
+    id: 1401
+    name: Operating Room Utilization
+    industry: Healthcare
+    segment: provider
+    slug: or_utilization
+    type: Operational
+    unit: '%'
+    methodology: OR Utilization = (OR Time Used / OR Time Available) × 100
+    description: Operating Room Utilization (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: or_time_used / or_time_available * 100
+      inputs:
+      - or_time_used
+      - or_time_available
+  healthcare.provider.ed_wait_time:
+    id: 1402
+    name: ED Wait Time
+    industry: Healthcare
+    segment: provider
+    slug: ed_wait_time
+    type: Operational
+    unit: Minutes
+    methodology: Mean minutes from ED arrival to provider (directly measured).
+    description: ED Wait Time (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    input: true
+  healthcare.provider.case_mix_index:
+    id: 1403
+    name: Case Mix Index
+    industry: Healthcare
+    segment: provider
+    slug: case_mix_index
+    type: Operational
+    unit: Index
+    methodology: Average DRG weight across discharges (directly measured).
+    description: Case Mix Index (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    input: true
+  healthcare.provider.cost_per_discharge:
+    id: 1404
+    name: Cost per Discharge
+    industry: Healthcare
+    segment: provider
+    slug: cost_per_discharge
+    type: Financial
+    unit: Currency
+    methodology: Cost per Discharge = Total Operating Cost / Discharges
+    description: Cost per Discharge (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: total_operating_cost / discharges
+      inputs:
+      - total_operating_cost
+      - discharges
+  healthcare.revenue_cycle.ar_days:
+    id: 1405
+    name: AR Days
+    industry: Healthcare
+    segment: revenue_cycle
+    slug: ar_days
+    type: Financial
+    unit: Days
+    methodology: AR Days = (Accounts Receivable / Net Patient Revenue) × Days
+    description: AR Days (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: accounts_receivable / net_patient_revenue * days
+      inputs:
+      - accounts_receivable
+      - net_patient_revenue
+      - days
+  healthcare.revenue_cycle.clean_claim_rate:
+    id: 1406
+    name: Clean Claim Rate
+    industry: Healthcare
+    segment: revenue_cycle
+    slug: clean_claim_rate
+    type: Financial
+    unit: '%'
+    methodology: Clean Claim Rate = (Clean Claims / Total Claims) × 100
+    description: Clean Claim Rate (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: clean_claims / total_claims * 100
+      inputs:
+      - clean_claims
+      - total_claims
+  healthcare.quality.mortality_rate:
+    id: 1407
+    name: Inpatient Mortality Rate
+    industry: Healthcare
+    segment: quality
+    slug: mortality_rate
+    type: Operational
+    unit: '%'
+    methodology: Mortality Rate = (Inpatient Deaths / Discharges) × 100
+    description: Inpatient Mortality Rate (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: inpatient_deaths / discharges * 100
+      inputs:
+      - inpatient_deaths
+      - discharges
+  healthcare.quality.infection_rate:
+    id: 1408
+    name: Healthcare-Associated Infection Rate
+    industry: Healthcare
+    segment: quality
+    slug: infection_rate
+    type: Operational
+    unit: Per 1000 patient-days
+    methodology: HAI Rate = (Infections / Patient Days) × 1000
+    description: Healthcare-Associated Infection Rate (aggregated, de-identified).
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: infections / patient_days * 1000
+      inputs:
+      - infections
+      - patient_days
 dataOptions:
   HcCensus911CatalogOptionKey01:
     id: 911
     name: De-identified operational census export
-    description: Aggregated admissions, discharges, and bed days by service line.
-      No patient names or MRNs in catalog templates.
+    description: Aggregated admissions, discharges, and bed days by service line. No patient names or
+      MRNs in catalog templates.
     industry: Healthcare
     format: Document
     template: Document
@@ -361,8 +632,7 @@ dataOptions:
   HcSched912CatalogOptionKey02:
     id: 912
     name: Scheduling utilization summary
-    description: Shift-level staffed hours and utilization by department (aggregated
-      counts only).
+    description: Shift-level staffed hours and utilization by department (aggregated counts only).
     industry: Healthcare
     format: Document
     template: Document
@@ -379,8 +649,7 @@ dataOptions:
   HcRcm913CatalogOptionKey03:
     id: 913
     name: Revenue cycle summary export
-    description: Claim submission, denial, and payment totals by payer category (no
-      member identifiers).
+    description: Claim submission, denial, and payment totals by payer category (no member identifiers).
     industry: Healthcare
     format: Document
     template: Financial Statement Template
@@ -397,8 +666,7 @@ dataOptions:
   HcQual914CatalogOptionKey04:
     id: 914
     name: De-identified quality outcomes summary
-    description: Cohort-level readmission and outcome indicators without PHI field
-      names.
+    description: Cohort-level readmission and outcome indicators without PHI field names.
     industry: Healthcare
     format: Document
     template: Document
@@ -411,8 +679,7 @@ dataOptions:
     - 913
     lastUpdated: '2026-06-14 00:00:00'
   Allhealthcareds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - date
     - account_code
@@ -586,8 +853,7 @@ dataOptions:
     name: CRM / Sales pipeline
     template: Document
   Allhealthcareds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn
-      analysis.
+    description: Product engagement and usage telemetry used for retention and churn analysis.
     fields:
     - date
     - customer_id

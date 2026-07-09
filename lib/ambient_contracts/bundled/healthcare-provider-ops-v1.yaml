@@ -1,0 +1,60 @@
+product:
+  name: Healthcare Provider Operations
+  version: 1.0
+  owner: analytics
+  description: "De-identified, aggregated acute and ambulatory operations Gold product: volume, throughput, occupancy, staffing, and unit cost by service line. No PHI."
+  domain: Healthcare
+  type: Derived
+
+schema:
+  table: gold.healthcare_provider_ops
+  primary_key: provider_ops_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: provider_ops_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+      description: "Multi-tenant isolation key"
+    - name: period
+      type: date
+      required: true
+    - name: service_line
+      type: string
+      required: true
+    - name: patient_volume
+      type: long
+      required: true
+    - name: average_length_of_stay
+      type: double
+      required: false
+    - name: bed_occupancy_rate
+      type: double
+      required: false
+    - name: staffing_ratio
+      type: double
+      required: false
+    - name: cost_per_discharge
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any patient-identifiable field; direct Bronze access"

@@ -10,6 +10,12 @@ Start with [ECOSYSTEM.md](ECOSYSTEM.md) and [CANONICAL_SCOPE.md](CANONICAL_SCOPE
 
 Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make changes](ECOSYSTEM.md#where-to-make-changes).
 
+## Documentation style
+
+Do **not** use markdown pipe tables (`| col |` with `|---|` separators) in `docs/`, any `README.md`, or `examples/**/*.md`. Use short paragraphs and bullet lists instead (for example `- **term** — definition`). Mermaid diagrams and code fences are fine.
+
+CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow the same rule in [AGENTS.md](AGENTS.md#documentation-conventions).
+
 ## Scope
 
 Put in this repository:
@@ -42,11 +48,17 @@ pytest
 2. Copy to bundled package data: `cp contracts/*.yaml lib/ambient_contracts/bundled/` (CI enforces sync).
 3. Run `validate-contracts`.
 
+Naming, filename major versions, and format rules: [CONVENTIONS.md](CONVENTIONS.md).
+
 ## Catalog changes
 
 1. Edit YAML under `catalog/`.
 2. Run `ambient-catalog-generate` (or `python scripts/generate_reference_catalog.py`).
-3. Run `ambient-catalog-generate --check` before pushing.
+3. Run `ambient-catalog-generate --check` before pushing (manifest JSON and `catalog/runtime/*.js` must match YAML).
+
+Catalogue keys, segment enum, integer id bands, and aliases: [CONVENTIONS.md](CONVENTIONS.md).
+
+Integrator-facing guides after catalog or contract changes: [governed-data.md](governed-data.md), [catalog-consumption.md](catalog-consumption.md), [crosswalk.md](crosswalk.md).
 
 ## Releases
 

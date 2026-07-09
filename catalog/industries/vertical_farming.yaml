@@ -4,8 +4,7 @@ metrics:
     datasource:
     - Farm Management Systems
     - Maintenance logs
-    description: Cost savings achieved by preventing equipment failures through predictive
-      maintenance.
+    description: Cost savings achieved by preventing equipment failures through predictive maintenance.
     id: 23
     industry: Vertical Farming
     methodology: Potential Repair Cost Avoided - Predictive Maintenance Cost
@@ -19,6 +18,13 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: Currency (e.g., USD)
+    segment: financial
+    slug: predictive_maintenance_savings
+    calc:
+      expr: repair_cost_avoided - predictive_maintenance_cost
+      inputs:
+      - repair_cost_avoided
+      - predictive_maintenance_cost
   6IfrKxlTi9pbGzpuLL5u:
     datasource:
     - Farm Management Systems
@@ -26,8 +32,8 @@ metrics:
     description: Total cost associated with producing one kilogram of crops.
     id: 20
     industry: Vertical Farming
-    methodology: Total Production Cost (Seeds, Fertilizers, Nutrients) + Total Operational
-      Cost (Labor, Energy, Water, Maintenance) / Total Yield (kg)
+    methodology: Total Production Cost (Seeds, Fertilizers, Nutrients) + Total Operational Cost (Labor,
+      Energy, Water, Maintenance) / Total Yield (kg)
     name: Cost per Kilogram of Produce
     sensorFieldData:
     - Not Applicable
@@ -37,6 +43,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: $/kg
+    segment: operations
+    slug: total_cost
+    calc:
+      expr: total_production_cost + total_operational_cost
+      inputs:
+      - total_production_cost
+      - total_operational_cost
   8B9bFHS6GSsjzHx9ppKu:
     datasource:
     - Energy Bills
@@ -44,8 +57,7 @@ metrics:
     description: Energy consumption required to deliver the desired light intensity.
     id: 22
     industry: Vertical Farming
-    methodology: Energy Consumed (kWh) / Total Light Delivered (lux-hours or similar
-      unit)
+    methodology: Energy Consumed (kWh) / Total Light Delivered (lux-hours or similar unit)
     name: Energy Cost per Unit of Light Delivered
     sensorFieldData:
     - Light intensity sensors (lux meters)
@@ -55,20 +67,24 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: kWh/lux-hour
-    fpaWorkflow: Opex efficiency review â€” energy spikes explain variance before
-      close.
-    operationalSignal: Field telemetry â€” light and power sensors
-    financialImpact: Opex and margin â€” flows to NOI and covenant headroom
+    fpaWorkflow: Opex efficiency review — energy spikes explain variance before close.
+    operationalSignal: Field telemetry — light and power sensors
+    financialImpact: Opex and margin — flows to NOI and covenant headroom
+    segment: operations
+    slug: energy_light_efficiency
+    calc:
+      expr: energy_consumed / total_light_delivered
+      inputs:
+      - energy_consumed
+      - total_light_delivered
   E5khIDv93onvwtXBUsJH:
     datasource:
     - Crop monitoring systems
     - Farm management systems
-    description: An index indicating the overall health of crops based on various
-      parameters.
+    description: An index indicating the overall health of crops based on various parameters.
     id: 19
     industry: Vertical Farming
-    methodology: Crop Health Index = (Sum of Health Scores / Total Number of Crops)
-      * 100
+    methodology: Crop Health Index = (Sum of Health Scores / Total Number of Crops) * 100
     name: Crop Health Index
     sensorFieldData:
     - Crop monitoring systems
@@ -79,6 +95,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: Index
+    segment: operations
+    slug: crop_health_index
+    calc:
+      expr: sum_health_scores / total_crops * 100
+      inputs:
+      - sum_health_scores
+      - total_crops
   F6IlgQNV6qNtUhk3BVtT:
     datasource:
     - Farm Management Systems
@@ -86,8 +109,7 @@ metrics:
     description: Difference between revenue and total costs.
     id: 21
     industry: Vertical Farming
-    methodology: Revenue from Produce Sales - Total Production Cost - Total Operational
-      Cost
+    methodology: Revenue from Produce Sales - Total Production Cost - Total Operational Cost
     name: Profit Margin
     sensorFieldData:
     - Not Applicable
@@ -97,6 +119,14 @@ metrics:
     tech: FINTECH
     type: Financial
     unit: '%'
+    segment: financial
+    slug: vf_net_profit
+    calc:
+      expr: produce_revenue - total_production_cost - total_operational_cost
+      inputs:
+      - produce_revenue
+      - total_production_cost
+      - total_operational_cost
   WeTkxvZyeWX51XfBGsuR:
     datasource:
     - Payroll records
@@ -104,8 +134,7 @@ metrics:
     description: Average labor cost associated with producing one kilogram of produce.
     id: 18
     industry: Vertical Farming
-    methodology: Labor Cost per Kilogram of Produce = Total Labor Costs / Total Harvested
-      Produce (kg)
+    methodology: Labor Cost per Kilogram of Produce = Total Labor Costs / Total Harvested Produce (kg)
     name: Labor Cost per Kilogram of Produce
     sensorFieldData:
     - Payroll records
@@ -116,6 +145,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: $/kg
+    segment: operations
+    slug: labor_cost_per_kg
+    calc:
+      expr: total_labor_costs / total_harvested_kg
+      inputs:
+      - total_labor_costs
+      - total_harvested_kg
   f3yEk5mEWwKhAFFQFyje:
     datasource:
     - Irrigation logs
@@ -123,8 +159,7 @@ metrics:
     description: Amount of produce harvested per liter of water used.
     id: 16
     industry: Vertical Farming
-    methodology: Water Usage Efficiency = Total Harvested Produce (kg) / Total Water
-      Used (liters)
+    methodology: Water Usage Efficiency = Total Harvested Produce (kg) / Total Water Used (liters)
     name: Water Usage Efficiency
     sensorFieldData:
     - Water flow meters
@@ -135,6 +170,13 @@ metrics:
     tech: DEEP TECH
     type: Operational
     unit: kg/liter
+    segment: operations
+    slug: water_use_efficiency
+    calc:
+      expr: total_harvested_kg / total_water_liters
+      inputs:
+      - total_harvested_kg
+      - total_water_liters
   jnQw1pD0motTKBZ9csPD:
     datasource:
     - Harvest logs
@@ -142,8 +184,7 @@ metrics:
     description: Amount of produce harvested per square meter of growing area.
     id: 15
     industry: Vertical Farming
-    methodology: Yield per Square Meter = Total Harvested Produce (kg) / Total Growing
-      Area (mÂ²)
+    methodology: Yield per Square Meter = Total Harvested Produce (kg) / Total Growing Area (m²)
     name: Yield per Square Meter
     sensorFieldData:
     - Crop monitoring systems
@@ -152,7 +193,14 @@ metrics:
     targetRangeLow: 5
     tech: DEEP TECH
     type: Operational
-    unit: kg/mÂ²
+    unit: kg/m²
+    segment: operations
+    slug: yield_per_sqm
+    calc:
+      expr: total_harvested_kg / total_growing_area
+      inputs:
+      - total_harvested_kg
+      - total_growing_area
   yGoqLDC3Mrk1OeH36jkB:
     datasource:
     - Energy bills
@@ -160,8 +208,8 @@ metrics:
     description: Amount of energy consumed per square meter of growing area.
     id: 17
     industry: Vertical Farming
-    methodology: Energy Consumption per Square Meter = Total Energy Consumed (kWh)
-      / Total Growing Area (mÂ²)
+    methodology: Energy Consumption per Square Meter = Total Energy Consumed (kWh) / Total Growing Area
+      (m²)
     name: Energy Consumption per Square Meter
     sensorFieldData:
     - Energy meters
@@ -170,7 +218,14 @@ metrics:
     targetRangeLow: 50
     tech: DEEP TECH
     type: Operational
-    unit: kWh/mÂ²
+    unit: kWh/m²
+    segment: operations
+    slug: energy_per_sqm
+    calc:
+      expr: total_energy_kwh / total_growing_area
+      inputs:
+      - total_energy_kwh
+      - total_growing_area
   Allverticalfarmingsaas-mrr:
     datasource:
     - Subscription billing records
@@ -180,7 +235,7 @@ metrics:
     industry: Vertical Farming
     industryTags:
     - SaaS
-    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
     name: Monthly Recurring Revenue (MRR)
     sensorFieldData:
     - Not Applicable
@@ -197,8 +252,14 @@ metrics:
       hardMax: 1000000000
     validationRule: currency
     benchmarkKey: mrr
-    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
-      model and ARR bridge.
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
   Allverticalfarmingsaas-arr:
     datasource:
     - Subscription billing records
@@ -208,7 +269,7 @@ metrics:
     industry: Vertical Farming
     industryTags:
     - SaaS
-    methodology: ARR = MRR Ã— 12
+    methodology: ARR = MRR × 12
     name: Annual Recurring Revenue (ARR)
     sensorFieldData:
     - Not Applicable
@@ -225,20 +286,22 @@ metrics:
       hardMax: 10000000000
     validationRule: currency
     benchmarkKey: arr
-    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
-      boards and investors.
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
   Allverticalfarmingsaas-nrr:
     datasource:
     - Subscription billing records
     - Product usage logs
-    description: Revenue retained and expanded from existing customers, net of churn
-      and contraction.
+    description: Revenue retained and expanded from existing customers, net of churn and contraction.
     id: 1023
     industry: Vertical Farming
     industryTags:
     - SaaS
-    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
-      MRR) Ã— 100
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100
     name: Net Revenue Retention (NRR)
     sensorFieldData:
     - Not Applicable
@@ -255,8 +318,16 @@ metrics:
       hardMax: 300
     validationRule: percentage_unbounded
     benchmarkKey: nrr
-    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
-      SaaS growth quality.
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
   Allverticalfarmingsaas-gross-churn:
     datasource:
     - Subscription billing records
@@ -266,7 +337,7 @@ metrics:
     industry: Vertical Farming
     industryTags:
     - SaaS
-    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
     name: Gross Revenue Churn Rate
     sensorFieldData:
     - Not Applicable
@@ -283,8 +354,14 @@ metrics:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_churn
-    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
-      investment case.
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
   Allverticalfarmingsaas-cac:
     datasource:
     - Marketing spend records
@@ -312,8 +389,14 @@ metrics:
       hardMax: 10000000
     validationRule: currency
     benchmarkKey: cac
-    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
-      allocation.
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
   Allverticalfarmingsaas-ltv:
     datasource:
     - Subscription billing records
@@ -323,7 +406,7 @@ metrics:
     industry: Vertical Farming
     industryTags:
     - SaaS
-    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
     name: Customer Lifetime Value (LTV)
     sensorFieldData:
     - Not Applicable
@@ -340,14 +423,20 @@ metrics:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: ltv
-    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
-      decisions.
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
   Allverticalfarmingsaas-ltv-cac:
     datasource:
     - Subscription billing records
     - Marketing spend records
-    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
-      unit economics.
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.
     id: 1047
     industry: Vertical Farming
     industryTags:
@@ -369,8 +458,12 @@ metrics:
       hardMax: 100
     validationRule: ratio
     benchmarkKey: ltv_cac
-    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
-      for scaling spend.
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
   Allverticalfarmingsaas-rule-of-40:
     datasource:
     - Subscription billing records
@@ -397,8 +490,14 @@ metrics:
       hardMax: 200
     validationRule: percentage_unbounded
     benchmarkKey: rule_of_40
-    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
-      for SaaS planning.
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
 dataOptions:
   DRHUJoXTe9TO3vlfY8bK:
     description: Records related to irrigation activities.
@@ -488,8 +587,7 @@ dataOptions:
     name: Crop monitoring systems
     template: Document
   Allverticalfarmingds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - date
     - account_code
@@ -663,8 +761,7 @@ dataOptions:
     name: CRM / Sales pipeline
     template: Document
   Allverticalfarmingds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn
-      analysis.
+    description: Product engagement and usage telemetry used for retention and churn analysis.
     fields:
     - date
     - customer_id

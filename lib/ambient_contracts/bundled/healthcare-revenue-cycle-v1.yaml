@@ -1,0 +1,53 @@
+product:
+  name: Healthcare Revenue Cycle
+  version: 1.0
+  owner: analytics
+  description: "De-identified revenue-cycle Gold product: claim denial and clean-claim rates and AR days by payer category. No member identifiers."
+  domain: Healthcare
+  type: Derived
+
+schema:
+  table: gold.healthcare_revenue_cycle
+  primary_key: revenue_cycle_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: revenue_cycle_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: payer_category
+      type: string
+      required: true
+    - name: claim_denial_rate
+      type: double
+      required: false
+    - name: clean_claim_rate
+      type: double
+      required: false
+    - name: ar_days
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
+
+consumption_contract:
+  allowed_paths:
+    - "Internal: Gold KPI calculators"
+  forbidden: "Any member-identifiable field; direct Bronze access"

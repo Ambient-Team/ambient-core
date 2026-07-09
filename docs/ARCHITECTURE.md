@@ -18,10 +18,12 @@ The installable wheel ships **`ambient_contracts`**, **`ambient_inference`**, **
 ## Repository trees
 
 - **`contracts/`** — data-product interfaces (CI-validated); YAML source of truth
-- **`catalog/`** — reference metrics, industry packs, benchmarks; `ambient-catalog-generate`
+- **`catalog/`** — reference metrics, industry packs, benchmarks; `ambient-catalog-generate` → JSON `manifest.json` and generated `runtime/*.js`
 - **`config/`** — Maestro model registry and routing (inference)
 - **`services/maestro/`** — headless HTTP API
-- **`docs/`** — manuals (`USAGE.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, `inference-layer.md`, this file, `CONTRIBUTING.md`)
+- **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, `inference-layer.md`, this file, `CONTRIBUTING.md`)
+
+Together, `contracts/`, `catalog/`, and `config/` are the **plain-text SSOT layer** in git; precursor OLTP/Bronze and forward Parquet/Delta or Maestro SQL live in deployment ([CONVENTIONS.md](CONVENTIONS.md), [governed-data.md](governed-data.md)).
 
 ## Consumers
 

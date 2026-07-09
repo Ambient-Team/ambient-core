@@ -58,6 +58,7 @@ From the core checkout (submodule or clone):
 ```bash
 validate-contracts
 validate-inference-registry
+validate-agent-config
 ambient-catalog-generate --check
 pytest   # optional; Spark tests need Java and AMBIENT_SPARK_TESTS=1
 ```
@@ -80,7 +81,9 @@ Run your application repository’s CI as well.
 - [ ] Submodule — `ambient-core/` checked out at the **same** tag SHA; parent commit records the pointer.
 - [ ] Container builds — Maestro or core clone args use the same tag if applicable.
 - [ ] CI — `AMBIENT_CORE_ROOT` (and catalog/contracts dirs) set before contract/catalog validation.
+- [ ] Agents — `validate-agent-config` if you fork profiles or tools; worker hardening per [agent-security.md](agent-security.md).
 - [ ] No mirrors — no `contracts/*.yaml` or `catalog/manifest.json` outside the `ambient-core/` checkout (stub README pointers are fine).
+- [ ] Authoring rules — read [CONVENTIONS.md](CONVENTIONS.md) before changing catalog keys, contract major versions, or ingestion formats; do not use binary spreadsheets or PDFs as SSOT in the consumer repo (extract to CSV/JSON/YAML at the boundary).
 - [ ] Catalog JS — import from `ambient-core/catalog/runtime/` (single bridge module in the app is a common pattern).
 - [ ] Notebooks and jobs — resolve contracts under `ambient-core/contracts/`.
 - [ ] Pipeline — shared modules from `ambient-core/lib`; app-only glue stays in the consumer repo.
@@ -93,3 +96,11 @@ Follow-up details: [CONTRIBUTING.md](CONTRIBUTING.md#consumer-follow-up-after-a-
 - **Consumer** — HTTP client, Compose, env config in the application repo; do not fork orchestration logic into UI tiers.
 
 See [inference-layer.md](inference-layer.md).
+
+## Appendix C — Agents
+
+- **Source** — `lib/ambient_agent/`, `tool_definitions.yaml`, `agent_profiles.yaml` in this repo only.
+- **Consumer** — call `run_plan_execute(profile_id=..., user_message=..., context=AgentRunContext(...))` from a backend worker; register tenant tools with `register_tool()` at process startup.
+- **Config** — run `validate-agent-config` in CI after profile or tool changes.
+- **Maestro** — set `MAESTRO_URL` (default `http://127.0.0.1:8088`) and `AMBIENT_MAESTRO_API_KEY` when the service requires auth.
+- **Docs** — [AGENTS.md](AGENTS.md), [governed-data.md](governed-data.md), [agent-security.md](agent-security.md).

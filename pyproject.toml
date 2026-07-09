@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ambient-core"
-version = "0.2.3"
+dynamic = ["version"]
 description = "Governed data-product contracts, reference catalog, lakehouse governance, and Maestro headless inference (MIT)."
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
@@ -57,6 +57,9 @@ validate-inference-registry = "ambient_inference.validate_registry:main"
 validate-agent-config = "ambient_agent.validate:main"
 ambient-catalog-generate = "ambient_cli.catalog:main"
 
+[tool.setuptools.dynamic]
+version = { attr = "ambient_inference.__version__" }
+
 [tool.setuptools.packages.find]
 where = ["lib"]
 include = [
@@ -64,6 +67,7 @@ include = [
     "ambient_contracts*",
     "ambient_cli*",
     "ambient_agent*",
+    "ambient_calc*",
 ]
 
 [tool.setuptools.package-data]

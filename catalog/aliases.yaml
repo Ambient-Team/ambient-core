@@ -1,0 +1,124 @@
+# Legacy catalogue key aliases.
+#
+# Maps a retired catalogue key to its current canonical key (see docs/CONVENTIONS.md).
+# Aliases are retained for at least one minor release so downstream consumers keyed on
+# the old identifier keep resolving, then removed. Alias targets must be unique.
+#
+# The bulk entries below cover the rename of the shared FP&A layer to the explicit
+# 'core' layer: All<Industry>fpa-<slug> -> <industry>.core.<slug>, and the shared
+# data-source templates: All<Industry><suffix> -> <industry>.core.<template>.
+
+aliases:
+  Allhealthcare5aMhHPzshRFSHX4PjOMH: healthcare.core.hr_records
+  AllhealthcareGvoI0Vg2YijGfgoBaqqe: healthcare.core.financial_statements
+  AllhealthcareQO2mQ9iQZXjtLrZYLXcK: healthcare.core.accounting_software
+  Allhealthcarefpa-burn-rate: healthcare.core.burn_rate
+  Allhealthcarefpa-ccc: healthcare.core.ccc
+  Allhealthcarefpa-current-ratio: healthcare.core.current_ratio
+  Allhealthcarefpa-dpo: healthcare.core.dpo
+  Allhealthcarefpa-dso: healthcare.core.dso
+  Allhealthcarefpa-ebitda-margin: healthcare.core.ebitda_margin
+  Allhealthcarefpa-gross-margin: healthcare.core.gross_margin
+  Allhealthcarefpa-net-margin: healthcare.core.net_margin
+  Allhealthcarefpa-operating-cash-flow: healthcare.core.operating_cash_flow
+  Allhealthcarefpa-operating-margin: healthcare.core.operating_margin
+  Allhealthcarefpa-quick-ratio: healthcare.core.quick_ratio
+  Allhealthcarefpa-revenue-growth: healthcare.core.revenue_growth
+  Allhealthcarefpa-runway: healthcare.core.runway
+  Allhealthcarefpa-working-capital: healthcare.core.working_capital
+  AllhealthcareqXzIFYqjk5et3S78BYew: healthcare.core.payroll_records
+  Allmanufacturing5aMhHPzshRFSHX4PjOMH: manufacturing.core.hr_records
+  AllmanufacturingGvoI0Vg2YijGfgoBaqqe: manufacturing.core.financial_statements
+  AllmanufacturingQO2mQ9iQZXjtLrZYLXcK: manufacturing.core.accounting_software
+  Allmanufacturingfpa-burn-rate: manufacturing.core.burn_rate
+  Allmanufacturingfpa-ccc: manufacturing.core.ccc
+  Allmanufacturingfpa-current-ratio: manufacturing.core.current_ratio
+  Allmanufacturingfpa-dpo: manufacturing.core.dpo
+  Allmanufacturingfpa-dso: manufacturing.core.dso
+  Allmanufacturingfpa-ebitda-margin: manufacturing.core.ebitda_margin
+  Allmanufacturingfpa-gross-margin: manufacturing.core.gross_margin
+  Allmanufacturingfpa-net-margin: manufacturing.core.net_margin
+  Allmanufacturingfpa-operating-cash-flow: manufacturing.core.operating_cash_flow
+  Allmanufacturingfpa-operating-margin: manufacturing.core.operating_margin
+  Allmanufacturingfpa-quick-ratio: manufacturing.core.quick_ratio
+  Allmanufacturingfpa-revenue-growth: manufacturing.core.revenue_growth
+  Allmanufacturingfpa-runway: manufacturing.core.runway
+  Allmanufacturingfpa-working-capital: manufacturing.core.working_capital
+  AllmanufacturingqXzIFYqjk5et3S78BYew: manufacturing.core.payroll_records
+  Allrealestate5aMhHPzshRFSHX4PjOMH: real_estate.core.hr_records
+  AllrealestateGvoI0Vg2YijGfgoBaqqe: real_estate.core.financial_statements
+  AllrealestateQO2mQ9iQZXjtLrZYLXcK: real_estate.core.accounting_software
+  Allrealestatefpa-burn-rate: real_estate.core.burn_rate
+  Allrealestatefpa-ccc: real_estate.core.ccc
+  Allrealestatefpa-current-ratio: real_estate.core.current_ratio
+  Allrealestatefpa-dpo: real_estate.core.dpo
+  Allrealestatefpa-dso: real_estate.core.dso
+  Allrealestatefpa-ebitda-margin: real_estate.core.ebitda_margin
+  Allrealestatefpa-gross-margin: real_estate.core.gross_margin
+  Allrealestatefpa-net-margin: real_estate.core.net_margin
+  Allrealestatefpa-operating-cash-flow: real_estate.core.operating_cash_flow
+  Allrealestatefpa-operating-margin: real_estate.core.operating_margin
+  Allrealestatefpa-quick-ratio: real_estate.core.quick_ratio
+  Allrealestatefpa-revenue-growth: real_estate.core.revenue_growth
+  Allrealestatefpa-runway: real_estate.core.runway
+  Allrealestatefpa-working-capital: real_estate.core.working_capital
+  AllrealestateqXzIFYqjk5et3S78BYew: real_estate.core.payroll_records
+  Allrestaurants5aMhHPzshRFSHX4PjOMH: restaurants.core.hr_records
+  AllrestaurantsGvoI0Vg2YijGfgoBaqqe: restaurants.core.financial_statements
+  AllrestaurantsQO2mQ9iQZXjtLrZYLXcK: restaurants.core.accounting_software
+  Allrestaurantsfpa-burn-rate: restaurants.core.burn_rate
+  Allrestaurantsfpa-ccc: restaurants.core.ccc
+  Allrestaurantsfpa-current-ratio: restaurants.core.current_ratio
+  Allrestaurantsfpa-dpo: restaurants.core.dpo
+  Allrestaurantsfpa-dso: restaurants.core.dso
+  Allrestaurantsfpa-ebitda-margin: restaurants.core.ebitda_margin
+  Allrestaurantsfpa-gross-margin: restaurants.core.gross_margin
+  Allrestaurantsfpa-net-margin: restaurants.core.net_margin
+  Allrestaurantsfpa-operating-cash-flow: restaurants.core.operating_cash_flow
+  Allrestaurantsfpa-operating-margin: restaurants.core.operating_margin
+  Allrestaurantsfpa-quick-ratio: restaurants.core.quick_ratio
+  Allrestaurantsfpa-revenue-growth: restaurants.core.revenue_growth
+  Allrestaurantsfpa-runway: restaurants.core.runway
+  Allrestaurantsfpa-working-capital: restaurants.core.working_capital
+  AllrestaurantsqXzIFYqjk5et3S78BYew: restaurants.core.payroll_records
+  Alltransportation5aMhHPzshRFSHX4PjOMH: transportation.core.hr_records
+  AlltransportationGvoI0Vg2YijGfgoBaqqe: transportation.core.financial_statements
+  AlltransportationQO2mQ9iQZXjtLrZYLXcK: transportation.core.accounting_software
+  Alltransportationfpa-burn-rate: transportation.core.burn_rate
+  Alltransportationfpa-ccc: transportation.core.ccc
+  Alltransportationfpa-current-ratio: transportation.core.current_ratio
+  Alltransportationfpa-dpo: transportation.core.dpo
+  Alltransportationfpa-dso: transportation.core.dso
+  Alltransportationfpa-ebitda-margin: transportation.core.ebitda_margin
+  Alltransportationfpa-gross-margin: transportation.core.gross_margin
+  Alltransportationfpa-net-margin: transportation.core.net_margin
+  Alltransportationfpa-operating-cash-flow: transportation.core.operating_cash_flow
+  Alltransportationfpa-operating-margin: transportation.core.operating_margin
+  Alltransportationfpa-quick-ratio: transportation.core.quick_ratio
+  Alltransportationfpa-revenue-growth: transportation.core.revenue_growth
+  Alltransportationfpa-runway: transportation.core.runway
+  Alltransportationfpa-working-capital: transportation.core.working_capital
+  AlltransportationqXzIFYqjk5et3S78BYew: transportation.core.payroll_records
+  Allverticalfarming5aMhHPzshRFSHX4PjOMH: vertical_farming.core.hr_records
+  AllverticalfarmingGvoI0Vg2YijGfgoBaqqe: vertical_farming.core.financial_statements
+  AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK: vertical_farming.core.accounting_software
+  Allverticalfarmingfpa-burn-rate: vertical_farming.core.burn_rate
+  Allverticalfarmingfpa-ccc: vertical_farming.core.ccc
+  Allverticalfarmingfpa-current-ratio: vertical_farming.core.current_ratio
+  Allverticalfarmingfpa-dpo: vertical_farming.core.dpo
+  Allverticalfarmingfpa-dso: vertical_farming.core.dso
+  Allverticalfarmingfpa-ebitda-margin: vertical_farming.core.ebitda_margin
+  Allverticalfarmingfpa-gross-margin: vertical_farming.core.gross_margin
+  Allverticalfarmingfpa-net-margin: vertical_farming.core.net_margin
+  Allverticalfarmingfpa-operating-cash-flow: vertical_farming.core.operating_cash_flow
+  Allverticalfarmingfpa-operating-margin: vertical_farming.core.operating_margin
+  Allverticalfarmingfpa-quick-ratio: vertical_farming.core.quick_ratio
+  Allverticalfarmingfpa-revenue-growth: vertical_farming.core.revenue_growth
+  Allverticalfarmingfpa-runway: vertical_farming.core.runway
+  Allverticalfarmingfpa-working-capital: vertical_farming.core.working_capital
+  AllverticalfarmingqXzIFYqjk5et3S78BYew: vertical_farming.core.payroll_records
+  HcDenial915CatalogMetricKey05: healthcare.revenue_cycle.claim_denial_rate
+  HcLos912CatalogMetricKey02: healthcare.provider.average_length_of_stay
+  HcReadmit913CatalogMetricKey03: healthcare.quality.readmission_rate_30d
+  HcStaff914CatalogMetricKey04: healthcare.provider.staffing_ratio
+  HcVol911CatalogMetricKey01: healthcare.provider.patient_volume

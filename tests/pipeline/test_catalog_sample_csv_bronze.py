@@ -6,7 +6,7 @@ from ambient_pipeline.contracts import ContractLoader
 
 
 def _required_metric_columns() -> set[str]:
-    contract = ContractLoader().load("tenant-metrics-v1.1.yaml")
+    contract = ContractLoader().load("tenant-metrics-v1.yaml")
     return {
         col["name"]
         for col in contract.get("schema", {}).get("columns", [])
