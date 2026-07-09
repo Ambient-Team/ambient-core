@@ -1,0 +1,5 @@
+# Wheel bundle mirror of contracts/ (included via contracts/ in the pack)
+lib/ambient_contracts/bundled/**
+
+# Generated from catalog YAML (ambient-catalog-generate)
+catalog/runtime/**

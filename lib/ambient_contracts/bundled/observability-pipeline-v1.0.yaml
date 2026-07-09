@@ -1,7 +1,7 @@
 product:
   name: Pipeline Observability
   version: 1.0
-  owner: platform-engineering@solutions-flux.ca
+  owner: platform-engineering
   ingestion_method: lakeflow_declarative
   pipeline_type: declarative
   production_pipeline: olap/declarative/observability_declarative.sql

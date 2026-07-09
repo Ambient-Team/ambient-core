@@ -1,6 +1,6 @@
-# Reference catalog (platform layer)
+# Reference catalog (source tree)
 
-Industry-neutral **reference data** for metrics, data-source templates, and benchmarks. This tree is **not** part of the consumption app (`src/`), **not** OLAP pipeline code (`olap/`), and **not** governed data-product contracts (`contracts/`).
+Industry-neutral **reference data** for metrics, data-source templates, and benchmarks. YAML and schemas live here in **ambient-core**; this tree is **not** governed data-product contracts (`contracts/` at repo root).
 
 ## Layout
 
@@ -13,24 +13,33 @@ Industry-neutral **reference data** for metrics, data-source templates, and benc
 - **`schema/`** — JSON Schema for metrics ([`metric-v1.json`](schema/metric-v1.json)) and data options ([`data-option-v1.json`](schema/data-option-v1.json)).
 - **`crosswalk.yaml`** — optional links from catalog metrics to `contracts/` products.
 - **`manifest.json`** — machine-readable export for OLAP/ML (regenerated).
-- **`runtime/`** — generated JS; the app loads it only through [`src/platform/referenceCatalog.js`](../src/platform/referenceCatalog.js).
+- **`runtime/`** — generated JS modules (do not hand-edit except `catalogEnrichment.js`).
 
 ## Commands
 
+From an ambient-core checkout with `pip install -e .`:
+
 ```bash
-npm run catalog:generate   # YAML → catalog/runtime/*.js + manifest.json
-npm run catalog:validate   # CI: validate YAML + ensure runtime is fresh
+ambient-catalog-generate              # YAML → catalog/runtime/*.js + manifest.json
+ambient-catalog-generate --check      # fail if generated output is stale (CI)
 ```
 
-Edit YAML under `industries/` and `core/`; do not hand-edit generated files in `runtime/` except `catalogEnrichment.js`.
+Equivalent: `python scripts/generate_reference_catalog.py` (and `--check`).
+
+Edit YAML under `industries/` and `core/`; regenerate after changes.
+
+## Consumers
+
+- **Integrators** — use `manifest.json` and Python loaders (`ambient_pipeline.catalog_loader`, `AMBIENT_CATALOG_DIR`); or bundle `runtime/` into your own app.
+- **Monorepo consumers** — import generated JS from a pinned `ambient-core/catalog/runtime/` checkout (single app bridge module is a common pattern).
 
 ## Terminology
 
-**Industry (vertical pack)** — Asset or sector context (Real Estate, Manufacturing, Healthcare, …). One pack per row in [`core/industries.yaml`](core/industries.yaml). In the consumption app, `organizations/{orgId}.profile.industry` selects which pack filters KPI and data-library templates. There is **no** catalog industry named FP&A.
+**Industry (vertical pack)** — Asset or sector context (Real Estate, Manufacturing, Healthcare, …). One pack per row in [`core/industries.yaml`](core/industries.yaml). There is **no** catalog industry named FP&A.
 
-**FP&A (product function)** — Financial planning and analysis sold **across** verticals: close packs, covenant liquidity, board reporting, and similar. Expressed in catalog metadata (`fpaWorkflow`, benchmarks) and in the FP&A workspace UI ([`fpaPackCategories.js`](../src/features/fpa-workspace/fpaPackCategories.js)). FP&A is not a second industry dimension on top of the org vertical.
+**FP&A (product function)** — Financial planning and analysis **across** verticals: close packs, covenant liquidity, board reporting, and similar. Expressed in catalog metadata (`fpaWorkflow`, benchmarks). FP&A is not a second industry dimension on top of the org vertical.
 
-**User role (department)** — `users.role` (Finance, Marketing, Operations, Development) is the member’s department on the team. It is **not** used to resolve the reference catalog today; future role-based contributions would be a separate rules layer.
+**User role (department)** — Optional app-level dimension (Finance, Marketing, Operations, and so on). Not used to resolve the reference catalog in the generator; future role-based rules would be a separate layer in a consumer app.
 
 **`core/shared/fpa_metrics.yaml`** — The fourteen-metric corporate finance / close suite copied into every vertical with distinct numeric ids. Keys like `Allmanufacturingfpa-current-ratio` use `fpa-` as a historical key segment only; each metric’s `industry` field is the vertical (e.g. Manufacturing), not FP&A.
 
@@ -40,7 +49,7 @@ Edit YAML under `industries/` and `core/`; do not hand-edit generated files in `
 
 ## Expansion rules
 
-At `catalog:generate` time, for each pack listed in `core/industries.yaml`:
+At generate time, for each pack listed in `core/industries.yaml`:
 
 1. **Cross-industry close metrics** — merge templates from `core/shared/fpa_metrics.yaml`, assign `id` from `fpa_industry_ids.yaml`, set `industry` to the vertical pack, and use catalog keys `All{slug}fpa-{metricSlug}` (e.g. `Allmanufacturingfpa-current-ratio`). Do not register FP&A in `industries.yaml`.
 2. **Common data options** — merge templates from `common_data_options.yaml`, resolve `metricRefs` to numeric ids in that vertical, assign option ids from `optionIds`.
@@ -54,14 +63,16 @@ Validation enforces globally unique ids, same-industry `metricIds` on data optio
 2. Create [`industries/your_sector.yaml`](industries/) with vertical-specific `metrics` and `dataOptions` only.
 3. Add close-metric id rows for the new vertical in [`fpa_industry_ids.yaml`](core/shared/fpa_industry_ids.yaml) (one id per slug in `fpa_metrics.yaml`; keep ids unique across the whole catalog).
 4. Add common data-option ids in [`common_data_options.yaml`](core/shared/common_data_options.yaml) under `optionIds`, plus any `metricRefs` overrides under `metricRefs.{IndustryName}` when defaults do not apply.
-5. Run `npm run catalog:generate` and fix validation errors.
+5. Run `ambient-catalog-generate` and fix validation errors.
 
-Consumption app: organization **vertical** (`organizations/{orgId}.profile.industry`) is set at org creation and selects which expanded pack filters KPI templates (`resolveCatalogIndustry` in generated `catalogIndustries.js`). User **department** (`users.role`) does not change catalog resolution.
+## Downstream consumption
+
+In a typical application, organization **vertical** (industry profile) selects which expanded pack filters KPI templates (`resolveCatalogIndustry` in generated `catalogIndustries.js`). User **department** does not change catalog resolution unless the app adds that layer.
 
 ## Boundaries
 
 - **Catalog** — intent (what KPIs exist, what sources they need, field hints).
-- **Contracts** — physical Gold/data-product shapes and lineage.
-- **Org OLTP** — tenant subscriptions, uploads, manual/verified values (Firestore).
+- **Contracts** — physical Gold/data-product shapes and lineage (`../contracts/`).
+- **Org operational store** — tenant state and verified values in a consumer app’s OLTP layer (not defined in this repo).
 
 Hosted catalog API later replaces **transport** only; this folder remains the repo source of truth until then.

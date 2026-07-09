@@ -18,11 +18,6 @@ def _repo_roots() -> list[Path]:
         Path.cwd().parent.parent,
         here.parents[2],
     ]
-    for root in (
-        Path("/Workspace/Users/ivan@ambientsystems.ai/ambient-systems-platform"),
-        Path("/Workspace/Repos/ambient-systems-platform"),
-    ):
-        candidates.append(root)
     seen: set[Path] = set()
     unique: list[Path] = []
     for path in candidates:
@@ -36,10 +31,10 @@ def _repo_roots() -> list[Path]:
 
 def resolve_manifest_path() -> Path:
     for root in _repo_roots():
-        candidate = root / "catalog" / "manifest.json"
+        candidate = root / "ambient-core" / "catalog" / "manifest.json"
         if candidate.is_file():
             return candidate
-        candidate = root / "ambient-core" / "catalog" / "manifest.json"
+        candidate = root / "catalog" / "manifest.json"
         if candidate.is_file():
             return candidate
     try:

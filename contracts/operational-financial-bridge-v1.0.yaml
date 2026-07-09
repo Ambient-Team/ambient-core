@@ -1,7 +1,7 @@
 product:
   name: Operational-Financial Bridge
   version: 1.0
-  owner: analytics@solutions-flux.ca
+  owner: analytics
   description: |
     Governed Gold data product that validates operational telemetry against institutional
     financial metrics (Single Source of Truth / "watermelon KPI" guard). Maps sensor and

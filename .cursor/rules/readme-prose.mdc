@@ -1,0 +1,29 @@
+---
+description: README files use prose lists, not markdown pipe tables
+globs: "**/README.md"
+alwaysApply: false
+---
+
+# README formatting
+
+When editing any `README.md` in this repository:
+
+- Do **not** use markdown pipe tables (`| col | col |` with header separators).
+- Use short paragraphs, bullet lists, or numbered lists instead.
+- Code blocks, links, and mermaid diagrams are fine.
+
+**Avoid**
+
+```markdown
+| Thing | Purpose |
+|-------|---------|
+| contracts | SSOT |
+```
+
+**Prefer**
+
+```markdown
+- **contracts/** — SSOT for data-product YAML.
+```
+
+For tabular reference material, put tables in `docs/*.md` (for example `docs/ECOSYSTEM.md`) and link from the README.

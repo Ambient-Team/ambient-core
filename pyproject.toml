@@ -4,13 +4,32 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ambient-core"
-version = "0.2.1"
-description = "Open-source Ambient contracts, catalog, governance, inference (Maestro), and shared pipeline primitives"
+version = "0.2.2"
+description = "Governed data-product contracts, reference catalog, lakehouse governance, and Maestro headless inference (MIT)."
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
+license = { text = "MIT" }
+keywords = [
+    "data-contracts",
+    "data-catalog",
+    "governance",
+    "medallion",
+    "lakehouse",
+    "fp-a",
+    "llm",
+    "inference",
+    "open-weight",
+]
 dependencies = [
     "pyyaml>=6.0,<7",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Ambient-Team/ambient-core"
+Documentation = "https://github.com/Ambient-Team/ambient-core/blob/main/docs/README.md"
+Repository = "https://github.com/Ambient-Team/ambient-core"
+Issues = "https://github.com/Ambient-Team/ambient-core/issues"
+Changelog = "https://github.com/Ambient-Team/ambient-core/releases"
 
 [project.optional-dependencies]
 inference = [

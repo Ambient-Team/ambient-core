@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/Ambient-Team/ambient-core/blob/main/docs/README.md
+    about: Usage, integration, and architecture guides
+  - name: Security advisory
+    url: https://github.com/Ambient-Team/ambient-core/security/advisories/new
+    about: Report a vulnerability (do not use public issues for exploits)

@@ -1,7 +1,7 @@
 product:
   name: Optimization Opportunity
   version: 1.0
-  owner: analytics@solutions-flux.ca (joint with platform)
+  owner: analytics (joint with platform)
   description: "Computed optimization recommendations derived from patented WIPO WO2022240365 logic. Includes confidence scores, estimated ROI impact, linked metrics, and full lineage. Bridges static reference recommendations to governed data products."
   domain: AI / Optimization
   type: Derived
