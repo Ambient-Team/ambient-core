@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import pytest
 
+pytest_plugins = ["spark_fixtures"]
+
 from ambient_inference.gateway import CompletionResult, ModelGateway
 from ambient_inference.registry import ModelRegistry
 from ambient_inference.schemas import ChatMessage, MessageRole, ModelProvenance

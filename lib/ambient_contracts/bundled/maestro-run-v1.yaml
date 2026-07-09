@@ -1,0 +1,63 @@
+product:
+  name: Maestro Run Artifact
+  version: 1.0
+  owner: platform-engineering@solutions-flux.ca
+  description: |
+    Persisted inference run from the Maestro API — routing plan, council drafts,
+    synthesis output, and per-model provenance. Open-weight backends only.
+  domain: Intelligence
+  type: Event
+
+schema:
+  primary_key: run_id
+  columns:
+    - name: run_id
+      type: string
+      required: true
+    - name: org_id
+      type: string
+      required: false
+    - name: mode
+      type: string
+      required: true
+    - name: status
+      type: string
+      required: true
+      enum: [pending, running, completed, failed]
+    - name: routing_plan
+      type: object
+      required: false
+    - name: artifact_content
+      type: string
+      required: false
+    - name: artifact_drafts
+      type: object
+      required: false
+    - name: provenance
+      type: array
+      required: false
+    - name: error
+      type: string
+      required: false
+    - name: created_at
+      type: timestamp
+      required: true
+    - name: updated_at
+      type: timestamp
+      required: true
+
+lineage:
+  bcbs239: false
+  provenance_columns: [run_id, org_id, created_at]
+  sources:
+    - "Maestro API POST /v1/runs (services/maestro)"
+    - "SQL run store (MAESTRO_DATABASE_URL)"
+
+governance:
+  multi_tenant: true
+  open_weight_only: true
+
+consumption_contract:
+  allowed_paths:
+    - "Maestro API clients (headless); future org-scoped usage metering"
+  forbidden: "Direct LLM calls from React consumption tier"

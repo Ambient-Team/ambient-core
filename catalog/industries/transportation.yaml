@@ -1,0 +1,681 @@
+industry: Transportation
+metrics:
+  DtBqsvp9S9HBlcxsvAgd:
+    datasource:
+    - HR records
+    - Payroll records
+    - Exit interviews
+    description: The percentage of drivers that leave the company within a specific
+      period.
+    id: 14
+    industry: Transportation
+    methodology: (Number of drivers who left / Total number of drivers) * 100
+    name: Driver Turnover Rate
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 100
+    targetRangeLow: 20
+    tech: DEEP TECH
+    type: Operational
+    unit: '%'
+  SAZkxRxYFtf1EIxBXWMk:
+    datasource:
+    - Fuel logs
+    - GPS tracking data
+    - Vehicle telematics data
+    description: Average miles per gallon for the fleet.
+    id: 10
+    industry: Transportation
+    methodology: Total miles driven / Total fuel used
+    name: Fuel Efficiency
+    sensorFieldData:
+    - Fuel logs
+    - GPS tracking data
+    status: data needed
+    targetRangeHigh: 50
+    targetRangeLow: 5
+    tech: DEEP TECH
+    type: Operational
+    unit: Miles per Gallon (MPG)
+  biA3oIK816fwfInBKg2e:
+    datasource:
+    - Delivery logs
+    - GPS tracking data
+    - Customer confirmations
+    description: The percentage of deliveries made on or before the scheduled delivery
+      time.
+    id: 12
+    industry: Transportation
+    methodology: (Number of on-time deliveries / Total deliveries) * 100
+    name: On-Time Delivery Rate
+    sensorFieldData:
+    - GPS tracking data
+    - Delivery confirmations
+    status: data needed
+    targetRangeHigh: 99
+    targetRangeLow: 85
+    tech: DEEP TECH
+    type: Operational
+    unit: '%'
+  iIaKhCCf0BGvHX1W1i7n:
+    datasource:
+    - Fleet management systems
+    - GPS tracking data
+    - Usage logs
+    description: The percentage of time the fleet is actively in use.
+    id: 11
+    industry: Transportation
+    methodology: (Total time fleet in use / Total available fleet time) * 100
+    name: Fleet Utilization Rate
+    sensorFieldData:
+    - GPS tracking data
+    - Usage logs
+    status: data needed
+    targetRangeHigh: 80
+    targetRangeLow: 20
+    tech: DEEP TECH
+    type: Operational
+    unit: Percentage
+  vXlB5QC3mZJw1auWaIfK:
+    datasource:
+    - Maintenance logs
+    - GPS tracking data
+    - Accounting Software
+    description: Total maintenance costs divided by total miles driven.
+    id: 13
+    industry: Transportation
+    methodology: Total maintenance costs / Total miles driven
+    name: Maintenance Cost per Mile
+    sensorFieldData:
+    - Maintenance logs
+    - GPS tracking data
+    status: data needed
+    targetRangeHigh: 0.1
+    targetRangeLow: 0.02
+    tech: DEEP TECH
+    type: Operational
+    unit: USD/mile
+  Alltransportationsaas-mrr:
+    datasource:
+    - Subscription billing records
+    - CRM / Sales pipeline
+    description: Normalized recurring subscription revenue billed in a month.
+    id: 1012
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: MRR = Î£ (Active Subscriptions Ã— Monthly Subscription Price)
+    name: Monthly Recurring Revenue (MRR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 500000
+    targetRangeLow: 50000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/month
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 1000000000
+    validationRule: currency
+    benchmarkKey: mrr
+    fpaWorkflow: Recurring-revenue forecast â€” the foundation of the SaaS operating
+      model and ARR bridge.
+  Alltransportationsaas-arr:
+    datasource:
+    - Subscription billing records
+    - CRM / Sales pipeline
+    description: Annualized run-rate of recurring subscription revenue.
+    id: 1018
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: ARR = MRR Ã— 12
+    name: Annual Recurring Revenue (ARR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 6000000
+    targetRangeLow: 600000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/year
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 10000000000
+    validationRule: currency
+    benchmarkKey: arr
+    fpaWorkflow: Annual planning & valuation â€” the headline scale metric for SaaS
+      boards and investors.
+  Alltransportationsaas-nrr:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Revenue retained and expanded from existing customers, net of churn
+      and contraction.
+    id: 1024
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: NRR = ((Starting MRR + Expansion âˆ’ Contraction âˆ’ Churn) / Starting
+      MRR) Ã— 100
+    name: Net Revenue Retention (NRR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 120
+    targetRangeLow: 100
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 300
+    validationRule: percentage_unbounded
+    benchmarkKey: nrr
+    fpaWorkflow: Expansion & retention modeling â€” the strongest signal of durable
+      SaaS growth quality.
+  Alltransportationsaas-gross-churn:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Percentage of recurring revenue lost to cancellations and downgrades.
+    id: 1030
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: Gross Churn = (Churned MRR / Starting MRR) Ã— 100
+    name: Gross Revenue Churn Rate
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 5
+    targetRangeLow: 1
+    tech: FINTECH
+    type: Operational
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: gross_churn
+    fpaWorkflow: Retention review â€” informs the renewal forecast and customer-success
+      investment case.
+  Alltransportationsaas-cac:
+    datasource:
+    - Marketing spend records
+    - CRM / Sales pipeline
+    - General ledger
+    description: Fully-loaded sales & marketing cost to acquire one new customer.
+    id: 1036
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: CAC = Total Sales & Marketing Spend / New Customers Acquired
+    name: Customer Acquisition Cost (CAC)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 10000
+    targetRangeLow: 500
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 10000000
+    validationRule: currency
+    benchmarkKey: cac
+    fpaWorkflow: Go-to-market efficiency â€” feeds CAC payback and the marketing budget
+      allocation.
+  Alltransportationsaas-ltv:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Expected gross-margin revenue from a customer over their lifetime.
+    id: 1042
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: LTV = (Average Revenue per Account Ã— Gross Margin %) / Churn Rate
+    name: Customer Lifetime Value (LTV)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 50000
+    targetRangeLow: 3000
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 100000000
+    validationRule: currency
+    benchmarkKey: ltv
+    fpaWorkflow: Unit-economics modeling â€” combined with CAC to gate growth-spend
+      decisions.
+  Alltransportationsaas-ltv-cac:
+    datasource:
+    - Subscription billing records
+    - Marketing spend records
+    description: Ratio of customer lifetime value to acquisition cost â€” core SaaS
+      unit economics.
+    id: 1048
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost
+    name: 'LTV : CAC Ratio'
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 5
+    targetRangeLow: 3
+    tech: FINTECH
+    type: Financial
+    unit: Ratio
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    validationRule: ratio
+    benchmarkKey: ltv_cac
+    fpaWorkflow: Investment efficiency â€” a board-level guardrail (target â‰¥ 3:1)
+      for scaling spend.
+  Alltransportationsaas-rule-of-40:
+    datasource:
+    - Subscription billing records
+    - Financial statements
+    description: Balance of growth and profitability for recurring-revenue businesses.
+    id: 1054
+    industry: Transportation
+    industryTags:
+    - SaaS
+    methodology: Rule of 40 = Revenue Growth % + Profit Margin %
+    name: Rule of 40
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 60
+    targetRangeLow: 40
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 200
+    validationRule: percentage_unbounded
+    benchmarkKey: rule_of_40
+    fpaWorkflow: Growth-vs-profitability review â€” a single composite health score
+      for SaaS planning.
+dataOptions:
+  5tZAB2WLZbRDQdj6l7X6:
+    description: Data collected from in-vehicle sensors to monitor vehicle performance.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - date
+    - vehicle_id
+    - telematics_date
+    - engine_performance
+    - fuel_efficiency
+    - maintenance_alerts
+    - driver_behavior
+    format: Document
+    id: 13
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 10
+    name: Vehicle telematics data
+    template: Document
+  DclVZaLbyz6Pwxt5Ctr1:
+    description: Records of maintenance activities.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields: []
+    format: Document
+    id: 16
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 13
+    name: Maintenance logs
+    template: Document
+  Ta6fK4eo9bymVVQGYEpl:
+    description: Software used to manage a fleet of vehicles.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - date
+    - fleet_id
+    - vehicle_ids
+    - maintenance_schedule
+    - fuel_logs
+    - insurance_details
+    format: Software
+    id: 14
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 11
+    name: Fleet management systems
+    template: Document
+  i0N19s7GpHi9QTyG5dhM:
+    description: Records of deliveries made, including location and timing.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - date
+    - delivery_date
+    - vehicle_id
+    - route_id
+    - delivery_status
+    - delivery_address
+    - customer_name
+    - delivery_time
+    format: Document
+    id: 15
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 12
+    name: Delivery logs
+    template: Document
+  jHscrlnM67xOUF1IXfos:
+    description: Data collected from GPS devices to track location and movement.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - date
+    - vehicle_id
+    - tracking_date
+    - start_location
+    - end_location
+    - distance_travelled
+    - average_speed
+    - route_taken
+    format: Document
+    id: 12
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 10
+    - 11
+    - 12
+    - 13
+    name: GPS tracking data
+    template: Document
+  uRTkFZUmJC2BLwoRtJxL:
+    description: Records of fuel consumption for vehicles or machinery.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - date
+    - vehicle_id
+    - fuel_type
+    - fuel_date
+    - fuel_quantity
+    - fuel_cost
+    - odometer_reading
+    format: Document
+    id: 11
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 10
+    name: Fuel logs
+    template: Document
+  Alltransportationds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart
+      of accounts.
+    fields:
+    - date
+    - account_code
+    - account_name
+    - journal_entry_id
+    - debit
+    - credit
+    - period
+    - currency
+    format: Financial Statement Template
+    id: 1102
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 940
+    - 946
+    - 952
+    - 958
+    - 964
+    - 976
+    - 982
+    - 994
+    - 1036
+    name: General ledger
+    template: Financial Statement Template
+  Alltransportationds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - date
+    - account_code
+    - account_name
+    - debit_balance
+    - credit_balance
+    - period
+    format: Financial Statement Template
+    id: 1108
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 928
+    - 934
+    - 970
+    name: Trial balance
+    template: Financial Statement Template
+  Alltransportationds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - date
+    - period_end_date
+    - current_assets
+    - total_assets
+    - current_liabilities
+    - total_liabilities
+    - inventory
+    - equity
+    format: Financial Statement Template
+    id: 1114
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 928
+    - 934
+    - 970
+    - 988
+    name: Balance sheet
+    template: Financial Statement Template
+  Alltransportationds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - date
+    - customer_name
+    - invoice_id
+    - invoice_date
+    - due_date
+    - amount_due
+    - days_outstanding
+    - aging_bucket
+    format: Transactional Data Template
+    id: 1120
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 976
+    - 988
+    name: Accounts receivable aging
+    template: Transactional Data Template
+  Alltransportationds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - date
+    - supplier_name
+    - bill_id
+    - bill_date
+    - due_date
+    - amount_due
+    - days_outstanding
+    - aging_bucket
+    format: Transactional Data Template
+    id: 1126
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 982
+    - 988
+    name: Accounts payable aging
+    template: Transactional Data Template
+  Alltransportationds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - date
+    - transaction_date
+    - account_id
+    - description
+    - amount
+    - direction
+    - balance
+    - currency
+    format: Transactional Data Template
+    id: 1132
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 994
+    - 1000
+    - 1006
+    name: Bank statements
+    template: Transactional Data Template
+  Alltransportationds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - date
+    - customer_id
+    - plan_name
+    - mrr
+    - billing_period
+    - status
+    - start_date
+    - end_date
+    format: Transactional Data Template
+    id: 1138
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1012
+    - 1018
+    - 1024
+    - 1030
+    - 1042
+    - 1048
+    - 1054
+    name: Subscription billing records
+    template: Transactional Data Template
+  Alltransportationds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - date
+    - opportunity_id
+    - account_name
+    - stage
+    - amount
+    - close_date
+    - owner
+    - probability
+    format: Software
+    id: 1144
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1012
+    - 1036
+    name: CRM / Sales pipeline
+    template: Document
+  Alltransportationds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn
+      analysis.
+    fields:
+    - date
+    - customer_id
+    - active_users
+    - sessions
+    - feature_adoption
+    - usage_minutes
+    format: Software
+    id: 1150
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1024
+    - 1030
+    name: Product usage logs
+    template: Document
+  Alltransportationds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - date
+    - channel
+    - campaign
+    - spend
+    - leads
+    - new_customers
+    - currency
+    format: Transactional Data Template
+    id: 1156
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1036
+    - 1048
+    name: Marketing spend records
+    template: Transactional Data Template

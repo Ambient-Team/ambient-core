@@ -1,36 +1,47 @@
-# ambient-core
+# Ambient Core
 
-Open-source **Maestro** inference: the `ambient-inference` Python package (`ambient_inference`) with open-weight model registry, routing, model council orchestration, and a headless FastAPI service.
+Open-source foundation for Ambient Systems: **contracts**, **reference catalog**, **governance** (ISO 8000 / BCBS 239 helpers), **Maestro inference** (`ambient_inference`), shared **pipeline** primitives, and a placeholder **agent** extension point.
 
-**Repository:** [Ambient-Team/ambient-core](https://github.com/Ambient-Team/ambient-core)
+**Platform repo:** [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform) consumes this package (or git submodule at `ambient-core/`).
 
 ## Install
 
 ```bash
-pip install -e ".[dev]"
-# Postgres run store (Docker / production):
-pip install -e ".[dev,postgres]"
+pip install -e ".[all]"
+# minimal + inference only:
+pip install -e ".[inference,dev]"
 ```
-
-## Quick start
-
-```bash
-validate-inference-registry
-pytest -q
-set MAESTRO_USE_CLASSIFIER=false
-uvicorn main:app --app-dir services/maestro --reload --port 8088
-```
-
-Point `MAESTRO_BACKEND_*_URL` env vars at OpenAI-compatible backends (Ollama, vLLM, etc.). See [docs/inference-layer.md](docs/inference-layer.md).
 
 ## Layout
 
-- `lib/ambient_inference/` — importable library
-- `services/maestro/` — FastAPI Maestro API
-- `config/` — models registry, routing policies, council profiles
-- `contracts/maestro-run-v1.yaml` — run artifact contract (also packaged under `ambient_inference/contracts/`)
-- `scripts/validate_inference_registry.py` — CI registry validator
+- **`contracts/`** — neutral data-product YAML (source of truth; mirrored under `lib/ambient_contracts/bundled/` for wheels)
+- **`catalog/`** — reference catalog YAML, schemas, generated `runtime/` + `manifest.json`
+- **`lib/ambient_contracts/`** — contract load + validate
+- **`lib/ambient_pipeline/`** — catalog loaders, Silver validation, provenance, bronze mapping
+- **`lib/ambient_inference/`** — Maestro library + packaged run contract
+- **`lib/ambient_agent/`** — open agent runtime extension point (non-commercial)
+- **`services/maestro/`** — FastAPI Maestro service
+- **`docs/`** — layer manuals and architecture
+
+## Commands
+
+```bash
+validate-contracts
+validate-inference-registry
+ambient-catalog-generate          # or: python scripts/generate_reference_catalog.py
+ambient-catalog-generate --check
+pytest
+```
+
+## Local Maestro
+
+```bash
+pip install -e ".[inference,dev,postgres]"
+uvicorn main:app --app-dir services/maestro --reload --port 8088
+```
+
+See [docs/inference-layer.md](docs/inference-layer.md).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — [LICENSE](LICENSE).

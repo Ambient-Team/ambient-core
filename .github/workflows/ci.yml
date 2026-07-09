@@ -19,11 +19,32 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Sync bundled contracts
+        run: |
+          cp contracts/*.yaml lib/ambient_contracts/bundled/
+          git diff --exit-code lib/ambient_contracts/bundled/ || (
+            echo "ERROR: lib/ambient_contracts/bundled/ out of sync with contracts/" >&2
+            exit 1
+          )
+
       - name: Install package
-        run: pip install -e ".[dev]"
+        run: pip install -e ".[all]"
+
+      - name: Validate contracts
+        run: validate-contracts
 
       - name: Validate inference registry
-        run: python scripts/validate_inference_registry.py
+        run: validate-inference-registry
+
+      - name: Validate reference catalog
+        run: python scripts/generate_reference_catalog.py --check
 
       - name: Run pytest
         run: pytest
+        env:
+          AMBIENT_SPARK_TESTS: "1"

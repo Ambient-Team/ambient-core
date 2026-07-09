@@ -1,0 +1,20 @@
+# Bronze intake field policy — excluded names are computed in gold OLAP, not requested at upload.
+excludeExact:
+  - net_profit
+  - gross_profit
+  - operating_income
+  - operating_profit
+  - ebit
+  - ebitda
+  - total_income
+  - total_expenses
+  - total_assets
+  - total_liabilities
+  - equity
+  - current_assets
+  - current_liabilities
+excludePatterns:
+  - '_margin$'
+  - '_ratio$'
+  - '_percent$'
+  - '_pct$'

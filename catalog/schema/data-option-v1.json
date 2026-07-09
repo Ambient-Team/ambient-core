@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambient.systems/catalog/data-option-v1.json",
+  "title": "CatalogDataOption",
+  "type": "object",
+  "required": ["id", "name", "industry", "metricIds", "fields"],
+  "properties": {
+    "id": { "type": "integer", "minimum": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "industry": { "type": "string" },
+    "description": { "type": "string" },
+    "format": { "type": "string" },
+    "template": { "type": "string" },
+    "metricIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "integer" }
+    },
+    "fields": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

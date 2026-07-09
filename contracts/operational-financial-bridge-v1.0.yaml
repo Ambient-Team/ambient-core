@@ -1,0 +1,118 @@
+product:
+  name: Operational-Financial Bridge
+  version: 1.0
+  owner: analytics@solutions-flux.ca
+  description: |
+    Governed Gold data product that validates operational telemetry against institutional
+    financial metrics (Single Source of Truth / "watermelon KPI" guard). Maps sensor and
+    floor-level signals (energy, IoT anomalies, yield) to auditable financial impact
+    (DSCR, Cap Rate, NOI, EBITDA Margin, cash flow) with lineage, quality scores, and
+    variance detection for FP&A and covenant reporting.
+  domain: Analytics
+  type: Bridge
+
+schema:
+  table: gold.operational_financial_bridge
+  primary_key: _bronze_org_id + _gold_period
+  partition_key: _bronze_org_id
+  columns:
+    - name: _bronze_org_id
+      type: string
+      required: true
+      description: "Multi-tenant isolation key (org_id)"
+    - name: location_ids
+      type: array<string>
+      required: false
+      description: "Org location tags for matrix reporting and residency enforcement"
+    - name: residency_zone
+      type: string
+      required: false
+      description: "Primary data-residency zone (e.g. Canada, Hong Kong, European Union)"
+    - name: operational_financial_aligned
+      type: boolean
+      required: true
+      description: "True when operational and financial layers pass joint validation"
+    - name: variance_detected_count
+      type: integer
+      required: true
+      description: "Count of unresolved operational-financial mismatches in period"
+    - name: operational_metric_count
+      type: integer
+      required: false
+    - name: financial_metric_count
+      type: integer
+      required: false
+    - name: bridge_mappings
+      type: array<struct>
+      required: false
+      description: |
+        [{ operational_metric_id, financial_metric_id, bridge_label, confidence_pct }]
+    - name: dq_overall_score
+      type: double
+      required: false
+      description: "ISO 8000 quality score from Reporting Quality product"
+    - name: _gold_run_id
+      type: string
+      required: true
+    - name: _gold_computed_ts
+      type: timestamp
+      required: true
+    - name: _gold_period
+      type: string
+      required: true
+      enum: [daily, weekly, monthly, quarterly]
+
+quality:
+  iso8000_tier: GOLD
+  completeness_sla: ">= 95% orgs with bridge status per close period"
+  accuracy_rules:
+    - "Financial KPIs must reconcile to operational drivers per vertical playbook"
+    - "Variance count must match immutable audit log evidence"
+  anomaly_detection: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_org_id", "_gold_run_id", "_gold_computed_ts"]
+  sources:
+    - "gold.org_kpis (Org KPI Product)"
+    - "gold.pipeline_health (Pipeline Observability)"
+    - "gold.quality_scorecard (Reporting Quality)"
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  gdpr_article: "25"
+  residency_enforced: true
+  dab_deployable: true
+  description: "Materialized inside client-local DAB stamps; no cross-border movement without explicit share"
+
+delta_sharing:
+  enabled: true
+  share_name: ambient_operational_financial_bridge
+  recipient_modes: [power_bi, tableau, snowflake, erp_adapter]
+  sla_minutes: 30
+  note: "Pre-modeled bridge status for FP&A — replaces 5-day manual reconciliation cycles"
+
+consumption_contract:
+  allowed_paths:
+    - "Adapter: Firestore sync (Consumption Adapter v1 only)"
+    - "Delta Sharing to corporate data stack"
+    - "ambient-cli read-only product commands"
+  forbidden: "Direct Silver/Bronze access or client-side bridge logic in React"
+
+firestore_sync:
+  enabled: false
+  note: "Bridge fields embedded on orgKpis and pipelineHealth documents until dedicated collection cutover"
+
+firestore:
+  paths: []
+  required_document_fields:
+    - org_id
+    - operational_financial_aligned
+    - variance_detected_count
+    - _gold_run_id
+    - _gold_computed_ts
+    - _gold_period
+  recommended_document_fields:
+    - bridge_mappings
+    - dq_overall_score

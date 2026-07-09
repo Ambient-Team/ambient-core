@@ -1,0 +1,89 @@
+product:
+  name: Data Quality & Lineage
+  version: 1.1
+  owner: platform-team@solutions-flux.ca
+  description: "Per-org, per-run ISO 8000-aligned data quality scorecard and full BCBS 239 lineage audit trail. Provides visibility into completeness, accuracy, anomaly count, and end-to-end provenance."
+  domain: Platform
+  type: Observability
+
+schema:
+  table: gold.data_quality_scorecard + gold.pipeline_audit
+  primary_key: _bronze_org_id + _gold_run_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: dq_total_rows
+      type: long
+      required: true
+    - name: dq_completeness_pct
+      type: double
+      required: true
+    - name: dq_accuracy_pct
+      type: double
+      required: true
+    - name: dq_anomaly_count
+      type: long
+      required: true
+    - name: dq_overall_score
+      type: double
+      required: true
+    - name: dq_grade
+      type: string
+      required: true
+      enum: [A, B, C, D, F]
+    - name: _gold_run_id
+      type: string
+      required: true
+    - name: dq_computed_ts
+      type: timestamp
+      required: true
+
+quality:
+  iso8000_tier: GOLD
+  completeness_sla: "Self-referential — must meet 100% completeness on scorecard itself"
+  accuracy_rules:
+    - "All DQ metrics derived directly from Silver validation flags"
+
+freshness:
+  sla: "Updated on every Gold pipeline completion"
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_silver_run_id", "_gold_run_id"]
+  source: "silver.metrics + transformation_log"
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: false
+  retention_days: 3650
+
+consumption_contract:
+  allowed_paths:
+    - "Internal monitoring & observability"
+    - "Customer-facing pipeline health (via Firestore adapter)"
+    - "Audit exports for compliance (SOC 2, BCBS 239)"
+  forbidden: "Any modification of DQ scores outside the governed pipeline"
+
+firestore:
+  paths:
+    - collection: qualityScorecard
+      logical_key: QUALITY
+      schema_version: v1.1
+      legacy: true
+    - collection: qualityScorecard_v1_1
+      logical_key: QUALITY
+      schema_version: v1.1
+  required_document_fields:
+    - org_id
+    - dq_total_rows
+    - dq_completeness_pct
+    - dq_accuracy_pct
+    - dq_anomaly_count
+    - dq_overall_score
+    - dq_grade
+    - _gold_run_id
+    - dq_computed_ts
+  recommended_document_fields: []
