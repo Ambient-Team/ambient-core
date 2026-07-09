@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ambient-core"
-version = "0.2.0"
+version = "0.2.1"
 description = "Open-source Ambient contracts, catalog, governance, inference (Maestro), and shared pipeline primitives"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
@@ -39,6 +39,12 @@ ambient-catalog-generate = "ambient_cli.catalog:main"
 
 [tool.setuptools.packages.find]
 where = ["lib"]
+include = [
+    "ambient_inference*",
+    "ambient_contracts*",
+    "ambient_cli*",
+    "ambient_agent*",
+]
 
 [tool.setuptools.package-data]
 ambient_inference = ["contracts/*.yaml", "default_config/*.yaml"]
