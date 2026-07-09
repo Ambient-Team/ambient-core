@@ -631,10 +631,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1082,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "1cvcTcHNt1VYX867UUG7": {
       "datasource": [
@@ -1935,10 +1935,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1085,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "0MJiYgAPcgkzE3xEgOFE": {
       "datasource": [
@@ -3158,10 +3158,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1084,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "DtBqsvp9S9HBlcxsvAgd": {
       "datasource": [
@@ -4684,10 +4684,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1814,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "aviation.network_carrier.load_factor": {
       "id": 1820,
@@ -5690,10 +5690,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1081,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "MfgOee901CatalogMetricKey01": {
       "id": 901,
@@ -6853,10 +6853,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1080,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "HcVol911CatalogMetricKey01": {
       "id": 911,
@@ -8210,10 +8210,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1083,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "RestFood921CatalogMetricKey01": {
       "id": 921,
@@ -9323,10 +9323,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1314,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "life_sciences.rnd.pipeline_active_count": {
       "id": 1330,
@@ -10085,10 +10085,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1514,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "banking.depository.net_interest_margin": {
       "id": 1530,
@@ -11029,10 +11029,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1614,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "financial_services.investment_banking.trading_revenue_ratio": {
       "id": 1535,
@@ -12185,10 +12185,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1984,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "funds.fund.assets_under_management": {
       "id": 1900,
@@ -13570,10 +13570,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1999,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "trusts.trust.funds_from_operations": {
       "id": 1940,
@@ -14336,10 +14336,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1634,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "insurance.property_casualty.combined_ratio": {
       "id": 1547,
@@ -15127,10 +15127,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1714,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "consumer_finance.consumer_lending.portfolio_yield": {
       "id": 1720,
@@ -16111,10 +16111,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1754,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "commercial_finance.commercial_lending.commercial_loan_growth": {
       "id": 1760,
@@ -17101,10 +17101,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "slug": "headcount",
       "id": 1654,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "headcount"
     },
     "retail.operations.same_store_sales_growth": {
       "id": 1670,
