@@ -126,13 +126,23 @@ def apply_column_mapping(df: DataFrame, mapping: dict[str, str]) -> DataFrame:
     return out
 
 
-def coerce_mapped_columns(df: DataFrame, field_names: list[str]) -> DataFrame:
+def coerce_mapped_columns(
+    df: DataFrame,
+    field_names: list[str],
+    catalog_field_types: dict[str, str] | None = None,
+) -> DataFrame:
     """Apply catalog field typing after rename (date / numeric / string)."""
     out = df
+    type_map = catalog_field_types or {}
     for field in field_names:
         if field not in out.columns:
             continue
+        catalog_type = type_map.get(field) or type_map.get(field.lower())
         kind = infer_field_type(field)
+        if catalog_type:
+            from ambient_pipeline.catalog_field_rules import spark_coerce_kind
+
+            kind = spark_coerce_kind(catalog_type)
         col = F.col(field)
         if kind == "date":
             out = out.withColumn(
@@ -161,6 +171,14 @@ def coerce_mapped_columns(df: DataFrame, field_names: list[str]) -> DataFrame:
         else:
             out = out.withColumn(field, col.cast(StringType()))
     return out
+
+
+def catalog_types_for_option(option: dict[str, Any] | None) -> dict[str, str]:
+    if not option:
+        return {}
+    from ambient_pipeline.catalog_field_rules import field_type_map
+
+    return field_type_map(option.get("fields"))
 
 
 def filter_raw_uploads(df: DataFrame, org_id: str, run_id: str, gcs_path: str) -> DataFrame:
@@ -235,6 +253,66 @@ def unpivot_to_tenant_metrics(
         .drop("_period_key", "_recorded_at")
     )
     return long_df
+
+
+def bronze_to_tenant_metrics(
+    df: DataFrame,
+    *,
+    org_id: str,
+    mapping_json: str | dict[str, Any] | None,
+    catalog_option_key: str,
+    run_id: str,
+    source_type: str = "csv_upload",
+    source_path: str = "manual_entry",
+    ingestion_ts: str,
+    catalog_manifest_version: str = "",
+    source_id: str = "",
+    gcs_path: str = "",
+    ingestion_status: str = "success",
+    ingestion_status_reason: str | None = None,
+    default_type: str = "Operational",
+    firestore_fetcher: Any | None = None,
+    spec: MappingSpec | None = None,
+) -> DataFrame:
+    """Map Bronze upload columns → catalog shape → unpivot → lineage stamp (Silver-ready).
+
+    Canonical order: **map → coerce → unpivot → stamp**. Do not stamp wide rows before
+    unpivot — ``unpivot_to_tenant_metrics`` drops columns not selected by ``stack()``.
+    """
+    resolved = spec or resolve_mapping_spec(
+        org_id=org_id,
+        mapping_json=mapping_json,
+        catalog_option_key=catalog_option_key,
+        source_id=source_id,
+        gcs_path=gcs_path,
+        catalog_manifest_version=catalog_manifest_version,
+        firestore_fetcher=firestore_fetcher,
+    )
+    option = load_data_option(resolved.catalog_option_key) if resolved.catalog_option_key else None
+    mapped = apply_column_mapping(df, resolved.catalog_field_to_csv_header)
+    field_names = list(resolved.catalog_field_to_csv_header.keys())
+    coerced = coerce_mapped_columns(
+        mapped,
+        field_names,
+        catalog_types_for_option(option),
+    )
+    long_df = unpivot_to_tenant_metrics(
+        coerced,
+        resolved,
+        org_id,
+        default_type=default_type,
+    )
+    return stamp_lineage_columns(
+        long_df,
+        resolved,
+        ingestion_status=ingestion_status,
+        ingestion_status_reason=ingestion_status_reason,
+        source_type=source_type,
+        source_path=source_path,
+        run_id=run_id,
+        org_id=org_id,
+        ingestion_ts=ingestion_ts,
+    )
 
 
 def stamp_lineage_columns(

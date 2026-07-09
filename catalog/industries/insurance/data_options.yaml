@@ -1,0 +1,41 @@
+dataOptions:
+  insurance.property_casualty.loss_summary:
+    id: 1565
+    name: Aggregated insurance loss summary
+    description: Earned premiums, losses, and expenses by line_of_business (property_casualty, life, health, reinsurance).
+    industry: Insurance
+    segment: property_casualty
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: line_of_business
+      type: string
+    - name: entity_segment
+      type: string
+    - name: incurred_losses
+      type: string
+    - name: underwriting_expense
+      type: string
+    - name: earned_premiums
+      type: string
+    - name: premium_growth
+      type: string
+    - name: benefits_paid
+      type: string
+    - name: catastrophe_losses
+      type: string
+    - name: prior_reserve_development
+      type: string
+    metricIds:
+    - 1547
+    - 1548
+    - 1549
+    - 1555
+    - 1574
+    - 1575
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: quarterly
+    grain: quarter

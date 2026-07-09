@@ -7,14 +7,14 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 1. [USAGE.md](USAGE.md) — install, extras, and command recipes.
 2. [INTEGRATING.md](INTEGRATING.md) — pin a tagged release in another repo (pip, submodule, CI env vars).
 3. [governed-data.md](governed-data.md) — catalog vs contracts; how UI, jobs, and agents consume SSOT.
-4. [work-cycles.md](work-cycles.md) — hub: benchmarking, assurance, investor disclosure (core vs platform).
-5. [benchmarking-lifecycle.md](benchmarking-lifecycle.md) — compare vs improve; peer gaps and decomposition.
-6. [assurance-lifecycle.md](assurance-lifecycle.md) — defend metrics; quality, lineage, ops–finance bridge.
-7. [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md) — mandates, fundraising, disclosure packs.
-8. [covenant-lifecycle.md](covenant-lifecycle.md) — lender thresholds, DSCR and capital headroom.
+4. [../contracts/README.md](../contracts/README.md) — data-product SSOT, catalog → Silver → Gold flow, product inventory.
+5. [work-cycles.md](work-cycles.md) — hub: benchmarking, assurance, investor disclosure (core vs platform).
+6. [benchmarking-lifecycle.md](benchmarking-lifecycle.md) — compare vs improve; peer gaps and decomposition.
+7. [assurance-lifecycle.md](assurance-lifecycle.md) — defend metrics; quality, lineage, ops–finance bridge.
+8. [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md) — mandates, fundraising, disclosure packs.
 9. [planning-variance-lifecycle.md](planning-variance-lifecycle.md) — budget and forecast vs actuals.
-10. [optimization-lifecycle.md](optimization-lifecycle.md) — governed opportunities and prioritization.
-11. [catalog-consumption.md](catalog-consumption.md) — manifest vs industry YAML; manifest field glossary.
+10. [catalog-consumption.md](catalog-consumption.md) — manifest v3, typed fields, `fieldCoverage`, frequencies; manifest field glossary.
+11. [maestro-catalog-ingestion.md](maestro-catalog-ingestion.md) — optional Maestro assist for upload → catalog mapping (not catalog SSOT).
 12. [crosswalk.md](crosswalk.md) — catalog metric → contract links.
 13. [pipeline.md](pipeline.md) — lakehouse governance helpers and test walkthroughs.
 14. [inference-layer.md](inference-layer.md) — run and extend Maestro.
@@ -39,4 +39,6 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 
 ## Catalog authoring
 
-- [../catalog/README.md](../catalog/README.md) — YAML layout, industry packs, generator commands.
+- [../catalog/README.md](../catalog/README.md) — YAML layout, industry packs, generator and hardening commands.
+- [catalog-input-field-gaps.md](catalog-input-field-gaps.md) — regenerated audit report (`scripts/audit_data_option_fields.py --report`).
+- [catalog-industry-coverage.md](catalog-industry-coverage.md) — ISIC/NAICS/NACE/GICS coverage roadmap.

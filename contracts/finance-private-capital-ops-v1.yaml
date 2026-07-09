@@ -2,6 +2,7 @@ product:
   name: Finance Private Capital Ops
   version: 1.0
   owner: analytics
+  consumption_id: FINANCE_PRIVATE_CAPITAL_OPS
   description: "Private-capital GP Gold product: sourcing, deployment, portfolio, co-investment, fundraising progress, manager economics, and program funnel (aggregated by reporting entity)."
   domain: Funds
   type: Derived

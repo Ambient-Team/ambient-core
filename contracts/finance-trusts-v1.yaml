@@ -2,6 +2,7 @@ product:
   name: Finance Trusts
   version: 1.0
   owner: analytics
+  consumption_id: FINANCE_TRUSTS
   description: "Trust and listed REIT vehicle Gold product: FFO, payout, same-store NOI at vehicle level, and trust administration scale (aggregated by trust vehicle)."
   domain: Trusts
   type: Derived

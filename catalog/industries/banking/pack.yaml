@@ -1,0 +1,17 @@
+industry: Banking
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '6419'
+  naics:
+    revision: '2022'
+    primary: '522110'
+  nace:
+    revision: Rev.2
+    primary: '64.19'
+  gics:
+    revision: '2023'
+    primary: '401010'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

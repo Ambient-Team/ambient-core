@@ -1,5 +1,5 @@
 /**
- * AUTO-GENERATED from catalog/core/bridge_rules.yaml — do not edit by hand.
+ * AUTO-GENERATED from catalog/bridge_rules.yaml — do not edit by hand.
  */
 const BRIDGE_RULES = [
   {

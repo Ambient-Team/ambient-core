@@ -1,0 +1,112 @@
+metrics:
+  life_sciences.rnd.pipeline_active_count:
+    id: 1330
+    name: Active Pipeline Programs
+    industry: Life Sciences
+    segment: rnd
+    slug: pipeline_active_count
+    type: Operational
+    unit: Count
+    methodology: Count of active R&D programs in the period (directly measured).
+    description: Active Pipeline Programs
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    input: true
+  life_sciences.rnd.trial_cost_per_patient:
+    id: 1331
+    name: Trial Cost per Patient
+    industry: Life Sciences
+    segment: rnd
+    slug: trial_cost_per_patient
+    type: Financial
+    unit: Currency
+    methodology: Trial Cost per Patient = Total Trial Cost / Patients Enrolled
+    description: Trial Cost per Patient
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: total_trial_cost / patients_enrolled
+      inputs:
+      - total_trial_cost
+      - patients_enrolled
+  life_sciences.rnd.phase_success_rate:
+    id: 1332
+    name: Phase Success Rate
+    industry: Life Sciences
+    segment: rnd
+    slug: phase_success_rate
+    type: Operational
+    unit: '%'
+    methodology: Phase Success Rate = (Phases Passed / Phases Attempted) × 100
+    description: Phase Success Rate
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: phases_passed / phases_attempted * 100
+      inputs:
+      - phases_passed
+      - phases_attempted
+  life_sciences.supply_chain.batch_yield:
+    id: 1333
+    name: Batch Yield
+    industry: Life Sciences
+    segment: supply_chain
+    slug: batch_yield
+    type: Operational
+    unit: '%'
+    methodology: Batch Yield = (Good Units / Total Units) × 100
+    description: Batch Yield
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: good_units / total_units * 100
+      inputs:
+      - good_units
+      - total_units
+  life_sciences.supply_chain.cogs_per_unit:
+    id: 1334
+    name: COGS per Unit
+    industry: Life Sciences
+    segment: supply_chain
+    slug: cogs_per_unit
+    type: Financial
+    unit: Currency
+    methodology: COGS per Unit = Total COGS / Units Produced
+    description: COGS per Unit
+    datasource:
+    - De-identified operational export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    calc:
+      expr: total_cogs / units_produced
+      inputs:
+      - total_cogs
+      - units_produced

@@ -2,6 +2,7 @@ product:
   name: Finance Consumer Finance
   version: 1.0
   owner: analytics
+  consumption_id: FINANCE_CONSUMER_FINANCE
   description: "Consumer lending, BNPL, embedded finance, payments, and residential mortgage lender book Gold product by product_line. No account or borrower identifiers."
   domain: Consumer Finance
   type: Derived

@@ -2,6 +2,7 @@ product:
   name: Finance Funds
   version: 1.1
   owner: analytics
+  consumption_id: FINANCE_FUNDS
   description: "Pooled and institutional fund Gold product: AUM, flows, fee yields, closed-end performance, fund risk, and custody (aggregated by fund vehicle)."
   domain: Funds
   type: Derived

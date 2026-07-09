@@ -100,10 +100,18 @@ def check_packs() -> list[str]:
     errors: list[str] = []
     metric_ids: dict[int, str] = {}
     option_ids: dict[int, str] = {}
-    for path in sorted(INDUSTRY_DIR.glob("*.yaml")):
-        pack = _load_yaml(path)
-        _check_entries("metric", pack.get("metrics"), path.name, metric_ids, errors)
-        _check_entries("dataOption", pack.get("dataOptions"), path.name, option_ids, errors)
+    for pack_dir in sorted(p for p in INDUSTRY_DIR.iterdir() if p.is_dir()):
+        metrics_path = pack_dir / "metrics.yaml"
+        options_path = pack_dir / "data_options.yaml"
+        pack_label = pack_dir.name
+        if metrics_path.is_file():
+            pack = _load_yaml(metrics_path)
+            _check_entries("metric", pack.get("metrics"), pack_label, metric_ids, errors)
+        if options_path.is_file():
+            pack = _load_yaml(options_path)
+            _check_entries(
+                "dataOption", pack.get("dataOptions"), pack_label, option_ids, errors
+            )
     return errors
 
 

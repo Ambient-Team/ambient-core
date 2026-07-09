@@ -1,0 +1,60 @@
+dataOptions:
+  life_sciences.rnd.clinical_trial_summary:
+    id: 1340
+    name: De-identified clinical trial summary
+    industry: Life Sciences
+    segment: rnd
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: program_id
+      type: id
+    - name: phase
+      type: string
+    - name: patients_enrolled
+      type: string
+    - name: phases_passed
+      type: string
+    - name: phases_attempted
+      type: string
+    - name: total_trial_cost
+      type: decimal
+    - name: pipeline_active_count
+      type: decimal
+    metricIds:
+    - 1330
+    - 1331
+    - 1332
+    lastUpdated: '2026-06-20 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  life_sciences.supply_chain.production_batch_records:
+    id: 1341
+    name: Production batch records
+    industry: Life Sciences
+    segment: supply_chain
+    format: Transactional Data Template
+    template: Transactional Data Template
+    fields:
+    - name: date
+      type: date
+    - name: batch_id
+      type: id
+    - name: good_units
+      type: string
+    - name: total_units
+      type: decimal
+    - name: total_cogs
+      type: decimal
+    - name: units_produced
+      type: string
+    metricIds:
+    - 1333
+    - 1334
+    lastUpdated: '2026-06-20 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

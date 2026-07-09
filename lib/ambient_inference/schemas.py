@@ -1,11 +1,21 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Literal
 from uuid import uuid4
 
 from pydantic import BaseModel, Field
+
+
+def utcnow() -> datetime:
+    """Current UTC time as a naive datetime.
+
+    Kept naive (tzinfo stripped) to match the naive timestamps stored in the
+    SQLite/Postgres ``DateTime`` columns, while avoiding the deprecated
+    ``datetime.utcnow()`` on Python 3.12+.
+    """
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 class MessageRole(str, Enum):
@@ -72,8 +82,8 @@ class RunRecord(BaseModel):
     routing_plan: RoutingPlan | None = None
     artifact: RunArtifact | None = None
     error: str | None = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)
 
 
 class RunEventType(str, Enum):

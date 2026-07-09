@@ -1,0 +1,87 @@
+dataOptions:
+  consumer_finance.consumer_lending.loan_tape_summary:
+    id: 1730
+    name: Aggregated consumer loan tape summary
+    description: Period aggregates by product line (cards, auto, personal). No account numbers. line_of_business distinguishes
+      product; not mortgage collateral.
+    industry: Consumer Finance
+    segment: consumer_lending
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: product_line
+      type: string
+    - name: interest_income
+      type: string
+    - name: average_receivables
+      type: string
+    - name: net_charge_offs
+      type: string
+    - name: delinquent_balance_30_plus
+      type: string
+    - name: total_receivables
+      type: decimal
+    - name: origination_volume_growth
+      type: decimal
+    - name: payment_volume
+      type: decimal
+    - name: bnpl_origination_growth
+      type: string
+    - name: embedded_channel_revenue
+      type: enum
+    - name: total_consumer_finance_revenue
+      type: decimal
+    - name: rtp_payment_volume
+      type: decimal
+    - name: merchant_acquiring_volume
+      type: decimal
+    metricIds:
+    - 1720
+    - 1721
+    - 1722
+    - 1723
+    - 1724
+    - 1725
+    - 1726
+    - 1727
+    - 1728
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  consumer_finance.residential_mortgage.residential_mortgage_book_summary:
+    id: 1794
+    name: Aggregated residential mortgage book summary
+    description: Lender-view mortgage portfolio aggregates. No borrower or loan identifiers.
+    industry: Consumer Finance
+    segment: residential_mortgage
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: product_line
+      type: string
+    - name: interest_income
+      type: string
+    - name: average_mortgage_balances
+      type: string
+    - name: delinquent_balance_30_plus
+      type: string
+    - name: total_mortgage_balances
+      type: decimal
+    - name: weighted_ltv_numerator
+      type: string
+    - name: origination_volume
+      type: decimal
+    metricIds:
+    - 1790
+    - 1791
+    - 1792
+    - 1793
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month

@@ -1,0 +1,17 @@
+industry: Insurance
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '6512'
+  naics:
+    revision: '2022'
+    primary: '524126'
+  nace:
+    revision: Rev.2
+    primary: '65.12'
+  gics:
+    revision: '2023'
+    primary: '403010'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

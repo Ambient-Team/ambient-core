@@ -3,9 +3,9 @@
 
 Enforces two standardization rules:
 
-1. No duplicate / dead catalogue trees. ``catalog/core/`` (+ ``catalog/core/shared/``)
-   and ``catalog/industries/`` are the single source of truth. The legacy top-level
-   mirrors must not reappear.
+1. No duplicate / dead catalogue trees. ``catalog/shared/``, ``catalog/industries/<pack>/``,
+   and ``catalog/packs.yaml`` are the single source of truth. Legacy ``catalog/core/`` and
+   top-level mirrors must not reappear.
 2. No UTF-8 mojibake. Catalogue YAML, contract YAML, and docs must be clean UTF-8;
    double-encoded sequences (for example ``Ã—`` for ``×``) are rejected.
 
@@ -22,14 +22,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "catalog"
 
-# Paths that were dead duplicates of catalog/core/** and must stay deleted.
+# Paths that were dead duplicates and must stay deleted.
 FORBIDDEN_PATHS = (
+    CATALOG / "core",
     CATALOG / "industries.yaml",
     CATALOG / "metrics.yaml",
     CATALOG / "benchmarks.yaml",
     CATALOG / "data_options.yaml",
-    CATALOG / "bridge_rules.yaml",
-    CATALOG / "shared",
 )
 
 # Known double-encoded (cp1252-via-utf8) sequences -> intended glyph.
@@ -49,8 +48,7 @@ MOJIBAKE = {
 }
 
 SCAN_DIRS = (
-    CATALOG / "core",
-    CATALOG / "industries",
+    CATALOG,
     ROOT / "contracts",
     ROOT / "docs",
 )
@@ -63,7 +61,7 @@ def check_forbidden_paths() -> list[str]:
         if path.exists():
             rel = path.relative_to(ROOT)
             errors.append(
-                f"dead catalogue duplicate present: {rel} — canonical source is catalog/core/"
+                f"dead catalogue duplicate present: {rel} — use catalog/shared/ and catalog/industries/<pack>/"
             )
     return errors
 

@@ -1,0 +1,17 @@
+industry: Healthcare
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '8610'
+  naics:
+    revision: '2022'
+    primary: '622110'
+  nace:
+    revision: Rev.2
+    primary: '86.10'
+  gics:
+    revision: '2023'
+    primary: '351020'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

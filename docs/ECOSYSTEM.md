@@ -10,7 +10,7 @@ This tree is **canonical for everyone**: contracts, reference catalog, shared pi
 
 ## Components in this repository
 
-**Contracts** (`contracts/`) — versioned YAML for data-product shapes, lineage, and quality semantics.
+**Contracts** ([contracts/README.md](../contracts/README.md)) — versioned YAML for data-product shapes, lineage, and quality semantics.
 
 **Catalog** (`catalog/`) — reference metrics, industries, benchmarks; `ambient-catalog-generate` produces `manifest.json` and `runtime/` JS.
 
@@ -82,7 +82,7 @@ After merge here, tag on `main`, then follow [CONTRIBUTING.md — Consumer follo
 ## Release and data flow
 
 1. **Contracts** — Edit `contracts/*.yaml`; sync `lib/ambient_contracts/bundled/` (CI enforces).
-2. **Catalog** — Edit YAML under `catalog/`; run `ambient-catalog-generate --check` before push.
+2. **Catalog** — Edit YAML under `catalog/`; run `harden_catalog_data_options.py --write` when changing data options; run `ambient-catalog-generate --check --strict-data-option-inputs` before push.
 3. **Maestro** — Logic and `maestro-run-v1` ship in `ambient_inference`; consumers run HTTP clients or compose at deploy time.
 4. **Releases** — Tag `vX.Y.Z` on `main`; consumers bump pip/submodule/Docker pins per [INTEGRATING.md](INTEGRATING.md).
 

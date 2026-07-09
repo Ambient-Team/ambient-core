@@ -1,0 +1,514 @@
+dataOptions:
+  DRHUJoXTe9TO3vlfY8bK:
+    description: Records related to irrigation activities.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields: []
+    format: Document
+    id: 20
+    industry: Vertical Farming
+    lastUpdated: '2024-07-31 14:25:08'
+    metricIds:
+    - 16
+    name: Irrigation logs
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  QKVboc2mj2QQ8u2RFOF1:
+    description: Software used to manage agricultural operations.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: farm_id
+      type: id
+    - name: crop_planted
+      type: string
+    - name: total_harvested_kg
+      type: decimal
+    - name: total_growing_area
+      type: decimal
+    - name: total_water_liters
+      type: decimal
+    - name: total_energy_kwh
+      type: decimal
+    - name: sum_health_scores
+      type: string
+    - name: total_crops
+      type: decimal
+    - name: total_production_cost
+      type: decimal
+    - name: total_operational_cost
+      type: decimal
+    - name: produce_revenue
+      type: decimal
+    - name: energy_consumed
+      type: string
+    - name: total_light_delivered
+      type: decimal
+    - name: repair_cost_avoided
+      type: decimal
+    - name: predictive_maintenance_cost
+      type: decimal
+    format: Software
+    id: 10
+    industry: Vertical Farming
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 15
+    - 16
+    - 17
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    name: Farm management systems
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  SuYpCOlDxv3Q0Sf2xq9L:
+    description: Records of the amount and type of produce harvested.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: farm_id
+      type: id
+    - name: crop_type
+      type: enum
+    - name: harvest_date
+      type: date
+    - name: quantity_harvested
+      type: string
+    - name: market_price
+      type: decimal
+    - name: quality_grade
+      type: enum
+    format: Document
+    id: 9
+    industry: Vertical Farming
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 15
+    - 18
+    name: Harvest logs
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  mZgKaZV2P6tbi7msxL3y:
+    description: Software used to monitor crop growth and health.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields: []
+    format: Software
+    id: 19
+    industry: Vertical Farming
+    lastUpdated: '2024-07-31 14:25:08'
+    metricIds:
+    - 15
+    - 19
+    name: Crop monitoring systems
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart of accounts.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: journal_entry_id
+      type: id
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: period
+      type: enum
+    - name: currency
+      type: currency
+    format: Financial Statement Template
+    id: 1101
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 939
+    - 945
+    - 951
+    - 957
+    - 963
+    - 975
+    - 981
+    - 993
+    - 1035
+    name: General ledger
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit_balance
+      type: string
+    - name: credit_balance
+      type: string
+    - name: period
+      type: enum
+    format: Financial Statement Template
+    id: 1107
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 927
+    - 933
+    - 969
+    name: Trial balance
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - name: date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: current_assets
+      type: string
+    - name: total_assets
+      type: decimal
+    - name: current_liabilities
+      type: string
+    - name: total_liabilities
+      type: decimal
+    - name: inventory
+      type: string
+    - name: equity
+      type: string
+    format: Financial Statement Template
+    id: 1113
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 927
+    - 933
+    - 969
+    - 987
+    name: Balance sheet
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: customer_name
+      type: string
+    - name: invoice_id
+      type: id
+    - name: invoice_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: total_credit_sales
+      type: decimal
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1119
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 975
+    - 987
+    name: Accounts receivable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: supplier_name
+      type: string
+    - name: bill_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_payable
+      type: decimal
+    - name: cogs
+      type: string
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1125
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 981
+    - 987
+    name: Accounts payable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - name: date
+      type: date
+    - name: transaction_date
+      type: date
+    - name: account_id
+      type: id
+    - name: description
+      type: string
+    - name: amount
+      type: decimal
+    - name: direction
+      type: string
+    - name: balance
+      type: string
+    - name: currency
+      type: currency
+    - name: net_income
+      type: string
+    - name: non_cash_charges
+      type: string
+    - name: increase_in_working_capital
+      type: string
+    - name: cash_out
+      type: string
+    - name: cash_in
+      type: string
+    - name: current_cash_balance
+      type: string
+    format: Transactional Data Template
+    id: 1131
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 993
+    - 999
+    - 1005
+    name: Bank statements
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1137
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1011
+    - 1017
+    - 1023
+    - 1029
+    - 1041
+    - 1047
+    - 1053
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1143
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1011
+    - 1035
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1149
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1023
+    - 1029
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allverticalfarmingds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    format: Transactional Data Template
+    id: 1155
+    industry: Vertical Farming
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1035
+    - 1047
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

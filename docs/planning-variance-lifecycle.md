@@ -1,6 +1,6 @@
 # Planning and variance lifecycle: core vs platform
 
-**Planning and variance** asks how **actuals** compare to the organization’s own **plan**—budget, forecast, or board case—and what explains the gap. The baseline is internal intent, not a peer ([benchmarking-lifecycle.md](benchmarking-lifecycle.md)) or a lender threshold ([covenant-lifecycle.md](covenant-lifecycle.md)).
+**Planning and variance** asks how **actuals** compare to the organization’s own **plan**—budget, forecast, or board case—and what explains the gap. The baseline is internal intent, not a peer ([benchmarking-lifecycle.md](benchmarking-lifecycle.md)).
 
 **FP&A close** on [work-cycles.md](work-cycles.md) is the recurring rhythm (close calendar, board packs); this cycle is the **plan-vs-actual analytical product** built on the same catalog metrics.
 
@@ -60,7 +60,6 @@ Benchmarking diagnoses performance versus **external** pace-setters and improvab
 ## Related
 
 - [work-cycles.md](work-cycles.md)
-- [covenant-lifecycle.md](covenant-lifecycle.md)
 - [benchmarking-lifecycle.md](benchmarking-lifecycle.md)
 - [catalog/README.md](../catalog/README.md#terminology)
 - [lib/ambient_calc](../lib/ambient_calc/__init__.py)

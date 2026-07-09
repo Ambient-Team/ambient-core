@@ -1,0 +1,655 @@
+metrics:
+  funds.fund.assets_under_management:
+    id: 1900
+    name: Assets Under Management
+    description: Total fund assets at period end across open-end, advised, and institutional
+      books (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Currency
+    methodology: Directly measured AUM at reporting date.
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Scale — base for fees, flows, and custody.
+    segment: fund
+    slug: assets_under_management
+    input: true
+  funds.fund.net_flow_rate:
+    id: 1901
+    name: Net Flow Rate
+    description: Net fund flows as a percentage of beginning AUM.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Net Flow Rate = ((Inflows − Outflows) / Beginning AUM) × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Organic growth — separate from market appreciation.
+    segment: fund
+    slug: net_flow_rate
+    calc:
+      expr: (inflows - outflows) / beginning_aum * 100
+      inputs:
+      - inflows
+      - outflows
+      - beginning_aum
+  funds.fund.management_fee_yield:
+    id: 1902
+    name: Management Fee Yield
+    description: Management and advisory fees relative to average AUM.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Fee Yield = (Management Fees / Average AUM) × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Pricing and mix — revenue per dollar of assets.
+    segment: fund
+    slug: management_fee_yield
+    calc:
+      expr: management_fees / average_aum * 100
+      inputs:
+      - management_fees
+      - average_aum
+  funds.fund.performance_fee_share:
+    id: 1903
+    name: Performance Fee Share
+    description: Carried interest and performance fees as a share of total fund revenue
+      (aggregated).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Performance Fee Share = (Performance Fees / Total Fund Revenue) ×
+      100
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Alternatives economics — GP incentive alignment.
+    segment: fund
+    slug: performance_fee_share
+    calc:
+      expr: performance_fees / total_fund_revenue * 100
+      inputs:
+      - performance_fees
+      - total_fund_revenue
+  funds.fund.fund_irr:
+    id: 1904
+    name: Fund IRR
+    description: Internal rate of return for a fund vintage (aggregated, no LP identifiers).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: IRR from aggregated cash flows and NAV (directly reported).
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Closed-end performance — LP reporting.
+    segment: fund
+    slug: fund_irr
+    input: true
+  funds.fund.tvpi:
+    id: 1905
+    name: TVPI
+    description: Total value to paid-in capital (distributions plus NAV).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: TVPI = (Distributions + NAV) / Paid-In Capital
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Fund multiple — gross performance before fees.
+    segment: fund
+    slug: tvpi
+    calc:
+      expr: (distributions + nav) / paid_in_capital
+      inputs:
+      - distributions
+      - nav
+      - paid_in_capital
+  funds.fund.dpi:
+    id: 1906
+    name: DPI
+    description: Distributions to paid-in capital (cash returned).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: DPI = Distributions / Paid-In Capital
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Realized returns — liquidity to LPs.
+    segment: fund
+    slug: dpi
+    calc:
+      expr: distributions / paid_in_capital
+      inputs:
+      - distributions
+      - paid_in_capital
+  funds.fund.capital_deployment_rate:
+    id: 1907
+    name: Capital Deployment Rate
+    description: Called capital relative to commitments (deployment pace).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Deployment Rate = (Called Capital / Committed Capital) × 100
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Dry powder — pacing of new investments.
+    segment: fund
+    slug: capital_deployment_rate
+    calc:
+      expr: called_capital / committed_capital * 100
+      inputs:
+      - called_capital
+      - committed_capital
+  funds.fund.fund_leverage_ratio:
+    id: 1908
+    name: Fund Leverage Ratio
+    description: Fund-level leverage relative to net asset value (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: Leverage Ratio = Total Fund Debt / NAV
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Fund risk — gearing and margin sensitivity.
+    segment: fund
+    slug: fund_leverage_ratio
+    input: true
+  funds.fund.liquidity_gate_frequency:
+    id: 1909
+    name: Liquidity Gate Frequency
+    description: Share of funds with active liquidity gates or suspensions in period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Gate Frequency = Gated Funds / Total Funds × 100
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Investor liquidity risk — redemptions and fund structures.
+    segment: fund
+    slug: liquidity_gate_frequency
+    input: true
+  funds.fund.strategy_return_volatility:
+    id: 1910
+    name: Strategy Return Volatility
+    description: Annualized volatility of fund or strategy returns (aggregated sleeve).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Standard deviation of periodic returns annualized
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Risk limits — allocator due diligence.
+    segment: fund
+    slug: strategy_return_volatility
+    input: true
+  funds.fund.assets_under_custody:
+    id: 1911
+    name: Assets Under Custody
+    description: Fund and client assets held in custody (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Currency
+    methodology: Directly measured AUC at reporting date
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Securities services scale — safekeeping attach.
+    segment: fund
+    slug: assets_under_custody
+    input: true
+  funds.fund.custody_fee_yield:
+    id: 1912
+    name: Custody Fee Yield
+    description: Custody and safekeeping fees relative to average AUC.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Custody Fee Yield = Custody Fees / Average AUC × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Securities services revenue.
+    segment: fund
+    slug: custody_fee_yield
+    calc:
+      expr: custody_fees / average_auc * 100
+      inputs:
+      - custody_fees
+      - average_auc
+  funds.fund.settlement_fail_rate:
+    id: 1913
+    name: Settlement Fail Rate
+    description: Failed settlements as a share of total settlement instructions.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Fail Rate = Failed Settlements / Total Instructions × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Operational risk — capital and client service.
+    segment: fund
+    slug: settlement_fail_rate
+    calc:
+      expr: failed_settlements / total_settlement_instructions * 100
+      inputs:
+      - failed_settlements
+      - total_settlement_instructions
+  funds.fund.safekeeping_asset_growth:
+    id: 1914
+    name: Safekeeping Asset Growth
+    description: Year-over-year growth in safekeeping and custody assets.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Growth = ((Current AUC − Prior) / Prior) × 100
+    datasource:
+    - Aggregated fund summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Wallet growth — custody-led relationships.
+    segment: fund
+    slug: safekeeping_asset_growth
+    input: true
+  funds.fund.rvpi:
+    id: 1922
+    name: RVPI
+    description: Residual value to paid-in capital (unrealized NAV relative to contributed
+      capital).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: RVPI = NAV / Paid-In Capital
+    datasource:
+    - Aggregated fund performance summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Unrealized multiple — complement to DPI and TVPI.
+    segment: fund
+    slug: rvpi
+    calc:
+      expr: nav / paid_in_capital
+      inputs:
+      - nav
+      - paid_in_capital
+  funds.operations.investment_close_rate:
+    id: 1923
+    name: Investment Close Rate
+    description: Share of qualified opportunities that closed as new investments in
+      the period (aggregated).
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Close Rate = (Closed Investments / Qualified Opportunities) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Sourcing efficiency — pipeline conversion to deployment.
+    segment: operations
+    slug: investment_close_rate
+    benchmarkKey: investment_close_rate
+    calc:
+      expr: closed_investments / qualified_opportunities * 100
+      inputs:
+      - closed_investments
+      - qualified_opportunities
+  funds.operations.average_investment_size:
+    id: 1924
+    name: Average Investment Size
+    description: Average capital deployed per new investment in the period (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Currency
+    methodology: Average Size = Deployed Capital / New Investments
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Check-size mix — pacing and stage strategy.
+    segment: operations
+    slug: average_investment_size
+    calc:
+      expr: deployed_capital / new_investments
+      inputs:
+      - deployed_capital
+      - new_investments
+  funds.operations.new_investments_count:
+    id: 1925
+    name: New Investments Count
+    description: Count of new investments closed in the period (aggregated).
+    industry: Funds
+    type: Operational
+    unit: Count
+    methodology: Directly measured count at reporting date.
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Deployment volume — deal velocity.
+    segment: operations
+    slug: new_investments_count
+    input: true
+  funds.operations.qualified_opportunities_count:
+    id: 1926
+    name: Qualified Opportunities Count
+    description: Count of opportunities that passed initial screening in the period
+      (aggregated).
+    industry: Funds
+    type: Operational
+    unit: Count
+    methodology: Directly measured count at reporting date.
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Pipeline depth — sourcing funnel numerator/denominator.
+    segment: operations
+    slug: qualified_opportunities_count
+    input: true
+  funds.operations.active_portfolio_company_count:
+    id: 1927
+    name: Active Portfolio Company Count
+    description: Count of active portfolio companies at period end (aggregated).
+    industry: Funds
+    type: Operational
+    unit: Count
+    methodology: Directly measured count at reporting date.
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Portfolio scale — support and monitoring load.
+    segment: operations
+    slug: active_portfolio_company_count
+    input: true
+  funds.operations.follow_on_investment_rate:
+    id: 1928
+    name: Follow-On Investment Rate
+    description: Share of eligible portfolio companies that received follow-on capital
+      in the period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Follow-On Rate = (Follow-On Investments / Eligible Portfolio Companies)
+      × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Portfolio support — reserve deployment and winners.
+    segment: operations
+    slug: follow_on_investment_rate
+    calc:
+      expr: follow_on_investments / eligible_portfolio_companies * 100
+      inputs:
+      - follow_on_investments
+      - eligible_portfolio_companies
+  funds.operations.portfolio_write_down_rate:
+    id: 1929
+    name: Portfolio Write-Down Rate
+    description: Impaired or written-down carrying value as a share of portfolio cost
+      basis.
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Write-Down Rate = (Impaired Carrying Value / Portfolio Cost Basis)
+      × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Portfolio quality — loss recognition and reserves.
+    segment: operations
+    slug: portfolio_write_down_rate
+    calc:
+      expr: impaired_carrying_value / portfolio_cost_basis * 100
+      inputs:
+      - impaired_carrying_value
+      - portfolio_cost_basis
+  funds.operations.co_investment_participation_rate:
+    id: 1930
+    name: Co-Investment Participation Rate
+    description: Share of closed deals that included external co-investors or syndicate
+      participants.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Co-Investment Rate = (Deals with Co-Investors / Total Closed Deals)
+      × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Syndication — capital efficiency and LP alignment.
+    segment: operations
+    slug: co_investment_participation_rate
+    calc:
+      expr: deals_with_co_investors / total_closed_deals * 100
+      inputs:
+      - deals_with_co_investors
+      - total_closed_deals
+  funds.operations.fundraising_commitment_progress:
+    id: 1931
+    name: Fundraising Commitment Progress
+    description: Committed capital relative to fundraising target for a vintage (aggregated).
+    industry: Funds
+    type: Financial
+    unit: '%'
+    methodology: Progress = (Committed Capital / Fundraising Target) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Fund formation — LP commitment pacing.
+    segment: operations
+    slug: fundraising_commitment_progress
+    calc:
+      expr: committed_capital / fundraising_target * 100
+      inputs:
+      - committed_capital
+      - fundraising_target
+  funds.operations.management_fee_operating_coverage:
+    id: 1932
+    name: Management Fee Operating Coverage
+    description: Management fees relative to operating expenses at the manager level
+      (aggregated).
+    industry: Funds
+    type: Financial
+    unit: Ratio
+    methodology: Coverage = Management Fees / Operating Expenses
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: GP sustainability — fee revenue vs run rate.
+    segment: operations
+    slug: management_fee_operating_coverage
+    calc:
+      expr: management_fees / operating_expenses
+      inputs:
+      - management_fees
+      - operating_expenses
+  funds.operations.program_investment_conversion_rate:
+    id: 1933
+    name: Program Investment Conversion Rate
+    description: Share of program or cohort participants that became portfolio investments
+      in the period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Conversion Rate = (Program Investments / Program Participants) ×
+      100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Accelerator and cohort funnel — program to deployment.
+    segment: operations
+    slug: program_investment_conversion_rate
+    benchmarkKey: program_investment_conversion_rate
+    calc:
+      expr: program_investments / program_participants * 100
+      inputs:
+      - program_investments
+      - program_participants
+  funds.operations.inbound_attributed_pipeline_share:
+    id: 1934
+    name: Inbound Attributed Pipeline Share
+    description: Share of qualified opportunities attributed to inbound channels in
+      the period.
+    industry: Funds
+    type: Operational
+    unit: '%'
+    methodology: Inbound Share = (Inbound Qualified Opportunities / Total Qualified
+      Opportunities) × 100
+    datasource:
+    - Aggregated investment program summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Sourcing mix — content, events, and referral leverage.
+    segment: operations
+    slug: inbound_attributed_pipeline_share
+    benchmarkKey: inbound_attributed_pipeline_share
+    calc:
+      expr: inbound_qualified_opportunities / total_qualified_opportunities * 100
+      inputs:
+      - inbound_qualified_opportunities
+      - total_qualified_opportunities

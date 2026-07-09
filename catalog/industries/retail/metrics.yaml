@@ -1,0 +1,133 @@
+metrics:
+  retail.operations.same_store_sales_growth:
+    id: 1670
+    name: Same-Store Sales Growth
+    description: Year-over-year revenue growth for stores open in both periods (aggregated).
+    industry: Retail
+    type: Operational
+    unit: '%'
+    methodology: SSS Growth = ((Current Period Sales − Prior Period Sales) / Prior
+      Period Sales) × 100
+    datasource:
+    - Store sales summary export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Comp sales — separates mature-store momentum from new openings.
+    segment: operations
+    slug: same_store_sales_growth
+    calc:
+      expr: (current_period_sales - prior_period_sales) / prior_period_sales * 100
+      inputs:
+      - current_period_sales
+      - prior_period_sales
+  retail.financial.inventory_turnover:
+    id: 1671
+    name: Inventory Turnover
+    description: How often retail inventory is sold and replaced over a period.
+    industry: Retail
+    type: Financial
+    unit: Turns
+    methodology: Inventory Turnover = COGS / Average Inventory Value
+    datasource:
+    - ERP general ledger
+    - Inventory valuation export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Working capital — ties shelf investment to sales velocity.
+    segment: financial
+    slug: inventory_turnover
+    calc:
+      expr: cogs / average_inventory_value
+      inputs:
+      - cogs
+      - average_inventory_value
+  retail.operations.shrink_rate:
+    id: 1672
+    name: Shrink Rate
+    description: Inventory loss from theft, damage, or administrative error (aggregated).
+    industry: Retail
+    type: Operational
+    unit: '%'
+    methodology: Shrink Rate = (Shrinkage Value / Sales) × 100
+    datasource:
+    - Inventory adjustment export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Margin protection — shrink drives gross margin variance.
+    segment: operations
+    slug: shrink_rate
+    calc:
+      expr: shrinkage_value / sales * 100
+      inputs:
+      - shrinkage_value
+      - sales
+  retail.financial.sales_per_square_foot:
+    id: 1673
+    name: Sales per Square Foot
+    description: Revenue productivity per selling square foot (aggregated by store
+      or banner).
+    industry: Retail
+    type: Financial
+    unit: Currency
+    methodology: Sales per Sq Ft = Net Sales / Selling Square Footage
+    datasource:
+    - Store sales summary export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Space productivity — real estate and format decisions.
+    segment: financial
+    slug: sales_per_square_foot
+    calc:
+      expr: net_sales / selling_square_footage
+      inputs:
+      - net_sales
+      - selling_square_footage
+  retail.operations.conversion_rate:
+    id: 1674
+    name: Conversion Rate
+    description: Share of store or site visitors who complete a purchase (omnichannel
+      where available).
+    industry: Retail
+    type: Operational
+    unit: '%'
+    methodology: Conversion Rate = (Transactions / Visitors) × 100
+    datasource:
+    - Store traffic and POS summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: weekly
+    tech: FINTECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Traffic quality — links marketing and labor to revenue.
+    segment: operations
+    slug: conversion_rate
+    calc:
+      expr: transactions / visitors * 100
+      inputs:
+      - transactions
+      - visitors

@@ -1,0 +1,422 @@
+metrics:
+  RestFood921CatalogMetricKey01:
+    id: 921
+    name: Food Cost Percentage
+    description: Cost of food sold as a percentage of restaurant revenue.
+    industry: Restaurants
+    type: Financial
+    unit: '%'
+    methodology: Food Cost % = Food COGS / Food Revenue × 100
+    datasource:
+    - POS daily close
+    - Inventory count export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 28
+    targetRangeHigh: 35
+    tech: FINTECH
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    benchmarkKey: food_cost_pct
+    frequency: weekly
+    higherIsBetter: false
+    fpaWorkflow: Margin control — primary lever in restaurant P&L alongside labor.
+    segment: financial
+    slug: food_cost_pct
+    calc:
+      expr: food_cogs / food_revenue * 100
+      inputs:
+      - food_cogs
+      - food_revenue
+  RestLabor922CatalogMetricKey02:
+    id: 922
+    name: Labor Cost Percentage
+    description: Total labor cost as a percentage of revenue for the period.
+    industry: Restaurants
+    type: Financial
+    unit: '%'
+    methodology: Labor Cost % = Total Labor / Total Revenue × 100
+    datasource:
+    - POS daily close
+    - Labor scheduling export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 25
+    targetRangeHigh: 35
+    tech: FINTECH
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    benchmarkKey: labor_cost_pct
+    frequency: weekly
+    higherIsBetter: false
+    fpaWorkflow: Prime cost management — labor plus food defines controllable margin.
+    segment: financial
+    slug: labor_cost_pct
+    calc:
+      expr: total_labor / total_revenue * 100
+      inputs:
+      - total_labor
+      - total_revenue
+  RestTurn923CatalogMetricKey03:
+    id: 923
+    name: Table Turn Time
+    description: Average minutes from seat to payment for dine-in service.
+    industry: Restaurants
+    type: Operational
+    unit: Minutes
+    methodology: Mean elapsed time per closed check for dine-in dayparts
+    datasource:
+    - POS daily close
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 45
+    targetRangeHigh: 90
+    tech: DEEP TECH
+    frequency: daily
+    higherIsBetter: false
+    fpaWorkflow: Throughput — turn time drives covers and revenue per seat hour.
+    segment: operations
+    slug: table_turnover
+    input: true
+  RestWaste924CatalogMetricKey04:
+    id: 924
+    name: Food Waste and Spoilage
+    description: Value or weight of inventory written off as waste or spoilage.
+    industry: Restaurants
+    type: Operational
+    unit: Currency (e.g., USD)
+    methodology: Sum of waste/spoilage adjustments from inventory counts
+    datasource:
+    - Inventory count export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 100
+    targetRangeHigh: 5000
+    tech: DEEP TECH
+    validationRule: currency
+    frequency: weekly
+    higherIsBetter: false
+    fpaWorkflow: Cost control — waste directly inflates food cost percentage.
+    segment: operations
+    slug: food_waste
+    input: true
+  RestSss925CatalogMetricKey05:
+    id: 925
+    name: Same-Store Sales Growth
+    description: Year-over-year revenue change for locations open in both periods.
+    industry: Restaurants
+    type: Financial
+    unit: '%'
+    methodology: (Current Period SSS Revenue − Prior Year SSS Revenue) / Prior Year
+      SSS Revenue × 100
+    datasource:
+    - POS daily close
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: -5
+    targetRangeHigh: 15
+    tech: FINTECH
+    validationRule: percentage
+    frequency: monthly
+    higherIsBetter: true
+    fpaWorkflow: Growth narrative — separates comp performance from new unit expansion.
+    segment: financial
+    slug: same_store_sales_growth
+    calc:
+      expr: (current_sss - prior_sss) / prior_sss * 100
+      inputs:
+      - current_sss
+      - prior_sss
+  Allrestaurantssaas-mrr:
+    datasource:
+    - Subscription billing records
+    - CRM / Sales pipeline
+    description: Normalized recurring subscription revenue billed in a month.
+    id: 1015
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
+    name: Monthly Recurring Revenue (MRR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 500000
+    targetRangeLow: 50000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/month
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 1000000000
+    validationRule: currency
+    benchmarkKey: mrr
+    fpaWorkflow: Recurring-revenue forecast — the foundation of the SaaS operating
+      model and ARR bridge.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
+  Allrestaurantssaas-arr:
+    datasource:
+    - Subscription billing records
+    - CRM / Sales pipeline
+    description: Annualized run-rate of recurring subscription revenue.
+    id: 1021
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: ARR = MRR × 12
+    name: Annual Recurring Revenue (ARR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 6000000
+    targetRangeLow: 600000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/year
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 10000000000
+    validationRule: currency
+    benchmarkKey: arr
+    fpaWorkflow: Annual planning & valuation — the headline scale metric for SaaS
+      boards and investors.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
+  Allrestaurantssaas-nrr:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Revenue retained and expanded from existing customers, net of churn
+      and contraction.
+    id: 1027
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting
+      MRR) × 100
+    name: Net Revenue Retention (NRR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 120
+    targetRangeLow: 100
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 300
+    validationRule: percentage_unbounded
+    benchmarkKey: nrr
+    fpaWorkflow: Expansion & retention modeling — the strongest signal of durable
+      SaaS growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr
+        * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
+  Allrestaurantssaas-gross-churn:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Percentage of recurring revenue lost to cancellations and downgrades.
+    id: 1033
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
+    name: Gross Revenue Churn Rate
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 5
+    targetRangeLow: 1
+    tech: FINTECH
+    type: Operational
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: gross_churn
+    fpaWorkflow: Retention review — informs the renewal forecast and customer-success
+      investment case.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
+  Allrestaurantssaas-cac:
+    datasource:
+    - Marketing spend records
+    - CRM / Sales pipeline
+    - General ledger
+    description: Fully-loaded sales & marketing cost to acquire one new customer.
+    id: 1039
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: CAC = Total Sales & Marketing Spend / New Customers Acquired
+    name: Customer Acquisition Cost (CAC)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 10000
+    targetRangeLow: 500
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 10000000
+    validationRule: currency
+    benchmarkKey: cac
+    fpaWorkflow: Go-to-market efficiency — feeds CAC payback and the marketing budget
+      allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
+  Allrestaurantssaas-ltv:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Expected gross-margin revenue from a customer over their lifetime.
+    id: 1045
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
+    name: Customer Lifetime Value (LTV)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 50000
+    targetRangeLow: 3000
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 100000000
+    validationRule: currency
+    benchmarkKey: ltv
+    fpaWorkflow: Unit-economics modeling — combined with CAC to gate growth-spend
+      decisions.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
+  Allrestaurantssaas-ltv-cac:
+    datasource:
+    - Subscription billing records
+    - Marketing spend records
+    description: Ratio of customer lifetime value to acquisition cost — core SaaS
+      unit economics.
+    id: 1051
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost
+    name: 'LTV : CAC Ratio'
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 5
+    targetRangeLow: 3
+    tech: FINTECH
+    type: Financial
+    unit: Ratio
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    validationRule: ratio
+    benchmarkKey: ltv_cac
+    fpaWorkflow: Investment efficiency — a board-level guardrail (target ≥ 3:1) for
+      scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
+  Allrestaurantssaas-rule-of-40:
+    datasource:
+    - Subscription billing records
+    - Financial statements
+    description: Balance of growth and profitability for recurring-revenue businesses.
+    id: 1057
+    industry: Restaurants
+    industryTags:
+    - SaaS
+    methodology: Rule of 40 = Revenue Growth % + Profit Margin %
+    name: Rule of 40
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 60
+    targetRangeLow: 40
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 200
+    validationRule: percentage_unbounded
+    benchmarkKey: rule_of_40
+    fpaWorkflow: Growth-vs-profitability review — a single composite health score
+      for SaaS planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct

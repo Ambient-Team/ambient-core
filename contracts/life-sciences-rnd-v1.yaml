@@ -2,6 +2,7 @@ product:
   name: Life Sciences R&D
   version: 1.0
   owner: analytics
+  consumption_id: LIFE_SCIENCES_RND
   description: "Aggregated life-sciences R&D Gold product: pipeline counts, trial cost per patient, and phase success by program. De-identified."
   domain: Life Sciences
   type: Derived

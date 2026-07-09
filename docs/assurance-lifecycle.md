@@ -38,7 +38,7 @@ flowchart LR
 
 ### 2. Evidence and ingestion
 
-- **Core** — Bronze lineage enforcement (`enforce_bronze_lineage`), [catalog input field policy](../catalog/core/shared/catalog_input_field_policy.yaml), PHI denylist; plain-text extract boundary per [governed-data.md](governed-data.md).
+- **Core** — Bronze lineage enforcement (`enforce_bronze_lineage`), [catalog input field policy](../catalog/input_field_policy.yaml), PHI denylist; plain-text extract boundary per [governed-data.md](governed-data.md).
 - **Platform** — Upload approvals, immutable evidence store, who certified which period, restatement policy.
 
 ### 3. Data quality measurement
@@ -48,7 +48,7 @@ flowchart LR
 
 ### 4. Operational–financial reconciliation
 
-- **Core** — [operational-financial-bridge-v1.yaml](../contracts/operational-financial-bridge-v1.yaml) (alignment flag, variance counts, bridge mapping records); [bridge_rules.yaml](../catalog/core/bridge_rules.yaml) and `metricBridgeHints.js` for narrative links between operational names and financial metrics (energy, NOI, DSCR themes).
+- **Core** — [operational-financial-bridge-v1.yaml](../contracts/operational-financial-bridge-v1.yaml) (alignment flag, variance counts, bridge mapping records); [bridge_rules.yaml](../catalog/bridge_rules.yaml) and `metricBridgeHints.js` for narrative links between operational names and financial metrics (energy, NOI, DSCR themes).
 - **Platform** — Reconciliation UI, ticketed variances, covenant “watermelon KPI” guards described in contract consumption notes.
 
 ### 5. Attestation and audit trail

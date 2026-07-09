@@ -11,7 +11,7 @@ flowchart LR
   subgraph core [ambient_core_OSS]
     Catalog[catalog_metrics_calc]
     Bench[benchmarks_yaml]
-    Profiles[sector_profiles]
+    Codes[industryCodes_ISIC_NAICS]
     Calc[ambient_calc]
     BridgeContract[operational_financial_bridge_v1]
   end
@@ -23,7 +23,7 @@ flowchart LR
   end
   Catalog --> Calc
   Bench --> Gap
-  Profiles --> Peers
+  Codes --> Peers
   Calc --> BridgeContract
   Peers --> Gap
   Norm --> Gap
@@ -34,7 +34,7 @@ flowchart LR
 
 ### 1. Scope and comparability
 
-- **Core** — Industry packs in [catalog/core/industries.yaml](../catalog/core/industries.yaml); [analysis lens terminology](../catalog/README.md#terminology); sector comparison profiles in [financial_sector_profiles.yaml](../catalog/core/financial_sector_profiles.yaml) and [transportation_sector_profiles.yaml](../catalog/core/transportation_sector_profiles.yaml) (`representativeMetricKeys`, revenue drivers, regulation).
+- **Core** — Industry packs in [catalog/packs.yaml](../catalog/packs.yaml); [analysis lens terminology](../catalog/README.md#terminology); official **ISIC / NAICS / NACE / GICS** tags on each pack (`industryCodes` in `pack.yaml`, exported in manifest v3). Coverage gaps: [catalog-industry-coverage.md](catalog-industry-coverage.md).
 - **Platform** — `peer_group_id` and org matching rules (sector, size band, geography, capital structure); optional `reporting_group_id` for holding-company rollup UI only. See recommended metadata in [catalog-consumption.md](catalog-consumption.md#analysis-lens-and-metric-filtering).
 
 ### 2. Metric selection
@@ -54,7 +54,7 @@ flowchart LR
 
 ### 5. Gap analysis (pace-setter vs focal)
 
-- **Core** — [catalog/core/benchmarks.yaml](../catalog/core/benchmarks.yaml) supplies **healthy bands** linked via `benchmarkKey` on metrics (guardrails for planning, not peer rankings). Sector profiles indicate which metrics typify a business model for comparison design.
+- **Core** — Per-vertical `catalog/industries/<pack>/benchmarks.yaml` supplies **healthy bands** linked via `benchmarkKey` on metrics (guardrails for planning, not peer rankings). Sector profiles indicate which metrics typify a business model for comparison design.
 - **Platform** — Stores peer actuals, computes gap versus pace-setter, ranked displays, optional composite scores with declared weights and sensitivity analysis.
 
 ### 6. Decomposition: improvable vs structural
@@ -65,7 +65,7 @@ This is the main **paid** insight after benchmarking: users need to see which pa
 
 - **`calc.inputs` and metric dependencies** — Show which levers are mathematically part of a KPI (numerator, denominator, and upstream metrics resolved by `ambient_calc`). The platform can walk this graph when building bridges; core does not label slices “structural” or “improvable.”
 - **[operational-financial-bridge-v1.yaml](../contracts/operational-financial-bridge-v1.yaml)** — Governed alignment between operational telemetry and financial metrics (variance counts, bridge mapping records). This guards “watermelon KPIs”; it is not a full waterfall chart product.
-- **[bridge_rules.yaml](../catalog/core/bridge_rules.yaml)** and generated `metricBridgeHints.js` — Narrative hints linking operational names to financial outcomes.
+- **[bridge_rules.yaml](../catalog/bridge_rules.yaml)** and generated `metricBridgeHints.js` — Narrative hints linking operational names to financial outcomes.
 
 **Platform (paid):**
 
@@ -74,7 +74,7 @@ This is the main **paid** insight after benchmarking: users need to see which pa
 
 ### 7. Improvement and practice transfer
 
-- **Core** — `fpaWorkflow` strings on catalog metrics; [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) defines the **shape** of governed optimization recommendations (confidence, lineage)—populated in deployment, not by OSS alone.
+- **Core** — `fpaWorkflow` strings on catalog metrics guide where improvement effort maps.
 - **Platform** — Post-benchmark improvement plans, ROI estimates, workflows, ticketing, and sustainment—commercial product scope.
 
 ## How the platform should use catalog mechanics
@@ -84,7 +84,7 @@ When showing “what is improvable,” the platform should:
 1. Resolve the focal metric’s `calc` block and dependency chain from the manifest or YAML.
 2. Compare focal and pace-setter values **per input or sub-metric** where data exists, using the same operational definitions.
 3. Attribute remaining gap to **documented structural factors** stored in platform metadata (not invented in core).
-4. Surface `fpaWorkflow` and bridge hints for interpretation; write opportunities to Gold per `opportunity-v1` when recommendations are generated.
+4. Surface `fpaWorkflow` and bridge hints for interpretation when recommendations are generated.
 
 Core will **not** store peer time series, draw waterfall UI, or classify gap slices without platform logic.
 
@@ -112,7 +112,7 @@ This sketch mirrors a rigorous paired benchmark design (comparability screen, fi
 ## Future use cases (same lifecycle)
 
 - Widen REIT compare to a **peer set** with frontier efficiency methods at platform scale.
-- Insurance LOB segments (`property_casualty`, `life`, …) with sector profiles and peer cohorts per org lens.
+- Insurance LOB segments (`property_casualty`, `life`, …) with official industry codes and peer cohorts per org lens.
 - Aviation network carriers on CASM, RASM, and load factor versus `aviation_network_carrier` profile peers.
 - Multimodal transportation orgs on `road_freight` versus `maritime_shipping` profiles without mixing modal definitions.
 
@@ -121,7 +121,6 @@ Optional future core enhancements (not required for the lifecycle doc): export c
 ## Related
 
 - [work-cycles.md](work-cycles.md) — hub for benchmarking, assurance, and disclosure cycles
-- [optimization-lifecycle.md](optimization-lifecycle.md) — ranked actions and opportunity-v1 handoff
 - [governed-data.md](governed-data.md) — catalog vs contracts; analysis lens and tenancy
 - [catalog-consumption.md](catalog-consumption.md) — manifest, segment filtering, metadata conventions
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — what is not in OSS

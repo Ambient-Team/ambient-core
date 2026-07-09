@@ -48,8 +48,8 @@ Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). 
 
 ## What's in the box
 
-- **`contracts/`** — data-product YAML (SSOT; bundled for wheels).
-- **`catalog/`** — industries, metrics, benchmarks; generator → `manifest.json` + `runtime/` JS.
+- **`contracts/`** — data-product YAML (SSOT; bundled for wheels). Product inventory and how catalog mapping ties to Silver/Gold: [contracts/README.md](contracts/README.md).
+- **`catalog/`** — industries, metrics, benchmarks; typed data-option fields and manifest **v3**; each pack tagged with ISIC, GICS, NAICS, and NACE; generator → `manifest.json` + `runtime/` JS. Field sync and coverage: [docs/catalog-input-field-gaps.md](docs/catalog-input-field-gaps.md), [docs/catalog-consumption.md](docs/catalog-consumption.md). Global taxonomy roadmap: [docs/catalog-industry-coverage.md](docs/catalog-industry-coverage.md).
 - **`lib/ambient_pipeline/`** — governance primitives for Spark/lakehouse jobs.
 - **`lib/ambient_inference/`** + **`services/maestro/`** — inference library and FastAPI service.
 - **`lib/ambient_contracts`**, **`ambient_cli`**, **`ambient_agent`** (extension point) — load, validate, and ship.
@@ -69,7 +69,7 @@ Full map: **[docs/README.md](docs/README.md)**.
 - **Conventions** — [CONVENTIONS.md](docs/CONVENTIONS.md) (catalogue/contract naming, core layer, calculation spec, data formats and storage)
 - **Positioning** — [POSITIONING.md](docs/POSITIONING.md)
 - **Components & releases** — [ECOSYSTEM.md](docs/ECOSYSTEM.md)
-- **Maestro** — [inference-layer.md](docs/inference-layer.md)
+- **Maestro** — [inference-layer.md](docs/inference-layer.md); optional catalog ingest assist — [maestro-catalog-ingestion.md](docs/maestro-catalog-ingestion.md)
 
 ## Community
 

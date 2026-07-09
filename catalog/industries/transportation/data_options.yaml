@@ -1,0 +1,720 @@
+dataOptions:
+  5tZAB2WLZbRDQdj6l7X6:
+    description: Data collected from in-vehicle sensors to monitor vehicle performance.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: vehicle_id
+      type: id
+    - name: telematics_date
+      type: date
+    - name: engine_performance
+      type: string
+    - name: fuel_efficiency
+      type: string
+    - name: maintenance_alerts
+      type: string
+    - name: driver_behavior
+      type: string
+    format: Document
+    id: 13
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 10
+    name: Vehicle telematics data
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  DclVZaLbyz6Pwxt5Ctr1:
+    description: Records of maintenance activities.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields: []
+    format: Document
+    id: 16
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 13
+    name: Maintenance logs
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Ta6fK4eo9bymVVQGYEpl:
+    description: Software used to manage a fleet of vehicles.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: fleet_id
+      type: id
+    - name: vehicle_ids
+      type: string
+    - name: maintenance_schedule
+      type: string
+    - name: fuel_logs
+      type: string
+    - name: insurance_details
+      type: string
+    - name: fleet_time_in_use
+      type: string
+    - name: fleet_available_time
+      type: string
+    format: Software
+    id: 14
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 11
+    name: Fleet management systems
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  i0N19s7GpHi9QTyG5dhM:
+    description: Records of deliveries made, including location and timing.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: delivery_date
+      type: date
+    - name: vehicle_id
+      type: id
+    - name: route_id
+      type: id
+    - name: delivery_status
+      type: enum
+    - name: delivery_address
+      type: string
+    - name: customer_name
+      type: string
+    - name: delivery_time
+      type: string
+    format: Document
+    id: 15
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 12
+    name: Delivery logs
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  jHscrlnM67xOUF1IXfos:
+    description: Data collected from GPS devices to track location and movement.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: vehicle_id
+      type: id
+    - name: tracking_date
+      type: date
+    - name: start_location
+      type: string
+    - name: end_location
+      type: string
+    - name: distance_travelled
+      type: string
+    - name: average_speed
+      type: string
+    - name: route_taken
+      type: string
+    format: Document
+    id: 12
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 10
+    - 11
+    - 12
+    - 13
+    name: GPS tracking data
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  uRTkFZUmJC2BLwoRtJxL:
+    description: Records of fuel consumption for vehicles or machinery.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: vehicle_id
+      type: id
+    - name: fuel_type
+      type: enum
+    - name: fuel_date
+      type: date
+    - name: fuel_quantity
+      type: string
+    - name: fuel_cost
+      type: decimal
+    - name: odometer_reading
+      type: string
+    format: Document
+    id: 11
+    industry: Transportation
+    lastUpdated: '2024-07-31 14:25:07'
+    metricIds:
+    - 10
+    name: Fuel logs
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart of accounts.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: journal_entry_id
+      type: id
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: period
+      type: enum
+    - name: currency
+      type: currency
+    format: Financial Statement Template
+    id: 1102
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 940
+    - 946
+    - 952
+    - 958
+    - 964
+    - 976
+    - 982
+    - 994
+    - 1036
+    name: General ledger
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit_balance
+      type: string
+    - name: credit_balance
+      type: string
+    - name: period
+      type: enum
+    format: Financial Statement Template
+    id: 1108
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 928
+    - 934
+    - 970
+    name: Trial balance
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - name: date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: current_assets
+      type: string
+    - name: total_assets
+      type: decimal
+    - name: current_liabilities
+      type: string
+    - name: total_liabilities
+      type: decimal
+    - name: inventory
+      type: string
+    - name: equity
+      type: string
+    format: Financial Statement Template
+    id: 1114
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 928
+    - 934
+    - 970
+    - 988
+    name: Balance sheet
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: customer_name
+      type: string
+    - name: invoice_id
+      type: id
+    - name: invoice_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: total_credit_sales
+      type: decimal
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1120
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 976
+    - 988
+    name: Accounts receivable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: supplier_name
+      type: string
+    - name: bill_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_payable
+      type: decimal
+    - name: cogs
+      type: string
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1126
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 982
+    - 988
+    name: Accounts payable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - name: date
+      type: date
+    - name: transaction_date
+      type: date
+    - name: account_id
+      type: id
+    - name: description
+      type: string
+    - name: amount
+      type: decimal
+    - name: direction
+      type: string
+    - name: balance
+      type: string
+    - name: currency
+      type: currency
+    - name: net_income
+      type: string
+    - name: non_cash_charges
+      type: string
+    - name: increase_in_working_capital
+      type: string
+    - name: cash_out
+      type: string
+    - name: cash_in
+      type: string
+    - name: current_cash_balance
+      type: string
+    format: Transactional Data Template
+    id: 1132
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 994
+    - 1000
+    - 1006
+    name: Bank statements
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1138
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1012
+    - 1018
+    - 1024
+    - 1030
+    - 1042
+    - 1048
+    - 1054
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1144
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1012
+    - 1036
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1150
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1024
+    - 1030
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Alltransportationds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    format: Transactional Data Template
+    id: 1156
+    industry: Transportation
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1036
+    - 1048
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  transportation.rail_freight.operations_summary:
+    id: 1170
+    name: Rail freight operations summary
+    description: Aggregated rail freight utilization, cost, and service metrics.
+    industry: Transportation
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: loaded_train_miles
+      type: string
+    - name: available_train_miles
+      type: string
+    - name: total_operating_cost
+      type: decimal
+    - name: ton_miles_moved
+      type: string
+    - name: on_time_shipments
+      type: string
+    - name: total_shipments
+      type: decimal
+    metricIds:
+    - 1860
+    - 1861
+    - 1862
+    lastUpdated: '2026-07-04 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  transportation.rail_passenger.operations_summary:
+    id: 1171
+    name: Rail passenger operations summary
+    description: Aggregated passenger rail ridership and fare recovery inputs.
+    industry: Transportation
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: total_boardings
+      type: decimal
+    - name: train_miles_operated
+      type: decimal
+    - name: fare_revenue
+      type: decimal
+    - name: operating_cost
+      type: decimal
+    metricIds:
+    - 1863
+    - 1864
+    lastUpdated: '2026-07-04 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  transportation.maritime.operations_summary:
+    id: 1172
+    name: Maritime fleet operations summary
+    description: Aggregated vessel utilization and TCE inputs.
+    industry: Transportation
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: operating_days
+      type: string
+    - name: available_days
+      type: string
+    - name: voyage_revenue
+      type: decimal
+    - name: voyage_costs
+      type: decimal
+    - name: on_hire_days
+      type: string
+    - name: on_schedule_voyages
+      type: string
+    - name: total_voyages
+      type: decimal
+    metricIds:
+    - 1865
+    - 1866
+    - 1867
+    lastUpdated: '2026-07-04 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  transportation.transit.operations_summary:
+    id: 1173
+    name: Public transit operations summary
+    description: Aggregated transit ridership, recovery, and OTP inputs.
+    industry: Transportation
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: operating_revenue
+      type: decimal
+    - name: operating_expenses
+      type: string
+    - name: unlinked_trips
+      type: string
+    - name: vehicle_revenue_hours
+      type: decimal
+    - name: on_time_trips
+      type: string
+    - name: total_trips
+      type: decimal
+    metricIds:
+    - 1868
+    - 1869
+    - 1870
+    lastUpdated: '2026-07-04 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  transportation.freight_forwarding.operations_summary:
+    id: 1174
+    name: Freight forwarding operations summary
+    description: Aggregated shipper SLA and margin inputs.
+    industry: Transportation
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: gross_profit
+      type: string
+    - name: shipments_handled
+      type: string
+    - name: on_time_shipments
+      type: string
+    - name: total_shipments
+      type: decimal
+    metricIds:
+    - 1871
+    - 1872
+    lastUpdated: '2026-07-04 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

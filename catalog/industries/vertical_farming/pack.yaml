@@ -1,0 +1,17 @@
+industry: Vertical Farming
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '0113'
+  naics:
+    revision: '2022'
+    primary: '111219'
+  nace:
+    revision: Rev.2
+    primary: '01.13'
+  gics:
+    revision: '2023'
+    primary: '302020'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

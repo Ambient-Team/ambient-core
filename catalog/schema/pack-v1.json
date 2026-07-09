@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambient.systems/catalog/pack-v1.json",
+  "title": "CatalogIndustryPack",
+  "type": "object",
+  "required": ["industry", "industryCodes"],
+  "properties": {
+    "industry": { "type": "string", "minLength": 1 },
+    "industryCodes": { "$ref": "#/$defs/industryCodes" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "taxonomyRef": {
+      "type": "object",
+      "required": ["revision", "primary"],
+      "properties": {
+        "revision": { "type": "string", "minLength": 1 },
+        "primary": { "type": "string", "minLength": 1 },
+        "secondary": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "industryCodes": {
+      "type": "object",
+      "required": ["isic", "naics", "nace", "gics", "confidence", "lastReviewed", "source"],
+      "properties": {
+        "isic": { "$ref": "#/$defs/taxonomyRef" },
+        "naics": { "$ref": "#/$defs/taxonomyRef" },
+        "nace": { "$ref": "#/$defs/taxonomyRef" },
+        "gics": { "$ref": "#/$defs/taxonomyRef" },
+        "confidence": {
+          "enum": ["high", "medium", "low", "provisional"]
+        },
+        "lastReviewed": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "source": {
+          "enum": ["manual", "expert", "imported"]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

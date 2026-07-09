@@ -9,7 +9,7 @@ import pytest
 
 from ambient_calc import CalcError, compute_all, compute_metric, safe_eval
 
-CORE = Path(__file__).resolve().parents[1] / "catalog" / "core" / "shared" / "core_metrics.yaml"
+CORE = Path(__file__).resolve().parents[1] / "catalog" / "shared" / "metrics.yaml"
 
 
 def test_safe_eval_basic_arithmetic():

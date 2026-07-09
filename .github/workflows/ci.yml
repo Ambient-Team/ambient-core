@@ -13,22 +13,23 @@ jobs:
   python:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
 
-      - name: Sync bundled contracts
+      - name: Sync bundled contracts and Maestro run artifact
         run: |
           cp contracts/*.yaml lib/ambient_contracts/bundled/
-          git diff --exit-code lib/ambient_contracts/bundled/ || (
-            echo "ERROR: lib/ambient_contracts/bundled/ out of sync with contracts/" >&2
+          cp contracts/maestro-run-v1.yaml lib/ambient_inference/contracts/maestro-run-v1.yaml
+          git diff --exit-code lib/ambient_contracts/bundled/ lib/ambient_inference/contracts/maestro-run-v1.yaml || (
+            echo "ERROR: bundled copies out of sync with contracts/" >&2
             exit 1
           )
 
@@ -45,7 +46,12 @@ jobs:
         run: validate-agent-config
 
       - name: Validate reference catalog
-        run: python scripts/generate_reference_catalog.py --check
+        run: |
+          python scripts/harden_catalog_data_options.py --check
+          python scripts/generate_reference_catalog.py --check --strict-data-option-inputs
+
+      - name: Validate catalog crosswalk
+        run: python scripts/check_crosswalk.py
 
       - name: Catalogue hygiene (no dead trees, no mojibake)
         run: python scripts/check_catalog_hygiene.py
@@ -58,6 +64,9 @@ jobs:
 
       - name: Metric formulas
         run: python scripts/check_formulas.py
+
+      - name: Metric input coverage (data options -> KPIs)
+        run: python scripts/check_metric_inputs.py
 
       - name: PHI policy (healthcare/life-sciences)
         run: python scripts/check_phi.py

@@ -2,6 +2,7 @@ product:
   name: Finance Insurance
   version: 1.1
   owner: analytics
+  consumption_id: FINANCE_INSURANCE
   description: "Aggregated insurer Gold product: combined and loss ratios, premium growth, reserve development, and catastrophe loss ratio by line of business."
   domain: Insurance
   type: Derived

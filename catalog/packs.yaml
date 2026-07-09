@@ -1,0 +1,28 @@
+defaultIndustry: Real Estate
+packs:
+- pack: real_estate
+  displayLabel: Real Estate (commercial)
+- pack: vertical_farming
+- pack: transportation
+  displayLabel: Transportation (multimodal)
+- pack: aviation
+  displayLabel: Aviation
+- pack: manufacturing
+- pack: healthcare
+- pack: restaurants
+- pack: life_sciences
+  displayLabel: Life Sciences
+- pack: banking
+  displayLabel: Banking (depository)
+- pack: financial_services
+  displayLabel: Financial Services
+- pack: funds
+  displayLabel: Funds
+- pack: trusts
+  displayLabel: Trusts
+- pack: insurance
+- pack: consumer_finance
+  displayLabel: Consumer Finance
+- pack: commercial_finance
+  displayLabel: Commercial Finance
+- pack: retail

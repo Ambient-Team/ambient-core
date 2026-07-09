@@ -1,0 +1,452 @@
+metrics:
+  financial_services.investment_banking.trading_revenue_ratio:
+    id: 1535
+    name: Trading Revenue Ratio
+    description: Share of firm revenue from trading activities (investment bank /
+      markets; no deposit book).
+    industry: Financial Services
+    type: Financial
+    unit: '%'
+    methodology: Trading Revenue Ratio = (Trading Revenue / Total Revenue) × 100
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Revenue mix — volatility and market-risk sensitivity.
+    segment: investment_banking
+    slug: trading_revenue_ratio
+    calc:
+      expr: trading_revenue / total_revenue * 100
+      inputs:
+      - trading_revenue
+      - total_revenue
+  financial_services.investment_banking.advisory_fee_ratio:
+    id: 1553
+    name: Advisory Fee Ratio
+    description: Share of revenue from advisory and underwriting mandates (investment
+      banking; no deposit book).
+    industry: Financial Services
+    type: Financial
+    unit: '%'
+    methodology: Advisory Fee Ratio = (Advisory Fee Revenue / Total Revenue) × 100
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Mandate revenue — M&A and capital-markets advisory mix.
+    segment: investment_banking
+    slug: advisory_fee_ratio
+    calc:
+      expr: advisory_fee_revenue / total_revenue * 100
+      inputs:
+      - advisory_fee_revenue
+      - total_revenue
+  Allfinancesaas-mrr:
+    datasource:
+    - Subscription billing records
+    - CRM / Sales pipeline
+    description: Normalized recurring subscription revenue billed in a month.
+    id: 1580
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: MRR = Σ (Active Subscriptions × Monthly Subscription Price)
+    name: Monthly Recurring Revenue (MRR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 500000
+    targetRangeLow: 50000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/month
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 1000000000
+    validationRule: currency
+    benchmarkKey: mrr
+    fpaWorkflow: Recurring-revenue forecast — foundation of the fintech operating
+      model.
+    segment: subscription
+    slug: mrr
+    calc:
+      expr: active_subscriptions * avg_monthly_price
+      inputs:
+      - active_subscriptions
+      - avg_monthly_price
+  Allfinancesaas-arr:
+    datasource:
+    - Subscription billing records
+    - CRM / Sales pipeline
+    description: Annualized run-rate of recurring subscription revenue.
+    id: 1581
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: ARR = MRR × 12
+    name: Annual Recurring Revenue (ARR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 6000000
+    targetRangeLow: 600000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/year
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 10000000000
+    validationRule: currency
+    benchmarkKey: arr
+    fpaWorkflow: Annual planning and valuation — headline scale for fintech boards.
+    segment: subscription
+    slug: arr
+    calc:
+      expr: mrr * 12
+      inputs: []
+  Allfinancesaas-nrr:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Revenue retained and expanded from existing customers, net of churn
+      and contraction.
+    id: 1582
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting
+      MRR) × 100
+    name: Net Revenue Retention (NRR)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 120
+    targetRangeLow: 100
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 300
+    validationRule: percentage_unbounded
+    benchmarkKey: nrr
+    fpaWorkflow: Expansion and retention modeling — durable fintech growth quality.
+    segment: subscription
+    slug: nrr
+    calc:
+      expr: (starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr
+        * 100
+      inputs:
+      - starting_mrr
+      - expansion_mrr
+      - contraction_mrr
+      - churned_mrr
+  Allfinancesaas-gross-churn:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Percentage of recurring revenue lost to cancellations and downgrades.
+    id: 1583
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: Gross Churn = (Churned MRR / Starting MRR) × 100
+    name: Gross Revenue Churn Rate
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 5
+    targetRangeLow: 1
+    tech: FINTECH
+    type: Operational
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: gross_churn
+    fpaWorkflow: Retention review — renewal forecast and customer-success investment.
+    segment: subscription
+    slug: gross_churn
+    calc:
+      expr: churned_mrr / starting_mrr * 100
+      inputs:
+      - churned_mrr
+      - starting_mrr
+  Allfinancesaas-cac:
+    datasource:
+    - Marketing spend records
+    - CRM / Sales pipeline
+    - General ledger
+    description: Fully-loaded sales and marketing cost to acquire one new customer.
+    id: 1584
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: CAC = Total Sales & Marketing Spend / New Customers Acquired
+    name: Customer Acquisition Cost (CAC)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 10000
+    targetRangeLow: 500
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 10000000
+    validationRule: currency
+    benchmarkKey: cac
+    fpaWorkflow: Go-to-market efficiency — CAC payback and marketing allocation.
+    segment: subscription
+    slug: cac
+    calc:
+      expr: sales_marketing_spend / new_customers
+      inputs:
+      - sales_marketing_spend
+      - new_customers
+  Allfinancesaas-ltv:
+    datasource:
+    - Subscription billing records
+    - Product usage logs
+    description: Expected gross-margin revenue from a customer over their lifetime.
+    id: 1585
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate
+    name: Customer Lifetime Value (LTV)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 50000
+    targetRangeLow: 3000
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 100000000
+    validationRule: currency
+    benchmarkKey: ltv
+    fpaWorkflow: Unit-economics modeling — growth-spend decisions with CAC.
+    segment: subscription
+    slug: ltv
+    calc:
+      expr: (avg_revenue_per_account * gross_margin_pct / 100) / churn_rate
+      inputs:
+      - avg_revenue_per_account
+      - gross_margin_pct
+      - churn_rate
+  Allfinancesaas-ltv-cac:
+    datasource:
+    - Subscription billing records
+    - Marketing spend records
+    description: Ratio of customer lifetime value to acquisition cost.
+    id: 1586
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost
+    name: 'LTV : CAC Ratio'
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 5
+    targetRangeLow: 3
+    tech: FINTECH
+    type: Financial
+    unit: Ratio
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    validationRule: ratio
+    benchmarkKey: ltv_cac
+    fpaWorkflow: Investment efficiency — board guardrail for scaling spend.
+    segment: subscription
+    slug: ltv_cac
+    calc:
+      expr: ltv / cac
+      inputs: []
+  Allfinancesaas-rule-of-40:
+    datasource:
+    - Subscription billing records
+    - Financial statements
+    description: Balance of growth and profitability for recurring-revenue businesses.
+    id: 1587
+    industry: Financial Services
+    industryTags:
+    - SaaS
+    methodology: Rule of 40 = Revenue Growth % + Profit Margin %
+    name: Rule of 40
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 60
+    targetRangeLow: 40
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: quarterly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 200
+    validationRule: percentage_unbounded
+    benchmarkKey: rule_of_40
+    fpaWorkflow: Growth-vs-profitability review — composite score for fintech planning.
+    segment: subscription
+    slug: rule_of_40
+    calc:
+      expr: revenue_growth_pct + profit_margin_pct
+      inputs:
+      - revenue_growth_pct
+      - profit_margin_pct
+  financial_services.investment_banking.value_at_risk_99:
+    id: 1590
+    name: Value at Risk 99%
+    description: One-day 99% VaR for trading inventory (aggregated division).
+    industry: Financial Services
+    type: Financial
+    unit: Currency
+    methodology: Regulatory or internal VaR at 99% confidence, one-day horizon
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: daily
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Market risk — capital and limit utilization.
+    segment: investment_banking
+    slug: value_at_risk_99
+    input: true
+  financial_services.investment_banking.stressed_var_99:
+    id: 1591
+    name: Stressed VaR 99%
+    description: Stressed one-day 99% VaR (aggregated).
+    industry: Financial Services
+    type: Financial
+    unit: Currency
+    methodology: Stressed VaR per firm risk policy
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: daily
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Tail risk — regulatory and internal stress overlays.
+    segment: investment_banking
+    slug: stressed_var_99
+    input: true
+  financial_services.investment_banking.counterparty_exposure_ratio:
+    id: 1592
+    name: Counterparty Exposure Ratio
+    description: Largest counterparty exposure relative to tier 1 capital (proxy).
+    industry: Financial Services
+    type: Financial
+    unit: '%'
+    methodology: Counterparty Exposure Ratio = Top Counterparty EAD / Tier 1 Capital
+      × 100
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Credit risk — concentration to single counterparties.
+    segment: investment_banking
+    slug: counterparty_exposure_ratio
+    input: true
+  financial_services.investment_banking.market_making_revenue_share:
+    id: 1593
+    name: Market Making Revenue Share
+    description: Share of division revenue from principal market-making activities.
+    industry: Financial Services
+    type: Financial
+    unit: '%'
+    methodology: Market Making Share = Market Making Revenue / Total Revenue × 100
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Revenue depth — inventory risk vs agency flow.
+    segment: investment_banking
+    slug: market_making_revenue_share
+    calc:
+      expr: market_making_revenue / total_revenue * 100
+      inputs:
+      - market_making_revenue
+      - total_revenue
+  financial_services.investment_banking.prime_brokerage_balance_growth:
+    id: 1594
+    name: Prime Brokerage Balance Growth
+    description: Year-over-year growth in prime brokerage client balances (aggregated).
+    industry: Financial Services
+    type: Operational
+    unit: '%'
+    methodology: Balance Growth = ((Current − Prior) / Prior) × 100
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Hedge fund wallet — financing and custody attach.
+    segment: investment_banking
+    slug: prime_brokerage_balance_growth
+    input: true
+  financial_services.investment_banking.trading_venue_volume_growth:
+    id: 1615
+    name: Trading Venue Volume Growth
+    description: Year-over-year growth in executed trading venue volume (aggregated).
+    industry: Financial Services
+    type: Operational
+    unit: '%'
+    methodology: Volume Growth = ((Current − Prior) / Prior) × 100
+    datasource:
+    - Aggregated investment banking summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Market share — electronic and voice flow trends.
+    segment: investment_banking
+    slug: trading_venue_volume_growth
+    input: true

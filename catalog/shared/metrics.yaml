@@ -1,0 +1,747 @@
+templates:
+  current-ratio:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    description: 'Short-term liquidity: ability to cover current liabilities with
+      current assets.'
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Current Ratio = Current Assets / Current Liabilities
+    name: Current Ratio
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 2
+    targetRangeLow: 1.2
+    tech: FINTECH
+    type: Financial
+    unit: Ratio
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 20
+    validationRule: ratio
+    benchmarkKey: current_ratio
+    fpaWorkflow: Liquidity & solvency review — feeds covenant monitoring and the monthly
+      board liquidity pack.
+    calc:
+      expr: current_assets / current_liabilities
+      inputs:
+      - current_assets
+      - current_liabilities
+  quick-ratio:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    description: Acid-test liquidity excluding inventory — most conservative short-term
+      solvency view.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Quick Ratio = (Current Assets − Inventory) / Current Liabilities
+    name: Quick Ratio (Acid Test)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 1.5
+    targetRangeLow: 1
+    tech: FINTECH
+    type: Financial
+    unit: Ratio
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 20
+    validationRule: ratio
+    benchmarkKey: quick_ratio
+    fpaWorkflow: Liquidity stress testing — pairs with cash-flow forecasting for downside
+      scenarios.
+    calc:
+      expr: (current_assets - inventory) / current_liabilities
+      inputs:
+      - current_assets
+      - inventory
+      - current_liabilities
+  gross-margin:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Share of revenue retained after the direct cost of goods sold.
+    industryTags:
+    - Corporate Finance
+    - SaaS
+    - All
+    methodology: Gross Margin = ((Revenue − COGS) / Revenue) × 100
+    name: Gross Profit Margin
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 70
+    targetRangeLow: 40
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: gross_margin
+    fpaWorkflow: Unit-economics and pricing review — anchors contribution-margin and
+      budget-vs-actual analysis.
+    calc:
+      expr: (revenue - cogs) / revenue * 100
+      inputs:
+      - revenue
+      - cogs
+  operating-margin:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Operating profitability after operating expenses (EBIT margin).
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Operating Margin = (Operating Income / Revenue) × 100
+    name: Operating Margin (EBIT)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 25
+    targetRangeLow: 10
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: operating_margin
+    fpaWorkflow: Opex efficiency review — drives the monthly variance bridge and cost-control
+      actions.
+    calc:
+      expr: operating_income / revenue * 100
+      inputs:
+      - operating_income
+      - revenue
+  ebitda-margin:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Core operating cash profitability before interest, tax, depreciation
+      and amortization.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: EBITDA Margin = (EBITDA / Revenue) × 100
+    name: EBITDA Margin
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 30
+    targetRangeLow: 15
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: ebitda_margin
+    fpaWorkflow: Valuation & lender reporting — primary profitability proxy in models
+      and covenant tests.
+    calc:
+      expr: ebitda / revenue * 100
+      inputs:
+      - ebitda
+      - revenue
+  net-margin:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Bottom-line profitability after all costs, interest and tax.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Net Profit Margin = (Net Income / Revenue) × 100
+    name: Net Profit Margin
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 20
+    targetRangeLow: 8
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 100
+    validationRule: percentage
+    benchmarkKey: net_margin
+    fpaWorkflow: Board P&L reporting — the headline profitability line for the monthly
+      close pack.
+    calc:
+      expr: net_income / revenue * 100
+      inputs:
+      - net_income
+      - revenue
+  revenue-growth:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Period-over-period revenue growth rate.
+    industryTags:
+    - Corporate Finance
+    - SaaS
+    - All
+    methodology: Revenue Growth = ((Current Period Revenue − Prior Period Revenue)
+      / Prior Period Revenue) × 100
+    name: Revenue Growth Rate
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 30
+    targetRangeLow: 10
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -100
+      hardMax: 1000
+    validationRule: percentage_unbounded
+    benchmarkKey: revenue_growth
+    fpaWorkflow: Growth planning — drives top-line forecast, hiring plan and the rolling
+      re-forecast.
+    calc:
+      expr: (revenue - revenue_prior) / revenue_prior * 100
+      inputs:
+      - revenue
+      - revenue_prior
+  working-capital:
+    datasource:
+    - Financial statements
+    - Balance sheet
+    - Trial balance
+    description: Operating liquidity available to fund day-to-day operations.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Working Capital = Current Assets − Current Liabilities
+    name: Working Capital
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 1000000
+    targetRangeLow: 100000
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -1000000000
+      hardMax: 1000000000
+    validationRule: currency_signed
+    benchmarkKey: working_capital
+    fpaWorkflow: Working-capital management — feeds the 13-week cash forecast and
+      treasury planning.
+    calc:
+      expr: current_assets - current_liabilities
+      inputs:
+      - current_assets
+      - current_liabilities
+  dso:
+    datasource:
+    - Accounts receivable aging
+    - Financial statements
+    - General ledger
+    description: Average number of days to collect cash after a sale.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: DSO = (Accounts Receivable / Total Credit Sales) × Number of Days
+    name: Days Sales Outstanding (DSO)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 45
+    targetRangeLow: 30
+    tech: FINTECH
+    type: Financial
+    unit: Days
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 365
+    validationRule: days
+    benchmarkKey: dso
+    fpaWorkflow: Receivables & collections review — directly improves the cash-conversion
+      cycle and forecast accuracy.
+    calc:
+      expr: accounts_receivable / total_credit_sales * days
+      inputs:
+      - accounts_receivable
+      - total_credit_sales
+      - days
+  dpo:
+    datasource:
+    - Accounts payable aging
+    - Financial statements
+    - General ledger
+    description: Average number of days the business takes to pay its suppliers.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: DPO = (Accounts Payable / COGS) × Number of Days
+    name: Days Payable Outstanding (DPO)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 60
+    targetRangeLow: 30
+    tech: FINTECH
+    type: Financial
+    unit: Days
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 365
+    validationRule: days
+    benchmarkKey: dpo
+    fpaWorkflow: Payables optimization — balances supplier terms against the cash-conversion
+      cycle.
+    calc:
+      expr: accounts_payable / cogs * days
+      inputs:
+      - accounts_payable
+      - cogs
+      - days
+  ccc:
+    datasource:
+    - Accounts receivable aging
+    - Accounts payable aging
+    - Inventory records
+    description: Days to convert investments in inventory and receivables back into
+      cash.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: CCC = DSO + Days Inventory Outstanding − DPO
+    name: Cash Conversion Cycle
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 60
+    targetRangeLow: 20
+    tech: FINTECH
+    type: Financial
+    unit: Days
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: -180
+      hardMax: 365
+    validationRule: days_signed
+    benchmarkKey: ccc
+    fpaWorkflow: Cash-efficiency program — a north-star working-capital KPI tracked
+      in the treasury review.
+    calc:
+      expr: dso + days_inventory_outstanding - dpo
+      inputs:
+      - days_inventory_outstanding
+  operating-cash-flow:
+    datasource:
+    - Financial statements
+    - Bank statements
+    - General ledger
+    description: Cash generated by core operations during the period.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Operating Cash Flow = Net Income + Non-Cash Charges − Increase in
+      Working Capital
+    name: Operating Cash Flow
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 1000000
+    targetRangeLow: 200000
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -1000000000
+      hardMax: 1000000000
+    validationRule: currency_signed
+    benchmarkKey: operating_cash_flow
+    fpaWorkflow: Cash-flow forecasting — the anchor of the direct/indirect cash-flow
+      statement.
+    calc:
+      expr: net_income + non_cash_charges - increase_in_working_capital
+      inputs:
+      - net_income
+      - non_cash_charges
+      - increase_in_working_capital
+  burn-rate:
+    datasource:
+    - Bank statements
+    - Financial statements
+    - General ledger
+    description: Net cash consumed per month (negative net operating cash flow).
+    industryTags:
+    - SaaS
+    - Corporate Finance
+    - All
+    methodology: Net Burn = Cash Out − Cash In (per month)
+    name: Monthly Burn Rate
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 200000
+    targetRangeLow: 50000
+    tech: FINTECH
+    type: Financial
+    unit: Currency/month
+    frequency: monthly
+    higherIsBetter: false
+    validRange:
+      hardMin: 0
+      hardMax: 100000000
+    validationRule: currency
+    benchmarkKey: burn_rate
+    fpaWorkflow: Runway management — paired with cash balance to govern the spend
+      plan and fundraising timing.
+    calc:
+      expr: cash_out - cash_in
+      inputs:
+      - cash_out
+      - cash_in
+  runway:
+    datasource:
+    - Bank statements
+    - Financial statements
+    description: Number of months of cash remaining at the current net burn rate.
+    industryTags:
+    - SaaS
+    - Corporate Finance
+    - All
+    methodology: Runway (months) = Current Cash Balance / Monthly Net Burn
+    name: Cash Runway
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 24
+    targetRangeLow: 12
+    tech: FINTECH
+    type: Financial
+    unit: Months
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: 0
+      hardMax: 240
+    validationRule: number
+    benchmarkKey: runway
+    fpaWorkflow: Board & investor reporting — the survival metric that gates hiring
+      and spend decisions.
+    calc:
+      expr: current_cash_balance / burn_rate
+      inputs:
+      - current_cash_balance
+  headcount:
+    name: Headcount (FTE)
+    description: Period-end count of active full-time-equivalent employees. A directly
+      measured input, not a derived ratio.
+    type: Operational
+    unit: Count
+    methodology: Period-end count of active employees expressed as full-time equivalents
+      (directly measured, not calculated).
+    datasource:
+    - HR records
+    - Payroll records
+    industryTags:
+    - Corporate
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    input: true
+    slug: headcount
+industryIds:
+  Healthcare:
+    current-ratio: 930
+    quick-ratio: 936
+    gross-margin: 942
+    operating-margin: 948
+    ebitda-margin: 954
+    net-margin: 960
+    revenue-growth: 966
+    working-capital: 972
+    dso: 978
+    dpo: 984
+    ccc: 990
+    operating-cash-flow: 996
+    burn-rate: 1002
+    runway: 1008
+    headcount: 1080
+  Manufacturing:
+    current-ratio: 929
+    quick-ratio: 935
+    gross-margin: 941
+    operating-margin: 947
+    ebitda-margin: 953
+    net-margin: 959
+    revenue-growth: 965
+    working-capital: 971
+    dso: 977
+    dpo: 983
+    ccc: 989
+    operating-cash-flow: 995
+    burn-rate: 1001
+    runway: 1007
+    headcount: 1081
+  Real Estate:
+    current-ratio: 926
+    quick-ratio: 932
+    gross-margin: 938
+    operating-margin: 944
+    ebitda-margin: 950
+    net-margin: 956
+    revenue-growth: 962
+    working-capital: 968
+    dso: 974
+    dpo: 980
+    ccc: 986
+    operating-cash-flow: 992
+    burn-rate: 998
+    runway: 1004
+    headcount: 1082
+  Restaurants:
+    current-ratio: 931
+    quick-ratio: 937
+    gross-margin: 943
+    operating-margin: 949
+    ebitda-margin: 955
+    net-margin: 961
+    revenue-growth: 967
+    working-capital: 973
+    dso: 979
+    dpo: 985
+    ccc: 991
+    operating-cash-flow: 997
+    burn-rate: 1003
+    runway: 1009
+    headcount: 1083
+  Transportation:
+    current-ratio: 928
+    quick-ratio: 934
+    gross-margin: 940
+    operating-margin: 946
+    ebitda-margin: 952
+    net-margin: 958
+    revenue-growth: 964
+    working-capital: 970
+    dso: 976
+    dpo: 982
+    ccc: 988
+    operating-cash-flow: 994
+    burn-rate: 1000
+    runway: 1006
+    headcount: 1084
+  Vertical Farming:
+    current-ratio: 927
+    quick-ratio: 933
+    gross-margin: 939
+    operating-margin: 945
+    ebitda-margin: 951
+    net-margin: 957
+    revenue-growth: 963
+    working-capital: 969
+    dso: 975
+    dpo: 981
+    ccc: 987
+    operating-cash-flow: 993
+    burn-rate: 999
+    runway: 1005
+    headcount: 1085
+  Life Sciences:
+    current-ratio: 1300
+    quick-ratio: 1301
+    gross-margin: 1302
+    operating-margin: 1303
+    ebitda-margin: 1304
+    net-margin: 1305
+    revenue-growth: 1306
+    working-capital: 1307
+    dso: 1308
+    dpo: 1309
+    ccc: 1310
+    operating-cash-flow: 1311
+    burn-rate: 1312
+    runway: 1313
+    headcount: 1314
+  Banking:
+    current-ratio: 1500
+    quick-ratio: 1501
+    gross-margin: 1502
+    operating-margin: 1503
+    ebitda-margin: 1504
+    net-margin: 1505
+    revenue-growth: 1506
+    working-capital: 1507
+    dso: 1508
+    dpo: 1509
+    ccc: 1510
+    operating-cash-flow: 1511
+    burn-rate: 1512
+    runway: 1513
+    headcount: 1514
+  Financial Services:
+    current-ratio: 1600
+    quick-ratio: 1601
+    gross-margin: 1602
+    operating-margin: 1603
+    ebitda-margin: 1604
+    net-margin: 1605
+    revenue-growth: 1606
+    working-capital: 1607
+    dso: 1608
+    dpo: 1609
+    ccc: 1610
+    operating-cash-flow: 1611
+    burn-rate: 1612
+    runway: 1613
+    headcount: 1614
+  Insurance:
+    current-ratio: 1620
+    quick-ratio: 1621
+    gross-margin: 1622
+    operating-margin: 1623
+    ebitda-margin: 1624
+    net-margin: 1625
+    revenue-growth: 1626
+    working-capital: 1627
+    dso: 1628
+    dpo: 1629
+    ccc: 1630
+    operating-cash-flow: 1631
+    burn-rate: 1632
+    runway: 1633
+    headcount: 1634
+  Retail:
+    current-ratio: 1640
+    quick-ratio: 1641
+    gross-margin: 1642
+    operating-margin: 1643
+    ebitda-margin: 1644
+    net-margin: 1645
+    revenue-growth: 1646
+    working-capital: 1647
+    dso: 1648
+    dpo: 1649
+    ccc: 1650
+    operating-cash-flow: 1651
+    burn-rate: 1652
+    runway: 1653
+    headcount: 1654
+  Consumer Finance:
+    current-ratio: 1700
+    quick-ratio: 1701
+    gross-margin: 1702
+    operating-margin: 1703
+    ebitda-margin: 1704
+    net-margin: 1705
+    revenue-growth: 1706
+    working-capital: 1707
+    dso: 1708
+    dpo: 1709
+    ccc: 1710
+    operating-cash-flow: 1711
+    burn-rate: 1712
+    runway: 1713
+    headcount: 1714
+  Commercial Finance:
+    current-ratio: 1740
+    quick-ratio: 1741
+    gross-margin: 1742
+    operating-margin: 1743
+    ebitda-margin: 1744
+    net-margin: 1745
+    revenue-growth: 1746
+    working-capital: 1747
+    dso: 1748
+    dpo: 1749
+    ccc: 1750
+    operating-cash-flow: 1751
+    burn-rate: 1752
+    runway: 1753
+    headcount: 1754
+  Aviation:
+    current-ratio: 1800
+    quick-ratio: 1801
+    gross-margin: 1802
+    operating-margin: 1803
+    ebitda-margin: 1804
+    net-margin: 1805
+    revenue-growth: 1806
+    working-capital: 1807
+    dso: 1808
+    dpo: 1809
+    ccc: 1810
+    operating-cash-flow: 1811
+    burn-rate: 1812
+    runway: 1813
+    headcount: 1814
+  Funds:
+    current-ratio: 1970
+    quick-ratio: 1971
+    gross-margin: 1972
+    operating-margin: 1973
+    ebitda-margin: 1974
+    net-margin: 1975
+    revenue-growth: 1976
+    working-capital: 1977
+    dso: 1978
+    dpo: 1979
+    ccc: 1980
+    operating-cash-flow: 1981
+    burn-rate: 1982
+    runway: 1983
+    headcount: 1984
+  Trusts:
+    current-ratio: 1985
+    quick-ratio: 1986
+    gross-margin: 1987
+    operating-margin: 1988
+    ebitda-margin: 1989
+    net-margin: 1990
+    revenue-growth: 1991
+    working-capital: 1992
+    dso: 1993
+    dpo: 1994
+    ccc: 1995
+    operating-cash-flow: 1996
+    burn-rate: 1997
+    runway: 1998
+    headcount: 1999

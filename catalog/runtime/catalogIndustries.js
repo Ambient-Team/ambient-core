@@ -1,5 +1,5 @@
 /**
- * AUTO-GENERATED from catalog/core/industries.yaml — do not edit by hand.
+ * AUTO-GENERATED from catalog/packs.yaml — do not edit by hand.
  * Run: npm run catalog:generate
  */
 export const CATALOG_INDUSTRY_OPTIONS = [

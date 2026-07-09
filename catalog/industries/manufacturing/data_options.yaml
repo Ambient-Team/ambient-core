@@ -1,0 +1,560 @@
+dataOptions:
+  MfgMes901CatalogOptionKey01:
+    id: 901
+    name: MES production export
+    description: Shop-floor production counts, run times, and work-order completion by line or cell.
+    industry: Manufacturing
+    format: Document
+    template: Transactional Data Template
+    fields:
+    - name: date
+      type: date
+    - name: line_id
+      type: id
+    - name: work_order_id
+      type: id
+    - name: units_produced
+      type: string
+    - name: units_scrapped
+      type: string
+    - name: run_minutes
+      type: string
+    - name: planned_minutes
+      type: string
+    - name: availability
+      type: string
+    - name: performance
+      type: string
+    - name: quality
+      type: string
+    - name: scrapped_units
+      type: string
+    - name: total_units
+      type: decimal
+    - name: total_manufacturing_cogs
+      type: decimal
+    metricIds:
+    - 901
+    - 902
+    - 905
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: weekly
+    grain: week
+  MfgErp902CatalogOptionKey02:
+    id: 902
+    name: ERP general ledger (manufacturing)
+    description: Period GL balances for COGS, inventory, and manufacturing overhead accounts.
+    industry: Manufacturing
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: balance
+      type: string
+    - name: cost_center
+      type: decimal
+    metricIds:
+    - 903
+    - 905
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  MfgCmms903CatalogOptionKey03:
+    id: 903
+    name: CMMS maintenance logs
+    description: Work orders, downtime reason codes, and mean time between failures by asset.
+    industry: Manufacturing
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: asset_id
+      type: id
+    - name: downtime_minutes
+      type: string
+    - name: reason_code
+      type: id
+    - name: planned_flag
+      type: string
+    metricIds:
+    - 904
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  MfgQual904CatalogOptionKey04:
+    id: 904
+    name: Quality inspection logs
+    description: Lot-level pass/fail, defect codes, and rework disposition (no customer PII).
+    industry: Manufacturing
+    format: Document
+    template: Transactional Data Template
+    fields:
+    - name: date
+      type: date
+    - name: lot_id
+      type: id
+    - name: units_inspected
+      type: string
+    - name: units_failed
+      type: string
+    - name: defect_code
+      type: id
+    - name: scrapped_units
+      type: string
+    - name: total_units
+      type: decimal
+    metricIds:
+    - 902
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: weekly
+    grain: week
+  Allmanufacturingds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart of accounts.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: journal_entry_id
+      type: id
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: period
+      type: enum
+    - name: currency
+      type: currency
+    format: Financial Statement Template
+    id: 1103
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 941
+    - 947
+    - 953
+    - 959
+    - 965
+    - 977
+    - 983
+    - 995
+    - 1037
+    name: General ledger
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit_balance
+      type: string
+    - name: credit_balance
+      type: string
+    - name: period
+      type: enum
+    format: Financial Statement Template
+    id: 1109
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 929
+    - 935
+    - 971
+    name: Trial balance
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - name: date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: current_assets
+      type: string
+    - name: total_assets
+      type: decimal
+    - name: current_liabilities
+      type: string
+    - name: total_liabilities
+      type: decimal
+    - name: inventory
+      type: string
+    - name: equity
+      type: string
+    format: Financial Statement Template
+    id: 1115
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 929
+    - 935
+    - 971
+    - 989
+    name: Balance sheet
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: customer_name
+      type: string
+    - name: invoice_id
+      type: id
+    - name: invoice_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: total_credit_sales
+      type: decimal
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1121
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 977
+    - 989
+    name: Accounts receivable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: supplier_name
+      type: string
+    - name: bill_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_payable
+      type: decimal
+    - name: cogs
+      type: string
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1127
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 983
+    - 989
+    name: Accounts payable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - name: date
+      type: date
+    - name: transaction_date
+      type: date
+    - name: account_id
+      type: id
+    - name: description
+      type: string
+    - name: amount
+      type: decimal
+    - name: direction
+      type: string
+    - name: balance
+      type: string
+    - name: currency
+      type: currency
+    - name: net_income
+      type: string
+    - name: non_cash_charges
+      type: string
+    - name: increase_in_working_capital
+      type: string
+    - name: cash_out
+      type: string
+    - name: cash_in
+      type: string
+    - name: current_cash_balance
+      type: string
+    format: Transactional Data Template
+    id: 1133
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 995
+    - 1001
+    - 1007
+    name: Bank statements
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1139
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1013
+    - 1019
+    - 1025
+    - 1031
+    - 1043
+    - 1049
+    - 1055
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1145
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1013
+    - 1037
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1151
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1025
+    - 1031
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    format: Transactional Data Template
+    id: 1157
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1037
+    - 1049
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allmanufacturingds-production-output:
+    description: Production line output, downtime and quality counts per shift.
+    fields:
+    - name: date
+      type: date
+    - name: line_id
+      type: id
+    - name: shift
+      type: string
+    - name: units_produced
+      type: string
+    - name: units_defective
+      type: string
+    - name: planned_runtime_min
+      type: string
+    - name: actual_runtime_min
+      type: string
+    format: Document
+    id: 1163
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 901
+    - 1073
+    name: Production output logs
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  Allmanufacturingds-inventory-records:
+    description: Inventory on hand, valuation and movement for working-capital analysis.
+    fields:
+    - name: date
+      type: date
+    - name: sku
+      type: string
+    - name: warehouse
+      type: string
+    - name: quantity_on_hand
+      type: string
+    - name: unit_cost
+      type: decimal
+    - name: reorder_point
+      type: string
+    - name: inventory_value
+      type: string
+    format: Document
+    id: 1169
+    industry: Manufacturing
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 989
+    - 903
+    name: Inventory records
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month

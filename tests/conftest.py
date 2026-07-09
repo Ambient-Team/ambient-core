@@ -9,6 +9,19 @@ from ambient_inference.registry import ModelRegistry
 from ambient_inference.schemas import ChatMessage, MessageRole, ModelProvenance
 
 
+@pytest.fixture(autouse=True)
+def _isolate_run_store(monkeypatch, tmp_path):
+    """Point Maestro's default run store at a throwaway SQLite file per test.
+
+    Without this, tests that build the Maestro app (which defaults to
+    ``sqlite:///./maestro_runs.db``) write to the git-tracked run store at the
+    repo root and dirty the working tree.
+    """
+    monkeypatch.setenv(
+        "MAESTRO_DATABASE_URL", f"sqlite:///{tmp_path / 'maestro_test_runs.db'}"
+    )
+
+
 class FakeGateway(ModelGateway):
     """Gateway that returns deterministic text without HTTP."""
 

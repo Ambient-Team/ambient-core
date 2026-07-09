@@ -1,0 +1,689 @@
+dataOptions:
+  2j9pysT31hgn2DQcejtz:
+    description: Records of income received from renting a property.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: rent_collection_date
+      type: date
+    - name: rent_amount
+      type: decimal
+    - name: tenant_name
+      type: string
+    - name: payment_method
+      type: enum
+    - name: payment_status
+      type: enum
+    - name: rental_income
+      type: string
+    - name: operating_expenses
+      type: string
+    - name: debt_service
+      type: string
+    - name: property_price
+      type: decimal
+    - name: gross_rental_income
+      type: string
+    format: Document
+    id: 6
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    metricIds:
+    - 4
+    - 6
+    name: Rental income records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Grtv4vjRFWRmrDSFF8cS:
+    description: Records of energy consumption and billing.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: energy_consumed
+      type: string
+    - name: energy_cost
+      type: decimal
+    - name: total_energy_cost
+      type: decimal
+    - name: rentable_square_feet
+      type: string
+    - name: gross_rental_income
+      type: string
+    - name: operating_expenses
+      type: string
+    - name: property_value
+      type: string
+    - name: provider_name
+      type: string
+    format: Document
+    id: 21
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:08'
+    metricIds:
+    - 2
+    - 3
+    - 1060
+    name: Energy bills
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  TPRNcAtqtiY387QTkah7:
+    description: Loan agreements used to finance property purchases.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: mortgage_lender
+      type: string
+    - name: loan_amount
+      type: decimal
+    - name: interest_rate
+      type: decimal
+    - name: loan_term
+      type: string
+    - name: monthly_payment
+      type: string
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    format: Document
+    id: 7
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    metricIds:
+    - 7
+    name: Mortgage documents
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  UVuuRwg8ksAOiP3WlKKr:
+    description: Documents related to the purchase of a property.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: purchase_date
+      type: date
+    - name: purchase_price
+      type: decimal
+    - name: seller_name
+      type: string
+    - name: property_location
+      type: string
+    - name: property_type
+      type: enum
+    - name: mortgage_details
+      type: string
+    format: Document
+    id: 2
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    metricIds:
+    - 1
+    name: Property purchase records
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  bs0gsbE2YDGDHyqRtkx8:
+    description: Documents related to the sale of a property.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: sale_date
+      type: date
+    - name: sale_price
+      type: decimal
+    - name: buyer_name
+      type: string
+    - name: property_location
+      type: string
+    - name: property_type
+      type: enum
+    - name: agent_details
+      type: string
+    format: Document
+    id: 3
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    metricIds:
+    - 1
+    name: Sale records
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  gKEmKLl2XRjSbTQGztuy:
+    description: Software used to manage rental properties.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: tenant_name
+      type: string
+    - name: lease_start_date
+      type: date
+    - name: lease_end_date
+      type: date
+    - name: monthly_rent
+      type: string
+    - name: maintenance_records
+      type: string
+    - name: payment_status
+      type: enum
+    - name: same_store_noi_growth
+      type: string
+    - name: operating_expenses
+      type: string
+    - name: effective_gross_income
+      type: string
+    - name: rentable_square_feet
+      type: string
+    - name: gross_rental_income
+      type: string
+    - name: vacant_units
+      type: string
+    - name: total_units
+      type: decimal
+    - name: total_energy_cost
+      type: decimal
+    metricIds:
+    - 2
+    - 9
+    - 1058
+    - 1059
+    - 1060
+    format: Software
+    id: 4
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    name: Property management systems
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  jYYkOyU5EQfa40iMf9x8:
+    description: Documents containing an estimate of a property's value.
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: valuation_date
+      type: date
+    - name: valuation_amount
+      type: decimal
+    - name: valuer_name
+      type: string
+    - name: valuation_method
+      type: enum
+    - name: property_location
+      type: string
+    format: Document
+    id: 5
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    metricIds:
+    - 3
+    - 6
+    name: Property valuation reports
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  ohvSqlJVvLde3k1gqYZh:
+    description: Loan agreements used for various purposes (e.g., equipment financing).
+    dummyFields:
+    - Date
+    - Revenue_Streams
+    - Operating_Expenses
+    - Asset_Values
+    - Liability_Amounts
+    fields: []
+    format: Document
+    id: 8
+    industry: Real Estate
+    lastUpdated: '2024-07-31 14:25:06'
+    metricIds:
+    - 8
+    name: Loan documents
+    template: Document
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart of accounts.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: journal_entry_id
+      type: id
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: period
+      type: enum
+    - name: currency
+      type: currency
+    format: Financial Statement Template
+    id: 1100
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 938
+    - 944
+    - 950
+    - 956
+    - 962
+    - 974
+    - 980
+    - 992
+    - 1034
+    name: General ledger
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit_balance
+      type: string
+    - name: credit_balance
+      type: string
+    - name: period
+      type: enum
+    format: Financial Statement Template
+    id: 1106
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 926
+    - 932
+    - 968
+    name: Trial balance
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - name: date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: current_assets
+      type: string
+    - name: total_assets
+      type: decimal
+    - name: current_liabilities
+      type: string
+    - name: total_liabilities
+      type: decimal
+    - name: inventory
+      type: string
+    - name: equity
+      type: string
+    format: Financial Statement Template
+    id: 1112
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 926
+    - 932
+    - 968
+    - 986
+    name: Balance sheet
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: customer_name
+      type: string
+    - name: invoice_id
+      type: id
+    - name: invoice_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: total_credit_sales
+      type: decimal
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1118
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 974
+    - 986
+    name: Accounts receivable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: supplier_name
+      type: string
+    - name: bill_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_payable
+      type: decimal
+    - name: cogs
+      type: string
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1124
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 980
+    - 986
+    name: Accounts payable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - name: date
+      type: date
+    - name: transaction_date
+      type: date
+    - name: account_id
+      type: id
+    - name: description
+      type: string
+    - name: amount
+      type: decimal
+    - name: direction
+      type: string
+    - name: balance
+      type: string
+    - name: currency
+      type: currency
+    - name: net_income
+      type: string
+    - name: non_cash_charges
+      type: string
+    - name: increase_in_working_capital
+      type: string
+    - name: cash_out
+      type: string
+    - name: cash_in
+      type: string
+    - name: current_cash_balance
+      type: string
+    format: Transactional Data Template
+    id: 1130
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 992
+    - 998
+    - 1004
+    name: Bank statements
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1136
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1010
+    - 1016
+    - 1022
+    - 1028
+    - 1040
+    - 1046
+    - 1052
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1142
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1010
+    - 1034
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1148
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1022
+    - 1028
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrealestateds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    format: Transactional Data Template
+    id: 1154
+    industry: Real Estate
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1034
+    - 1046
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

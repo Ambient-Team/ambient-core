@@ -10,14 +10,6 @@
       "type": "array",
       "items": { "$ref": "#/$defs/industryEntry" }
     },
-    "financialSectorProfiles": {
-      "type": "object",
-      "additionalProperties": { "type": "object" }
-    },
-    "transportationSectorProfiles": {
-      "type": "object",
-      "additionalProperties": { "type": "object" }
-    },
     "metrics": {
       "type": "array",
       "items": { "$ref": "#/$defs/manifestMetric" }
@@ -31,14 +23,43 @@
   "$defs": {
     "industryEntry": {
       "type": "object",
-      "required": ["value", "label", "pack"],
+      "required": ["value", "label", "pack", "industryCodes"],
       "properties": {
         "value": { "type": "string", "minLength": 1 },
         "label": { "type": "string", "minLength": 1 },
         "pack": { "type": "string", "minLength": 1 },
-        "sectorProfileIds": {
+        "industryCodes": { "$ref": "#/$defs/manifestIndustryCodes" }
+      },
+      "additionalProperties": false
+    },
+    "taxonomyRef": {
+      "type": "object",
+      "required": ["revision", "primary"],
+      "properties": {
+        "revision": { "type": "string", "minLength": 1 },
+        "primary": { "type": "string", "minLength": 1 },
+        "secondary": {
           "type": "array",
+          "maxItems": 2,
           "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manifestIndustryCodes": {
+      "type": "object",
+      "required": ["isic", "naics", "nace", "gics", "confidence", "lastReviewed", "source"],
+      "properties": {
+        "isic": { "$ref": "#/$defs/taxonomyRef" },
+        "naics": { "$ref": "#/$defs/taxonomyRef" },
+        "nace": { "$ref": "#/$defs/taxonomyRef" },
+        "gics": { "$ref": "#/$defs/taxonomyRef" },
+        "confidence": {
+          "enum": ["high", "medium", "low", "provisional"]
+        },
+        "lastReviewed": { "type": "string", "minLength": 1 },
+        "source": {
+          "enum": ["manual", "expert", "imported"]
         }
       },
       "additionalProperties": false
@@ -52,6 +73,41 @@
         "fields": {
           "type": "array",
           "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "metricCalc": {
+      "type": "object",
+      "required": ["expr", "inputs"],
+      "properties": {
+        "expr": { "type": "string", "minLength": 1 },
+        "inputs": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "metricInputSource": {
+      "type": "object",
+      "required": ["catalogOptionKey", "via"],
+      "properties": {
+        "catalogOptionKey": { "type": "string", "minLength": 1 },
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "field": { "type": "string" },
+        "via": { "enum": ["field", "upload"] }
+      },
+      "additionalProperties": false
+    },
+    "metricInput": {
+      "type": "object",
+      "required": ["name", "kind", "covered", "satisfiedBy"],
+      "properties": {
+        "name": { "type": "string" },
+        "kind": { "enum": ["measured", "derived"] },
+        "covered": { "type": "boolean" },
+        "satisfiedBy": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/metricInputSource" }
         }
       },
       "additionalProperties": false
@@ -79,6 +135,17 @@
         "requiredSources": {
           "type": "array",
           "items": { "$ref": "#/$defs/requiredSource" }
+        },
+        "calc": {
+          "oneOf": [{ "$ref": "#/$defs/metricCalc" }, { "type": "null" }]
+        },
+        "directlyReported": { "type": "boolean" },
+        "inputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/metricInput" }
+        },
+        "inputCoverage": {
+          "enum": ["complete", "upload", "none", "derived", "unspecified"]
         }
       },
       "additionalProperties": false

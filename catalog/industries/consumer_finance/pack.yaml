@@ -1,0 +1,17 @@
+industry: Consumer Finance
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '6492'
+  naics:
+    revision: '2022'
+    primary: '522291'
+  nace:
+    revision: Rev.2
+    primary: '64.92'
+  gics:
+    revision: '2023'
+    primary: '402020'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

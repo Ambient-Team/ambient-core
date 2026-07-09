@@ -1,0 +1,17 @@
+industry: Trusts
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '6430'
+  naics:
+    revision: '2022'
+    primary: '525120'
+  nace:
+    revision: Rev.2
+    primary: '64.30'
+  gics:
+    revision: '2023'
+    primary: '601060'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

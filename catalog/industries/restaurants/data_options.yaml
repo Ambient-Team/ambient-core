@@ -1,0 +1,483 @@
+dataOptions:
+  RestPos921CatalogOptionKey01:
+    id: 921
+    name: POS daily close
+    description: End-of-day sales, tender, labor punches summary, and check times by location.
+    industry: Restaurants
+    format: Document
+    template: Transactional Data Template
+    fields:
+    - name: date
+      type: date
+    - name: location_id
+      type: id
+    - name: gross_sales
+      type: string
+    - name: net_sales
+      type: string
+    - name: food_sales
+      type: string
+    - name: covers
+      type: string
+    - name: avg_check_minutes
+      type: string
+    - name: labor_hours
+      type: decimal
+    - name: labor_cost
+      type: decimal
+    - name: food_cogs
+      type: string
+    - name: food_revenue
+      type: decimal
+    - name: total_labor
+      type: decimal
+    - name: total_revenue
+      type: decimal
+    - name: table_turnover
+      type: string
+    - name: current_sss
+      type: string
+    - name: prior_sss
+      type: string
+    metricIds:
+    - 921
+    - 922
+    - 923
+    - 925
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: daily
+    grain: day
+  RestInv922CatalogOptionKey02:
+    id: 922
+    name: Inventory count export
+    description: Periodic stock counts, usage, and waste/spoilage adjustments by SKU category.
+    industry: Restaurants
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: location_id
+      type: id
+    - name: category
+      type: string
+    - name: quantity_on_hand
+      type: string
+    - name: usage_value
+      type: string
+    - name: waste_value
+      type: string
+    - name: spoilage_value
+      type: string
+    metricIds:
+    - 921
+    - 924
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  RestLabor923CatalogOptionKey03:
+    id: 923
+    name: Labor scheduling export
+    description: Scheduled vs actual hours and labor cost by role and location (aggregated staff counts only).
+    industry: Restaurants
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: location_id
+      type: id
+    - name: role
+      type: string
+    - name: scheduled_hours
+      type: decimal
+    - name: actual_hours
+      type: decimal
+    - name: labor_cost
+      type: decimal
+    metricIds:
+    - 922
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  Allrestaurantsds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart of accounts.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: journal_entry_id
+      type: id
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: period
+      type: enum
+    - name: currency
+      type: currency
+    format: Financial Statement Template
+    id: 1105
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 943
+    - 949
+    - 955
+    - 961
+    - 967
+    - 979
+    - 985
+    - 997
+    - 1039
+    name: General ledger
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit_balance
+      type: string
+    - name: credit_balance
+      type: string
+    - name: period
+      type: enum
+    format: Financial Statement Template
+    id: 1111
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 931
+    - 937
+    - 973
+    name: Trial balance
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - name: date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: current_assets
+      type: string
+    - name: total_assets
+      type: decimal
+    - name: current_liabilities
+      type: string
+    - name: total_liabilities
+      type: decimal
+    - name: inventory
+      type: string
+    - name: equity
+      type: string
+    format: Financial Statement Template
+    id: 1117
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 931
+    - 937
+    - 973
+    - 991
+    name: Balance sheet
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: customer_name
+      type: string
+    - name: invoice_id
+      type: id
+    - name: invoice_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: total_credit_sales
+      type: decimal
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1123
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 979
+    - 991
+    name: Accounts receivable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: supplier_name
+      type: string
+    - name: bill_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_payable
+      type: decimal
+    - name: cogs
+      type: string
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1129
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 985
+    - 991
+    name: Accounts payable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - name: date
+      type: date
+    - name: transaction_date
+      type: date
+    - name: account_id
+      type: id
+    - name: description
+      type: string
+    - name: amount
+      type: decimal
+    - name: direction
+      type: string
+    - name: balance
+      type: string
+    - name: currency
+      type: currency
+    - name: net_income
+      type: string
+    - name: non_cash_charges
+      type: string
+    - name: increase_in_working_capital
+      type: string
+    - name: cash_out
+      type: string
+    - name: cash_in
+      type: string
+    - name: current_cash_balance
+      type: string
+    format: Transactional Data Template
+    id: 1135
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 997
+    - 1003
+    - 1009
+    name: Bank statements
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1141
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1015
+    - 1021
+    - 1027
+    - 1033
+    - 1045
+    - 1051
+    - 1057
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1147
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1015
+    - 1039
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1153
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1027
+    - 1033
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allrestaurantsds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    format: Transactional Data Template
+    id: 1159
+    industry: Restaurants
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1039
+    - 1051
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

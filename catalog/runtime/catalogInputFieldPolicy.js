@@ -1,5 +1,5 @@
 /**
- * AUTO-GENERATED from catalog/core/shared/catalog_input_field_policy.yaml — do not edit by hand.
+ * AUTO-GENERATED from catalog/input_field_policy.yaml — do not edit by hand.
  * Run: npm run catalog:generate
  */
 const EXCLUDE_EXACT = new Set(["current_assets", "current_liabilities", "ebit", "ebitda", "equity", "gross_profit", "net_profit", "operating_income", "operating_profit", "total_assets", "total_expenses", "total_income", "total_liabilities"]);

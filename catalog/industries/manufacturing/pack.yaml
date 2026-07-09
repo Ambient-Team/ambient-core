@@ -1,0 +1,17 @@
+industry: Manufacturing
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '2819'
+  naics:
+    revision: '2022'
+    primary: '333999'
+  nace:
+    revision: Rev.2
+    primary: '28.19'
+  gics:
+    revision: '2023'
+    primary: '201060'
+  confidence: provisional
+  lastReviewed: '2026-07-04'
+  source: manual

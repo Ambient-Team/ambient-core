@@ -2,6 +2,7 @@ product:
   name: Healthcare Quality Outcomes
   version: 1.0
   owner: analytics
+  consumption_id: HEALTHCARE_QUALITY_OUTCOMES
   description: "De-identified, cohort-level quality outcomes Gold product: readmission, mortality, and infection rates. Cohort grain only, no PHI."
   domain: Healthcare
   type: Derived

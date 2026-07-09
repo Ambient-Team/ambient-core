@@ -44,7 +44,7 @@ ambient-catalog-generate
 ambient-catalog-generate --check
 ```
 
-- Edit `catalog/core/` and `catalog/industries/` ([catalog/README.md](../catalog/README.md)).
+- Edit `catalog/shared/` and `catalog/industries/<pack>/` ([catalog/README.md](../catalog/README.md)).
 - Use `manifest.json` for pipelines; `catalog/runtime/` for JS apps.
 - Set `AMBIENT_CATALOG_DIR` or run from a full checkout (`resolve_catalog_root()` in `paths.py`).
 

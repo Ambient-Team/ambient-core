@@ -1,0 +1,538 @@
+dataOptions:
+  HcCensus911CatalogOptionKey01:
+    id: 911
+    name: De-identified operational census export
+    description: Aggregated admissions, discharges, and bed days by service line. No patient names or MRNs in catalog templates.
+    industry: Healthcare
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: service_line
+      type: string
+    - name: admissions
+      type: string
+    - name: discharges
+      type: string
+    - name: patient_days
+      type: string
+    - name: occupied_beds
+      type: decimal
+    - name: available_beds
+      type: decimal
+    metricIds:
+    - 911
+    - 912
+    - 1400
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  HcProviderOps916CatalogOptionKey05:
+    id: 916
+    name: De-identified provider operations summary
+    description: Aggregated clinical and operational KPI inputs by period (no PHI).
+    industry: Healthcare
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: occupied_beds
+      type: decimal
+    - name: available_beds
+      type: decimal
+    - name: or_time_used
+      type: string
+    - name: or_time_available
+      type: string
+    - name: ed_wait_time
+      type: string
+    - name: case_mix_index
+      type: string
+    - name: total_operating_cost
+      type: decimal
+    - name: discharges
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: net_patient_revenue
+      type: decimal
+    - name: days
+      type: string
+    - name: clean_claims
+      type: string
+    - name: total_claims
+      type: decimal
+    - name: inpatient_deaths
+      type: string
+    - name: infections
+      type: string
+    - name: patient_days
+      type: string
+    metricIds:
+    - 1400
+    - 1401
+    - 1402
+    - 1403
+    - 1404
+    - 1405
+    - 1406
+    - 1407
+    - 1408
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  HcSched912CatalogOptionKey02:
+    id: 912
+    name: Scheduling utilization summary
+    description: Shift-level staffed hours and utilization by department (aggregated counts only).
+    industry: Healthcare
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: department
+      type: string
+    - name: staffed_hours
+      type: decimal
+    - name: scheduled_hours
+      type: decimal
+    - name: encounter_count
+      type: decimal
+    metricIds:
+    - 911
+    - 914
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  HcRcm913CatalogOptionKey03:
+    id: 913
+    name: Revenue cycle summary export
+    description: Claim submission, denial, and payment totals by payer category (no member identifiers).
+    industry: Healthcare
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: payer_category
+      type: string
+    - name: claims_submitted
+      type: string
+    - name: claims_denied
+      type: string
+    - name: amount_billed
+      type: decimal
+    - name: amount_collected
+      type: decimal
+    metricIds:
+    - 915
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  HcQual914CatalogOptionKey04:
+    id: 914
+    name: De-identified quality outcomes summary
+    description: Cohort-level readmission and outcome indicators without PHI field names.
+    industry: Healthcare
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: cohort_id
+      type: id
+    - name: discharges
+      type: string
+    - name: readmissions_30d
+      type: string
+    metricIds:
+    - 913
+    lastUpdated: '2026-06-14 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-general-ledger:
+    description: Complete record of all financial transactions posted to the chart of accounts.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: journal_entry_id
+      type: id
+    - name: debit
+      type: string
+    - name: credit
+      type: string
+    - name: period
+      type: enum
+    - name: currency
+      type: currency
+    format: Financial Statement Template
+    id: 1104
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 942
+    - 948
+    - 954
+    - 960
+    - 966
+    - 978
+    - 984
+    - 996
+    - 1038
+    name: General ledger
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-trial-balance:
+    description: Period-end list of all ledger account balances used to prepare statements.
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: account_name
+      type: decimal
+    - name: debit_balance
+      type: string
+    - name: credit_balance
+      type: string
+    - name: period
+      type: enum
+    format: Financial Statement Template
+    id: 1110
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 930
+    - 936
+    - 972
+    name: Trial balance
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-balance-sheet:
+    description: Statement of assets, liabilities and equity at a point in time.
+    fields:
+    - name: date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: current_assets
+      type: string
+    - name: total_assets
+      type: decimal
+    - name: current_liabilities
+      type: string
+    - name: total_liabilities
+      type: decimal
+    - name: inventory
+      type: string
+    - name: equity
+      type: string
+    format: Financial Statement Template
+    id: 1116
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 930
+    - 936
+    - 972
+    - 990
+    name: Balance sheet
+    template: Financial Statement Template
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-ar-aging:
+    description: Outstanding customer invoices grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: customer_name
+      type: string
+    - name: invoice_id
+      type: id
+    - name: invoice_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_receivable
+      type: decimal
+    - name: total_credit_sales
+      type: decimal
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1122
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 978
+    - 990
+    name: Accounts receivable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-ap-aging:
+    description: Outstanding supplier bills grouped by how overdue they are.
+    fields:
+    - name: date
+      type: date
+    - name: supplier_name
+      type: string
+    - name: bill_id
+      type: id
+    - name: bill_date
+      type: date
+    - name: due_date
+      type: date
+    - name: amount_due
+      type: decimal
+    - name: days_outstanding
+      type: string
+    - name: aging_bucket
+      type: string
+    - name: accounts_payable
+      type: decimal
+    - name: cogs
+      type: string
+    - name: days
+      type: string
+    - name: days_inventory_outstanding
+      type: string
+    format: Transactional Data Template
+    id: 1128
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 984
+    - 990
+    name: Accounts payable aging
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-bank-statements:
+    description: Bank account transaction lines used for cash-flow and reconciliation.
+    fields:
+    - name: date
+      type: date
+    - name: transaction_date
+      type: date
+    - name: account_id
+      type: id
+    - name: description
+      type: string
+    - name: amount
+      type: decimal
+    - name: direction
+      type: string
+    - name: balance
+      type: string
+    - name: currency
+      type: currency
+    - name: net_income
+      type: string
+    - name: non_cash_charges
+      type: string
+    - name: increase_in_working_capital
+      type: string
+    - name: cash_out
+      type: string
+    - name: cash_in
+      type: string
+    - name: current_cash_balance
+      type: string
+    format: Transactional Data Template
+    id: 1134
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 996
+    - 1002
+    - 1008
+    name: Bank statements
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-subscription-billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1140
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1014
+    - 1020
+    - 1026
+    - 1032
+    - 1044
+    - 1050
+    - 1056
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-crm-pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1146
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1014
+    - 1038
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-product-usage:
+    description: Product engagement and usage telemetry used for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1152
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1026
+    - 1032
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  Allhealthcareds-marketing-spend:
+    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    format: Transactional Data Template
+    id: 1158
+    industry: Healthcare
+    lastUpdated: '2026-05-30 00:00:00'
+    metricIds:
+    - 1038
+    - 1050
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

@@ -34,7 +34,7 @@ flowchart LR
 
 ### 1. Audience and mandate mapping
 
-- **Core** — Analysis lens per org ([governed-data.md](governed-data.md)); sector profiles for comparison **design**, not legal obligation lists.
+- **Core** — Analysis lens per org ([governed-data.md](governed-data.md)); industry packs and benchmark guardrails for comparison **design**, not legal obligation lists.
 - **Platform** — `disclosure_mandate_id`, `investor_audience` (listed exchange, LP, sponsor, lender); checklist per jurisdiction or fund policy (for example exchange sustainability reporting expectations for listed real estate, portfolio-level carbon disclosure demanded by institutional LPs). Map mandates to catalog metric ids and contract products.
 
 ### 2. Metric pack selection
@@ -51,12 +51,12 @@ flowchart LR
 
 ### 4. Gap versus requirement
 
-- **Core** — [benchmarks.yaml](../catalog/core/benchmarks.yaml) healthy bands are **planning guardrails**, not exchange or LP thresholds.
+- **Core** — Per-industry `catalog/industries/<pack>/benchmarks.yaml` healthy bands are **planning guardrails**, not exchange or LP thresholds.
 - **Platform** — Required versus actual versus prior period; optional peer percentile for **narrative** only when mandate references market practice. Success criterion is **compliance or mandate gap**, not pace-setter rank.
 
 ### 5. Remediation, fundraising, and data room
 
-- **Core** — `fpaWorkflow` hints on metrics; [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) governs the **shape** of optimization or remediation recommendations (confidence, lineage)—populated in deployment.
+- **Core** — `fpaWorkflow` hints on metrics guide where remediation recommendations map.
 - **Platform** — CapEx and retrofit roadmaps, sustainability action owners, data-room exports, equity or debt storytelling tied to catalog metric keys.
 
 ## Overlap: benchmark cycle vs disclosure cycle on the same org
@@ -75,7 +75,7 @@ Listed issuers may face **regulatory or exchange** sustainability disclosure pre
 
 **Gap (platform).** Missing intensity metrics or undisclosed PUE where mandate requires them—gap to **requirement**, not to a peer REIT.
 
-**Remediation (platform).** Efficiency and procurement initiatives; optional opportunities written to Gold per `opportunity-v1`. Empirical filings and figures remain in external research or issuer disclosures.
+**Remediation (platform).** Efficiency and procurement initiatives tracked in the platform. Empirical filings and figures remain in external research or issuer disclosures.
 
 ## Related
 
@@ -84,4 +84,3 @@ Listed issuers may face **regulatory or exchange** sustainability disclosure pre
 - [assurance-lifecycle.md](assurance-lifecycle.md)
 - [governed-data.md](governed-data.md)
 - [catalog-consumption.md](catalog-consumption.md)
-- [opportunity-v1.yaml](../contracts/opportunity-v1.yaml)

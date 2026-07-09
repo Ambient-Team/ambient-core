@@ -4,7 +4,7 @@
 Output formats (see docs/CONVENTIONS.md): YAML in, JSON manifest + generated JS out.
 Run ``ambient-catalog-generate --check`` in CI to detect drift.
 
-Industry packs are verticals (Real Estate, Manufacturing, …). Shared core_metrics.yaml
+Industry packs are verticals (Real Estate, Manufacturing, …). catalog/shared/metrics.yaml
 holds cross-industry corporate finance / close metrics expanded into each pack—not an
 FP&A catalog industry.
 """
@@ -25,8 +25,33 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "catalog"
 RUNTIME = CATALOG / "runtime"
 INDUSTRY_DIR = CATALOG / "industries"
-CORE_DIR = CATALOG / "core"
-SHARED_DIR = CORE_DIR / "shared"
+SHARED_DIR = CATALOG / "shared"
+
+MANIFEST_VERSION = 3
+
+if str(ROOT / "lib") not in sys.path:
+    sys.path.insert(0, str(ROOT / "lib"))
+
+from ambient_pipeline.catalog_field_rules import (  # noqa: E402
+    FIELD_COVERAGE_ENUMERATED,
+    FREQUENCY_ORDER,
+    field_entry_name,
+    infer_field_coverage,
+    input_excluded_from_field_list,
+    normalize_field_entries,
+)
+
+# Class-level minimum patterns (division-only allowed when confidence is provisional).
+ISIC_CLASS = re.compile(r"^\d{4}$")
+ISIC_DIVISION = re.compile(r"^\d{2}$")
+NAICS_CLASS = re.compile(r"^\d{5,6}$")
+NACE_CLASS = re.compile(r"^\d{2}\.\d{2}$")
+NACE_DIVISION = re.compile(r"^\d{2}$")
+GICS_INDUSTRY = re.compile(r"^\d{6,8}$")
+
+if str(ROOT / "lib") not in sys.path:
+    sys.path.insert(0, str(ROOT / "lib"))
+from ambient_calc import CalcError, formula_names  # noqa: E402
 
 INDUSTRY_PACK_MIN_METRICS = 3
 INDUSTRY_PACK_MIN_DATA_OPTIONS = 2
@@ -39,136 +64,170 @@ GENERATED_RUNTIME_FILES = (
     "catalogIndustries.js",
     "catalogInputFieldPolicy.js",
     "catalogManifest.js",
-    "catalogSectorProfiles.js",
 )
 
 
 def load_industry_registry() -> tuple[str, list[dict]]:
-    data = _load_yaml(CORE_DIR / "industries.yaml")
+    data = _load_yaml(CATALOG / "packs.yaml")
     default = str(data.get("defaultIndustry") or "").strip()
     packs = data.get("packs")
     if not default:
-        raise ValueError("catalog/core/industries.yaml missing defaultIndustry")
+        raise ValueError("catalog/packs.yaml missing defaultIndustry")
     if not isinstance(packs, list) or not packs:
-        raise ValueError("catalog/core/industries.yaml missing packs")
+        raise ValueError("catalog/packs.yaml missing packs")
     return default, packs
+
+
+def _pack_id_from_entry(pack_entry: dict) -> str:
+    pack_id = pack_entry.get("pack")
+    if not pack_id:
+        file_name = pack_entry.get("file")
+        if file_name:
+            pack_id = Path(file_name).stem
+    if not pack_id:
+        raise ValueError("industry pack entry missing pack")
+    return str(pack_id)
 
 
 def build_industry_entries(packs: list[dict]) -> list[dict]:
     entries: list[dict] = []
     for pack_entry in packs:
-        file_name = pack_entry.get("file")
-        if not file_name:
-            raise ValueError("industry pack entry missing file")
-        pack_path = INDUSTRY_DIR / file_name
-        if not pack_path.is_file():
-            raise FileNotFoundError(f"Missing industry pack: {file_name}")
-        pack = _load_yaml(pack_path)
-        value = pack.get("industry")
+        pack_id = _pack_id_from_entry(pack_entry)
+        pack_dir = INDUSTRY_DIR / pack_id
+        if not pack_dir.is_dir():
+            raise FileNotFoundError(f"Missing industry pack directory: {pack_id}")
+        pack_meta = _load_yaml(pack_dir / "pack.yaml")
+        value = pack_meta.get("industry")
         if not value:
-            raise ValueError(f"Industry pack {file_name} missing top-level industry")
+            raise ValueError(f"Industry pack {pack_id} missing industry in pack.yaml")
         label = pack_entry.get("displayLabel") or value
-        entry: dict = {"value": value, "label": label, "pack": file_name}
-        profile_ids = pack_entry.get("sectorProfileIds")
-        if profile_ids:
-            entry["sectorProfileIds"] = list(profile_ids)
+        codes = pack_meta.get("industryCodes")
+        if not isinstance(codes, dict):
+            raise ValueError(f"Industry pack {pack_id} missing industryCodes in pack.yaml")
+        entry: dict = {
+            "value": value,
+            "label": label,
+            "pack": pack_id,
+            "industryCodes": codes,
+        }
         entries.append(entry)
     return entries
 
 
-def load_financial_sector_profiles() -> dict:
-    path = CORE_DIR / "financial_sector_profiles.yaml"
-    if not path.is_file():
-        return {}
-    data = _load_yaml(path)
-    profiles = data.get("profiles") or {}
-    return profiles if isinstance(profiles, dict) else {}
+def _industry_codes_for_manifest(codes: dict) -> dict:
+    """YAML industryCodes → manifest camelCase (taxonomy keys unchanged)."""
+    out: dict = {}
+    for key in ("isic", "naics", "nace", "gics"):
+        block = codes.get(key)
+        if not isinstance(block, dict):
+            continue
+        row: dict = {
+            "revision": block.get("revision"),
+            "primary": block.get("primary"),
+        }
+        sec = block.get("secondary")
+        if sec:
+            row["secondary"] = list(sec)
+        out[key] = row
+    for meta in ("confidence", "lastReviewed", "source"):
+        if meta in codes:
+            out[meta] = codes[meta]
+    return out
 
 
-def load_transportation_sector_profiles() -> dict:
-    path = CORE_DIR / "transportation_sector_profiles.yaml"
-    if not path.is_file():
-        return {}
-    data = _load_yaml(path)
-    profiles = data.get("profiles") or {}
-    return profiles if isinstance(profiles, dict) else {}
-
-
-def _load_catalog_aliases() -> dict[str, str]:
-    path = CATALOG / "aliases.yaml"
-    if not path.is_file():
-        return {}
-    data = _load_yaml(path)
-    aliases = data.get("aliases") or {}
-    return aliases if isinstance(aliases, dict) else {}
-
-
-def _resolve_metric_key(key: str, metrics: dict, aliases: dict[str, str]) -> str | None:
-    seen: set[str] = set()
-    current = key
-    while current not in seen:
-        if current in metrics:
-            return current
-        seen.add(current)
-        nxt = aliases.get(current)
-        if not nxt:
-            return None
-        current = nxt
-    return None
-
-
-def validate_sector_profiles(
-    financial_profiles: dict,
-    transportation_profiles: dict,
-    metrics: dict,
-    industry_entries: list[dict],
+def _validate_taxonomy_code(
+    system: str,
+    code: str,
+    confidence: str,
+    path: str,
 ) -> list[str]:
     errors: list[str] = []
-    aliases = _load_catalog_aliases()
-    financial_ids = set(financial_profiles.keys())
-    transportation_ids = set(transportation_profiles.keys())
-    all_profile_ids = financial_ids | transportation_ids
-    if financial_ids & transportation_ids:
-        overlap = sorted(financial_ids & transportation_ids)
-        errors.append(f"Sector profile id(s) appear in both financial and transportation YAML: {overlap}")
-
-    for entry in industry_entries:
-        for pid in entry.get("sectorProfileIds") or []:
-            if pid not in all_profile_ids:
-                errors.append(
-                    f"sectorProfileIds {pid!r} on pack {entry.get('pack')!r} "
-                    f"is not in financial_sector_profiles.yaml or transportation_sector_profiles.yaml"
-                )
-
-    def _validate_profile_keys(profiles: dict, label: str) -> None:
-        for pid, profile in profiles.items():
-            if not isinstance(profile, dict):
-                errors.append(f"{label} sector profile {pid!r} is not a mapping")
-                continue
-            for mkey in profile.get("representativeMetricKeys") or []:
-                if _resolve_metric_key(str(mkey), metrics, aliases) is None:
-                    errors.append(
-                        f"{label} sector profile {pid!r} representativeMetricKey {mkey!r} "
-                        f"does not resolve in catalog metrics"
-                    )
-
-    _validate_profile_keys(financial_profiles, "Financial")
-    _validate_profile_keys(transportation_profiles, "Transportation")
+    provisional = confidence == "provisional"
+    if system == "isic":
+        if ISIC_CLASS.match(code):
+            return errors
+        if provisional and ISIC_DIVISION.match(code):
+            return errors
+        errors.append(f"{path}: ISIC code {code!r} must be 4-digit class (or 2-digit division if provisional)")
+    elif system == "naics":
+        if NAICS_CLASS.match(code):
+            return errors
+        errors.append(f"{path}: NAICS code {code!r} must be 5–6 digits")
+    elif system == "nace":
+        if NACE_CLASS.match(code):
+            return errors
+        if provisional and NACE_DIVISION.match(code):
+            return errors
+        errors.append(
+            f"{path}: NACE code {code!r} must be class NN.NN (or division NN if provisional)"
+        )
+    elif system == "gics":
+        if GICS_INDUSTRY.match(code):
+            return errors
+        errors.append(f"{path}: GICS code {code!r} must be 6–8 digits (industry or sub-industry)")
     return errors
 
 
-def _industry_pack_paths() -> list[Path]:
+def validate_pack_industry_codes(industry_entries: list[dict]) -> list[str]:
+    errors: list[str] = []
+    for entry in industry_entries:
+        pack_id = entry["pack"]
+        codes = entry.get("industryCodes")
+        if not isinstance(codes, dict):
+            errors.append(f"Pack {pack_id}: industryCodes must be a mapping")
+            continue
+        confidence = str(codes.get("confidence") or "")
+        if confidence not in ("high", "medium", "low", "provisional"):
+            errors.append(f"Pack {pack_id}: invalid industryCodes.confidence {confidence!r}")
+        for system in ("isic", "naics", "nace", "gics"):
+            block = codes.get(system)
+            if not isinstance(block, dict):
+                errors.append(f"Pack {pack_id}: missing industryCodes.{system}")
+                continue
+            primary = str(block.get("primary") or "").strip()
+            if not primary:
+                errors.append(f"Pack {pack_id}: industryCodes.{system}.primary is required")
+                continue
+            errors.extend(
+                _validate_taxonomy_code(
+                    system,
+                    primary,
+                    confidence,
+                    f"Pack {pack_id} industryCodes.{system}.primary",
+                )
+            )
+            secondary = block.get("secondary") or []
+            if not isinstance(secondary, list):
+                errors.append(f"Pack {pack_id}: industryCodes.{system}.secondary must be a list")
+            elif len(secondary) > 2:
+                errors.append(f"Pack {pack_id}: industryCodes.{system}.secondary max 2 entries")
+            else:
+                for i, sec in enumerate(secondary):
+                    errors.extend(
+                        _validate_taxonomy_code(
+                            system,
+                            str(sec).strip(),
+                            confidence,
+                            f"Pack {pack_id} industryCodes.{system}.secondary[{i}]",
+                        )
+                    )
+        if not codes.get("lastReviewed"):
+            errors.append(f"Pack {pack_id}: industryCodes.lastReviewed is required")
+        if codes.get("source") not in ("manual", "expert", "imported"):
+            errors.append(f"Pack {pack_id}: industryCodes.source is required (manual|expert|imported)")
+    return errors
+
+
+def _registered_pack_ids() -> list[str]:
     _, packs = load_industry_registry()
-    paths: list[Path] = []
+    pack_ids: list[str] = []
     for pack_entry in packs:
-        file_name = pack_entry.get("file")
-        if not file_name:
-            raise ValueError("industry pack entry missing file")
-        path = INDUSTRY_DIR / file_name
-        if not path.is_file():
-            raise FileNotFoundError(f"Missing industry pack: {file_name}")
-        paths.append(path)
-    return paths
+        pack_id = _pack_id_from_entry(pack_entry)
+        pack_dir = INDUSTRY_DIR / pack_id
+        if not pack_dir.is_dir():
+            raise FileNotFoundError(f"Missing industry pack directory: {pack_id}")
+        pack_ids.append(pack_id)
+    return pack_ids
 
 
 def _load_yaml(path: Path) -> dict:
@@ -202,17 +261,15 @@ def _core_key(industry: str, slug: str) -> str:
 
 
 def _load_shared_fpa() -> tuple[dict, dict]:
-    templates_path = SHARED_DIR / "core_metrics.yaml"
-    ids_path = SHARED_DIR / "core_ids.yaml"
-    if not templates_path.is_file() or not ids_path.is_file():
+    path = SHARED_DIR / "metrics.yaml"
+    if not path.is_file():
         return {}, {}
-    templates = _load_yaml(templates_path).get("templates") or {}
-    industry_ids = _load_yaml(ids_path).get("industryIds") or {}
-    return templates, industry_ids
+    data = _load_yaml(path)
+    return data.get("templates") or {}, data.get("industryIds") or {}
 
 
 def _load_shared_data_option_templates() -> tuple[dict, dict]:
-    path = SHARED_DIR / "common_data_options.yaml"
+    path = SHARED_DIR / "data_options.yaml"
     if not path.is_file():
         return {}, {}
     data = _load_yaml(path)
@@ -281,6 +338,8 @@ def _expand_fpa_metrics(pack_industry: str, pack_metrics: dict) -> dict:
         metric["id"] = metric_id
         metric["industry"] = pack_industry
         metric["segment"] = "core"
+        if not metric.get("slug"):
+            metric["slug"] = slug.replace("-", "_")
         expanded[key] = metric
     return expanded
 
@@ -305,7 +364,10 @@ def _expand_common_data_options(
                 f"Missing option id for {pack_industry!r} template {template_key!r}"
             )
         refs_cfg = template.get("metricRefs") or {}
-        ref_names = refs_cfg.get(pack_industry) or refs_cfg.get("default") or []
+        ref_names = list(refs_cfg.get("default") or [])
+        for name in refs_cfg.get(pack_industry) or []:
+            if name not in ref_names:
+                ref_names.append(name)
         metric_ids = _resolve_metric_refs(
             ref_names,
             pack_industry,
@@ -327,7 +389,7 @@ def _expand_common_data_options(
 
 
 def load_input_field_policy() -> tuple[set[str], list[re.Pattern]]:
-    path = SHARED_DIR / "catalog_input_field_policy.yaml"
+    path = CATALOG / "input_field_policy.yaml"
     if not path.is_file():
         return set(), []
     data = _load_yaml(path)
@@ -345,16 +407,139 @@ def filter_input_fields(fields: list | None, exact: set[str], patterns: list[re.
         return []
     out: list = []
     for field in fields:
-        name = str(field).strip()
+        name = field_entry_name(field)
         if not name:
             continue
-        lower = name.lower()
-        if lower in exact:
+        if input_excluded_from_field_list(name, exact, patterns):
             continue
-        if any(p.search(lower) for p in patterns):
-            continue
-        out.append(name)
+        out.append(field)
     return out
+
+
+def normalize_data_option_metadata(data_options: dict) -> None:
+    for key, option in data_options.items():
+        raw = option.get("fields")
+        if raw is not None:
+            option["fields"] = normalize_field_entries(list(raw))
+        option.setdefault(
+            "fieldCoverage",
+            infer_field_coverage(option, catalog_option_key=key),
+        )
+        option.setdefault("collectionFrequency", "monthly")
+        option.setdefault("grain", "month")
+
+
+def _measured_input_names(metric_key: str, metric: dict) -> list[str]:
+    calc = metric.get("calc") or {}
+    if calc.get("expr"):
+        return [str(n) for n in (calc.get("inputs") or [])]
+    if metric.get("input"):
+        slug = metric.get("slug") or _metric_slug(metric_key, metric)
+        return [slug] if slug else []
+    return []
+
+
+def _input_satisfied_by_field_or_policy(
+    input_name: str,
+    option: dict,
+    exact: set[str],
+    patterns: list[re.Pattern],
+) -> bool:
+    """Strict check: explicit field or input_field_policy upload exclusion only."""
+    for field in option.get("fields") or []:
+        if _norm_field(field_entry_name(field)) == _norm_field(input_name):
+            return True
+    return input_excluded_from_field_list(input_name, exact, patterns)
+
+
+def _input_satisfied_by_option(
+    input_name: str,
+    option: dict,
+    exact: set[str],
+    patterns: list[re.Pattern],
+) -> bool:
+    if _input_satisfied_by_field_or_policy(input_name, option, exact, patterns):
+        return True
+    if not (option.get("fields") or []):
+        return True
+    template = str(option.get("template") or "")
+    fmt = str(option.get("format") or "")
+    if template in ("Financial Statement Template", "Transactional Data Template", "Document"):
+        return True
+    if fmt in ("Document", "Software"):
+        return True
+    return False
+
+
+def validate_data_option_measured_inputs(
+    metrics: dict,
+    metric_ids: dict[int, str],
+    data_options: dict,
+    exact: set[str],
+    patterns: list[re.Pattern],
+    *,
+    strict: bool = False,
+) -> list[str]:
+    """Return human-readable gap messages. ``strict=True`` omits document upload bypass."""
+    messages: list[str] = []
+    for ok, option in data_options.items():
+        coverage = str(
+            option.get("fieldCoverage") or infer_field_coverage(option, catalog_option_key=ok)
+        )
+        if coverage != FIELD_COVERAGE_ENUMERATED:
+            continue
+        for mid in option.get("metricIds") or []:
+            mkey = metric_ids.get(int(mid))
+            if not mkey:
+                continue
+            metric = metrics[mkey]
+            for name in _measured_input_names(mkey, metric):
+                if not name:
+                    continue
+                satisfied = (
+                    _input_satisfied_by_field_or_policy(name, option, exact, patterns)
+                    if strict
+                    else _input_satisfied_by_option(name, option, exact, patterns)
+                )
+                if not satisfied:
+                    messages.append(
+                        f"Data option {ok} metric {mid} ({metric.get('name')}) "
+                        f"missing measured input {name!r}"
+                    )
+    return messages
+
+
+def validate_collection_frequency_coherence(
+    metrics: dict,
+    metric_ids: dict[int, str],
+    data_options: dict,
+) -> list[str]:
+    warnings: list[str] = []
+    for ok, option in data_options.items():
+        coll = str(option.get("collectionFrequency") or "monthly").strip().lower()
+        coll_rank = FREQUENCY_ORDER.get(coll)
+        if coll_rank is None:
+            warnings.append(f"Data option {ok} has unknown collectionFrequency {coll!r}")
+            continue
+        strictest: int | None = None
+        strictest_label = ""
+        for mid in option.get("metricIds") or []:
+            mkey = metric_ids.get(int(mid))
+            if not mkey:
+                continue
+            freq = str(metrics[mkey].get("frequency") or "monthly").strip().lower()
+            rank = FREQUENCY_ORDER.get(freq)
+            if rank is None:
+                continue
+            if strictest is None or rank < strictest:
+                strictest = rank
+                strictest_label = freq
+        if strictest is not None and coll_rank > strictest:
+            warnings.append(
+                f"Data option {ok} collectionFrequency {coll!r} is coarser than linked "
+                f"metric cadence {strictest_label!r}"
+            )
+    return warnings
 
 
 def apply_input_field_policy(data_options: dict, exact: set[str], patterns: list[re.Pattern]) -> None:
@@ -368,7 +553,7 @@ def write_catalog_input_field_policy(exact: set[str], patterns: list[re.Pattern]
     exact_sorted = json.dumps(sorted(exact))
     pattern_sources = json.dumps([p.pattern for p in patterns])
     content = f"""/**
- * AUTO-GENERATED from catalog/core/shared/catalog_input_field_policy.yaml — do not edit by hand.
+ * AUTO-GENERATED from catalog/input_field_policy.yaml — do not edit by hand.
  * Run: npm run catalog:generate
  */
 const EXCLUDE_EXACT = new Set({exact_sorted});
@@ -391,21 +576,34 @@ export function filterCatalogInputFields(fields) {{
     (RUNTIME / "catalogInputFieldPolicy.js").write_text(content, encoding="utf-8", newline="\n")
 
 
-def load_catalog() -> tuple[dict, dict, dict, list, dict]:
-    """Return metrics, data_options, benchmarks, bridge_rules, crosswalk."""
+def load_catalog() -> tuple[dict, dict, dict, list, dict, dict[str, dict]]:
+    """Return metrics, data_options, benchmarks, bridge_rules, crosswalk, pack_benchmarks."""
     metrics: dict = {}
     data_options: dict = {}
-    benchmarks = _load_yaml(CORE_DIR / "benchmarks.yaml").get("benchmarks", {})
-    bridge_rules = _load_yaml(CORE_DIR / "bridge_rules.yaml").get("rules", [])
+    merged_benchmarks: dict = {}
+    pack_benchmarks: dict[str, dict] = {}
+    bridge_rules = _load_yaml(CATALOG / "bridge_rules.yaml").get("rules", [])
     crosswalk = _load_yaml(CATALOG / "crosswalk.yaml")
 
-    for pack_path in _industry_pack_paths():
-        pack = _load_yaml(pack_path)
-        pack_industry = pack.get("industry")
+    for pack_id in _registered_pack_ids():
+        pack_dir = INDUSTRY_DIR / pack_id
+        pack_industry = _load_yaml(pack_dir / "pack.yaml").get("industry")
         if not pack_industry:
-            raise ValueError(f"Industry pack {pack_path.name} missing top-level industry:")
-        pack_metrics = dict(pack.get("metrics") or {})
-        pack_options = dict(pack.get("dataOptions") or {})
+            raise ValueError(f"Industry pack {pack_id} missing industry in pack.yaml")
+        pack_metrics = dict(_load_yaml(pack_dir / "metrics.yaml").get("metrics") or {})
+        pack_options = dict(_load_yaml(pack_dir / "data_options.yaml").get("dataOptions") or {})
+        bench = _load_yaml(pack_dir / "benchmarks.yaml").get("benchmarks") or {}
+        pack_benchmarks[pack_id] = bench
+        for bkey, defn in bench.items():
+            if bkey in merged_benchmarks:
+                if json.dumps(merged_benchmarks[bkey], sort_keys=True) != json.dumps(
+                    defn, sort_keys=True
+                ):
+                    raise ValueError(
+                        f"benchmark {bkey!r} has conflicting definitions across industry packs"
+                    )
+            else:
+                merged_benchmarks[bkey] = defn
 
         fpa_metrics = _expand_fpa_metrics(pack_industry, pack_metrics)
         merged_metrics = _merge_pack(fpa_metrics, pack_metrics)
@@ -418,22 +616,23 @@ def load_catalog() -> tuple[dict, dict, dict, list, dict]:
         for key, metric in merged_metrics.items():
             if str(metric.get("industry", pack_industry)) != pack_industry:
                 raise ValueError(
-                    f"{pack_path.name} metric {key} industry "
+                    f"{pack_id} metric {key} industry "
                     f"{metric.get('industry')!r} != pack {pack_industry!r}"
                 )
             metrics[key] = metric
         for key, option in merged_options.items():
             if str(option.get("industry", pack_industry)) != pack_industry:
                 raise ValueError(
-                    f"{pack_path.name} data option {key} industry "
+                    f"{pack_id} data option {key} industry "
                     f"{option.get('industry')!r} != pack {pack_industry!r}"
                 )
             data_options[key] = option
 
     exact, patterns = load_input_field_policy()
+    normalize_data_option_metadata(data_options)
     apply_input_field_policy(data_options, exact, patterns)
 
-    return metrics, data_options, benchmarks, bridge_rules, crosswalk
+    return metrics, data_options, merged_benchmarks, bridge_rules, crosswalk, pack_benchmarks
 
 
 def normalize_name(name: str) -> str:
@@ -446,6 +645,7 @@ def validate(
     benchmarks: dict,
     industry_entries: list[dict],
     default_industry: str,
+    pack_benchmarks: dict[str, dict],
 ) -> list[str]:
     errors: list[str] = []
 
@@ -455,12 +655,20 @@ def validate(
             f"defaultIndustry {default_industry!r} is not among registered industries"
         )
 
-    registry_files = {e["pack"] for e in industry_entries}
+    registry_packs = {e["pack"] for e in industry_entries}
+    industry_to_pack = {e["value"]: e["pack"] for e in industry_entries}
+
     for yaml_path in INDUSTRY_DIR.glob("*.yaml"):
-        if yaml_path.name not in registry_files:
-            errors.append(
-                f"Industry file {yaml_path.name} not listed in catalog/core/industries.yaml"
-            )
+        errors.append(
+            f"Legacy monolithic industry file {yaml_path.name} — use catalog/industries/<pack>/"
+        )
+    for path in INDUSTRY_DIR.iterdir():
+        if path.is_dir() and path.name not in registry_packs:
+            errors.append(f"Industry directory {path.name} not listed in catalog/packs.yaml")
+
+    for pack_id in registry_packs:
+        if not (INDUSTRY_DIR / pack_id / "pack.yaml").is_file():
+            errors.append(f"Industry pack {pack_id} missing pack.yaml")
 
     errors.extend(validate_metrics_schema(metrics))
 
@@ -507,7 +715,7 @@ def validate(
             continue
         if industry not in registered_values:
             errors.append(
-                f"Metric {key} industry {industry!r} is not in catalog/core/industries.yaml"
+                f"Metric {key} industry {industry!r} is not in catalog/packs.yaml"
             )
         bucket = names_by_industry.setdefault(industry, {})
         norm = normalize_name(metric.get("name"))
@@ -515,8 +723,16 @@ def validate(
             errors.append(f"Duplicate metric name '{metric.get('name')}' in industry {industry}")
         bucket[norm] = key
         bkey = metric.get("benchmarkKey")
-        if bkey and bkey not in benchmarks:
-            errors.append(f"Metric {key} references unknown benchmarkKey {bkey}")
+        if bkey:
+            pack_id = industry_to_pack.get(industry, "")
+            local = pack_benchmarks.get(pack_id, {})
+            if bkey not in local:
+                errors.append(
+                    f"Metric {key} benchmarkKey {bkey!r} missing from "
+                    f"catalog/industries/{pack_id}/benchmarks.yaml"
+                )
+            elif bkey not in benchmarks:
+                errors.append(f"Metric {key} references unknown benchmarkKey {bkey}")
         for tag in metric.get("industryTags") or []:
             tag_str = str(tag).strip()
             if tag_str in registered_values and tag_str != industry:
@@ -550,18 +766,16 @@ def validate(
                 f"{INDUSTRY_PACK_MIN_DATA_OPTIONS} data options after expansion"
             )
 
-    for pack_path in _industry_pack_paths():
-        pack = _load_yaml(pack_path)
-        pack_label = pack_path.name
-        po = pack.get("dataOptions", {})
+    for pack_id in registry_packs:
+        po = _load_yaml(INDUSTRY_DIR / pack_id / "data_options.yaml").get("dataOptions") or {}
         for _k, opt in po.items():
             if not opt.get("metricIds"):
                 errors.append(
-                    f"Industry pack {pack_label} data option {opt.get('name')} has no metricIds"
+                    f"Industry pack {pack_id} data option {opt.get('name')} has no metricIds"
                 )
         for _k, opt in po.items():
             if str(opt.get("industry", "")) == "All":
-                errors.append(f"Industry pack {pack_label} data option {_k} still tagged All")
+                errors.append(f"Industry pack {pack_id} data option {_k} still tagged All")
 
     return errors
 
@@ -669,7 +883,7 @@ export default BENCHMARKS;
 def write_bridge_hints(rules: list) -> None:
     rules_js = js_object(rules)
     content = f"""/**
- * AUTO-GENERATED from catalog/core/bridge_rules.yaml — do not edit by hand.
+ * AUTO-GENERATED from catalog/bridge_rules.yaml — do not edit by hand.
  */
 const BRIDGE_RULES = {rules_js}.map((rule) => ({{
   test: new RegExp(rule.pattern, rule.flags || 'i'),
@@ -692,31 +906,13 @@ export function getMetricBridgeHint(metricsName, metricType) {{
     (RUNTIME / "metricBridgeHints.js").write_text(content, encoding="utf-8", newline="\n")
 
 
-def write_catalog_sector_profiles(
-    financial_profiles: dict,
-    transportation_profiles: dict,
-) -> None:
-    financial_js = js_object(financial_profiles)
-    transportation_js = js_object(transportation_profiles)
-    content = f"""/**
- * AUTO-GENERATED from catalog/core/financial_sector_profiles.yaml and
- * catalog/core/transportation_sector_profiles.yaml — do not edit by hand.
- * Run: npm run catalog:generate
- */
-export const FINANCIAL_SECTOR_PROFILES = {financial_js};
-
-export const TRANSPORTATION_SECTOR_PROFILES = {transportation_js};
-"""
-    (RUNTIME / "catalogSectorProfiles.js").write_text(content, encoding="utf-8", newline="\n")
-
-
 def write_catalog_industries(default_industry: str, industry_entries: list[dict]) -> None:
     options_js = js_object(
         [{"value": e["value"], "label": e["label"]} for e in industry_entries]
     )
     default_js = js_string(default_industry)
     content = f"""/**
- * AUTO-GENERATED from catalog/core/industries.yaml — do not edit by hand.
+ * AUTO-GENERATED from catalog/packs.yaml — do not edit by hand.
  * Run: npm run catalog:generate
  */
 export const CATALOG_INDUSTRY_OPTIONS = {options_js};
@@ -739,29 +935,167 @@ export function resolveCatalogIndustry(orgIndustry) {{
     (RUNTIME / "catalogIndustries.js").write_text(content, encoding="utf-8", newline="\n")
 
 
+def _norm_field(value: object) -> str:
+    return str(value or "").strip().lower()
+
+
+def _metric_slug(key: str, metric: dict) -> str:
+    slug = metric.get("slug")
+    if slug:
+        return _norm_field(slug)
+    if "." in key:
+        return _norm_field(key.rsplit(".", 1)[-1].replace("-", "_"))
+    return _norm_field(key.replace("-", "_"))
+
+
+def build_metric_input_recipe(
+    metric: dict,
+    linked_options: list[dict],
+    known_slugs: set[str],
+) -> tuple[list[dict], str]:
+    """Resolve a metric's required inputs to the data options that supply them.
+
+    ``linked_options`` are the data options whose ``metricIds`` reference this metric,
+    each shaped ``{"catalogOptionKey", "id", "name", "fields"}``. Returns
+    ``(inputs, inputCoverage)`` where each input is::
+
+        {"name", "kind": "measured"|"derived", "covered": bool, "satisfiedBy": [...]}
+
+    Each ``satisfiedBy`` source carries ``via``:
+
+    - ``field`` — the input is an explicit, mappable column on a linked data option;
+    - ``upload`` — the input is supplied by a linked upload's document/template rather
+      than an enumerated field (accounting line items and aggregates are intentionally
+      not enumerated as fields — see ``catalog_input_field_policy.yaml``).
+
+    ``inputCoverage`` is one of:
+
+    - ``complete`` — every measured input is an explicit mappable field;
+    - ``upload`` — feedable, but at least one measured input comes from an upload;
+    - ``none`` — no data option references this metric (it cannot be fed as wired);
+    - ``derived`` — computed only from other metrics (nothing to upload directly);
+    - ``unspecified`` — the metric declares neither ``calc`` nor ``input``.
+    """
+    field_index: dict[str, list[dict]] = {}
+    for opt in linked_options:
+        for field in opt.get("fields") or []:
+            field_index.setdefault(_norm_field(field_entry_name(field)), []).append(opt)
+
+    def field_sources(name: str) -> list[dict]:
+        return [
+            {
+                "catalogOptionKey": opt["catalogOptionKey"],
+                "id": opt.get("id"),
+                "name": opt.get("name"),
+                "field": name,
+                "via": "field",
+            }
+            for opt in field_index.get(_norm_field(name), [])
+        ]
+
+    def upload_sources() -> list[dict]:
+        return [
+            {
+                "catalogOptionKey": opt["catalogOptionKey"],
+                "id": opt.get("id"),
+                "name": opt.get("name"),
+                "via": "upload",
+            }
+            for opt in linked_options
+        ]
+
+    calc = metric.get("calc") or {}
+    expr = calc.get("expr")
+    measured_names: list[str] = []
+    derived_names: list[str] = []
+    if expr:
+        measured_names = [str(n) for n in (calc.get("inputs") or [])]
+        measured_set = {_norm_field(n) for n in measured_names}
+        try:
+            names = formula_names(expr)
+        except CalcError:
+            names = set()
+        derived_names = sorted(
+            n
+            for n in names
+            if _norm_field(n) in known_slugs and _norm_field(n) not in measured_set
+        )
+    elif metric.get("input"):
+        slug = str(metric.get("slug") or "").strip()
+        measured_names = [slug] if slug else []
+
+    inputs: list[dict] = []
+    for name in measured_names:
+        sources = field_sources(name)
+        if sources:
+            inputs.append(
+                {"name": name, "kind": "measured", "covered": True, "satisfiedBy": sources}
+            )
+        elif linked_options:
+            inputs.append(
+                {"name": name, "kind": "measured", "covered": True, "satisfiedBy": upload_sources()}
+            )
+        else:
+            inputs.append({"name": name, "kind": "measured", "covered": False, "satisfiedBy": []})
+    for name in derived_names:
+        inputs.append({"name": name, "kind": "derived", "covered": True, "satisfiedBy": []})
+
+    measured_inputs = [i for i in inputs if i["kind"] == "measured"]
+    if not inputs:
+        coverage = "unspecified"
+    elif not measured_inputs:
+        coverage = "derived"
+    elif any(not i["covered"] for i in measured_inputs):
+        coverage = "none"
+    elif all(
+        all(s.get("via") == "field" for s in i["satisfiedBy"]) for i in measured_inputs
+    ):
+        coverage = "complete"
+    else:
+        coverage = "upload"
+    return inputs, coverage
+
+
 def write_manifest(
     metrics: dict,
     data_options: dict,
     industry_entries: list[dict],
-    financial_sector_profiles: dict,
-    transportation_sector_profiles: dict,
 ) -> None:
-    metric_by_id = {m.get("id"): {"key": k, **m} for k, m in metrics.items()}
+    slugs_by_industry: dict[str, set[str]] = {}
+    for key, metric in metrics.items():
+        slugs_by_industry.setdefault(str(metric.get("industry", "")), set()).add(
+            _metric_slug(key, metric)
+        )
+
     entries = []
     for key, metric in metrics.items():
-        required_sources = []
-        for mid in metric.get("requiredSourceMetricIds") or []:
-            pass
-        for opt_key, opt in data_options.items():
-            mids = opt.get("metricIds") or []
-            if metric.get("id") in mids:
-                required_sources.append(
-                    {
-                        "catalogOptionKey": opt_key,
-                        "name": opt.get("name"),
-                        "fields": opt.get("fields") or [],
-                    }
-                )
+        linked_options = [
+            {
+                "catalogOptionKey": opt_key,
+                "id": opt.get("id"),
+                "name": opt.get("name"),
+                "fields": opt.get("fields") or [],
+            }
+            for opt_key, opt in data_options.items()
+            if metric.get("id") in (opt.get("metricIds") or [])
+        ]
+        required_sources = [
+            {
+                "catalogOptionKey": o["catalogOptionKey"],
+                "name": o["name"],
+                "fields": [field_entry_name(f) for f in (o.get("fields") or [])],
+            }
+            for o in linked_options
+        ]
+        recipe_inputs, coverage = build_metric_input_recipe(
+            metric,
+            linked_options,
+            slugs_by_industry.get(str(metric.get("industry", "")), set()),
+        )
+        calc = metric.get("calc") or {}
+        calc_out = None
+        if calc.get("expr"):
+            calc_out = {"expr": calc.get("expr"), "inputs": list(calc.get("inputs") or [])}
         entries.append(
             {
                 "catalogMetricKey": key,
@@ -771,26 +1105,25 @@ def write_manifest(
                 "methodology": metric.get("methodology"),
                 "type": metric.get("type"),
                 "unit": metric.get("unit"),
+                "frequency": metric.get("frequency"),
                 "requiredSources": required_sources,
+                "calc": calc_out,
+                "directlyReported": bool(metric.get("input")) and calc_out is None,
+                "inputs": recipe_inputs,
+                "inputCoverage": coverage,
             }
         )
     manifest = {
-        "version": 1,
+        "version": MANIFEST_VERSION,
         "industries": [
             {
                 "value": e["value"],
                 "label": e["label"],
                 "pack": e["pack"],
-                **(
-                    {"sectorProfileIds": e["sectorProfileIds"]}
-                    if e.get("sectorProfileIds")
-                    else {}
-                ),
+                "industryCodes": _industry_codes_for_manifest(e["industryCodes"]),
             }
             for e in industry_entries
         ],
-        "financialSectorProfiles": financial_sector_profiles,
-        "transportationSectorProfiles": transportation_sector_profiles,
         "metrics": entries,
         "dataOptions": [
             {
@@ -800,6 +1133,9 @@ def write_manifest(
                 "industry": v.get("industry"),
                 "metricIds": v.get("metricIds") or [],
                 "fields": v.get("fields") or [],
+                "fieldCoverage": v.get("fieldCoverage"),
+                "collectionFrequency": v.get("collectionFrequency"),
+                "grain": v.get("grain"),
             }
             for k, v in data_options.items()
         ],
@@ -818,70 +1154,10 @@ export const catalogManifest = {json.dumps({"version": manifest["version"]}, ens
 
 
 def extract_core_from_runtime() -> None:
-    """One-time: dump catalog/runtime into catalog/core/*.yaml."""
-    CORE_DIR.mkdir(parents=True, exist_ok=True)
-    INDUSTRY_DIR.mkdir(parents=True, exist_ok=True)
-    result = subprocess.run(
-        ["node", str(ROOT / "scripts" / "dump_catalog_runtime.mjs")],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
+    """Obsolete after 0.2.7 catalog layout."""
+    raise SystemExit(
+        "catalog --extract is removed; edit catalog/shared/ and catalog/industries/<pack>/ YAML"
     )
-    payload = json.loads(result.stdout)
-    (CORE_DIR / "metrics.yaml").write_text(
-        yaml.safe_dump({"metrics": payload["metrics"]}, sort_keys=False, allow_unicode=True),
-        encoding="utf-8",
-    )
-    (CORE_DIR / "data_options.yaml").write_text(
-        yaml.safe_dump({"dataOptions": payload["dataOptions"]}, sort_keys=False, allow_unicode=True),
-        encoding="utf-8",
-    )
-    (CORE_DIR / "benchmarks.yaml").write_text(
-        yaml.safe_dump({"benchmarks": payload["benchmarks"]}, sort_keys=False, allow_unicode=True),
-        encoding="utf-8",
-    )
-    if not (CORE_DIR / "bridge_rules.yaml").is_file():
-        (CORE_DIR / "bridge_rules.yaml").write_text(
-            yaml.safe_dump(
-                {
-                    "rules": [
-                        {
-                            "pattern": "dscr|debt service coverage",
-                            "flags": "i",
-                            "financial": "Covenant headroom — lender DSCR tests",
-                            "operational": "NOI and debt service — feeds DSCR",
-                        },
-                        {
-                            "pattern": "cap(italization)?\\s*rate",
-                            "flags": "i",
-                            "financial": "Yield and valuation — cap rate sensitivity",
-                            "operational": "NOI vs. asset value — cap rate input",
-                        },
-                        {
-                            "pattern": "energy|kwh|power",
-                            "flags": "i",
-                            "operational": "Energy spike / efficiency — variance before close",
-                            "financial": "Opex and NOI impact — debt covenant pressure",
-                        },
-                        {
-                            "pattern": "sensor|iot|telemetry|anomal",
-                            "flags": "i",
-                            "operational": "Field telemetry — explains P&L variance",
-                            "financial": "Validated financial impact after attestation",
-                        },
-                        {
-                            "pattern": "noi|net operating income",
-                            "flags": "i",
-                            "financial": "Core profitability — DSCR and cap rate driver",
-                            "operational": "Ops efficiency flows to NOI",
-                        },
-                    ]
-                },
-                sort_keys=False,
-            ),
-            encoding="utf-8",
-        )
 
 
 def validate_manifest_on_disk(path: Path) -> list[str]:
@@ -904,24 +1180,27 @@ def validate_manifest_on_disk(path: Path) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--extract", action="store_true", help="Extract catalog/core from current JS (one-time)")
+    parser.add_argument("--extract", action="store_true", help="Obsolete (removed in 0.2.7 layout)")
     parser.add_argument("--check", action="store_true", help="Validate only; fail if generated files differ")
+    parser.add_argument(
+        "--strict-data-option-inputs",
+        action="store_true",
+        help="Fail generate when structured data options omit measured fields (default: warn only)",
+    )
     args = parser.parse_args()
 
     if args.extract:
         extract_core_from_runtime()
-        print("Extracted catalog/core from catalog/runtime")
+        print("Extracted catalog from catalog/runtime")
         return 0
 
-    if not _industry_pack_paths():
-        print("No catalog/industries/*.yaml packs found", file=sys.stderr)
+    if not _registered_pack_ids():
+        print("No catalog/industries/<pack>/ directories found", file=sys.stderr)
         return 1
 
     default_industry, registry_packs = load_industry_registry()
     industry_entries = build_industry_entries(registry_packs)
-    metrics, data_options, benchmarks, bridge_rules, _crosswalk = load_catalog()
-    sector_profiles = load_financial_sector_profiles()
-    transportation_sector_profiles = load_transportation_sector_profiles()
+    metrics, data_options, benchmarks, bridge_rules, _crosswalk, pack_benchmarks = load_catalog()
     exact, patterns = load_input_field_policy()
     errors = validate(
         metrics,
@@ -929,15 +1208,31 @@ def main() -> int:
         benchmarks,
         industry_entries,
         default_industry,
+        pack_benchmarks,
     )
-    errors.extend(
-        validate_sector_profiles(
-            sector_profiles,
-            transportation_sector_profiles,
-            metrics,
-            industry_entries,
-        )
+    errors.extend(validate_pack_industry_codes(industry_entries))
+    metric_id_index: dict[int, str] = {}
+    for key, metric in metrics.items():
+        mid = metric.get("id")
+        if mid is not None:
+            metric_id_index[int(mid)] = key
+    input_gaps = validate_data_option_measured_inputs(
+        metrics,
+        metric_id_index,
+        data_options,
+        exact,
+        patterns,
+        strict=args.strict_data_option_inputs,
     )
+    if args.strict_data_option_inputs:
+        errors.extend(input_gaps)
+    else:
+        for msg in input_gaps:
+            print(f"catalog validation warning: {msg}", file=sys.stderr)
+    for warn in validate_collection_frequency_coherence(
+        metrics, metric_id_index, data_options
+    ):
+        print(f"catalog validation warning: {warn}", file=sys.stderr)
     if errors:
         for err in errors:
             print(f"catalog validation error: {err}", file=sys.stderr)
@@ -961,13 +1256,10 @@ def main() -> int:
     write_bridge_hints(bridge_rules)
     write_catalog_industries(default_industry, industry_entries)
     write_catalog_input_field_policy(exact, patterns)
-    write_catalog_sector_profiles(sector_profiles, transportation_sector_profiles)
     write_manifest(
         metrics,
         data_options,
         industry_entries,
-        sector_profiles,
-        transportation_sector_profiles,
     )
 
     manifest_parse_errors = validate_manifest_on_disk(manifest_path)

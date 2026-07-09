@@ -1,0 +1,24 @@
+industry: Financial Services
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '6612'
+    secondary:
+    - '6611'
+    - '6630'
+  naics:
+    revision: '2022'
+    primary: '523150'
+    secondary:
+    - '523940'
+  nace:
+    revision: Rev.2
+    primary: '66.12'
+    secondary:
+    - '66.30'
+  gics:
+    revision: '2023'
+    primary: '402010'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

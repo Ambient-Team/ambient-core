@@ -1,0 +1,17 @@
+industry: Restaurants
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '5610'
+  naics:
+    revision: '2022'
+    primary: '722511'
+  nace:
+    revision: Rev.2
+    primary: '56.10'
+  gics:
+    revision: '2023'
+    primary: '253010'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

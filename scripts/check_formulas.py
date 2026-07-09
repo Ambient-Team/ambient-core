@@ -25,7 +25,7 @@ from ambient_calc import CalcError, compute_all, formula_names  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "catalog"
-CORE = CATALOG / "core" / "shared" / "core_metrics.yaml"
+CORE = CATALOG / "shared" / "metrics.yaml"
 INDUSTRY = CATALOG / "industries"
 
 
@@ -44,8 +44,11 @@ def gather() -> dict:
         slug = m.get("slug") or _slug(key)
         m = {**m, "slug": slug}
         metrics[slug] = m
-    for pack_path in sorted(INDUSTRY.glob("*.yaml")):
-        for key, m in (_load(pack_path).get("metrics") or {}).items():
+    for pack_dir in sorted(p for p in INDUSTRY.iterdir() if p.is_dir()):
+        metrics_path = pack_dir / "metrics.yaml"
+        if not metrics_path.is_file():
+            continue
+        for key, m in (_load(metrics_path).get("metrics") or {}).items():
             slug = m.get("slug") or _slug(key)
             m = {**m, "slug": slug}
             metrics[slug] = m

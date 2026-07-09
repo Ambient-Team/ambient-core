@@ -2,6 +2,7 @@ product:
   name: Finance Depository Banking
   version: 1.1
   owner: analytics
+  consumption_id: FINANCE_BANKING
   description: "Deposit-taking bank Gold product: NIM, credit quality, loan-to-deposit, efficiency, tier-1 capital, funding and liquidity ratios, ALM sensitivity, operational risk, and stress CET1 by business_line. Excludes investment banking, fund books, and commercial or consumer loan books (see finance-funds-v1, finance-commercial-finance-v1, and finance-consumer-finance-v1)."
   domain: Banking
   type: Derived

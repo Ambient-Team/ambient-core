@@ -50,7 +50,6 @@ validate-inference-registry
 - **`analyst`** — `single_chat`, `general_chat`; `catalog_resolve_metric`, `structured_json`. Platform adds fulfillment / tenant metrics.
 - **`auditor`** — `single_chat`, `general_chat`; `contracts_validate`, `contracts_list`. Platform adds policy store / tickets.
 - **`summarizer`** — `council_research` or `single_chat`; catalog_*, Maestro synthesis via loop. Platform adds doc sources.
-- **`optimizer`** — `council_research`, `research_qa`; `contracts_list`, catalog_*. Platform adds pipeline triggers.
 
 **Not in core YAML:** web search, Firestore writes, Databricks job triggers, `metricFulfillment`, billing — implement in the platform repo and register at runtime.
 

@@ -30,9 +30,13 @@ Medallion job steps that implement this path are in [pipeline.md](pipeline.md).
 
 Catalog metrics do **not** replace contracts. A metric may exist in the catalog long before a Gold product is defined. Optional links are recorded in [crosswalk.yaml](../catalog/crosswalk.yaml) — see [crosswalk.md](crosswalk.md).
 
+### Catalog fields → contracts
+
+Manifest **v3** typed `fields` and data-option `fieldCoverage` govern **what uploads may contain** and how Bronze mapping coerces columns. **Contracts** govern **what may be written** to Silver and Gold: required columns, bronze lineage, and product governance. Typical path: catalog-mapped Bronze → [tenant-metrics-v1.yaml](../contracts/tenant-metrics-v1.yaml) (Silver) → vertical Gold products (`finance-*-v1`, healthcare, life sciences). Diagram and product groupings: [contracts/README.md — How catalog and contracts connect](../contracts/README.md#how-catalog-and-contracts-connect).
+
 ## Analysis lens and multi-org tenancy
 
-**Catalog industry and segment** describe an **analysis lens** (which KPIs and peer comparisons apply), not the legal entity’s self-classification. **ambient-core** supplies the taxonomy: industry packs in [catalog/core/industries.yaml](../catalog/core/industries.yaml), metrics, sector profiles, and contracts. A **multi-tenant platform** (not in this repo) supplies `org_id`, entitlements, which catalog pack and Gold contract bind to each org, and peer cohort membership.
+**Catalog industry and segment** describe an **analysis lens** (which KPIs and peer comparisons apply), not the legal entity’s self-classification. **ambient-core** supplies the taxonomy: industry packs in [catalog/packs.yaml](../catalog/packs.yaml) with `industryCodes` on each pack, metrics, benchmarks, and contracts. A **multi-tenant platform** (not in this repo) supplies `org_id`, entitlements, which catalog pack and Gold contract bind to each org, and peer cohort membership.
 
 A single banking group on a paid platform is often modeled as **several tenant organizations**—for example owned branch real estate (Real Estate lens), consumer depository banking (Banking lens), C&I and commercial CRE lending (Commercial Finance lens), residential mortgage lender book (Consumer Finance `residential_mortgage` segment), unsecured cards (Consumer Finance `consumer_lending`), pooled or advised fund books (**Funds** lens), listed REIT or trust **vehicle** reporting (**Trusts** lens), and investment banking or fintech SaaS (Financial Services lens). Each org is compared to peers in **that** lens. Consolidated equity may move because real estate is revalued; that driver should be analyzed with real estate KPIs on the RE org, not by stretching banking metrics across the whole group. Do **not** use a legacy “REITs” industry class or `reits` segment—vehicle FFO and payout belong on **Trusts**; property NOI and vacancy belong on **Real Estate**.
 
@@ -40,7 +44,7 @@ A single banking group on a paid platform is often modeled as **several tenant o
 
 Upload fields such as `entity_segment` on some catalog data options support **segmented extracts** within a lens; they do not assert that the tenant org “is” a bank or insurer in the legal sense. `AgentRunContext.metadata` (for example `org_id`) is forwarded to Maestro as opaque hints; core does **not** validate tenancy or lens choice—see [agent-security.md](agent-security.md). Platform boundaries: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). Terminology: [catalog/README.md](../catalog/README.md#terminology).
 
-For **product work cycles** on the same governed metrics—**benchmarking**, **assurance**, **investor disclosure**, **covenant monitoring**, **planning and variance**, and **optimization**—core supplies definitions and contracts; the paid platform supplies workflows and UI. See [work-cycles.md](work-cycles.md) and the child lifecycle docs linked from that hub.
+For **product work cycles** on the same governed metrics—**benchmarking**, **assurance**, **investor disclosure**, and **planning and variance**—core supplies definitions and contracts; the paid platform supplies workflows and UI. See [work-cycles.md](work-cycles.md) and the child lifecycle docs linked from that hub.
 
 ## Path resolution
 
@@ -82,7 +86,7 @@ flowchart TB
 ### Pipelines and notebooks (Python)
 
 - **Contracts:** `ContractLoader` from `ambient_contracts` — load YAML, `assert_required_columns()` on Spark DataFrames, `enforce_bronze_lineage()` before Silver/Gold writes.
-- **Catalog:** `load_manifest()` for metric lists; `ambient_pipeline.catalog_loader.load_data_option()` for upload-mapping rules tied to industry YAML.
+- **Catalog:** `load_manifest()` for metric lists; `ambient_pipeline.catalog_loader.load_data_option()` for upload-mapping rules tied to industry YAML; manifest v3 field types feed `coerce_mapped_columns()` in bronze mapping ([pipeline.md](pipeline.md)).
 - **Governance helpers** (git checkout, not full wheel): `ambient_pipeline` — provenance stamping, PII pseudonymization, bronze→tenant-metrics mapping. See [pipeline.md](pipeline.md).
 
 Execution (Databricks jobs, schedules, Firestore sync) lives in **your application repository**; core supplies contracts, catalog semantics, and reusable helpers.
@@ -108,22 +112,16 @@ From a core checkout:
 
 ```bash
 validate-contracts
-ambient-catalog-generate --check
+python scripts/harden_catalog_data_options.py --check
+python scripts/generate_reference_catalog.py --check --strict-data-option-inputs
 validate-agent-config   # if you ship or fork agent profiles
 ```
 
 ## Data-product inventory
 
-- [tenant-metrics-v1.yaml](../contracts/tenant-metrics-v1.yaml) — Silver tenant metric snapshots; bronze lineage; multi-tenant isolation
-- [org-kpi-v1.yaml](../contracts/org-kpi-v1.yaml) — Gold org KPIs by vertical
-- [quality-v1.yaml](../contracts/quality-v1.yaml) — Data quality and lineage product
-- [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) — Optimization opportunity outputs
-- [operational-financial-bridge-v1.yaml](../contracts/operational-financial-bridge-v1.yaml) — Operational–financial bridge
-- [commercial-usage-v1.yaml](../contracts/commercial-usage-v1.yaml) — Commercial usage snapshot
-- [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) — Medallion/pipeline health (often references platform deploy assets)
-- [maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) — Maestro run artifact schema (inference, not medallion data)
+**Silver** tenant snapshots ([tenant-metrics-v1](../contracts/tenant-metrics-v1.yaml)), **Gold** vertical rollups (`finance-*-v1`, healthcare, life sciences, org-kpi), **platform** products (quality, operational–financial bridge, commercial usage, pipeline observability), and **inference** ([maestro-run-v1](../contracts/maestro-run-v1.yaml)) are defined as YAML under `contracts/`.
 
-Open the YAML for table names, required columns, and consumption rules. `validate-contracts` checks structural keys (`product`, `schema`, `lineage`, `governance`); deeper semantics are enforced in pipeline code and tests.
+Full grouped inventory with scope notes: [contracts/README.md — Current data products](../contracts/README.md#current-data-products). Open each YAML for table names, required columns, and consumption rules. `validate-contracts` checks structural keys (`product`, `schema`, `lineage`, `governance`); deeper semantics are enforced in pipeline code and tests.
 
 ## Crosswalk
 
@@ -133,7 +131,7 @@ See [crosswalk.md](crosswalk.md) for field definitions, the in-repo DSCR example
 
 1. Pin a tagged `ambient-core` release — [INTEGRATING.md](INTEGRATING.md).
 2. Set `AMBIENT_CORE_ROOT` / contract and catalog dirs in CI.
-3. Gate merges with `validate-contracts` and `ambient-catalog-generate --check`.
+3. Gate merges with `validate-contracts`, catalog hardening `--check`, and `ambient-catalog-generate --check` (with strict enumerated-field validation in CI).
 4. Jobs: load contracts and catalog rules in Python; do not copy YAML into app-only trees.
 5. UI: consume `manifest.json` or `catalog/runtime/` from the pinned checkout.
 6. Agents: `run_plan_execute` from a worker; register tenant-specific tools in the platform repo.

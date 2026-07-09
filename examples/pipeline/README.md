@@ -12,4 +12,4 @@ pip install -e .
 python examples/pipeline/minimal_governed_data.py
 ```
 
-For bronze mapping, provenance, and Spark validation, see [docs/pipeline.md](../../docs/pipeline.md), [docs/governed-data.md](../../docs/governed-data.md), and [docs/CONVENTIONS.md](../../docs/CONVENTIONS.md). Tests live under `tests/pipeline/`.
+For bronze mapping, provenance, and Spark validation, see [docs/pipeline.md](../../docs/pipeline.md), [docs/governed-data.md](../../docs/governed-data.md), [contracts/README.md](../../contracts/README.md), and [docs/CONVENTIONS.md](../../docs/CONVENTIONS.md). Tests live under `tests/pipeline/`.

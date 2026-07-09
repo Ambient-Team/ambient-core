@@ -48,7 +48,8 @@ export const REFERENCE_DATA = {
       },
       "id": 926,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "real_estate.core.quick_ratio": {
       "datasource": [
@@ -91,7 +92,8 @@ export const REFERENCE_DATA = {
       },
       "id": 932,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "real_estate.core.gross_margin": {
       "datasource": [
@@ -133,7 +135,8 @@ export const REFERENCE_DATA = {
       },
       "id": 938,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "real_estate.core.operating_margin": {
       "datasource": [
@@ -174,7 +177,8 @@ export const REFERENCE_DATA = {
       },
       "id": 944,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "real_estate.core.ebitda_margin": {
       "datasource": [
@@ -215,7 +219,8 @@ export const REFERENCE_DATA = {
       },
       "id": 950,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "real_estate.core.net_margin": {
       "datasource": [
@@ -256,7 +261,8 @@ export const REFERENCE_DATA = {
       },
       "id": 956,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "real_estate.core.revenue_growth": {
       "datasource": [
@@ -298,7 +304,8 @@ export const REFERENCE_DATA = {
       },
       "id": 962,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "real_estate.core.working_capital": {
       "datasource": [
@@ -340,7 +347,8 @@ export const REFERENCE_DATA = {
       },
       "id": 968,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "real_estate.core.dso": {
       "datasource": [
@@ -383,7 +391,8 @@ export const REFERENCE_DATA = {
       },
       "id": 974,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "real_estate.core.dpo": {
       "datasource": [
@@ -426,7 +435,8 @@ export const REFERENCE_DATA = {
       },
       "id": 980,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "real_estate.core.ccc": {
       "datasource": [
@@ -467,7 +477,8 @@ export const REFERENCE_DATA = {
       },
       "id": 986,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "real_estate.core.operating_cash_flow": {
       "datasource": [
@@ -510,7 +521,8 @@ export const REFERENCE_DATA = {
       },
       "id": 992,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "real_estate.core.burn_rate": {
       "datasource": [
@@ -553,7 +565,8 @@ export const REFERENCE_DATA = {
       },
       "id": 998,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "real_estate.core.runway": {
       "datasource": [
@@ -594,7 +607,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1004,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "real_estate.core.headcount": {
       "name": "Headcount (FTE)",
@@ -617,6 +631,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1082,
       "industry": "Real Estate",
       "segment": "core"
@@ -1337,7 +1352,8 @@ export const REFERENCE_DATA = {
       },
       "id": 927,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "vertical_farming.core.quick_ratio": {
       "datasource": [
@@ -1380,7 +1396,8 @@ export const REFERENCE_DATA = {
       },
       "id": 933,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "vertical_farming.core.gross_margin": {
       "datasource": [
@@ -1422,7 +1439,8 @@ export const REFERENCE_DATA = {
       },
       "id": 939,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "vertical_farming.core.operating_margin": {
       "datasource": [
@@ -1463,7 +1481,8 @@ export const REFERENCE_DATA = {
       },
       "id": 945,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "vertical_farming.core.ebitda_margin": {
       "datasource": [
@@ -1504,7 +1523,8 @@ export const REFERENCE_DATA = {
       },
       "id": 951,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "vertical_farming.core.net_margin": {
       "datasource": [
@@ -1545,7 +1565,8 @@ export const REFERENCE_DATA = {
       },
       "id": 957,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "vertical_farming.core.revenue_growth": {
       "datasource": [
@@ -1587,7 +1608,8 @@ export const REFERENCE_DATA = {
       },
       "id": 963,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "vertical_farming.core.working_capital": {
       "datasource": [
@@ -1629,7 +1651,8 @@ export const REFERENCE_DATA = {
       },
       "id": 969,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "vertical_farming.core.dso": {
       "datasource": [
@@ -1672,7 +1695,8 @@ export const REFERENCE_DATA = {
       },
       "id": 975,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "vertical_farming.core.dpo": {
       "datasource": [
@@ -1715,7 +1739,8 @@ export const REFERENCE_DATA = {
       },
       "id": 981,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "vertical_farming.core.ccc": {
       "datasource": [
@@ -1756,7 +1781,8 @@ export const REFERENCE_DATA = {
       },
       "id": 987,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "vertical_farming.core.operating_cash_flow": {
       "datasource": [
@@ -1799,7 +1825,8 @@ export const REFERENCE_DATA = {
       },
       "id": 993,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "vertical_farming.core.burn_rate": {
       "datasource": [
@@ -1842,7 +1869,8 @@ export const REFERENCE_DATA = {
       },
       "id": 999,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "vertical_farming.core.runway": {
       "datasource": [
@@ -1883,7 +1911,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1005,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "vertical_farming.core.headcount": {
       "name": "Headcount (FTE)",
@@ -1906,6 +1935,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1085,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -2545,7 +2575,8 @@ export const REFERENCE_DATA = {
       },
       "id": 928,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "transportation.core.quick_ratio": {
       "datasource": [
@@ -2588,7 +2619,8 @@ export const REFERENCE_DATA = {
       },
       "id": 934,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "transportation.core.gross_margin": {
       "datasource": [
@@ -2630,7 +2662,8 @@ export const REFERENCE_DATA = {
       },
       "id": 940,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "transportation.core.operating_margin": {
       "datasource": [
@@ -2671,7 +2704,8 @@ export const REFERENCE_DATA = {
       },
       "id": 946,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "transportation.core.ebitda_margin": {
       "datasource": [
@@ -2712,7 +2746,8 @@ export const REFERENCE_DATA = {
       },
       "id": 952,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "transportation.core.net_margin": {
       "datasource": [
@@ -2753,7 +2788,8 @@ export const REFERENCE_DATA = {
       },
       "id": 958,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "transportation.core.revenue_growth": {
       "datasource": [
@@ -2795,7 +2831,8 @@ export const REFERENCE_DATA = {
       },
       "id": 964,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "transportation.core.working_capital": {
       "datasource": [
@@ -2837,7 +2874,8 @@ export const REFERENCE_DATA = {
       },
       "id": 970,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "transportation.core.dso": {
       "datasource": [
@@ -2880,7 +2918,8 @@ export const REFERENCE_DATA = {
       },
       "id": 976,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "transportation.core.dpo": {
       "datasource": [
@@ -2923,7 +2962,8 @@ export const REFERENCE_DATA = {
       },
       "id": 982,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "transportation.core.ccc": {
       "datasource": [
@@ -2964,7 +3004,8 @@ export const REFERENCE_DATA = {
       },
       "id": 988,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "transportation.core.operating_cash_flow": {
       "datasource": [
@@ -3007,7 +3048,8 @@ export const REFERENCE_DATA = {
       },
       "id": 994,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "transportation.core.burn_rate": {
       "datasource": [
@@ -3050,7 +3092,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1000,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "transportation.core.runway": {
       "datasource": [
@@ -3091,7 +3134,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1006,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "transportation.core.headcount": {
       "name": "Headcount (FTE)",
@@ -3114,6 +3158,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1084,
       "industry": "Transportation",
       "segment": "core"
@@ -4056,7 +4101,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1800,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "aviation.core.quick_ratio": {
       "datasource": [
@@ -4099,7 +4145,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1801,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "aviation.core.gross_margin": {
       "datasource": [
@@ -4141,7 +4188,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1802,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "aviation.core.operating_margin": {
       "datasource": [
@@ -4182,7 +4230,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1803,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "aviation.core.ebitda_margin": {
       "datasource": [
@@ -4223,7 +4272,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1804,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "aviation.core.net_margin": {
       "datasource": [
@@ -4264,7 +4314,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1805,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "aviation.core.revenue_growth": {
       "datasource": [
@@ -4306,7 +4357,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1806,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "aviation.core.working_capital": {
       "datasource": [
@@ -4348,7 +4400,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1807,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "aviation.core.dso": {
       "datasource": [
@@ -4391,7 +4444,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1808,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "aviation.core.dpo": {
       "datasource": [
@@ -4434,7 +4488,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1809,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "aviation.core.ccc": {
       "datasource": [
@@ -4475,7 +4530,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1810,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "aviation.core.operating_cash_flow": {
       "datasource": [
@@ -4518,7 +4574,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1811,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "aviation.core.burn_rate": {
       "datasource": [
@@ -4561,7 +4618,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1812,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "aviation.core.runway": {
       "datasource": [
@@ -4602,7 +4660,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1813,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "aviation.core.headcount": {
       "name": "Headcount (FTE)",
@@ -4625,6 +4684,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1814,
       "industry": "Aviation",
       "segment": "core"
@@ -5047,7 +5107,8 @@ export const REFERENCE_DATA = {
       },
       "id": 929,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "manufacturing.core.quick_ratio": {
       "datasource": [
@@ -5090,7 +5151,8 @@ export const REFERENCE_DATA = {
       },
       "id": 935,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "manufacturing.core.gross_margin": {
       "datasource": [
@@ -5132,7 +5194,8 @@ export const REFERENCE_DATA = {
       },
       "id": 941,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "manufacturing.core.operating_margin": {
       "datasource": [
@@ -5173,7 +5236,8 @@ export const REFERENCE_DATA = {
       },
       "id": 947,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "manufacturing.core.ebitda_margin": {
       "datasource": [
@@ -5214,7 +5278,8 @@ export const REFERENCE_DATA = {
       },
       "id": 953,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "manufacturing.core.net_margin": {
       "datasource": [
@@ -5255,7 +5320,8 @@ export const REFERENCE_DATA = {
       },
       "id": 959,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "manufacturing.core.revenue_growth": {
       "datasource": [
@@ -5297,7 +5363,8 @@ export const REFERENCE_DATA = {
       },
       "id": 965,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "manufacturing.core.working_capital": {
       "datasource": [
@@ -5339,7 +5406,8 @@ export const REFERENCE_DATA = {
       },
       "id": 971,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "manufacturing.core.dso": {
       "datasource": [
@@ -5382,7 +5450,8 @@ export const REFERENCE_DATA = {
       },
       "id": 977,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "manufacturing.core.dpo": {
       "datasource": [
@@ -5425,7 +5494,8 @@ export const REFERENCE_DATA = {
       },
       "id": 983,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "manufacturing.core.ccc": {
       "datasource": [
@@ -5466,7 +5536,8 @@ export const REFERENCE_DATA = {
       },
       "id": 989,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "manufacturing.core.operating_cash_flow": {
       "datasource": [
@@ -5509,7 +5580,8 @@ export const REFERENCE_DATA = {
       },
       "id": 995,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "manufacturing.core.burn_rate": {
       "datasource": [
@@ -5552,7 +5624,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1001,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "manufacturing.core.runway": {
       "datasource": [
@@ -5593,7 +5666,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1007,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "manufacturing.core.headcount": {
       "name": "Headcount (FTE)",
@@ -5616,6 +5690,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1081,
       "industry": "Manufacturing",
       "segment": "core"
@@ -6195,7 +6270,8 @@ export const REFERENCE_DATA = {
       },
       "id": 930,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "healthcare.core.quick_ratio": {
       "datasource": [
@@ -6238,7 +6314,8 @@ export const REFERENCE_DATA = {
       },
       "id": 936,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "healthcare.core.gross_margin": {
       "datasource": [
@@ -6280,7 +6357,8 @@ export const REFERENCE_DATA = {
       },
       "id": 942,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "healthcare.core.operating_margin": {
       "datasource": [
@@ -6321,7 +6399,8 @@ export const REFERENCE_DATA = {
       },
       "id": 948,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "healthcare.core.ebitda_margin": {
       "datasource": [
@@ -6362,7 +6441,8 @@ export const REFERENCE_DATA = {
       },
       "id": 954,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "healthcare.core.net_margin": {
       "datasource": [
@@ -6403,7 +6483,8 @@ export const REFERENCE_DATA = {
       },
       "id": 960,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "healthcare.core.revenue_growth": {
       "datasource": [
@@ -6445,7 +6526,8 @@ export const REFERENCE_DATA = {
       },
       "id": 966,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "healthcare.core.working_capital": {
       "datasource": [
@@ -6487,7 +6569,8 @@ export const REFERENCE_DATA = {
       },
       "id": 972,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "healthcare.core.dso": {
       "datasource": [
@@ -6530,7 +6613,8 @@ export const REFERENCE_DATA = {
       },
       "id": 978,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "healthcare.core.dpo": {
       "datasource": [
@@ -6573,7 +6657,8 @@ export const REFERENCE_DATA = {
       },
       "id": 984,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "healthcare.core.ccc": {
       "datasource": [
@@ -6614,7 +6699,8 @@ export const REFERENCE_DATA = {
       },
       "id": 990,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "healthcare.core.operating_cash_flow": {
       "datasource": [
@@ -6657,7 +6743,8 @@ export const REFERENCE_DATA = {
       },
       "id": 996,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "healthcare.core.burn_rate": {
       "datasource": [
@@ -6700,7 +6787,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1002,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "healthcare.core.runway": {
       "datasource": [
@@ -6741,7 +6829,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1008,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "healthcare.core.headcount": {
       "name": "Headcount (FTE)",
@@ -6764,6 +6853,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1080,
       "industry": "Healthcare",
       "segment": "core"
@@ -7537,7 +7627,8 @@ export const REFERENCE_DATA = {
       },
       "id": 931,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "restaurants.core.quick_ratio": {
       "datasource": [
@@ -7580,7 +7671,8 @@ export const REFERENCE_DATA = {
       },
       "id": 937,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "restaurants.core.gross_margin": {
       "datasource": [
@@ -7622,7 +7714,8 @@ export const REFERENCE_DATA = {
       },
       "id": 943,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "restaurants.core.operating_margin": {
       "datasource": [
@@ -7663,7 +7756,8 @@ export const REFERENCE_DATA = {
       },
       "id": 949,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "restaurants.core.ebitda_margin": {
       "datasource": [
@@ -7704,7 +7798,8 @@ export const REFERENCE_DATA = {
       },
       "id": 955,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "restaurants.core.net_margin": {
       "datasource": [
@@ -7745,7 +7840,8 @@ export const REFERENCE_DATA = {
       },
       "id": 961,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "restaurants.core.revenue_growth": {
       "datasource": [
@@ -7787,7 +7883,8 @@ export const REFERENCE_DATA = {
       },
       "id": 967,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "restaurants.core.working_capital": {
       "datasource": [
@@ -7829,7 +7926,8 @@ export const REFERENCE_DATA = {
       },
       "id": 973,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "restaurants.core.dso": {
       "datasource": [
@@ -7872,7 +7970,8 @@ export const REFERENCE_DATA = {
       },
       "id": 979,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "restaurants.core.dpo": {
       "datasource": [
@@ -7915,7 +8014,8 @@ export const REFERENCE_DATA = {
       },
       "id": 985,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "restaurants.core.ccc": {
       "datasource": [
@@ -7956,7 +8056,8 @@ export const REFERENCE_DATA = {
       },
       "id": 991,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "restaurants.core.operating_cash_flow": {
       "datasource": [
@@ -7999,7 +8100,8 @@ export const REFERENCE_DATA = {
       },
       "id": 997,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "restaurants.core.burn_rate": {
       "datasource": [
@@ -8042,7 +8144,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1003,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "restaurants.core.runway": {
       "datasource": [
@@ -8083,7 +8186,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1009,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "restaurants.core.headcount": {
       "name": "Headcount (FTE)",
@@ -8106,6 +8210,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1083,
       "industry": "Restaurants",
       "segment": "core"
@@ -8635,7 +8740,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1300,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "life_sciences.core.quick_ratio": {
       "datasource": [
@@ -8678,7 +8784,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1301,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "life_sciences.core.gross_margin": {
       "datasource": [
@@ -8720,7 +8827,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1302,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "life_sciences.core.operating_margin": {
       "datasource": [
@@ -8761,7 +8869,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1303,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "life_sciences.core.ebitda_margin": {
       "datasource": [
@@ -8802,7 +8911,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1304,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "life_sciences.core.net_margin": {
       "datasource": [
@@ -8843,7 +8953,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1305,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "life_sciences.core.revenue_growth": {
       "datasource": [
@@ -8885,7 +8996,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1306,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "life_sciences.core.working_capital": {
       "datasource": [
@@ -8927,7 +9039,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1307,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "life_sciences.core.dso": {
       "datasource": [
@@ -8970,7 +9083,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1308,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "life_sciences.core.dpo": {
       "datasource": [
@@ -9013,7 +9127,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1309,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "life_sciences.core.ccc": {
       "datasource": [
@@ -9054,7 +9169,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1310,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "life_sciences.core.operating_cash_flow": {
       "datasource": [
@@ -9097,7 +9213,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1311,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "life_sciences.core.burn_rate": {
       "datasource": [
@@ -9140,7 +9257,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1312,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "life_sciences.core.runway": {
       "datasource": [
@@ -9181,7 +9299,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1313,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "life_sciences.core.headcount": {
       "name": "Headcount (FTE)",
@@ -9204,6 +9323,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1314,
       "industry": "Life Sciences",
       "segment": "core"
@@ -9382,7 +9502,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1500,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "banking.core.quick_ratio": {
       "datasource": [
@@ -9425,7 +9546,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1501,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "banking.core.gross_margin": {
       "datasource": [
@@ -9467,7 +9589,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1502,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "banking.core.operating_margin": {
       "datasource": [
@@ -9508,7 +9631,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1503,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "banking.core.ebitda_margin": {
       "datasource": [
@@ -9549,7 +9673,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1504,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "banking.core.net_margin": {
       "datasource": [
@@ -9590,7 +9715,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1505,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "banking.core.revenue_growth": {
       "datasource": [
@@ -9632,7 +9758,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1506,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "banking.core.working_capital": {
       "datasource": [
@@ -9674,7 +9801,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1507,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "banking.core.dso": {
       "datasource": [
@@ -9717,7 +9845,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1508,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "banking.core.dpo": {
       "datasource": [
@@ -9760,7 +9889,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1509,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "banking.core.ccc": {
       "datasource": [
@@ -9801,7 +9931,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1510,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "banking.core.operating_cash_flow": {
       "datasource": [
@@ -9844,7 +9975,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1511,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "banking.core.burn_rate": {
       "datasource": [
@@ -9887,7 +10019,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1512,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "banking.core.runway": {
       "datasource": [
@@ -9928,7 +10061,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1513,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "banking.core.headcount": {
       "name": "Headcount (FTE)",
@@ -9951,6 +10085,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1514,
       "industry": "Banking",
       "segment": "core"
@@ -10311,7 +10446,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1600,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "financial_services.core.quick_ratio": {
       "datasource": [
@@ -10354,7 +10490,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1601,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "financial_services.core.gross_margin": {
       "datasource": [
@@ -10396,7 +10533,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1602,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "financial_services.core.operating_margin": {
       "datasource": [
@@ -10437,7 +10575,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1603,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "financial_services.core.ebitda_margin": {
       "datasource": [
@@ -10478,7 +10617,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1604,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "financial_services.core.net_margin": {
       "datasource": [
@@ -10519,7 +10659,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1605,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "financial_services.core.revenue_growth": {
       "datasource": [
@@ -10561,7 +10702,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1606,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "financial_services.core.working_capital": {
       "datasource": [
@@ -10603,7 +10745,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1607,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "financial_services.core.dso": {
       "datasource": [
@@ -10646,7 +10789,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1608,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "financial_services.core.dpo": {
       "datasource": [
@@ -10689,7 +10833,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1609,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "financial_services.core.ccc": {
       "datasource": [
@@ -10730,7 +10875,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1610,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "financial_services.core.operating_cash_flow": {
       "datasource": [
@@ -10773,7 +10919,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1611,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "financial_services.core.burn_rate": {
       "datasource": [
@@ -10816,7 +10963,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1612,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "financial_services.core.runway": {
       "datasource": [
@@ -10857,7 +11005,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1613,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "financial_services.core.headcount": {
       "name": "Headcount (FTE)",
@@ -10880,6 +11029,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1614,
       "industry": "Financial Services",
       "segment": "core"
@@ -11452,7 +11602,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1970,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "funds.core.quick_ratio": {
       "datasource": [
@@ -11495,7 +11646,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1971,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "funds.core.gross_margin": {
       "datasource": [
@@ -11537,7 +11689,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1972,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "funds.core.operating_margin": {
       "datasource": [
@@ -11578,7 +11731,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1973,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "funds.core.ebitda_margin": {
       "datasource": [
@@ -11619,7 +11773,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1974,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "funds.core.net_margin": {
       "datasource": [
@@ -11660,7 +11815,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1975,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "funds.core.revenue_growth": {
       "datasource": [
@@ -11702,7 +11858,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1976,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "funds.core.working_capital": {
       "datasource": [
@@ -11744,7 +11901,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1977,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "funds.core.dso": {
       "datasource": [
@@ -11787,7 +11945,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1978,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "funds.core.dpo": {
       "datasource": [
@@ -11830,7 +11989,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1979,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "funds.core.ccc": {
       "datasource": [
@@ -11871,7 +12031,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1980,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "funds.core.operating_cash_flow": {
       "datasource": [
@@ -11914,7 +12075,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1981,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "funds.core.burn_rate": {
       "datasource": [
@@ -11957,7 +12119,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1982,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "funds.core.runway": {
       "datasource": [
@@ -11998,7 +12161,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1983,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "funds.core.headcount": {
       "name": "Headcount (FTE)",
@@ -12021,6 +12185,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1984,
       "industry": "Funds",
       "segment": "core"
@@ -12822,7 +12987,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1985,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "trusts.core.quick_ratio": {
       "datasource": [
@@ -12865,7 +13031,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1986,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "trusts.core.gross_margin": {
       "datasource": [
@@ -12907,7 +13074,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1987,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "trusts.core.operating_margin": {
       "datasource": [
@@ -12948,7 +13116,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1988,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "trusts.core.ebitda_margin": {
       "datasource": [
@@ -12989,7 +13158,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1989,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "trusts.core.net_margin": {
       "datasource": [
@@ -13030,7 +13200,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1990,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "trusts.core.revenue_growth": {
       "datasource": [
@@ -13072,7 +13243,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1991,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "trusts.core.working_capital": {
       "datasource": [
@@ -13114,7 +13286,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1992,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "trusts.core.dso": {
       "datasource": [
@@ -13157,7 +13330,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1993,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "trusts.core.dpo": {
       "datasource": [
@@ -13200,7 +13374,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1994,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "trusts.core.ccc": {
       "datasource": [
@@ -13241,7 +13416,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1995,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "trusts.core.operating_cash_flow": {
       "datasource": [
@@ -13284,7 +13460,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1996,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "trusts.core.burn_rate": {
       "datasource": [
@@ -13327,7 +13504,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1997,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "trusts.core.runway": {
       "datasource": [
@@ -13368,7 +13546,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1998,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "trusts.core.headcount": {
       "name": "Headcount (FTE)",
@@ -13391,6 +13570,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1999,
       "industry": "Trusts",
       "segment": "core"
@@ -13573,7 +13753,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1620,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "insurance.core.quick_ratio": {
       "datasource": [
@@ -13616,7 +13797,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1621,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "insurance.core.gross_margin": {
       "datasource": [
@@ -13658,7 +13840,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1622,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "insurance.core.operating_margin": {
       "datasource": [
@@ -13699,7 +13882,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1623,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "insurance.core.ebitda_margin": {
       "datasource": [
@@ -13740,7 +13924,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1624,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "insurance.core.net_margin": {
       "datasource": [
@@ -13781,7 +13966,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1625,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "insurance.core.revenue_growth": {
       "datasource": [
@@ -13823,7 +14009,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1626,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "insurance.core.working_capital": {
       "datasource": [
@@ -13865,7 +14052,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1627,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "insurance.core.dso": {
       "datasource": [
@@ -13908,7 +14096,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1628,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "insurance.core.dpo": {
       "datasource": [
@@ -13951,7 +14140,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1629,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "insurance.core.ccc": {
       "datasource": [
@@ -13992,7 +14182,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1630,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "insurance.core.operating_cash_flow": {
       "datasource": [
@@ -14035,7 +14226,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1631,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "insurance.core.burn_rate": {
       "datasource": [
@@ -14078,7 +14270,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1632,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "insurance.core.runway": {
       "datasource": [
@@ -14119,7 +14312,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1633,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "insurance.core.headcount": {
       "name": "Headcount (FTE)",
@@ -14142,6 +14336,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1634,
       "industry": "Insurance",
       "segment": "core"
@@ -14349,7 +14544,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1700,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "consumer_finance.core.quick_ratio": {
       "datasource": [
@@ -14392,7 +14588,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1701,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "consumer_finance.core.gross_margin": {
       "datasource": [
@@ -14434,7 +14631,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1702,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "consumer_finance.core.operating_margin": {
       "datasource": [
@@ -14475,7 +14673,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1703,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "consumer_finance.core.ebitda_margin": {
       "datasource": [
@@ -14516,7 +14715,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1704,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "consumer_finance.core.net_margin": {
       "datasource": [
@@ -14557,7 +14757,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1705,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "consumer_finance.core.revenue_growth": {
       "datasource": [
@@ -14599,7 +14800,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1706,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "consumer_finance.core.working_capital": {
       "datasource": [
@@ -14641,7 +14843,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1707,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "consumer_finance.core.dso": {
       "datasource": [
@@ -14684,7 +14887,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1708,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "consumer_finance.core.dpo": {
       "datasource": [
@@ -14727,7 +14931,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1709,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "consumer_finance.core.ccc": {
       "datasource": [
@@ -14768,7 +14973,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1710,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "consumer_finance.core.operating_cash_flow": {
       "datasource": [
@@ -14811,7 +15017,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1711,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "consumer_finance.core.burn_rate": {
       "datasource": [
@@ -14854,7 +15061,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1712,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "consumer_finance.core.runway": {
       "datasource": [
@@ -14895,7 +15103,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1713,
       "industry": "Consumer Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "consumer_finance.core.headcount": {
       "name": "Headcount (FTE)",
@@ -14918,6 +15127,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1714,
       "industry": "Consumer Finance",
       "segment": "core"
@@ -15318,7 +15528,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1740,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "commercial_finance.core.quick_ratio": {
       "datasource": [
@@ -15361,7 +15572,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1741,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "commercial_finance.core.gross_margin": {
       "datasource": [
@@ -15403,7 +15615,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1742,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "commercial_finance.core.operating_margin": {
       "datasource": [
@@ -15444,7 +15657,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1743,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "commercial_finance.core.ebitda_margin": {
       "datasource": [
@@ -15485,7 +15699,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1744,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "commercial_finance.core.net_margin": {
       "datasource": [
@@ -15526,7 +15741,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1745,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "commercial_finance.core.revenue_growth": {
       "datasource": [
@@ -15568,7 +15784,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1746,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "commercial_finance.core.working_capital": {
       "datasource": [
@@ -15610,7 +15827,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1747,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "commercial_finance.core.dso": {
       "datasource": [
@@ -15653,7 +15871,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1748,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "commercial_finance.core.dpo": {
       "datasource": [
@@ -15696,7 +15915,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1749,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "commercial_finance.core.ccc": {
       "datasource": [
@@ -15737,7 +15957,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1750,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "commercial_finance.core.operating_cash_flow": {
       "datasource": [
@@ -15780,7 +16001,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1751,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "commercial_finance.core.burn_rate": {
       "datasource": [
@@ -15823,7 +16045,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1752,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "commercial_finance.core.runway": {
       "datasource": [
@@ -15864,7 +16087,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1753,
       "industry": "Commercial Finance",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "commercial_finance.core.headcount": {
       "name": "Headcount (FTE)",
@@ -15887,6 +16111,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1754,
       "industry": "Commercial Finance",
       "segment": "core"
@@ -16293,7 +16518,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1640,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "current_ratio"
     },
     "retail.core.quick_ratio": {
       "datasource": [
@@ -16336,7 +16562,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1641,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "quick_ratio"
     },
     "retail.core.gross_margin": {
       "datasource": [
@@ -16378,7 +16605,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1642,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "gross_margin"
     },
     "retail.core.operating_margin": {
       "datasource": [
@@ -16419,7 +16647,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1643,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_margin"
     },
     "retail.core.ebitda_margin": {
       "datasource": [
@@ -16460,7 +16689,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1644,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ebitda_margin"
     },
     "retail.core.net_margin": {
       "datasource": [
@@ -16501,7 +16731,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1645,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "net_margin"
     },
     "retail.core.revenue_growth": {
       "datasource": [
@@ -16543,7 +16774,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1646,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "revenue_growth"
     },
     "retail.core.working_capital": {
       "datasource": [
@@ -16585,7 +16817,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1647,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "working_capital"
     },
     "retail.core.dso": {
       "datasource": [
@@ -16628,7 +16861,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1648,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dso"
     },
     "retail.core.dpo": {
       "datasource": [
@@ -16671,7 +16905,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1649,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "dpo"
     },
     "retail.core.ccc": {
       "datasource": [
@@ -16712,7 +16947,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1650,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "ccc"
     },
     "retail.core.operating_cash_flow": {
       "datasource": [
@@ -16755,7 +16991,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1651,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "operating_cash_flow"
     },
     "retail.core.burn_rate": {
       "datasource": [
@@ -16798,7 +17035,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1652,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "burn_rate"
     },
     "retail.core.runway": {
       "datasource": [
@@ -16839,7 +17077,8 @@ export const REFERENCE_DATA = {
       },
       "id": 1653,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "slug": "runway"
     },
     "retail.core.headcount": {
       "name": "Headcount (FTE)",
@@ -16862,6 +17101,7 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
+      "slug": "headcount",
       "id": 1654,
       "industry": "Retail",
       "segment": "core"

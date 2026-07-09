@@ -14,14 +14,14 @@ Examples: `healthcare.provider.patient_volume`, `healthcare.revenue_cycle.claim_
 
 Keys are lowercase, use `_` within a token and `.` only as the three-part separator, and match `^[a-z][a-z0-9_]*\.[a-z0-9_]+\.[a-z0-9_]+$`.
 
-The **core layer** (`catalog/core/shared/core_metrics.yaml`) holds metrics shared by every industry. The generator expands each into every pack with the key `industry.core.slug` (for example `healthcare.core.gross_margin`), assigning per-industry ids from `core_ids.yaml`. Every industry pack is therefore an extension on top of this core. Legacy author-chosen keys that predate this convention remain valid until retired (see the alias policy) so existing downstream consumers do not break; their canonical slug for the calculator is carried in a `slug` field.
+The **core layer** (`catalog/shared/metrics.yaml`) holds metrics shared by every industry. The generator expands each into every pack with the key `industry.core.slug` (for example `healthcare.core.gross_margin`), assigning per-industry ids from `industryIds` in the same file. Every industry pack is therefore an extension on top of this shared layer.
 
 ## Integer ID allocation
 
 Every metric and data option carries a unique integer `id`, and uniqueness across the whole catalogue is enforced by the generator and by `scripts/check_naming.py`. Two kinds of id exist:
 
 - **Author-assigned native ids.** Each vertical's hand-written metrics occupy a small dedicated band: healthcare native ids use `900–999` (currently `911–915`), life-sciences native ids use the `1200–1299` band, banking and fee-market verticals use `1530–1605` (split across Banking, Financial Services, and Insurance packs), retail native ids use `1670–1689`, consumer finance natives use `1720–1799`, commercial finance natives use `1760–1789` (core expansion ids `1740–1754`), aviation natives use `1820–1859`, multimodal transportation natives (rail, maritime, transit, 3PL) use `1860–1899`, **Funds** natives use `1900–1917` and GP extension natives **`1922–1939`** (core expansion ids `1970–1984`; common data-option ids `1918–1921`), and **Trusts** natives use `1940–1949`. When adding a vertical, reserve a fresh band here before assigning ids.
-- **Generated core-layer ids.** The shared core metrics are expanded into each pack with ids allocated per industry in `catalog/core/shared/core_ids.yaml`; these occupy the higher `900–1099` range and are managed by the generator rather than chosen by hand.
+- **Generated core-layer ids.** The shared metrics are expanded into each pack with ids allocated per industry in `catalog/shared/metrics.yaml` (`industryIds`); these occupy the higher `900–1099` range and are managed by the generator rather than chosen by hand.
 
 When adding a vertical, reserve a new native band here first.
 
@@ -76,13 +76,15 @@ Catalog **segments** describe business lines **within an industry pack** (the an
 
 ## Financial sector comparison profiles
 
-Cross-sector comparison metadata (primary revenue driver, regulatory intensity, capital light vs balance-sheet heavy, cyclicality) lives in [`catalog/core/financial_sector_profiles.yaml`](../catalog/core/financial_sector_profiles.yaml). The catalog generator exports profiles to `catalog/manifest.json` (`financialSectorProfiles`) and [`catalog/runtime/catalogSectorProfiles.js`](../catalog/runtime/catalogSectorProfiles.js). Industry packs may list `sectorProfileIds` in [`catalog/core/industries.yaml`](../catalog/core/industries.yaml).
+Cross-sector peer and comparison design should use **official industry codes** on each catalog pack (`industryCodes` in [`catalog/industries/<pack>/pack.yaml`](../catalog/industries/banking/pack.yaml)), exported on manifest industry rows (**manifest version 3**). Packs are registered in [`catalog/packs.yaml`](../catalog/packs.yaml). See [catalog-industry-coverage.md](catalog-industry-coverage.md) for taxonomy versions and global coverage gaps.
+
+**Catalog data options (manifest v3)** export typed `fields`, `fieldCoverage` (`upload` | `enumerated`), `collectionFrequency`, `grain`, and per-metric `frequency`. After editing `data_options.yaml`, run [`scripts/harden_catalog_data_options.py`](../scripts/harden_catalog_data_options.py) and `ambient-catalog-generate --check` (CI also passes `--strict-data-option-inputs`). See [catalog-consumption.md](catalog-consumption.md) and [catalog/README.md](../catalog/README.md).
 
 Allowed enum values in profiles include `globalAssetConcentration` (`highest`, `very_high`, `moderate`, `low_moderate`, `lowest`), `regulatoryIntensity` (`extremely_high`, `high`, `moderate_high`, `evolving`), `capitalModel` (`balance_sheet_heavy`, `capital_light`), and `cyclicality` (`highly_cyclical`, `defensive`, `mixed`).
 
 ## Transportation and aviation sector comparison profiles
 
-Cross-modal comparison metadata (revenue drivers, asset intensity, regulation, cyclicality) for **Aviation** and **Transportation** lives in [`catalog/core/transportation_sector_profiles.yaml`](../catalog/core/transportation_sector_profiles.yaml). The catalog generator exports profiles to `catalog/manifest.json` (`transportationSectorProfiles`) and [`catalog/runtime/catalogSectorProfiles.js`](../catalog/runtime/catalogSectorProfiles.js) as `TRANSPORTATION_SECTOR_PROFILES`. Industry packs list `sectorProfileIds` in [`catalog/core/industries.yaml`](../catalog/core/industries.yaml).
+Multimodal transport and aviation packs use **NAICS / ISIC / NACE / GICS** tags on [`catalog/industries/transportation/pack.yaml`](../catalog/industries/transportation/pack.yaml) and [`catalog/industries/aviation/pack.yaml`](../catalog/industries/aviation/pack.yaml) (see [catalog-industry-coverage.md](catalog-industry-coverage.md)).
 
 **Integer ID bands (native metrics):** Aviation natives use **1820–1859** (data options through **1834**); Aviation core expansion ids use **1800–1814**; multimodal Transportation natives (rail, maritime, transit, 3PL) use **1860–1899**. Road-fleet legacy natives in the Transportation pack retain author ids **10–14** with segment `road_freight`.
 
@@ -106,6 +108,8 @@ When a key is renamed, the old key is recorded in `catalog/aliases.yaml` mapping
 ## Contract files and versions
 
 Contract files live in `contracts/` and are named `product-slug-vMAJOR.yaml` (for example `healthcare-provider-ops-v1.yaml`). The major version in the filename must match the major component of `product.version` inside the file. Backward-incompatible schema changes (removing a column, narrowing a type, making an optional column required) require a major-version bump and a new file; backward-compatible additions are minor bumps recorded only in `product.version`. This relationship is checked by `scripts/check_contract_schema.py`.
+
+Vertical Gold products declare **`product.consumption_id`** (for example `FINANCE_BANKING`) aligned with `contractProductId` in [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml). Platform-facing products may instead expose `firestore.paths[].logical_key` (for example `TENANT_METRICS` on tenant-metrics). CI validates crosswalk ids with `python scripts/check_crosswalk.py`.
 
 ## The core layer and calculation
 
@@ -169,4 +173,4 @@ For an integrator-oriented view of this flow (catalog, contracts, and consumers)
 
 ### Encoding and enforcement
 
-All text assets are UTF-8, LF-normalized, with a trailing newline, per `.editorconfig` and `.gitattributes`; YAML uses 2-space indentation; JSON and generated `.js` come from `ambient-catalog-generate` or other generators rather than hand-formatting. Existing CI hooks enforce the structure of these assets — `validate_contracts.py` and `check_contract_schema.py` for contract YAML, `check_catalog_hygiene.py`, `check_naming.py`, and `check_formulas.py` for catalog YAML, `ambient-catalog-generate --check` for manifest and runtime JS drift, `validate_inference_registry.py` for config YAML, and `check_markdown_prose.py` for docs. New format rules should extend these scripts rather than introduce a parallel checker.
+All text assets are UTF-8, LF-normalized, with a trailing newline, per `.editorconfig` and `.gitattributes`; YAML uses 2-space indentation; JSON and generated `.js` come from `ambient-catalog-generate` or other generators rather than hand-formatting. Existing CI hooks enforce the structure of these assets — `validate_contracts.py` and `check_contract_schema.py` for contract YAML, `check_catalog_hygiene.py`, `check_naming.py`, and `check_formulas.py` for catalog YAML, `harden_catalog_data_options.py --check` and `generate_reference_catalog.py --check --strict-data-option-inputs` for catalog data-option shape and manifest/runtime drift, `validate_inference_registry.py` for config YAML, and `check_markdown_prose.py` for docs. New format rules should extend these scripts rather than introduce a parallel checker.

@@ -1,0 +1,23 @@
+industry: Real Estate
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '6810'
+    secondary:
+    - '6820'
+  naics:
+    revision: '2022'
+    primary: '531120'
+    secondary:
+    - '531390'
+  nace:
+    revision: Rev.2
+    primary: '68.10'
+    secondary:
+    - '68.20'
+  gics:
+    revision: '2023'
+    primary: '601020'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

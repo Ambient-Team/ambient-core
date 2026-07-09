@@ -4,7 +4,7 @@ Headless, API-first intelligence: **open-weight models only**, intelligent routi
 
 **Maestro is the control plane.** It does not run models — it orchestrates them (see [Architecture: control plane vs data plane](#architecture-control-plane-vs-data-plane) below).
 
-**Related:** [contracts/maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) (run artifact contract). Downstream apps call this service over HTTP; deploy wiring lives in the consumer repository.
+**Related:** [contracts/maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) (run artifact contract). Downstream apps call this service over HTTP; deploy wiring lives in the consumer repository. Optional assist for raw upload → catalog column mapping is described in [maestro-catalog-ingestion.md](maestro-catalog-ingestion.md) (not SSOT for catalog or post-ingest quality).
 
 ---
 

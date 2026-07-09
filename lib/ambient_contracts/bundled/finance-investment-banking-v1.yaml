@@ -2,6 +2,7 @@ product:
   name: Finance Investment Banking
   version: 1.1
   owner: analytics
+  consumption_id: FINANCE_INVESTMENT_BANKING
   description: "Investment banking and markets Gold product: trading and advisory mix, VaR, counterparty exposure, market making, prime brokerage, and venue volume by division."
   domain: Finance
   type: Derived

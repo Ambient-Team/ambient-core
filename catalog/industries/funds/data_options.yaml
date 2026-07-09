@@ -1,0 +1,167 @@
+dataOptions:
+  funds.fund.fund_summary:
+    id: 1916
+    name: Aggregated fund summary
+    description: AUM, flows, fees, and custody aggregates by book_type. No LP or client identifiers.
+    industry: Funds
+    segment: fund
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: fund_vehicle_id
+      type: id
+    - name: book_type
+      type: enum
+    - name: assets_under_management
+      type: string
+    - name: inflows
+      type: string
+    - name: outflows
+      type: string
+    - name: beginning_aum
+      type: string
+    - name: management_fees
+      type: string
+    - name: average_aum
+      type: string
+    - name: custody_fees
+      type: string
+    - name: average_auc
+      type: string
+    - name: failed_settlements
+      type: string
+    - name: total_settlement_instructions
+      type: decimal
+    metricIds:
+    - 1900
+    - 1901
+    - 1902
+    - 1911
+    - 1912
+    - 1913
+    - 1914
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  funds.fund.fund_performance_summary:
+    id: 1917
+    name: Aggregated fund performance summary
+    description: Closed-end and alternatives performance without LP names.
+    industry: Funds
+    segment: fund
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: fund_vehicle_id
+      type: id
+    - name: fund_irr
+      type: string
+    - name: distributions
+      type: string
+    - name: nav
+      type: string
+    - name: paid_in_capital
+      type: string
+    - name: called_capital
+      type: string
+    - name: committed_capital
+      type: string
+    - name: performance_fees
+      type: string
+    - name: total_fund_revenue
+      type: decimal
+    - name: liquidity_gate_frequency
+      type: string
+    - name: strategy_return_volatility
+      type: decimal
+    metricIds:
+    - 1903
+    - 1904
+    - 1905
+    - 1906
+    - 1907
+    - 1908
+    - 1909
+    - 1910
+    - 1922
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: quarterly
+    grain: quarter
+  funds.operations.investment_program_summary:
+    id: 1936
+    name: Aggregated investment program summary
+    description: Private-capital GP sourcing, deployment, portfolio, and funnel aggregates. No LP, founder, or deal identifiers.
+    industry: Funds
+    segment: operations
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: reporting_entity_id
+      type: id
+    - name: closed_investments
+      type: string
+    - name: qualified_opportunities
+      type: string
+    - name: deployed_capital
+      type: string
+    - name: new_investments
+      type: string
+    - name: follow_on_investments
+      type: string
+    - name: eligible_portfolio_companies
+      type: string
+    - name: impaired_carrying_value
+      type: string
+    - name: portfolio_cost_basis
+      type: decimal
+    - name: deals_with_co_investors
+      type: string
+    - name: total_closed_deals
+      type: decimal
+    - name: committed_capital
+      type: string
+    - name: fundraising_target
+      type: string
+    - name: management_fees
+      type: string
+    - name: operating_expenses
+      type: string
+    - name: program_investments
+      type: string
+    - name: program_participants
+      type: string
+    - name: inbound_qualified_opportunities
+      type: string
+    - name: total_qualified_opportunities
+      type: decimal
+    - name: active_portfolio_company_count
+      type: decimal
+    - name: new_investments_count
+      type: decimal
+    - name: qualified_opportunities_count
+      type: decimal
+    metricIds:
+    - 1923
+    - 1924
+    - 1925
+    - 1926
+    - 1927
+    - 1928
+    - 1929
+    - 1930
+    - 1931
+    - 1932
+    - 1933
+    - 1934
+    lastUpdated: '2026-06-28 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: quarterly
+    grain: quarter

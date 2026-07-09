@@ -45,18 +45,21 @@ pytest
 ## Contract changes
 
 1. Edit YAML under `contracts/`.
-2. Copy to bundled package data: `cp contracts/*.yaml lib/ambient_contracts/bundled/` (CI enforces sync).
+2. Copy to bundled package data: `cp contracts/*.yaml lib/ambient_contracts/bundled/` and `cp contracts/maestro-run-v1.yaml lib/ambient_inference/contracts/maestro-run-v1.yaml` (CI enforces sync).
 3. Run `validate-contracts`.
+
+Crosswalk edits: update [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml) and run `python scripts/check_crosswalk.py` (CI). See [crosswalk.md](crosswalk.md).
 
 Naming, filename major versions, and format rules: [CONVENTIONS.md](CONVENTIONS.md).
 
 ## Catalog changes
 
-1. Edit YAML under `catalog/`.
-2. Run `ambient-catalog-generate` (or `python scripts/generate_reference_catalog.py`).
-3. Run `ambient-catalog-generate --check` before pushing (manifest JSON and `catalog/runtime/*.js` must match YAML).
+1. Edit YAML under `catalog/` (see [catalog/README.md](../catalog/README.md)).
+2. Run `python scripts/harden_catalog_data_options.py --write` when changing `data_options.yaml` (typed fields, `fieldCoverage`, frequencies).
+3. Run `ambient-catalog-generate` (or `python scripts/generate_reference_catalog.py`).
+4. Before pushing: `python scripts/harden_catalog_data_options.py --check` and `ambient-catalog-generate --check` (CI also uses `--strict-data-option-inputs` on the generator).
 
-Catalogue keys, segment enum, integer id bands, and aliases: [CONVENTIONS.md](CONVENTIONS.md).
+Catalogue keys, segment enum, integer id bands, field typing, and aliases: [CONVENTIONS.md](CONVENTIONS.md), [catalog-consumption.md](catalog-consumption.md).
 
 Integrator-facing guides after catalog or contract changes: [governed-data.md](governed-data.md), [catalog-consumption.md](catalog-consumption.md), [crosswalk.md](crosswalk.md).
 

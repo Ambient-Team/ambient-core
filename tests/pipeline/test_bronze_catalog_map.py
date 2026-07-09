@@ -65,6 +65,23 @@ def test_coerce_numeric_string_and_parse_float() -> None:
     assert parse_float_from_cell("not-a-number") is None
 
 
+def test_coerce_mapped_columns_uses_manifest_types(spark) -> None:
+    from ambient_pipeline.bronze_catalog_map import apply_column_mapping, coerce_mapped_columns
+
+    rows = [("2024-03-15", "42", "Active")]
+    df = spark.createDataFrame(rows, ["Date", "Headcount", "Status"])
+    mapped = apply_column_mapping(df, {"date": "Date", "headcount": "Headcount", "status": "Status"})
+    coerced = coerce_mapped_columns(
+        mapped,
+        ["date", "headcount", "status"],
+        catalog_field_types={"headcount": "integer", "status": "string", "date": "date"},
+    )
+    row = coerced.collect()[0]
+    assert str(row["date"]) == "2024-03-15"
+    assert row["headcount"] == 42.0
+    assert row["status"] == "Active"
+
+
 def test_coerce_mapped_columns_dates_and_currency(spark) -> None:
     from ambient_pipeline.bronze_catalog_map import apply_column_mapping, coerce_mapped_columns
 

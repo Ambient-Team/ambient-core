@@ -13,6 +13,7 @@ import os
 import sys
 
 from ambient_contracts.catalog_manifest import load_manifest
+from ambient_contracts.crosswalk import load_crosswalk_links
 from ambient_contracts.loader import ContractLoader
 from ambient_contracts.validate import validate_all_contracts
 
@@ -48,6 +49,15 @@ def main() -> int:
         f"contract tenant-metrics: product={product.get('name')!r} "
         f"table={schema.get('table')!r}"
     )
+
+    links = load_crosswalk_links()
+    dscr = next((link for link in links if link.get("metricId") == 8), None)
+    if dscr:
+        print(
+            "crosswalk DSCR sample: "
+            f"contractFile={dscr.get('contractFile')!r} "
+            f"contractProductId={dscr.get('contractProductId')!r}"
+        )
     return 0
 
 

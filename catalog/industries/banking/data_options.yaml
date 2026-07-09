@@ -1,0 +1,47 @@
+dataOptions:
+  banking.depository.regulatory_summary:
+    id: 1560
+    name: Aggregated regulatory and financial summary
+    description: Period-level depository bank aggregates (NIM, credit, deposits, capital). Not investment banking.
+    industry: Banking
+    segment: depository
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: entity_segment
+      type: string
+    - name: net_interest_income
+      type: string
+    - name: average_earning_assets
+      type: string
+    - name: non_performing_loans
+      type: string
+    - name: total_loans
+      type: decimal
+    - name: total_deposits
+      type: decimal
+    - name: operating_expense
+      type: string
+    - name: total_revenue
+      type: decimal
+    - name: tier1_capital_ratio
+      type: decimal
+    metricIds:
+    - 1530
+    - 1531
+    - 1532
+    - 1533
+    - 1534
+    - 1554
+    - 1556
+    - 1557
+    - 1558
+    - 1559
+    - 1567
+    - 1568
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month

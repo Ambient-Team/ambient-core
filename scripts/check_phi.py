@@ -3,7 +3,7 @@
 
 Scans data-option ``fields`` in the healthcare and life_sciences catalogue packs and the
 columns of their Gold contracts against the PHI denylist in
-catalog/core/shared/catalog_input_field_policy.yaml. Open-source catalogue assets must be
+catalog/input_field_policy.yaml. Open-source catalogue assets must be
 de-identified and aggregated.
 
 Run: python scripts/check_phi.py
@@ -18,8 +18,10 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-POLICY = ROOT / "catalog" / "core" / "shared" / "catalog_input_field_policy.yaml"
-PACKS = [ROOT / "catalog" / "industries" / n for n in ("healthcare.yaml", "life_sciences.yaml")]
+POLICY = ROOT / "catalog" / "input_field_policy.yaml"
+PACKS = [
+    ROOT / "catalog" / "industries" / n for n in ("healthcare", "life_sciences")
+]
 CONTRACT_DOMAINS = {"Healthcare", "Life Sciences"}
 
 
@@ -44,13 +46,16 @@ def main() -> int:
     exact, patterns = _matchers()
     errors: list[str] = []
     for pack in PACKS:
-        if not pack.is_file():
+        opts_path = pack / "data_options.yaml"
+        if not opts_path.is_file():
             continue
-        d = _load(pack)
+        d = _load(opts_path)
         for key, opt in (d.get("dataOptions") or {}).items():
             for field in opt.get("fields") or []:
                 if _hit(field, exact, patterns):
-                    errors.append(f"{pack.name}: data option {key} has PHI-shaped field {field!r}")
+                    errors.append(
+                        f"{pack.name}: data option {key} has PHI-shaped field {field!r}"
+                    )
     for cf in sorted((ROOT / "contracts").glob("*.yaml")):
         doc = _load(cf)
         if doc.get("product", {}).get("domain") not in CONTRACT_DOMAINS:

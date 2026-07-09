@@ -1,0 +1,169 @@
+benchmarks:
+  current_ratio:
+    label: Current Ratio
+    unit: Ratio
+    healthyLow: 1.2
+    healthyHigh: 2
+    higherIsBetter: true
+    source: General corporate-finance norms
+  quick_ratio:
+    label: Quick Ratio
+    unit: Ratio
+    healthyLow: 1
+    healthyHigh: 1.5
+    higherIsBetter: true
+    source: General corporate-finance norms
+  working_capital:
+    label: Working Capital
+    unit: Currency
+    healthyLow: 100000
+    healthyHigh: 1000000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  gross_margin:
+    label: Gross Profit Margin
+    unit: '%'
+    healthyLow: 40
+    healthyHigh: 70
+    higherIsBetter: true
+    source: Cross-industry median bands
+  operating_margin:
+    label: Operating Margin
+    unit: '%'
+    healthyLow: 10
+    healthyHigh: 25
+    higherIsBetter: true
+    source: Cross-industry median bands
+  ebitda_margin:
+    label: EBITDA Margin
+    unit: '%'
+    healthyLow: 15
+    healthyHigh: 30
+    higherIsBetter: true
+    source: Cross-industry median bands
+  net_margin:
+    label: Net Profit Margin
+    unit: '%'
+    healthyLow: 8
+    healthyHigh: 20
+    higherIsBetter: true
+    source: Cross-industry median bands
+  revenue_growth:
+    label: Revenue Growth Rate
+    unit: '%'
+    healthyLow: 10
+    healthyHigh: 30
+    higherIsBetter: true
+    source: Growth-stage guidance
+  dso:
+    label: Days Sales Outstanding
+    unit: Days
+    healthyLow: 30
+    healthyHigh: 45
+    higherIsBetter: false
+    source: Order-to-cash norms
+  dpo:
+    label: Days Payable Outstanding
+    unit: Days
+    healthyLow: 30
+    healthyHigh: 60
+    higherIsBetter: true
+    source: Procure-to-pay norms
+  ccc:
+    label: Cash Conversion Cycle
+    unit: Days
+    healthyLow: 20
+    healthyHigh: 60
+    higherIsBetter: false
+    source: Working-capital norms
+  operating_cash_flow:
+    label: Operating Cash Flow
+    unit: Currency
+    healthyLow: 200000
+    healthyHigh: 1000000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  burn_rate:
+    label: Monthly Burn Rate
+    unit: Currency/month
+    healthyLow: 50000
+    healthyHigh: 200000
+    higherIsBetter: false
+    source: Early-stage guidance
+  runway:
+    label: Cash Runway
+    unit: Months
+    healthyLow: 12
+    healthyHigh: 24
+    higherIsBetter: true
+    source: Venture norms (target ≥ 18 months)
+  food_cost_pct:
+    label: Food Cost Percentage
+    unit: '%'
+    healthyLow: 28
+    healthyHigh: 35
+    higherIsBetter: false
+    source: Full-service restaurant norms
+  labor_cost_pct:
+    label: Labor Cost Percentage
+    unit: '%'
+    healthyLow: 25
+    healthyHigh: 35
+    higherIsBetter: false
+    source: Full-service restaurant norms
+  mrr:
+    label: Monthly Recurring Revenue
+    unit: Currency/month
+    healthyLow: 50000
+    healthyHigh: 500000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  arr:
+    label: Annual Recurring Revenue
+    unit: Currency/year
+    healthyLow: 600000
+    healthyHigh: 6000000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  nrr:
+    label: Net Revenue Retention
+    unit: '%'
+    healthyLow: 100
+    healthyHigh: 120
+    higherIsBetter: true
+    source: Best-in-class SaaS ≥ 120%
+  gross_churn:
+    label: Gross Revenue Churn
+    unit: '%'
+    healthyLow: 1
+    healthyHigh: 5
+    higherIsBetter: false
+    source: SaaS retention norms
+  cac:
+    label: Customer Acquisition Cost
+    unit: Currency
+    healthyLow: 500
+    healthyHigh: 10000
+    higherIsBetter: false
+    source: Segment-dependent guidance
+  ltv:
+    label: Customer Lifetime Value
+    unit: Currency
+    healthyLow: 3000
+    healthyHigh: 50000
+    higherIsBetter: true
+    source: Segment-dependent guidance
+  ltv_cac:
+    label: 'LTV : CAC Ratio'
+    unit: Ratio
+    healthyLow: 3
+    healthyHigh: 5
+    higherIsBetter: true
+    source: SaaS guardrail (≥ 3:1)
+  rule_of_40:
+    label: Rule of 40
+    unit: '%'
+    healthyLow: 40
+    healthyHigh: 60
+    higherIsBetter: true
+    source: SaaS composite health (≥ 40%)

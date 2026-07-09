@@ -17,7 +17,7 @@ The installable wheel ships **`ambient_contracts`**, **`ambient_inference`**, **
 
 ## Repository trees
 
-- **`contracts/`** — data-product interfaces (CI-validated); YAML source of truth
+- **`contracts/`** — data-product interfaces (CI-validated); YAML source of truth — [contracts/README.md](../contracts/README.md)
 - **`catalog/`** — reference metrics, industry packs, benchmarks; `ambient-catalog-generate` → JSON `manifest.json` and generated `runtime/*.js`
 - **`config/`** — Maestro model registry and routing (inference)
 - **`services/maestro/`** — headless HTTP API

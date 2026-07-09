@@ -2,7 +2,7 @@
 
 A **paid multi-tenant platform** (not ambient-core) orchestrates several **work cycles** on top of the same governed metrics. Each cycle answers a different question but shares prerequisites: a **tenant organization**, an [analysis lens](governed-data.md#analysis-lens-and-multi-org-tenancy) (catalog industry and segment), and a pinned **ambient-core** release for catalog and contract SSOT.
 
-**ambient-core** supplies KPI definitions, methodologies, `calc` specs, healthy bands, sector profiles, and Gold contract shapes. The **platform** supplies tenancy, workflows, peer or mandate data, UI, and commercial features.
+**ambient-core** supplies KPI definitions, methodologies, `calc` specs, healthy bands, industry packs with `industryCodes`, per-pack benchmarks, and Gold contract shapes. The **platform** supplies tenancy, workflows, peer or mandate data, UI, and commercial features.
 
 ```mermaid
 flowchart TB
@@ -15,25 +15,18 @@ flowchart TB
     Bench[benchmarking]
     Assure[assurance]
     Disclose[investor_disclosure]
-    Covenant[covenant_monitoring]
     Planning[planning_variance]
-    Optimize[optimization]
   end
   Lens --> Bench
   Lens --> Assure
   Lens --> Disclose
-  Lens --> Covenant
   Lens --> Planning
-  Lens --> Optimize
   Catalog --> Bench
   Catalog --> Assure
   Catalog --> Disclose
-  Catalog --> Covenant
   Catalog --> Planning
-  Catalog --> Optimize
   Contracts --> Assure
   Contracts --> Disclose
-  Contracts --> Optimize
 ```
 
 ## Work cycles documented
@@ -42,7 +35,7 @@ flowchart TB
 
 **Question:** Who performs better on chosen KPIs, what is the gap versus a pace-setter, and which part of the gap is structural versus improvable?
 
-Core provides definitions, sector profiles, `benchmarks.yaml` guardrails, and formula inputs. The platform provides peer cohorts, normalization, gap analytics, waterfalls, and improvement tied to [opportunity-v1.yaml](../contracts/opportunity-v1.yaml).
+Core provides definitions, industry packs, per-industry benchmark guardrails in `catalog/industries/<pack>/benchmarks.yaml`, and formula inputs. The platform provides peer cohorts, normalization, gap analytics, waterfalls, and improvement workflows.
 
 Detail: [benchmarking-lifecycle.md](benchmarking-lifecycle.md).
 
@@ -62,14 +55,6 @@ Core provides the same metric vocabulary (for example Real Estate operations, `f
 
 Detail: [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md).
 
-### Covenant monitoring
-
-**Question:** Are we within **covenant or policy thresholds** (lender, bond, treasury), what is headroom, and which catalog drivers move DSCR, LTV, coverage, or capital metrics?
-
-Core provides covenant-adjacent metric definitions, DSCR guardrails in `benchmarks.yaml`, and ops–finance bridge contracts. The platform stores facility terms, test schedules, waivers, and alerts.
-
-Detail: [covenant-lifecycle.md](covenant-lifecycle.md).
-
 ### Planning and variance
 
 **Question:** How do **actuals** compare to our **plan** (budget, forecast, board case), and what explains variance?
@@ -77,14 +62,6 @@ Detail: [covenant-lifecycle.md](covenant-lifecycle.md).
 Core provides `fpaWorkflow`, `*.core.*` close metrics, and `calc` input structure. The platform stores plan versions, scenarios, variance bridges, and commentary.
 
 Detail: [planning-variance-lifecycle.md](planning-variance-lifecycle.md).
-
-### Optimization
-
-**Question:** What **actions** should we take, in what order, with confidence and lineage to catalog metrics?
-
-Core provides [opportunity-v1.yaml](../contracts/opportunity-v1.yaml) and the neutral `optimizer` agent profile. The platform scores, ranks, assigns, and fulfills opportunities (including patented logic described in the contract, not shipped in OSS).
-
-Detail: [optimization-lifecycle.md](optimization-lifecycle.md).
 
 ### FP&A close (product function, not a separate lifecycle doc)
 
@@ -111,10 +88,8 @@ Core does not validate these; document them in your worker for consistent loggin
 - **`assurance_framework`** or **`control_pack_id`** — assurance scope (for example lineage plus bridge controls).
 - **`disclosure_mandate_id`** — named requirement set (exchange checklist, fund policy).
 - **`investor_audience`** — coarse audience (listed, LP, lender, internal).
-- **`covenant_pack_id`** or **`facility_id`** — lender or bond covenant mapping.
 - **`plan_version_id`** — locked budget or forecast version.
 - **`scenario_id`** — plan scenario (base, upside, downside).
-- **`optimization_run_id`** — optional batch id for opportunity generation.
 
 ## Do not conflate “audit” in this repository
 
@@ -132,6 +107,4 @@ Three different ideas appear in core docs and code:
 - [benchmarking-lifecycle.md](benchmarking-lifecycle.md)
 - [assurance-lifecycle.md](assurance-lifecycle.md)
 - [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md)
-- [covenant-lifecycle.md](covenant-lifecycle.md)
 - [planning-variance-lifecycle.md](planning-variance-lifecycle.md)
-- [optimization-lifecycle.md](optimization-lifecycle.md)

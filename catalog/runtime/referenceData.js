@@ -22,15 +22,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1082,
       "industry": "Real Estate",
       "segment": "core",
       "metricIds": [
+        926,
+        932,
+        938,
+        944,
+        956,
+        950,
+        992,
+        962,
+        968,
+        974,
+        980,
+        986,
+        998,
+        1004,
         1,
         2,
         3,
@@ -52,12 +81,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1076,
       "industry": "Real Estate",
       "segment": "core",
       "metricIds": [
-        956
+        1082
       ]
     },
     "real_estate.core.accounting_software": {
@@ -74,6 +115,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1088,
       "industry": "Real Estate",
       "segment": "core",
@@ -97,6 +141,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1094,
       "industry": "Real Estate",
       "segment": "core",
@@ -115,13 +162,54 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "rent_collection_date",
-        "rent_amount",
-        "tenant_name",
-        "payment_method",
-        "payment_status"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "rent_collection_date",
+          "type": "date"
+        },
+        {
+          "name": "rent_amount",
+          "type": "decimal"
+        },
+        {
+          "name": "tenant_name",
+          "type": "string"
+        },
+        {
+          "name": "payment_method",
+          "type": "enum"
+        },
+        {
+          "name": "payment_status",
+          "type": "enum"
+        },
+        {
+          "name": "rental_income",
+          "type": "string"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "string"
+        },
+        {
+          "name": "debt_service",
+          "type": "string"
+        },
+        {
+          "name": "property_price",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_rental_income",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 6,
@@ -132,7 +220,10 @@ export const REFERENCE_DATA = {
         6
       ],
       "name": "Rental income records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Grtv4vjRFWRmrDSFF8cS": {
       "description": "Records of energy consumption and billing.",
@@ -144,12 +235,50 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "bill_date",
-        "energy_consumed",
-        "energy_cost",
-        "provider_name"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "string"
+        },
+        {
+          "name": "energy_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_energy_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "rentable_square_feet",
+          "type": "string"
+        },
+        {
+          "name": "gross_rental_income",
+          "type": "string"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "string"
+        },
+        {
+          "name": "property_value",
+          "type": "string"
+        },
+        {
+          "name": "provider_name",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 21,
@@ -157,10 +286,14 @@ export const REFERENCE_DATA = {
       "lastUpdated": "2024-07-31 14:25:08",
       "metricIds": [
         2,
-        3
+        3,
+        1060
       ],
       "name": "Energy bills",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "TPRNcAtqtiY387QTkah7": {
       "description": "Loan agreements used to finance property purchases.",
@@ -172,15 +305,42 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "mortgage_lender",
-        "loan_amount",
-        "interest_rate",
-        "loan_term",
-        "monthly_payment",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "mortgage_lender",
+          "type": "string"
+        },
+        {
+          "name": "loan_amount",
+          "type": "decimal"
+        },
+        {
+          "name": "interest_rate",
+          "type": "decimal"
+        },
+        {
+          "name": "loan_term",
+          "type": "string"
+        },
+        {
+          "name": "monthly_payment",
+          "type": "string"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        }
       ],
       "format": "Document",
       "id": 7,
@@ -190,7 +350,10 @@ export const REFERENCE_DATA = {
         7
       ],
       "name": "Mortgage documents",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "UVuuRwg8ksAOiP3WlKKr": {
       "description": "Documents related to the purchase of a property.",
@@ -202,14 +365,38 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "purchase_date",
-        "purchase_price",
-        "seller_name",
-        "property_location",
-        "property_type",
-        "mortgage_details"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "purchase_date",
+          "type": "date"
+        },
+        {
+          "name": "purchase_price",
+          "type": "decimal"
+        },
+        {
+          "name": "seller_name",
+          "type": "string"
+        },
+        {
+          "name": "property_location",
+          "type": "string"
+        },
+        {
+          "name": "property_type",
+          "type": "enum"
+        },
+        {
+          "name": "mortgage_details",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 2,
@@ -219,7 +406,10 @@ export const REFERENCE_DATA = {
         1
       ],
       "name": "Property purchase records",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "bs0gsbE2YDGDHyqRtkx8": {
       "description": "Documents related to the sale of a property.",
@@ -231,14 +421,38 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "sale_date",
-        "sale_price",
-        "buyer_name",
-        "property_location",
-        "property_type",
-        "agent_details"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "sale_date",
+          "type": "date"
+        },
+        {
+          "name": "sale_price",
+          "type": "decimal"
+        },
+        {
+          "name": "buyer_name",
+          "type": "string"
+        },
+        {
+          "name": "property_location",
+          "type": "string"
+        },
+        {
+          "name": "property_type",
+          "type": "enum"
+        },
+        {
+          "name": "agent_details",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 3,
@@ -248,7 +462,10 @@ export const REFERENCE_DATA = {
         1
       ],
       "name": "Sale records",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "gKEmKLl2XRjSbTQGztuy": {
       "description": "Software used to manage rental properties.",
@@ -260,25 +477,87 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "tenant_name",
-        "lease_start_date",
-        "lease_end_date",
-        "monthly_rent",
-        "maintenance_records",
-        "payment_status"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "tenant_name",
+          "type": "string"
+        },
+        {
+          "name": "lease_start_date",
+          "type": "date"
+        },
+        {
+          "name": "lease_end_date",
+          "type": "date"
+        },
+        {
+          "name": "monthly_rent",
+          "type": "string"
+        },
+        {
+          "name": "maintenance_records",
+          "type": "string"
+        },
+        {
+          "name": "payment_status",
+          "type": "enum"
+        },
+        {
+          "name": "same_store_noi_growth",
+          "type": "string"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "string"
+        },
+        {
+          "name": "effective_gross_income",
+          "type": "string"
+        },
+        {
+          "name": "rentable_square_feet",
+          "type": "string"
+        },
+        {
+          "name": "gross_rental_income",
+          "type": "string"
+        },
+        {
+          "name": "vacant_units",
+          "type": "string"
+        },
+        {
+          "name": "total_units",
+          "type": "decimal"
+        },
+        {
+          "name": "total_energy_cost",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        2,
+        9,
+        1058,
+        1059,
+        1060
       ],
       "format": "Software",
       "id": 4,
       "industry": "Real Estate",
       "lastUpdated": "2024-07-31 14:25:06",
-      "metricIds": [
-        2,
-        9
-      ],
       "name": "Property management systems",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "jYYkOyU5EQfa40iMf9x8": {
       "description": "Documents containing an estimate of a property's value.",
@@ -290,13 +569,34 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "property_id",
-        "valuation_date",
-        "valuation_amount",
-        "valuer_name",
-        "valuation_method",
-        "property_location"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "valuation_date",
+          "type": "date"
+        },
+        {
+          "name": "valuation_amount",
+          "type": "decimal"
+        },
+        {
+          "name": "valuer_name",
+          "type": "string"
+        },
+        {
+          "name": "valuation_method",
+          "type": "enum"
+        },
+        {
+          "name": "property_location",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 5,
@@ -307,7 +607,10 @@ export const REFERENCE_DATA = {
         6
       ],
       "name": "Property valuation reports",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "ohvSqlJVvLde3k1gqYZh": {
       "description": "Loan agreements used for various purposes (e.g., equipment financing).",
@@ -327,19 +630,46 @@ export const REFERENCE_DATA = {
         8
       ],
       "name": "Loan documents",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-general-ledger": {
       "description": "Complete record of all financial transactions posted to the chart of accounts.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "journal_entry_id",
-        "debit",
-        "credit",
-        "period",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "journal_entry_id",
+          "type": "id"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1100,
@@ -357,17 +687,38 @@ export const REFERENCE_DATA = {
         1034
       ],
       "name": "General ledger",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-trial-balance": {
       "description": "Period-end list of all ledger account balances used to prepare statements.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit_balance",
-        "credit_balance",
-        "period"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit_balance",
+          "type": "string"
+        },
+        {
+          "name": "credit_balance",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1106,
@@ -379,14 +730,26 @@ export const REFERENCE_DATA = {
         968
       ],
       "name": "Trial balance",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-balance-sheet": {
       "description": "Statement of assets, liabilities and equity at a point in time.",
       "fields": [
-        "date",
-        "period_end_date",
-        "inventory"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "inventory",
+          "type": "string"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1112,
@@ -399,19 +762,62 @@ export const REFERENCE_DATA = {
         986
       ],
       "name": "Balance sheet",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-ar-aging": {
       "description": "Outstanding customer invoices grouped by how overdue they are.",
       "fields": [
-        "date",
-        "customer_name",
-        "invoice_id",
-        "invoice_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "invoice_id",
+          "type": "id"
+        },
+        {
+          "name": "invoice_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "total_credit_sales",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1118,
@@ -422,19 +828,62 @@ export const REFERENCE_DATA = {
         986
       ],
       "name": "Accounts receivable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-ap-aging": {
       "description": "Outstanding supplier bills grouped by how overdue they are.",
       "fields": [
-        "date",
-        "supplier_name",
-        "bill_id",
-        "bill_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "supplier_name",
+          "type": "string"
+        },
+        {
+          "name": "bill_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_payable",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1124,
@@ -445,19 +894,70 @@ export const REFERENCE_DATA = {
         986
       ],
       "name": "Accounts payable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-bank-statements": {
       "description": "Bank account transaction lines used for cash-flow and reconciliation.",
       "fields": [
-        "date",
-        "transaction_date",
-        "account_id",
-        "description",
-        "amount",
-        "direction",
-        "balance",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date"
+        },
+        {
+          "name": "account_id",
+          "type": "id"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "direction",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "net_income",
+          "type": "string"
+        },
+        {
+          "name": "non_cash_charges",
+          "type": "string"
+        },
+        {
+          "name": "increase_in_working_capital",
+          "type": "string"
+        },
+        {
+          "name": "cash_out",
+          "type": "string"
+        },
+        {
+          "name": "cash_in",
+          "type": "string"
+        },
+        {
+          "name": "current_cash_balance",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1130,
@@ -469,19 +969,78 @@ export const REFERENCE_DATA = {
         1004
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1136,
@@ -497,19 +1056,62 @@ export const REFERENCE_DATA = {
         1052
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1142,
@@ -520,17 +1122,54 @@ export const REFERENCE_DATA = {
         1034
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-product-usage": {
       "description": "Product engagement and usage telemetry used for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1148,
@@ -541,18 +1180,46 @@ export const REFERENCE_DATA = {
         1028
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrealestateds-marketing-spend": {
       "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1154,
@@ -563,7 +1230,10 @@ export const REFERENCE_DATA = {
         1046
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "vertical_farming.core.financial_statements": {
       "name": "Financial statements",
@@ -579,21 +1249,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1083,
       "industry": "Vertical Farming",
       "segment": "core",
       "metricIds": [
         927,
+        933,
         939,
         945,
         957,
         951,
-        993
+        993,
+        963,
+        969,
+        975,
+        981,
+        987,
+        999,
+        1005
       ]
     },
     "vertical_farming.core.hr_records": {
@@ -609,11 +1302,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1077,
       "industry": "Vertical Farming",
       "segment": "core",
       "metricIds": [
+        1085,
         18
       ]
     },
@@ -631,13 +1337,18 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1089,
       "industry": "Vertical Farming",
       "segment": "core",
       "metricIds": [
+        939,
+        945,
+        957,
         20,
-        21,
-        939
+        21
       ]
     },
     "vertical_farming.core.payroll_records": {
@@ -654,10 +1365,15 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1095,
       "industry": "Vertical Farming",
       "segment": "core",
       "metricIds": [
+        957,
+        945,
         18,
         20
       ]
@@ -680,7 +1396,10 @@ export const REFERENCE_DATA = {
         16
       ],
       "name": "Irrigation logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "QKVboc2mj2QQ8u2RFOF1": {
       "description": "Software used to manage agricultural operations.",
@@ -692,9 +1411,70 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "farm_id",
-        "crop_planted"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "farm_id",
+          "type": "id"
+        },
+        {
+          "name": "crop_planted",
+          "type": "string"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_growing_area",
+          "type": "decimal"
+        },
+        {
+          "name": "total_water_liters",
+          "type": "decimal"
+        },
+        {
+          "name": "total_energy_kwh",
+          "type": "decimal"
+        },
+        {
+          "name": "sum_health_scores",
+          "type": "string"
+        },
+        {
+          "name": "total_crops",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "string"
+        },
+        {
+          "name": "total_light_delivered",
+          "type": "decimal"
+        },
+        {
+          "name": "repair_cost_avoided",
+          "type": "decimal"
+        },
+        {
+          "name": "predictive_maintenance_cost",
+          "type": "decimal"
+        }
       ],
       "format": "Software",
       "id": 10,
@@ -711,7 +1491,10 @@ export const REFERENCE_DATA = {
         23
       ],
       "name": "Farm management systems",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "SuYpCOlDxv3Q0Sf2xq9L": {
       "description": "Records of the amount and type of produce harvested.",
@@ -723,13 +1506,34 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "farm_id",
-        "crop_type",
-        "harvest_date",
-        "quantity_harvested",
-        "market_price",
-        "quality_grade"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "farm_id",
+          "type": "id"
+        },
+        {
+          "name": "crop_type",
+          "type": "enum"
+        },
+        {
+          "name": "harvest_date",
+          "type": "date"
+        },
+        {
+          "name": "quantity_harvested",
+          "type": "string"
+        },
+        {
+          "name": "market_price",
+          "type": "decimal"
+        },
+        {
+          "name": "quality_grade",
+          "type": "enum"
+        }
       ],
       "format": "Document",
       "id": 9,
@@ -740,7 +1544,10 @@ export const REFERENCE_DATA = {
         18
       ],
       "name": "Harvest logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "mZgKaZV2P6tbi7msxL3y": {
       "description": "Software used to monitor crop growth and health.",
@@ -761,19 +1568,46 @@ export const REFERENCE_DATA = {
         19
       ],
       "name": "Crop monitoring systems",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-general-ledger": {
       "description": "Complete record of all financial transactions posted to the chart of accounts.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "journal_entry_id",
-        "debit",
-        "credit",
-        "period",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "journal_entry_id",
+          "type": "id"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1101,
@@ -791,17 +1625,38 @@ export const REFERENCE_DATA = {
         1035
       ],
       "name": "General ledger",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-trial-balance": {
       "description": "Period-end list of all ledger account balances used to prepare statements.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit_balance",
-        "credit_balance",
-        "period"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit_balance",
+          "type": "string"
+        },
+        {
+          "name": "credit_balance",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1107,
@@ -813,14 +1668,26 @@ export const REFERENCE_DATA = {
         969
       ],
       "name": "Trial balance",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-balance-sheet": {
       "description": "Statement of assets, liabilities and equity at a point in time.",
       "fields": [
-        "date",
-        "period_end_date",
-        "inventory"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "inventory",
+          "type": "string"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1113,
@@ -833,19 +1700,62 @@ export const REFERENCE_DATA = {
         987
       ],
       "name": "Balance sheet",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-ar-aging": {
       "description": "Outstanding customer invoices grouped by how overdue they are.",
       "fields": [
-        "date",
-        "customer_name",
-        "invoice_id",
-        "invoice_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "invoice_id",
+          "type": "id"
+        },
+        {
+          "name": "invoice_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "total_credit_sales",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1119,
@@ -856,19 +1766,62 @@ export const REFERENCE_DATA = {
         987
       ],
       "name": "Accounts receivable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-ap-aging": {
       "description": "Outstanding supplier bills grouped by how overdue they are.",
       "fields": [
-        "date",
-        "supplier_name",
-        "bill_id",
-        "bill_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "supplier_name",
+          "type": "string"
+        },
+        {
+          "name": "bill_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_payable",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1125,
@@ -879,19 +1832,70 @@ export const REFERENCE_DATA = {
         987
       ],
       "name": "Accounts payable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-bank-statements": {
       "description": "Bank account transaction lines used for cash-flow and reconciliation.",
       "fields": [
-        "date",
-        "transaction_date",
-        "account_id",
-        "description",
-        "amount",
-        "direction",
-        "balance",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date"
+        },
+        {
+          "name": "account_id",
+          "type": "id"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "direction",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "net_income",
+          "type": "string"
+        },
+        {
+          "name": "non_cash_charges",
+          "type": "string"
+        },
+        {
+          "name": "increase_in_working_capital",
+          "type": "string"
+        },
+        {
+          "name": "cash_out",
+          "type": "string"
+        },
+        {
+          "name": "cash_in",
+          "type": "string"
+        },
+        {
+          "name": "current_cash_balance",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1131,
@@ -903,19 +1907,78 @@ export const REFERENCE_DATA = {
         1005
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1137,
@@ -931,19 +1994,62 @@ export const REFERENCE_DATA = {
         1053
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1143,
@@ -954,17 +2060,54 @@ export const REFERENCE_DATA = {
         1035
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-product-usage": {
       "description": "Product engagement and usage telemetry used for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1149,
@@ -975,18 +2118,46 @@ export const REFERENCE_DATA = {
         1029
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allverticalfarmingds-marketing-spend": {
       "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1155,
@@ -997,7 +2168,10 @@ export const REFERENCE_DATA = {
         1047
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "transportation.core.financial_statements": {
       "name": "Financial statements",
@@ -1013,21 +2187,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1084,
       "industry": "Transportation",
       "segment": "core",
       "metricIds": [
         928,
+        934,
         940,
         946,
         958,
         952,
-        994
+        994,
+        964,
+        970,
+        976,
+        982,
+        988,
+        1000,
+        1006
       ]
     },
     "transportation.core.hr_records": {
@@ -1043,11 +2240,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1078,
       "industry": "Transportation",
       "segment": "core",
       "metricIds": [
+        1084,
         14
       ]
     },
@@ -1065,6 +2275,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1090,
       "industry": "Transportation",
       "segment": "core",
@@ -1088,10 +2301,15 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1096,
       "industry": "Transportation",
       "segment": "core",
       "metricIds": [
+        958,
+        946,
         14,
         13
       ]
@@ -1106,13 +2324,34 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "vehicle_id",
-        "telematics_date",
-        "engine_performance",
-        "fuel_efficiency",
-        "maintenance_alerts",
-        "driver_behavior"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "telematics_date",
+          "type": "date"
+        },
+        {
+          "name": "engine_performance",
+          "type": "string"
+        },
+        {
+          "name": "fuel_efficiency",
+          "type": "string"
+        },
+        {
+          "name": "maintenance_alerts",
+          "type": "string"
+        },
+        {
+          "name": "driver_behavior",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 13,
@@ -1122,7 +2361,10 @@ export const REFERENCE_DATA = {
         10
       ],
       "name": "Vehicle telematics data",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "DclVZaLbyz6Pwxt5Ctr1": {
       "description": "Records of maintenance activities.",
@@ -1142,7 +2384,10 @@ export const REFERENCE_DATA = {
         13
       ],
       "name": "Maintenance logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Ta6fK4eo9bymVVQGYEpl": {
       "description": "Software used to manage a fleet of vehicles.",
@@ -1154,12 +2399,38 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "fleet_id",
-        "vehicle_ids",
-        "maintenance_schedule",
-        "fuel_logs",
-        "insurance_details"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "fleet_id",
+          "type": "id"
+        },
+        {
+          "name": "vehicle_ids",
+          "type": "string"
+        },
+        {
+          "name": "maintenance_schedule",
+          "type": "string"
+        },
+        {
+          "name": "fuel_logs",
+          "type": "string"
+        },
+        {
+          "name": "insurance_details",
+          "type": "string"
+        },
+        {
+          "name": "fleet_time_in_use",
+          "type": "string"
+        },
+        {
+          "name": "fleet_available_time",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 14,
@@ -1169,7 +2440,10 @@ export const REFERENCE_DATA = {
         11
       ],
       "name": "Fleet management systems",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "i0N19s7GpHi9QTyG5dhM": {
       "description": "Records of deliveries made, including location and timing.",
@@ -1181,14 +2455,38 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "delivery_date",
-        "vehicle_id",
-        "route_id",
-        "delivery_status",
-        "delivery_address",
-        "customer_name",
-        "delivery_time"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "delivery_date",
+          "type": "date"
+        },
+        {
+          "name": "vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "route_id",
+          "type": "id"
+        },
+        {
+          "name": "delivery_status",
+          "type": "enum"
+        },
+        {
+          "name": "delivery_address",
+          "type": "string"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "delivery_time",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 15,
@@ -1198,7 +2496,10 @@ export const REFERENCE_DATA = {
         12
       ],
       "name": "Delivery logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "jHscrlnM67xOUF1IXfos": {
       "description": "Data collected from GPS devices to track location and movement.",
@@ -1210,14 +2511,38 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "vehicle_id",
-        "tracking_date",
-        "start_location",
-        "end_location",
-        "distance_travelled",
-        "average_speed",
-        "route_taken"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "tracking_date",
+          "type": "date"
+        },
+        {
+          "name": "start_location",
+          "type": "string"
+        },
+        {
+          "name": "end_location",
+          "type": "string"
+        },
+        {
+          "name": "distance_travelled",
+          "type": "string"
+        },
+        {
+          "name": "average_speed",
+          "type": "string"
+        },
+        {
+          "name": "route_taken",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 12,
@@ -1230,7 +2555,10 @@ export const REFERENCE_DATA = {
         13
       ],
       "name": "GPS tracking data",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "uRTkFZUmJC2BLwoRtJxL": {
       "description": "Records of fuel consumption for vehicles or machinery.",
@@ -1242,13 +2570,34 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "vehicle_id",
-        "fuel_type",
-        "fuel_date",
-        "fuel_quantity",
-        "fuel_cost",
-        "odometer_reading"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "fuel_type",
+          "type": "enum"
+        },
+        {
+          "name": "fuel_date",
+          "type": "date"
+        },
+        {
+          "name": "fuel_quantity",
+          "type": "string"
+        },
+        {
+          "name": "fuel_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "odometer_reading",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 11,
@@ -1258,19 +2607,46 @@ export const REFERENCE_DATA = {
         10
       ],
       "name": "Fuel logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-general-ledger": {
       "description": "Complete record of all financial transactions posted to the chart of accounts.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "journal_entry_id",
-        "debit",
-        "credit",
-        "period",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "journal_entry_id",
+          "type": "id"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1102,
@@ -1288,17 +2664,38 @@ export const REFERENCE_DATA = {
         1036
       ],
       "name": "General ledger",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-trial-balance": {
       "description": "Period-end list of all ledger account balances used to prepare statements.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit_balance",
-        "credit_balance",
-        "period"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit_balance",
+          "type": "string"
+        },
+        {
+          "name": "credit_balance",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1108,
@@ -1310,14 +2707,26 @@ export const REFERENCE_DATA = {
         970
       ],
       "name": "Trial balance",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-balance-sheet": {
       "description": "Statement of assets, liabilities and equity at a point in time.",
       "fields": [
-        "date",
-        "period_end_date",
-        "inventory"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "inventory",
+          "type": "string"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1114,
@@ -1330,19 +2739,62 @@ export const REFERENCE_DATA = {
         988
       ],
       "name": "Balance sheet",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-ar-aging": {
       "description": "Outstanding customer invoices grouped by how overdue they are.",
       "fields": [
-        "date",
-        "customer_name",
-        "invoice_id",
-        "invoice_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "invoice_id",
+          "type": "id"
+        },
+        {
+          "name": "invoice_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "total_credit_sales",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1120,
@@ -1353,19 +2805,62 @@ export const REFERENCE_DATA = {
         988
       ],
       "name": "Accounts receivable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-ap-aging": {
       "description": "Outstanding supplier bills grouped by how overdue they are.",
       "fields": [
-        "date",
-        "supplier_name",
-        "bill_id",
-        "bill_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "supplier_name",
+          "type": "string"
+        },
+        {
+          "name": "bill_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_payable",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1126,
@@ -1376,19 +2871,70 @@ export const REFERENCE_DATA = {
         988
       ],
       "name": "Accounts payable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-bank-statements": {
       "description": "Bank account transaction lines used for cash-flow and reconciliation.",
       "fields": [
-        "date",
-        "transaction_date",
-        "account_id",
-        "description",
-        "amount",
-        "direction",
-        "balance",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date"
+        },
+        {
+          "name": "account_id",
+          "type": "id"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "direction",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "net_income",
+          "type": "string"
+        },
+        {
+          "name": "non_cash_charges",
+          "type": "string"
+        },
+        {
+          "name": "increase_in_working_capital",
+          "type": "string"
+        },
+        {
+          "name": "cash_out",
+          "type": "string"
+        },
+        {
+          "name": "cash_in",
+          "type": "string"
+        },
+        {
+          "name": "current_cash_balance",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1132,
@@ -1400,19 +2946,78 @@ export const REFERENCE_DATA = {
         1006
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1138,
@@ -1428,19 +3033,62 @@ export const REFERENCE_DATA = {
         1054
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1144,
@@ -1451,17 +3099,54 @@ export const REFERENCE_DATA = {
         1036
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-product-usage": {
       "description": "Product engagement and usage telemetry used for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1150,
@@ -1472,18 +3157,46 @@ export const REFERENCE_DATA = {
         1030
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Alltransportationds-marketing-spend": {
       "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1156,
@@ -1494,7 +3207,227 @@ export const REFERENCE_DATA = {
         1048
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "transportation.rail_freight.operations_summary": {
+      "id": 1170,
+      "name": "Rail freight operations summary",
+      "description": "Aggregated rail freight utilization, cost, and service metrics.",
+      "industry": "Transportation",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "loaded_train_miles",
+          "type": "string"
+        },
+        {
+          "name": "available_train_miles",
+          "type": "string"
+        },
+        {
+          "name": "total_operating_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "ton_miles_moved",
+          "type": "string"
+        },
+        {
+          "name": "on_time_shipments",
+          "type": "string"
+        },
+        {
+          "name": "total_shipments",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1860,
+        1861,
+        1862
+      ],
+      "lastUpdated": "2026-07-04 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "transportation.rail_passenger.operations_summary": {
+      "id": 1171,
+      "name": "Rail passenger operations summary",
+      "description": "Aggregated passenger rail ridership and fare recovery inputs.",
+      "industry": "Transportation",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "total_boardings",
+          "type": "decimal"
+        },
+        {
+          "name": "train_miles_operated",
+          "type": "decimal"
+        },
+        {
+          "name": "fare_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_cost",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1863,
+        1864
+      ],
+      "lastUpdated": "2026-07-04 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "transportation.maritime.operations_summary": {
+      "id": 1172,
+      "name": "Maritime fleet operations summary",
+      "description": "Aggregated vessel utilization and TCE inputs.",
+      "industry": "Transportation",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "operating_days",
+          "type": "string"
+        },
+        {
+          "name": "available_days",
+          "type": "string"
+        },
+        {
+          "name": "voyage_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "voyage_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "on_hire_days",
+          "type": "string"
+        },
+        {
+          "name": "on_schedule_voyages",
+          "type": "string"
+        },
+        {
+          "name": "total_voyages",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1865,
+        1866,
+        1867
+      ],
+      "lastUpdated": "2026-07-04 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "transportation.transit.operations_summary": {
+      "id": 1173,
+      "name": "Public transit operations summary",
+      "description": "Aggregated transit ridership, recovery, and OTP inputs.",
+      "industry": "Transportation",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "operating_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "string"
+        },
+        {
+          "name": "unlinked_trips",
+          "type": "string"
+        },
+        {
+          "name": "vehicle_revenue_hours",
+          "type": "decimal"
+        },
+        {
+          "name": "on_time_trips",
+          "type": "string"
+        },
+        {
+          "name": "total_trips",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1868,
+        1869,
+        1870
+      ],
+      "lastUpdated": "2026-07-04 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "transportation.freight_forwarding.operations_summary": {
+      "id": 1174,
+      "name": "Freight forwarding operations summary",
+      "description": "Aggregated shipper SLA and margin inputs.",
+      "industry": "Transportation",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "shipments_handled",
+          "type": "string"
+        },
+        {
+          "name": "on_time_shipments",
+          "type": "string"
+        },
+        {
+          "name": "total_shipments",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1871,
+        1872
+      ],
+      "lastUpdated": "2026-07-04 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "aviation.core.financial_statements": {
       "name": "Financial statements",
@@ -1510,21 +3443,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1815,
       "industry": "Aviation",
       "segment": "core",
       "metricIds": [
         1800,
+        1801,
         1802,
         1803,
         1805,
         1804,
-        1811
+        1811,
+        1806,
+        1807,
+        1808,
+        1809,
+        1810,
+        1812,
+        1813
       ]
     },
     "aviation.core.hr_records": {
@@ -1540,12 +3496,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1816,
       "industry": "Aviation",
       "segment": "core",
       "metricIds": [
-        1805
+        1814
       ]
     },
     "aviation.core.accounting_software": {
@@ -1562,6 +3530,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1817,
       "industry": "Aviation",
       "segment": "core",
@@ -1585,6 +3556,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1818,
       "industry": "Aviation",
       "segment": "core",
@@ -1601,10 +3575,62 @@ export const REFERENCE_DATA = {
       "segment": "network_carrier",
       "format": "Document",
       "fields": [
-        "period_start_date",
-        "period_end_date",
-        "available_seat_kilometers",
-        "revenue_passenger_kilometers"
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "available_seat_kilometers",
+          "type": "string"
+        },
+        {
+          "name": "revenue_passenger_kilometers",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue_capacity_units",
+          "type": "decimal"
+        },
+        {
+          "name": "available_capacity_units",
+          "type": "string"
+        },
+        {
+          "name": "total_operating_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operating_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "on_time_arrivals",
+          "type": "string"
+        },
+        {
+          "name": "total_arrivals",
+          "type": "decimal"
+        },
+        {
+          "name": "fuel_expense",
+          "type": "string"
+        },
+        {
+          "name": "cargo_tonne_km_carried",
+          "type": "string"
+        },
+        {
+          "name": "available_tonne_km",
+          "type": "string"
+        },
+        {
+          "name": "cargo_revenue",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1820,
@@ -1614,7 +3640,10 @@ export const REFERENCE_DATA = {
         1824,
         1830,
         1831
-      ]
+      ],
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "aviation.airport.traffic_revenue_summary": {
       "id": 1833,
@@ -1624,15 +3653,43 @@ export const REFERENCE_DATA = {
       "segment": "airport",
       "format": "Document",
       "fields": [
-        "period_start_date",
-        "period_end_date",
-        "enplaned_passengers"
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "enplaned_passengers",
+          "type": "string"
+        },
+        {
+          "name": "passengers_enplaned_growth",
+          "type": "string"
+        },
+        {
+          "name": "aeronautical_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "commercial_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_revenue",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1825,
         1826,
         1827
-      ]
+      ],
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "quarterly",
+      "grain": "quarter"
     },
     "aviation.travel_distribution.booking_summary": {
       "id": 1834,
@@ -1642,13 +3699,38 @@ export const REFERENCE_DATA = {
       "segment": "travel_distribution",
       "format": "Document",
       "fields": [
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "platform_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_booking_value",
+          "type": "string"
+        },
+        {
+          "name": "completed_bookings",
+          "type": "string"
+        },
+        {
+          "name": "qualified_sessions",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1828,
         1829
-      ]
+      ],
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "manufacturing.core.financial_statements": {
       "name": "Financial statements",
@@ -1664,21 +3746,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1085,
       "industry": "Manufacturing",
       "segment": "core",
       "metricIds": [
         929,
+        935,
         941,
         947,
         959,
         953,
-        995
+        995,
+        965,
+        971,
+        977,
+        983,
+        989,
+        1001,
+        1007
       ]
     },
     "manufacturing.core.hr_records": {
@@ -1694,12 +3799,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1079,
       "industry": "Manufacturing",
       "segment": "core",
       "metricIds": [
-        959
+        1081
       ]
     },
     "manufacturing.core.accounting_software": {
@@ -1716,6 +3833,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1091,
       "industry": "Manufacturing",
       "segment": "core",
@@ -1739,6 +3859,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1097,
       "industry": "Manufacturing",
       "segment": "core",
@@ -1755,20 +3878,68 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Transactional Data Template",
       "fields": [
-        "date",
-        "line_id",
-        "work_order_id",
-        "units_produced",
-        "units_scrapped",
-        "run_minutes",
-        "planned_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "line_id",
+          "type": "id"
+        },
+        {
+          "name": "work_order_id",
+          "type": "id"
+        },
+        {
+          "name": "units_produced",
+          "type": "string"
+        },
+        {
+          "name": "units_scrapped",
+          "type": "string"
+        },
+        {
+          "name": "run_minutes",
+          "type": "string"
+        },
+        {
+          "name": "planned_minutes",
+          "type": "string"
+        },
+        {
+          "name": "availability",
+          "type": "string"
+        },
+        {
+          "name": "performance",
+          "type": "string"
+        },
+        {
+          "name": "quality",
+          "type": "string"
+        },
+        {
+          "name": "scrapped_units",
+          "type": "string"
+        },
+        {
+          "name": "total_units",
+          "type": "decimal"
+        },
+        {
+          "name": "total_manufacturing_cogs",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         901,
         902,
         905
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "MfgErp902CatalogOptionKey02": {
       "id": 902,
@@ -1778,19 +3949,43 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit",
-        "credit",
-        "balance",
-        "cost_center"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "cost_center",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         903,
         905
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "MfgCmms903CatalogOptionKey03": {
       "id": 903,
@@ -1800,16 +3995,34 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "asset_id",
-        "downtime_minutes",
-        "reason_code",
-        "planned_flag"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "asset_id",
+          "type": "id"
+        },
+        {
+          "name": "downtime_minutes",
+          "type": "string"
+        },
+        {
+          "name": "reason_code",
+          "type": "id"
+        },
+        {
+          "name": "planned_flag",
+          "type": "string"
+        }
       ],
       "metricIds": [
         904
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "MfgQual904CatalogOptionKey04": {
       "id": 904,
@@ -1819,28 +4032,78 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Transactional Data Template",
       "fields": [
-        "date",
-        "lot_id",
-        "units_inspected",
-        "units_failed",
-        "defect_code"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "lot_id",
+          "type": "id"
+        },
+        {
+          "name": "units_inspected",
+          "type": "string"
+        },
+        {
+          "name": "units_failed",
+          "type": "string"
+        },
+        {
+          "name": "defect_code",
+          "type": "id"
+        },
+        {
+          "name": "scrapped_units",
+          "type": "string"
+        },
+        {
+          "name": "total_units",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         902
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "Allmanufacturingds-general-ledger": {
       "description": "Complete record of all financial transactions posted to the chart of accounts.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "journal_entry_id",
-        "debit",
-        "credit",
-        "period",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "journal_entry_id",
+          "type": "id"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1103,
@@ -1858,17 +4121,38 @@ export const REFERENCE_DATA = {
         1037
       ],
       "name": "General ledger",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-trial-balance": {
       "description": "Period-end list of all ledger account balances used to prepare statements.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit_balance",
-        "credit_balance",
-        "period"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit_balance",
+          "type": "string"
+        },
+        {
+          "name": "credit_balance",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1109,
@@ -1880,14 +4164,26 @@ export const REFERENCE_DATA = {
         971
       ],
       "name": "Trial balance",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-balance-sheet": {
       "description": "Statement of assets, liabilities and equity at a point in time.",
       "fields": [
-        "date",
-        "period_end_date",
-        "inventory"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "inventory",
+          "type": "string"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1115,
@@ -1900,19 +4196,62 @@ export const REFERENCE_DATA = {
         989
       ],
       "name": "Balance sheet",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-ar-aging": {
       "description": "Outstanding customer invoices grouped by how overdue they are.",
       "fields": [
-        "date",
-        "customer_name",
-        "invoice_id",
-        "invoice_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "invoice_id",
+          "type": "id"
+        },
+        {
+          "name": "invoice_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "total_credit_sales",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1121,
@@ -1923,19 +4262,62 @@ export const REFERENCE_DATA = {
         989
       ],
       "name": "Accounts receivable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-ap-aging": {
       "description": "Outstanding supplier bills grouped by how overdue they are.",
       "fields": [
-        "date",
-        "supplier_name",
-        "bill_id",
-        "bill_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "supplier_name",
+          "type": "string"
+        },
+        {
+          "name": "bill_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_payable",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1127,
@@ -1946,19 +4328,70 @@ export const REFERENCE_DATA = {
         989
       ],
       "name": "Accounts payable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-bank-statements": {
       "description": "Bank account transaction lines used for cash-flow and reconciliation.",
       "fields": [
-        "date",
-        "transaction_date",
-        "account_id",
-        "description",
-        "amount",
-        "direction",
-        "balance",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date"
+        },
+        {
+          "name": "account_id",
+          "type": "id"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "direction",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "net_income",
+          "type": "string"
+        },
+        {
+          "name": "non_cash_charges",
+          "type": "string"
+        },
+        {
+          "name": "increase_in_working_capital",
+          "type": "string"
+        },
+        {
+          "name": "cash_out",
+          "type": "string"
+        },
+        {
+          "name": "cash_in",
+          "type": "string"
+        },
+        {
+          "name": "current_cash_balance",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1133,
@@ -1970,19 +4403,78 @@ export const REFERENCE_DATA = {
         1007
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1139,
@@ -1998,19 +4490,62 @@ export const REFERENCE_DATA = {
         1055
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1145,
@@ -2021,17 +4556,54 @@ export const REFERENCE_DATA = {
         1037
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-product-usage": {
       "description": "Product engagement and usage telemetry used for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1151,
@@ -2042,18 +4614,46 @@ export const REFERENCE_DATA = {
         1031
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-marketing-spend": {
       "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1157,
@@ -2064,18 +4664,42 @@ export const REFERENCE_DATA = {
         1049
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allmanufacturingds-production-output": {
       "description": "Production line output, downtime and quality counts per shift.",
       "fields": [
-        "date",
-        "line_id",
-        "shift",
-        "units_produced",
-        "units_defective",
-        "planned_runtime_min",
-        "actual_runtime_min"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "line_id",
+          "type": "id"
+        },
+        {
+          "name": "shift",
+          "type": "string"
+        },
+        {
+          "name": "units_produced",
+          "type": "string"
+        },
+        {
+          "name": "units_defective",
+          "type": "string"
+        },
+        {
+          "name": "planned_runtime_min",
+          "type": "string"
+        },
+        {
+          "name": "actual_runtime_min",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 1163,
@@ -2086,18 +4710,42 @@ export const REFERENCE_DATA = {
         1073
       ],
       "name": "Production output logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "Allmanufacturingds-inventory-records": {
       "description": "Inventory on hand, valuation and movement for working-capital analysis.",
       "fields": [
-        "date",
-        "sku",
-        "warehouse",
-        "quantity_on_hand",
-        "unit_cost",
-        "reorder_point",
-        "inventory_value"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "sku",
+          "type": "string"
+        },
+        {
+          "name": "warehouse",
+          "type": "string"
+        },
+        {
+          "name": "quantity_on_hand",
+          "type": "string"
+        },
+        {
+          "name": "unit_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "reorder_point",
+          "type": "string"
+        },
+        {
+          "name": "inventory_value",
+          "type": "string"
+        }
       ],
       "format": "Document",
       "id": 1169,
@@ -2108,7 +4756,10 @@ export const REFERENCE_DATA = {
         903
       ],
       "name": "Inventory records",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "healthcare.core.financial_statements": {
       "name": "Financial statements",
@@ -2124,21 +4775,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1086,
       "industry": "Healthcare",
       "segment": "core",
       "metricIds": [
         930,
+        936,
         942,
         948,
         960,
         954,
-        996
+        996,
+        966,
+        972,
+        978,
+        984,
+        990,
+        1002,
+        1008
       ]
     },
     "healthcare.core.hr_records": {
@@ -2154,11 +4828,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1080,
       "industry": "Healthcare",
       "segment": "core",
       "metricIds": [
+        1080,
         914
       ]
     },
@@ -2176,6 +4863,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1092,
       "industry": "Healthcare",
       "segment": "core",
@@ -2199,6 +4889,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1098,
       "industry": "Healthcare",
       "segment": "core",
@@ -2215,18 +4908,137 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "service_line",
-        "admissions",
-        "discharges",
-        "patient_days",
-        "occupied_beds"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "service_line",
+          "type": "string"
+        },
+        {
+          "name": "admissions",
+          "type": "string"
+        },
+        {
+          "name": "discharges",
+          "type": "string"
+        },
+        {
+          "name": "patient_days",
+          "type": "string"
+        },
+        {
+          "name": "occupied_beds",
+          "type": "decimal"
+        },
+        {
+          "name": "available_beds",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         911,
-        912
+        912,
+        1400
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
+    },
+    "HcProviderOps916CatalogOptionKey05": {
+      "id": 916,
+      "name": "De-identified provider operations summary",
+      "description": "Aggregated clinical and operational KPI inputs by period (no PHI).",
+      "industry": "Healthcare",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "occupied_beds",
+          "type": "decimal"
+        },
+        {
+          "name": "available_beds",
+          "type": "decimal"
+        },
+        {
+          "name": "or_time_used",
+          "type": "string"
+        },
+        {
+          "name": "or_time_available",
+          "type": "string"
+        },
+        {
+          "name": "ed_wait_time",
+          "type": "string"
+        },
+        {
+          "name": "case_mix_index",
+          "type": "string"
+        },
+        {
+          "name": "total_operating_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "discharges",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "net_patient_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "clean_claims",
+          "type": "string"
+        },
+        {
+          "name": "total_claims",
+          "type": "decimal"
+        },
+        {
+          "name": "inpatient_deaths",
+          "type": "string"
+        },
+        {
+          "name": "infections",
+          "type": "string"
+        },
+        {
+          "name": "patient_days",
+          "type": "string"
+        }
+      ],
+      "metricIds": [
+        1400,
+        1401,
+        1402,
+        1403,
+        1404,
+        1405,
+        1406,
+        1407,
+        1408
+      ],
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "HcSched912CatalogOptionKey02": {
       "id": 912,
@@ -2236,17 +5048,35 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "department",
-        "staffed_hours",
-        "scheduled_hours",
-        "encounter_count"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "department",
+          "type": "string"
+        },
+        {
+          "name": "staffed_hours",
+          "type": "decimal"
+        },
+        {
+          "name": "scheduled_hours",
+          "type": "decimal"
+        },
+        {
+          "name": "encounter_count",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         911,
         914
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "HcRcm913CatalogOptionKey03": {
       "id": 913,
@@ -2256,17 +5086,38 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "payer_category",
-        "claims_submitted",
-        "claims_denied",
-        "amount_billed",
-        "amount_collected"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "payer_category",
+          "type": "string"
+        },
+        {
+          "name": "claims_submitted",
+          "type": "string"
+        },
+        {
+          "name": "claims_denied",
+          "type": "string"
+        },
+        {
+          "name": "amount_billed",
+          "type": "decimal"
+        },
+        {
+          "name": "amount_collected",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         915
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "HcQual914CatalogOptionKey04": {
       "id": 914,
@@ -2276,27 +5127,66 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "cohort_id",
-        "discharges",
-        "readmissions_30d"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "cohort_id",
+          "type": "id"
+        },
+        {
+          "name": "discharges",
+          "type": "string"
+        },
+        {
+          "name": "readmissions_30d",
+          "type": "string"
+        }
       ],
       "metricIds": [
         913
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-general-ledger": {
       "description": "Complete record of all financial transactions posted to the chart of accounts.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "journal_entry_id",
-        "debit",
-        "credit",
-        "period",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "journal_entry_id",
+          "type": "id"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1104,
@@ -2314,17 +5204,38 @@ export const REFERENCE_DATA = {
         1038
       ],
       "name": "General ledger",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-trial-balance": {
       "description": "Period-end list of all ledger account balances used to prepare statements.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit_balance",
-        "credit_balance",
-        "period"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit_balance",
+          "type": "string"
+        },
+        {
+          "name": "credit_balance",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1110,
@@ -2336,14 +5247,26 @@ export const REFERENCE_DATA = {
         972
       ],
       "name": "Trial balance",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-balance-sheet": {
       "description": "Statement of assets, liabilities and equity at a point in time.",
       "fields": [
-        "date",
-        "period_end_date",
-        "inventory"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "inventory",
+          "type": "string"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1116,
@@ -2356,19 +5279,62 @@ export const REFERENCE_DATA = {
         990
       ],
       "name": "Balance sheet",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-ar-aging": {
       "description": "Outstanding customer invoices grouped by how overdue they are.",
       "fields": [
-        "date",
-        "customer_name",
-        "invoice_id",
-        "invoice_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "invoice_id",
+          "type": "id"
+        },
+        {
+          "name": "invoice_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "total_credit_sales",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1122,
@@ -2379,19 +5345,62 @@ export const REFERENCE_DATA = {
         990
       ],
       "name": "Accounts receivable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-ap-aging": {
       "description": "Outstanding supplier bills grouped by how overdue they are.",
       "fields": [
-        "date",
-        "supplier_name",
-        "bill_id",
-        "bill_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "supplier_name",
+          "type": "string"
+        },
+        {
+          "name": "bill_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_payable",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1128,
@@ -2402,19 +5411,70 @@ export const REFERENCE_DATA = {
         990
       ],
       "name": "Accounts payable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-bank-statements": {
       "description": "Bank account transaction lines used for cash-flow and reconciliation.",
       "fields": [
-        "date",
-        "transaction_date",
-        "account_id",
-        "description",
-        "amount",
-        "direction",
-        "balance",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date"
+        },
+        {
+          "name": "account_id",
+          "type": "id"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "direction",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "net_income",
+          "type": "string"
+        },
+        {
+          "name": "non_cash_charges",
+          "type": "string"
+        },
+        {
+          "name": "increase_in_working_capital",
+          "type": "string"
+        },
+        {
+          "name": "cash_out",
+          "type": "string"
+        },
+        {
+          "name": "cash_in",
+          "type": "string"
+        },
+        {
+          "name": "current_cash_balance",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1134,
@@ -2426,19 +5486,78 @@ export const REFERENCE_DATA = {
         1008
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1140,
@@ -2454,19 +5573,62 @@ export const REFERENCE_DATA = {
         1056
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1146,
@@ -2477,17 +5639,54 @@ export const REFERENCE_DATA = {
         1038
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-product-usage": {
       "description": "Product engagement and usage telemetry used for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1152,
@@ -2498,18 +5697,46 @@ export const REFERENCE_DATA = {
         1032
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allhealthcareds-marketing-spend": {
       "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1158,
@@ -2520,7 +5747,10 @@ export const REFERENCE_DATA = {
         1050
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "restaurants.core.financial_statements": {
       "name": "Financial statements",
@@ -2536,21 +5766,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1087,
       "industry": "Restaurants",
       "segment": "core",
       "metricIds": [
         931,
+        937,
         943,
         949,
         961,
         955,
-        997
+        997,
+        967,
+        973,
+        979,
+        985,
+        991,
+        1003,
+        1009
       ]
     },
     "restaurants.core.hr_records": {
@@ -2566,11 +5819,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1081,
       "industry": "Restaurants",
       "segment": "core",
       "metricIds": [
+        1083,
         922
       ]
     },
@@ -2588,6 +5854,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1093,
       "industry": "Restaurants",
       "segment": "core",
@@ -2611,6 +5880,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1099,
       "industry": "Restaurants",
       "segment": "core",
@@ -2627,15 +5899,70 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Transactional Data Template",
       "fields": [
-        "date",
-        "location_id",
-        "gross_sales",
-        "net_sales",
-        "food_sales",
-        "covers",
-        "avg_check_minutes",
-        "labor_hours",
-        "labor_cost"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "location_id",
+          "type": "id"
+        },
+        {
+          "name": "gross_sales",
+          "type": "string"
+        },
+        {
+          "name": "net_sales",
+          "type": "string"
+        },
+        {
+          "name": "food_sales",
+          "type": "string"
+        },
+        {
+          "name": "covers",
+          "type": "string"
+        },
+        {
+          "name": "avg_check_minutes",
+          "type": "string"
+        },
+        {
+          "name": "labor_hours",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "food_cogs",
+          "type": "string"
+        },
+        {
+          "name": "food_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor",
+          "type": "decimal"
+        },
+        {
+          "name": "total_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "table_turnover",
+          "type": "string"
+        },
+        {
+          "name": "current_sss",
+          "type": "string"
+        },
+        {
+          "name": "prior_sss",
+          "type": "string"
+        }
       ],
       "metricIds": [
         921,
@@ -2643,7 +5970,10 @@ export const REFERENCE_DATA = {
         923,
         925
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "daily",
+      "grain": "day"
     },
     "RestInv922CatalogOptionKey02": {
       "id": 922,
@@ -2653,19 +5983,43 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "location_id",
-        "category",
-        "quantity_on_hand",
-        "usage_value",
-        "waste_value",
-        "spoilage_value"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "location_id",
+          "type": "id"
+        },
+        {
+          "name": "category",
+          "type": "string"
+        },
+        {
+          "name": "quantity_on_hand",
+          "type": "string"
+        },
+        {
+          "name": "usage_value",
+          "type": "string"
+        },
+        {
+          "name": "waste_value",
+          "type": "string"
+        },
+        {
+          "name": "spoilage_value",
+          "type": "string"
+        }
       ],
       "metricIds": [
         921,
         924
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "RestLabor923CatalogOptionKey03": {
       "id": 923,
@@ -2675,29 +6029,74 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "location_id",
-        "role",
-        "scheduled_hours",
-        "actual_hours",
-        "labor_cost"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "location_id",
+          "type": "id"
+        },
+        {
+          "name": "role",
+          "type": "string"
+        },
+        {
+          "name": "scheduled_hours",
+          "type": "decimal"
+        },
+        {
+          "name": "actual_hours",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         922
       ],
-      "lastUpdated": "2026-06-14 00:00:00"
+      "lastUpdated": "2026-06-14 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "Allrestaurantsds-general-ledger": {
       "description": "Complete record of all financial transactions posted to the chart of accounts.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "journal_entry_id",
-        "debit",
-        "credit",
-        "period",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "journal_entry_id",
+          "type": "id"
+        },
+        {
+          "name": "debit",
+          "type": "string"
+        },
+        {
+          "name": "credit",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1105,
@@ -2715,17 +6114,38 @@ export const REFERENCE_DATA = {
         1039
       ],
       "name": "General ledger",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-trial-balance": {
       "description": "Period-end list of all ledger account balances used to prepare statements.",
       "fields": [
-        "date",
-        "account_code",
-        "account_name",
-        "debit_balance",
-        "credit_balance",
-        "period"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "debit_balance",
+          "type": "string"
+        },
+        {
+          "name": "credit_balance",
+          "type": "string"
+        },
+        {
+          "name": "period",
+          "type": "enum"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1111,
@@ -2737,14 +6157,26 @@ export const REFERENCE_DATA = {
         973
       ],
       "name": "Trial balance",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-balance-sheet": {
       "description": "Statement of assets, liabilities and equity at a point in time.",
       "fields": [
-        "date",
-        "period_end_date",
-        "inventory"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "inventory",
+          "type": "string"
+        }
       ],
       "format": "Financial Statement Template",
       "id": 1117,
@@ -2757,19 +6189,62 @@ export const REFERENCE_DATA = {
         991
       ],
       "name": "Balance sheet",
-      "template": "Financial Statement Template"
+      "template": "Financial Statement Template",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-ar-aging": {
       "description": "Outstanding customer invoices grouped by how overdue they are.",
       "fields": [
-        "date",
-        "customer_name",
-        "invoice_id",
-        "invoice_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_name",
+          "type": "string"
+        },
+        {
+          "name": "invoice_id",
+          "type": "id"
+        },
+        {
+          "name": "invoice_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "total_credit_sales",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1123,
@@ -2780,19 +6255,62 @@ export const REFERENCE_DATA = {
         991
       ],
       "name": "Accounts receivable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-ap-aging": {
       "description": "Outstanding supplier bills grouped by how overdue they are.",
       "fields": [
-        "date",
-        "supplier_name",
-        "bill_id",
-        "bill_date",
-        "due_date",
-        "amount_due",
-        "days_outstanding",
-        "aging_bucket"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "supplier_name",
+          "type": "string"
+        },
+        {
+          "name": "bill_id",
+          "type": "id"
+        },
+        {
+          "name": "bill_date",
+          "type": "date"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "amount_due",
+          "type": "decimal"
+        },
+        {
+          "name": "days_outstanding",
+          "type": "string"
+        },
+        {
+          "name": "aging_bucket",
+          "type": "string"
+        },
+        {
+          "name": "accounts_payable",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "days",
+          "type": "string"
+        },
+        {
+          "name": "days_inventory_outstanding",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1129,
@@ -2803,19 +6321,70 @@ export const REFERENCE_DATA = {
         991
       ],
       "name": "Accounts payable aging",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-bank-statements": {
       "description": "Bank account transaction lines used for cash-flow and reconciliation.",
       "fields": [
-        "date",
-        "transaction_date",
-        "account_id",
-        "description",
-        "amount",
-        "direction",
-        "balance",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date"
+        },
+        {
+          "name": "account_id",
+          "type": "id"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "direction",
+          "type": "string"
+        },
+        {
+          "name": "balance",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "net_income",
+          "type": "string"
+        },
+        {
+          "name": "non_cash_charges",
+          "type": "string"
+        },
+        {
+          "name": "increase_in_working_capital",
+          "type": "string"
+        },
+        {
+          "name": "cash_out",
+          "type": "string"
+        },
+        {
+          "name": "cash_in",
+          "type": "string"
+        },
+        {
+          "name": "current_cash_balance",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1135,
@@ -2827,19 +6396,78 @@ export const REFERENCE_DATA = {
         1009
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1141,
@@ -2855,19 +6483,62 @@ export const REFERENCE_DATA = {
         1057
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1147,
@@ -2878,17 +6549,54 @@ export const REFERENCE_DATA = {
         1039
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-product-usage": {
       "description": "Product engagement and usage telemetry used for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1153,
@@ -2899,18 +6607,46 @@ export const REFERENCE_DATA = {
         1033
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allrestaurantsds-marketing-spend": {
       "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1159,
@@ -2921,7 +6657,10 @@ export const REFERENCE_DATA = {
         1051
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "life_sciences.core.financial_statements": {
       "name": "Financial statements",
@@ -2937,21 +6676,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1320,
       "industry": "Life Sciences",
       "segment": "core",
       "metricIds": [
         1300,
+        1301,
         1302,
         1303,
         1305,
         1304,
-        1311
+        1311,
+        1306,
+        1307,
+        1308,
+        1309,
+        1310,
+        1312,
+        1313
       ]
     },
     "life_sciences.core.hr_records": {
@@ -2967,12 +6729,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1321,
       "industry": "Life Sciences",
       "segment": "core",
       "metricIds": [
-        1305
+        1314
       ]
     },
     "life_sciences.core.accounting_software": {
@@ -2989,6 +6763,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1322,
       "industry": "Life Sciences",
       "segment": "core",
@@ -3012,6 +6789,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1323,
       "industry": "Life Sciences",
       "segment": "core",
@@ -3028,20 +6808,48 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "program_id",
-        "phase",
-        "patients_enrolled",
-        "phases_passed",
-        "phases_attempted",
-        "total_trial_cost"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "program_id",
+          "type": "id"
+        },
+        {
+          "name": "phase",
+          "type": "string"
+        },
+        {
+          "name": "patients_enrolled",
+          "type": "string"
+        },
+        {
+          "name": "phases_passed",
+          "type": "string"
+        },
+        {
+          "name": "phases_attempted",
+          "type": "string"
+        },
+        {
+          "name": "total_trial_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "pipeline_active_count",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1330,
         1331,
         1332
       ],
-      "lastUpdated": "2026-06-20 00:00:00"
+      "lastUpdated": "2026-06-20 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "life_sciences.supply_chain.production_batch_records": {
       "id": 1341,
@@ -3051,18 +6859,39 @@ export const REFERENCE_DATA = {
       "format": "Transactional Data Template",
       "template": "Transactional Data Template",
       "fields": [
-        "date",
-        "batch_id",
-        "good_units",
-        "total_units",
-        "total_cogs",
-        "units_produced"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "batch_id",
+          "type": "id"
+        },
+        {
+          "name": "good_units",
+          "type": "string"
+        },
+        {
+          "name": "total_units",
+          "type": "decimal"
+        },
+        {
+          "name": "total_cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "units_produced",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1333,
         1334
       ],
-      "lastUpdated": "2026-06-20 00:00:00"
+      "lastUpdated": "2026-06-20 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "banking.core.financial_statements": {
       "name": "Financial statements",
@@ -3078,21 +6907,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1515,
       "industry": "Banking",
       "segment": "core",
       "metricIds": [
         1500,
+        1501,
         1502,
         1503,
         1505,
         1504,
-        1511
+        1511,
+        1506,
+        1507,
+        1508,
+        1509,
+        1510,
+        1512,
+        1513
       ]
     },
     "banking.core.hr_records": {
@@ -3108,12 +6960,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1516,
       "industry": "Banking",
       "segment": "core",
       "metricIds": [
-        1505
+        1514
       ]
     },
     "banking.core.accounting_software": {
@@ -3130,6 +6994,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1517,
       "industry": "Banking",
       "segment": "core",
@@ -3153,6 +7020,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1518,
       "industry": "Banking",
       "segment": "core",
@@ -3170,15 +7040,42 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "entity_segment",
-        "net_interest_income",
-        "average_earning_assets",
-        "non_performing_loans",
-        "total_loans",
-        "total_deposits",
-        "operating_expense",
-        "total_revenue"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "entity_segment",
+          "type": "string"
+        },
+        {
+          "name": "net_interest_income",
+          "type": "string"
+        },
+        {
+          "name": "average_earning_assets",
+          "type": "string"
+        },
+        {
+          "name": "non_performing_loans",
+          "type": "string"
+        },
+        {
+          "name": "total_loans",
+          "type": "decimal"
+        },
+        {
+          "name": "total_deposits",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expense",
+          "type": "string"
+        },
+        {
+          "name": "total_revenue",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1530,
@@ -3194,7 +7091,10 @@ export const REFERENCE_DATA = {
         1567,
         1568
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "financial_services.core.financial_statements": {
       "name": "Financial statements",
@@ -3210,21 +7110,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1615,
       "industry": "Financial Services",
       "segment": "core",
       "metricIds": [
         1600,
+        1601,
         1602,
         1603,
         1605,
         1604,
-        1611
+        1611,
+        1606,
+        1607,
+        1608,
+        1609,
+        1610,
+        1612,
+        1613
       ]
     },
     "financial_services.core.hr_records": {
@@ -3240,12 +7163,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1616,
       "industry": "Financial Services",
       "segment": "core",
       "metricIds": [
-        1605
+        1614
       ]
     },
     "financial_services.core.accounting_software": {
@@ -3262,6 +7197,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1617,
       "industry": "Financial Services",
       "segment": "core",
@@ -3285,6 +7223,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1618,
       "industry": "Financial Services",
       "segment": "core",
@@ -3302,29 +7243,121 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "division",
-        "trading_revenue",
-        "advisory_fee_revenue",
-        "total_revenue"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "division",
+          "type": "string"
+        },
+        {
+          "name": "trading_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "advisory_fee_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "market_making_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "value_at_risk_99",
+          "type": "string"
+        },
+        {
+          "name": "stressed_var_99",
+          "type": "string"
+        },
+        {
+          "name": "prime_brokerage_balance_growth",
+          "type": "string"
+        },
+        {
+          "name": "trading_venue_volume_growth",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1535,
-        1553
+        1553,
+        1590,
+        1591,
+        1592,
+        1593,
+        1594,
+        1615
       ],
-      "lastUpdated": "2026-06-24 00:00:00"
+      "lastUpdated": "2026-06-24 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "daily",
+      "grain": "day"
     },
     "Allfinancesaas-subscription-billing": {
       "description": "Subscription and billing records for recurring-revenue analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "plan_name",
-        "mrr",
-        "billing_period",
-        "status",
-        "start_date",
-        "end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1570,
@@ -3334,22 +7367,66 @@ export const REFERENCE_DATA = {
         1580,
         1581,
         1582,
-        1583
+        1583,
+        1587
       ],
       "name": "Subscription billing records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allfinancesaas-crm-pipeline": {
       "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
       "fields": [
-        "date",
-        "opportunity_id",
-        "account_name",
-        "stage",
-        "amount",
-        "close_date",
-        "owner",
-        "probability"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1571,
@@ -3360,17 +7437,54 @@ export const REFERENCE_DATA = {
         1584
       ],
       "name": "CRM / Sales pipeline",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allfinancesaas-product-usage": {
       "description": "Product engagement telemetry for retention and churn analysis.",
       "fields": [
-        "date",
-        "customer_id",
-        "active_users",
-        "sessions",
-        "feature_adoption",
-        "usage_minutes"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
       ],
       "format": "Software",
       "id": 1572,
@@ -3381,18 +7495,54 @@ export const REFERENCE_DATA = {
         1583
       ],
       "name": "Product usage logs",
-      "template": "Document"
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "Allfinancesaas-marketing-spend": {
       "description": "Marketing and sales spend by channel for CAC and efficiency.",
       "fields": [
-        "date",
-        "channel",
-        "campaign",
-        "spend",
-        "leads",
-        "new_customers",
-        "currency"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
       ],
       "format": "Transactional Data Template",
       "id": 1573,
@@ -3403,7 +7553,10 @@ export const REFERENCE_DATA = {
         1585
       ],
       "name": "Marketing spend records",
-      "template": "Transactional Data Template"
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "funds.core.financial_statements": {
       "name": "Financial statements",
@@ -3419,21 +7572,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1918,
       "industry": "Funds",
       "segment": "core",
       "metricIds": [
         1970,
+        1971,
         1972,
         1973,
         1975,
         1974,
-        1981
+        1981,
+        1976,
+        1977,
+        1978,
+        1979,
+        1980,
+        1982,
+        1983
       ]
     },
     "funds.core.hr_records": {
@@ -3449,12 +7625,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1919,
       "industry": "Funds",
       "segment": "core",
       "metricIds": [
-        1975
+        1984
       ]
     },
     "funds.core.accounting_software": {
@@ -3471,6 +7659,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1920,
       "industry": "Funds",
       "segment": "core",
@@ -3494,6 +7685,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1921,
       "industry": "Funds",
       "segment": "core",
@@ -3511,19 +7705,58 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "fund_vehicle_id",
-        "book_type",
-        "assets_under_management",
-        "inflows",
-        "outflows",
-        "beginning_aum",
-        "management_fees",
-        "average_aum",
-        "custody_fees",
-        "average_auc",
-        "failed_settlements",
-        "total_settlement_instructions"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "fund_vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "book_type",
+          "type": "enum"
+        },
+        {
+          "name": "assets_under_management",
+          "type": "string"
+        },
+        {
+          "name": "inflows",
+          "type": "string"
+        },
+        {
+          "name": "outflows",
+          "type": "string"
+        },
+        {
+          "name": "beginning_aum",
+          "type": "string"
+        },
+        {
+          "name": "management_fees",
+          "type": "string"
+        },
+        {
+          "name": "average_aum",
+          "type": "string"
+        },
+        {
+          "name": "custody_fees",
+          "type": "string"
+        },
+        {
+          "name": "average_auc",
+          "type": "string"
+        },
+        {
+          "name": "failed_settlements",
+          "type": "string"
+        },
+        {
+          "name": "total_settlement_instructions",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1900,
@@ -3534,7 +7767,10 @@ export const REFERENCE_DATA = {
         1913,
         1914
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "funds.fund.fund_performance_summary": {
       "id": 1917,
@@ -3545,16 +7781,54 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "fund_vehicle_id",
-        "fund_irr",
-        "distributions",
-        "nav",
-        "paid_in_capital",
-        "called_capital",
-        "committed_capital",
-        "performance_fees",
-        "total_fund_revenue"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "fund_vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "fund_irr",
+          "type": "string"
+        },
+        {
+          "name": "distributions",
+          "type": "string"
+        },
+        {
+          "name": "nav",
+          "type": "string"
+        },
+        {
+          "name": "paid_in_capital",
+          "type": "string"
+        },
+        {
+          "name": "called_capital",
+          "type": "string"
+        },
+        {
+          "name": "committed_capital",
+          "type": "string"
+        },
+        {
+          "name": "performance_fees",
+          "type": "string"
+        },
+        {
+          "name": "total_fund_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "liquidity_gate_frequency",
+          "type": "string"
+        },
+        {
+          "name": "strategy_return_volatility",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1903,
@@ -3567,7 +7841,10 @@ export const REFERENCE_DATA = {
         1910,
         1922
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "quarterly",
+      "grain": "quarter"
     },
     "funds.operations.investment_program_summary": {
       "id": 1936,
@@ -3578,27 +7855,98 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "fields": [
-        "date",
-        "reporting_entity_id",
-        "closed_investments",
-        "qualified_opportunities",
-        "deployed_capital",
-        "new_investments",
-        "follow_on_investments",
-        "eligible_portfolio_companies",
-        "impaired_carrying_value",
-        "portfolio_cost_basis",
-        "deals_with_co_investors",
-        "total_closed_deals",
-        "committed_capital",
-        "fundraising_target",
-        "management_fees",
-        "operating_expenses",
-        "program_investments",
-        "program_participants",
-        "inbound_qualified_opportunities",
-        "total_qualified_opportunities",
-        "active_portfolio_company_count"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "reporting_entity_id",
+          "type": "id"
+        },
+        {
+          "name": "closed_investments",
+          "type": "string"
+        },
+        {
+          "name": "qualified_opportunities",
+          "type": "string"
+        },
+        {
+          "name": "deployed_capital",
+          "type": "string"
+        },
+        {
+          "name": "new_investments",
+          "type": "string"
+        },
+        {
+          "name": "follow_on_investments",
+          "type": "string"
+        },
+        {
+          "name": "eligible_portfolio_companies",
+          "type": "string"
+        },
+        {
+          "name": "impaired_carrying_value",
+          "type": "string"
+        },
+        {
+          "name": "portfolio_cost_basis",
+          "type": "decimal"
+        },
+        {
+          "name": "deals_with_co_investors",
+          "type": "string"
+        },
+        {
+          "name": "total_closed_deals",
+          "type": "decimal"
+        },
+        {
+          "name": "committed_capital",
+          "type": "string"
+        },
+        {
+          "name": "fundraising_target",
+          "type": "string"
+        },
+        {
+          "name": "management_fees",
+          "type": "string"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "string"
+        },
+        {
+          "name": "program_investments",
+          "type": "string"
+        },
+        {
+          "name": "program_participants",
+          "type": "string"
+        },
+        {
+          "name": "inbound_qualified_opportunities",
+          "type": "string"
+        },
+        {
+          "name": "total_qualified_opportunities",
+          "type": "decimal"
+        },
+        {
+          "name": "active_portfolio_company_count",
+          "type": "decimal"
+        },
+        {
+          "name": "new_investments_count",
+          "type": "decimal"
+        },
+        {
+          "name": "qualified_opportunities_count",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1923,
@@ -3614,7 +7962,10 @@ export const REFERENCE_DATA = {
         1933,
         1934
       ],
-      "lastUpdated": "2026-06-28 00:00:00"
+      "lastUpdated": "2026-06-28 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "quarterly",
+      "grain": "quarter"
     },
     "trusts.core.financial_statements": {
       "name": "Financial statements",
@@ -3630,21 +7981,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1946,
       "industry": "Trusts",
       "segment": "core",
       "metricIds": [
         1985,
+        1986,
         1987,
         1988,
         1990,
         1989,
-        1996
+        1996,
+        1991,
+        1992,
+        1993,
+        1994,
+        1995,
+        1997,
+        1998
       ]
     },
     "trusts.core.hr_records": {
@@ -3660,12 +8034,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1947,
       "industry": "Trusts",
       "segment": "core",
       "metricIds": [
-        1990
+        1999
       ]
     },
     "trusts.core.accounting_software": {
@@ -3682,6 +8068,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1948,
       "industry": "Trusts",
       "segment": "core",
@@ -3705,6 +8094,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1949,
       "industry": "Trusts",
       "segment": "core",
@@ -3722,17 +8114,50 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "trust_vehicle_id",
-        "vehicle_type",
-        "funds_from_operations",
-        "ffo",
-        "distributions",
-        "current_noi",
-        "prior_noi",
-        "trust_assets_under_administration",
-        "trustee_fees",
-        "average_trust_aua"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "trust_vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "vehicle_type",
+          "type": "enum"
+        },
+        {
+          "name": "funds_from_operations",
+          "type": "decimal"
+        },
+        {
+          "name": "ffo",
+          "type": "string"
+        },
+        {
+          "name": "distributions",
+          "type": "string"
+        },
+        {
+          "name": "current_noi",
+          "type": "string"
+        },
+        {
+          "name": "prior_noi",
+          "type": "string"
+        },
+        {
+          "name": "trust_assets_under_administration",
+          "type": "decimal"
+        },
+        {
+          "name": "trustee_fees",
+          "type": "string"
+        },
+        {
+          "name": "average_trust_aua",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1940,
@@ -3741,7 +8166,10 @@ export const REFERENCE_DATA = {
         1943,
         1944
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "quarterly",
+      "grain": "quarter"
     },
     "insurance.core.financial_statements": {
       "name": "Financial statements",
@@ -3757,21 +8185,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1621,
       "industry": "Insurance",
       "segment": "core",
       "metricIds": [
         1620,
+        1621,
         1622,
         1623,
         1625,
         1624,
-        1631
+        1631,
+        1626,
+        1627,
+        1628,
+        1629,
+        1630,
+        1632,
+        1633
       ]
     },
     "insurance.core.hr_records": {
@@ -3787,12 +8238,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1622,
       "industry": "Insurance",
       "segment": "core",
       "metricIds": [
-        1625
+        1634
       ]
     },
     "insurance.core.accounting_software": {
@@ -3809,6 +8272,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1623,
       "industry": "Insurance",
       "segment": "core",
@@ -3832,6 +8298,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1624,
       "industry": "Insurance",
       "segment": "core",
@@ -3849,16 +8318,46 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "line_of_business",
-        "entity_segment",
-        "incurred_losses",
-        "underwriting_expense",
-        "earned_premiums",
-        "premium_growth",
-        "benefits_paid",
-        "catastrophe_losses",
-        "prior_reserve_development"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "line_of_business",
+          "type": "string"
+        },
+        {
+          "name": "entity_segment",
+          "type": "string"
+        },
+        {
+          "name": "incurred_losses",
+          "type": "string"
+        },
+        {
+          "name": "underwriting_expense",
+          "type": "string"
+        },
+        {
+          "name": "earned_premiums",
+          "type": "string"
+        },
+        {
+          "name": "premium_growth",
+          "type": "string"
+        },
+        {
+          "name": "benefits_paid",
+          "type": "string"
+        },
+        {
+          "name": "catastrophe_losses",
+          "type": "string"
+        },
+        {
+          "name": "prior_reserve_development",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1547,
@@ -3868,7 +8367,10 @@ export const REFERENCE_DATA = {
         1574,
         1575
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "quarterly",
+      "grain": "quarter"
     },
     "consumer_finance.core.financial_statements": {
       "name": "Financial statements",
@@ -3884,21 +8386,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1715,
       "industry": "Consumer Finance",
       "segment": "core",
       "metricIds": [
         1700,
+        1701,
         1702,
         1703,
         1705,
         1704,
-        1711
+        1711,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1712,
+        1713
       ]
     },
     "consumer_finance.core.hr_records": {
@@ -3914,12 +8439,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1716,
       "industry": "Consumer Finance",
       "segment": "core",
       "metricIds": [
-        1705
+        1714
       ]
     },
     "consumer_finance.core.accounting_software": {
@@ -3936,6 +8473,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1717,
       "industry": "Consumer Finance",
       "segment": "core",
@@ -3959,6 +8499,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1718,
       "industry": "Consumer Finance",
       "segment": "core",
@@ -3976,20 +8519,62 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "product_line",
-        "interest_income",
-        "average_receivables",
-        "net_charge_offs",
-        "delinquent_balance_30_plus",
-        "total_receivables",
-        "origination_volume_growth",
-        "payment_volume",
-        "bnpl_origination_growth",
-        "embedded_channel_revenue",
-        "total_consumer_finance_revenue",
-        "rtp_payment_volume",
-        "merchant_acquiring_volume"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "product_line",
+          "type": "string"
+        },
+        {
+          "name": "interest_income",
+          "type": "string"
+        },
+        {
+          "name": "average_receivables",
+          "type": "string"
+        },
+        {
+          "name": "net_charge_offs",
+          "type": "string"
+        },
+        {
+          "name": "delinquent_balance_30_plus",
+          "type": "string"
+        },
+        {
+          "name": "total_receivables",
+          "type": "decimal"
+        },
+        {
+          "name": "origination_volume_growth",
+          "type": "decimal"
+        },
+        {
+          "name": "payment_volume",
+          "type": "decimal"
+        },
+        {
+          "name": "bnpl_origination_growth",
+          "type": "string"
+        },
+        {
+          "name": "embedded_channel_revenue",
+          "type": "enum"
+        },
+        {
+          "name": "total_consumer_finance_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "rtp_payment_volume",
+          "type": "decimal"
+        },
+        {
+          "name": "merchant_acquiring_volume",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1720,
@@ -4002,7 +8587,10 @@ export const REFERENCE_DATA = {
         1727,
         1728
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "consumer_finance.residential_mortgage.residential_mortgage_book_summary": {
       "id": 1794,
@@ -4013,14 +8601,38 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "product_line",
-        "interest_income",
-        "average_mortgage_balances",
-        "delinquent_balance_30_plus",
-        "total_mortgage_balances",
-        "weighted_ltv_numerator",
-        "origination_volume"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "product_line",
+          "type": "string"
+        },
+        {
+          "name": "interest_income",
+          "type": "string"
+        },
+        {
+          "name": "average_mortgage_balances",
+          "type": "string"
+        },
+        {
+          "name": "delinquent_balance_30_plus",
+          "type": "string"
+        },
+        {
+          "name": "total_mortgage_balances",
+          "type": "decimal"
+        },
+        {
+          "name": "weighted_ltv_numerator",
+          "type": "string"
+        },
+        {
+          "name": "origination_volume",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1790,
@@ -4028,7 +8640,10 @@ export const REFERENCE_DATA = {
         1792,
         1793
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "commercial_finance.core.financial_statements": {
       "name": "Financial statements",
@@ -4044,21 +8659,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1755,
       "industry": "Commercial Finance",
       "segment": "core",
       "metricIds": [
         1740,
+        1741,
         1742,
         1743,
         1745,
         1744,
-        1751
+        1751,
+        1746,
+        1747,
+        1748,
+        1749,
+        1750,
+        1752,
+        1753
       ]
     },
     "commercial_finance.core.hr_records": {
@@ -4074,12 +8712,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1756,
       "industry": "Commercial Finance",
       "segment": "core",
       "metricIds": [
-        1745
+        1754
       ]
     },
     "commercial_finance.core.accounting_software": {
@@ -4096,6 +8746,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1757,
       "industry": "Commercial Finance",
       "segment": "core",
@@ -4119,6 +8772,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1758,
       "industry": "Commercial Finance",
       "segment": "core",
@@ -4136,20 +8792,62 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "entity_segment",
-        "outstanding_commercial_loans",
-        "interest_income",
-        "average_commercial_loans",
-        "non_performing_commercial_loans",
-        "total_commercial_loans",
-        "net_charge_offs",
-        "delinquent_balance_30_plus",
-        "origination_volume",
-        "weighted_ltv_numerator",
-        "drawn_commitments",
-        "total_commitments",
-        "sustainable_loan_balance"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "entity_segment",
+          "type": "string"
+        },
+        {
+          "name": "outstanding_commercial_loans",
+          "type": "string"
+        },
+        {
+          "name": "interest_income",
+          "type": "string"
+        },
+        {
+          "name": "average_commercial_loans",
+          "type": "string"
+        },
+        {
+          "name": "non_performing_commercial_loans",
+          "type": "string"
+        },
+        {
+          "name": "total_commercial_loans",
+          "type": "decimal"
+        },
+        {
+          "name": "net_charge_offs",
+          "type": "string"
+        },
+        {
+          "name": "delinquent_balance_30_plus",
+          "type": "string"
+        },
+        {
+          "name": "origination_volume",
+          "type": "decimal"
+        },
+        {
+          "name": "weighted_ltv_numerator",
+          "type": "string"
+        },
+        {
+          "name": "drawn_commitments",
+          "type": "string"
+        },
+        {
+          "name": "total_commitments",
+          "type": "decimal"
+        },
+        {
+          "name": "sustainable_loan_balance",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1760,
@@ -4164,7 +8862,10 @@ export const REFERENCE_DATA = {
         1774,
         1777
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "commercial_finance.commercial_lending.commercial_treasury_summary": {
       "id": 1778,
@@ -4175,17 +8876,35 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "entity_segment",
-        "treasury_fee_revenue",
-        "average_commercial_deposits",
-        "commercial_payment_volume"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "entity_segment",
+          "type": "string"
+        },
+        {
+          "name": "treasury_fee_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "average_commercial_deposits",
+          "type": "string"
+        },
+        {
+          "name": "commercial_payment_volume",
+          "type": "decimal"
+        }
       ],
       "metricIds": [
         1775,
         1776
       ],
-      "lastUpdated": "2026-06-25 00:00:00"
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     },
     "retail.core.financial_statements": {
       "name": "Financial statements",
@@ -4201,21 +8920,44 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [
-        "date",
-        "statement_type",
-        "period_start_date",
-        "period_end_date"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
       ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1641,
       "industry": "Retail",
       "segment": "core",
       "metricIds": [
         1640,
+        1641,
         1642,
         1643,
         1645,
         1644,
-        1651
+        1651,
+        1646,
+        1647,
+        1648,
+        1649,
+        1650,
+        1652,
+        1653
       ]
     },
     "retail.core.hr_records": {
@@ -4231,12 +8973,24 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1642,
       "industry": "Retail",
       "segment": "core",
       "metricIds": [
-        1645
+        1654
       ]
     },
     "retail.core.accounting_software": {
@@ -4253,6 +9007,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1643,
       "industry": "Retail",
       "segment": "core",
@@ -4276,6 +9033,9 @@ export const REFERENCE_DATA = {
         "Liability_Amounts"
       ],
       "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
       "id": 1644,
       "industry": "Retail",
       "segment": "core",
@@ -4293,21 +9053,48 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "store_id",
-        "current_period_sales",
-        "prior_period_sales",
-        "net_sales",
-        "selling_square_footage",
-        "transactions",
-        "visitors"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "store_id",
+          "type": "id"
+        },
+        {
+          "name": "current_period_sales",
+          "type": "enum"
+        },
+        {
+          "name": "prior_period_sales",
+          "type": "enum"
+        },
+        {
+          "name": "net_sales",
+          "type": "string"
+        },
+        {
+          "name": "selling_square_footage",
+          "type": "string"
+        },
+        {
+          "name": "transactions",
+          "type": "string"
+        },
+        {
+          "name": "visitors",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1670,
         1673,
         1674
       ],
-      "lastUpdated": "2026-06-24 00:00:00"
+      "lastUpdated": "2026-06-24 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "weekly",
+      "grain": "week"
     },
     "retail.financial.inventory_summary": {
       "id": 1681,
@@ -4318,18 +9105,39 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "fields": [
-        "date",
-        "banner",
-        "cogs",
-        "average_inventory_value",
-        "shrinkage_value",
-        "sales"
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "banner",
+          "type": "string"
+        },
+        {
+          "name": "cogs",
+          "type": "string"
+        },
+        {
+          "name": "average_inventory_value",
+          "type": "string"
+        },
+        {
+          "name": "shrinkage_value",
+          "type": "string"
+        },
+        {
+          "name": "sales",
+          "type": "string"
+        }
       ],
       "metricIds": [
         1671,
         1672
       ],
-      "lastUpdated": "2026-06-24 00:00:00"
+      "lastUpdated": "2026-06-24 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
     }
   }
 };

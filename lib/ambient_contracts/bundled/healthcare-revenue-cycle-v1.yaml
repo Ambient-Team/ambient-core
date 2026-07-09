@@ -2,6 +2,7 @@ product:
   name: Healthcare Revenue Cycle
   version: 1.0
   owner: analytics
+  consumption_id: HEALTHCARE_REVENUE_CYCLE
   description: "De-identified revenue-cycle Gold product: claim denial and clean-claim rates and AR days by payer category. No member identifiers."
   domain: Healthcare
   type: Derived

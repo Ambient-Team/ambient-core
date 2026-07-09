@@ -1,0 +1,17 @@
+industry: Aviation
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '5110'
+  naics:
+    revision: '2022'
+    primary: '481111'
+  nace:
+    revision: Rev.2
+    primary: '51.10'
+  gics:
+    revision: '2023'
+    primary: '203020'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

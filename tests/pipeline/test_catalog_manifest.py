@@ -12,7 +12,7 @@ def test_manifest_loads_from_repo() -> None:
     path = resolve_manifest_path()
     assert path.is_file()
     manifest = load_manifest()
-    assert manifest.version == 1
+    assert manifest.version == 3
     assert len(manifest.metrics) >= 1
 
 

@@ -9,11 +9,7 @@ export const BENCHMARKS = {
     "healthyLow": 1.2,
     "healthyHigh": 2,
     "higherIsBetter": true,
-    "source": "General corporate-finance norms",
-    "industries": [
-      "All",
-      "Corporate Finance"
-    ]
+    "source": "General corporate-finance norms"
   },
   "quick_ratio": {
     "label": "Quick Ratio",
@@ -21,11 +17,7 @@ export const BENCHMARKS = {
     "healthyLow": 1,
     "healthyHigh": 1.5,
     "higherIsBetter": true,
-    "source": "General corporate-finance norms",
-    "industries": [
-      "All",
-      "Manufacturing"
-    ]
+    "source": "General corporate-finance norms"
   },
   "working_capital": {
     "label": "Working Capital",
@@ -33,10 +25,7 @@ export const BENCHMARKS = {
     "healthyLow": 100000,
     "healthyHigh": 1000000,
     "higherIsBetter": true,
-    "source": "Scale-dependent guidance",
-    "industries": [
-      "All"
-    ]
+    "source": "Scale-dependent guidance"
   },
   "gross_margin": {
     "label": "Gross Profit Margin",
@@ -44,12 +33,7 @@ export const BENCHMARKS = {
     "healthyLow": 40,
     "healthyHigh": 70,
     "higherIsBetter": true,
-    "source": "Cross-industry median bands",
-    "industries": [
-      "All",
-      "SaaS",
-      "Manufacturing"
-    ]
+    "source": "Cross-industry median bands"
   },
   "operating_margin": {
     "label": "Operating Margin",
@@ -57,10 +41,7 @@ export const BENCHMARKS = {
     "healthyLow": 10,
     "healthyHigh": 25,
     "higherIsBetter": true,
-    "source": "Cross-industry median bands",
-    "industries": [
-      "All"
-    ]
+    "source": "Cross-industry median bands"
   },
   "ebitda_margin": {
     "label": "EBITDA Margin",
@@ -68,10 +49,7 @@ export const BENCHMARKS = {
     "healthyLow": 15,
     "healthyHigh": 30,
     "higherIsBetter": true,
-    "source": "Cross-industry median bands",
-    "industries": [
-      "All"
-    ]
+    "source": "Cross-industry median bands"
   },
   "net_margin": {
     "label": "Net Profit Margin",
@@ -79,10 +57,7 @@ export const BENCHMARKS = {
     "healthyLow": 8,
     "healthyHigh": 20,
     "higherIsBetter": true,
-    "source": "Cross-industry median bands",
-    "industries": [
-      "All"
-    ]
+    "source": "Cross-industry median bands"
   },
   "revenue_growth": {
     "label": "Revenue Growth Rate",
@@ -90,11 +65,7 @@ export const BENCHMARKS = {
     "healthyLow": 10,
     "healthyHigh": 30,
     "higherIsBetter": true,
-    "source": "Growth-stage guidance",
-    "industries": [
-      "All",
-      "SaaS"
-    ]
+    "source": "Growth-stage guidance"
   },
   "dso": {
     "label": "Days Sales Outstanding",
@@ -102,10 +73,7 @@ export const BENCHMARKS = {
     "healthyLow": 30,
     "healthyHigh": 45,
     "higherIsBetter": false,
-    "source": "Order-to-cash norms",
-    "industries": [
-      "All"
-    ]
+    "source": "Order-to-cash norms"
   },
   "dpo": {
     "label": "Days Payable Outstanding",
@@ -113,10 +81,7 @@ export const BENCHMARKS = {
     "healthyLow": 30,
     "healthyHigh": 60,
     "higherIsBetter": true,
-    "source": "Procure-to-pay norms",
-    "industries": [
-      "All"
-    ]
+    "source": "Procure-to-pay norms"
   },
   "ccc": {
     "label": "Cash Conversion Cycle",
@@ -124,11 +89,7 @@ export const BENCHMARKS = {
     "healthyLow": 20,
     "healthyHigh": 60,
     "higherIsBetter": false,
-    "source": "Working-capital norms",
-    "industries": [
-      "All",
-      "Manufacturing"
-    ]
+    "source": "Working-capital norms"
   },
   "operating_cash_flow": {
     "label": "Operating Cash Flow",
@@ -136,10 +97,7 @@ export const BENCHMARKS = {
     "healthyLow": 200000,
     "healthyHigh": 1000000,
     "higherIsBetter": true,
-    "source": "Scale-dependent guidance",
-    "industries": [
-      "All"
-    ]
+    "source": "Scale-dependent guidance"
   },
   "burn_rate": {
     "label": "Monthly Burn Rate",
@@ -147,11 +105,7 @@ export const BENCHMARKS = {
     "healthyLow": 50000,
     "healthyHigh": 200000,
     "higherIsBetter": false,
-    "source": "Early-stage guidance",
-    "industries": [
-      "SaaS",
-      "All"
-    ]
+    "source": "Early-stage guidance"
   },
   "runway": {
     "label": "Cash Runway",
@@ -159,165 +113,7 @@ export const BENCHMARKS = {
     "healthyLow": 12,
     "healthyHigh": 24,
     "higherIsBetter": true,
-    "source": "Venture norms (target ≥ 18 months)",
-    "industries": [
-      "SaaS",
-      "All"
-    ]
-  },
-  "investment_close_rate": {
-    "label": "Investment Close Rate",
-    "unit": "%",
-    "healthyLow": 2,
-    "healthyHigh": 15,
-    "higherIsBetter": true,
-    "source": "Illustrative private-capital sourcing guidance",
-    "industries": [
-      "Funds"
-    ]
-  },
-  "program_investment_conversion_rate": {
-    "label": "Program Investment Conversion Rate",
-    "unit": "%",
-    "healthyLow": 1,
-    "healthyHigh": 10,
-    "higherIsBetter": true,
-    "source": "Illustrative accelerator and cohort funnel guidance",
-    "industries": [
-      "Funds"
-    ]
-  },
-  "inbound_attributed_pipeline_share": {
-    "label": "Inbound Attributed Pipeline Share",
-    "unit": "%",
-    "healthyLow": 20,
-    "healthyHigh": 60,
-    "higherIsBetter": true,
-    "source": "Illustrative inbound sourcing mix guidance",
-    "industries": [
-      "Funds"
-    ]
-  },
-  "mrr": {
-    "label": "Monthly Recurring Revenue",
-    "unit": "Currency/month",
-    "healthyLow": 50000,
-    "healthyHigh": 500000,
-    "higherIsBetter": true,
-    "source": "Scale-dependent guidance",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "arr": {
-    "label": "Annual Recurring Revenue",
-    "unit": "Currency/year",
-    "healthyLow": 600000,
-    "healthyHigh": 6000000,
-    "higherIsBetter": true,
-    "source": "Scale-dependent guidance",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "nrr": {
-    "label": "Net Revenue Retention",
-    "unit": "%",
-    "healthyLow": 100,
-    "healthyHigh": 120,
-    "higherIsBetter": true,
-    "source": "Best-in-class SaaS ≥ 120%",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "gross_churn": {
-    "label": "Gross Revenue Churn",
-    "unit": "%",
-    "healthyLow": 1,
-    "healthyHigh": 5,
-    "higherIsBetter": false,
-    "source": "SaaS retention norms",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "cac": {
-    "label": "Customer Acquisition Cost",
-    "unit": "Currency",
-    "healthyLow": 500,
-    "healthyHigh": 10000,
-    "higherIsBetter": false,
-    "source": "Segment-dependent guidance",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "ltv": {
-    "label": "Customer Lifetime Value",
-    "unit": "Currency",
-    "healthyLow": 3000,
-    "healthyHigh": 50000,
-    "higherIsBetter": true,
-    "source": "Segment-dependent guidance",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "ltv_cac": {
-    "label": "LTV : CAC Ratio",
-    "unit": "Ratio",
-    "healthyLow": 3,
-    "healthyHigh": 5,
-    "higherIsBetter": true,
-    "source": "SaaS guardrail (≥ 3:1)",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "rule_of_40": {
-    "label": "Rule of 40",
-    "unit": "%",
-    "healthyLow": 40,
-    "healthyHigh": 60,
-    "higherIsBetter": true,
-    "source": "SaaS composite health (≥ 40%)",
-    "industries": [
-      "SaaS"
-    ]
-  },
-  "oee": {
-    "label": "Overall Equipment Effectiveness",
-    "unit": "%",
-    "healthyLow": 60,
-    "healthyHigh": 85,
-    "higherIsBetter": true,
-    "source": "World-class OEE ≈ 85%",
-    "industries": [
-      "Manufacturing"
-    ]
-  },
-  "inventory_turnover": {
-    "label": "Inventory Turnover",
-    "unit": "Turns",
-    "healthyLow": 4,
-    "healthyHigh": 12,
-    "higherIsBetter": true,
-    "source": "Sector-dependent guidance",
-    "industries": [
-      "Manufacturing"
-    ]
-  },
-  "capacity_utilization": {
-    "label": "Capacity Utilization",
-    "unit": "%",
-    "healthyLow": 70,
-    "healthyHigh": 90,
-    "higherIsBetter": true,
-    "source": "Operations norms",
-    "industries": [
-      "Manufacturing"
-    ]
+    "source": "Venture norms (target ≥ 18 months)"
   },
   "noi": {
     "label": "Net Operating Income",
@@ -325,10 +121,7 @@ export const BENCHMARKS = {
     "healthyLow": 400000,
     "healthyHigh": 800000,
     "higherIsBetter": true,
-    "source": "Asset-dependent guidance",
-    "industries": [
-      "Real Estate"
-    ]
+    "source": "Asset-dependent guidance"
   },
   "cap_rate": {
     "label": "Capitalization Rate",
@@ -336,10 +129,7 @@ export const BENCHMARKS = {
     "healthyLow": 5,
     "healthyHigh": 8,
     "higherIsBetter": true,
-    "source": "Market-dependent guidance",
-    "industries": [
-      "Real Estate"
-    ]
+    "source": "Market-dependent guidance"
   },
   "dscr": {
     "label": "Debt Service Coverage Ratio",
@@ -347,10 +137,7 @@ export const BENCHMARKS = {
     "healthyLow": 1.5,
     "healthyHigh": 2.5,
     "higherIsBetter": true,
-    "source": "Lender covenant norms (≥ 1.25x)",
-    "industries": [
-      "Real Estate"
-    ]
+    "source": "Lender covenant norms (≥ 1.25x)"
   },
   "ltv_realestate": {
     "label": "Loan-to-Value",
@@ -358,10 +145,7 @@ export const BENCHMARKS = {
     "healthyLow": 60,
     "healthyHigh": 75,
     "higherIsBetter": false,
-    "source": "Lending norms",
-    "industries": [
-      "Real Estate"
-    ]
+    "source": "Lending norms"
   },
   "vacancy_rate": {
     "label": "Vacancy Rate",
@@ -369,10 +153,95 @@ export const BENCHMARKS = {
     "healthyLow": 3,
     "healthyHigh": 7,
     "higherIsBetter": false,
-    "source": "Market-dependent guidance",
-    "industries": [
-      "Real Estate"
-    ]
+    "source": "Market-dependent guidance"
+  },
+  "mrr": {
+    "label": "Monthly Recurring Revenue",
+    "unit": "Currency/month",
+    "healthyLow": 50000,
+    "healthyHigh": 500000,
+    "higherIsBetter": true,
+    "source": "Scale-dependent guidance"
+  },
+  "arr": {
+    "label": "Annual Recurring Revenue",
+    "unit": "Currency/year",
+    "healthyLow": 600000,
+    "healthyHigh": 6000000,
+    "higherIsBetter": true,
+    "source": "Scale-dependent guidance"
+  },
+  "nrr": {
+    "label": "Net Revenue Retention",
+    "unit": "%",
+    "healthyLow": 100,
+    "healthyHigh": 120,
+    "higherIsBetter": true,
+    "source": "Best-in-class SaaS ≥ 120%"
+  },
+  "gross_churn": {
+    "label": "Gross Revenue Churn",
+    "unit": "%",
+    "healthyLow": 1,
+    "healthyHigh": 5,
+    "higherIsBetter": false,
+    "source": "SaaS retention norms"
+  },
+  "cac": {
+    "label": "Customer Acquisition Cost",
+    "unit": "Currency",
+    "healthyLow": 500,
+    "healthyHigh": 10000,
+    "higherIsBetter": false,
+    "source": "Segment-dependent guidance"
+  },
+  "ltv": {
+    "label": "Customer Lifetime Value",
+    "unit": "Currency",
+    "healthyLow": 3000,
+    "healthyHigh": 50000,
+    "higherIsBetter": true,
+    "source": "Segment-dependent guidance"
+  },
+  "ltv_cac": {
+    "label": "LTV : CAC Ratio",
+    "unit": "Ratio",
+    "healthyLow": 3,
+    "healthyHigh": 5,
+    "higherIsBetter": true,
+    "source": "SaaS guardrail (≥ 3:1)"
+  },
+  "rule_of_40": {
+    "label": "Rule of 40",
+    "unit": "%",
+    "healthyLow": 40,
+    "healthyHigh": 60,
+    "higherIsBetter": true,
+    "source": "SaaS composite health (≥ 40%)"
+  },
+  "oee": {
+    "label": "Overall Equipment Effectiveness",
+    "unit": "%",
+    "healthyLow": 60,
+    "healthyHigh": 85,
+    "higherIsBetter": true,
+    "source": "World-class OEE ≈ 85%"
+  },
+  "inventory_turnover": {
+    "label": "Inventory Turnover",
+    "unit": "Turns",
+    "healthyLow": 4,
+    "healthyHigh": 12,
+    "higherIsBetter": true,
+    "source": "Sector-dependent guidance"
+  },
+  "capacity_utilization": {
+    "label": "Capacity Utilization",
+    "unit": "%",
+    "healthyLow": 70,
+    "healthyHigh": 90,
+    "higherIsBetter": true,
+    "source": "Operations norms"
   },
   "food_cost_pct": {
     "label": "Food Cost Percentage",
@@ -380,10 +249,7 @@ export const BENCHMARKS = {
     "healthyLow": 28,
     "healthyHigh": 35,
     "higherIsBetter": false,
-    "source": "Full-service restaurant norms",
-    "industries": [
-      "Restaurants"
-    ]
+    "source": "Full-service restaurant norms"
   },
   "labor_cost_pct": {
     "label": "Labor Cost Percentage",
@@ -391,10 +257,31 @@ export const BENCHMARKS = {
     "healthyLow": 25,
     "healthyHigh": 35,
     "higherIsBetter": false,
-    "source": "Full-service restaurant norms",
-    "industries": [
-      "Restaurants"
-    ]
+    "source": "Full-service restaurant norms"
+  },
+  "investment_close_rate": {
+    "label": "Investment Close Rate",
+    "unit": "%",
+    "healthyLow": 2,
+    "healthyHigh": 15,
+    "higherIsBetter": true,
+    "source": "Illustrative private-capital sourcing guidance"
+  },
+  "program_investment_conversion_rate": {
+    "label": "Program Investment Conversion Rate",
+    "unit": "%",
+    "healthyLow": 1,
+    "healthyHigh": 10,
+    "higherIsBetter": true,
+    "source": "Illustrative accelerator and cohort funnel guidance"
+  },
+  "inbound_attributed_pipeline_share": {
+    "label": "Inbound Attributed Pipeline Share",
+    "unit": "%",
+    "healthyLow": 20,
+    "healthyHigh": 60,
+    "higherIsBetter": true,
+    "source": "Illustrative inbound sourcing mix guidance"
   }
 };
 

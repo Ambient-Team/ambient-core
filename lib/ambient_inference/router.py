@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from typing import Any
 
@@ -13,6 +14,8 @@ from ambient_inference.schemas import (
     CreateRunRequest,
     RoutingPlan,
 )
+
+logger = logging.getLogger(__name__)
 
 _COST_ORDER = {"low": 0, "medium": 1, "high": 2}
 
@@ -73,7 +76,7 @@ class Router:
                 primary_id = fallback[0] if fallback else None
             fallback = [m for m in fallback if self._within_tier(m, max_tier)]
 
-        return RoutingPlan(
+        plan = RoutingPlan(
             mode=request.mode,
             task_type=task_type,
             strategy=strategy,
@@ -83,6 +86,17 @@ class Router:
             fallback_chain=fallback,
             classifier_used=classifier_used,
         )
+        logger.debug(
+            "routing plan: mode=%s task_type=%s strategy=%s primary=%s drafts=%s synthesizer=%s classifier_used=%s",
+            plan.mode,
+            plan.task_type,
+            plan.strategy,
+            plan.primary_model_id,
+            plan.draft_model_ids,
+            plan.synthesizer_model_id,
+            plan.classifier_used,
+        )
+        return plan
 
     def _within_tier(self, model_id: str, max_tier: str) -> bool:
         try:
@@ -110,9 +124,23 @@ class Router:
                 json_mode=True,
                 fallback_chain=[],
             )
-            return self._parse_classifier(result.content)
         except Exception:
+            # Classifier is best-effort: fall back to the profile's default
+            # task_type, but surface the failure so routing regressions are
+            # not silent (backend down, timeout, auth error, ...).
+            logger.warning(
+                "classifier call failed for model %s; using default task_type",
+                classifier_id,
+                exc_info=True,
+            )
             return None
+        parsed = self._parse_classifier(result.content)
+        if parsed is None:
+            logger.warning(
+                "classifier %s returned unparseable output; using default task_type",
+                classifier_id,
+            )
+        return parsed
 
     def _parse_classifier(self, raw: str) -> ClassifierResult | None:
         text = raw.strip()

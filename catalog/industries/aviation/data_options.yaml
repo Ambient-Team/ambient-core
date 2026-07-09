@@ -1,0 +1,103 @@
+dataOptions:
+  aviation.network_carrier.operational_statistics_summary:
+    id: 1832
+    name: Airline operational statistics summary
+    description: Period aggregates for ASK, RPM, OTP, and fuel (no flight-level PII).
+    industry: Aviation
+    segment: network_carrier
+    format: Document
+    fields:
+    - name: period_start_date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: available_seat_kilometers
+      type: string
+    - name: revenue_passenger_kilometers
+      type: decimal
+    - name: revenue_capacity_units
+      type: decimal
+    - name: available_capacity_units
+      type: string
+    - name: total_operating_cost
+      type: decimal
+    - name: total_operating_revenue
+      type: decimal
+    - name: on_time_arrivals
+      type: string
+    - name: total_arrivals
+      type: decimal
+    - name: fuel_expense
+      type: string
+    - name: cargo_tonne_km_carried
+      type: string
+    - name: available_tonne_km
+      type: string
+    - name: cargo_revenue
+      type: decimal
+    metricIds:
+    - 1820
+    - 1821
+    - 1822
+    - 1823
+    - 1824
+    - 1830
+    - 1831
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  aviation.airport.traffic_revenue_summary:
+    id: 1833
+    name: Airport traffic and revenue summary
+    description: Enplanements and aeronautical versus commercial revenue splits (aggregated).
+    industry: Aviation
+    segment: airport
+    format: Document
+    fields:
+    - name: period_start_date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: enplaned_passengers
+      type: string
+    - name: passengers_enplaned_growth
+      type: string
+    - name: aeronautical_revenue
+      type: decimal
+    - name: commercial_revenue
+      type: decimal
+    - name: total_revenue
+      type: decimal
+    metricIds:
+    - 1825
+    - 1826
+    - 1827
+    fieldCoverage: enumerated
+    collectionFrequency: quarterly
+    grain: quarter
+  aviation.travel_distribution.booking_summary:
+    id: 1834
+    name: Travel distribution booking summary
+    description: Gross bookings, platform revenue, and session counts (aggregated).
+    industry: Aviation
+    segment: travel_distribution
+    format: Document
+    fields:
+    - name: period_start_date
+      type: date
+    - name: period_end_date
+      type: date
+    - name: platform_revenue
+      type: decimal
+    - name: gross_booking_value
+      type: string
+    - name: completed_bookings
+      type: string
+    - name: qualified_sessions
+      type: string
+    metricIds:
+    - 1828
+    - 1829
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

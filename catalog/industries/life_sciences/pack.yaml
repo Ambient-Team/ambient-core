@@ -1,0 +1,17 @@
+industry: Life Sciences
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '7210'
+  naics:
+    revision: '2022'
+    primary: '541714'
+  nace:
+    revision: Rev.2
+    primary: '72.11'
+  gics:
+    revision: '2023'
+    primary: '352010'
+  confidence: high
+  lastReviewed: '2026-07-04'
+  source: manual

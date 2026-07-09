@@ -1,0 +1,62 @@
+dataOptions:
+  retail.operations.store_sales_summary:
+    id: 1680
+    name: Store sales summary export
+    description: Aggregated comp and total sales, traffic, and selling area by store or banner. No payment instrument detail.
+    industry: Retail
+    segment: operations
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: store_id
+      type: id
+    - name: current_period_sales
+      type: enum
+    - name: prior_period_sales
+      type: enum
+    - name: net_sales
+      type: string
+    - name: selling_square_footage
+      type: string
+    - name: transactions
+      type: string
+    - name: visitors
+      type: string
+    metricIds:
+    - 1670
+    - 1673
+    - 1674
+    lastUpdated: '2026-06-24 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: weekly
+    grain: week
+  retail.financial.inventory_summary:
+    id: 1681
+    name: Inventory valuation export
+    description: Period COGS, average inventory, and shrink adjustments (aggregated).
+    industry: Retail
+    segment: financial
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: banner
+      type: string
+    - name: cogs
+      type: string
+    - name: average_inventory_value
+      type: string
+    - name: shrinkage_value
+      type: string
+    - name: sales
+      type: string
+    metricIds:
+    - 1671
+    - 1672
+    lastUpdated: '2026-06-24 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
