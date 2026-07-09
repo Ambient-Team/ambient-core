@@ -2,6 +2,8 @@
 
 Headless, API-first intelligence: **open-weight models only**, intelligent routing, and a **model council** orchestrator. Clients call Maestro over HTTP; consumption apps should not host GPU inference or embed API keys for proprietary LLMs.
 
+**Maestro is the control plane.** It does not run models — it orchestrates them (see [Architecture: control plane vs data plane](#architecture-control-plane-vs-data-plane) below).
+
 **Related:** [contracts/maestro-run-v1.yaml](../contracts/maestro-run-v1.yaml) (run artifact contract). Downstream apps call this service over HTTP; deploy wiring lives in the consumer repository.
 
 ---
@@ -12,6 +14,67 @@ Headless, API-first intelligence: **open-weight models only**, intelligent routi
 - **Router** — policy-driven model selection plus optional classifier pass; fallback chains on backend errors.
 - **Council** — `council_research` workflow: parallel drafts → chair synthesis (MVP).
 - **Run store** — SQL persistence (`runs`, `run_events`) with optional `org_id` for tenancy and future metering.
+
+---
+
+## Architecture: control plane vs data plane
+
+Maestro is an **orchestration / control layer** for open-weight models. It does not host model weights. It decides which model(s) to use, how to route between them, whether to run a single model or a **council**, and how to handle streaming, persistence, and events.
+
+This is analogous to SDN (Software-Defined Networking):
+
+| SDN concept | Maestro equivalent | Role |
+|-------------|-------------------|------|
+| Data plane | Ollama / vLLM (actual models) | Inference |
+| Control plane | Maestro (`lib/ambient_inference`, `services/maestro`) | Routing, council, run lifecycle |
+| Southbound API | OpenAI-compatible calls via `ModelGateway` | How Maestro talks to backends |
+| Northbound API | `POST /v1/runs`, stream, run lookup | How applications talk to Maestro |
+
+```mermaid
+flowchart TB
+  app[Application]
+  maestro[Maestro control plane]
+  backends[Ollama or vLLM data plane]
+  app -->|"POST /v1/runs"| maestro
+  maestro -->|OpenAI compatible HTTP| backends
+```
+
+```mermaid
+flowchart LR
+  subgraph northbound [Northbound HTTP]
+    runs["POST /v1/runs"]
+    stream["POST /v1/runs/stream"]
+  end
+  subgraph control [services/maestro and ambient_inference]
+    orch[MaestroOrchestrator]
+    reg[ModelRegistry]
+    router[Router]
+    council[CouncilEngine]
+    store[RunStore]
+    gw[ModelGateway]
+  end
+  subgraph data [Data plane]
+    backends[Ollama vLLM]
+  end
+  runs --> orch
+  stream --> orch
+  orch --> router
+  orch --> council
+  orch --> store
+  router --> gw
+  council --> gw
+  gw --> backends
+```
+
+**HTTP entrypoint** — [`services/maestro/main.py`](../services/maestro/main.py):
+
+- `GET /health` and `GET /ready` — liveness/readiness probes (no API key; restrict at ingress in production).
+- `GET /v1/models`, `POST /v1/runs`, run lookup — API key when `AMBIENT_MAESTRO_API_KEY` is set.
+- `POST /v1/runs/stream` — persists events to `RunStore` and fans out SSE to the client.
+
+**Library wiring** — [`services/maestro/deps.py`](../services/maestro/deps.py) builds `ModelRegistry`, `ModelGateway`, `Router`, `CouncilEngine`, `RunStore`, and `MaestroOrchestrator`.
+
+For how Ambient Core compares to agent frameworks and governance suites, see [POSITIONING.md](POSITIONING.md).
 
 ---
 
@@ -52,6 +115,7 @@ Point backends at Ollama (OpenAI-compatible base URL):
 Optional:
 
 - **AMBIENT_MAESTRO_API_KEY** — if set, clients must send `X-Api-Key` or `Authorization: Bearer`
+- **MAESTRO_MAX_REQUEST_BODY_BYTES** — default `1048576`; set `0` to disable the request body cap
 - **MAESTRO_DATABASE_URL** — default `sqlite:///./maestro_runs.db`; use Postgres in platform Docker Compose
 
 ### Docker Compose (optional — consumer repo)
@@ -120,3 +184,10 @@ The `tool_calling` capability on `qwen2.5-coder-14b` is **documentation-only** u
 
 - API keys and backend tokens live in env / secret stores only.
 - Pass **`X-Org-Id`** (or `org_id` in the body) for tenant attribution on runs.
+
+**Production checklist**
+
+- Set **`AMBIENT_MAESTRO_API_KEY`** on any Maestro instance reachable outside a trusted dev machine. When unset, the HTTP API accepts unauthenticated requests (local quick start only).
+- Clients may send the key as **`X-Api-Key`** or **`Authorization: Bearer <key>`**. Comparison uses a timing-safe digest when a key is configured.
+- **`GET /health`** and **`GET /ready`** stay unauthenticated for orchestrator probes. Restrict network access (VPC, ingress auth, or private listeners) in deployed environments.
+- **`MAESTRO_MAX_REQUEST_BODY_BYTES`** — maximum request body size (default `1048576`). Set to `0` to disable the cap. Oversized bodies (per `Content-Length`) receive HTTP **413**.

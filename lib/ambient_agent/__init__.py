@@ -9,7 +9,8 @@ from ambient_agent.executor import execute
 from ambient_agent.loop import AgentRunResult, run_plan_execute
 from ambient_agent.maestro_client import MaestroHttpClient
 from ambient_agent.registry import register_tool
-from ambient_agent.validate import load_agent_profiles, load_tool_definitions, main as validate_main
+from ambient_agent.config import load_agent_profiles, load_tool_definitions
+from ambient_agent.validate import main as validate_main
 
 __all__ = [
     "AgentRunContext",

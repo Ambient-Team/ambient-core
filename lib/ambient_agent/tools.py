@@ -7,10 +7,10 @@ from pathlib import Path
 from typing import Any
 
 from ambient_agent.boundaries import AgentRunContext
-from ambient_agent.validate import load_tool_definitions
+from ambient_agent.config import load_tool_definitions
 from ambient_contracts.paths import resolve_contracts_dir
 from ambient_contracts.validate import validate_all_contracts, validate_contract_file
-from ambient_pipeline.catalog_manifest import load_manifest
+from ambient_contracts.catalog_manifest import load_manifest
 
 
 def _catalog_list_metrics(args: dict[str, Any], _ctx: AgentRunContext, _trace: list) -> dict[str, Any]:

@@ -62,6 +62,7 @@ Full map: **[docs/README.md](docs/README.md)**.
 
 - **Start** — [USAGE.md](docs/USAGE.md)
 - **Embed a release** — [INTEGRATING.md](docs/INTEGRATING.md)
+- **Positioning** — [POSITIONING.md](docs/POSITIONING.md)
 - **Components & releases** — [ECOSYSTEM.md](docs/ECOSYSTEM.md)
 - **Maestro** — [inference-layer.md](docs/inference-layer.md)
 

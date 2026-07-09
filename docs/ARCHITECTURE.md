@@ -11,7 +11,7 @@ Overview: [ECOSYSTEM.md](ECOSYSTEM.md).
 
 The installable wheel ships **`ambient_contracts`**, **`ambient_inference`**, **`ambient_cli`**, and **`ambient_agent`** per `pyproject.toml`. **`ambient_pipeline`** is exercised from a git checkout in tests; consumers may add app-specific modules alongside a pinned install.
 
-- **`ambient_inference`** — Maestro registry, router, council, run store
+- **`ambient_inference`** — Maestro registry, router, council, run store (control plane; see [inference-layer.md](inference-layer.md) § control plane vs data plane)
 - **`ambient_agent`** — reserved for lightweight open agent runtime (extension point)
 - **`ambient_cli`** — `validate-contracts`, `ambient-catalog-generate` wrappers
 

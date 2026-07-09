@@ -67,7 +67,26 @@ result = run_plan_execute(
 # result.content, result.run_id, result.observations
 ```
 
+### Live agent E2E
+
+Full **plan-execute → tools → Maestro synthesis** runs are gated by the `agent_e2e` pytest marker (excluded from default `pytest` via `addopts` in `pyproject.toml`).
+
+1. Install test deps (includes `httpx` for Maestro HTTP): `pip install -e ".[inference,dev]"` (or `.[all]`). Use Python 3.10–3.12 (`requires-python` in `pyproject.toml`).
+2. Start Maestro with at least one inference backend ([inference-layer.md](inference-layer.md)).
+3. Optional env: `MAESTRO_E2E_URL` (default `http://127.0.0.1:8088`), `AMBIENT_MAESTRO_API_KEY`.
+4. Run: `pytest -m agent_e2e -q` or `pytest tests/test_agent_e2e.py -m agent_e2e -q`.
+
+Tests skip gracefully when Maestro is unreachable or `/ready` reports no backends.
+
 Modules: `tools.py` (built-ins), `registry.py` (`register_tool`), `executor.py`, `maestro_client.py`, `loop.py` (`run_plan_execute`). Direct calls to the `maestro_run` tool id are blocked; synthesis goes through the loop.
+
+### Plan-execute tool arguments (v1)
+
+`run_plan_execute` does **not** parse tool calls from an LLM. It walks the profile’s fixed `tool_ids` list and supplies arguments via built-in defaults in `loop.py` (for example `catalog_resolve_metric` uses a truncated copy of `user_message` as `metric_id`). Registered platform tools invoked through `run_plan_execute` receive an empty `{}` args dict unless the loop is extended. For tools that need explicit inputs, call `execute(tool_id, args, context, trace)` directly from your worker code.
+
+### Tool registry (process scope)
+
+`register_tool()` uses a **single process-global** namespace: not isolated per tenant or per run. Registering the same `tool_id` twice raises `ValueError`. Call `clear_extensions()` in tests. Intended for worker/API startup (see platform extensions below), not per-request registration in a multi-tenant process without a reload strategy.
 
 **Phase 2 (not in v0.2.3):** ReAct loops with LLM-parsed tool calls require Maestro `CreateRunRequest` tool-calling support.
 

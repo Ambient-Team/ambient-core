@@ -75,6 +75,8 @@ ambient_agent = ["*.yaml"]
 asyncio_mode = "auto"
 testpaths = ["tests"]
 pythonpath = ["lib"]
+addopts = "-m 'not agent_e2e'"
 markers = [
     "gpu: live Maestro/Ollama E2E (set MAESTRO_E2E_URL)",
+    "agent_e2e: live full agent loop via run_plan_execute (MAESTRO_E2E_URL)",
 ]

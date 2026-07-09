@@ -8,24 +8,12 @@ from typing import Any
 
 import yaml
 
-from ambient_contracts.paths import resolve_catalog_root as _resolve_catalog_root
+from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 
 
 def resolve_catalog_root(start: Path | None = None) -> Path:
     """Find catalog/ directory (local checkout, submodule, or Databricks Repos)."""
-    if start and (start / "manifest.json").is_file():
-        return start
-    candidates: list[Path] = [
-        Path.cwd(),
-        Path.cwd().parent,
-        Path.cwd().parent.parent,
-    ]
-    for root in candidates:
-        for rel in ("ambient-core/catalog", "catalog"):
-            path = root / rel if "/" not in rel else root.joinpath(*rel.split("/"))
-            if (path / "manifest.json").is_file():
-                return path
-    return _resolve_catalog_root()
+    return resolve_catalog_root_flexible(start)
 
 
 def load_manifest_version(catalog_root: Path | None = None) -> str:

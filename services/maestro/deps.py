@@ -16,6 +16,17 @@ class Settings:
     api_key: str | None
     database_url: str
     use_classifier: bool
+    max_request_body_bytes: int
+
+
+def _parse_max_body_bytes() -> int:
+    raw = os.environ.get("MAESTRO_MAX_REQUEST_BODY_BYTES")
+    if raw is None:
+        return 1_048_576
+    try:
+        return int(raw)
+    except ValueError:
+        return 1_048_576
 
 
 settings = Settings(
@@ -25,6 +36,7 @@ settings = Settings(
         "sqlite:///./maestro_runs.db",
     ),
     use_classifier=os.environ.get("MAESTRO_USE_CLASSIFIER", "true").lower() == "true",
+    max_request_body_bytes=_parse_max_body_bytes(),
 )
 
 _orchestrator: MaestroOrchestrator | None = None
