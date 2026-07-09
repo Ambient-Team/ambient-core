@@ -1,5 +1,4 @@
 # Receives ambient_hub_sync from EngineerID/ambient-systems hub.
-# Fetches mapped paths via GitHub API; opens a PR via create-pull-request.
 
 name: Hub sync receiver
 
@@ -19,14 +18,19 @@ jobs:
       - name: Checkout spoke repo
         uses: actions/checkout@v4
 
+      - name: Resolve hub coordinates
+        id: hub
+        run: |
+          echo "repo=${{ github.event.client_payload.source_repo }}" >> "$GITHUB_OUTPUT"
+          echo "sha=${{ github.event.client_payload.sha }}" >> "$GITHUB_OUTPUT"
+          echo "rules=${{ github.event.client_payload.ruleIds }}" >> "$GITHUB_OUTPUT"
+
       - name: Fetch real files from hub
         env:
           HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
         run: |
-          SRC_REPO="${{ github.event.client_payload.source_repo }}"
-          if [ -z "$SRC_REPO" ]; then SRC_REPO="${{ github.event.client_payload.sourceRepo }}"; fi
-          SRC_SHA="${{ github.event.client_payload.sha }}"
-          if [ -z "$SRC_SHA" ]; then SRC_SHA="${{ github.event.client_payload.sourceSha }}"; fi
+          SRC_REPO="${{ steps.hub.outputs.repo }}"
+          SRC_SHA="${{ steps.hub.outputs.sha }}"
           echo "Authenticating to hub ($SRC_REPO) at commit $SRC_SHA"
           FILES_TO_SYNC=(
             "MAPPING.md:docs/hub/upstream-mapping.md"
@@ -52,11 +56,11 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: chore: sync upstream from ambient-systems hub
-          branch: hub-sync/${{ github.event.client_payload.sha || github.event.client_payload.sourceSha }}
+          branch: hub-sync/${{ steps.hub.outputs.sha }}
           title: Hub sync updates from ambient-systems
           body: |
-            Automated file sync triggered by the hub.
-            Source repository: ${{ github.event.client_payload.source_repo || github.event.client_payload.sourceRepo }}
-            Upstream commit: ${{ github.event.client_payload.sha || github.event.client_payload.sourceSha }}
-            Rule ids: ${{ github.event.client_payload.ruleIds }}
+            Automated file sync from the hub.
+            Source repository: ${{ steps.hub.outputs.repo }}
+            Upstream commit: ${{ steps.hub.outputs.sha }}
+            Rule ids: ${{ steps.hub.outputs.rules }}
             Review before merge.
