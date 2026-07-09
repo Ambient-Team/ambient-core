@@ -1,7 +1,5 @@
-﻿# Receives ambient_hub_sync from Ambient-Team/ambient-systems hub.
-# Opens a PR on repository_dispatch; does not push to main.
-# Secret on spoke: HUB_FETCH_TOKEN with read access to ambient-systems.
-
+# Receives ambient_hub_sync from EngineerID/ambient-systems hub.
+# Fetches mapped paths via GitHub API; opens a PR via create-pull-request.
 
 name: Hub sync receiver
 
@@ -18,48 +16,47 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Show payload
-        run: |
-          echo "sourceRepo=${{ github.event.client_payload.sourceRepo }}"
-          echo "sourceSha=${{ github.event.client_payload.sourceSha }}"
-          echo "ruleIds=${{ github.event.client_payload.ruleIds }}"
-          echo "payloadProfiles=${{ github.event.client_payload.payloadProfiles }}"
-
-      - name: Check out spoke default branch
+      - name: Checkout spoke repo
         uses: actions/checkout@v4
 
-      - name: Create sync branch
-        id: branch
-        run: |
-          SHORT="${{ github.event.client_payload.sourceSha }}"
-          SHORT="${SHORT:0:7}"
-          BRANCH="hub-sync/$(date -u +%Y%m%d)-${SHORT}"
-          git checkout -b "$BRANCH"
-          echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
-
-      - name: Apply hub sync
+      - name: Fetch real files from hub
         env:
-          HUB_FETCH_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
         run: |
-          echo "TODO: fetch hub files at ${{ github.event.client_payload.sourceSha }} and apply updates."
-          echo "See MAPPING.md in ambient-systems for payload fields."
-          # Example marker file for review-only PRs until real sync is implemented:
-          mkdir -p .hub-sync
-          printf '%s\n' "${{ github.event.client_payload.sourceSha }}" > .hub-sync/last-hub-sha.txt
+          SRC_REPO="${{ github.event.client_payload.source_repo }}"
+          if [ -z "$SRC_REPO" ]; then SRC_REPO="${{ github.event.client_payload.sourceRepo }}"; fi
+          SRC_SHA="${{ github.event.client_payload.sha }}"
+          if [ -z "$SRC_SHA" ]; then SRC_SHA="${{ github.event.client_payload.sourceSha }}"; fi
+          echo "Authenticating to hub ($SRC_REPO) at commit $SRC_SHA"
+          FILES_TO_SYNC=(
+            "MAPPING.md:docs/hub/upstream-mapping.md"
+            "company/strategy/03_data-product-contracts.md:docs/hub/data-product-contracts-intent.md"
+          )
+          for map in "${FILES_TO_SYNC[@]}"; do
+            HUB_PATH="${map%%:*}"
+            LOCAL_PATH="${map##*:}"
+            echo "Fetching $HUB_PATH -> $LOCAL_PATH"
+            mkdir -p "$(dirname "$LOCAL_PATH")"
+            HTTP_STATUS=$(curl -s -w "%{http_code}" -o "$LOCAL_PATH" \
+              -H "Authorization: token $HUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3.raw" \
+              -L "https://api.github.com/repos/$SRC_REPO/contents/$HUB_PATH?ref=$SRC_SHA")
+            if [ "$HTTP_STATUS" -ne 200 ]; then
+              echo "Error fetching $HUB_PATH (HTTP $HTTP_STATUS). Check path or HUB_FETCH_TOKEN."
+              exit 1
+            fi
+            echo "Synced $HUB_PATH"
+          done
 
-      - name: Open pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "No changes to commit; skipping PR."
-            exit 0
-          fi
-          git commit -m "hub sync from ${{ github.event.client_payload.sourceSha }}"
-          git push -u origin "${{ steps.branch.outputs.name }}"
-          gh pr create \
-            --title "Hub sync ${{ github.event.client_payload.sourceSha }}" \
-            --body "Automated hub sync from ambient-systems. Rule ids: ${{ github.event.client_payload.ruleIds }}. Review before merge."
+      - name: Create pull request for review
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: chore: sync upstream from ambient-systems hub
+          branch: hub-sync/${{ github.event.client_payload.sha || github.event.client_payload.sourceSha }}
+          title: Hub sync updates from ambient-systems
+          body: |
+            Automated file sync triggered by the hub.
+            Source repository: ${{ github.event.client_payload.source_repo || github.event.client_payload.sourceRepo }}
+            Upstream commit: ${{ github.event.client_payload.sha || github.event.client_payload.sourceSha }}
+            Rule ids: ${{ github.event.client_payload.ruleIds }}
+            Review before merge.
