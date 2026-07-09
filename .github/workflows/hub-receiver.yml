@@ -21,40 +21,49 @@ jobs:
           PAYLOAD_SHA: ${{ github.event.client_payload.sha }}
           PAYLOAD_REPO: ${{ github.event.client_payload.source_repo }}
         run: |
-          SHORT="${PAYLOAD_SHA:0:7}"
+          SHORT=$(printf '%.7s' "$PAYLOAD_SHA")
           echo "repo=$PAYLOAD_REPO" >> "$GITHUB_OUTPUT"
           echo "sha=$PAYLOAD_SHA" >> "$GITHUB_OUTPUT"
           echo "short=$SHORT" >> "$GITHUB_OUTPUT"
 
-      - name: Fetch real files from hub
+      - name: Fetch MAPPING.md
         env:
           HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
         run: |
-          SRC_REPO="${{ steps.hub.outputs.repo }}"
-          SRC_SHA="${{ steps.hub.outputs.sha }}"
-          FILES_TO_SYNC=(
-            "MAPPING.md:docs/hub/upstream-mapping.md"
-            "company/strategy/03_data-product-contracts.md:docs/hub/data-product-contracts-intent.md"
-          )
-          for map in "${FILES_TO_SYNC[@]}"; do
-            HUB_PATH="${map%%:*}"
-            LOCAL_PATH="${map##*:}"
-            mkdir -p "$(dirname "$LOCAL_PATH")"
-            HTTP_STATUS=$(curl -s -w "%{{http_code}}" -o "$LOCAL_PATH" \
-              -H "Authorization: token $HUB_TOKEN" \
-              -H "Accept: application/vnd.github.v3.raw" \
-              -L "https://api.github.com/repos/$SRC_REPO/contents/$HUB_PATH?ref=$SRC_SHA")
-            if [ "$HTTP_STATUS" -ne 200 ]; then
-              echo "Error fetching $HUB_PATH HTTP $HTTP_STATUS"
-              exit 1
-            fi
-          done
+          mkdir -p "$(dirname "docs/hub/upstream-mapping.md")"
+          HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/upstream-mapping.md" \
+            -H "Authorization: token $HUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3.raw" \
+            -L "https://api.github.com/repos/${{ steps.hub.outputs.repo }}/contents/MAPPING.md?ref=${{ steps.hub.outputs.sha }}")
+          test "$HTTP_STATUS" -eq 200
 
-      - name: Create pull request for review
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: chore: sync upstream from ambient-systems hub
-          branch: hub-sync/${{ steps.hub.outputs.short }}
-          title: Hub sync updates from ambient-systems
-          body: |
-            Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}.
+      - name: Fetch data product contracts intent
+        env:
+          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+        run: |
+          mkdir -p "$(dirname "docs/hub/data-product-contracts-intent.md")"
+          HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/data-product-contracts-intent.md" \
+            -H "Authorization: token $HUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3.raw" \
+            -L "https://api.github.com/repos/${{ steps.hub.outputs.repo }}/contents/company/strategy/03_data-product-contracts.md?ref=${{ steps.hub.outputs.sha }}")
+          test "$HTTP_STATUS" -eq 200
+
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit --trailer "Co-authored-by: Cursor <cursoragent@cursor.com>" -m "hub sync from ${{ steps.hub.outputs.sha }}"
+          BRANCH="hub-sync/${{ steps.hub.outputs.short }}"
+          git checkout -b "$BRANCH
+
+Made with [Cursor](https://cursor.com)"
+          git push -u origin "$BRANCH"
+          gh pr create --title "Hub sync ${{ steps.hub.outputs.short }}" --body "Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}."
