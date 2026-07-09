@@ -85,3 +85,113 @@ jobs:
           python -m venv /tmp/wheel-smoke-venv
           /tmp/wheel-smoke-venv/bin/pip install -q dist/ambient_core-*.whl
           /tmp/wheel-smoke-venv/bin/python -c "import ambient_agent; from ambient_agent.executor import execute"
+
+  remediate:
+    needs: python
+    if: >-
+      failure() &&
+      github.event_name == 'pull_request' &&
+      startsWith(github.head_ref, 'hub-sync/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    concurrency:
+      group: cursor-remediate-${{ github.head_ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Skip remediate loop guard
+        id: guard
+        run: |
+          if git log -1 --pretty=%s | grep -q 'cursor remediate'; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v6
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-java@v5
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Sync bundled contracts and Maestro run artifact
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          cp contracts/*.yaml lib/ambient_contracts/bundled/
+          cp contracts/maestro-run-v1.yaml lib/ambient_inference/contracts/maestro-run-v1.yaml
+          git diff --exit-code lib/ambient_contracts/bundled/ lib/ambient_inference/contracts/maestro-run-v1.yaml || (
+            echo "ERROR: bundled copies out of sync with contracts/" >&2
+            exit 1
+          )
+
+      - name: Install package
+        if: steps.guard.outputs.skip != 'true'
+        run: pip install -e ".[all]"
+
+      - name: Capture failed CI logs
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p ci-failure-logs
+          gh run view "${{ github.run_id }}" --repo "$GITHUB_REPOSITORY" --log-failed \
+            > ci-failure-logs/log_full.txt 2>&1 || true
+          tail -c 45000 ci-failure-logs/log_full.txt > ci-failure-logs/log_tail.txt
+
+      - name: Install Cursor CLI
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+
+      - name: Run Cursor agent (files only)
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CURSOR_API_KEY:-}" ]; then
+            echo "CURSOR_API_KEY not set; skipping agent."
+            exit 0
+          fi
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo "GitHub Actions CI python job failed on hub-sync PR branch ${{ github.head_ref }}."
+            echo "Failed run: ${RUN_URL}"
+            echo ""
+            echo "Fix the root cause in repo files only. Do NOT run git or gh; the workflow commits and pushes."
+            echo "Reproduce with the same commands as .github/workflows/ci.yml (validate-*, scripts/check_*.py, pytest, wheel smoke)."
+            echo "Follow AGENTS.md."
+            echo ""
+            echo "Failed log tail:"
+            cat ci-failure-logs/log_tail.txt
+          } > ci-failure-logs/agent_prompt.txt
+          agent -p --force "$(cat ci-failure-logs/agent_prompt.txt)"
+
+      - name: Commit and push remediate fix
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No file changes from agent."
+            exit 0
+          fi
+          git add -A
+          git commit -m "ci: cursor remediate hub-sync failure (run ${{ github.run_id }})"
+          git push origin "HEAD:${HEAD_REF}"
