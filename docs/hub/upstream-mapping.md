@@ -22,11 +22,14 @@ Agents on this machine may read spoke repos via localPath in mapping.json. The c
 
 - **strategy-platform-intent** — Changes under company/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
-- **commercial-public-sync** — Changes under commercial/outbound/ or commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries.
+- **commercial-public-sync** — Changes under commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries. Dormant outbound lives under commercial/archive/ and does not dispatch.
 - **career-public-sync** — Changes under people/cv/ or people/job-search-targeting.md notify the personal site. Canonical vault CV paths are people/cv/, not legacy career/cv/ paths referenced in older site readme text.
 - **interview-prep-learning** — Changes under people/interview-prep/ may notify code-signal when that spoke is enabled.
+- **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
-**Global excludes:** operations/finance/, company/legal/, assets/archive/, and commercial/playbook/ never trigger dispatch.
+**Global excludes:** operations/finance/, company/legal/, assets/archive/, and commercial/archive/ never trigger dispatch.
+
+**Inbox:** Ecosystem landing and reverse-consolidation live under inbox/ (PROTOCOL.md). Inbox paths do not have a dedicated sync rule in v1; triage into watched prefixes above so spokes are notified. Spoke outcomes that need hub decisions land in inbox/returns/ (manual or agent-assisted; no reverse repository_dispatch yet).
 
 ---
 
@@ -63,7 +66,7 @@ Configure in ambient-systems GitHub Actions secrets:
 
 The dispatcher selects the token from the spoke owner (Ambient-Team vs engineerID). Both secrets are required for live dispatch to all enabled spokes.
 
-**Reuse on spokes:** Store the same Ambient PAT on each Ambient-Team spoke as **HUB_DISPATCH_AMBIENT_TEAM** (hub secret name differs). Store the same engineerID PAT on each engineerID spoke as **HUB_DISPATCH_ENGINEERID**. One PAT per org covers dispatch from the hub and git push to hub-sync branches on spokes when the token has contents, pull-requests, and actions write on that repo.
+**Reuse on spokes:** Store the same Ambient PAT on each Ambient-Team spoke as **HUB_DISPATCH_TOKEN_AMBIENT** (same secret name as on the hub). Store the same engineerID PAT on each engineerID spoke as **HUB_DISPATCH_ENGINEERID**. One PAT per org covers dispatch from the hub and git push to hub-sync branches on spokes when the token has contents, pull-requests, and actions write on that repo.
 
 **Dry run:** Run workflow hub dispatch manually with dry_run true, or set DRY_RUN true when invoking dispatch.sh locally. No API calls are made in dry run mode.
 
@@ -83,12 +86,20 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 
 **Branching SSOT for all repos:** company/strategy/governance/ecosystem-branching.md (naming, worktrees, orphan prevention, CI classes).
 
-**Spoke secrets**
+**Founder Uni progress (hub-owned):** commercial/learning/founder-uni/ holds curriculum-map, progress (Pass / Master / Finish), and spoke-expectations. Spokes do not own the curriculum and do not get a dedicated learning sync rule in the Focused pass. When spoke work closes an FU week (especially MVP / validation / demo weeks), file inbox/returns/ with fu-week and fu-level, or ask the hub operator to update progress.md. Do not treat fundraising or hiring curriculum as active ops under commercial freeze — see commercial/learning/founder-uni/conflicts.md.
+
+**Spoke secrets (Ambient-Team; names match GitHub Actions secrets)**
 
 - **HUB_FETCH_TOKEN** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
-- **HUB_DISPATCH_AMBIENT_TEAM** — on Ambient-Team spokes only; same PAT value as hub **HUB_DISPATCH_TOKEN_AMBIENT**. Used for git push to hub-sync branches and optional gh workflow run to kick CI.
-- **HUB_DISPATCH_ENGINEERID** — on engineerID spokes; same PAT value as hub **HUB_DISPATCH_ENGINEERID**.
+- **HUB_DISPATCH_TOKEN_AMBIENT** — same PAT value as hub; git push to hub-sync branches and optional gh workflow run to kick CI.
 - **CURSOR_API_KEY** — optional; CI self-heal (see .github/hub/templates/CI_CURSOR_BRIDGE.md).
+- **DATABRICKS_HOST** / **DATABRICKS_TOKEN** — platform only; CI Databricks Validate (see ambient-systems-platform docs/databricks-manual.md).
+
+**Spoke secrets (engineerID)**
+
+- **HUB_FETCH_TOKEN** — read private hub at payload sha.
+- **HUB_DISPATCH_ENGINEERID** — same PAT value as hub **HUB_DISPATCH_ENGINEERID**.
+- **CURSOR_API_KEY** — optional; CI self-heal.
 
 **Branch protection (GitHub repo settings on main)**
 
@@ -114,8 +125,8 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 - **Hub dispatch HTTP 422 too many payload properties:** client_payload allows at most 10 top-level keys. Hub wraps metadata in client_payload.data (single key).
 - **Spoke receiver: GitHub Actions is not permitted to create or approve pull requests:** In each spoke repo, Settings, Actions, General, enable workflow permission to create and approve pull requests. The sync job may still push hub-sync/SHORT_SHA; open a PR manually if needed until this is enabled.
 - **Spoke fetch HTTP 403:** HUB_FETCH_TOKEN on the spoke must read the private hub repo EngineerID/ambient-systems at the commit in client_payload.data.sha (or legacy client_payload.sha).
-- **Hub-sync merged but main CI red:** hub-sync PR may have merged without CI if push used GITHUB_TOKEN only. Set HUB_DISPATCH_AMBIENT_TEAM or HUB_DISPATCH_ENGINEERID on the spoke (matching org) and require status checks before merge. Remediate skipped on push to main is expected.
-- **Hub-sync PR without CI:** Confirm spoke secret name matches hub-receiver.yml (HUB_DISPATCH_AMBIENT_TEAM or HUB_DISPATCH_ENGINEERID, not legacy HUB_SYNC_PUSH_TOKEN).
+- **Hub-sync merged but main CI red:** hub-sync PR may have merged without CI if push used GITHUB_TOKEN only. Set HUB_DISPATCH_TOKEN_AMBIENT (Ambient-Team) or HUB_DISPATCH_ENGINEERID (engineerID) on the spoke and require status checks before merge. Remediate skipped on push to main is expected.
+- **Hub-sync PR without CI:** Confirm spoke secret name matches hub-receiver.yml (HUB_DISPATCH_TOKEN_AMBIENT or HUB_DISPATCH_ENGINEERID, not legacy HUB_DISPATCH_AMBIENT_TEAM or HUB_SYNC_PUSH_TOKEN).
 - **Red check named .github/workflows/hub-receiver.yml on push with no jobs:** GitHub workflow file validation failed (invalid YAML), not a failed hub sync. repository_dispatch runs still use the Hub sync receiver workflow name when valid. Fix job-level env: do not reference steps context at job env (see ambient-core hub-receiver history).
 
 ---
@@ -127,4 +138,4 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 - Platform summary — README.md platform summary section
 - CI self-heal (Cursor CLI and workflow_run bridge) — .github/hub/templates/CI_CURSOR_BRIDGE.md
 
-*Last updated: July 9, 2026*
+*Last updated: July 10, 2026*
