@@ -93,14 +93,14 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 
 - **HUB_FETCH_TOKEN** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
 - **HUB_DISPATCH_TOKEN_AMBIENT** — same PAT value as hub; git push to hub-sync branches and optional gh workflow run to kick CI.
-- **CURSOR_API_KEY** — optional; CI self-heal (see .github/hub/templates/CI_CURSOR_BRIDGE.md).
+- **CURSOR_API_KEY** — required for CI self-heal (Pattern A/B). See .github/hub/templates/CI_CURSOR_BRIDGE.md. Missing on a spoke means logs are captured but no Cursor CLI heal runs.
 - **DATABRICKS_HOST** / **DATABRICKS_TOKEN** — platform only; CI Databricks Validate (see ambient-systems-platform docs/databricks-manual.md).
 
 **Spoke secrets (engineerID)**
 
 - **HUB_FETCH_TOKEN** — read private hub at payload sha.
 - **HUB_DISPATCH_ENGINEERID** — same PAT value as hub **HUB_DISPATCH_ENGINEERID**.
-- **CURSOR_API_KEY** — optional; CI self-heal.
+- **CURSOR_API_KEY** — required for CI self-heal (Pattern A/B). Missing means logs only; no Cursor CLI heal.
 
 **Branch protection (GitHub repo settings on main)**
 
