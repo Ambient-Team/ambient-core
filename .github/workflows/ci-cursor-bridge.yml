@@ -1,4 +1,4 @@
-﻿# Pattern B: copy to TARGET_REPO/.github/workflows/ci-cursor-bridge.yml
+# Pattern B: copy to TARGET_REPO/.github/workflows/ci-cursor-bridge.yml
 # On watched workflow failure: capture logs, run Cursor CLI on a heal branch, open a PR.
 # Requires repository secret CURSOR_API_KEY. See CI_CURSOR_BRIDGE.md.
 # Does not use Cloud Agents API (avoids usage-based spend). Agent runs on the Actions runner.
