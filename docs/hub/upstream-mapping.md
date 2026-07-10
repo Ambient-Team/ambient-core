@@ -25,6 +25,7 @@ Agents on this machine may read spoke repos via localPath in mapping.json. The c
 - **commercial-public-sync** — Changes under commercial/outbound/ or commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries.
 - **career-public-sync** — Changes under people/cv/ or people/job-search-targeting.md notify the personal site. Canonical vault CV paths are people/cv/, not legacy career/cv/ paths referenced in older site readme text.
 - **interview-prep-learning** — Changes under people/interview-prep/ may notify code-signal when that spoke is enabled.
+- **customer-package-platform-note** — Changes under operations/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
 **Global excludes:** operations/finance/, company/legal/, assets/archive/, and commercial/playbook/ never trigger dispatch.
 

@@ -76,6 +76,8 @@ Each spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branchi
 **Lane 1 (hub vault)**
 
 - Doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops, people and career validation.
+- Ecosystem PM snapshots and Gold dashboard: operations/ecosystem/ (sync_ecosystem_dashboard.py; Actions ecosystem-dashboard-sync).
+- Hub-test customer package (production orchestration from vault): operations/customers/hub-test/. Commercial capture playbooks live here; platform demos no longer hold commercial media.
 - No production contract YAML SSOT and no deployable platform code.
 
 **Lane 2 (platform)**
