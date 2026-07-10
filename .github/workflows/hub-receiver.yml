@@ -61,6 +61,17 @@ jobs:
             -L "https://api.github.com/repos/${{ steps.hub.outputs.repo }}/contents/company/strategy/03_data-product-contracts.md?ref=${{ steps.hub.outputs.sha }}")
           test "$HTTP_STATUS" -eq 200
 
+      - name: Fetch ecosystem map
+        env:
+          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+        run: |
+          mkdir -p docs/hub
+          HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/ecosystem-map-intent.md" \
+            -H "Authorization: token $HUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3.raw" \
+            -L "https://api.github.com/repos/${{ steps.hub.outputs.repo }}/contents/company/strategy/governance/ecosystem-map.md?ref=${{ steps.hub.outputs.sha }}")
+          test "$HTTP_STATUS" -eq 200
+
       - name: Hygiene on hub mirror markdown
         run: |
           set -euo pipefail
