@@ -59,9 +59,11 @@ Spokes fetch hub file content via GitHub API (contents or archive) using a spoke
 Configure in ambient-systems GitHub Actions secrets:
 
 - **HUB_DISPATCH_TOKEN_AMBIENT** — Fine-grained PAT for Ambient-Team spokes: ambient-systems-platform, ambient-core, ambientsystems.ai. Permissions: repository_dispatch on each target repo.
-- **HUB_DISPATCH_TOKEN** — Fine-grained PAT for engineerID spokes: ambient-systems (self), EngineerID.github.io, code-signal. Permissions: repository_dispatch on each target repo.
+- **HUB_DISPATCH_ENGINEERID** — Fine-grained PAT for engineerID spokes: ambient-systems (self), EngineerID.github.io, code-signal. Permissions: repository_dispatch on each target repo.
 
 The dispatcher selects the token from the spoke owner (Ambient-Team vs engineerID). Both secrets are required for live dispatch to all enabled spokes.
+
+**Reuse on spokes:** Store the same Ambient PAT on each Ambient-Team spoke as **HUB_DISPATCH_AMBIENT_TEAM** (hub secret name differs). Store the same engineerID PAT on each engineerID spoke as **HUB_DISPATCH_ENGINEERID**. One PAT per org covers dispatch from the hub and git push to hub-sync branches on spokes when the token has contents, pull-requests, and actions write on that repo.
 
 **Dry run:** Run workflow hub dispatch manually with dry_run true, or set DRY_RUN true when invoking dispatch.sh locally. No API calls are made in dry run mode.
 
@@ -72,9 +74,27 @@ The dispatcher selects the token from the spoke owner (Ambient-Team vs engineerI
 Each spoke adds a receiver workflow (starter template at .github/hub/templates/spoke-receiver-workflow.yml):
 
 1. Trigger on repository_dispatch with types ambient_hub_sync.
-2. Check out the default branch, create a branch hub-sync/DATE-SHORT_SHA.
+2. Check out the default branch, create a branch hub-sync/SHORT_SHA.
 3. Apply sync logic using client_payload.data (or legacy flat fields).
-4. Open a pull request. Never push directly to main.
+4. Push the branch with the org dispatch PAT secret (see below), not GITHUB_TOKEN alone, so CI can run on the pull request.
+5. Open a pull request. Never push directly to main.
+6. **Merge policy:** do not merge hub-sync PRs until required CI is green on the PR. Pattern A remediate runs only on failed hub-sync pull_request CI, not on push to main.
+7. **After merge:** delete the `hub-sync/*` head branch (enable auto-delete in GitHub PR settings). See company/strategy/governance/ecosystem-branching.md section 6.
+
+**Branching SSOT for all repos:** company/strategy/governance/ecosystem-branching.md (naming, worktrees, orphan prevention, CI classes).
+
+**Spoke secrets**
+
+- **HUB_FETCH_TOKEN** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
+- **HUB_DISPATCH_AMBIENT_TEAM** — on Ambient-Team spokes only; same PAT value as hub **HUB_DISPATCH_TOKEN_AMBIENT**. Used for git push to hub-sync branches and optional gh workflow run to kick CI.
+- **HUB_DISPATCH_ENGINEERID** — on engineerID spokes; same PAT value as hub **HUB_DISPATCH_ENGINEERID**.
+- **CURSOR_API_KEY** — optional; CI self-heal (see .github/hub/templates/CI_CURSOR_BRIDGE.md).
+
+**Branch protection (GitHub repo settings on main)**
+
+- Require pull request before merge.
+- Require status checks: ambient-core job **python** (workflow CI); platform jobs **pre-commit**, **python**, **javascript**, **e2e-release** (workflow CI Validate).
+- Spokes without full CI: require manual review before merge.
 
 Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but no Actions run appears on the spoke.
 
@@ -90,10 +110,13 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 
 ## Troubleshooting (live dispatch)
 
-- **Hub dispatch HTTP 403 on Ambient-Team spokes:** Use HUB_DISPATCH_TOKEN_AMBIENT with access to each Ambient-Team target repo. engineerID-only HUB_DISPATCH_TOKEN cannot dispatch to Ambient-Team.
+- **Hub dispatch HTTP 403 on Ambient-Team spokes:** Use HUB_DISPATCH_TOKEN_AMBIENT on the hub with access to each Ambient-Team target repo. engineerID-only HUB_DISPATCH_ENGINEERID cannot dispatch to Ambient-Team.
 - **Hub dispatch HTTP 422 too many payload properties:** client_payload allows at most 10 top-level keys. Hub wraps metadata in client_payload.data (single key).
 - **Spoke receiver: GitHub Actions is not permitted to create or approve pull requests:** In each spoke repo, Settings, Actions, General, enable workflow permission to create and approve pull requests. The sync job may still push hub-sync/SHORT_SHA; open a PR manually if needed until this is enabled.
 - **Spoke fetch HTTP 403:** HUB_FETCH_TOKEN on the spoke must read the private hub repo EngineerID/ambient-systems at the commit in client_payload.data.sha (or legacy client_payload.sha).
+- **Hub-sync merged but main CI red:** hub-sync PR may have merged without CI if push used GITHUB_TOKEN only. Set HUB_DISPATCH_AMBIENT_TEAM or HUB_DISPATCH_ENGINEERID on the spoke (matching org) and require status checks before merge. Remediate skipped on push to main is expected.
+- **Hub-sync PR without CI:** Confirm spoke secret name matches hub-receiver.yml (HUB_DISPATCH_AMBIENT_TEAM or HUB_DISPATCH_ENGINEERID, not legacy HUB_SYNC_PUSH_TOKEN).
+- **Red check named .github/workflows/hub-receiver.yml on push with no jobs:** GitHub workflow file validation failed (invalid YAML), not a failed hub sync. repository_dispatch runs still use the Hub sync receiver workflow name when valid. Fix job-level env: do not reference steps context at job env (see ambient-core hub-receiver history).
 
 ---
 
@@ -102,5 +125,6 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 - Lane 1 vs Lane 2 — AGENTS.md vault vs platform section
 - Site vs vault — AGENTS.md vault vs site section
 - Platform summary — README.md platform summary section
+- CI self-heal (Cursor CLI and workflow_run bridge) — .github/hub/templates/CI_CURSOR_BRIDGE.md
 
 *Last updated: July 9, 2026*
