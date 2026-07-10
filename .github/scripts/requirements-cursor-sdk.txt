@@ -1,0 +1,2 @@
+# Cursor SDK for CI self-heal (Pattern A/B, vault maintenance). Not required for local vault ops.
+cursor-sdk==0.1.9

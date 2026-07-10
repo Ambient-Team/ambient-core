@@ -97,14 +97,18 @@ jobs:
     permissions:
       contents: write
       actions: read
+      pull-requests: write
     concurrency:
       group: cursor-remediate-${{ github.head_ref }}
       cancel-in-progress: true
+    env:
+      PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT || secrets.HUB_DISPATCH_ENGINEERID || github.token }}
     steps:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+          token: ${{ env.PUSH_TOKEN }}
 
       - name: Skip remediate loop guard
         id: guard
@@ -151,13 +155,11 @@ jobs:
             > ci-failure-logs/log_full.txt 2>&1 || true
           tail -c 45000 ci-failure-logs/log_full.txt > ci-failure-logs/log_tail.txt
 
-      - name: Install Cursor CLI
+      - name: Install Cursor SDK
         if: steps.guard.outputs.skip != 'true'
-        run: |
-          curl https://cursor.com/install -fsS | bash
-          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+        run: pip install -r .github/scripts/requirements-cursor-sdk.txt
 
-      - name: Run Cursor agent (files only)
+      - name: Run Cursor SDK local heal
         if: steps.guard.outputs.skip != 'true'
         env:
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
@@ -179,30 +181,23 @@ jobs:
             echo "Failed log tail:"
             cat ci-failure-logs/log_tail.txt
           } > ci-failure-logs/agent_prompt.txt
-          agent -p --force "$(cat ci-failure-logs/agent_prompt.txt)"
+          python3 .github/scripts/cursor_sdk_heal.py --prompt-file ci-failure-logs/agent_prompt.txt --cwd .
 
       - name: Commit and push remediate fix
         if: steps.guard.outputs.skip != 'true'
         env:
           HEAD_REF: ${{ github.head_ref }}
+          GH_TOKEN: ${{ env.PUSH_TOKEN }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # GITHUB_TOKEN cannot update workflow files without workflows permission
-          git checkout -- .github/workflows 2>/dev/null || true
+          rm -rf ci-failure-logs
           if [ -z "$(git status --porcelain)" ]; then
-            echo "No non-workflow file changes from agent." >> "$GITHUB_STEP_SUMMARY"
+            echo "No file changes from agent." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           git add -A
-          git reset HEAD -- .github/workflows 2>/dev/null || true
-          if [ -z "$(git diff --cached --name-only)" ]; then
-            echo "Only workflow changes from agent; skipping push (needs human or workflows-scoped PAT)." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
           git commit -m "ci: cursor remediate hub-sync failure (run ${{ github.run_id }})"
-          if ! git push origin "HEAD:${HEAD_REF}"; then
-            echo "Push failed (often workflow-file permission). Logs remain in artifacts." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
+          git push origin "HEAD:${HEAD_REF}"
+          echo "Pushed remediate commit to ${HEAD_REF} (unattended)." >> "$GITHUB_STEP_SUMMARY"
