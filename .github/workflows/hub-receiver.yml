@@ -89,8 +89,8 @@ jobs:
       - name: Commit sync branch
         id: commit
         env:
-          # Same PAT as hub HUB_DISPATCH_TOKEN_AMBIENT; spoke secret name differs.
-          HUB_SYNC_PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM }}
+          # Same PAT and secret name as hub HUB_DISPATCH_TOKEN_AMBIENT.
+          HUB_SYNC_PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT }}
         run: |
           set -euo pipefail
           SYNC_BRANCH="hub-sync/${{ steps.hub.outputs.short }}"
@@ -106,7 +106,7 @@ jobs:
           if [ -n "${HUB_SYNC_PUSH_TOKEN:-}" ]; then
             git push "https://x-access-token:${HUB_SYNC_PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${SYNC_BRANCH}"
           else
-            echo "::warning::HUB_DISPATCH_AMBIENT_TEAM not set; CI may not run on the PR."
+            echo "::warning::HUB_DISPATCH_TOKEN_AMBIENT not set; CI may not run on the PR."
             git push -u origin "${SYNC_BRANCH}"
           fi
           echo "empty=false" >> "$GITHUB_OUTPUT"
@@ -129,11 +129,11 @@ jobs:
       - name: Trigger CI on hub-sync branch
         if: steps.commit.outputs.empty == 'false'
         env:
-          GH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM }}
+          GH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT }}
         run: |
           set -euo pipefail
           if [ -z "${GH_TOKEN:-}" ]; then
-            echo "HUB_DISPATCH_AMBIENT_TEAM not set; skip CI kick."
+            echo "HUB_DISPATCH_TOKEN_AMBIENT not set; skip CI kick."
             exit 0
           fi
           gh workflow run ci.yml --ref "hub-sync/${{ steps.hub.outputs.short }}"
