@@ -1,7 +1,8 @@
 # Pattern B: copy to TARGET_REPO/.github/workflows/ci-cursor-bridge.yml
-# On watched workflow failure: capture logs, run Cursor CLI on a heal branch, open a PR.
-# Requires repository secret CURSOR_API_KEY. See CI_CURSOR_BRIDGE.md.
-# Does not use Cloud Agents API (avoids usage-based spend). Agent runs on the Actions runner.
+# On watched workflow failure: Cursor SDK local heal, open PR, enable auto-merge.
+# Requires CURSOR_API_KEY. Prefer HUB_DISPATCH_TOKEN_* for push (workflow files).
+# Copy .github/scripts/cursor_sdk_heal.py + requirements-cursor-sdk.txt from hub
+# (or use paths below after copying). See CI_CURSOR_BRIDGE.md.
 
 name: CI failure Cursor bridge
 
@@ -33,7 +34,7 @@ jobs:
       cancel-in-progress: true
     env:
       CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
-      GH_TOKEN: ${{ github.token }}
+      PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT || secrets.HUB_DISPATCH_ENGINEERID || github.token }}
       RUN_ID: ${{ github.event.workflow_run.id }}
       RUN_URL: ${{ github.event.workflow_run.html_url }}
       WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
@@ -45,8 +46,11 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
+          token: ${{ env.PUSH_TOKEN }}
 
       - name: Collect failed workflow logs
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p ci-failure-logs
@@ -74,7 +78,7 @@ jobs:
 
       - name: Note when CURSOR_API_KEY is missing
         if: env.CURSOR_API_KEY == ''
-        run: echo "Log captured; set CURSOR_API_KEY to enable Cursor CLI self-heal." >> "$GITHUB_STEP_SUMMARY"
+        run: echo "Log captured; set CURSOR_API_KEY to enable Cursor SDK self-heal." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Skip if tip is already a cursor remediate
         if: env.CURSOR_API_KEY != ''
@@ -87,13 +91,23 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Install Cursor CLI
+      - uses: actions/setup-python@v5
+        if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Install Cursor SDK
         if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
         run: |
-          curl https://cursor.com/install -fsS | bash
-          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+          if [ -f .github/scripts/requirements-cursor-sdk.txt ]; then
+            pip install -r .github/scripts/requirements-cursor-sdk.txt
+          elif [ -f _main/scripts/requirements-cursor-sdk.txt ]; then
+            pip install -r _main/scripts/requirements-cursor-sdk.txt
+          else
+            pip install 'cursor-sdk==0.1.9'
+          fi
 
-      - name: Run Cursor agent (files only)
+      - name: Run Cursor SDK local heal
         if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
         env:
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
@@ -105,28 +119,28 @@ jobs:
             echo "Run: ${RUN_URL}"
             echo ""
             echo "Fix hub-sync receiver workflow, fetched hub files, or markdown hygiene."
-            echo "Do NOT run git or gh; the workflow commits and opens a PR."
+            echo "Do NOT run git or gh; the workflow commits, opens a PR, and enables auto-merge."
             echo ""
             echo "Failed log tail:"
             cat ci-failure-logs/log_tail.txt
           } > ci-failure-logs/agent_prompt.txt
-          agent -p --force "$(cat ci-failure-logs/agent_prompt.txt)"
+          HEAL_PY=".github/scripts/cursor_sdk_heal.py"
+          if [ ! -f "$HEAL_PY" ]; then HEAL_PY="_main/scripts/cursor_sdk_heal.py"; fi
+          python3 "$HEAL_PY" --prompt-file ci-failure-logs/agent_prompt.txt --cwd .
 
-      - name: Commit heal branch and open PR
+      - name: Commit heal branch, open PR, enable auto-merge
         if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ env.PUSH_TOKEN }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Drop agent scratch under ci-failure-logs from the heal commit
           git checkout -- ci-failure-logs 2>/dev/null || true
           rm -rf ci-failure-logs
-          if git diff --quiet && git diff --cached --quiet; then
-            # Also check untracked that agent may have added
-            if [ -z "$(git status --porcelain)" ]; then
-              echo "No file changes from agent; logs only." >> "$GITHUB_STEP_SUMMARY"
-              exit 0
-            fi
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No file changes from agent; logs only." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
           fi
           HEAL_BRANCH="cursor/heal-${RUN_ID}"
           git checkout -B "$HEAL_BRANCH"
@@ -137,5 +151,8 @@ jobs:
             --base main \
             --head "$HEAL_BRANCH" \
             --title "ci: cursor self-heal for ${WORKFLOW_NAME} (${RUN_ID})" \
-            --body "Automated Cursor CLI self-heal after failed workflow run ${RUN_URL}. Review before merge. Do not merge if the agent only papered over a secret or permissions issue.")"
+            --body "Unattended Cursor SDK self-heal after failed workflow run ${RUN_URL}. Auto-merge enabled when required checks pass.")"
           echo "Opened ${PR_URL}" >> "$GITHUB_STEP_SUMMARY"
+          gh pr merge --auto --squash "$PR_URL" \
+            || gh pr merge --auto --merge "$PR_URL" \
+            || echo "Auto-merge not enabled yet (branch protection); PR left open: ${PR_URL}" >> "$GITHUB_STEP_SUMMARY"
