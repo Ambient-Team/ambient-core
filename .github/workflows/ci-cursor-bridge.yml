@@ -1,5 +1,7 @@
-# When Hub sync receiver fails, capture logs and launch a Cursor Cloud Agent.
-# Requires repository secret CURSOR_API_KEY.
+﻿# Pattern B: copy to TARGET_REPO/.github/workflows/ci-cursor-bridge.yml
+# On watched workflow failure: capture logs, run Cursor CLI on a heal branch, open a PR.
+# Requires repository secret CURSOR_API_KEY. See CI_CURSOR_BRIDGE.md.
+# Does not use Cloud Agents API (avoids usage-based spend). Agent runs on the Actions runner.
 
 name: CI failure Cursor bridge
 
@@ -11,8 +13,9 @@ on:
       - completed
 
 permissions:
-  contents: read
+  contents: write
   actions: read
+  pull-requests: write
 
 jobs:
   bridge:
@@ -25,6 +28,9 @@ jobs:
         github.event.workflow_run.event == 'repository_dispatch'
       )
     runs-on: ubuntu-latest
+    concurrency:
+      group: cursor-bridge-${{ github.event.workflow_run.head_branch }}-${{ github.event.workflow_run.id }}
+      cancel-in-progress: true
     env:
       CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
       GH_TOKEN: ${{ github.token }}
@@ -34,6 +40,12 @@ jobs:
       HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
       HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
     steps:
+      - name: Checkout failed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+
       - name: Collect failed workflow logs
         run: |
           set -euo pipefail
@@ -51,7 +63,7 @@ jobs:
           gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log-failed >> "$LOG_FILE" 2>&1 \
             || gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log >> "$LOG_FILE" 2>&1 \
             || echo "(could not retrieve logs)" >> "$LOG_FILE"
-          echo "LOG_FILE=$LOG_FILE" >> "$GITHUB_ENV"
+          tail -c 45000 "$LOG_FILE" > ci-failure-logs/log_tail.txt
 
       - name: Upload failure log artifact
         uses: actions/upload-artifact@v4
@@ -60,43 +72,70 @@ jobs:
           path: ci-failure-logs/
           retention-days: 30
 
-      - name: Launch Cursor Cloud Agent
-        if: env.CURSOR_API_KEY != ''
-        run: |
-          set -euo pipefail
-          tail -c 45000 "$LOG_FILE" > ci-failure-logs/log_tail.txt
-          jq -n \
-            --arg wf "$WORKFLOW_NAME" \
-            --arg br "$HEAD_BRANCH" \
-            --arg sha "$HEAD_SHA" \
-            --arg runurl "$RUN_URL" \
-            --arg url "https://github.com/${GITHUB_REPOSITORY}" \
-            --rawfile logtail ci-failure-logs/log_tail.txt \
-            '{
-               prompt: {
-                 text: (
-                   "Hub sync receiver workflow \"" + $wf + "\" failed.\n" +
-                   "Branch: " + $br + " commit " + $sha + "\n" +
-                   "Run: " + $runurl + "\n\n" +
-                   "Fix .github/workflows/hub-receiver.yml fetch paths, hub-sync files, or markdown. " +
-                   "Open a PR with the fix. Log tail:\n\n" + $logtail
-                 )
-               },
-               repos: [{ url: $url, startingRef: $br }],
-               autoCreatePR: true
-             }' > cursor-agent-payload.json
-          HTTP_CODE="$(curl -sS -o cursor-agent-response.json -w '%{http_code}' \
-            --request POST \
-            --url https://api.cursor.com/v1/agents \
-            --header "Authorization: Bearer ${CURSOR_API_KEY}" \
-            --header "Content-Type: application/json" \
-            --data @cursor-agent-payload.json)"
-          if [ "${HTTP_CODE}" -lt 200 ] || [ "${HTTP_CODE}" -ge 300 ]; then
-            echo "::error::Cursor agent launch failed HTTP ${HTTP_CODE}"
-            cat cursor-agent-response.json || true
-            exit 1
-          fi
-
       - name: Note when CURSOR_API_KEY is missing
         if: env.CURSOR_API_KEY == ''
-        run: echo "Log captured; set CURSOR_API_KEY to enable agent launch." >> "$GITHUB_STEP_SUMMARY"
+        run: echo "Log captured; set CURSOR_API_KEY to enable Cursor CLI self-heal." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Skip if tip is already a cursor remediate
+        if: env.CURSOR_API_KEY != ''
+        id: guard
+        run: |
+          if git log -1 --pretty=%s | grep -q 'cursor remediate'; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Latest commit is already a cursor remediate; skipping." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Cursor CLI
+        if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+
+      - name: Run Cursor agent (files only)
+        if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+        run: |
+          set -euo pipefail
+          {
+            echo "GitHub Actions workflow \"${WORKFLOW_NAME}\" failed."
+            echo "Branch: ${HEAD_BRANCH} commit ${HEAD_SHA}"
+            echo "Run: ${RUN_URL}"
+            echo ""
+            echo "Fix hub-sync receiver workflow, fetched hub files, or markdown hygiene."
+            echo "Do NOT run git or gh; the workflow commits and opens a PR."
+            echo ""
+            echo "Failed log tail:"
+            cat ci-failure-logs/log_tail.txt
+          } > ci-failure-logs/agent_prompt.txt
+          agent -p --force "$(cat ci-failure-logs/agent_prompt.txt)"
+
+      - name: Commit heal branch and open PR
+        if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Drop agent scratch under ci-failure-logs from the heal commit
+          git checkout -- ci-failure-logs 2>/dev/null || true
+          rm -rf ci-failure-logs
+          if git diff --quiet && git diff --cached --quiet; then
+            # Also check untracked that agent may have added
+            if [ -z "$(git status --porcelain)" ]; then
+              echo "No file changes from agent; logs only." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+          fi
+          HEAL_BRANCH="cursor/heal-${RUN_ID}"
+          git checkout -B "$HEAL_BRANCH"
+          git add -A
+          git commit -m "ci: cursor remediate workflow failure (run ${RUN_ID})"
+          git push -u origin "HEAD:${HEAL_BRANCH}"
+          PR_URL="$(gh pr create \
+            --base main \
+            --head "$HEAL_BRANCH" \
+            --title "ci: cursor self-heal for ${WORKFLOW_NAME} (${RUN_ID})" \
+            --body "Automated Cursor CLI self-heal after failed workflow run ${RUN_URL}. Review before merge. Do not merge if the agent only papered over a secret or permissions issue.")"
+          echo "Opened ${PR_URL}" >> "$GITHUB_STEP_SUMMARY"
