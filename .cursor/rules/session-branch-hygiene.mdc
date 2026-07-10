@@ -1,0 +1,23 @@
+---
+description: Session close-out and main safety for this spoke
+alwaysApply: true
+---
+
+# Session branch hygiene
+
+Full SSOT: EngineerID/ambient-systems company/strategy/governance/ecosystem-branching.md
+
+Local short form: docs/hub/branching.md
+
+## Main safety
+
+- Never commit or push to main. Even one-line fixes use repo/short-kebab-scope plus a PR.
+- Never force-push main. Prefer small scoped PRs.
+
+## Session close-out
+
+1. Open or update a PR for in-session commits.
+2. When CI is green and the user asked for the work: merge, confirm head deleted, prune local.
+3. If abandoning: close the PR and delete the remote branch.
+4. Delete orphan hub-sync or cursor heads if auto-delete missed them.
+5. Prefer one open repo/* PR; do not leave ready PRs after the session.
