@@ -1,17 +1,29 @@
 # Git branching (Ambient-Team/ambient-core)
 
-Short policy for this spoke. Full SSOT lives in the private hub vault: company/strategy/governance/ecosystem-branching.md (EngineerID/ambient-systems).
+Short policy for this spoke. Full SSOT: EngineerID/ambient-systems company/strategy/governance/ecosystem-branching.md.
 
-## Rules
+## Main safety
 
-- Integration branch: `main` only. Do not commit on `main`.
-- Human and agent work: branch `repo/<short-kebab-scope>` off updated `main`, PR, human merge.
-- Hub automation: `hub-sync/*` branches only from hub-receiver workflow; open PR, wait for CI job **python**, merge, delete head branch.
-- Do not use `cursor/*` manually; review bot remediate PRs separately.
+- Integration branch: `main` only. Do not commit or push to `main`, including one-line fixes.
+- Human and agent work: branch `repo/short-kebab-scope` off updated `main`, open a PR into `main`.
+- Prefer small scoped PRs. Never force-push `main`.
+
+## Session close-out
+
+- When CI is green and the work was requested this session: merge the PR (agent or human), then delete the head branch and prune local.
+- If abandoning: close the PR and delete the remote branch.
+- Do not leave orphan `repo/*`, `hub-sync/*`, or `cursor/*` branches or ready open PRs after a session.
+- Prefer one open `repo/*` PR per repo; do not open a second overlapping PR for the same scope.
+- Do not merge while required CI job python is red.
+
+## Automation
+
+- Hub automation: `hub-sync/*` from hub-receiver only; open PR, wait for CI job python, merge when green, delete head branch.
+- Do not use `cursor/*` manually; CI self-heal may open those and auto-merge when green.
 
 ## CI
 
-Workflow **CI** must be green on the PR before merge. Required check on `main`: job **python**.
+Workflow CI must be green on the PR before merge. Required check on main: job python.
 
 ## Parallel agents
 
