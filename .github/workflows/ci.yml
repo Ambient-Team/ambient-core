@@ -189,10 +189,20 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
-            echo "No file changes from agent."
+          # GITHUB_TOKEN cannot update workflow files without workflows permission
+          git checkout -- .github/workflows 2>/dev/null || true
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No non-workflow file changes from agent." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           git add -A
+          git reset HEAD -- .github/workflows 2>/dev/null || true
+          if [ -z "$(git diff --cached --name-only)" ]; then
+            echo "Only workflow changes from agent; skipping push (needs human or workflows-scoped PAT)." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           git commit -m "ci: cursor remediate hub-sync failure (run ${{ github.run_id }})"
-          git push origin "HEAD:${HEAD_REF}"
+          if ! git push origin "HEAD:${HEAD_REF}"; then
+            echo "Push failed (often workflow-file permission). Logs remain in artifacts." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
