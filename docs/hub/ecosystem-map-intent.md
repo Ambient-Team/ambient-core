@@ -230,7 +230,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 **Vault cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
 
-**Integration target hint:** py -3 operations/finance/engine/scripts/suggest_branch_name.py --from-git prints main as merge target under branch-map v4.
+**Integration target hint:** py -3 _main/scripts/suggest_branch_name.py --from-git prints main as merge target under branch-map v4.
 
 ---
 
