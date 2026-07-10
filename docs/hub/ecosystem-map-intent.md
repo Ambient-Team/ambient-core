@@ -76,6 +76,10 @@ Each spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branchi
 **Lane 1 (hub vault)**
 
 - Doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops, people and career validation.
+- Ecosystem PM snapshots and Gold dashboard: operations/ecosystem/ (sync_ecosystem_dashboard.py; Actions ecosystem-dashboard-sync).
+- Hub-test customer package (production orchestration from vault): commercial/customers/hub-test/. Commercial capture playbooks live here; platform demos no longer hold commercial media.
+- Ecosystem inbox (land + reverse consolidate): inbox/ — PROTOCOL.md. Items land in open/, route to hub SSOT, spokes receive via hub-dispatch; spoke outcomes return to inbox/returns/ for hub review. Not a second PM dashboard (that remains operations/ecosystem/).
+- Founder Uni curriculum and Pass / Master / Finish progress: commercial/learning/founder-uni/ (hub-owned). Spoke expectations and return shape live there. Thin sync rule founder-learning-sync mirrors curriculum-map.md and spoke-expectations.md only to the site validation-engine. Returns may cite fu-week and fu-level per inbox/PROTOCOL.md (no PII).
 - No production contract YAML SSOT and no deployable platform code.
 
 **Lane 2 (platform)**
@@ -133,10 +137,19 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **commercial-public-sync**
 
-- Hub paths: commercial/outbound/**, commercial/validation/**
+- Hub paths: commercial/validation/**
 - Spokes: site
 - Profile: site-gtm
 - Site receiver copies: internal-docs/hub/upstream-mapping.md, internal-docs/hub/vault-validation-readme.md (commercial/validation/README.md), internal-docs/hub/ecosystem-map-intent.md
+- Note: dormant outbound and playbook vault leftovers live under commercial/archive/ (excluded). Site SSOT: ambientsystems.ai internal-docs/commercial/.
+
+**founder-learning-sync**
+
+- Hub paths: commercial/learning/founder-uni/curriculum-map.md, commercial/learning/founder-uni/spoke-expectations.md
+- Spokes: site
+- Profile: site-gtm
+- Site receiver copies: internal-docs/hub/founder-uni/curriculum-map.md, internal-docs/hub/founder-uni/spoke-expectations.md
+- Never sync notes.md or progress.md
 
 **career-public-sync**
 
@@ -157,7 +170,7 @@ Full secrets and troubleshooting: MAPPING.md.
 - operations/finance/
 - company/legal/
 - assets/archive/
-- commercial/playbook/
+- commercial/archive/
 
 ---
 
@@ -181,14 +194,15 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 **On Ambient-Team spokes**
 
 - HUB_FETCH_TOKEN — read private hub at payload sha
-- HUB_DISPATCH_AMBIENT_TEAM — same PAT value as hub HUB_DISPATCH_TOKEN_AMBIENT; push hub-sync branches and optional CI kick
+- HUB_DISPATCH_TOKEN_AMBIENT — same name and PAT value as hub; push hub-sync branches and optional CI kick
+- CURSOR_API_KEY — optional; CI bridge
+- DATABRICKS_HOST and DATABRICKS_TOKEN — platform only (CI Databricks Validate)
 
 **On engineerID spokes**
 
 - HUB_FETCH_TOKEN
 - HUB_DISPATCH_ENGINEERID — same PAT value as hub HUB_DISPATCH_ENGINEERID
-
-Optional CURSOR_API_KEY for CI bridge per company/strategy/governance/cursor-integrations.md.
+- CURSOR_API_KEY — optional; CI bridge
 
 ---
 
@@ -223,7 +237,7 @@ Optional CURSOR_API_KEY for CI bridge per company/strategy/governance/cursor-int
 ## Non-goals
 
 - Hub dispatch does not deploy Databricks or run platform jobs.
-- Hub dispatch does not sync finance, legal, archive, or commercial/playbook/.
+- Hub dispatch does not sync finance, legal, assets/archive/, or commercial/archive/.
 - Hub mirrors on spokes are intent and reference copies; execution SSOT stays in each repo tree.
 - Hub dispatch does not bump ambient-core submodule pins on platform.
 
@@ -240,4 +254,4 @@ Optional CURSOR_API_KEY for CI bridge per company/strategy/governance/cursor-int
 - Cursor policy — cursor-integrations.md
 - Career vs company validation — people/validation-bridge.md
 
-*Last alignment: July 9, 2026 | Public doctrine alignment*
+*Last alignment: July 10, 2026 | Public doctrine alignment*
