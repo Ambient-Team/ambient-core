@@ -22,11 +22,14 @@ Agents on this machine may read spoke repos via localPath in mapping.json. The c
 
 - **strategy-platform-intent** — Changes under company/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
-- **commercial-public-sync** — Changes under commercial/outbound/ or commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries.
+- **commercial-public-sync** — Changes under commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries. Dormant outbound lives under commercial/archive/ and does not dispatch.
 - **career-public-sync** — Changes under people/cv/ or people/job-search-targeting.md notify the personal site. Canonical vault CV paths are people/cv/, not legacy career/cv/ paths referenced in older site readme text.
 - **interview-prep-learning** — Changes under people/interview-prep/ may notify code-signal when that spoke is enabled.
+- **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
-**Global excludes:** operations/finance/, company/legal/, assets/archive/, and commercial/playbook/ never trigger dispatch.
+**Global excludes:** operations/finance/, company/legal/, assets/archive/, and commercial/archive/ never trigger dispatch.
+
+**Inbox:** Ecosystem landing and reverse-consolidation live under inbox/ (PROTOCOL.md). Inbox paths do not have a dedicated sync rule in v1; triage into watched prefixes above so spokes are notified. Spoke outcomes that need hub decisions land in inbox/returns/ (manual or agent-assisted; no reverse repository_dispatch yet).
 
 ---
 
@@ -82,6 +85,8 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 7. **After merge:** delete the `hub-sync/*` head branch (enable auto-delete in GitHub PR settings). See company/strategy/governance/ecosystem-branching.md section 6.
 
 **Branching SSOT for all repos:** company/strategy/governance/ecosystem-branching.md (naming, worktrees, orphan prevention, CI classes).
+
+**Founder Uni progress (hub-owned):** commercial/learning/founder-uni/ holds curriculum-map, progress (Pass / Master / Finish), and spoke-expectations. Spokes do not own the curriculum and do not get a dedicated learning sync rule in the Focused pass. When spoke work closes an FU week (especially MVP / validation / demo weeks), file inbox/returns/ with fu-week and fu-level, or ask the hub operator to update progress.md. Do not treat fundraising or hiring curriculum as active ops under commercial freeze — see commercial/learning/founder-uni/conflicts.md.
 
 **Spoke secrets**
 
