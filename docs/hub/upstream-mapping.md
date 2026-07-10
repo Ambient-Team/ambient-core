@@ -2,13 +2,13 @@
 
 **Purpose:** This vault is the coordination hub. Spoke repositories own execution surfaces, public site content, personal site mirrors, or personal learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main.
 
-Machine map: see mapping.json at repo root. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml.
+Machine map: see mapping.json at repo root. Prose SSOT for all six repos: company/strategy/governance/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml.
 
 ---
 
 ## Spokes
 
-- **platform** — EngineerID/ambient-systems-platform — Lane 2 execution: platform code, bundles, jobs, app, CI. Local tree: C:/GitHub/ambient-systems-platform
+- **platform** — Ambient-Team/ambient-systems-platform — Lane 2 execution: platform code, bundles, jobs, app, CI. Local tree: C:/GitHub/ambient-systems-platform
 - **core** — Ambient-Team/ambient-core — Open-core contracts, catalog, shared pipeline, Maestro source. Local tree: C:/GitHub/ambient-core
 - **site** — Ambient-Team/ambientsystems.ai — Public marketing site, messaging SSOT, internal-docs mirrors. Local tree: C:/GitHub/ambientsystems.ai
 - **personal-site** — engineerID/EngineerID.github.io — Personal site and machine-readable CV mirrors. Local tree: C:/GitHub/EngineerID.github.io
