@@ -208,9 +208,9 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 ## Branching and automation
 
-- Human and agent work: repo/short-kebab-scope off main, PR only, agents never merge.
-- hub-sync/SHORT_SHA — automation only; wait for required CI on execution spokes before merge.
-- cursor/ — CI remediate; review as bot output.
+- Human and agent work: `repo/short-kebab-scope` off `main`, PR only; never commit on `main`. Agents may merge green in-session PRs; session close-out deletes heads and clears orphans. See ecosystem-branching.md.
+- hub-sync/SHORT_SHA — automation only; wait for required CI on execution spokes before merge; delete head after merge.
+- cursor/ — CI remediate; Pattern B may auto-merge when green; otherwise review and delete head.
 - Parallel agents: separate git worktree per branch (ecosystem-branching.md section 4).
 
 **Required CI on merge (execution spokes)**
