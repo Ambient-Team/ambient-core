@@ -1,8 +1,8 @@
 # Ecosystem map (hub and spokes)
 
-**Version:** 1
-**Date:** July 9, 2026
-**Purpose:** Agent and human SSOT for all repositories in mapping.json: roles, lanes, hub dispatch, spoke receivers, secrets, and where to edit. Machine list: mapping.json at hub root. Operations detail: MAPPING.md. Branching: ecosystem-branching.md.
+**Version:** 2
+**Date:** July 13, 2026
+**Purpose:** Agent and human SSOT for repositories in mapping.json: floating hub, two execution lanes, personal spokes, PhD theory root, roles, hub dispatch, spoke receivers, secrets, and where to edit. Machine list: mapping.json at hub root. Operations detail: MAPPING.md. Branching: ecosystem-branching.md.
 
 Platform summary: see README Platform Summary — ../../../README.md#platform-summary.
 
@@ -11,8 +11,19 @@ Platform summary: see README Platform Summary — ../../../README.md#platform-su
 ## When to read this
 
 - Before cross-repo work, hub-sync PR review, or choosing which clone to open.
-- When Lane 1 intent in the vault should become Lane 2 execution, site mirrors, or personal mirrors.
+- When hub Active focus should orient business lane (site) or technical lane (platform).
 - When unsure whether finance, legal, or playbook paths trigger dispatch (they do not).
+- Before any PhD-adjacent work: agents never write to phd-moat.
+
+---
+
+## Floating hub and two lanes
+
+**Floating hub** = ambient-systems is the only coordination hub. Its Active focus moves (`_data/ecosystem/hub-focus.yaml`). Spokes reorient around that focus. PhD is not the hub and is not mature enough to be hub.
+
+- **Business lane:** ambientsystems.ai — market-facing OS (validation, marketing, sales, later commercial P&L).
+- **Technical lane:** ambient-systems-platform (+ ambient-core) — product engine.
+- **Theory root:** phd-moat — read-only one-way input to Ambient via company/strategy/phd-derivation-map.md.
 
 ---
 
@@ -22,20 +33,20 @@ Platform summary: see README Platform Summary — ../../../README.md#platform-su
 
 - id: hub (implicit)
 - GitHub: EngineerID/ambient-systems
-- Class: hub
+- Class: hub (floating focus)
 - Local: C:/GitHub/ambient-systems
 - Visibility: private vault
-- Primary edits: company/strategy/, product/, commercial/, people/, operations/finance/, company/legal/, mapping.json, AGENTS.md, README.md
+- Primary edits: company/strategy/, product/, commercial/, people/, operations/finance/, company/legal/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
 
-**Spoke platform**
+**Spoke platform (technical lane)**
 
 - id: platform
 - GitHub: Ambient-Team/ambient-systems-platform
 - Class: execution
 - Local: C:/GitHub/ambient-systems-platform
-- Role: Lane 2 — platform code, Databricks bundles, jobs, app, CI and pre-commit
+- Role: Technical lane — platform code, Databricks bundles, jobs, app, CI and pre-commit
 
-**Spoke core**
+**Spoke core (technical lane contracts)**
 
 - id: core
 - GitHub: Ambient-Team/ambient-core
@@ -43,13 +54,13 @@ Platform summary: see README Platform Summary — ../../../README.md#platform-su
 - Local: C:/GitHub/ambient-core
 - Role: Contract and catalog YAML SSOT, shared pipeline libraries, Maestro source (public MIT)
 
-**Spoke site**
+**Spoke site (business lane)**
 
 - id: site
 - GitHub: Ambient-Team/ambientsystems.ai
 - Class: site
 - Local: C:/GitHub/ambientsystems.ai
-- Role: Marketing site, wiki, company-external messaging, internal-docs mirrors, leads
+- Role: Business lane — marketing site, wiki, company-external messaging, validation engine, leads, commercial charter
 
 **Spoke personal-site**
 
@@ -67,40 +78,49 @@ Platform summary: see README Platform Summary — ../../../README.md#platform-su
 - Local: C:/GitHub/code-signal
 - Role: Personal CodeSignal learning vault; optional interview-prep hook from hub
 
-Each spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branching.md (short branching copy).
+**Theory root phd-moat (not a dispatch spoke)**
+
+- id: phd-moat
+- GitHub: EngineerID/phd-moat
+- Class: theory-root
+- Local: C:/GitHub/phd-moat
+- enabled: false (no hub-sync; no Ambient agent writes)
+- Role: Doctoral theory root — one-way defendable constructs into Ambient derivation map only
+
+Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branching.md (short branching copy).
 
 ---
 
 ## Lanes and canonical ownership
 
-**Lane 1 (hub vault)**
+**Floating hub (this vault)**
 
-- Doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops, people and career validation.
+- Active focus pointer, doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops (until site fully owns business OS), people and career validation.
 - Ecosystem PM snapshots and Gold dashboard: operations/ecosystem/ (sync_ecosystem_dashboard.py; Actions ecosystem-dashboard-sync).
-- Hub-test customer package (production orchestration from vault): commercial/customers/hub-test/. Commercial capture playbooks live here; platform demos no longer hold commercial media.
-- Ecosystem inbox (land + reverse consolidate): inbox/ — PROTOCOL.md. Items land in open/, route to hub SSOT, spokes receive via hub-dispatch; spoke outcomes return to inbox/returns/ for hub review. Not a second PM dashboard (that remains operations/ecosystem/).
-- Founder Uni curriculum and Pass / Master / Finish progress: commercial/learning/founder-uni/ (hub-owned). Spoke expectations and return shape live there. Thin sync rule founder-learning-sync mirrors curriculum-map.md and spoke-expectations.md only to the site validation-engine. Returns may cite fu-week and fu-level per inbox/PROTOCOL.md (no PII).
+- Hub-test customer package (production orchestration from vault): commercial/customers/hub-test/.
+- Ecosystem inbox: inbox/ — PROTOCOL.md.
+- Founder Uni: commercial/learning/founder-uni/.
+- PhD derivation map: company/strategy/phd-derivation-map.md (Ambient-owned; never write PhD).
 - No production contract YAML SSOT and no deployable platform code.
 
-**Lane 2 (platform)**
+**Technical lane (platform + core)**
 
-- Runnable integration code consumed in production workflows.
-- Implements intent recorded in company/strategy/backlog/technical-backlog.md with platform PR links when done.
+- Runnable integration code in ambient-systems-platform.
+- YAML catalog and contracts in ambient-core; platform pins submodule tag.
 
-**Contracts (core)**
+**Business lane (site)**
 
-- YAML catalog and data product contracts.
-- Platform consumes ambient-core via pinned submodule tag. Contract changes require core PR plus platform pin bump. Hub dispatch does not replace that pin workflow.
-
-**Site (ambientsystems.ai)**
-
-- Public and company-external surfaces. Vault commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md.
+- Public and company-external commercial OS. Vault commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md. Business charter: site internal-docs/commercial/business-engine-charter.md.
 
 **Personal spokes**
 
 - Career artifacts and learning vault. Not company doctrine or GTM SSOT.
 
-Vault vs platform vs site agent sections: AGENTS.md vault vs platform and vault vs site.
+**Theory root**
+
+- Read-only. Defendable PhD constructs may become Ambient core claims; undefendable only peripheral at operator risk. Never reverse-sync Ambient proprietary into PhD.
+
+Agent sections: AGENTS.md floating hub, PhD theory root, vault vs site.
 
 ---
 
@@ -108,7 +128,7 @@ Vault vs platform vs site agent sections: AGENTS.md vault vs platform and vault 
 
 **Trigger:** Push to hub main under path filters in .github/workflows/hub-dispatch.yml (company/strategy/, product/, commercial/, people/, mapping.json).
 
-**Script:** .github/hub/dispatch.sh reads mapping.json, applies globalExcludes, matches syncRules, POSTs repository_dispatch with event_type ambient_hub_sync.
+**Script:** .github/hub/dispatch.sh reads mapping.json, applies globalExcludes, matches syncRules, POSTs repository_dispatch with event_type ambient_hub_sync only to spokes with `enabled: true`. phd-moat is never dispatched.
 
 **Payload v2:** client_payload.data holds source_repo, sha, sourceRef, mappingVersion, ruleIds, payloadProfiles, changedPaths (up to 50 listed), pathCount, pathsTruncated.
 
