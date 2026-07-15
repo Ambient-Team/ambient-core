@@ -8,10 +8,19 @@ const EXCLUDE_PATTERN_SOURCES = ["_margin$", "_ratio$", "_percent$", "_pct$"];
 
 const EXCLUDE_PATTERNS = EXCLUDE_PATTERN_SOURCES.map((src) => new RegExp(src, 'i'));
 
+function fieldNameFromEntry(field) {
+  if (field == null) return '';
+  if (typeof field === 'string') return field.trim();
+  if (typeof field === 'object') {
+    return String(field.name ?? field.field ?? field.key ?? field.id ?? '').trim();
+  }
+  return String(field).trim();
+}
+
 export function filterCatalogInputFields(fields) {
   if (!fields || !fields.length) return [];
   return fields.filter((field) => {
-    const name = String(field || '').trim();
+    const name = fieldNameFromEntry(field);
     if (!name) return false;
     const lower = name.toLowerCase();
     if (EXCLUDE_EXACT.has(lower)) return false;

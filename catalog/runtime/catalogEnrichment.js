@@ -45,11 +45,16 @@ function inferDataTypes(option = {}) {
 }
 
 /**
- * @param {string} field
+ * @param {string|object} field
  */
 export function inferFieldRule(field = '') {
-  const f = field.toLowerCase();
-  const rule = { field, type: 'string', required: true };
+  const fieldName = typeof field === 'string'
+    ? field
+    : (field && typeof field === 'object'
+      ? (field.name ?? field.field ?? field.key ?? field.id ?? '')
+      : String(field ?? ''));
+  const f = String(fieldName).toLowerCase();
+  const rule = { field: fieldName, type: 'string', required: true };
 
   if (f === 'date' || f.endsWith('_date') || f.endsWith('date')) {
     return { ...rule, type: 'date', format: 'YYYY-MM-DD' };
