@@ -1,17 +1,17 @@
-industry: Commercial Finance
+industry: Software (SaaS)
 industryCodes:
   isic:
     revision: Rev.4
-    primary: '6492'
+    primary: '5820'
   naics:
     revision: '2022'
-    primary: '522220'
+    primary: '511210'
   nace:
     revision: Rev.2
-    primary: '64.92'
+    primary: '58.29'
   gics:
     revision: '2023'
-    primary: '401010'
+    primary: '451030'
   confidence: high
-  lastReviewed: '2026-07-04'
+  lastReviewed: '2026-07-16'
   source: manual

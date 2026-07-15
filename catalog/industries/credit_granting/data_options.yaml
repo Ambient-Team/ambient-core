@@ -1,0 +1,168 @@
+dataOptions:
+  credit_granting.consumer_lending.loan_tape_summary:
+    id: 1730
+    name: Aggregated consumer loan tape summary
+    description: Period aggregates by product line (cards, auto, personal). No account
+      numbers. line_of_business distinguishes product; not mortgage collateral.
+    industry: Credit Granting
+    segment: consumer_lending
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: product_line
+      type: string
+    - name: interest_income
+      type: string
+    - name: average_receivables
+      type: string
+    - name: net_charge_offs
+      type: string
+    - name: delinquent_balance_30_plus
+      type: string
+    - name: total_receivables
+      type: decimal
+    - name: origination_volume_growth
+      type: decimal
+    - name: payment_volume
+      type: decimal
+    - name: bnpl_origination_growth
+      type: string
+    - name: embedded_channel_revenue
+      type: enum
+    - name: total_consumer_finance_revenue
+      type: decimal
+    - name: rtp_payment_volume
+      type: decimal
+    - name: merchant_acquiring_volume
+      type: decimal
+    metricIds:
+    - 1720
+    - 1721
+    - 1722
+    - 1723
+    - 1724
+    - 1725
+    - 1726
+    - 1727
+    - 1728
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  credit_granting.residential_mortgage.residential_mortgage_book_summary:
+    id: 1794
+    name: Aggregated residential mortgage book summary
+    description: Lender-view mortgage portfolio aggregates. No borrower or loan identifiers.
+    industry: Credit Granting
+    segment: residential_mortgage
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: product_line
+      type: string
+    - name: interest_income
+      type: string
+    - name: average_mortgage_balances
+      type: string
+    - name: delinquent_balance_30_plus
+      type: string
+    - name: total_mortgage_balances
+      type: decimal
+    - name: weighted_ltv_numerator
+      type: string
+    - name: origination_volume
+      type: decimal
+    metricIds:
+    - 1790
+    - 1791
+    - 1792
+    - 1793
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  credit_granting.commercial_lending.commercial_loan_book_summary:
+    id: 1770
+    name: Aggregated commercial loan book summary
+    description: Period aggregates by book segment (C&I, middle market). No borrower
+      identifiers or account numbers.
+    industry: Credit Granting
+    segment: commercial_lending
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: entity_segment
+      type: string
+    - name: outstanding_commercial_loans
+      type: string
+    - name: interest_income
+      type: string
+    - name: average_commercial_loans
+      type: string
+    - name: non_performing_commercial_loans
+      type: string
+    - name: total_commercial_loans
+      type: decimal
+    - name: net_charge_offs
+      type: string
+    - name: delinquent_balance_30_plus
+      type: string
+    - name: origination_volume
+      type: decimal
+    - name: weighted_ltv_numerator
+      type: string
+    - name: drawn_commitments
+      type: string
+    - name: total_commitments
+      type: decimal
+    - name: sustainable_loan_balance
+      type: string
+    metricIds:
+    - 1760
+    - 1761
+    - 1762
+    - 1763
+    - 1764
+    - 1765
+    - 1771
+    - 1772
+    - 1773
+    - 1774
+    - 1777
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month
+  credit_granting.commercial_lending.commercial_treasury_summary:
+    id: 1778
+    name: Aggregated commercial treasury summary
+    description: Treasury services fees, commercial deposits, and B2B payment volume.
+      No client identifiers.
+    industry: Credit Granting
+    segment: commercial_lending
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: entity_segment
+      type: string
+    - name: treasury_fee_revenue
+      type: decimal
+    - name: average_commercial_deposits
+      type: string
+    - name: commercial_payment_volume
+      type: decimal
+    metricIds:
+    - 1775
+    - 1776
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: monthly
+    grain: month

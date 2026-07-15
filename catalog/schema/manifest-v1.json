@@ -46,11 +46,28 @@
       },
       "additionalProperties": false
     },
+    "isicTaxonomyRef": {
+      "type": "object",
+      "required": ["revision", "primary", "section", "division", "group"],
+      "properties": {
+        "revision": { "type": "string", "minLength": 1 },
+        "primary": { "type": "string", "minLength": 1 },
+        "secondary": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "section": { "type": "string", "pattern": "^[A-U]$" },
+        "division": { "type": "string", "pattern": "^\\d{2}$" },
+        "group": { "type": "string", "pattern": "^\\d{3}$" }
+      },
+      "additionalProperties": false
+    },
     "manifestIndustryCodes": {
       "type": "object",
       "required": ["isic", "naics", "nace", "gics", "confidence", "lastReviewed", "source"],
       "properties": {
-        "isic": { "$ref": "#/$defs/taxonomyRef" },
+        "isic": { "$ref": "#/$defs/isicTaxonomyRef" },
         "naics": { "$ref": "#/$defs/taxonomyRef" },
         "nace": { "$ref": "#/$defs/taxonomyRef" },
         "gics": { "$ref": "#/$defs/taxonomyRef" },

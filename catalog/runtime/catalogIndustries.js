@@ -13,7 +13,11 @@ export const CATALOG_INDUSTRY_OPTIONS = [
   },
   {
     "value": "Transportation",
-    "label": "Transportation (multimodal)"
+    "label": "Transportation (freight)"
+  },
+  {
+    "value": "Passenger Transit",
+    "label": "Passenger Transit"
   },
   {
     "value": "Aviation",
@@ -21,7 +25,7 @@ export const CATALOG_INDUSTRY_OPTIONS = [
   },
   {
     "value": "Manufacturing",
-    "label": "Manufacturing"
+    "label": "Manufacturing (machinery and discrete)"
   },
   {
     "value": "Healthcare",
@@ -56,12 +60,12 @@ export const CATALOG_INDUSTRY_OPTIONS = [
     "label": "Insurance"
   },
   {
-    "value": "Consumer Finance",
-    "label": "Consumer Finance"
+    "value": "Credit Granting",
+    "label": "Credit Granting"
   },
   {
-    "value": "Commercial Finance",
-    "label": "Commercial Finance"
+    "value": "Software (SaaS)",
+    "label": "Software (SaaS)"
   },
   {
     "value": "Retail",

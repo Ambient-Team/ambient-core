@@ -51,107 +51,107 @@ links:
   metricId: 1534
   contractFile: finance-banking-v1.yaml
   contractProductId: FINANCE_BANKING
-- catalogMetricKey: commercial_finance.commercial_lending.commercial_loan_growth
+- catalogMetricKey: credit_granting.commercial_lending.commercial_loan_growth
   metricId: 1760
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.portfolio_yield
+- catalogMetricKey: credit_granting.commercial_lending.portfolio_yield
   metricId: 1761
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.non_performing_loan_ratio
+- catalogMetricKey: credit_granting.commercial_lending.non_performing_loan_ratio
   metricId: 1762
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.net_charge_off_rate
+- catalogMetricKey: credit_granting.commercial_lending.net_charge_off_rate
   metricId: 1763
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.origination_volume_growth
+- catalogMetricKey: credit_granting.commercial_lending.origination_volume_growth
   metricId: 1764
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.delinquency_rate_30d
+- catalogMetricKey: credit_granting.commercial_lending.delinquency_rate_30d
   metricId: 1765
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.weighted_average_ltv
+- catalogMetricKey: credit_granting.commercial_lending.weighted_average_ltv
   metricId: 1771
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.portfolio_dscr
+- catalogMetricKey: credit_granting.commercial_lending.portfolio_dscr
   metricId: 1772
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.sector_concentration_index
+- catalogMetricKey: credit_granting.commercial_lending.sector_concentration_index
   metricId: 1773
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.revolver_utilization_rate
+- catalogMetricKey: credit_granting.commercial_lending.revolver_utilization_rate
   metricId: 1774
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.treasury_fee_yield
+- catalogMetricKey: credit_granting.commercial_lending.treasury_fee_yield
   metricId: 1775
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.commercial_payment_volume
+- catalogMetricKey: credit_granting.commercial_lending.commercial_payment_volume
   metricId: 1776
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: commercial_finance.commercial_lending.sustainable_finance_share
+- catalogMetricKey: credit_granting.commercial_lending.sustainable_finance_share
   metricId: 1777
   contractFile: finance-commercial-finance-v1.yaml
   contractProductId: FINANCE_COMMERCIAL_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.portfolio_yield
+- catalogMetricKey: credit_granting.consumer_lending.portfolio_yield
   metricId: 1720
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.net_charge_off_rate
+- catalogMetricKey: credit_granting.consumer_lending.net_charge_off_rate
   metricId: 1721
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.delinquency_rate_30d
+- catalogMetricKey: credit_granting.consumer_lending.delinquency_rate_30d
   metricId: 1722
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.origination_volume_growth
+- catalogMetricKey: credit_granting.consumer_lending.origination_volume_growth
   metricId: 1723
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.payment_volume
+- catalogMetricKey: credit_granting.consumer_lending.payment_volume
   metricId: 1724
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.bnpl_origination_growth
+- catalogMetricKey: credit_granting.consumer_lending.bnpl_origination_growth
   metricId: 1725
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.embedded_finance_revenue_share
+- catalogMetricKey: credit_granting.consumer_lending.embedded_finance_revenue_share
   metricId: 1726
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.rtp_payment_volume
+- catalogMetricKey: credit_granting.consumer_lending.rtp_payment_volume
   metricId: 1727
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.consumer_lending.merchant_acquiring_volume
+- catalogMetricKey: credit_granting.consumer_lending.merchant_acquiring_volume
   metricId: 1728
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.residential_mortgage.portfolio_yield
+- catalogMetricKey: credit_granting.residential_mortgage.portfolio_yield
   metricId: 1790
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.residential_mortgage.delinquency_rate_30d
+- catalogMetricKey: credit_granting.residential_mortgage.delinquency_rate_30d
   metricId: 1791
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.residential_mortgage.weighted_average_ltv
+- catalogMetricKey: credit_granting.residential_mortgage.weighted_average_ltv
   metricId: 1792
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
-- catalogMetricKey: consumer_finance.residential_mortgage.origination_volume_growth
+- catalogMetricKey: credit_granting.residential_mortgage.origination_volume_growth
   metricId: 1793
   contractFile: finance-consumer-finance-v1.yaml
   contractProductId: FINANCE_CONSUMER_FINANCE
@@ -339,15 +339,15 @@ links:
   metricId: 1934
   contractFile: finance-private-capital-ops-v1.yaml
   contractProductId: FINANCE_PRIVATE_CAPITAL_OPS
-- catalogMetricKey: trusts.trust.funds_from_operations
+- catalogMetricKey: real_estate.reit.funds_from_operations
   metricId: 1940
   contractFile: finance-trusts-v1.yaml
   contractProductId: FINANCE_TRUSTS
-- catalogMetricKey: trusts.trust.ffo_payout_ratio
+- catalogMetricKey: real_estate.reit.ffo_payout_ratio
   metricId: 1941
   contractFile: finance-trusts-v1.yaml
   contractProductId: FINANCE_TRUSTS
-- catalogMetricKey: trusts.trust.same_store_noi_growth
+- catalogMetricKey: real_estate.reit.same_store_noi_growth
   metricId: 1942
   contractFile: finance-trusts-v1.yaml
   contractProductId: FINANCE_TRUSTS

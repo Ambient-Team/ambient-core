@@ -199,7 +199,8 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Alltransportationds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart of accounts.
+    description: Complete record of all financial transactions posted to the chart
+      of accounts.
     fields:
     - name: date
       type: date
@@ -230,7 +231,6 @@ dataOptions:
     - 976
     - 982
     - 994
-    - 1036
     name: General ledger
     template: Financial Statement Template
     fieldCoverage: upload
@@ -419,163 +419,6 @@ dataOptions:
     fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
-  Alltransportationds-subscription-billing:
-    description: Subscription and billing records for recurring-revenue analysis.
-    fields:
-    - name: date
-      type: date
-    - name: customer_id
-      type: id
-    - name: plan_name
-      type: string
-    - name: mrr
-      type: string
-    - name: billing_period
-      type: enum
-    - name: status
-      type: enum
-    - name: start_date
-      type: date
-    - name: end_date
-      type: date
-    - name: active_subscriptions
-      type: string
-    - name: avg_monthly_price
-      type: decimal
-    - name: starting_mrr
-      type: string
-    - name: expansion_mrr
-      type: string
-    - name: contraction_mrr
-      type: string
-    - name: churned_mrr
-      type: string
-    - name: avg_revenue_per_account
-      type: decimal
-    - name: churn_rate
-      type: decimal
-    format: Transactional Data Template
-    id: 1138
-    industry: Transportation
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1012
-    - 1018
-    - 1024
-    - 1030
-    - 1042
-    - 1048
-    - 1054
-    name: Subscription billing records
-    template: Transactional Data Template
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Alltransportationds-crm-pipeline:
-    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
-    fields:
-    - name: date
-      type: date
-    - name: opportunity_id
-      type: id
-    - name: account_name
-      type: decimal
-    - name: stage
-      type: enum
-    - name: amount
-      type: decimal
-    - name: close_date
-      type: date
-    - name: owner
-      type: string
-    - name: probability
-      type: string
-    - name: active_subscriptions
-      type: string
-    - name: avg_monthly_price
-      type: decimal
-    - name: sales_marketing_spend
-      type: string
-    - name: new_customers
-      type: string
-    format: Software
-    id: 1144
-    industry: Transportation
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1012
-    - 1036
-    name: CRM / Sales pipeline
-    template: Document
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Alltransportationds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn analysis.
-    fields:
-    - name: date
-      type: date
-    - name: customer_id
-      type: id
-    - name: active_users
-      type: string
-    - name: sessions
-      type: string
-    - name: feature_adoption
-      type: string
-    - name: usage_minutes
-      type: string
-    - name: starting_mrr
-      type: string
-    - name: expansion_mrr
-      type: string
-    - name: contraction_mrr
-      type: string
-    - name: churned_mrr
-      type: string
-    format: Software
-    id: 1150
-    industry: Transportation
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1024
-    - 1030
-    name: Product usage logs
-    template: Document
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Alltransportationds-marketing-spend:
-    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
-    fields:
-    - name: date
-      type: date
-    - name: channel
-      type: enum
-    - name: campaign
-      type: string
-    - name: spend
-      type: string
-    - name: leads
-      type: string
-    - name: new_customers
-      type: string
-    - name: currency
-      type: currency
-    - name: sales_marketing_spend
-      type: string
-    format: Transactional Data Template
-    id: 1156
-    industry: Transportation
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1036
-    - 1048
-    name: Marketing spend records
-    template: Transactional Data Template
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
   transportation.rail_freight.operations_summary:
     id: 1170
     name: Rail freight operations summary
@@ -602,31 +445,6 @@ dataOptions:
     - 1860
     - 1861
     - 1862
-    lastUpdated: '2026-07-04 00:00:00'
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  transportation.rail_passenger.operations_summary:
-    id: 1171
-    name: Rail passenger operations summary
-    description: Aggregated passenger rail ridership and fare recovery inputs.
-    industry: Transportation
-    format: Document
-    template: Document
-    fields:
-    - name: date
-      type: date
-    - name: total_boardings
-      type: decimal
-    - name: train_miles_operated
-      type: decimal
-    - name: fare_revenue
-      type: decimal
-    - name: operating_cost
-      type: decimal
-    metricIds:
-    - 1863
-    - 1864
     lastUpdated: '2026-07-04 00:00:00'
     fieldCoverage: enumerated
     collectionFrequency: monthly
@@ -659,36 +477,6 @@ dataOptions:
     - 1865
     - 1866
     - 1867
-    lastUpdated: '2026-07-04 00:00:00'
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  transportation.transit.operations_summary:
-    id: 1173
-    name: Public transit operations summary
-    description: Aggregated transit ridership, recovery, and OTP inputs.
-    industry: Transportation
-    format: Document
-    template: Document
-    fields:
-    - name: date
-      type: date
-    - name: operating_revenue
-      type: decimal
-    - name: operating_expenses
-      type: string
-    - name: unlinked_trips
-      type: string
-    - name: vehicle_revenue_hours
-      type: decimal
-    - name: on_time_trips
-      type: string
-    - name: total_trips
-      type: decimal
-    metricIds:
-    - 1868
-    - 1869
-    - 1870
     lastUpdated: '2026-07-04 00:00:00'
     fieldCoverage: enumerated
     collectionFrequency: monthly

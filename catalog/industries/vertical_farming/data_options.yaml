@@ -7,7 +7,25 @@ dataOptions:
     - Operating_Expenses
     - Asset_Values
     - Liability_Amounts
-    fields: []
+    fields:
+    - name: date
+      type: date
+    - name: farm_id
+      type: id
+    - name: zone_id
+      type: id
+    - name: water_volume_liters
+      type: decimal
+    - name: irrigation_duration_minutes
+      type: decimal
+    - name: nutrient_ec
+      type: decimal
+    - name: ph_level
+      type: decimal
+    - name: total_harvested_kg
+      type: decimal
+    - name: total_water_liters
+      type: decimal
     format: Document
     id: 20
     industry: Vertical Farming
@@ -16,7 +34,7 @@ dataOptions:
     - 16
     name: Irrigation logs
     template: Document
-    fieldCoverage: upload
+    fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
   QKVboc2mj2QQ8u2RFOF1:
@@ -121,7 +139,31 @@ dataOptions:
     - Operating_Expenses
     - Asset_Values
     - Liability_Amounts
-    fields: []
+    fields:
+    - name: date
+      type: date
+    - name: farm_id
+      type: id
+    - name: crop_id
+      type: id
+    - name: health_score
+      type: decimal
+    - name: growth_stage
+      type: enum
+    - name: canopy_cover_pct
+      type: decimal
+    - name: pest_pressure_index
+      type: decimal
+    - name: sensor_reading_count
+      type: decimal
+    - name: total_harvested_kg
+      type: decimal
+    - name: total_growing_area
+      type: decimal
+    - name: sum_health_scores
+      type: string
+    - name: total_crops
+      type: decimal
     format: Software
     id: 19
     industry: Vertical Farming
@@ -131,7 +173,7 @@ dataOptions:
     - 19
     name: Crop monitoring systems
     template: Document
-    fieldCoverage: upload
+    fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
   Allverticalfarmingds-general-ledger:

@@ -696,6 +696,54 @@ industryIds:
     burn-rate: 1752
     runway: 1753
     headcount: 1754
+  Credit Granting:
+    current-ratio: 1700
+    quick-ratio: 1701
+    gross-margin: 1702
+    operating-margin: 1703
+    ebitda-margin: 1704
+    net-margin: 1705
+    revenue-growth: 1706
+    working-capital: 1707
+    dso: 1708
+    dpo: 1709
+    ccc: 1710
+    operating-cash-flow: 1711
+    burn-rate: 1712
+    runway: 1713
+    headcount: 1714
+  Software (SaaS):
+    current-ratio: 2040
+    quick-ratio: 2041
+    gross-margin: 2042
+    operating-margin: 2043
+    ebitda-margin: 2044
+    net-margin: 2045
+    revenue-growth: 2046
+    working-capital: 2047
+    dso: 2048
+    dpo: 2049
+    ccc: 2050
+    operating-cash-flow: 2051
+    burn-rate: 2052
+    runway: 2053
+    headcount: 2054
+  Passenger Transit:
+    current-ratio: 2020
+    quick-ratio: 2021
+    gross-margin: 2022
+    operating-margin: 2023
+    ebitda-margin: 2024
+    net-margin: 2025
+    revenue-growth: 2026
+    working-capital: 2027
+    dso: 2028
+    dpo: 2029
+    ccc: 2030
+    operating-cash-flow: 2031
+    burn-rate: 2032
+    runway: 2033
+    headcount: 2034
   Aviation:
     current-ratio: 1800
     quick-ratio: 1801

@@ -2,7 +2,8 @@ dataOptions:
   MfgMes901CatalogOptionKey01:
     id: 901
     name: MES production export
-    description: Shop-floor production counts, run times, and work-order completion by line or cell.
+    description: Shop-floor production counts, run times, and work-order completion
+      by line or cell.
     industry: Manufacturing
     format: Document
     template: Transactional Data Template
@@ -44,7 +45,8 @@ dataOptions:
   MfgErp902CatalogOptionKey02:
     id: 902
     name: ERP general ledger (manufacturing)
-    description: Period GL balances for COGS, inventory, and manufacturing overhead accounts.
+    description: Period GL balances for COGS, inventory, and manufacturing overhead
+      accounts.
     industry: Manufacturing
     format: Document
     template: Financial Statement Template
@@ -73,7 +75,8 @@ dataOptions:
   MfgCmms903CatalogOptionKey03:
     id: 903
     name: CMMS maintenance logs
-    description: Work orders, downtime reason codes, and mean time between failures by asset.
+    description: Work orders, downtime reason codes, and mean time between failures
+      by asset.
     industry: Manufacturing
     format: Document
     template: Document
@@ -97,7 +100,8 @@ dataOptions:
   MfgQual904CatalogOptionKey04:
     id: 904
     name: Quality inspection logs
-    description: Lot-level pass/fail, defect codes, and rework disposition (no customer PII).
+    description: Lot-level pass/fail, defect codes, and rework disposition (no customer
+      PII).
     industry: Manufacturing
     format: Document
     template: Transactional Data Template
@@ -123,7 +127,8 @@ dataOptions:
     collectionFrequency: weekly
     grain: week
   Allmanufacturingds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart of accounts.
+    description: Complete record of all financial transactions posted to the chart
+      of accounts.
     fields:
     - name: date
       type: date
@@ -154,7 +159,6 @@ dataOptions:
     - 977
     - 983
     - 995
-    - 1037
     name: General ledger
     template: Financial Statement Template
     fieldCoverage: upload
@@ -339,163 +343,6 @@ dataOptions:
     - 1001
     - 1007
     name: Bank statements
-    template: Transactional Data Template
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Allmanufacturingds-subscription-billing:
-    description: Subscription and billing records for recurring-revenue analysis.
-    fields:
-    - name: date
-      type: date
-    - name: customer_id
-      type: id
-    - name: plan_name
-      type: string
-    - name: mrr
-      type: string
-    - name: billing_period
-      type: enum
-    - name: status
-      type: enum
-    - name: start_date
-      type: date
-    - name: end_date
-      type: date
-    - name: active_subscriptions
-      type: string
-    - name: avg_monthly_price
-      type: decimal
-    - name: starting_mrr
-      type: string
-    - name: expansion_mrr
-      type: string
-    - name: contraction_mrr
-      type: string
-    - name: churned_mrr
-      type: string
-    - name: avg_revenue_per_account
-      type: decimal
-    - name: churn_rate
-      type: decimal
-    format: Transactional Data Template
-    id: 1139
-    industry: Manufacturing
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1013
-    - 1019
-    - 1025
-    - 1031
-    - 1043
-    - 1049
-    - 1055
-    name: Subscription billing records
-    template: Transactional Data Template
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Allmanufacturingds-crm-pipeline:
-    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
-    fields:
-    - name: date
-      type: date
-    - name: opportunity_id
-      type: id
-    - name: account_name
-      type: decimal
-    - name: stage
-      type: enum
-    - name: amount
-      type: decimal
-    - name: close_date
-      type: date
-    - name: owner
-      type: string
-    - name: probability
-      type: string
-    - name: active_subscriptions
-      type: string
-    - name: avg_monthly_price
-      type: decimal
-    - name: sales_marketing_spend
-      type: string
-    - name: new_customers
-      type: string
-    format: Software
-    id: 1145
-    industry: Manufacturing
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1013
-    - 1037
-    name: CRM / Sales pipeline
-    template: Document
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Allmanufacturingds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn analysis.
-    fields:
-    - name: date
-      type: date
-    - name: customer_id
-      type: id
-    - name: active_users
-      type: string
-    - name: sessions
-      type: string
-    - name: feature_adoption
-      type: string
-    - name: usage_minutes
-      type: string
-    - name: starting_mrr
-      type: string
-    - name: expansion_mrr
-      type: string
-    - name: contraction_mrr
-      type: string
-    - name: churned_mrr
-      type: string
-    format: Software
-    id: 1151
-    industry: Manufacturing
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1025
-    - 1031
-    name: Product usage logs
-    template: Document
-    fieldCoverage: enumerated
-    collectionFrequency: monthly
-    grain: month
-  Allmanufacturingds-marketing-spend:
-    description: Marketing and sales spend by channel and campaign for CAC and efficiency.
-    fields:
-    - name: date
-      type: date
-    - name: channel
-      type: enum
-    - name: campaign
-      type: string
-    - name: spend
-      type: string
-    - name: leads
-      type: string
-    - name: new_customers
-      type: string
-    - name: currency
-      type: currency
-    - name: sales_marketing_spend
-      type: string
-    format: Transactional Data Template
-    id: 1157
-    industry: Manufacturing
-    lastUpdated: '2026-05-30 00:00:00'
-    metricIds:
-    - 1037
-    - 1049
-    name: Marketing spend records
     template: Transactional Data Template
     fieldCoverage: enumerated
     collectionFrequency: monthly

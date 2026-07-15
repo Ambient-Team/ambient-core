@@ -1312,6 +1312,92 @@ export const REFERENCE_DATA = {
         ]
       }
     },
+    "real_estate.reit.funds_from_operations": {
+      "id": 1940,
+      "name": "Funds From Operations",
+      "description": "REIT FFO for the period (vehicle reporting, aggregated).",
+      "industry": "Real Estate",
+      "type": "Financial",
+      "unit": "Currency",
+      "methodology": "FFO per NAREIT or trust reporting definition (directly reported aggregate).",
+      "datasource": [
+        "Aggregated trust vehicle summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Trust earnings — dividend coverage for vehicle investors.",
+      "segment": "reit",
+      "slug": "funds_from_operations",
+      "input": true
+    },
+    "real_estate.reit.ffo_payout_ratio": {
+      "id": 1941,
+      "name": "FFO Payout Ratio",
+      "description": "Distributions paid relative to FFO.",
+      "industry": "Real Estate",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "FFO Payout = (Distributions / FFO) × 100",
+      "datasource": [
+        "Aggregated trust vehicle summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 200
+      },
+      "fpaWorkflow": "Distribution safety — retained cash for growth and debt service.",
+      "segment": "reit",
+      "slug": "ffo_payout_ratio",
+      "calc": {
+        "expr": "distributions / ffo * 100",
+        "inputs": [
+          "distributions",
+          "ffo"
+        ]
+      }
+    },
+    "real_estate.reit.same_store_noi_growth": {
+      "id": 1942,
+      "name": "REIT Same-Store NOI Growth",
+      "description": "Year-over-year NOI growth on a same-store basis at the trust vehicle level.",
+      "industry": "Real Estate",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Same-Store NOI Growth = ((Current NOI − Prior NOI) / Prior NOI) × 100",
+      "datasource": [
+        "Aggregated trust vehicle summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Vehicle organic performance — excludes acquisition noise (property ops on Real Estate orgs).",
+      "segment": "reit",
+      "slug": "same_store_noi_growth",
+      "calc": {
+        "expr": "(current_noi - prior_noi) / prior_noi * 100",
+        "inputs": [
+          "current_noi",
+          "prior_noi"
+        ]
+      }
+    },
     "vertical_farming.core.current_ratio": {
       "datasource": [
         "Financial statements",
@@ -3317,332 +3403,6 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "Alltransportationsaas-mrr": {
-      "datasource": [
-        "Subscription billing records",
-        "CRM / Sales pipeline"
-      ],
-      "description": "Normalized recurring subscription revenue billed in a month.",
-      "id": 1012,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
-      "name": "Monthly Recurring Revenue (MRR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 500000,
-      "targetRangeLow": 50000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency/month",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 1000000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
-      "segment": "subscription",
-      "slug": "mrr",
-      "calc": {
-        "expr": "active_subscriptions * avg_monthly_price",
-        "inputs": [
-          "active_subscriptions",
-          "avg_monthly_price"
-        ]
-      }
-    },
-    "Alltransportationsaas-arr": {
-      "datasource": [
-        "Subscription billing records",
-        "CRM / Sales pipeline"
-      ],
-      "description": "Annualized run-rate of recurring subscription revenue.",
-      "id": 1018,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "ARR = MRR × 12",
-      "name": "Annual Recurring Revenue (ARR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 6000000,
-      "targetRangeLow": 600000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency/year",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 10000000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
-      "segment": "subscription",
-      "slug": "arr",
-      "calc": {
-        "expr": "mrr * 12",
-        "inputs": []
-      }
-    },
-    "Alltransportationsaas-nrr": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Revenue retained and expanded from existing customers, net of churn and contraction.",
-      "id": 1024,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
-      "name": "Net Revenue Retention (NRR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 120,
-      "targetRangeLow": 100,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "%",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 300
-      },
-      "validationRule": "percentage_unbounded",
-      "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
-      "segment": "subscription",
-      "slug": "nrr",
-      "calc": {
-        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
-        "inputs": [
-          "starting_mrr",
-          "expansion_mrr",
-          "contraction_mrr",
-          "churned_mrr"
-        ]
-      }
-    },
-    "Alltransportationsaas-gross-churn": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Percentage of recurring revenue lost to cancellations and downgrades.",
-      "id": 1030,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
-      "name": "Gross Revenue Churn Rate",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 5,
-      "targetRangeLow": 1,
-      "tech": "FINTECH",
-      "type": "Operational",
-      "unit": "%",
-      "frequency": "monthly",
-      "higherIsBetter": false,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "validationRule": "percentage",
-      "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
-      "segment": "subscription",
-      "slug": "gross_churn",
-      "calc": {
-        "expr": "churned_mrr / starting_mrr * 100",
-        "inputs": [
-          "churned_mrr",
-          "starting_mrr"
-        ]
-      }
-    },
-    "Alltransportationsaas-cac": {
-      "datasource": [
-        "Marketing spend records",
-        "CRM / Sales pipeline",
-        "General ledger"
-      ],
-      "description": "Fully-loaded sales & marketing cost to acquire one new customer.",
-      "id": 1036,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "CAC = Total Sales & Marketing Spend / New Customers Acquired",
-      "name": "Customer Acquisition Cost (CAC)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 10000,
-      "targetRangeLow": 500,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency (e.g., USD)",
-      "frequency": "monthly",
-      "higherIsBetter": false,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 10000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
-      "segment": "subscription",
-      "slug": "cac",
-      "calc": {
-        "expr": "sales_marketing_spend / new_customers",
-        "inputs": [
-          "sales_marketing_spend",
-          "new_customers"
-        ]
-      }
-    },
-    "Alltransportationsaas-ltv": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Expected gross-margin revenue from a customer over their lifetime.",
-      "id": 1042,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
-      "name": "Customer Lifetime Value (LTV)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 50000,
-      "targetRangeLow": 3000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency (e.g., USD)",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
-      "segment": "subscription",
-      "slug": "ltv",
-      "calc": {
-        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
-        "inputs": [
-          "avg_revenue_per_account",
-          "gross_margin_pct",
-          "churn_rate"
-        ]
-      }
-    },
-    "Alltransportationsaas-ltv-cac": {
-      "datasource": [
-        "Subscription billing records",
-        "Marketing spend records"
-      ],
-      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
-      "id": 1048,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost",
-      "name": "LTV : CAC Ratio",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 5,
-      "targetRangeLow": 3,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Ratio",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "validationRule": "ratio",
-      "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
-      "segment": "subscription",
-      "slug": "ltv_cac",
-      "calc": {
-        "expr": "ltv / cac",
-        "inputs": []
-      }
-    },
-    "Alltransportationsaas-rule-of-40": {
-      "datasource": [
-        "Subscription billing records",
-        "Financial statements"
-      ],
-      "description": "Balance of growth and profitability for recurring-revenue businesses.",
-      "id": 1054,
-      "industry": "Transportation",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "Rule of 40 = Revenue Growth % + Profit Margin %",
-      "name": "Rule of 40",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 60,
-      "targetRangeLow": 40,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "%",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": -100,
-        "hardMax": 200
-      },
-      "validationRule": "percentage_unbounded",
-      "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
-      "segment": "subscription",
-      "slug": "rule_of_40",
-      "calc": {
-        "expr": "revenue_growth_pct + profit_margin_pct",
-        "inputs": [
-          "revenue_growth_pct",
-          "profit_margin_pct"
-        ]
-      }
-    },
     "transportation.rail_freight.train_utilization": {
       "id": 1860,
       "name": "Train Utilization",
@@ -3737,69 +3497,6 @@ export const REFERENCE_DATA = {
         "inputs": [
           "on_time_shipments",
           "total_shipments"
-        ]
-      }
-    },
-    "transportation.rail_passenger.ridership_per_train_mile": {
-      "id": 1863,
-      "name": "Ridership per Train-Mile",
-      "description": "Passenger boardings per train-mile operated (aggregated).",
-      "industry": "Transportation",
-      "type": "Operational",
-      "unit": "Passengers per train-mile",
-      "methodology": "Ridership per Train-Mile = Total Boardings / Train-Miles Operated",
-      "datasource": [
-        "Rail passenger operations summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "monthly",
-      "tech": "DEEP TECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Passenger rail productivity — load and schedule design.",
-      "segment": "rail_passenger",
-      "slug": "ridership_per_train_mile",
-      "calc": {
-        "expr": "total_boardings / train_miles_operated",
-        "inputs": [
-          "total_boardings",
-          "train_miles_operated"
-        ]
-      }
-    },
-    "transportation.rail_passenger.farebox_recovery": {
-      "id": 1864,
-      "name": "Rail Farebox Recovery Ratio",
-      "description": "Passenger fare revenue as a share of fully allocated operating cost (aggregated).",
-      "industry": "Transportation",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Farebox Recovery = (Fare Revenue / Operating Cost) × 100",
-      "datasource": [
-        "Rail passenger operations summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "annual",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "validationRule": "percentage",
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 200
-      },
-      "fpaWorkflow": "Subsidy dependence — intercity and commuter rail.",
-      "segment": "rail_passenger",
-      "slug": "farebox_recovery",
-      "calc": {
-        "expr": "fare_revenue / operating_cost * 100",
-        "inputs": [
-          "fare_revenue",
-          "operating_cost"
         ]
       }
     },
@@ -3901,103 +3598,6 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "transportation.public_transit.farebox_recovery_ratio": {
-      "id": 1868,
-      "name": "Transit Farebox Recovery Ratio",
-      "description": "Fare and subsidy-eligible revenue as a share of operating expenses (aggregated).",
-      "industry": "Transportation",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Farebox Recovery = (Operating Revenue / Operating Expenses) × 100",
-      "datasource": [
-        "Public transit operations summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "annual",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "validationRule": "percentage",
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 200
-      },
-      "fpaWorkflow": "Municipal funding gap — bus and rail transit.",
-      "segment": "public_transit",
-      "slug": "farebox_recovery_ratio",
-      "calc": {
-        "expr": "operating_revenue / operating_expenses * 100",
-        "inputs": [
-          "operating_revenue",
-          "operating_expenses"
-        ]
-      }
-    },
-    "transportation.public_transit.ridership_per_vehicle_hour": {
-      "id": 1869,
-      "name": "Ridership per Vehicle Hour",
-      "description": "Unlinked passenger trips per vehicle revenue hour (aggregated).",
-      "industry": "Transportation",
-      "type": "Operational",
-      "unit": "Passengers per vehicle hour",
-      "methodology": "Ridership per Vehicle Hour = Unlinked Trips / Vehicle Revenue Hours",
-      "datasource": [
-        "Public transit operations summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "monthly",
-      "tech": "DEEP TECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Service productivity — headway and crowding tradeoffs.",
-      "segment": "public_transit",
-      "slug": "ridership_per_vehicle_hour",
-      "calc": {
-        "expr": "unlinked_trips / vehicle_revenue_hours",
-        "inputs": [
-          "unlinked_trips",
-          "vehicle_revenue_hours"
-        ]
-      }
-    },
-    "transportation.public_transit.on_time_performance": {
-      "id": 1870,
-      "name": "On-Time Performance",
-      "description": "Share of transit trips departing or arriving within agency on-time standard (aggregated).",
-      "industry": "Transportation",
-      "type": "Operational",
-      "unit": "%",
-      "methodology": "OTP = (On-Time Trips / Total Trips) × 100",
-      "datasource": [
-        "Public transit operations summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "monthly",
-      "tech": "DEEP TECH",
-      "higherIsBetter": true,
-      "validationRule": "percentage",
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "fpaWorkflow": "Service quality — distinct from aviation OTP thresholds.",
-      "segment": "public_transit",
-      "slug": "on_time_performance",
-      "calc": {
-        "expr": "on_time_trips / total_trips * 100",
-        "inputs": [
-          "on_time_trips",
-          "total_trips"
-        ]
-      }
-    },
     "transportation.freight_forwarding.gross_margin_per_shipment": {
       "id": 1871,
       "name": "Gross Margin per Shipment",
@@ -4058,6 +3658,794 @@ export const REFERENCE_DATA = {
         "inputs": [
           "on_time_shipments",
           "total_shipments"
+        ]
+      }
+    },
+    "passenger_transit.core.current_ratio": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet"
+      ],
+      "description": "Short-term liquidity: ability to cover current liabilities with current assets.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Current Ratio = Current Assets / Current Liabilities",
+      "name": "Current Ratio",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 2,
+      "targetRangeLow": 1.2,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 20
+      },
+      "validationRule": "ratio",
+      "benchmarkKey": "current_ratio",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "id": 2020,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "current_ratio"
+    },
+    "passenger_transit.core.quick_ratio": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet"
+      ],
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
+      "name": "Quick Ratio (Acid Test)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1.5,
+      "targetRangeLow": 1,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 20
+      },
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
+      "id": 2021,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "quick_ratio"
+    },
+    "passenger_transit.core.gross_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of revenue retained after the direct cost of goods sold.",
+      "industryTags": [
+        "Corporate Finance",
+        "SaaS",
+        "All"
+      ],
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
+      "name": "Gross Profit Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 70,
+      "targetRangeLow": 40,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "gross_margin",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "id": 2022,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "gross_margin"
+    },
+    "passenger_transit.core.operating_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Operating profitability after operating expenses (EBIT margin).",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
+      "name": "Operating Margin (EBIT)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 25,
+      "targetRangeLow": 10,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_margin",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "id": 2023,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "operating_margin"
+    },
+    "passenger_transit.core.ebitda_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Core operating cash profitability before interest, tax, depreciation and amortization.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
+      "name": "EBITDA Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 30,
+      "targetRangeLow": 15,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "ebitda_margin",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
+      "id": 2024,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "ebitda_margin"
+    },
+    "passenger_transit.core.net_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Bottom-line profitability after all costs, interest and tax.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
+      "name": "Net Profit Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 20,
+      "targetRangeLow": 8,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "net_margin",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "id": 2025,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "net_margin"
+    },
+    "passenger_transit.core.revenue_growth": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Period-over-period revenue growth rate.",
+      "industryTags": [
+        "Corporate Finance",
+        "SaaS",
+        "All"
+      ],
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
+      "name": "Revenue Growth Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 30,
+      "targetRangeLow": 10,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 1000
+      },
+      "validationRule": "percentage_unbounded",
+      "benchmarkKey": "revenue_growth",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
+      "id": 2026,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "revenue_growth"
+    },
+    "passenger_transit.core.working_capital": {
+      "datasource": [
+        "Financial statements",
+        "Balance sheet",
+        "Trial balance"
+      ],
+      "description": "Operating liquidity available to fund day-to-day operations.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
+      "name": "Working Capital",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1000000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "working_capital",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "id": 2027,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "working_capital"
+    },
+    "passenger_transit.core.dso": {
+      "datasource": [
+        "Accounts receivable aging",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Average number of days to collect cash after a sale.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
+      "name": "Days Sales Outstanding (DSO)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 45,
+      "targetRangeLow": 30,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 365
+      },
+      "validationRule": "days",
+      "benchmarkKey": "dso",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
+      "id": 2028,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "dso"
+    },
+    "passenger_transit.core.dpo": {
+      "datasource": [
+        "Accounts payable aging",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Average number of days the business takes to pay its suppliers.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
+      "name": "Days Payable Outstanding (DPO)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 30,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 365
+      },
+      "validationRule": "days",
+      "benchmarkKey": "dpo",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
+      "id": 2029,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "dpo"
+    },
+    "passenger_transit.core.ccc": {
+      "datasource": [
+        "Accounts receivable aging",
+        "Accounts payable aging",
+        "Inventory records"
+      ],
+      "description": "Days to convert investments in inventory and receivables back into cash.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
+      "name": "Cash Conversion Cycle",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 20,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": -180,
+        "hardMax": 365
+      },
+      "validationRule": "days_signed",
+      "benchmarkKey": "ccc",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
+      "id": 2030,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "ccc"
+    },
+    "passenger_transit.core.operating_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash generated by core operations during the period.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
+      "name": "Operating Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1000000,
+      "targetRangeLow": 200000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "operating_cash_flow",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
+      "id": 2031,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "operating_cash_flow"
+    },
+    "passenger_transit.core.burn_rate": {
+      "datasource": [
+        "Bank statements",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Net cash consumed per month (negative net operating cash flow).",
+      "industryTags": [
+        "SaaS",
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
+      "name": "Monthly Burn Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 200000,
+      "targetRangeLow": 50000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency/month",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "burn_rate",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
+      "id": 2032,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "burn_rate"
+    },
+    "passenger_transit.core.runway": {
+      "datasource": [
+        "Bank statements",
+        "Financial statements"
+      ],
+      "description": "Number of months of cash remaining at the current net burn rate.",
+      "industryTags": [
+        "SaaS",
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Runway (months) = Current Cash Balance / Monthly Net Burn",
+      "name": "Cash Runway",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 24,
+      "targetRangeLow": 12,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Months",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 240
+      },
+      "validationRule": "number",
+      "benchmarkKey": "runway",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
+      "id": 2033,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "runway"
+    },
+    "passenger_transit.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 2034,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "slug": "headcount"
+    },
+    "passenger_transit.rail_passenger.ridership_per_train_mile": {
+      "id": 1863,
+      "name": "Ridership per Train-Mile",
+      "description": "Passenger boardings per train-mile operated (aggregated).",
+      "industry": "Passenger Transit",
+      "type": "Operational",
+      "unit": "Passengers per train-mile",
+      "methodology": "Ridership per Train-Mile = Total Boardings / Train-Miles Operated",
+      "datasource": [
+        "Rail passenger operations summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Passenger rail productivity — load and schedule design.",
+      "segment": "rail_passenger",
+      "slug": "ridership_per_train_mile",
+      "calc": {
+        "expr": "total_boardings / train_miles_operated",
+        "inputs": [
+          "total_boardings",
+          "train_miles_operated"
+        ]
+      }
+    },
+    "passenger_transit.rail_passenger.farebox_recovery": {
+      "id": 1864,
+      "name": "Rail Farebox Recovery Ratio",
+      "description": "Passenger fare revenue as a share of fully allocated operating cost (aggregated).",
+      "industry": "Passenger Transit",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Farebox Recovery = (Fare Revenue / Operating Cost) × 100",
+      "datasource": [
+        "Rail passenger operations summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "annual",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 200
+      },
+      "fpaWorkflow": "Subsidy dependence — intercity and commuter rail.",
+      "segment": "rail_passenger",
+      "slug": "farebox_recovery",
+      "calc": {
+        "expr": "fare_revenue / operating_cost * 100",
+        "inputs": [
+          "fare_revenue",
+          "operating_cost"
+        ]
+      }
+    },
+    "passenger_transit.public_transit.farebox_recovery_ratio": {
+      "id": 1868,
+      "name": "Transit Farebox Recovery Ratio",
+      "description": "Fare and subsidy-eligible revenue as a share of operating expenses (aggregated).",
+      "industry": "Passenger Transit",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Farebox Recovery = (Operating Revenue / Operating Expenses) × 100",
+      "datasource": [
+        "Public transit operations summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "annual",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 200
+      },
+      "fpaWorkflow": "Municipal funding gap — bus and rail transit.",
+      "segment": "public_transit",
+      "slug": "farebox_recovery_ratio",
+      "calc": {
+        "expr": "operating_revenue / operating_expenses * 100",
+        "inputs": [
+          "operating_revenue",
+          "operating_expenses"
+        ]
+      }
+    },
+    "passenger_transit.public_transit.ridership_per_vehicle_hour": {
+      "id": 1869,
+      "name": "Ridership per Vehicle Hour",
+      "description": "Unlinked passenger trips per vehicle revenue hour (aggregated).",
+      "industry": "Passenger Transit",
+      "type": "Operational",
+      "unit": "Passengers per vehicle hour",
+      "methodology": "Ridership per Vehicle Hour = Unlinked Trips / Vehicle Revenue Hours",
+      "datasource": [
+        "Public transit operations summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Service productivity — headway and crowding tradeoffs.",
+      "segment": "public_transit",
+      "slug": "ridership_per_vehicle_hour",
+      "calc": {
+        "expr": "unlinked_trips / vehicle_revenue_hours",
+        "inputs": [
+          "unlinked_trips",
+          "vehicle_revenue_hours"
+        ]
+      }
+    },
+    "passenger_transit.public_transit.on_time_performance": {
+      "id": 1870,
+      "name": "On-Time Performance",
+      "description": "Share of transit trips departing or arriving within agency on-time standard (aggregated).",
+      "industry": "Passenger Transit",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "OTP = (On-Time Trips / Total Trips) × 100",
+      "datasource": [
+        "Public transit operations summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "DEEP TECH",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "fpaWorkflow": "Service quality — distinct from aviation OTP thresholds.",
+      "segment": "public_transit",
+      "slug": "on_time_performance",
+      "calc": {
+        "expr": "on_time_trips / total_trips * 100",
+        "inputs": [
+          "on_time_trips",
+          "total_trips"
         ]
       }
     },
@@ -5861,332 +6249,6 @@ export const REFERENCE_DATA = {
         "inputs": [
           "total_manufacturing_cogs",
           "units_produced"
-        ]
-      }
-    },
-    "Allmanufacturingsaas-mrr": {
-      "datasource": [
-        "Subscription billing records",
-        "CRM / Sales pipeline"
-      ],
-      "description": "Normalized recurring subscription revenue billed in a month.",
-      "id": 1013,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
-      "name": "Monthly Recurring Revenue (MRR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 500000,
-      "targetRangeLow": 50000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency/month",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 1000000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast — the foundation of the SaaS operating model and ARR bridge.",
-      "segment": "subscription",
-      "slug": "mrr",
-      "calc": {
-        "expr": "active_subscriptions * avg_monthly_price",
-        "inputs": [
-          "active_subscriptions",
-          "avg_monthly_price"
-        ]
-      }
-    },
-    "Allmanufacturingsaas-arr": {
-      "datasource": [
-        "Subscription billing records",
-        "CRM / Sales pipeline"
-      ],
-      "description": "Annualized run-rate of recurring subscription revenue.",
-      "id": 1019,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "ARR = MRR × 12",
-      "name": "Annual Recurring Revenue (ARR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 6000000,
-      "targetRangeLow": 600000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency/year",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 10000000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning & valuation — the headline scale metric for SaaS boards and investors.",
-      "segment": "subscription",
-      "slug": "arr",
-      "calc": {
-        "expr": "mrr * 12",
-        "inputs": []
-      }
-    },
-    "Allmanufacturingsaas-nrr": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Revenue retained and expanded from existing customers, net of churn and contraction.",
-      "id": 1025,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
-      "name": "Net Revenue Retention (NRR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 120,
-      "targetRangeLow": 100,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "%",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 300
-      },
-      "validationRule": "percentage_unbounded",
-      "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion & retention modeling — the strongest signal of durable SaaS growth quality.",
-      "segment": "subscription",
-      "slug": "nrr",
-      "calc": {
-        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
-        "inputs": [
-          "starting_mrr",
-          "expansion_mrr",
-          "contraction_mrr",
-          "churned_mrr"
-        ]
-      }
-    },
-    "Allmanufacturingsaas-gross-churn": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Percentage of recurring revenue lost to cancellations and downgrades.",
-      "id": 1031,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
-      "name": "Gross Revenue Churn Rate",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 5,
-      "targetRangeLow": 1,
-      "tech": "FINTECH",
-      "type": "Operational",
-      "unit": "%",
-      "frequency": "monthly",
-      "higherIsBetter": false,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "validationRule": "percentage",
-      "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review — informs the renewal forecast and customer-success investment case.",
-      "segment": "subscription",
-      "slug": "gross_churn",
-      "calc": {
-        "expr": "churned_mrr / starting_mrr * 100",
-        "inputs": [
-          "churned_mrr",
-          "starting_mrr"
-        ]
-      }
-    },
-    "Allmanufacturingsaas-cac": {
-      "datasource": [
-        "Marketing spend records",
-        "CRM / Sales pipeline",
-        "General ledger"
-      ],
-      "description": "Fully-loaded sales & marketing cost to acquire one new customer.",
-      "id": 1037,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "CAC = Total Sales & Marketing Spend / New Customers Acquired",
-      "name": "Customer Acquisition Cost (CAC)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 10000,
-      "targetRangeLow": 500,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency (e.g., USD)",
-      "frequency": "monthly",
-      "higherIsBetter": false,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 10000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency — feeds CAC payback and the marketing budget allocation.",
-      "segment": "subscription",
-      "slug": "cac",
-      "calc": {
-        "expr": "sales_marketing_spend / new_customers",
-        "inputs": [
-          "sales_marketing_spend",
-          "new_customers"
-        ]
-      }
-    },
-    "Allmanufacturingsaas-ltv": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Expected gross-margin revenue from a customer over their lifetime.",
-      "id": 1043,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
-      "name": "Customer Lifetime Value (LTV)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 50000,
-      "targetRangeLow": 3000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency (e.g., USD)",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling — combined with CAC to gate growth-spend decisions.",
-      "segment": "subscription",
-      "slug": "ltv",
-      "calc": {
-        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
-        "inputs": [
-          "avg_revenue_per_account",
-          "gross_margin_pct",
-          "churn_rate"
-        ]
-      }
-    },
-    "Allmanufacturingsaas-ltv-cac": {
-      "datasource": [
-        "Subscription billing records",
-        "Marketing spend records"
-      ],
-      "description": "Ratio of customer lifetime value to acquisition cost — core SaaS unit economics.",
-      "id": 1049,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost",
-      "name": "LTV : CAC Ratio",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 5,
-      "targetRangeLow": 3,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Ratio",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "validationRule": "ratio",
-      "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency — a board-level guardrail (target ≥ 3:1) for scaling spend.",
-      "segment": "subscription",
-      "slug": "ltv_cac",
-      "calc": {
-        "expr": "ltv / cac",
-        "inputs": []
-      }
-    },
-    "Allmanufacturingsaas-rule-of-40": {
-      "datasource": [
-        "Subscription billing records",
-        "Financial statements"
-      ],
-      "description": "Balance of growth and profitability for recurring-revenue businesses.",
-      "id": 1055,
-      "industry": "Manufacturing",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "Rule of 40 = Revenue Growth % + Profit Margin %",
-      "name": "Rule of 40",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 60,
-      "targetRangeLow": 40,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "%",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": -100,
-        "hardMax": 200
-      },
-      "validationRule": "percentage_unbounded",
-      "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review — a single composite health score for SaaS planning.",
-      "segment": "subscription",
-      "slug": "rule_of_40",
-      "calc": {
-        "expr": "revenue_growth_pct + profit_margin_pct",
-        "inputs": [
-          "revenue_growth_pct",
-          "profit_margin_pct"
         ]
       }
     },
@@ -11092,332 +11154,6 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "Allfinancesaas-mrr": {
-      "datasource": [
-        "Subscription billing records",
-        "CRM / Sales pipeline"
-      ],
-      "description": "Normalized recurring subscription revenue billed in a month.",
-      "id": 1580,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
-      "name": "Monthly Recurring Revenue (MRR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 500000,
-      "targetRangeLow": 50000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency/month",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 1000000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "mrr",
-      "fpaWorkflow": "Recurring-revenue forecast — foundation of the fintech operating model.",
-      "segment": "subscription",
-      "slug": "mrr",
-      "calc": {
-        "expr": "active_subscriptions * avg_monthly_price",
-        "inputs": [
-          "active_subscriptions",
-          "avg_monthly_price"
-        ]
-      }
-    },
-    "Allfinancesaas-arr": {
-      "datasource": [
-        "Subscription billing records",
-        "CRM / Sales pipeline"
-      ],
-      "description": "Annualized run-rate of recurring subscription revenue.",
-      "id": 1581,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "ARR = MRR × 12",
-      "name": "Annual Recurring Revenue (ARR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 6000000,
-      "targetRangeLow": 600000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency/year",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 10000000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "arr",
-      "fpaWorkflow": "Annual planning and valuation — headline scale for fintech boards.",
-      "segment": "subscription",
-      "slug": "arr",
-      "calc": {
-        "expr": "mrr * 12",
-        "inputs": []
-      }
-    },
-    "Allfinancesaas-nrr": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Revenue retained and expanded from existing customers, net of churn and contraction.",
-      "id": 1582,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
-      "name": "Net Revenue Retention (NRR)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 120,
-      "targetRangeLow": 100,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "%",
-      "frequency": "monthly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 300
-      },
-      "validationRule": "percentage_unbounded",
-      "benchmarkKey": "nrr",
-      "fpaWorkflow": "Expansion and retention modeling — durable fintech growth quality.",
-      "segment": "subscription",
-      "slug": "nrr",
-      "calc": {
-        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
-        "inputs": [
-          "starting_mrr",
-          "expansion_mrr",
-          "contraction_mrr",
-          "churned_mrr"
-        ]
-      }
-    },
-    "Allfinancesaas-gross-churn": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Percentage of recurring revenue lost to cancellations and downgrades.",
-      "id": 1583,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
-      "name": "Gross Revenue Churn Rate",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 5,
-      "targetRangeLow": 1,
-      "tech": "FINTECH",
-      "type": "Operational",
-      "unit": "%",
-      "frequency": "monthly",
-      "higherIsBetter": false,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "validationRule": "percentage",
-      "benchmarkKey": "gross_churn",
-      "fpaWorkflow": "Retention review — renewal forecast and customer-success investment.",
-      "segment": "subscription",
-      "slug": "gross_churn",
-      "calc": {
-        "expr": "churned_mrr / starting_mrr * 100",
-        "inputs": [
-          "churned_mrr",
-          "starting_mrr"
-        ]
-      }
-    },
-    "Allfinancesaas-cac": {
-      "datasource": [
-        "Marketing spend records",
-        "CRM / Sales pipeline",
-        "General ledger"
-      ],
-      "description": "Fully-loaded sales and marketing cost to acquire one new customer.",
-      "id": 1584,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "CAC = Total Sales & Marketing Spend / New Customers Acquired",
-      "name": "Customer Acquisition Cost (CAC)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 10000,
-      "targetRangeLow": 500,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency (e.g., USD)",
-      "frequency": "monthly",
-      "higherIsBetter": false,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 10000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "cac",
-      "fpaWorkflow": "Go-to-market efficiency — CAC payback and marketing allocation.",
-      "segment": "subscription",
-      "slug": "cac",
-      "calc": {
-        "expr": "sales_marketing_spend / new_customers",
-        "inputs": [
-          "sales_marketing_spend",
-          "new_customers"
-        ]
-      }
-    },
-    "Allfinancesaas-ltv": {
-      "datasource": [
-        "Subscription billing records",
-        "Product usage logs"
-      ],
-      "description": "Expected gross-margin revenue from a customer over their lifetime.",
-      "id": 1585,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
-      "name": "Customer Lifetime Value (LTV)",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 50000,
-      "targetRangeLow": 3000,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Currency (e.g., USD)",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100000000
-      },
-      "validationRule": "currency",
-      "benchmarkKey": "ltv",
-      "fpaWorkflow": "Unit-economics modeling — growth-spend decisions with CAC.",
-      "segment": "subscription",
-      "slug": "ltv",
-      "calc": {
-        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
-        "inputs": [
-          "avg_revenue_per_account",
-          "gross_margin_pct",
-          "churn_rate"
-        ]
-      }
-    },
-    "Allfinancesaas-ltv-cac": {
-      "datasource": [
-        "Subscription billing records",
-        "Marketing spend records"
-      ],
-      "description": "Ratio of customer lifetime value to acquisition cost.",
-      "id": 1586,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost",
-      "name": "LTV : CAC Ratio",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 5,
-      "targetRangeLow": 3,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "Ratio",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
-      },
-      "validationRule": "ratio",
-      "benchmarkKey": "ltv_cac",
-      "fpaWorkflow": "Investment efficiency — board guardrail for scaling spend.",
-      "segment": "subscription",
-      "slug": "ltv_cac",
-      "calc": {
-        "expr": "ltv / cac",
-        "inputs": []
-      }
-    },
-    "Allfinancesaas-rule-of-40": {
-      "datasource": [
-        "Subscription billing records",
-        "Financial statements"
-      ],
-      "description": "Balance of growth and profitability for recurring-revenue businesses.",
-      "id": 1587,
-      "industry": "Financial Services",
-      "industryTags": [
-        "SaaS"
-      ],
-      "methodology": "Rule of 40 = Revenue Growth % + Profit Margin %",
-      "name": "Rule of 40",
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "targetRangeHigh": 60,
-      "targetRangeLow": 40,
-      "tech": "FINTECH",
-      "type": "Financial",
-      "unit": "%",
-      "frequency": "quarterly",
-      "higherIsBetter": true,
-      "validRange": {
-        "hardMin": -100,
-        "hardMax": 200
-      },
-      "validationRule": "percentage_unbounded",
-      "benchmarkKey": "rule_of_40",
-      "fpaWorkflow": "Growth-vs-profitability review — composite score for fintech planning.",
-      "segment": "subscription",
-      "slug": "rule_of_40",
-      "calc": {
-        "expr": "revenue_growth_pct + profit_margin_pct",
-        "inputs": [
-          "revenue_growth_pct",
-          "profit_margin_pct"
-        ]
-      }
-    },
     "financial_services.investment_banking.value_at_risk_99": {
       "id": 1590,
       "name": "Value at Risk 99%",
@@ -13575,92 +13311,6 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "trusts.trust.funds_from_operations": {
-      "id": 1940,
-      "name": "Funds From Operations",
-      "description": "Trust or REIT FFO for the period (vehicle reporting, aggregated).",
-      "industry": "Trusts",
-      "type": "Financial",
-      "unit": "Currency",
-      "methodology": "FFO per NAREIT or trust reporting definition (directly reported aggregate).",
-      "datasource": [
-        "Aggregated trust vehicle summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Trust earnings — dividend coverage for vehicle investors.",
-      "segment": "trust",
-      "slug": "funds_from_operations",
-      "input": true
-    },
-    "trusts.trust.ffo_payout_ratio": {
-      "id": 1941,
-      "name": "FFO Payout Ratio",
-      "description": "Distributions paid relative to FFO.",
-      "industry": "Trusts",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "FFO Payout = (Distributions / FFO) × 100",
-      "datasource": [
-        "Aggregated trust vehicle summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": false,
-      "validationRule": "percentage",
-      "validRange": {
-        "hardMin": 0,
-        "hardMax": 200
-      },
-      "fpaWorkflow": "Distribution safety — retained cash for growth and debt service.",
-      "segment": "trust",
-      "slug": "ffo_payout_ratio",
-      "calc": {
-        "expr": "distributions / ffo * 100",
-        "inputs": [
-          "distributions",
-          "ffo"
-        ]
-      }
-    },
-    "trusts.trust.same_store_noi_growth": {
-      "id": 1942,
-      "name": "Same-Store NOI Growth",
-      "description": "Year-over-year NOI growth on a same-store basis at the trust vehicle level.",
-      "industry": "Trusts",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Same-Store NOI Growth = ((Current NOI − Prior NOI) / Prior NOI) × 100",
-      "datasource": [
-        "Aggregated trust vehicle summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Vehicle organic performance — excludes acquisition noise (property ops on Real Estate orgs).",
-      "segment": "trust",
-      "slug": "same_store_noi_growth",
-      "calc": {
-        "expr": "(current_noi - prior_noi) / prior_noi * 100",
-        "inputs": [
-          "current_noi",
-          "prior_noi"
-        ]
-      }
-    },
     "trusts.trust.trust_assets_under_administration": {
       "id": 1943,
       "name": "Trust Assets Under Administration",
@@ -14504,7 +14154,7 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.core.current_ratio": {
+    "credit_granting.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -14543,11 +14193,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1700,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "current_ratio"
     },
-    "consumer_finance.core.quick_ratio": {
+    "credit_granting.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -14587,11 +14237,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1701,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "quick_ratio"
     },
-    "consumer_finance.core.gross_margin": {
+    "credit_granting.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -14630,11 +14280,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1702,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "gross_margin"
     },
-    "consumer_finance.core.operating_margin": {
+    "credit_granting.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -14672,11 +14322,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1703,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "operating_margin"
     },
-    "consumer_finance.core.ebitda_margin": {
+    "credit_granting.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -14714,11 +14364,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1704,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "ebitda_margin"
     },
-    "consumer_finance.core.net_margin": {
+    "credit_granting.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -14756,11 +14406,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1705,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "net_margin"
     },
-    "consumer_finance.core.revenue_growth": {
+    "credit_granting.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -14799,11 +14449,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1706,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "revenue_growth"
     },
-    "consumer_finance.core.working_capital": {
+    "credit_granting.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -14842,11 +14492,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1707,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "working_capital"
     },
-    "consumer_finance.core.dso": {
+    "credit_granting.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -14886,11 +14536,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1708,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "dso"
     },
-    "consumer_finance.core.dpo": {
+    "credit_granting.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -14930,11 +14580,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1709,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "dpo"
     },
-    "consumer_finance.core.ccc": {
+    "credit_granting.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -14972,11 +14622,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1710,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "ccc"
     },
-    "consumer_finance.core.operating_cash_flow": {
+    "credit_granting.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -15016,11 +14666,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1711,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "operating_cash_flow"
     },
-    "consumer_finance.core.burn_rate": {
+    "credit_granting.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -15060,11 +14710,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1712,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "burn_rate"
     },
-    "consumer_finance.core.runway": {
+    "credit_granting.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -15102,11 +14752,11 @@ export const REFERENCE_DATA = {
         ]
       },
       "id": 1713,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "runway"
     },
-    "consumer_finance.core.headcount": {
+    "credit_granting.core.headcount": {
       "name": "Headcount (FTE)",
       "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
       "type": "Operational",
@@ -15128,15 +14778,15 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "input": true,
       "id": 1714,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "slug": "headcount"
     },
-    "consumer_finance.consumer_lending.portfolio_yield": {
+    "credit_granting.consumer_lending.portfolio_yield": {
       "id": 1720,
       "name": "Portfolio Yield",
       "description": "Interest income on consumer receivables relative to average outstanding balance (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "Portfolio Yield = (Interest Income / Average Receivables) × 100",
@@ -15161,11 +14811,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.consumer_lending.net_charge_off_rate": {
+    "credit_granting.consumer_lending.net_charge_off_rate": {
       "id": 1721,
       "name": "Net Charge-Off Rate",
       "description": "Charge-offs net of recoveries as a share of average receivables.",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "NCO Rate = (Net Charge-Offs / Average Receivables) × 100",
@@ -15195,11 +14845,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.consumer_lending.delinquency_rate_30d": {
+    "credit_granting.consumer_lending.delinquency_rate_30d": {
       "id": 1722,
       "name": "30+ Day Delinquency Rate",
       "description": "Share of receivables past due 30 days or more (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "Delinquency Rate = (Delinquent Balance 30+ / Total Receivables) × 100",
@@ -15229,11 +14879,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.consumer_lending.origination_volume_growth": {
+    "credit_granting.consumer_lending.origination_volume_growth": {
       "id": 1723,
       "name": "Origination Volume Growth",
       "description": "Year-over-year growth in new consumer loan originations (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Operational",
       "unit": "%",
       "methodology": "Origination Growth = ((Current Originations − Prior Originations) / Prior Originations) × 100",
@@ -15252,11 +14902,11 @@ export const REFERENCE_DATA = {
       "slug": "origination_volume_growth",
       "input": true
     },
-    "consumer_finance.consumer_lending.payment_volume": {
+    "credit_granting.consumer_lending.payment_volume": {
       "id": 1724,
       "name": "Card Payment Volume",
       "description": "Total payment transaction volume for card portfolios (aggregated; fee revenue proxy).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "Currency",
       "methodology": "Directly measured payment volume in period.",
@@ -15275,11 +14925,11 @@ export const REFERENCE_DATA = {
       "slug": "payment_volume",
       "input": true
     },
-    "consumer_finance.consumer_lending.bnpl_origination_growth": {
+    "credit_granting.consumer_lending.bnpl_origination_growth": {
       "id": 1725,
       "name": "BNPL Origination Growth",
       "description": "Year-over-year growth in buy-now-pay-later originations (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Operational",
       "unit": "%",
       "methodology": "BNPL Growth = ((Current BNPL Originations − Prior) / Prior) × 100",
@@ -15298,11 +14948,11 @@ export const REFERENCE_DATA = {
       "slug": "bnpl_origination_growth",
       "input": true
     },
-    "consumer_finance.consumer_lending.embedded_finance_revenue_share": {
+    "credit_granting.consumer_lending.embedded_finance_revenue_share": {
       "id": 1726,
       "name": "Embedded Finance Revenue Share",
       "description": "Share of consumer finance revenue from embedded or partner channels (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "Embedded Share = (Embedded Channel Revenue / Total Consumer Finance Revenue) × 100",
@@ -15327,11 +14977,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.consumer_lending.rtp_payment_volume": {
+    "credit_granting.consumer_lending.rtp_payment_volume": {
       "id": 1727,
       "name": "RTP Payment Volume",
       "description": "Real-time payments volume for consumer-facing rails (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "Currency",
       "methodology": "Directly measured RTP volume in period.",
@@ -15350,11 +15000,11 @@ export const REFERENCE_DATA = {
       "slug": "rtp_payment_volume",
       "input": true
     },
-    "consumer_finance.consumer_lending.merchant_acquiring_volume": {
+    "credit_granting.consumer_lending.merchant_acquiring_volume": {
       "id": 1728,
       "name": "Merchant Acquiring Volume",
       "description": "Card acquiring volume where bank is acquirer or sponsor (consumer-facing, aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "Currency",
       "methodology": "Directly measured acquiring volume in period.",
@@ -15373,11 +15023,11 @@ export const REFERENCE_DATA = {
       "slug": "merchant_acquiring_volume",
       "input": true
     },
-    "consumer_finance.residential_mortgage.portfolio_yield": {
+    "credit_granting.residential_mortgage.portfolio_yield": {
       "id": 1790,
       "name": "Residential Mortgage Portfolio Yield",
       "description": "Interest income on residential mortgage book relative to average balances (lender view).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "Portfolio Yield = (Interest Income / Average Mortgage Balances) × 100",
@@ -15402,11 +15052,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.residential_mortgage.delinquency_rate_30d": {
+    "credit_granting.residential_mortgage.delinquency_rate_30d": {
       "id": 1791,
       "name": "Residential Mortgage 30+ Day Delinquency",
       "description": "Share of mortgage balances past due 30+ days (lender book).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "Delinquency Rate = (Delinquent Balance 30+ / Total Mortgage Balances) × 100",
@@ -15436,11 +15086,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.residential_mortgage.weighted_average_ltv": {
+    "credit_granting.residential_mortgage.weighted_average_ltv": {
       "id": 1792,
       "name": "Residential Mortgage Weighted Average LTV",
       "description": "Loan-weighted LTV on residential mortgage portfolio (lender view).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Financial",
       "unit": "%",
       "methodology": "WA LTV = Σ(Loan Balance × LTV) / Σ Loan Balances",
@@ -15465,11 +15115,11 @@ export const REFERENCE_DATA = {
         ]
       }
     },
-    "consumer_finance.residential_mortgage.origination_volume_growth": {
+    "credit_granting.residential_mortgage.origination_volume_growth": {
       "id": 1793,
       "name": "Residential Mortgage Origination Growth",
       "description": "Year-over-year growth in new mortgage originations (aggregated).",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "type": "Operational",
       "unit": "%",
       "methodology": "Origination Growth = ((Current − Prior) / Prior) × 100",
@@ -15488,7 +15138,369 @@ export const REFERENCE_DATA = {
       "slug": "origination_volume_growth",
       "input": true
     },
-    "commercial_finance.core.current_ratio": {
+    "credit_granting.commercial_lending.commercial_loan_growth": {
+      "id": 1760,
+      "name": "Commercial Loan Growth",
+      "description": "Year-over-year growth in outstanding commercial and C&I loan balances (aggregated).",
+      "industry": "Credit Granting",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Loan Growth = ((Current Outstanding − Prior Outstanding) / Prior Outstanding) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Book momentum — market share and underwriting appetite on C&I and middle market.",
+      "segment": "commercial_lending",
+      "slug": "commercial_loan_growth",
+      "input": true
+    },
+    "credit_granting.commercial_lending.portfolio_yield": {
+      "id": 1761,
+      "name": "Commercial Portfolio Yield",
+      "description": "Interest income on commercial loans relative to average outstanding balance (aggregated C&I and middle market).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Portfolio Yield = (Interest Income / Average Commercial Loans) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Revenue driver — spread on commercial book vs funding and credit risk.",
+      "segment": "commercial_lending",
+      "slug": "portfolio_yield",
+      "calc": {
+        "expr": "interest_income / average_commercial_loans * 100",
+        "inputs": [
+          "interest_income",
+          "average_commercial_loans"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.non_performing_loan_ratio": {
+      "id": 1762,
+      "name": "Commercial NPL Ratio",
+      "description": "Share of commercial loans past due or non-accrual (aggregated credit quality).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "NPL Ratio = (Non-Performing Commercial Loans / Total Commercial Loans) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "fpaWorkflow": "Credit risk monitoring — provisions and relationship reviews.",
+      "segment": "commercial_lending",
+      "slug": "non_performing_loan_ratio",
+      "calc": {
+        "expr": "non_performing_commercial_loans / total_commercial_loans * 100",
+        "inputs": [
+          "non_performing_commercial_loans",
+          "total_commercial_loans"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.net_charge_off_rate": {
+      "id": 1763,
+      "name": "Commercial Net Charge-Off Rate",
+      "description": "Commercial charge-offs net of recoveries as a share of average commercial loans.",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "NCO Rate = (Net Charge-Offs / Average Commercial Loans) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "fpaWorkflow": "Credit loss — cyclical and sector concentration signal.",
+      "segment": "commercial_lending",
+      "slug": "net_charge_off_rate",
+      "calc": {
+        "expr": "net_charge_offs / average_commercial_loans * 100",
+        "inputs": [
+          "net_charge_offs",
+          "average_commercial_loans"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.origination_volume_growth": {
+      "id": 1764,
+      "name": "Commercial Origination Volume Growth",
+      "description": "Year-over-year growth in new commercial loan commitments or fundings (aggregated).",
+      "industry": "Credit Granting",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Origination Growth = ((Current Originations − Prior Originations) / Prior Originations) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Pipeline and production — relationship manager capacity and risk appetite.",
+      "segment": "commercial_lending",
+      "slug": "origination_volume_growth",
+      "input": true
+    },
+    "credit_granting.commercial_lending.delinquency_rate_30d": {
+      "id": 1765,
+      "name": "Commercial 30+ Day Delinquency Rate",
+      "description": "Share of commercial loan balances past due 30 days or more (aggregated).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Delinquency Rate = (Delinquent Balance 30+ / Total Commercial Loans) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "fpaWorkflow": "Early warning — rolls into NPLs and provisions.",
+      "segment": "commercial_lending",
+      "slug": "delinquency_rate_30d",
+      "calc": {
+        "expr": "delinquent_balance_30_plus / total_commercial_loans * 100",
+        "inputs": [
+          "delinquent_balance_30_plus",
+          "total_commercial_loans"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.weighted_average_ltv": {
+      "id": 1771,
+      "name": "Weighted Average LTV",
+      "description": "Loan-weighted LTV on commercial and CRE portfolios (lender book view).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "WA LTV = Σ(Loan Balance × LTV) / Σ Loan Balances",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": false,
+      "fpaWorkflow": "Collateral adequacy — CRE and secured commercial exposure.",
+      "segment": "commercial_lending",
+      "slug": "weighted_average_ltv",
+      "calc": {
+        "expr": "weighted_ltv_numerator / total_commercial_loans * 100",
+        "inputs": [
+          "weighted_ltv_numerator",
+          "total_commercial_loans"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.portfolio_dscr": {
+      "id": 1772,
+      "name": "Portfolio DSCR",
+      "description": "Loan-weighted average debt service coverage on commercial book (lender view).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "Number",
+      "methodology": "Portfolio DSCR = Σ(DSCR × Loan Weight) on reporting book",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Cash-flow coverage — covenant monitoring at portfolio level.",
+      "segment": "commercial_lending",
+      "slug": "portfolio_dscr",
+      "input": true
+    },
+    "credit_granting.commercial_lending.sector_concentration_index": {
+      "id": 1773,
+      "name": "Sector Concentration Index",
+      "description": "Herfindahl-style concentration of commercial exposures by industry sector (org book).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "Number",
+      "methodology": "HHI = Σ(Sector Share²) × 10000 on outstanding balances",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": false,
+      "fpaWorkflow": "Concentration risk — diversification vs single-sector stress.",
+      "segment": "commercial_lending",
+      "slug": "sector_concentration_index",
+      "input": true
+    },
+    "credit_granting.commercial_lending.revolver_utilization_rate": {
+      "id": 1774,
+      "name": "Revolver Utilization Rate",
+      "description": "Drawn committed lines relative to total commitments (aggregated).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Utilization = (Drawn Commitments / Total Commitments) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Line usage — liquidity demand and fee income potential.",
+      "segment": "commercial_lending",
+      "slug": "revolver_utilization_rate",
+      "calc": {
+        "expr": "drawn_commitments / total_commitments * 100",
+        "inputs": [
+          "drawn_commitments",
+          "total_commitments"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.treasury_fee_yield": {
+      "id": 1775,
+      "name": "Treasury Fee Yield",
+      "description": "Cash management and liquidity service fees relative to commercial deposit balances.",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Treasury Fee Yield = (Treasury Fee Revenue / Average Commercial Deposits) × 100",
+      "datasource": [
+        "Aggregated commercial treasury summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Non-interest revenue — relationship treasury monetization.",
+      "segment": "commercial_lending",
+      "slug": "treasury_fee_yield",
+      "calc": {
+        "expr": "treasury_fee_revenue / average_commercial_deposits * 100",
+        "inputs": [
+          "treasury_fee_revenue",
+          "average_commercial_deposits"
+        ]
+      }
+    },
+    "credit_granting.commercial_lending.commercial_payment_volume": {
+      "id": 1776,
+      "name": "Commercial Payment Volume",
+      "description": "B2B payment and wire volume processed for commercial clients (aggregated).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "Currency",
+      "methodology": "Directly measured payment volume in period.",
+      "datasource": [
+        "Aggregated commercial treasury summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Payments scale — embedded commercial flows and fee income.",
+      "segment": "commercial_lending",
+      "slug": "commercial_payment_volume",
+      "input": true
+    },
+    "credit_granting.commercial_lending.sustainable_finance_share": {
+      "id": 1777,
+      "name": "Sustainable Finance Share",
+      "description": "Share of commercial outstandings tagged as sustainable or green-labeled (aggregated).",
+      "industry": "Credit Granting",
+      "type": "Financial",
+      "unit": "%",
+      "methodology": "Sustainable Share = (Sustainable Loan Balance / Total Commercial Loans) × 100",
+      "datasource": [
+        "Aggregated commercial loan book summary"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "quarterly",
+      "tech": "FINTECH",
+      "higherIsBetter": true,
+      "fpaWorkflow": "ESG lending — portfolio mix and disclosure.",
+      "segment": "commercial_lending",
+      "slug": "sustainable_finance_share",
+      "calc": {
+        "expr": "sustainable_loan_balance / total_commercial_loans * 100",
+        "inputs": [
+          "sustainable_loan_balance",
+          "total_commercial_loans"
+        ]
+      }
+    },
+    "software_saas.core.current_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15526,12 +15538,12 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
-      "id": 1740,
-      "industry": "Commercial Finance",
+      "id": 2040,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "current_ratio"
     },
-    "commercial_finance.core.quick_ratio": {
+    "software_saas.core.quick_ratio": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15570,12 +15582,12 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
-      "id": 1741,
-      "industry": "Commercial Finance",
+      "id": 2041,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "quick_ratio"
     },
-    "commercial_finance.core.gross_margin": {
+    "software_saas.core.gross_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -15613,12 +15625,12 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "id": 1742,
-      "industry": "Commercial Finance",
+      "id": 2042,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "gross_margin"
     },
-    "commercial_finance.core.operating_margin": {
+    "software_saas.core.operating_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -15655,12 +15667,12 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
-      "id": 1743,
-      "industry": "Commercial Finance",
+      "id": 2043,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "operating_margin"
     },
-    "commercial_finance.core.ebitda_margin": {
+    "software_saas.core.ebitda_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -15697,12 +15709,12 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
-      "id": 1744,
-      "industry": "Commercial Finance",
+      "id": 2044,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "ebitda_margin"
     },
-    "commercial_finance.core.net_margin": {
+    "software_saas.core.net_margin": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -15739,12 +15751,12 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
-      "id": 1745,
-      "industry": "Commercial Finance",
+      "id": 2045,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "net_margin"
     },
-    "commercial_finance.core.revenue_growth": {
+    "software_saas.core.revenue_growth": {
       "datasource": [
         "Financial statements",
         "General ledger"
@@ -15782,12 +15794,12 @@ export const REFERENCE_DATA = {
           "revenue_prior"
         ]
       },
-      "id": 1746,
-      "industry": "Commercial Finance",
+      "id": 2046,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "revenue_growth"
     },
-    "commercial_finance.core.working_capital": {
+    "software_saas.core.working_capital": {
       "datasource": [
         "Financial statements",
         "Balance sheet",
@@ -15825,12 +15837,12 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
-      "id": 1747,
-      "industry": "Commercial Finance",
+      "id": 2047,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "working_capital"
     },
-    "commercial_finance.core.dso": {
+    "software_saas.core.dso": {
       "datasource": [
         "Accounts receivable aging",
         "Financial statements",
@@ -15869,12 +15881,12 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "id": 1748,
-      "industry": "Commercial Finance",
+      "id": 2048,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "dso"
     },
-    "commercial_finance.core.dpo": {
+    "software_saas.core.dpo": {
       "datasource": [
         "Accounts payable aging",
         "Financial statements",
@@ -15913,12 +15925,12 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "id": 1749,
-      "industry": "Commercial Finance",
+      "id": 2049,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "dpo"
     },
-    "commercial_finance.core.ccc": {
+    "software_saas.core.ccc": {
       "datasource": [
         "Accounts receivable aging",
         "Accounts payable aging",
@@ -15955,12 +15967,12 @@ export const REFERENCE_DATA = {
           "days_inventory_outstanding"
         ]
       },
-      "id": 1750,
-      "industry": "Commercial Finance",
+      "id": 2050,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "ccc"
     },
-    "commercial_finance.core.operating_cash_flow": {
+    "software_saas.core.operating_cash_flow": {
       "datasource": [
         "Financial statements",
         "Bank statements",
@@ -15999,12 +16011,12 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
-      "id": 1751,
-      "industry": "Commercial Finance",
+      "id": 2051,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "operating_cash_flow"
     },
-    "commercial_finance.core.burn_rate": {
+    "software_saas.core.burn_rate": {
       "datasource": [
         "Bank statements",
         "Financial statements",
@@ -16043,12 +16055,12 @@ export const REFERENCE_DATA = {
           "cash_in"
         ]
       },
-      "id": 1752,
-      "industry": "Commercial Finance",
+      "id": 2052,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "burn_rate"
     },
-    "commercial_finance.core.runway": {
+    "software_saas.core.runway": {
       "datasource": [
         "Bank statements",
         "Financial statements"
@@ -16085,12 +16097,12 @@ export const REFERENCE_DATA = {
           "current_cash_balance"
         ]
       },
-      "id": 1753,
-      "industry": "Commercial Finance",
+      "id": 2053,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "runway"
     },
-    "commercial_finance.core.headcount": {
+    "software_saas.core.headcount": {
       "name": "Headcount (FTE)",
       "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
       "type": "Operational",
@@ -16111,370 +16123,334 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "FINTECH",
       "input": true,
-      "id": 1754,
-      "industry": "Commercial Finance",
+      "id": 2054,
+      "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "headcount"
     },
-    "commercial_finance.commercial_lending.commercial_loan_growth": {
-      "id": 1760,
-      "name": "Commercial Loan Growth",
-      "description": "Year-over-year growth in outstanding commercial and C&I loan balances (aggregated).",
-      "industry": "Commercial Finance",
+    "software_saas.subscription.mrr": {
+      "datasource": [
+        "Subscription billing records",
+        "CRM / Sales pipeline"
+      ],
+      "description": "Normalized recurring subscription revenue billed in a month.",
+      "id": 1580,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "MRR = Σ (Active Subscriptions × Monthly Subscription Price)",
+      "name": "Monthly Recurring Revenue (MRR)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 500000,
+      "targetRangeLow": 50000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency/month",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "mrr",
+      "fpaWorkflow": "Recurring-revenue forecast — foundation of the fintech operating model.",
+      "segment": "subscription",
+      "slug": "mrr",
+      "calc": {
+        "expr": "active_subscriptions * avg_monthly_price",
+        "inputs": [
+          "active_subscriptions",
+          "avg_monthly_price"
+        ]
+      }
+    },
+    "software_saas.subscription.arr": {
+      "datasource": [
+        "Subscription billing records",
+        "CRM / Sales pipeline"
+      ],
+      "description": "Annualized run-rate of recurring subscription revenue.",
+      "id": 1581,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "ARR = MRR × 12",
+      "name": "Annual Recurring Revenue (ARR)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 6000000,
+      "targetRangeLow": 600000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency/year",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 10000000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "arr",
+      "fpaWorkflow": "Annual planning and valuation — headline scale for fintech boards.",
+      "segment": "subscription",
+      "slug": "arr",
+      "calc": {
+        "expr": "mrr * 12",
+        "inputs": []
+      }
+    },
+    "software_saas.subscription.nrr": {
+      "datasource": [
+        "Subscription billing records",
+        "Product usage logs"
+      ],
+      "description": "Revenue retained and expanded from existing customers, net of churn and contraction.",
+      "id": 1582,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "NRR = ((Starting MRR + Expansion − Contraction − Churn) / Starting MRR) × 100",
+      "name": "Net Revenue Retention (NRR)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 120,
+      "targetRangeLow": 100,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 300
+      },
+      "validationRule": "percentage_unbounded",
+      "benchmarkKey": "nrr",
+      "fpaWorkflow": "Expansion and retention modeling — durable fintech growth quality.",
+      "segment": "subscription",
+      "slug": "nrr",
+      "calc": {
+        "expr": "(starting_mrr + expansion_mrr - contraction_mrr - churned_mrr) / starting_mrr * 100",
+        "inputs": [
+          "starting_mrr",
+          "expansion_mrr",
+          "contraction_mrr",
+          "churned_mrr"
+        ]
+      }
+    },
+    "software_saas.subscription.gross_churn": {
+      "datasource": [
+        "Subscription billing records",
+        "Product usage logs"
+      ],
+      "description": "Percentage of recurring revenue lost to cancellations and downgrades.",
+      "id": 1583,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "Gross Churn = (Churned MRR / Starting MRR) × 100",
+      "name": "Gross Revenue Churn Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 5,
+      "targetRangeLow": 1,
+      "tech": "FINTECH",
       "type": "Operational",
       "unit": "%",
-      "methodology": "Loan Growth = ((Current Outstanding − Prior Outstanding) / Prior Outstanding) × 100",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Book momentum — market share and underwriting appetite on C&I and middle market.",
-      "segment": "commercial_lending",
-      "slug": "commercial_loan_growth",
-      "input": true
-    },
-    "commercial_finance.commercial_lending.portfolio_yield": {
-      "id": 1761,
-      "name": "Commercial Portfolio Yield",
-      "description": "Interest income on commercial loans relative to average outstanding balance (aggregated C&I and middle market).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Portfolio Yield = (Interest Income / Average Commercial Loans) × 100",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
       "frequency": "monthly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Revenue driver — spread on commercial book vs funding and credit risk.",
-      "segment": "commercial_lending",
-      "slug": "portfolio_yield",
-      "calc": {
-        "expr": "interest_income / average_commercial_loans * 100",
-        "inputs": [
-          "interest_income",
-          "average_commercial_loans"
-        ]
-      }
-    },
-    "commercial_finance.commercial_lending.non_performing_loan_ratio": {
-      "id": 1762,
-      "name": "Commercial NPL Ratio",
-      "description": "Share of commercial loans past due or non-accrual (aggregated credit quality).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "NPL Ratio = (Non-Performing Commercial Loans / Total Commercial Loans) × 100",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
       "higherIsBetter": false,
-      "validationRule": "percentage",
       "validRange": {
         "hardMin": 0,
         "hardMax": 100
       },
-      "fpaWorkflow": "Credit risk monitoring — provisions and relationship reviews.",
-      "segment": "commercial_lending",
-      "slug": "non_performing_loan_ratio",
+      "validationRule": "percentage",
+      "benchmarkKey": "gross_churn",
+      "fpaWorkflow": "Retention review — renewal forecast and customer-success investment.",
+      "segment": "subscription",
+      "slug": "gross_churn",
       "calc": {
-        "expr": "non_performing_commercial_loans / total_commercial_loans * 100",
+        "expr": "churned_mrr / starting_mrr * 100",
         "inputs": [
-          "non_performing_commercial_loans",
-          "total_commercial_loans"
+          "churned_mrr",
+          "starting_mrr"
         ]
       }
     },
-    "commercial_finance.commercial_lending.net_charge_off_rate": {
-      "id": 1763,
-      "name": "Commercial Net Charge-Off Rate",
-      "description": "Commercial charge-offs net of recoveries as a share of average commercial loans.",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "NCO Rate = (Net Charge-Offs / Average Commercial Loans) × 100",
+    "software_saas.subscription.cac": {
       "datasource": [
-        "Aggregated commercial loan book summary"
+        "Marketing spend records",
+        "CRM / Sales pipeline",
+        "General ledger"
       ],
+      "description": "Fully-loaded sales and marketing cost to acquire one new customer.",
+      "id": 1584,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "CAC = Total Sales & Marketing Spend / New Customers Acquired",
+      "name": "Customer Acquisition Cost (CAC)",
       "sensorFieldData": [
         "Not Applicable"
       ],
       "status": "data needed",
-      "frequency": "quarterly",
+      "targetRangeHigh": 10000,
+      "targetRangeLow": 500,
       "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
       "higherIsBetter": false,
-      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 10000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "cac",
+      "fpaWorkflow": "Go-to-market efficiency — CAC payback and marketing allocation.",
+      "segment": "subscription",
+      "slug": "cac",
+      "calc": {
+        "expr": "sales_marketing_spend / new_customers",
+        "inputs": [
+          "sales_marketing_spend",
+          "new_customers"
+        ]
+      }
+    },
+    "software_saas.subscription.ltv": {
+      "datasource": [
+        "Subscription billing records",
+        "Product usage logs"
+      ],
+      "description": "Expected gross-margin revenue from a customer over their lifetime.",
+      "id": 1585,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "LTV = (Average Revenue per Account × Gross Margin %) / Churn Rate",
+      "name": "Customer Lifetime Value (LTV)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 50000,
+      "targetRangeLow": 3000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "quarterly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "ltv",
+      "fpaWorkflow": "Unit-economics modeling — growth-spend decisions with CAC.",
+      "segment": "subscription",
+      "slug": "ltv",
+      "calc": {
+        "expr": "(avg_revenue_per_account * gross_margin_pct / 100) / churn_rate",
+        "inputs": [
+          "avg_revenue_per_account",
+          "gross_margin_pct",
+          "churn_rate"
+        ]
+      }
+    },
+    "software_saas.subscription.ltv_cac": {
+      "datasource": [
+        "Subscription billing records",
+        "Marketing spend records"
+      ],
+      "description": "Ratio of customer lifetime value to acquisition cost.",
+      "id": 1586,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "LTV:CAC = Customer Lifetime Value / Customer Acquisition Cost",
+      "name": "LTV : CAC Ratio",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 5,
+      "targetRangeLow": 3,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "quarterly",
+      "higherIsBetter": true,
       "validRange": {
         "hardMin": 0,
         "hardMax": 100
       },
-      "fpaWorkflow": "Credit loss — cyclical and sector concentration signal.",
-      "segment": "commercial_lending",
-      "slug": "net_charge_off_rate",
+      "validationRule": "ratio",
+      "benchmarkKey": "ltv_cac",
+      "fpaWorkflow": "Investment efficiency — board guardrail for scaling spend.",
+      "segment": "subscription",
+      "slug": "ltv_cac",
       "calc": {
-        "expr": "net_charge_offs / average_commercial_loans * 100",
-        "inputs": [
-          "net_charge_offs",
-          "average_commercial_loans"
-        ]
+        "expr": "ltv / cac",
+        "inputs": []
       }
     },
-    "commercial_finance.commercial_lending.origination_volume_growth": {
-      "id": 1764,
-      "name": "Commercial Origination Volume Growth",
-      "description": "Year-over-year growth in new commercial loan commitments or fundings (aggregated).",
-      "industry": "Commercial Finance",
-      "type": "Operational",
-      "unit": "%",
-      "methodology": "Origination Growth = ((Current Originations − Prior Originations) / Prior Originations) × 100",
+    "software_saas.subscription.rule_of_40": {
       "datasource": [
-        "Aggregated commercial loan book summary"
+        "Subscription billing records",
+        "Financial statements"
       ],
+      "description": "Balance of growth and profitability for recurring-revenue businesses.",
+      "id": 1587,
+      "industry": "Software (SaaS)",
+      "industryTags": [
+        "SaaS"
+      ],
+      "methodology": "Rule of 40 = Revenue Growth % + Profit Margin %",
+      "name": "Rule of 40",
       "sensorFieldData": [
         "Not Applicable"
       ],
       "status": "data needed",
-      "frequency": "quarterly",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 40,
       "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Pipeline and production — relationship manager capacity and risk appetite.",
-      "segment": "commercial_lending",
-      "slug": "origination_volume_growth",
-      "input": true
-    },
-    "commercial_finance.commercial_lending.delinquency_rate_30d": {
-      "id": 1765,
-      "name": "Commercial 30+ Day Delinquency Rate",
-      "description": "Share of commercial loan balances past due 30 days or more (aggregated).",
-      "industry": "Commercial Finance",
       "type": "Financial",
       "unit": "%",
-      "methodology": "Delinquency Rate = (Delinquent Balance 30+ / Total Commercial Loans) × 100",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "monthly",
-      "tech": "FINTECH",
-      "higherIsBetter": false,
-      "validationRule": "percentage",
+      "frequency": "quarterly",
+      "higherIsBetter": true,
       "validRange": {
-        "hardMin": 0,
-        "hardMax": 100
+        "hardMin": -100,
+        "hardMax": 200
       },
-      "fpaWorkflow": "Early warning — rolls into NPLs and provisions.",
-      "segment": "commercial_lending",
-      "slug": "delinquency_rate_30d",
+      "validationRule": "percentage_unbounded",
+      "benchmarkKey": "rule_of_40",
+      "fpaWorkflow": "Growth-vs-profitability review — composite score for fintech planning.",
+      "segment": "subscription",
+      "slug": "rule_of_40",
       "calc": {
-        "expr": "delinquent_balance_30_plus / total_commercial_loans * 100",
+        "expr": "revenue_growth_pct + profit_margin_pct",
         "inputs": [
-          "delinquent_balance_30_plus",
-          "total_commercial_loans"
-        ]
-      }
-    },
-    "commercial_finance.commercial_lending.weighted_average_ltv": {
-      "id": 1771,
-      "name": "Weighted Average LTV",
-      "description": "Loan-weighted LTV on commercial and CRE portfolios (lender book view).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "WA LTV = Σ(Loan Balance × LTV) / Σ Loan Balances",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": false,
-      "fpaWorkflow": "Collateral adequacy — CRE and secured commercial exposure.",
-      "segment": "commercial_lending",
-      "slug": "weighted_average_ltv",
-      "calc": {
-        "expr": "weighted_ltv_numerator / total_commercial_loans * 100",
-        "inputs": [
-          "weighted_ltv_numerator",
-          "total_commercial_loans"
-        ]
-      }
-    },
-    "commercial_finance.commercial_lending.portfolio_dscr": {
-      "id": 1772,
-      "name": "Portfolio DSCR",
-      "description": "Loan-weighted average debt service coverage on commercial book (lender view).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "Number",
-      "methodology": "Portfolio DSCR = Σ(DSCR × Loan Weight) on reporting book",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Cash-flow coverage — covenant monitoring at portfolio level.",
-      "segment": "commercial_lending",
-      "slug": "portfolio_dscr",
-      "input": true
-    },
-    "commercial_finance.commercial_lending.sector_concentration_index": {
-      "id": 1773,
-      "name": "Sector Concentration Index",
-      "description": "Herfindahl-style concentration of commercial exposures by industry sector (org book).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "Number",
-      "methodology": "HHI = Σ(Sector Share²) × 10000 on outstanding balances",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": false,
-      "fpaWorkflow": "Concentration risk — diversification vs single-sector stress.",
-      "segment": "commercial_lending",
-      "slug": "sector_concentration_index",
-      "input": true
-    },
-    "commercial_finance.commercial_lending.revolver_utilization_rate": {
-      "id": 1774,
-      "name": "Revolver Utilization Rate",
-      "description": "Drawn committed lines relative to total commitments (aggregated).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Utilization = (Drawn Commitments / Total Commitments) × 100",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "monthly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Line usage — liquidity demand and fee income potential.",
-      "segment": "commercial_lending",
-      "slug": "revolver_utilization_rate",
-      "calc": {
-        "expr": "drawn_commitments / total_commitments * 100",
-        "inputs": [
-          "drawn_commitments",
-          "total_commitments"
-        ]
-      }
-    },
-    "commercial_finance.commercial_lending.treasury_fee_yield": {
-      "id": 1775,
-      "name": "Treasury Fee Yield",
-      "description": "Cash management and liquidity service fees relative to commercial deposit balances.",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Treasury Fee Yield = (Treasury Fee Revenue / Average Commercial Deposits) × 100",
-      "datasource": [
-        "Aggregated commercial treasury summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Non-interest revenue — relationship treasury monetization.",
-      "segment": "commercial_lending",
-      "slug": "treasury_fee_yield",
-      "calc": {
-        "expr": "treasury_fee_revenue / average_commercial_deposits * 100",
-        "inputs": [
-          "treasury_fee_revenue",
-          "average_commercial_deposits"
-        ]
-      }
-    },
-    "commercial_finance.commercial_lending.commercial_payment_volume": {
-      "id": 1776,
-      "name": "Commercial Payment Volume",
-      "description": "B2B payment and wire volume processed for commercial clients (aggregated).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "Currency",
-      "methodology": "Directly measured payment volume in period.",
-      "datasource": [
-        "Aggregated commercial treasury summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "monthly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "Payments scale — embedded commercial flows and fee income.",
-      "segment": "commercial_lending",
-      "slug": "commercial_payment_volume",
-      "input": true
-    },
-    "commercial_finance.commercial_lending.sustainable_finance_share": {
-      "id": 1777,
-      "name": "Sustainable Finance Share",
-      "description": "Share of commercial outstandings tagged as sustainable or green-labeled (aggregated).",
-      "industry": "Commercial Finance",
-      "type": "Financial",
-      "unit": "%",
-      "methodology": "Sustainable Share = (Sustainable Loan Balance / Total Commercial Loans) × 100",
-      "datasource": [
-        "Aggregated commercial loan book summary"
-      ],
-      "sensorFieldData": [
-        "Not Applicable"
-      ],
-      "status": "data needed",
-      "frequency": "quarterly",
-      "tech": "FINTECH",
-      "higherIsBetter": true,
-      "fpaWorkflow": "ESG lending — portfolio mix and disclosure.",
-      "segment": "commercial_lending",
-      "slug": "sustainable_finance_share",
-      "calc": {
-        "expr": "sustainable_loan_balance / total_commercial_loans * 100",
-        "inputs": [
-          "sustainable_loan_balance",
-          "total_commercial_loans"
+          "revenue_growth_pct",
+          "profit_margin_pct"
         ]
       }
     },

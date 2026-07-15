@@ -4,23 +4,22 @@ industryCodes:
     revision: Rev.4
     primary: '4923'
     secondary:
-    - '4911'
+    - '4912'
     - '5022'
   naics:
     revision: '2022'
     primary: '484110'
     secondary:
-    - '482111'
+    - '484122'
     - '483111'
   nace:
     revision: Rev.2
     primary: '49.41'
     secondary:
-    - '49.20'
     - '50.20'
   gics:
     revision: '2023'
     primary: '203040'
-  confidence: medium
-  lastReviewed: '2026-07-04'
+  confidence: high
+  lastReviewed: '2026-07-16'
   source: manual

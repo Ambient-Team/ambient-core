@@ -297,7 +297,25 @@ dataOptions:
     - Operating_Expenses
     - Asset_Values
     - Liability_Amounts
-    fields: []
+    fields:
+    - name: date
+      type: date
+    - name: property_id
+      type: id
+    - name: lender_name
+      type: string
+    - name: loan_amount
+      type: decimal
+    - name: interest_rate
+      type: decimal
+    - name: loan_term_months
+      type: decimal
+    - name: maturity_date
+      type: date
+    - name: outstanding_balance
+      type: decimal
+    - name: annual_debt_service
+      type: string
     format: Document
     id: 8
     industry: Real Estate
@@ -306,7 +324,7 @@ dataOptions:
     - 8
     name: Loan documents
     template: Document
-    fieldCoverage: upload
+    fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
   Allrealestateds-general-ledger:
@@ -687,3 +705,42 @@ dataOptions:
     fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
+  real_estate.reit.reit_supplemental:
+    id: 1950
+    name: REIT supplemental reporting
+    description: REIT FFO, distributions, and same-store NOI (vehicle reporting). No beneficiary identifiers.
+    industry: Real Estate
+    segment: reit
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: trust_vehicle_id
+      type: id
+    - name: vehicle_type
+      type: enum
+    - name: funds_from_operations
+      type: decimal
+    - name: ffo
+      type: string
+    - name: distributions
+      type: string
+    - name: current_noi
+      type: string
+    - name: prior_noi
+      type: string
+    - name: trust_assets_under_administration
+      type: decimal
+    - name: trustee_fees
+      type: string
+    - name: average_trust_aua
+      type: string
+    metricIds:
+    - 1940
+    - 1941
+    - 1942
+    lastUpdated: '2026-06-25 00:00:00'
+    fieldCoverage: upload
+    collectionFrequency: quarterly
+    grain: quarter
