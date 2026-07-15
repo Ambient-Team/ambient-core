@@ -4,20 +4,20 @@ This guide answers how **catalog** and **contracts** are used in practice and ho
 
 Naming, integer ids, serialization formats, and where databases sit relative to git are defined in [CONVENTIONS.md](CONVENTIONS.md). This page focuses on consumption and the end-to-end data flow.
 
-For catalog YAML authoring, see [catalog/README.md](../catalog/README.md). For contract file layout in this repo, see [contracts/README.md](../contracts/README.md). For agents that read metadata via tools, see [AGENTS.md](AGENTS.md) and [agent-security.md](agent-security.md).
+For catalog YAML authoring, see [catalog/README.md](../catalog/README.md). For contract file layout in this repo, see [contracts/README.md](../contracts/README.md).
 
 ## Plain text SSOT and data flow
 
-Ambient Core owns the **middle** layer: human-authored **YAML** for contracts and catalog semantics (plus Maestro **config**), and machine-generated **JSON** (`catalog/manifest.json`, JSON Schemas, bronze mapping payloads) and **JavaScript** (`catalog/runtime/*.js` from `ambient-catalog-generate`). Do not maintain a second editable copy of those trees in a consumer repo — pin a tagged checkout or submodule ([INTEGRATING.md](INTEGRATING.md), [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)).
+Ambient Core owns the **middle** layer: human-authored **YAML** for contracts and catalog semantics, and machine-generated **JSON** (`catalog/manifest.json`, JSON Schemas, bronze mapping payloads) and **JavaScript** (`catalog/runtime/*.js` from `ambient-catalog-generate`). Do not maintain a second editable copy of those trees in a consumer repo — pin a tagged checkout or submodule ([INTEGRATING.md](INTEGRATING.md), [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)).
 
-Operational databases and lakehouse Bronze are **precursors**: data is extracted to plain text (typically **CSV/TSV** or **JSON**) at the upload boundary before governance runs. Maestro emits **JSONL** run-complete lines at the service boundary ([CONVENTIONS.md](CONVENTIONS.md#choosing-a-format)). Silver → Gold and similar **forward** stores are Parquet/Delta or service SQL in deployment; their shapes are still defined by YAML in `contracts/`. Details: [CONVENTIONS.md — Data formats and storage](CONVENTIONS.md#data-formats-and-storage).
+Operational databases and lakehouse Bronze are **precursors**: data is extracted to plain text (typically **CSV/TSV** or **JSON**) at the upload boundary before governance runs. Silver → Gold and similar **forward** stores are Parquet/Delta or service SQL in deployment; their shapes are still defined by YAML in `contracts/`. Details: [CONVENTIONS.md — Data formats and storage](CONVENTIONS.md#data-formats-and-storage).
 
 ```mermaid
 flowchart LR
   precursor[Precursor_OLTP_or_Bronze]
   extract[Plain_text_extract_CSV_or_JSON]
   yaml[YAML_contracts_and_catalog_in_git]
-  forward[Forward_Parquet_Delta_or_Maestro_SQL]
+  forward[Forward_Parquet_Delta]
   precursor --> extract --> yaml --> forward
 ```
 
@@ -42,7 +42,7 @@ A single banking group on a paid platform is often modeled as **several tenant o
 
 **Risk and payments** are not separate catalog industries or standalone `finance-risk-v1` / payments contracts. Credit, liquidity, market, and payment-volume metrics live on the existing pack and matching `finance-*-v1` Gold product for that economic engine (for example NPL on Commercial Finance, VaR on investment banking, card volume on Consumer Finance). Institution-wide liquidity and stress metrics stay on Banking. Macro peer share and HHI across the market belong in platform benchmarking, not per-org Gold schema.
 
-Upload fields such as `entity_segment` on some catalog data options support **segmented extracts** within a lens; they do not assert that the tenant org “is” a bank or insurer in the legal sense. `AgentRunContext.metadata` (for example `org_id`) is forwarded to Maestro as opaque hints; core does **not** validate tenancy or lens choice—see [agent-security.md](agent-security.md). Platform boundaries: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). Terminology: [catalog/README.md](../catalog/README.md#terminology).
+Upload fields such as `entity_segment` on some catalog data options support **segmented extracts** within a lens; they do not assert that the tenant org “is” a bank or insurer in the legal sense. Core does **not** validate tenancy or lens choice. Platform boundaries: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). Terminology: [catalog/README.md](../catalog/README.md#terminology).
 
 For **product work cycles** on the same governed metrics—**benchmarking**, **assurance**, **investor disclosure**, and **planning and variance**—core supplies definitions and contracts; the paid platform supplies workflows and UI. See [work-cycles.md](work-cycles.md) and the child lifecycle docs linked from that hub.
 
@@ -54,7 +54,7 @@ Python and CLIs resolve paths via [lib/ambient_contracts/paths.py](../lib/ambien
 - **`AMBIENT_CONTRACTS_DIR`** — override contracts directory (default: `contracts/` under root, or wheel bundle)
 - **`AMBIENT_CATALOG_DIR`** — catalog tree containing `manifest.json`
 
-**Wheel-only installs** ship bundled contracts; catalog tools and `load_manifest()` need a full checkout or `AMBIENT_CATALOG_DIR` pointing at a tree with `manifest.json`. Agent tool definitions mark catalog tools with `requires_env: [AMBIENT_CORE_ROOT]` for the same reason.
+**Wheel-only installs** ship bundled contracts; catalog tools and `load_manifest()` need a full checkout or `AMBIENT_CATALOG_DIR` pointing at a tree with `manifest.json`.
 
 Set these in CI before `validate-contracts` and `ambient-catalog-generate --check` when core is a submodule — see [INTEGRATING.md](INTEGRATING.md).
 
@@ -68,13 +68,10 @@ flowchart TB
   end
   UI[Web app / JS]
   Jobs[Spark / lakehouse jobs]
-  Agent[Agent worker]
   UI --> M
   UI --> runtime[catalog/runtime/*.js]
   Jobs --> C
   Jobs --> M
-  Agent --> C
-  Agent --> M
 ```
 
 ### UI and planning (JavaScript or JSON)
@@ -91,21 +88,6 @@ flowchart TB
 
 Execution (Databricks jobs, schedules, Firestore sync) lives in **your application repository**; core supplies contracts, catalog semantics, and reusable helpers.
 
-### Agents (plan-execute worker)
-
-Core built-in tools in [lib/ambient_agent/tools.py](../lib/ambient_agent/tools.py):
-
-- **`catalog_list_metrics`** — slice of `manifest.json` metrics (optional `industry`, `limit`)
-- **`catalog_resolve_metric`** — one metric by `metric_id` (string id from manifest)
-- **`contracts_list`** — basenames of `*.yaml` in the resolved contracts dir
-- **`contracts_validate`** — structural validation for one file or all contracts
-
-`run_plan_execute()` walks a profile’s fixed `tool_ids`, then sends observations to Maestro. Default args for `catalog_resolve_metric` use the first 128 characters of `user_message` as `metric_id` — for production, call `execute(tool_id, explicit_args, ...)` from your worker. Live Gold values and job triggers are **platform** tools via `register_tool()` — not in core.
-
-Set `AgentRunContext.contract_refs` and `catalog_refs` in your worker to include **policy hints** in the synthesis prompt (basenames / metric ids). They do not restrict which tools run or enforce authorization.
-
-The crosswalk is **not** read by agent tools. Apps may load links with `ambient_contracts.crosswalk.load_crosswalk_links()` — see [crosswalk.md](crosswalk.md).
-
 ## CI gates
 
 From a core checkout:
@@ -114,12 +96,11 @@ From a core checkout:
 validate-contracts
 python scripts/harden_catalog_data_options.py --check
 python scripts/generate_reference_catalog.py --check --strict-data-option-inputs
-validate-agent-config   # if you ship or fork agent profiles
 ```
 
 ## Data-product inventory
 
-**Silver** tenant snapshots ([tenant-metrics-v1](../contracts/tenant-metrics-v1.yaml)), **Gold** vertical rollups (`finance-*-v1`, healthcare, life sciences, org-kpi), **platform** products (quality, operational–financial bridge, commercial usage, pipeline observability), and **inference** ([maestro-run-v1](../contracts/maestro-run-v1.yaml)) are defined as YAML under `contracts/`.
+**Silver** tenant snapshots ([tenant-metrics-v1](../contracts/tenant-metrics-v1.yaml)), **Gold** vertical rollups (`finance-*-v1`, healthcare, life sciences, org-kpi), and **platform** products (quality, operational–financial bridge, commercial usage, pipeline observability) are defined as YAML under `contracts/`.
 
 Full grouped inventory with scope notes: [contracts/README.md — Current data products](../contracts/README.md#current-data-products). Open each YAML for table names, required columns, and consumption rules. `validate-contracts` checks structural keys (`product`, `schema`, `lineage`, `governance`); deeper semantics are enforced in pipeline code and tests.
 
@@ -134,16 +115,14 @@ See [crosswalk.md](crosswalk.md) for field definitions, the in-repo DSCR example
 3. Gate merges with `validate-contracts`, catalog hardening `--check`, and `ambient-catalog-generate --check` (with strict enumerated-field validation in CI).
 4. Jobs: load contracts and catalog rules in Python; do not copy YAML into app-only trees.
 5. UI: consume `manifest.json` or `catalog/runtime/` from the pinned checkout.
-6. Agents: `run_plan_execute` from a worker; register tenant-specific tools in the platform repo.
 
 Try the minimal Python walkthrough: [examples/pipeline/minimal_governed_data.py](../examples/pipeline/minimal_governed_data.py).
 
 ## Anti-patterns
 
 - Maintaining a second editable `contracts/` or generated `manifest.json` outside the pinned core checkout.
-- Encoding KPI definitions only in LLM prompts instead of catalog + contracts.
-- Expecting core agents to run pipelines or query live Gold — add `register_tool()` handlers in your app and keep secrets off the client.
-- Using `contracts_validate` or `ContractLoader` with user-supplied paths without basename checks in **your** API layer (core agent tool validates basenames only).
+- Encoding KPI definitions only in ad hoc prompts instead of catalog + contracts.
+- Using `ContractLoader` with user-supplied paths without basename checks in **your** API layer.
 
 ## Related
 

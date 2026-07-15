@@ -41,7 +41,7 @@ Platform summary: see README Platform Summary — ../../../README.md#platform-su
 - GitHub: Ambient-Team/ambient-core
 - Class: execution
 - Local: C:/GitHub/ambient-core
-- Role: Contract and catalog YAML SSOT, shared pipeline libraries, Maestro source (public MIT)
+- Role: Contract and catalog YAML SSOT, shared pipeline libraries (public MIT)
 
 **Spoke site**
 

@@ -10,23 +10,23 @@ Index of all cycles: [work-cycles.md](work-cycles.md).
 
 ```mermaid
 flowchart LR
-  subgraph core [ambient_core_OSS]
-    Catalog[catalog_methodology_calc]
-    QualityContract[quality_v1]
-    BridgeContract[operational_financial_bridge_v1]
-    Lineage[pipeline_lineage_rules]
-  end
-  subgraph platform [paid_platform]
-    Controls[control_packs]
-    Evidence[signoff_and_evidence]
-    DQViews[dq_and_variance_UI]
-    Attest[assurance_exports]
-  end
-  Catalog --> Controls
-  Lineage --> Evidence
-  QualityContract --> DQViews
-  BridgeContract --> DQViews
-  Evidence --> Attest
+ subgraph core [ambient_core_OSS]
+ Catalog[catalog_methodology_calc]
+ QualityContract[quality_v1]
+ BridgeContract[operational_financial_bridge_v1]
+ Lineage[pipeline_lineage_rules]
+ end
+ subgraph platform [paid_platform]
+ Controls[control_packs]
+ Evidence[signoff_and_evidence]
+ DQViews[dq_and_variance_UI]
+ Attest[assurance_exports]
+ end
+ Catalog --> Controls
+ Lineage --> Evidence
+ QualityContract --> DQViews
+ BridgeContract --> DQViews
+ Evidence --> Attest
 ```
 
 ## Phase mapping
@@ -53,7 +53,7 @@ flowchart LR
 
 ### 5. Attestation and audit trail
 
-- **Core** — [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) audit and performance event shapes; Maestro run artifacts and JSONL run-complete lines for inference audit.
+- **Core** — [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) audit and performance event shapes for pipeline observability.
 - **Platform** — Assurance packs for external reviewers, read-only auditor portals, period close sign-off matrices.
 
 ## What core will not do
@@ -62,7 +62,7 @@ flowchart LR
 - Replace GRC, SOX, or IT general-control tools.
 - Store control testing workflows or sample selections.
 
-The **`auditor` agent profile** in [AGENTS.md](AGENTS.md) validates contract YAML and summarizes governance observations in a plan-execute run—it is **not** the assurance product described here.
+The **`auditor` agent profile** in [../AGENTS.md](../AGENTS.md) validates contract YAML and summarizes governance observations in a plan-execute run—it is **not** the assurance product described here.
 
 ## REIT illustration (alignment, not ranking)
 
@@ -73,6 +73,6 @@ For a real-estate or listed REIT org, assurance often requires showing that **en
 - [work-cycles.md](work-cycles.md)
 - [benchmarking-lifecycle.md](benchmarking-lifecycle.md)
 - [investor-disclosure-lifecycle.md](investor-disclosure-lifecycle.md)
-- [agent-security.md](agent-security.md)
+- [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md)
 - [pipeline.md](pipeline.md)
 - [quality-v1.yaml](../contracts/quality-v1.yaml)

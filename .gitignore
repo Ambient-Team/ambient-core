@@ -153,15 +153,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Inference / local models (not source)
-ollama/
-models/
-inference/models/
-*.gguf
-*.bin
-*.pt
-*.pth
-
 # pytype static type analyzer
 .pytype/
 

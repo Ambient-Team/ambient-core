@@ -8,13 +8,13 @@ Industry-neutral **reference data** for metrics, data-source templates, and benc
 
 - **`packs.yaml`** — registry of vertical packs (`defaultIndustry`, `packs[]` with `pack`, optional `displayLabel`).
 - **`shared/`** — industry-agnostic templates expanded into every pack at generate time:
-  - **`metrics.yaml`** — `templates` (close / corporate-finance metrics + `headcount`) and `industryIds` (numeric id per vertical per template slug).
-  - **`data_options.yaml`** — `dataOptionTemplates` and per-vertical `optionIds`; `metricRefs` resolve within each pack after expansion.
+ - **`metrics.yaml`** — `templates` (close / corporate-finance metrics + `headcount`) and `industryIds` (numeric id per vertical per template slug).
+ - **`data_options.yaml`** — `dataOptionTemplates` and per-vertical `optionIds`; `metricRefs` resolve within each pack after expansion.
 - **`industries/<pack_id>/`** — one directory per vertical (see [packs.yaml](packs.yaml)):
-  - **`pack.yaml`** — `industry:` display name and **`industryCodes`** (ISIC, NAICS, NACE, GICS); see [Industry classification](#industry-classification).
-  - **`metrics.yaml`** — vertical-native KPI definitions (`metrics:` map).
-  - **`data_options.yaml`** — upload / mapping templates (`dataOptions:` map); link to KPIs via `metricIds`.
-  - **`benchmarks.yaml`** — healthy bands for this vertical (`benchmarks:` map); referenced by `benchmarkKey` on metrics in this pack (including expanded shared metrics).
+ - **`pack.yaml`** — `industry:` display name and **`industryCodes`** (ISIC, NAICS, NACE, GICS); see [Industry classification](#industry-classification).
+ - **`metrics.yaml`** — vertical-native KPI definitions (`metrics:` map).
+ - **`data_options.yaml`** — upload / mapping templates (`dataOptions:` map); link to KPIs via `metricIds`.
+ - **`benchmarks.yaml`** — healthy bands for this vertical (`benchmarks:` map); referenced by `benchmarkKey` on metrics in this pack (including expanded shared metrics).
 - **`input_field_policy.yaml`** — excluded/derived fields and PHI denylist for catalogue fields.
 - **`bridge_rules.yaml`** — cross-industry narrative hints (operational ↔ financial); exported to `metricBridgeHints.js`.
 - **`schema/`** — JSON Schema for metrics, data options, packs ([`pack-v1.json`](schema/pack-v1.json)), and manifest.
@@ -40,8 +40,8 @@ Peer cohorts and “analysis lens” in product UIs should use these official co
 From an ambient-core checkout with `pip install -e .`:
 
 ```bash
-ambient-catalog-generate              # YAML → catalog/runtime/*.js + manifest.json (v3)
-ambient-catalog-generate --check      # fail if generated output is stale (CI)
+ambient-catalog-generate # YAML → catalog/runtime/*.js + manifest.json (v3)
+ambient-catalog-generate --check # fail if generated output is stale (CI)
 ```
 
 Equivalent: `python scripts/generate_reference_catalog.py` (and `--check`).
@@ -72,7 +72,7 @@ Validation enforces globally unique ids, same-industry `metricIds` on data optio
 
 - **Integrators** — `manifest.json`, `load_manifest()`, `AMBIENT_CATALOG_DIR`; or bundle `runtime/` in your app.
 - **Data → KPIs** — each metric in the manifest carries `requiredSources`, `inputs`, and `inputCoverage`; see [docs/catalog-consumption.md](../docs/catalog-consumption.md).
-- **Optional ingest assist** — [docs/maestro-catalog-ingestion.md](../docs/maestro-catalog-ingestion.md) (Maestro mapping; pipeline remains authoritative for quality).
+- **Optional ingest assist** — [docs/catalog-consumption.md](../docs/catalog-consumption.md) (mapping; pipeline remains authoritative for quality).
 - **Benchmarks** — per-vertical source in `industries/<pack>/benchmarks.yaml`; merged at generate time into `referenceBenchmarks.js` (identical bands across packs for the same key).
 - **Coverage roadmap** — [docs/catalog-industry-coverage.md](../docs/catalog-industry-coverage.md).
 

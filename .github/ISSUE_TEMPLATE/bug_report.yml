@@ -34,7 +34,6 @@ body:
         - contracts
         - catalog
         - ambient_pipeline
-        - Maestro / inference
         - CI / packaging
         - documentation
         - other

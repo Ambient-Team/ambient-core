@@ -3,4 +3,6 @@
 from ambient_contracts.loader import ContractLoader
 from ambient_contracts.validate import validate_all_contracts
 
-__all__ = ["ContractLoader", "validate_all_contracts"]
+__version__ = "0.3.0"
+
+__all__ = ["ContractLoader", "validate_all_contracts", "__version__"]
