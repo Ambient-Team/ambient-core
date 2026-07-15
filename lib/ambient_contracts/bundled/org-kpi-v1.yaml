@@ -92,7 +92,7 @@ residency:
   location_ids:
     type: array<string>
     required: false
-    description: "Org entity tags for matrix reporting (Quebec, Hong Kong, etc.)"
+    description: "Org entity tags for matrix reporting (Hong Kong, historical Quebec, etc.)"
   residency_zone:
     type: string
     required: false
