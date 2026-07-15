@@ -26,7 +26,7 @@ pytest tests/pipeline/
 
 Java 17+ is required for Spark tests.
 
-**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_contracts`, `ambient_cli`, and `ambient_cli`. **`ambient_pipeline` requires a git checkout** (tests use `pythonpath = lib` in `pyproject.toml`). Import it from `lib/ambient_pipeline` in notebooks and jobs pinned to the same core tag.
+**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, and `ambient_calc`. **`ambient_pipeline` requires a git checkout** (tests use `pythonpath = lib` in `pyproject.toml`). Import it from `lib/ambient_pipeline` in notebooks and jobs pinned to the same core tag.
 
 ## Typical job flow (Bronze → Silver tenant-metrics)
 
@@ -99,13 +99,9 @@ python examples/pipeline/minimal_governed_data.py
 
 See [examples/pipeline/README.md](../examples/pipeline/README.md).
 
-## Agents and pipelines
-
-Core agents read **metadata** via `catalog_*` and `contracts_*` tools; they do not run Spark jobs. To let an agent trigger a pipeline or read live Gold, register tools in your worker — [../AGENTS.md](../AGENTS.md).
-
 ## Related
 
-- [USAGE.md](USAGE.md) — recipe 4 (pipeline pytest)
+- [USAGE.md](USAGE.md) — recipe 3 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
 - [contracts/README.md](../contracts/README.md) — SSOT products and catalog → contract flow
 - [catalog-consumption.md](catalog-consumption.md) — optional assist before Bronze (mapping, units)
