@@ -1,16 +1,16 @@
 {
-  "$schema": "https://repomix.com/schemas/latest/schema.json",
-  "output": {
-    "filePath": "repomix-output.md",
-    "style": "markdown",
-    "headerText": "Ambient Core — canonical OSS foundation: contracts, catalog, ambient_pipeline, Maestro. Docs: docs/USAGE.md, docs/ECOSYSTEM.md, docs/INTEGRATING.md.",
-    "showLineNumbers": true
-  },
-  "ignore": {
-    "useGitignore": true,
-    "useDefaultPatterns": true
-  },
-  "security": {
-    "enableSecurityCheck": true
-  }
+ "$schema": "https://repomix.com/schemas/latest/schema.json",
+ "output": {
+ "filePath": "repomix-output.md",
+ "style": "markdown",
+ "headerText": "Ambient Core — canonical OSS foundation: contracts, catalog, ambient_pipeline, . Docs: docs/USAGE.md, docs/ECOSYSTEM.md, docs/INTEGRATING.md.",
+ "showLineNumbers": true
+ },
+ "ignore": {
+ "useGitignore": true,
+ "useDefaultPatterns": true
+ },
+ "security": {
+ "enableSecurityCheck": true
+ }
 }

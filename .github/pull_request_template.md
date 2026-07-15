@@ -6,7 +6,6 @@ What changed and why (link an issue if there is one).
 
 - [ ] contracts (bundled sync updated if YAML changed)
 - [ ] catalog (`harden_catalog_data_options.py --check`, `ambient-catalog-generate --check --strict-data-option-inputs`)
-- [ ] ambient_inference / Maestro
 - [ ] ambient_pipeline
 - [ ] docs / CI only
 

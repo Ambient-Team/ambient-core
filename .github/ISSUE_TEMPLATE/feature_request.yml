@@ -29,8 +29,7 @@ body:
         - contracts
         - catalog
         - ambient_pipeline
-        - Maestro / inference
-        - ambient_agent
+        - ambient_cli
         - other
     validations:
       required: true

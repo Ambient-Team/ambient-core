@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ambient-core"
 dynamic = ["version"]
-description = "Governed data-product contracts, reference catalog, lakehouse governance, and Maestro headless inference (MIT)."
+description = "Governed data-product contracts, reference catalog, and lakehouse governance (MIT)."
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 license = { text = "MIT" }
@@ -16,9 +16,6 @@ keywords = [
     "medallion",
     "lakehouse",
     "fp-a",
-    "llm",
-    "inference",
-    "open-weight",
 ]
 dependencies = [
     "pyyaml>=6.0,<7",
@@ -32,13 +29,6 @@ Issues = "https://github.com/Ambient-Team/ambient-core/issues"
 Changelog = "https://github.com/Ambient-Team/ambient-core/releases"
 
 [project.optional-dependencies]
-inference = [
-    "fastapi>=0.115,<1",
-    "uvicorn[standard]>=0.32,<1",
-    "httpx>=0.27,<1",
-    "pydantic>=2.9,<3",
-    "sqlalchemy>=2.0,<3",
-]
 pipeline = [
     "pyspark>=3.5.0,<5",
 ]
@@ -48,39 +38,29 @@ dev = [
     "pytest-asyncio>=0.24,<2",
 ]
 all = [
-    "ambient-core[inference,pipeline,dev,postgres]",
+    "ambient-core[pipeline,dev,postgres]",
 ]
 
 [project.scripts]
 validate-contracts = "ambient_contracts.validate:main"
-validate-inference-registry = "ambient_inference.validate_registry:main"
-validate-agent-config = "ambient_agent.validate:main"
 ambient-catalog-generate = "ambient_cli.catalog:main"
 
 [tool.setuptools.dynamic]
-version = { attr = "ambient_inference.__version__" }
+version = { attr = "ambient_contracts.__version__" }
 
 [tool.setuptools.packages.find]
 where = ["lib"]
 include = [
-    "ambient_inference*",
     "ambient_contracts*",
     "ambient_cli*",
-    "ambient_agent*",
     "ambient_calc*",
+    "ambient_pipeline*",
 ]
 
 [tool.setuptools.package-data]
-ambient_inference = ["contracts/*.yaml", "default_config/*.yaml"]
 ambient_contracts = ["bundled/*.yaml"]
-ambient_agent = ["*.yaml"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
 pythonpath = ["lib"]
-addopts = "-m 'not agent_e2e'"
-markers = [
-    "gpu: live Maestro/Ollama E2E (set MAESTRO_E2E_URL)",
-    "agent_e2e: live full agent loop via run_plan_execute (MAESTRO_E2E_URL)",
-]

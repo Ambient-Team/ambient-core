@@ -1,28 +1,28 @@
-# Security
+# Security Policy
 
-**Ambient Core** is an MIT library and schema foundation (contracts, catalog, governance, Maestro). Report security issues **in this codebase** here; deployment and tenant isolation for a specific product are out of scope unless the flaw is in shipped library or service defaults in this tree.
+**Ambient Core** is an MIT library and schema foundation (contracts, catalog, governance). Report security issues **in this codebase** here; deployment and tenant isolation for a specific product are out of scope unless the flaw is in shipped library defaults in this tree.
 
 ## Supported versions
 
-Security fixes are applied on the **`main`** branch and released via git tags (`vX.Y.Z`). Downstream projects should upgrade their pin after taking a new release.
+Security fixes are applied to the latest tagged release on `main`. Older tags are not backported unless a critical issue warrants it.
 
 ## Reporting a vulnerability
 
-If you discover a security issue in **this repository** (for example credential leakage in examples, unsafe defaults in the Maestro service, or a dependency concern):
+If you discover a security issue in **this repository** (for example credential leakage in examples, unsafe defaults in library code, or a dependency concern):
 
-1. **Do not** open a public GitHub issue with exploit details.
-2. Use **GitHub Security Advisories** for this repository, or the maintainer contact on their GitHub profile.
-3. If credentials were committed, rotate them immediately after confirmation.
+1. Prefer **GitHub Security Advisories** for this repository (private disclosure).
+2. If Advisories are unavailable, open a private channel with the maintainers or use the repository contact listed in the GitHub organization profile.
 
-We will acknowledge reports in a reasonable timeframe and coordinate a fix and disclosure.
+Do not open a public issue with exploit details for unfixed vulnerabilities.
 
-## Expectations for contributors
+Please include:
 
-- Never commit secrets, API keys, tokens, or production connection strings. Use local `.env` files (gitignored).
-- Run `validate-contracts` and tests before pushing; CI mirrors the same gates.
-- Local Repomix packs use `enableSecurityCheck` in `repomix.config.json`; do not disable it to bypass secret scanning.
-- Treat `.env.example` and synthetic fixtures as non-production; do not place real tenant data in the repo.
+- Affected package or path (for example `ambient_contracts`, `contracts/*.yaml`)
+- Steps to reproduce
+- Impact assessment (confidentiality, integrity, availability)
 
-## Scope
+## Scope notes
 
-This repo does not host live multi-tenant applications or cloud workspaces. Reports about production tenant isolation or cloud configuration should go to the **repository that deploys** those services, in addition to any issue in the Maestro or library code defined here.
+This repo does not host live multi-tenant applications or cloud workspaces. Reports about production tenant isolation or cloud configuration should go to the **repository that deploys** those services, in addition to any issue in library code defined here.
+
+Operator AI tools (Cursor Agent / IDE) used by maintainers are not Ambient Core product surfaces.

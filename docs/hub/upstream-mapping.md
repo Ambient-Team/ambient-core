@@ -9,7 +9,7 @@ Machine map: see mapping.json at repo root. Prose SSOT for all six repos: compan
 ## Spokes
 
 - **platform** — Ambient-Team/ambient-systems-platform — Lane 2 execution: platform code, bundles, jobs, app, CI. Local tree: C:/GitHub/ambient-systems-platform
-- **core** — Ambient-Team/ambient-core — Open-core contracts, catalog, shared pipeline, Maestro source. Local tree: C:/GitHub/ambient-core
+- **core** — Ambient-Team/ambient-core — Open-core contracts, catalog, shared pipeline. Local tree: C:/GitHub/ambient-core
 - **site** — Ambient-Team/ambientsystems.ai — Public marketing site, messaging SSOT, internal-docs mirrors. Local tree: C:/GitHub/ambientsystems.ai
 - **personal-site** — engineerID/EngineerID.github.io — Personal site and machine-readable CV mirrors. Local tree: C:/GitHub/EngineerID.github.io
 - **code-signal** — engineerID/code-signal — Personal CodeSignal learning vault; hub hook enabled for interview-prep sync into the learning vault. Local tree: C:/GitHub/code-signal

@@ -5,7 +5,7 @@ Authoring and generator commands live in [catalog/README.md](../catalog/README.m
 ## When to use what
 
 - **List or resolve KPI definitions** — generated **manifest** via `ambient_contracts.catalog_manifest.load_manifest()` → `catalog/manifest.json`. The loader parses JSON once and returns a typed **`CatalogManifest`** (`ambient_contracts.manifest_models`); use `manifest.metrics`, `manifest.resolve_metric(id)`, or `CatalogMetric.to_tool_dict()` when you need the same camelCase objects as the raw file.
-- **Agent tools `catalog_list_metrics` / `catalog_resolve_metric`** — same manifest; see [lib/ambient_agent/tools.py](../lib/ambient_agent/tools.py)
+- **Agent tools `catalog_list_metrics` / `catalog_resolve_metric`** — same manifest; see [lib/ambient_cli/tools.py](../lib/ambient_cli/tools.py)
 - **Upload column mapping, data-option templates, bronze field rules** — industry YAML under `catalog/industries/<pack>/` via `ambient_pipeline.catalog_loader.load_data_option()` (falls back to `manifest.json` for expanded shared options)
 - **Front-end industry picker, metric browser, enrichment** — generated JS in `catalog/runtime/*.js` (e.g. `catalogIndustries.js`)
 - **Link a catalog metric to a governed Gold contract** — [catalog/crosswalk.yaml](../catalog/crosswalk.yaml); see [crosswalk.md](crosswalk.md)
@@ -54,8 +54,8 @@ Each entry in **`inputs`** has:
 - **`kind`** — `measured` (a value you supply) or `derived` (computed from another catalog metric)
 - **`covered`** — whether a linked data option can supply it
 - **`satisfiedBy`** — the supplying data option(s), each with `catalogOptionKey`, `name`, and a `via`:
-  - **`field`** — the input is an explicit, mappable column on that data option (map this column)
-  - **`upload`** — the input comes from that option's document/template contents rather than an enumerated field (upload that document). Accounting aggregates and ratios are intentionally not enumerated as fields — see [catalog/input_field_policy.yaml](../catalog/input_field_policy.yaml).
+ - **`field`** — the input is an explicit, mappable column on that data option (map this column)
+ - **`upload`** — the input comes from that option's document/template contents rather than an enumerated field (upload that document). Accounting aggregates and ratios are intentionally not enumerated as fields — see [catalog/input_field_policy.yaml](../catalog/input_field_policy.yaml).
 
 The metric-level **`inputCoverage`** summarizes feedability:
 
@@ -71,7 +71,7 @@ Operator flow, then, is: pick the metric, read its `inputs`, upload each `satisf
 
 Each **`dataOptions[]`** row in manifest version **3** includes:
 
-- **`fields`** — objects `{ name, type, … }` where `type` is a catalog enum (`decimal`, `date`, `string`, …). Optional **`unit`** (for example `USD`, `seat-km`) and **`description`** (authoring hint for Maestro and integrators). YAML may still list legacy string field names; the generator normalizes them at export time.
+- **`fields`** — objects `{ name, type, … }` where `type` is a catalog enum (`decimal`, `date`, `string`, …). Optional **`unit`** (for example `USD`, `seat-km`) and **`description`** (authoring hint for and integrators). YAML may still list legacy string field names; the generator normalizes them at export time.
 - **`fieldCoverage`** — `upload` (document/financial statement path; measured inputs via upload policy) or `enumerated` (column-mapped exports; strict validation applies). Inferred at generate time when omitted; persisted by [`scripts/harden_catalog_data_options.py`](../scripts/harden_catalog_data_options.py).
 - **`collectionFrequency`** — how often the org should refresh or upload data for this template (for example `monthly`). Same concept as *source frequency* or *required upload cadence*; the YAML key is `collectionFrequency` for manifest stability.
 - **`grain`** — row-level expectation for Bronze tables (`transaction`, `day`, `week`, `month`, `quarter`).

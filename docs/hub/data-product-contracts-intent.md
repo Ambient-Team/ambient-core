@@ -100,7 +100,6 @@ Full column-level semantics: ambient-core `contracts/README.md` on the pinned ta
 **Platform and metering**
 
 - `commercial-usage-v1.yaml` — usage snapshot contract for finance and BI export (not a commercial SKU statement for core itself)
-- `maestro-run-v1.yaml` — Maestro inference run artifact
 
 **Healthcare and life sciences**
 

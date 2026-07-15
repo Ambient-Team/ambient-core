@@ -1,6 +1,6 @@
 # Integrator roadmap
 
-What Ambient Core provides today versus planned deferrals. For consumption guides, see [governed-data.md](governed-data.md), [pipeline.md](pipeline.md), [AGENTS.md](AGENTS.md), and [agent-security.md](agent-security.md).
+What Ambient Core provides today versus planned deferrals. For consumption guides, see [governed-data.md](governed-data.md), [pipeline.md](pipeline.md), [../AGENTS.md](../AGENTS.md), and [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md).
 
 ## Shipped (documentation and runtime)
 
@@ -9,7 +9,7 @@ What Ambient Core provides today versus planned deferrals. For consumption guide
 - **Crosswalk** — YAML SSOT + `load_crosswalk_links()`; CI `scripts/check_crosswalk.py`
 - **Agents** — plan-execute loop, core tools, policy hints (`contract_refs` / `catalog_refs`)
 - **Examples** — `examples/agents/minimal_worker.py`, OpenClaw integration doc
-- **Tests** — agent loop, Maestro HTTP client mocks, crosswalk loader
+- **Tests** — agent loop, HTTP client mocks, crosswalk loader
 
 ## Deferred (not in core yet)
 
@@ -25,8 +25,8 @@ What Ambient Core provides today versus planned deferrals. For consumption guide
 
 ## Suggested integrator order
 
-1. [INTEGRATING.md](INTEGRATING.md) — pin tag, env vars, CI gates  
-2. [CONVENTIONS.md](CONVENTIONS.md) — skim formats and catalogue naming before authoring YAML  
-3. [governed-data.md](governed-data.md) — catalog + contracts consumption  
-4. [pipeline.md](pipeline.md) or [AGENTS.md](AGENTS.md) depending on lakehouse vs worker focus  
-5. [agent-security.md](agent-security.md) before production agents  
+1. [INTEGRATING.md](INTEGRATING.md) — pin tag, env vars, CI gates 
+2. [CONVENTIONS.md](CONVENTIONS.md) — skim formats and catalogue naming before authoring YAML 
+3. [governed-data.md](governed-data.md) — catalog + contracts consumption 
+4. [pipeline.md](pipeline.md) or [../AGENTS.md](../AGENTS.md) depending on lakehouse vs worker focus 
+5. [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) before production agents 

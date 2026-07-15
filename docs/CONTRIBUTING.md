@@ -4,7 +4,7 @@ Thank you for improving governed analytics foundations. Read [CODE_OF_CONDUCT.md
 
 **New here?** Start with [USAGE.md](USAGE.md), then skim [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Open a [draft PR](https://github.com/Ambient-Team/ambient-core/compare) early for feedback on contracts or catalog shape.
 
-All foundational work—contracts, catalog, shared pipeline governance, Maestro—belongs in **this** repository. Application UI, deploy bindings, and tenant-specific tooling belong in **separate repos** that pin a release here.
+All foundational work—contracts, catalog, shared pipeline governance—belongs in **this** repository. Application UI, deploy bindings, and tenant-specific tooling belong in **separate repos** that pin a release here. Customer-facing AI is out of scope for this MIT core.
 
 Start with [ECOSYSTEM.md](ECOSYSTEM.md) and [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Quick start: [USAGE.md](USAGE.md). Foundation vs full product: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
 
@@ -14,7 +14,7 @@ Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make change
 
 Do **not** use markdown pipe tables (`| col |` with `|---|` separators) in `docs/`, any `README.md`, or `examples/**/*.md`. Use short paragraphs and bullet lists instead (for example `- **term** — definition`). Mermaid diagrams and code fences are fine.
 
-CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow the same rule in [AGENTS.md](AGENTS.md#documentation-conventions).
+CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow [../AGENTS.md](../AGENTS.md).
 
 ## Scope
 
@@ -23,11 +23,9 @@ Put in this repository:
 - Data-product **contracts** (`contracts/`)
 - **Catalog** YAML and generator output (`catalog/`)
 - **Governance** helpers (`lib/ambient_pipeline/`)
-- **Inference** (`lib/ambient_inference/`, `services/maestro/`)
-- **Agent** extension point (`lib/ambient_agent/`)
 - **CLI** entrypoints (`validate-contracts`, `ambient-catalog-generate`, etc.)
 
-Do **not** add SaaS-only UI, vendor OLTP deploy, or operator secrets here.
+Do **not** add SaaS-only UI, vendor OLTP deploy, operator secrets, or customer-facing AI / inference / model hosting here.
 
 ## Development setup
 
@@ -37,15 +35,13 @@ cd ambient-core
 py -3.12 -m venv .venv
 pip install -e ".[all]"
 validate-contracts
-validate-agent-config
-validate-inference-registry
 pytest
 ```
 
 ## Contract changes
 
 1. Edit YAML under `contracts/`.
-2. Copy to bundled package data: `cp contracts/*.yaml lib/ambient_contracts/bundled/` and `cp contracts/maestro-run-v1.yaml lib/ambient_inference/contracts/maestro-run-v1.yaml` (CI enforces sync).
+2. Copy to bundled package data: `cp contracts/*.yaml lib/ambient_contracts/bundled/` (CI enforces sync).
 3. Run `validate-contracts`.
 
 Crosswalk edits: update [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml) and run `python scripts/check_crosswalk.py` (CI). See [crosswalk.md](crosswalk.md).
@@ -76,7 +72,7 @@ Tag `vX.Y.Z` on `main`; then complete **Consumer follow-up** below for any repo 
 
 ## How packages fit (maintainers)
 
-- **Pip / git tag** — `ambient_contracts`, `ambient_inference`, `ambient_cli`, `ambient_agent` (+ bundled YAML). Bump tag when APIs or contracts change.
+- **Pip / git tag** — `ambient_contracts`, `ambient_cli`, `ambient_calc`, `ambient_pipeline` (+ bundled YAML). Bump tag when APIs or contracts change.
 - **Submodule / checkout** — `catalog/`, `lib/ambient_pipeline/` on disk for JS and Spark tests. Bump SHA when manifest, runtime JS, or pipeline code changes.
 - **App-only pipeline glue** — stays in the consumer repository; shared modules stay here.
 

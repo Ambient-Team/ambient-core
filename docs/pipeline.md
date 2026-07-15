@@ -20,13 +20,13 @@ For catalog vs contracts and path env vars, see [governed-data.md](governed-data
 git clone <repository-url>
 cd ambient-core
 pip install -e ".[pipeline,dev]"
-set AMBIENT_SPARK_TESTS=1   # Windows; use export on Unix
+set AMBIENT_SPARK_TESTS=1 # Windows; use export on Unix
 pytest tests/pipeline/
 ```
 
 Java 17+ is required for Spark tests.
 
-**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_inference`, `ambient_cli`, and `ambient_agent`. **`ambient_pipeline` requires a git checkout** (tests use `pythonpath = lib` in `pyproject.toml`). Import it from `lib/ambient_pipeline` in notebooks and jobs pinned to the same core tag.
+**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_contracts`, `ambient_cli`, and `ambient_cli`. **`ambient_pipeline` requires a git checkout** (tests use `pythonpath = lib` in `pyproject.toml`). Import it from `lib/ambient_pipeline` in notebooks and jobs pinned to the same core tag.
 
 ## Typical job flow (Bronze → Silver tenant-metrics)
 
@@ -34,19 +34,19 @@ The steps below implement precursor → plain-text extract → YAML-governed →
 
 ```mermaid
 flowchart LR
-  Upload[Bronze CSV upload]
-  Map[map and coerce]
-  Unpivot[unpivot long metrics]
-  Stamp[lineage stamp]
-  Validate[SilverValidator optional]
-  Contract[ContractLoader assert]
-  Gold[Gold vertical tables]
-  Upload --> Map
-  Map --> Unpivot
-  Unpivot --> Stamp
-  Stamp --> Validate
-  Validate --> Contract
-  Contract --> Gold
+ Upload[Bronze CSV upload]
+ Map[map and coerce]
+ Unpivot[unpivot long metrics]
+ Stamp[lineage stamp]
+ Validate[SilverValidator optional]
+ Contract[ContractLoader assert]
+ Gold[Gold vertical tables]
+ Upload --> Map
+ Map --> Unpivot
+ Unpivot --> Stamp
+ Stamp --> Validate
+ Validate --> Contract
+ Contract --> Gold
 ```
 
 **Canonical order:** map → coerce → **unpivot** → stamp → (optional validate) → contract assert → write Silver.
@@ -101,13 +101,13 @@ See [examples/pipeline/README.md](../examples/pipeline/README.md).
 
 ## Agents and pipelines
 
-Core agents read **metadata** via `catalog_*` and `contracts_*` tools; they do not run Spark jobs. To let an agent trigger a pipeline or read live Gold, register tools in your worker — [AGENTS.md](AGENTS.md).
+Core agents read **metadata** via `catalog_*` and `contracts_*` tools; they do not run Spark jobs. To let an agent trigger a pipeline or read live Gold, register tools in your worker — [../AGENTS.md](../AGENTS.md).
 
 ## Related
 
 - [USAGE.md](USAGE.md) — recipe 4 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
 - [contracts/README.md](../contracts/README.md) — SSOT products and catalog → contract flow
-- [maestro-catalog-ingestion.md](maestro-catalog-ingestion.md) — optional Maestro assist before Bronze (mapping, units)
+- [catalog-consumption.md](catalog-consumption.md) — optional assist before Bronze (mapping, units)
 - [CONVENTIONS.md](CONVENTIONS.md) — formats, bronze boundary, forward stores
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — scope split

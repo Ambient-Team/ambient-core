@@ -7,7 +7,6 @@ What you get from **this repository alone** versus what belongs in a **separate 
 - Validate and load **data-product contracts** (`validate-contracts`, `ambient_contracts`).
 - Author and generate the **reference catalog** (`ambient-catalog-generate`, `catalog/manifest.json`, `catalog/runtime/` JS).
 - Run **governance pipeline** helpers under `lib/ambient_pipeline/` from a **git checkout** (pytest sets `pythonpath = lib`; see [USAGE.md](USAGE.md) for wheel vs checkout).
-- Run **Maestro** locally (`lib/ambient_inference`, `services/maestro`).
 - Fork or integrate contracts and catalog semantics without shipping a full SaaS stack.
 
 ## Not in this repository (typical downstream app)
@@ -15,7 +14,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 - **Consumption UI** (web or mobile clients), API gateways tied to a specific vendor OLTP.
 - **Lakehouse or warehouse deploy** (bundle definitions, scheduled jobs, workspace-specific notebooks).
 - **App-specific pipeline glue** (secrets resolution, Firestore or tenant sync IDs, storage path conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
-- **Production inference deploy** — optional Compose, Postgres, and GPU backends wired in the consumer’s infra (see [inference-layer.md](inference-layer.md) for Maestro behavior defined here).
+- **Customer-facing AI / inference / model hosting** — not shipped from this MIT core. Future proprietary AI/ML, if any, belongs only in the commercial platform application.
 - **Business-line organizations** — splitting a conglomerate into multiple tenant orgs, each with its own catalog industry, contracts, uploads, and peer set; optional holding-company rollup is platform analytics, not a second catalog industry in core.
 - **Benchmark gap decomposition and improvement workflows** — peer actuals storage, structural versus improvable waterfall/bridge UI, normalization policy, and post-benchmark action tracking on top of core metrics and contracts; see [benchmarking-lifecycle.md](benchmarking-lifecycle.md).
 - **Assurance and attestation workflows** — control packs, evidence sign-off, DQ and bridge reconciliation UI, external reviewer exports; see [assurance-lifecycle.md](assurance-lifecycle.md).
@@ -29,7 +28,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 - **Catalog YAML** — `catalog/` here; generated JSON manifest and JS via `ambient-catalog-generate`.
 - **Plain text first** — definitions and semantics live in git as YAML (and generated JSON); binary uploads and live databases are precursors or forward stores, not a second SSOT ([CONVENTIONS.md](CONVENTIONS.md)).
 - Consumers should **not** maintain a second editable copy of `contracts/` or `catalog/`; pin a tag and use submodule checkout or `AMBIENT_CORE_ROOT` ([INTEGRATING.md](INTEGRATING.md)).
-- **Platform deployments** wire precursor OLTP/Bronze and forward lakehouse or Maestro Postgres **instances**; core still owns the YAML definitions those stores implement.
+- **Platform deployments** wire precursor OLTP/Bronze and forward lakehouse **instances**; core still owns the YAML definitions those stores implement.
 
 ## `commercial-usage-v1.yaml`
 

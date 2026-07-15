@@ -4,7 +4,7 @@ YAML in this directory is the **single source of truth** for governed data-produ
 
 ## For integrators
 
-Read [docs/governed-data.md](../docs/governed-data.md) for how contracts interact with the catalog, agents, and lakehouse jobs.
+Read [docs/governed-data.md](../docs/governed-data.md) for how contracts interact with the catalog and lakehouse jobs.
 
 **Do not** maintain a parallel `contracts/` tree in your application repository. Pin a tagged core release and set `AMBIENT_CONTRACTS_DIR` to the submodule or clone path — [docs/INTEGRATING.md](../docs/INTEGRATING.md).
 
@@ -43,8 +43,8 @@ flowchart TB
 1. **Upload shape** — Industry `data_options.yaml` and manifest **v3** export typed `fields`, `fieldCoverage` (`upload` or `enumerated`), `collectionFrequency`, and metric `frequency`. Pipeline mapping uses these names and types ([docs/catalog-consumption.md](../docs/catalog-consumption.md), [docs/catalog-input-field-gaps.md](../docs/catalog-input-field-gaps.md)).
 2. **Bronze → Silver** — After catalog mapping and provenance stamping, rows conform to [**tenant-metrics-v1.yaml**](tenant-metrics-v1.yaml): multi-tenant Silver snapshots with bronze lineage columns.
 3. **Silver → Gold** — Vertical rollups use domain products (`finance-*-v1`, healthcare, life sciences, org-kpi). Several catalog industry packs can map to one `finance-*` contract via book segments and `product_line` — see [catalog/crosswalk.yaml](../catalog/crosswalk.yaml).
-4. **Crosswalk** — Optional links from manifest metric keys to `contractFile` and `contractProductId` for apps and docs; not read by core agent builtins ([docs/crosswalk.md](../docs/crosswalk.md)).
-5. **Maestro (optional)** — Pre-Bronze column-mapping assist only; post-ingest quality remains pipeline + contracts ([docs/maestro-catalog-ingestion.md](../docs/maestro-catalog-ingestion.md)).
+4. **Crosswalk** — Optional links from manifest metric keys to `contractFile` and `contractProductId` for apps and docs; for documentation and adapter wiring ([docs/crosswalk.md](../docs/crosswalk.md)).
+5. **Quality** — Post-ingest quality remains pipeline + contracts (Silver validation, Gold contracts).
 
 End-to-end job steps: [docs/pipeline.md](../docs/pipeline.md).
 
@@ -62,10 +62,6 @@ Gold **finance-*-v1** contracts map to metrics across Banking, Commercial Financ
 - **`operational-financial-bridge-v1.yaml`** — Operational–financial bridge; cross-domain reconciliation
 - **`commercial-usage-v1.yaml`** — Commercial usage snapshot; billing and consumption metering
 - **`observability-pipeline-v1.yaml`** — Pipeline and medallion observability; may reference platform deploy assets
-
-### Inference
-
-- **`maestro-run-v1.yaml`** — Maestro inference run artifact; AI control-plane schema (not medallion fact data)
 
 ### Healthcare
 

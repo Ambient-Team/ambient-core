@@ -25,11 +25,10 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Sync bundled contracts and Maestro run artifact
+      - name: Sync bundled contracts
         run: |
           cp contracts/*.yaml lib/ambient_contracts/bundled/
-          cp contracts/maestro-run-v1.yaml lib/ambient_inference/contracts/maestro-run-v1.yaml
-          git diff --exit-code lib/ambient_contracts/bundled/ lib/ambient_inference/contracts/maestro-run-v1.yaml || (
+          git diff --exit-code lib/ambient_contracts/bundled/ || (
             echo "ERROR: bundled copies out of sync with contracts/" >&2
             exit 1
           )
@@ -39,12 +38,6 @@ jobs:
 
       - name: Validate contracts
         run: validate-contracts
-
-      - name: Validate inference registry
-        run: validate-inference-registry
-
-      - name: Validate agent config
-        run: validate-agent-config
 
       - name: Validate reference catalog
         run: |
@@ -80,12 +73,12 @@ jobs:
         env:
           AMBIENT_SPARK_TESTS: "1"
 
-      - name: Wheel smoke (ambient_agent import)
+      - name: Wheel smoke (ambient_contracts import)
         run: |
           pip wheel . -w dist --no-deps
           python -m venv /tmp/wheel-smoke-venv
           /tmp/wheel-smoke-venv/bin/pip install -q dist/ambient_core-*.whl
-          /tmp/wheel-smoke-venv/bin/python -c "import ambient_agent; from ambient_agent.executor import execute"
+          /tmp/wheel-smoke-venv/bin/python -c "import ambient_contracts; assert ambient_contracts.__version__"
 
   remediate:
     needs: python
@@ -130,12 +123,11 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Sync bundled contracts and Maestro run artifact
+      - name: Sync bundled contracts
         if: steps.guard.outputs.skip != 'true'
         run: |
           cp contracts/*.yaml lib/ambient_contracts/bundled/
-          cp contracts/maestro-run-v1.yaml lib/ambient_inference/contracts/maestro-run-v1.yaml
-          git diff --exit-code lib/ambient_contracts/bundled/ lib/ambient_inference/contracts/maestro-run-v1.yaml || (
+          git diff --exit-code lib/ambient_contracts/bundled/ || (
             echo "ERROR: bundled copies out of sync with contracts/" >&2
             exit 1
           )
