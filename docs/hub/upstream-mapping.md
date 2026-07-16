@@ -1,12 +1,12 @@
 # Hub-and-spoke mapping (ambient-systems)
 
-**Purpose:** This vault is the floating-hub coordinator. Enabled spokes own business lane, technical lane, personal mirrors, or learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main. phd-moat is a theory root only (`enabled: false`) — never dispatched and never written by Ambient agents.
+**Purpose:** This vault is the floating-hub coordinator. Enabled spokes own business lane, technical lane, personal mirrors, or learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main.
 
-Machine map: see mapping.json at repo root. Prose SSOT: company/strategy/governance/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Derivation from PhD: company/phd-derivation-map.md.
+Machine map: see mapping.json at repo root. Prose SSOT: company/strategy/governance/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Company ops start: company/operating-lanes.md. Strategy cycle: company/strategy/strategy-cycle.md.
 
 ---
 
-## Spokes and theory root
+## Spokes
 
 **Enabled dispatch spokes**
 
@@ -16,11 +16,7 @@ Machine map: see mapping.json at repo root. Prose SSOT: company/strategy/governa
 - **personal-site** — engineerID/EngineerID.github.io — Personal site and CV mirrors. Local tree: C:/GitHub/EngineerID.github.io
 - **code-signal** — engineerID/code-signal — Personal CodeSignal learning vault; hub hook for interview-prep. Local tree: C:/GitHub/code-signal
 
-**Theory root (not dispatched)**
-
-- **phd-moat** — EngineerID/phd-moat — Doctoral theory root. Local tree: C:/GitHub/phd-moat. `enabled: false`. Agents must never create, edit, or delete files there. Future spoke onboarding (secrets, receiver) is out of scope until operator enables it.
-
-Agents on this machine may **read** spoke and theory-root repos via localPath in mapping.json. The cloud dispatcher never uses localPath and skips `enabled: false` entries.
+Agents on this machine may **read** spoke repos via localPath in mapping.json. The cloud dispatcher never uses localPath and skips `enabled: false` entries.
 
 ---
 
