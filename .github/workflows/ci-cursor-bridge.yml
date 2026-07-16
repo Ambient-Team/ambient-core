@@ -91,7 +91,7 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         if: env.CURSOR_API_KEY != '' && steps.guard.outputs.skip != 'true'
         with:
           python-version: "3.12"
