@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run a one-shot Cursor SDK local Agent.prompt for CI self-heal.
 
-Used by GitHub Actions (Pattern A/B and vault maintenance). Does not call Cloud
+Used by GitHub Actions (Pattern A/B and hub maintenance). Does not call Cloud
 Agents API. Auth: CURSOR_API_KEY.
 
   python3 _main/scripts/cursor_sdk_heal.py --prompt-file path/to/prompt.txt

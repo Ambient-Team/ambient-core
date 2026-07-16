@@ -23,13 +23,13 @@ Spoke id: core. Full map on hub: https://github.com/EngineerID/ambient-systems/b
 ## Where to edit
 
 - Contract and catalog YAML, shared libraries: this repo.
-- Doctrine prose and backlog intent: hub vault; mirrors here are reference only.
+- Doctrine prose and backlog intent: hub repository; mirrors here are reference only.
 - Platform integration: ambient-systems-platform submodule pin after tagged core release.
 
 ## Siblings
 
 - ambient-systems-platform — consumes this repo via submodule pin.
-- Hub vault — strategy and contracts prose that informs catalog work.
+- Hub repository — strategy and contracts prose that informs catalog work.
 
 ## Branching and CI
 

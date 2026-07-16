@@ -33,4 +33,4 @@ Use a separate git worktree per branch (see hub ecosystem-branching.md section 4
 
 Off for this repo. Disable at https://cursor.com/dashboard/bugbot if the app still comments on PRs. Hub policy: company/strategy/governance/cursor-integrations.md in EngineerID/ambient-systems.
 
-*Hub mirror; update via hub sync or edit with vault SSOT change.*
+*Hub mirror; update via hub sync or edit with hub SSOT change.*

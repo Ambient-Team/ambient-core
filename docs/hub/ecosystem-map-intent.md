@@ -35,7 +35,7 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - GitHub: EngineerID/ambient-systems
 - Class: hub (floating focus)
 - Local: C:/GitHub/ambient-systems
-- Visibility: private vault
+- Visibility: private hub
 - Primary edits: company/ (including phd-derivation-map.md and strategy/), corporate/, product/, commercial/, people/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
 
 **Spoke platform (technical lane)**
@@ -76,7 +76,7 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - GitHub: engineerID/code-signal
 - Class: personal
 - Local: C:/GitHub/code-signal
-- Role: Personal CodeSignal learning vault; optional interview-prep hook from hub
+- Role: Personal CodeSignal learning repository; optional interview-prep hook from hub
 
 **Theory root phd-moat (not a dispatch spoke)**
 
@@ -93,11 +93,11 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 ## Lanes and canonical ownership
 
-**Floating hub (this vault)**
+**Floating hub (this hub)**
 
 - Active focus pointer, doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops (until site fully owns the business OS), people and career validation.
 - Ecosystem PM snapshots and Gold dashboard: operations/ecosystem/ (sync_ecosystem_dashboard.py; Actions ecosystem-dashboard-sync).
-- Hub-test customer package (production orchestration from vault): commercial/customers/hub-test/.
+- Hub-test customer package (production orchestration from hub): commercial/customers/hub-test/.
 - Ecosystem inbox: inbox/ -- PROTOCOL.md.
 - Founder Uni: commercial/learning/founder-uni/.
 - PhD derivation map: company/phd-derivation-map.md (Ambient-owned; never write into PhD).
@@ -110,11 +110,11 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS. Vault commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md. Business charter: site internal-docs/commercial/business-engine-charter.md.
+- Public and company-external commercial OS. Hub commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md. Business charter: site internal-docs/commercial/business-engine-charter.md.
 
 **Personal spokes**
 
-- Career artifacts and learning vault. Not company doctrine or GTM SSOT.
+- Career artifacts and learning repository. Not company doctrine or GTM SSOT.
 
 **Theory root (PhD company-ops framing)**
 
@@ -124,7 +124,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 - Client overlap stays two separate interactions: academic (A) via PhD, and product (B) via the business lane. Do not merge them.
 - Never reverse-sync Ambient proprietary material, ops, or client data into PhD.
 
-Agent sections: AGENTS.md floating hub, PhD theory root, vault vs site.
+Agent sections: AGENTS.md floating hub, PhD theory root, hub vs site.
 
 ---
 
@@ -164,8 +164,8 @@ Full secrets and troubleshooting: MAPPING.md.
 - Hub paths: commercial/validation/**
 - Spokes: site
 - Profile: site-gtm
-- Site receiver copies: internal-docs/hub/upstream-mapping.md, internal-docs/hub/vault-validation-readme.md (commercial/validation/README.md), internal-docs/hub/ecosystem-map-intent.md
-- Note: dormant outbound and playbook vault leftovers live under commercial/archive/ (excluded). Site SSOT: ambientsystems.ai internal-docs/commercial/.
+- Site receiver copies: internal-docs/hub/upstream-mapping.md, internal-docs/hub/hub-validation-readme.md (commercial/validation/README.md), internal-docs/hub/ecosystem-map-intent.md
+- Note: dormant outbound and playbook hub leftovers live under commercial/archive/ (excluded). Site SSOT: ambientsystems.ai internal-docs/commercial/.
 
 **founder-learning-sync**
 
@@ -252,7 +252,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 4. Public messaging or validation mirror -- hub commercial/ and site internal-docs/ or wait for hub-sync PR on site.
 5. CV or interview prep public mirror -- hub people/ then personal spoke hub-sync PR.
 
-**Vault cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
+**Hub cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
 
 **Integration target hint:** py -3 _main/scripts/suggest_branch_name.py --from-git prints main as merge target under branch-map v4.
 
