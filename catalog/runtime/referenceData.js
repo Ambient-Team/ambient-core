@@ -621,7 +621,44 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "property_id",
+          "type": "id"
+        },
+        {
+          "name": "lender_name",
+          "type": "string"
+        },
+        {
+          "name": "loan_amount",
+          "type": "decimal"
+        },
+        {
+          "name": "interest_rate",
+          "type": "decimal"
+        },
+        {
+          "name": "loan_term_months",
+          "type": "decimal"
+        },
+        {
+          "name": "maturity_date",
+          "type": "date"
+        },
+        {
+          "name": "outstanding_balance",
+          "type": "decimal"
+        },
+        {
+          "name": "annual_debt_service",
+          "type": "string"
+        }
+      ],
       "format": "Document",
       "id": 8,
       "industry": "Real Estate",
@@ -631,7 +668,7 @@ export const REFERENCE_DATA = {
       ],
       "name": "Loan documents",
       "template": "Document",
-      "fieldCoverage": "upload",
+      "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
     },
@@ -1235,6 +1272,70 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
+    "real_estate.reit.reit_supplemental": {
+      "id": 1950,
+      "name": "REIT supplemental reporting",
+      "description": "REIT FFO, distributions, and same-store NOI (vehicle reporting). No beneficiary identifiers.",
+      "industry": "Real Estate",
+      "segment": "reit",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "trust_vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "vehicle_type",
+          "type": "enum"
+        },
+        {
+          "name": "funds_from_operations",
+          "type": "decimal"
+        },
+        {
+          "name": "ffo",
+          "type": "string"
+        },
+        {
+          "name": "distributions",
+          "type": "string"
+        },
+        {
+          "name": "current_noi",
+          "type": "string"
+        },
+        {
+          "name": "prior_noi",
+          "type": "string"
+        },
+        {
+          "name": "trust_assets_under_administration",
+          "type": "decimal"
+        },
+        {
+          "name": "trustee_fees",
+          "type": "string"
+        },
+        {
+          "name": "average_trust_aua",
+          "type": "string"
+        }
+      ],
+      "metricIds": [
+        1940,
+        1941,
+        1942
+      ],
+      "lastUpdated": "2026-06-25 00:00:00",
+      "fieldCoverage": "upload",
+      "collectionFrequency": "quarterly",
+      "grain": "quarter"
+    },
     "vertical_farming.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
@@ -1387,7 +1488,44 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "farm_id",
+          "type": "id"
+        },
+        {
+          "name": "zone_id",
+          "type": "id"
+        },
+        {
+          "name": "water_volume_liters",
+          "type": "decimal"
+        },
+        {
+          "name": "irrigation_duration_minutes",
+          "type": "decimal"
+        },
+        {
+          "name": "nutrient_ec",
+          "type": "decimal"
+        },
+        {
+          "name": "ph_level",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_water_liters",
+          "type": "decimal"
+        }
+      ],
       "format": "Document",
       "id": 20,
       "industry": "Vertical Farming",
@@ -1397,7 +1535,7 @@ export const REFERENCE_DATA = {
       ],
       "name": "Irrigation logs",
       "template": "Document",
-      "fieldCoverage": "upload",
+      "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
     },
@@ -1558,7 +1696,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "farm_id",
+          "type": "id"
+        },
+        {
+          "name": "crop_id",
+          "type": "id"
+        },
+        {
+          "name": "health_score",
+          "type": "decimal"
+        },
+        {
+          "name": "growth_stage",
+          "type": "enum"
+        },
+        {
+          "name": "pest_pressure_index",
+          "type": "decimal"
+        },
+        {
+          "name": "sensor_reading_count",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_growing_area",
+          "type": "decimal"
+        },
+        {
+          "name": "sum_health_scores",
+          "type": "string"
+        },
+        {
+          "name": "total_crops",
+          "type": "decimal"
+        }
+      ],
       "format": "Software",
       "id": 19,
       "industry": "Vertical Farming",
@@ -1569,7 +1752,7 @@ export const REFERENCE_DATA = {
       ],
       "name": "Crop monitoring systems",
       "template": "Document",
-      "fieldCoverage": "upload",
+      "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
     },
@@ -2660,8 +2843,7 @@ export const REFERENCE_DATA = {
         964,
         976,
         982,
-        994,
-        1036
+        994
       ],
       "name": "General ledger",
       "template": "Financial Statement Template",
@@ -2951,267 +3133,6 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
-    "Alltransportationds-subscription-billing": {
-      "description": "Subscription and billing records for recurring-revenue analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "customer_id",
-          "type": "id"
-        },
-        {
-          "name": "plan_name",
-          "type": "string"
-        },
-        {
-          "name": "mrr",
-          "type": "string"
-        },
-        {
-          "name": "billing_period",
-          "type": "enum"
-        },
-        {
-          "name": "status",
-          "type": "enum"
-        },
-        {
-          "name": "start_date",
-          "type": "date"
-        },
-        {
-          "name": "end_date",
-          "type": "date"
-        },
-        {
-          "name": "active_subscriptions",
-          "type": "string"
-        },
-        {
-          "name": "avg_monthly_price",
-          "type": "decimal"
-        },
-        {
-          "name": "starting_mrr",
-          "type": "string"
-        },
-        {
-          "name": "expansion_mrr",
-          "type": "string"
-        },
-        {
-          "name": "contraction_mrr",
-          "type": "string"
-        },
-        {
-          "name": "churned_mrr",
-          "type": "string"
-        },
-        {
-          "name": "avg_revenue_per_account",
-          "type": "decimal"
-        },
-        {
-          "name": "churn_rate",
-          "type": "decimal"
-        }
-      ],
-      "format": "Transactional Data Template",
-      "id": 1138,
-      "industry": "Transportation",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1012,
-        1018,
-        1024,
-        1030,
-        1042,
-        1048,
-        1054
-      ],
-      "name": "Subscription billing records",
-      "template": "Transactional Data Template",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Alltransportationds-crm-pipeline": {
-      "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "opportunity_id",
-          "type": "id"
-        },
-        {
-          "name": "account_name",
-          "type": "decimal"
-        },
-        {
-          "name": "stage",
-          "type": "enum"
-        },
-        {
-          "name": "amount",
-          "type": "decimal"
-        },
-        {
-          "name": "close_date",
-          "type": "date"
-        },
-        {
-          "name": "owner",
-          "type": "string"
-        },
-        {
-          "name": "probability",
-          "type": "string"
-        },
-        {
-          "name": "active_subscriptions",
-          "type": "string"
-        },
-        {
-          "name": "avg_monthly_price",
-          "type": "decimal"
-        },
-        {
-          "name": "sales_marketing_spend",
-          "type": "string"
-        },
-        {
-          "name": "new_customers",
-          "type": "string"
-        }
-      ],
-      "format": "Software",
-      "id": 1144,
-      "industry": "Transportation",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1012,
-        1036
-      ],
-      "name": "CRM / Sales pipeline",
-      "template": "Document",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Alltransportationds-product-usage": {
-      "description": "Product engagement and usage telemetry used for retention and churn analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "customer_id",
-          "type": "id"
-        },
-        {
-          "name": "active_users",
-          "type": "string"
-        },
-        {
-          "name": "sessions",
-          "type": "string"
-        },
-        {
-          "name": "feature_adoption",
-          "type": "string"
-        },
-        {
-          "name": "usage_minutes",
-          "type": "string"
-        },
-        {
-          "name": "starting_mrr",
-          "type": "string"
-        },
-        {
-          "name": "expansion_mrr",
-          "type": "string"
-        },
-        {
-          "name": "contraction_mrr",
-          "type": "string"
-        },
-        {
-          "name": "churned_mrr",
-          "type": "string"
-        }
-      ],
-      "format": "Software",
-      "id": 1150,
-      "industry": "Transportation",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1024,
-        1030
-      ],
-      "name": "Product usage logs",
-      "template": "Document",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Alltransportationds-marketing-spend": {
-      "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "channel",
-          "type": "enum"
-        },
-        {
-          "name": "campaign",
-          "type": "string"
-        },
-        {
-          "name": "spend",
-          "type": "string"
-        },
-        {
-          "name": "leads",
-          "type": "string"
-        },
-        {
-          "name": "new_customers",
-          "type": "string"
-        },
-        {
-          "name": "currency",
-          "type": "currency"
-        },
-        {
-          "name": "sales_marketing_spend",
-          "type": "string"
-        }
-      ],
-      "format": "Transactional Data Template",
-      "id": 1156,
-      "industry": "Transportation",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1036,
-        1048
-      ],
-      "name": "Marketing spend records",
-      "template": "Transactional Data Template",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
     "transportation.rail_freight.operations_summary": {
       "id": 1170,
       "name": "Rail freight operations summary",
@@ -3253,44 +3174,6 @@ export const REFERENCE_DATA = {
         1860,
         1861,
         1862
-      ],
-      "lastUpdated": "2026-07-04 00:00:00",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "transportation.rail_passenger.operations_summary": {
-      "id": 1171,
-      "name": "Rail passenger operations summary",
-      "description": "Aggregated passenger rail ridership and fare recovery inputs.",
-      "industry": "Transportation",
-      "format": "Document",
-      "template": "Document",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "total_boardings",
-          "type": "decimal"
-        },
-        {
-          "name": "train_miles_operated",
-          "type": "decimal"
-        },
-        {
-          "name": "fare_revenue",
-          "type": "decimal"
-        },
-        {
-          "name": "operating_cost",
-          "type": "decimal"
-        }
-      ],
-      "metricIds": [
-        1863,
-        1864
       ],
       "lastUpdated": "2026-07-04 00:00:00",
       "fieldCoverage": "enumerated",
@@ -3348,11 +3231,223 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
-    "transportation.transit.operations_summary": {
+    "transportation.freight_forwarding.operations_summary": {
+      "id": 1174,
+      "name": "Freight forwarding operations summary",
+      "description": "Aggregated shipper SLA and margin inputs.",
+      "industry": "Transportation",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "shipments_handled",
+          "type": "string"
+        },
+        {
+          "name": "on_time_shipments",
+          "type": "string"
+        },
+        {
+          "name": "total_shipments",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1871,
+        1872
+      ],
+      "lastUpdated": "2026-07-04 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "passenger_transit.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2060,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "metricIds": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2025,
+        2024,
+        2031,
+        2026,
+        2027,
+        2028,
+        2029,
+        2030,
+        2032,
+        2033
+      ]
+    },
+    "passenger_transit.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2061,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "metricIds": [
+        2034
+      ]
+    },
+    "passenger_transit.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2062,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "metricIds": [
+        2022,
+        2023,
+        2025
+      ]
+    },
+    "passenger_transit.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2063,
+      "industry": "Passenger Transit",
+      "segment": "core",
+      "metricIds": [
+        2025,
+        2023
+      ]
+    },
+    "passenger_transit.rail_passenger.operations_summary": {
+      "id": 1171,
+      "name": "Rail passenger operations summary",
+      "description": "Aggregated passenger rail ridership and fare recovery inputs.",
+      "industry": "Passenger Transit",
+      "segment": "rail_passenger",
+      "format": "Document",
+      "template": "Document",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "total_boardings",
+          "type": "decimal"
+        },
+        {
+          "name": "train_miles_operated",
+          "type": "decimal"
+        },
+        {
+          "name": "fare_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_cost",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        1863,
+        1864
+      ],
+      "lastUpdated": "2026-07-16 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "passenger_transit.public_transit.operations_summary": {
       "id": 1173,
       "name": "Public transit operations summary",
       "description": "Aggregated transit ridership, recovery, and OTP inputs.",
-      "industry": "Transportation",
+      "industry": "Passenger Transit",
+      "segment": "public_transit",
       "format": "Document",
       "template": "Document",
       "fields": [
@@ -3390,41 +3485,7 @@ export const REFERENCE_DATA = {
         1869,
         1870
       ],
-      "lastUpdated": "2026-07-04 00:00:00",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "transportation.freight_forwarding.operations_summary": {
-      "id": 1174,
-      "name": "Freight forwarding operations summary",
-      "description": "Aggregated shipper SLA and margin inputs.",
-      "industry": "Transportation",
-      "format": "Document",
-      "template": "Document",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "shipments_handled",
-          "type": "string"
-        },
-        {
-          "name": "on_time_shipments",
-          "type": "string"
-        },
-        {
-          "name": "total_shipments",
-          "type": "decimal"
-        }
-      ],
-      "metricIds": [
-        1871,
-        1872
-      ],
-      "lastUpdated": "2026-07-04 00:00:00",
+      "lastUpdated": "2026-07-16 00:00:00",
       "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -4117,8 +4178,7 @@ export const REFERENCE_DATA = {
         965,
         977,
         983,
-        995,
-        1037
+        995
       ],
       "name": "General ledger",
       "template": "Financial Statement Template",
@@ -4403,267 +4463,6 @@ export const REFERENCE_DATA = {
         1007
       ],
       "name": "Bank statements",
-      "template": "Transactional Data Template",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allmanufacturingds-subscription-billing": {
-      "description": "Subscription and billing records for recurring-revenue analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "customer_id",
-          "type": "id"
-        },
-        {
-          "name": "plan_name",
-          "type": "string"
-        },
-        {
-          "name": "mrr",
-          "type": "string"
-        },
-        {
-          "name": "billing_period",
-          "type": "enum"
-        },
-        {
-          "name": "status",
-          "type": "enum"
-        },
-        {
-          "name": "start_date",
-          "type": "date"
-        },
-        {
-          "name": "end_date",
-          "type": "date"
-        },
-        {
-          "name": "active_subscriptions",
-          "type": "string"
-        },
-        {
-          "name": "avg_monthly_price",
-          "type": "decimal"
-        },
-        {
-          "name": "starting_mrr",
-          "type": "string"
-        },
-        {
-          "name": "expansion_mrr",
-          "type": "string"
-        },
-        {
-          "name": "contraction_mrr",
-          "type": "string"
-        },
-        {
-          "name": "churned_mrr",
-          "type": "string"
-        },
-        {
-          "name": "avg_revenue_per_account",
-          "type": "decimal"
-        },
-        {
-          "name": "churn_rate",
-          "type": "decimal"
-        }
-      ],
-      "format": "Transactional Data Template",
-      "id": 1139,
-      "industry": "Manufacturing",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1013,
-        1019,
-        1025,
-        1031,
-        1043,
-        1049,
-        1055
-      ],
-      "name": "Subscription billing records",
-      "template": "Transactional Data Template",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allmanufacturingds-crm-pipeline": {
-      "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "opportunity_id",
-          "type": "id"
-        },
-        {
-          "name": "account_name",
-          "type": "decimal"
-        },
-        {
-          "name": "stage",
-          "type": "enum"
-        },
-        {
-          "name": "amount",
-          "type": "decimal"
-        },
-        {
-          "name": "close_date",
-          "type": "date"
-        },
-        {
-          "name": "owner",
-          "type": "string"
-        },
-        {
-          "name": "probability",
-          "type": "string"
-        },
-        {
-          "name": "active_subscriptions",
-          "type": "string"
-        },
-        {
-          "name": "avg_monthly_price",
-          "type": "decimal"
-        },
-        {
-          "name": "sales_marketing_spend",
-          "type": "string"
-        },
-        {
-          "name": "new_customers",
-          "type": "string"
-        }
-      ],
-      "format": "Software",
-      "id": 1145,
-      "industry": "Manufacturing",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1013,
-        1037
-      ],
-      "name": "CRM / Sales pipeline",
-      "template": "Document",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allmanufacturingds-product-usage": {
-      "description": "Product engagement and usage telemetry used for retention and churn analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "customer_id",
-          "type": "id"
-        },
-        {
-          "name": "active_users",
-          "type": "string"
-        },
-        {
-          "name": "sessions",
-          "type": "string"
-        },
-        {
-          "name": "feature_adoption",
-          "type": "string"
-        },
-        {
-          "name": "usage_minutes",
-          "type": "string"
-        },
-        {
-          "name": "starting_mrr",
-          "type": "string"
-        },
-        {
-          "name": "expansion_mrr",
-          "type": "string"
-        },
-        {
-          "name": "contraction_mrr",
-          "type": "string"
-        },
-        {
-          "name": "churned_mrr",
-          "type": "string"
-        }
-      ],
-      "format": "Software",
-      "id": 1151,
-      "industry": "Manufacturing",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1025,
-        1031
-      ],
-      "name": "Product usage logs",
-      "template": "Document",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allmanufacturingds-marketing-spend": {
-      "description": "Marketing and sales spend by channel and campaign for CAC and efficiency.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "channel",
-          "type": "enum"
-        },
-        {
-          "name": "campaign",
-          "type": "string"
-        },
-        {
-          "name": "spend",
-          "type": "string"
-        },
-        {
-          "name": "leads",
-          "type": "string"
-        },
-        {
-          "name": "new_customers",
-          "type": "string"
-        },
-        {
-          "name": "currency",
-          "type": "currency"
-        },
-        {
-          "name": "sales_marketing_spend",
-          "type": "string"
-        }
-      ],
-      "format": "Transactional Data Template",
-      "id": 1157,
-      "industry": "Manufacturing",
-      "lastUpdated": "2026-05-30 00:00:00",
-      "metricIds": [
-        1037,
-        1049
-      ],
-      "name": "Marketing spend records",
       "template": "Transactional Data Template",
       "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
@@ -7299,265 +7098,6 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "daily",
       "grain": "day"
     },
-    "Allfinancesaas-subscription-billing": {
-      "description": "Subscription and billing records for recurring-revenue analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "customer_id",
-          "type": "id"
-        },
-        {
-          "name": "plan_name",
-          "type": "string"
-        },
-        {
-          "name": "mrr",
-          "type": "string"
-        },
-        {
-          "name": "billing_period",
-          "type": "enum"
-        },
-        {
-          "name": "status",
-          "type": "enum"
-        },
-        {
-          "name": "start_date",
-          "type": "date"
-        },
-        {
-          "name": "end_date",
-          "type": "date"
-        },
-        {
-          "name": "active_subscriptions",
-          "type": "string"
-        },
-        {
-          "name": "avg_monthly_price",
-          "type": "decimal"
-        },
-        {
-          "name": "starting_mrr",
-          "type": "string"
-        },
-        {
-          "name": "expansion_mrr",
-          "type": "string"
-        },
-        {
-          "name": "contraction_mrr",
-          "type": "string"
-        },
-        {
-          "name": "churned_mrr",
-          "type": "string"
-        }
-      ],
-      "format": "Transactional Data Template",
-      "id": 1570,
-      "industry": "Financial Services",
-      "lastUpdated": "2026-06-24 00:00:00",
-      "metricIds": [
-        1580,
-        1581,
-        1582,
-        1583,
-        1587
-      ],
-      "name": "Subscription billing records",
-      "template": "Transactional Data Template",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allfinancesaas-crm-pipeline": {
-      "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "opportunity_id",
-          "type": "id"
-        },
-        {
-          "name": "account_name",
-          "type": "decimal"
-        },
-        {
-          "name": "stage",
-          "type": "enum"
-        },
-        {
-          "name": "amount",
-          "type": "decimal"
-        },
-        {
-          "name": "close_date",
-          "type": "date"
-        },
-        {
-          "name": "owner",
-          "type": "string"
-        },
-        {
-          "name": "probability",
-          "type": "string"
-        },
-        {
-          "name": "active_subscriptions",
-          "type": "string"
-        },
-        {
-          "name": "avg_monthly_price",
-          "type": "decimal"
-        },
-        {
-          "name": "sales_marketing_spend",
-          "type": "string"
-        },
-        {
-          "name": "new_customers",
-          "type": "string"
-        }
-      ],
-      "format": "Software",
-      "id": 1571,
-      "industry": "Financial Services",
-      "lastUpdated": "2026-06-24 00:00:00",
-      "metricIds": [
-        1580,
-        1584
-      ],
-      "name": "CRM / Sales pipeline",
-      "template": "Document",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allfinancesaas-product-usage": {
-      "description": "Product engagement telemetry for retention and churn analysis.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "customer_id",
-          "type": "id"
-        },
-        {
-          "name": "active_users",
-          "type": "string"
-        },
-        {
-          "name": "sessions",
-          "type": "string"
-        },
-        {
-          "name": "feature_adoption",
-          "type": "string"
-        },
-        {
-          "name": "usage_minutes",
-          "type": "string"
-        },
-        {
-          "name": "starting_mrr",
-          "type": "string"
-        },
-        {
-          "name": "expansion_mrr",
-          "type": "string"
-        },
-        {
-          "name": "contraction_mrr",
-          "type": "string"
-        },
-        {
-          "name": "churned_mrr",
-          "type": "string"
-        }
-      ],
-      "format": "Software",
-      "id": 1572,
-      "industry": "Financial Services",
-      "lastUpdated": "2026-06-24 00:00:00",
-      "metricIds": [
-        1582,
-        1583
-      ],
-      "name": "Product usage logs",
-      "template": "Document",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
-    "Allfinancesaas-marketing-spend": {
-      "description": "Marketing and sales spend by channel for CAC and efficiency.",
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "channel",
-          "type": "enum"
-        },
-        {
-          "name": "campaign",
-          "type": "string"
-        },
-        {
-          "name": "spend",
-          "type": "string"
-        },
-        {
-          "name": "leads",
-          "type": "string"
-        },
-        {
-          "name": "new_customers",
-          "type": "string"
-        },
-        {
-          "name": "currency",
-          "type": "currency"
-        },
-        {
-          "name": "sales_marketing_spend",
-          "type": "string"
-        },
-        {
-          "name": "avg_revenue_per_account",
-          "type": "decimal"
-        },
-        {
-          "name": "churn_rate",
-          "type": "decimal"
-        }
-      ],
-      "format": "Transactional Data Template",
-      "id": 1573,
-      "industry": "Financial Services",
-      "lastUpdated": "2026-06-24 00:00:00",
-      "metricIds": [
-        1584,
-        1585
-      ],
-      "name": "Marketing spend records",
-      "template": "Transactional Data Template",
-      "fieldCoverage": "enumerated",
-      "collectionFrequency": "monthly",
-      "grain": "month"
-    },
     "funds.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
@@ -8160,9 +7700,6 @@ export const REFERENCE_DATA = {
         }
       ],
       "metricIds": [
-        1940,
-        1941,
-        1942,
         1943,
         1944
       ],
@@ -8372,7 +7909,7 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "quarterly",
       "grain": "quarter"
     },
-    "consumer_finance.core.financial_statements": {
+    "credit_granting.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
       "format": "Document",
@@ -8407,7 +7944,7 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month",
       "id": 1715,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "metricIds": [
         1700,
@@ -8426,7 +7963,7 @@ export const REFERENCE_DATA = {
         1713
       ]
     },
-    "consumer_finance.core.hr_records": {
+    "credit_granting.core.hr_records": {
       "name": "HR records",
       "description": "Records related to human resources and employee data.",
       "format": "Document",
@@ -8453,13 +7990,13 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month",
       "id": 1716,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "metricIds": [
         1714
       ]
     },
-    "consumer_finance.core.accounting_software": {
+    "credit_granting.core.accounting_software": {
       "name": "Accounting Software",
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
@@ -8477,7 +8014,7 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month",
       "id": 1717,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "metricIds": [
         1702,
@@ -8485,7 +8022,7 @@ export const REFERENCE_DATA = {
         1705
       ]
     },
-    "consumer_finance.core.payroll_records": {
+    "credit_granting.core.payroll_records": {
       "name": "Payroll records",
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
@@ -8503,18 +8040,18 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month",
       "id": 1718,
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "core",
       "metricIds": [
         1705,
         1703
       ]
     },
-    "consumer_finance.consumer_lending.loan_tape_summary": {
+    "credit_granting.consumer_lending.loan_tape_summary": {
       "id": 1730,
       "name": "Aggregated consumer loan tape summary",
       "description": "Period aggregates by product line (cards, auto, personal). No account numbers. line_of_business distinguishes product; not mortgage collateral.",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "consumer_lending",
       "format": "Document",
       "template": "Financial Statement Template",
@@ -8592,11 +8129,11 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
-    "consumer_finance.residential_mortgage.residential_mortgage_book_summary": {
+    "credit_granting.residential_mortgage.residential_mortgage_book_summary": {
       "id": 1794,
       "name": "Aggregated residential mortgage book summary",
       "description": "Lender-view mortgage portfolio aggregates. No borrower or loan identifiers.",
-      "industry": "Consumer Finance",
+      "industry": "Credit Granting",
       "segment": "residential_mortgage",
       "format": "Document",
       "template": "Financial Statement Template",
@@ -8645,149 +8182,11 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
-    "commercial_finance.core.financial_statements": {
-      "name": "Financial statements",
-      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
-      "format": "Document",
-      "template": "Financial Statement Template",
-      "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "statement_type",
-          "type": "enum"
-        },
-        {
-          "name": "period_start_date",
-          "type": "date"
-        },
-        {
-          "name": "period_end_date",
-          "type": "date"
-        }
-      ],
-      "fieldCoverage": "upload",
-      "collectionFrequency": "monthly",
-      "grain": "month",
-      "id": 1755,
-      "industry": "Commercial Finance",
-      "segment": "core",
-      "metricIds": [
-        1740,
-        1741,
-        1742,
-        1743,
-        1745,
-        1744,
-        1751,
-        1746,
-        1747,
-        1748,
-        1749,
-        1750,
-        1752,
-        1753
-      ]
-    },
-    "commercial_finance.core.hr_records": {
-      "name": "HR records",
-      "description": "Records related to human resources and employee data.",
-      "format": "Document",
-      "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
-      "fields": [
-        {
-          "name": "date",
-          "type": "date"
-        },
-        {
-          "name": "headcount",
-          "type": "decimal"
-        }
-      ],
-      "fieldCoverage": "upload",
-      "collectionFrequency": "monthly",
-      "grain": "month",
-      "id": 1756,
-      "industry": "Commercial Finance",
-      "segment": "core",
-      "metricIds": [
-        1754
-      ]
-    },
-    "commercial_finance.core.accounting_software": {
-      "name": "Accounting Software",
-      "description": "Software used for financial record keeping and reporting.",
-      "format": "Software",
-      "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
-      "fields": [],
-      "fieldCoverage": "upload",
-      "collectionFrequency": "monthly",
-      "grain": "month",
-      "id": 1757,
-      "industry": "Commercial Finance",
-      "segment": "core",
-      "metricIds": [
-        1742,
-        1743,
-        1745
-      ]
-    },
-    "commercial_finance.core.payroll_records": {
-      "name": "Payroll records",
-      "description": "Records related to employee salaries and payments.",
-      "format": "Document",
-      "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
-      "fields": [],
-      "fieldCoverage": "upload",
-      "collectionFrequency": "monthly",
-      "grain": "month",
-      "id": 1758,
-      "industry": "Commercial Finance",
-      "segment": "core",
-      "metricIds": [
-        1745,
-        1743
-      ]
-    },
-    "commercial_finance.commercial_lending.commercial_loan_book_summary": {
+    "credit_granting.commercial_lending.commercial_loan_book_summary": {
       "id": 1770,
       "name": "Aggregated commercial loan book summary",
       "description": "Period aggregates by book segment (C&I, middle market). No borrower identifiers or account numbers.",
-      "industry": "Commercial Finance",
+      "industry": "Credit Granting",
       "segment": "commercial_lending",
       "format": "Document",
       "template": "Financial Statement Template",
@@ -8867,11 +8266,11 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
-    "commercial_finance.commercial_lending.commercial_treasury_summary": {
+    "credit_granting.commercial_lending.commercial_treasury_summary": {
       "id": 1778,
       "name": "Aggregated commercial treasury summary",
       "description": "Treasury services fees, commercial deposits, and B2B payment volume. No client identifiers.",
-      "industry": "Commercial Finance",
+      "industry": "Credit Granting",
       "segment": "commercial_lending",
       "format": "Document",
       "template": "Financial Statement Template",
@@ -8905,6 +8304,407 @@ export const REFERENCE_DATA = {
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
+    },
+    "software_saas.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2055,
+      "industry": "Software (SaaS)",
+      "segment": "core",
+      "metricIds": [
+        2040,
+        2041,
+        2042,
+        2043,
+        2045,
+        2044,
+        2051,
+        2046,
+        2047,
+        2048,
+        2049,
+        2050,
+        2052,
+        2053
+      ]
+    },
+    "software_saas.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2056,
+      "industry": "Software (SaaS)",
+      "segment": "core",
+      "metricIds": [
+        2054
+      ]
+    },
+    "software_saas.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2057,
+      "industry": "Software (SaaS)",
+      "segment": "core",
+      "metricIds": [
+        2042,
+        2043,
+        2045
+      ]
+    },
+    "software_saas.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:08",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2058,
+      "industry": "Software (SaaS)",
+      "segment": "core",
+      "metricIds": [
+        2045,
+        2043
+      ]
+    },
+    "software_saas.subscription.subscription_billing": {
+      "description": "Subscription and billing records for recurring-revenue analysis.",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "plan_name",
+          "type": "string"
+        },
+        {
+          "name": "mrr",
+          "type": "string"
+        },
+        {
+          "name": "billing_period",
+          "type": "enum"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
+      ],
+      "format": "Transactional Data Template",
+      "id": 1570,
+      "industry": "Software (SaaS)",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1580,
+        1581,
+        1582,
+        1583,
+        1587
+      ],
+      "name": "Subscription billing records",
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "segment": "subscription"
+    },
+    "software_saas.subscription.crm_pipeline": {
+      "description": "Sales pipeline and CRM opportunities used for bookings and CAC analysis.",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "opportunity_id",
+          "type": "id"
+        },
+        {
+          "name": "account_name",
+          "type": "decimal"
+        },
+        {
+          "name": "stage",
+          "type": "enum"
+        },
+        {
+          "name": "amount",
+          "type": "decimal"
+        },
+        {
+          "name": "close_date",
+          "type": "date"
+        },
+        {
+          "name": "owner",
+          "type": "string"
+        },
+        {
+          "name": "probability",
+          "type": "string"
+        },
+        {
+          "name": "active_subscriptions",
+          "type": "string"
+        },
+        {
+          "name": "avg_monthly_price",
+          "type": "decimal"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        }
+      ],
+      "format": "Software",
+      "id": 1571,
+      "industry": "Software (SaaS)",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1580,
+        1584
+      ],
+      "name": "CRM / Sales pipeline",
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "segment": "subscription"
+    },
+    "software_saas.subscription.product_usage": {
+      "description": "Product engagement telemetry for retention and churn analysis.",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "customer_id",
+          "type": "id"
+        },
+        {
+          "name": "active_users",
+          "type": "string"
+        },
+        {
+          "name": "sessions",
+          "type": "string"
+        },
+        {
+          "name": "feature_adoption",
+          "type": "string"
+        },
+        {
+          "name": "usage_minutes",
+          "type": "string"
+        },
+        {
+          "name": "starting_mrr",
+          "type": "string"
+        },
+        {
+          "name": "expansion_mrr",
+          "type": "string"
+        },
+        {
+          "name": "contraction_mrr",
+          "type": "string"
+        },
+        {
+          "name": "churned_mrr",
+          "type": "string"
+        }
+      ],
+      "format": "Software",
+      "id": 1572,
+      "industry": "Software (SaaS)",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1582,
+        1583
+      ],
+      "name": "Product usage logs",
+      "template": "Document",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "segment": "subscription"
+    },
+    "software_saas.subscription.marketing_spend": {
+      "description": "Marketing and sales spend by channel for CAC and efficiency.",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "channel",
+          "type": "enum"
+        },
+        {
+          "name": "campaign",
+          "type": "string"
+        },
+        {
+          "name": "spend",
+          "type": "string"
+        },
+        {
+          "name": "leads",
+          "type": "string"
+        },
+        {
+          "name": "new_customers",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "currency"
+        },
+        {
+          "name": "sales_marketing_spend",
+          "type": "string"
+        },
+        {
+          "name": "avg_revenue_per_account",
+          "type": "decimal"
+        },
+        {
+          "name": "churn_rate",
+          "type": "decimal"
+        }
+      ],
+      "format": "Transactional Data Template",
+      "id": 1573,
+      "industry": "Software (SaaS)",
+      "lastUpdated": "2026-06-24 00:00:00",
+      "metricIds": [
+        1584,
+        1585
+      ],
+      "name": "Marketing spend records",
+      "template": "Transactional Data Template",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "segment": "subscription"
     },
     "retail.core.financial_statements": {
       "name": "Financial statements",

@@ -2,7 +2,8 @@ dataOptionTemplates:
   financial_statements:
     keySuffix: GvoI0Vg2YijGfgoBaqqe
     name: Financial statements
-    description: Records of a company's financial activities (income, expenses, assets, liabilities).
+    description: Records of a company's financial activities (income, expenses, assets,
+      liabilities).
     format: Document
     template: Financial Statement Template
     lastUpdated: '2024-07-31 14:25:05'
@@ -198,6 +199,21 @@ optionIds:
     hr_records: 1756
     accounting_software: 1757
     payroll_records: 1758
+  Credit Granting:
+    financial_statements: 1715
+    hr_records: 1716
+    accounting_software: 1717
+    payroll_records: 1718
+  Software (SaaS):
+    financial_statements: 2055
+    hr_records: 2056
+    accounting_software: 2057
+    payroll_records: 2058
+  Passenger Transit:
+    financial_statements: 2060
+    hr_records: 2061
+    accounting_software: 2062
+    payroll_records: 2063
   Aviation:
     financial_statements: 1815
     hr_records: 1816

@@ -3,15 +3,19 @@ industryCodes:
   isic:
     revision: Rev.4
     primary: '6512'
+    secondary:
+    - '6511'
   naics:
     revision: '2022'
     primary: '524126'
   nace:
     revision: Rev.2
     primary: '65.12'
+    secondary:
+    - '65.11'
   gics:
     revision: '2023'
     primary: '403010'
   confidence: high
-  lastReviewed: '2026-07-04'
+  lastReviewed: '2026-07-16'
   source: manual

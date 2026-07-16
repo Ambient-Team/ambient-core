@@ -114,6 +114,49 @@ def build_industry_entries(packs: list[dict]) -> list[dict]:
     return entries
 
 
+# ISIC Rev.4 section letter from 2-digit division (UN ISIC Rev.4)
+_ISIC_SECTION_BY_DIVISION: list[tuple[int, int, str]] = [
+    (1, 3, "A"),
+    (5, 9, "B"),
+    (10, 33, "C"),
+    (35, 35, "D"),
+    (36, 39, "E"),
+    (41, 43, "F"),
+    (45, 47, "G"),
+    (49, 53, "H"),
+    (55, 56, "I"),
+    (58, 63, "J"),
+    (64, 66, "K"),
+    (68, 68, "L"),
+    (69, 75, "M"),
+    (77, 82, "N"),
+    (84, 84, "O"),
+    (85, 85, "P"),
+    (86, 88, "Q"),
+    (90, 93, "R"),
+    (94, 96, "S"),
+    (97, 97, "T"),
+    (99, 99, "U"),
+]
+
+
+def _isic_hierarchy(class_code: str) -> dict[str, str] | None:
+    code = str(class_code or "").strip()
+    if not ISIC_CLASS.match(code):
+        return None
+    division = int(code[:2])
+    section = "U"
+    for lo, hi, letter in _ISIC_SECTION_BY_DIVISION:
+        if lo <= division <= hi:
+            section = letter
+            break
+    return {
+        "section": section,
+        "division": code[:2],
+        "group": code[:3],
+    }
+
+
 def _industry_codes_for_manifest(codes: dict) -> dict:
     """YAML industryCodes → manifest camelCase (taxonomy keys unchanged)."""
     out: dict = {}
@@ -128,6 +171,10 @@ def _industry_codes_for_manifest(codes: dict) -> dict:
         sec = block.get("secondary")
         if sec:
             row["secondary"] = list(sec)
+        if key == "isic":
+            derived = _isic_hierarchy(str(block.get("primary") or ""))
+            if derived:
+                row.update(derived)
         out[key] = row
     for meta in ("confidence", "lastReviewed", "source"):
         if meta in codes:

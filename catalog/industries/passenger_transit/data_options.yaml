@@ -1,0 +1,58 @@
+dataOptions:
+  passenger_transit.rail_passenger.operations_summary:
+    id: 1171
+    name: Rail passenger operations summary
+    description: Aggregated passenger rail ridership and fare recovery inputs.
+    industry: Passenger Transit
+    segment: rail_passenger
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: total_boardings
+      type: decimal
+    - name: train_miles_operated
+      type: decimal
+    - name: fare_revenue
+      type: decimal
+    - name: operating_cost
+      type: decimal
+    metricIds:
+    - 1863
+    - 1864
+    lastUpdated: '2026-07-16 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  passenger_transit.public_transit.operations_summary:
+    id: 1173
+    name: Public transit operations summary
+    description: Aggregated transit ridership, recovery, and OTP inputs.
+    industry: Passenger Transit
+    segment: public_transit
+    format: Document
+    template: Document
+    fields:
+    - name: date
+      type: date
+    - name: operating_revenue
+      type: decimal
+    - name: operating_expenses
+      type: string
+    - name: unlinked_trips
+      type: string
+    - name: vehicle_revenue_hours
+      type: decimal
+    - name: on_time_trips
+      type: string
+    - name: total_trips
+      type: decimal
+    metricIds:
+    - 1868
+    - 1869
+    - 1870
+    lastUpdated: '2026-07-16 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

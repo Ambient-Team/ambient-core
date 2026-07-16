@@ -1,4 +1,4 @@
-industry: Consumer Finance
+industry: Credit Granting
 industryCodes:
   isic:
     revision: Rev.4
@@ -6,12 +6,16 @@ industryCodes:
   naics:
     revision: '2022'
     primary: '522291'
+    secondary:
+    - '522220'
   nace:
     revision: Rev.2
     primary: '64.92'
   gics:
     revision: '2023'
     primary: '402020'
+    secondary:
+    - '402010'
   confidence: high
-  lastReviewed: '2026-07-04'
+  lastReviewed: '2026-07-16'
   source: manual

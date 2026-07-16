@@ -1,0 +1,164 @@
+dataOptions:
+  software_saas.subscription.subscription_billing:
+    description: Subscription and billing records for recurring-revenue analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: plan_name
+      type: string
+    - name: mrr
+      type: string
+    - name: billing_period
+      type: enum
+    - name: status
+      type: enum
+    - name: start_date
+      type: date
+    - name: end_date
+      type: date
+    - name: revenue_growth_pct
+      type: decimal
+    - name: profit_margin_pct
+      type: decimal
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Transactional Data Template
+    id: 1570
+    industry: Software (SaaS)
+    lastUpdated: '2026-06-24 00:00:00'
+    metricIds:
+    - 1580
+    - 1581
+    - 1582
+    - 1583
+    - 1587
+    name: Subscription billing records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+    segment: subscription
+  software_saas.subscription.crm_pipeline:
+    description: Sales pipeline and CRM opportunities used for bookings and CAC analysis.
+    fields:
+    - name: date
+      type: date
+    - name: opportunity_id
+      type: id
+    - name: account_name
+      type: decimal
+    - name: stage
+      type: enum
+    - name: amount
+      type: decimal
+    - name: close_date
+      type: date
+    - name: owner
+      type: string
+    - name: probability
+      type: string
+    - name: active_subscriptions
+      type: string
+    - name: avg_monthly_price
+      type: decimal
+    - name: sales_marketing_spend
+      type: string
+    - name: new_customers
+      type: string
+    format: Software
+    id: 1571
+    industry: Software (SaaS)
+    lastUpdated: '2026-06-24 00:00:00'
+    metricIds:
+    - 1580
+    - 1584
+    name: CRM / Sales pipeline
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+    segment: subscription
+  software_saas.subscription.product_usage:
+    description: Product engagement telemetry for retention and churn analysis.
+    fields:
+    - name: date
+      type: date
+    - name: customer_id
+      type: id
+    - name: active_users
+      type: string
+    - name: sessions
+      type: string
+    - name: feature_adoption
+      type: string
+    - name: usage_minutes
+      type: string
+    - name: starting_mrr
+      type: string
+    - name: expansion_mrr
+      type: string
+    - name: contraction_mrr
+      type: string
+    - name: churned_mrr
+      type: string
+    format: Software
+    id: 1572
+    industry: Software (SaaS)
+    lastUpdated: '2026-06-24 00:00:00'
+    metricIds:
+    - 1582
+    - 1583
+    name: Product usage logs
+    template: Document
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+    segment: subscription
+  software_saas.subscription.marketing_spend:
+    description: Marketing and sales spend by channel for CAC and efficiency.
+    fields:
+    - name: date
+      type: date
+    - name: channel
+      type: enum
+    - name: campaign
+      type: string
+    - name: spend
+      type: string
+    - name: leads
+      type: string
+    - name: new_customers
+      type: string
+    - name: currency
+      type: currency
+    - name: sales_marketing_spend
+      type: string
+    - name: avg_revenue_per_account
+      type: decimal
+    - name: churn_rate
+      type: decimal
+    format: Transactional Data Template
+    id: 1573
+    industry: Software (SaaS)
+    lastUpdated: '2026-06-24 00:00:00'
+    metricIds:
+    - 1584
+    - 1585
+    name: Marketing spend records
+    template: Transactional Data Template
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+    segment: subscription

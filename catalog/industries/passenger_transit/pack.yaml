@@ -1,17 +1,21 @@
-industry: Manufacturing
+industry: Passenger Transit
 industryCodes:
   isic:
     revision: Rev.4
-    primary: '2819'
+    primary: '4922'
+    secondary:
+    - '4911'
   naics:
     revision: '2022'
-    primary: '333999'
+    primary: '485111'
   nace:
     revision: Rev.2
-    primary: '28.19'
+    primary: '49.31'
+    secondary:
+    - '49.10'
   gics:
     revision: '2023'
-    primary: '201060'
+    primary: '203040'
   confidence: medium
   lastReviewed: '2026-07-16'
   source: manual

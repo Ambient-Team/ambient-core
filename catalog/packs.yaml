@@ -4,10 +4,13 @@ packs:
   displayLabel: Real Estate (commercial)
 - pack: vertical_farming
 - pack: transportation
-  displayLabel: Transportation (multimodal)
+  displayLabel: Transportation (freight)
+- pack: passenger_transit
+  displayLabel: Passenger Transit
 - pack: aviation
   displayLabel: Aviation
 - pack: manufacturing
+  displayLabel: Manufacturing (machinery and discrete)
 - pack: healthcare
 - pack: restaurants
 - pack: life_sciences
@@ -21,8 +24,8 @@ packs:
 - pack: trusts
   displayLabel: Trusts
 - pack: insurance
-- pack: consumer_finance
-  displayLabel: Consumer Finance
-- pack: commercial_finance
-  displayLabel: Commercial Finance
+- pack: credit_granting
+  displayLabel: Credit Granting
+- pack: software_saas
+  displayLabel: Software (SaaS)
 - pack: retail

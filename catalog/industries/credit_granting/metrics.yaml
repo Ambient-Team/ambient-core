@@ -1,0 +1,634 @@
+metrics:
+  credit_granting.consumer_lending.portfolio_yield:
+    id: 1720
+    name: Portfolio Yield
+    description: Interest income on consumer receivables relative to average outstanding
+      balance (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Portfolio Yield = (Interest Income / Average Receivables) × 100
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Revenue driver — spread on consumer book vs funding cost.
+    segment: consumer_lending
+    slug: portfolio_yield
+    calc:
+      expr: interest_income / average_receivables * 100
+      inputs:
+      - interest_income
+      - average_receivables
+  credit_granting.consumer_lending.net_charge_off_rate:
+    id: 1721
+    name: Net Charge-Off Rate
+    description: Charge-offs net of recoveries as a share of average receivables.
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: NCO Rate = (Net Charge-Offs / Average Receivables) × 100
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Credit loss — macro and underwriting quality signal.
+    segment: consumer_lending
+    slug: net_charge_off_rate
+    calc:
+      expr: net_charge_offs / average_receivables * 100
+      inputs:
+      - net_charge_offs
+      - average_receivables
+  credit_granting.consumer_lending.delinquency_rate_30d:
+    id: 1722
+    name: 30+ Day Delinquency Rate
+    description: Share of receivables past due 30 days or more (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Delinquency Rate = (Delinquent Balance 30+ / Total Receivables) ×
+      100
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Early warning — rolls into charge-offs and provisions.
+    segment: consumer_lending
+    slug: delinquency_rate_30d
+    calc:
+      expr: delinquent_balance_30_plus / total_receivables * 100
+      inputs:
+      - delinquent_balance_30_plus
+      - total_receivables
+  credit_granting.consumer_lending.origination_volume_growth:
+    id: 1723
+    name: Origination Volume Growth
+    description: Year-over-year growth in new consumer loan originations (aggregated).
+    industry: Credit Granting
+    type: Operational
+    unit: '%'
+    methodology: Origination Growth = ((Current Originations − Prior Originations)
+      / Prior Originations) × 100
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Top-line momentum — market share and underwriting appetite.
+    segment: consumer_lending
+    slug: origination_volume_growth
+    input: true
+  credit_granting.consumer_lending.payment_volume:
+    id: 1724
+    name: Card Payment Volume
+    description: Total payment transaction volume for card portfolios (aggregated;
+      fee revenue proxy).
+    industry: Credit Granting
+    type: Financial
+    unit: Currency
+    methodology: Directly measured payment volume in period.
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Interchange and transaction fee scale — cards and wallets.
+    segment: consumer_lending
+    slug: payment_volume
+    input: true
+  credit_granting.consumer_lending.bnpl_origination_growth:
+    id: 1725
+    name: BNPL Origination Growth
+    description: Year-over-year growth in buy-now-pay-later originations (aggregated).
+    industry: Credit Granting
+    type: Operational
+    unit: '%'
+    methodology: BNPL Growth = ((Current BNPL Originations − Prior) / Prior) × 100
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Embedded finance — BNPL wallet share and merchant partnerships.
+    segment: consumer_lending
+    slug: bnpl_origination_growth
+    input: true
+  credit_granting.consumer_lending.embedded_finance_revenue_share:
+    id: 1726
+    name: Embedded Finance Revenue Share
+    description: Share of consumer finance revenue from embedded or partner channels
+      (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Embedded Share = (Embedded Channel Revenue / Total Consumer Finance
+      Revenue) × 100
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Distribution mix — platform and BaaS economics.
+    segment: consumer_lending
+    slug: embedded_finance_revenue_share
+    calc:
+      expr: embedded_channel_revenue / total_consumer_finance_revenue * 100
+      inputs:
+      - embedded_channel_revenue
+      - total_consumer_finance_revenue
+  credit_granting.consumer_lending.rtp_payment_volume:
+    id: 1727
+    name: RTP Payment Volume
+    description: Real-time payments volume for consumer-facing rails (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: Currency
+    methodology: Directly measured RTP volume in period.
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Payments modernization — RTP adoption and fee scale.
+    segment: consumer_lending
+    slug: rtp_payment_volume
+    input: true
+  credit_granting.consumer_lending.merchant_acquiring_volume:
+    id: 1728
+    name: Merchant Acquiring Volume
+    description: Card acquiring volume where bank is acquirer or sponsor (consumer-facing,
+      aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: Currency
+    methodology: Directly measured acquiring volume in period.
+    datasource:
+    - Aggregated consumer loan tape summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Merchant services — interchange and acquiring economics.
+    segment: consumer_lending
+    slug: merchant_acquiring_volume
+    input: true
+  credit_granting.residential_mortgage.portfolio_yield:
+    id: 1790
+    name: Residential Mortgage Portfolio Yield
+    description: Interest income on residential mortgage book relative to average
+      balances (lender view).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Portfolio Yield = (Interest Income / Average Mortgage Balances) ×
+      100
+    datasource:
+    - Aggregated residential mortgage book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Spread on mortgage book vs funding and prepayment risk.
+    segment: residential_mortgage
+    slug: portfolio_yield
+    calc:
+      expr: interest_income / average_mortgage_balances * 100
+      inputs:
+      - interest_income
+      - average_mortgage_balances
+  credit_granting.residential_mortgage.delinquency_rate_30d:
+    id: 1791
+    name: Residential Mortgage 30+ Day Delinquency
+    description: Share of mortgage balances past due 30+ days (lender book).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Delinquency Rate = (Delinquent Balance 30+ / Total Mortgage Balances)
+      × 100
+    datasource:
+    - Aggregated residential mortgage book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Early warning — rolls into NPLs and loss mitigation.
+    segment: residential_mortgage
+    slug: delinquency_rate_30d
+    calc:
+      expr: delinquent_balance_30_plus / total_mortgage_balances * 100
+      inputs:
+      - delinquent_balance_30_plus
+      - total_mortgage_balances
+  credit_granting.residential_mortgage.weighted_average_ltv:
+    id: 1792
+    name: Residential Mortgage Weighted Average LTV
+    description: Loan-weighted LTV on residential mortgage portfolio (lender view).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: WA LTV = Σ(Loan Balance × LTV) / Σ Loan Balances
+    datasource:
+    - Aggregated residential mortgage book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Collateral cushion — equity buffer vs home price shocks.
+    segment: residential_mortgage
+    slug: weighted_average_ltv
+    calc:
+      expr: weighted_ltv_numerator / total_mortgage_balances * 100
+      inputs:
+      - weighted_ltv_numerator
+      - total_mortgage_balances
+  credit_granting.residential_mortgage.origination_volume_growth:
+    id: 1793
+    name: Residential Mortgage Origination Growth
+    description: Year-over-year growth in new mortgage originations (aggregated).
+    industry: Credit Granting
+    type: Operational
+    unit: '%'
+    methodology: Origination Growth = ((Current − Prior) / Prior) × 100
+    datasource:
+    - Aggregated residential mortgage book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Production pipeline — purchase vs refi mix at portfolio level.
+    segment: residential_mortgage
+    slug: origination_volume_growth
+    input: true
+  credit_granting.commercial_lending.commercial_loan_growth:
+    id: 1760
+    name: Commercial Loan Growth
+    description: Year-over-year growth in outstanding commercial and C&I loan balances
+      (aggregated).
+    industry: Credit Granting
+    type: Operational
+    unit: '%'
+    methodology: Loan Growth = ((Current Outstanding − Prior Outstanding) / Prior
+      Outstanding) × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Book momentum — market share and underwriting appetite on C&I and
+      middle market.
+    segment: commercial_lending
+    slug: commercial_loan_growth
+    input: true
+  credit_granting.commercial_lending.portfolio_yield:
+    id: 1761
+    name: Commercial Portfolio Yield
+    description: Interest income on commercial loans relative to average outstanding
+      balance (aggregated C&I and middle market).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Portfolio Yield = (Interest Income / Average Commercial Loans) ×
+      100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Revenue driver — spread on commercial book vs funding and credit
+      risk.
+    segment: commercial_lending
+    slug: portfolio_yield
+    calc:
+      expr: interest_income / average_commercial_loans * 100
+      inputs:
+      - interest_income
+      - average_commercial_loans
+  credit_granting.commercial_lending.non_performing_loan_ratio:
+    id: 1762
+    name: Commercial NPL Ratio
+    description: Share of commercial loans past due or non-accrual (aggregated credit
+      quality).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: NPL Ratio = (Non-Performing Commercial Loans / Total Commercial Loans)
+      × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Credit risk monitoring — provisions and relationship reviews.
+    segment: commercial_lending
+    slug: non_performing_loan_ratio
+    calc:
+      expr: non_performing_commercial_loans / total_commercial_loans * 100
+      inputs:
+      - non_performing_commercial_loans
+      - total_commercial_loans
+  credit_granting.commercial_lending.net_charge_off_rate:
+    id: 1763
+    name: Commercial Net Charge-Off Rate
+    description: Commercial charge-offs net of recoveries as a share of average commercial
+      loans.
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: NCO Rate = (Net Charge-Offs / Average Commercial Loans) × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Credit loss — cyclical and sector concentration signal.
+    segment: commercial_lending
+    slug: net_charge_off_rate
+    calc:
+      expr: net_charge_offs / average_commercial_loans * 100
+      inputs:
+      - net_charge_offs
+      - average_commercial_loans
+  credit_granting.commercial_lending.origination_volume_growth:
+    id: 1764
+    name: Commercial Origination Volume Growth
+    description: Year-over-year growth in new commercial loan commitments or fundings
+      (aggregated).
+    industry: Credit Granting
+    type: Operational
+    unit: '%'
+    methodology: Origination Growth = ((Current Originations − Prior Originations)
+      / Prior Originations) × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Pipeline and production — relationship manager capacity and risk
+      appetite.
+    segment: commercial_lending
+    slug: origination_volume_growth
+    input: true
+  credit_granting.commercial_lending.delinquency_rate_30d:
+    id: 1765
+    name: Commercial 30+ Day Delinquency Rate
+    description: Share of commercial loan balances past due 30 days or more (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Delinquency Rate = (Delinquent Balance 30+ / Total Commercial Loans)
+      × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Early warning — rolls into NPLs and provisions.
+    segment: commercial_lending
+    slug: delinquency_rate_30d
+    calc:
+      expr: delinquent_balance_30_plus / total_commercial_loans * 100
+      inputs:
+      - delinquent_balance_30_plus
+      - total_commercial_loans
+  credit_granting.commercial_lending.weighted_average_ltv:
+    id: 1771
+    name: Weighted Average LTV
+    description: Loan-weighted LTV on commercial and CRE portfolios (lender book view).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: WA LTV = Σ(Loan Balance × LTV) / Σ Loan Balances
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Collateral adequacy — CRE and secured commercial exposure.
+    segment: commercial_lending
+    slug: weighted_average_ltv
+    calc:
+      expr: weighted_ltv_numerator / total_commercial_loans * 100
+      inputs:
+      - weighted_ltv_numerator
+      - total_commercial_loans
+  credit_granting.commercial_lending.portfolio_dscr:
+    id: 1772
+    name: Portfolio DSCR
+    description: Loan-weighted average debt service coverage on commercial book (lender
+      view).
+    industry: Credit Granting
+    type: Financial
+    unit: Number
+    methodology: Portfolio DSCR = Σ(DSCR × Loan Weight) on reporting book
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Cash-flow coverage — covenant monitoring at portfolio level.
+    segment: commercial_lending
+    slug: portfolio_dscr
+    input: true
+  credit_granting.commercial_lending.sector_concentration_index:
+    id: 1773
+    name: Sector Concentration Index
+    description: Herfindahl-style concentration of commercial exposures by industry
+      sector (org book).
+    industry: Credit Granting
+    type: Financial
+    unit: Number
+    methodology: HHI = Σ(Sector Share²) × 10000 on outstanding balances
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    fpaWorkflow: Concentration risk — diversification vs single-sector stress.
+    segment: commercial_lending
+    slug: sector_concentration_index
+    input: true
+  credit_granting.commercial_lending.revolver_utilization_rate:
+    id: 1774
+    name: Revolver Utilization Rate
+    description: Drawn committed lines relative to total commitments (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Utilization = (Drawn Commitments / Total Commitments) × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Line usage — liquidity demand and fee income potential.
+    segment: commercial_lending
+    slug: revolver_utilization_rate
+    calc:
+      expr: drawn_commitments / total_commitments * 100
+      inputs:
+      - drawn_commitments
+      - total_commitments
+  credit_granting.commercial_lending.treasury_fee_yield:
+    id: 1775
+    name: Treasury Fee Yield
+    description: Cash management and liquidity service fees relative to commercial
+      deposit balances.
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Treasury Fee Yield = (Treasury Fee Revenue / Average Commercial Deposits)
+      × 100
+    datasource:
+    - Aggregated commercial treasury summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Non-interest revenue — relationship treasury monetization.
+    segment: commercial_lending
+    slug: treasury_fee_yield
+    calc:
+      expr: treasury_fee_revenue / average_commercial_deposits * 100
+      inputs:
+      - treasury_fee_revenue
+      - average_commercial_deposits
+  credit_granting.commercial_lending.commercial_payment_volume:
+    id: 1776
+    name: Commercial Payment Volume
+    description: B2B payment and wire volume processed for commercial clients (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: Currency
+    methodology: Directly measured payment volume in period.
+    datasource:
+    - Aggregated commercial treasury summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Payments scale — embedded commercial flows and fee income.
+    segment: commercial_lending
+    slug: commercial_payment_volume
+    input: true
+  credit_granting.commercial_lending.sustainable_finance_share:
+    id: 1777
+    name: Sustainable Finance Share
+    description: Share of commercial outstandings tagged as sustainable or green-labeled
+      (aggregated).
+    industry: Credit Granting
+    type: Financial
+    unit: '%'
+    methodology: Sustainable Share = (Sustainable Loan Balance / Total Commercial
+      Loans) × 100
+    datasource:
+    - Aggregated commercial loan book summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: ESG lending — portfolio mix and disclosure.
+    segment: commercial_lending
+    slug: sustainable_finance_share
+    calc:
+      expr: sustainable_loan_balance / total_commercial_loans * 100
+      inputs:
+      - sustainable_loan_balance
+      - total_commercial_loans

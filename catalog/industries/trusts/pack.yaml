@@ -11,7 +11,7 @@ industryCodes:
     primary: '64.30'
   gics:
     revision: '2023'
-    primary: '601060'
+    primary: '402010'
   confidence: high
-  lastReviewed: '2026-07-04'
+  lastReviewed: '2026-07-16'
   source: manual

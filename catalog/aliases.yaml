@@ -1,4 +1,12 @@
 aliases:
+  Allfinancesaas-arr: software_saas.subscription.arr
+  Allfinancesaas-cac: software_saas.subscription.cac
+  Allfinancesaas-gross-churn: software_saas.subscription.gross_churn
+  Allfinancesaas-ltv: software_saas.subscription.ltv
+  Allfinancesaas-ltv-cac: software_saas.subscription.ltv_cac
+  Allfinancesaas-mrr: software_saas.subscription.mrr
+  Allfinancesaas-nrr: software_saas.subscription.nrr
+  Allfinancesaas-rule-of-40: software_saas.subscription.rule_of_40
   Allhealthcare5aMhHPzshRFSHX4PjOMH: healthcare.core.hr_records
   AllhealthcareGvoI0Vg2YijGfgoBaqqe: healthcare.core.financial_statements
   AllhealthcareQO2mQ9iQZXjtLrZYLXcK: healthcare.core.accounting_software
@@ -35,6 +43,14 @@ aliases:
   Allmanufacturingfpa-runway: manufacturing.core.runway
   Allmanufacturingfpa-working-capital: manufacturing.core.working_capital
   AllmanufacturingqXzIFYqjk5et3S78BYew: manufacturing.core.payroll_records
+  Allmanufacturingsaas-arr: software_saas.subscription.arr
+  Allmanufacturingsaas-cac: software_saas.subscription.cac
+  Allmanufacturingsaas-gross-churn: software_saas.subscription.gross_churn
+  Allmanufacturingsaas-ltv: software_saas.subscription.ltv
+  Allmanufacturingsaas-ltv-cac: software_saas.subscription.ltv_cac
+  Allmanufacturingsaas-mrr: software_saas.subscription.mrr
+  Allmanufacturingsaas-nrr: software_saas.subscription.nrr
+  Allmanufacturingsaas-rule-of-40: software_saas.subscription.rule_of_40
   Allrealestate5aMhHPzshRFSHX4PjOMH: real_estate.core.hr_records
   AllrealestateGvoI0Vg2YijGfgoBaqqe: real_estate.core.financial_statements
   AllrealestateQO2mQ9iQZXjtLrZYLXcK: real_estate.core.accounting_software
@@ -89,6 +105,14 @@ aliases:
   Alltransportationfpa-runway: transportation.core.runway
   Alltransportationfpa-working-capital: transportation.core.working_capital
   AlltransportationqXzIFYqjk5et3S78BYew: transportation.core.payroll_records
+  Alltransportationsaas-arr: software_saas.subscription.arr
+  Alltransportationsaas-cac: software_saas.subscription.cac
+  Alltransportationsaas-gross-churn: software_saas.subscription.gross_churn
+  Alltransportationsaas-ltv: software_saas.subscription.ltv
+  Alltransportationsaas-ltv-cac: software_saas.subscription.ltv_cac
+  Alltransportationsaas-mrr: software_saas.subscription.mrr
+  Alltransportationsaas-nrr: software_saas.subscription.nrr
+  Alltransportationsaas-rule-of-40: software_saas.subscription.rule_of_40
   Allverticalfarming5aMhHPzshRFSHX4PjOMH: vertical_farming.core.hr_records
   AllverticalfarmingGvoI0Vg2YijGfgoBaqqe: vertical_farming.core.financial_statements
   AllverticalfarmingQO2mQ9iQZXjtLrZYLXcK: vertical_farming.core.accounting_software
@@ -138,6 +162,36 @@ aliases:
   commercial_banking.core.revenue_growth: commercial_finance.core.revenue_growth
   commercial_banking.core.runway: commercial_finance.core.runway
   commercial_banking.core.working_capital: commercial_finance.core.working_capital
+  commercial_finance.commercial_lending.commercial_loan_book_summary: credit_granting.commercial_lending.commercial_loan_book_summary
+  commercial_finance.commercial_lending.commercial_loan_growth: credit_granting.commercial_lending.commercial_loan_growth
+  commercial_finance.commercial_lending.commercial_payment_volume: credit_granting.commercial_lending.commercial_payment_volume
+  commercial_finance.commercial_lending.commercial_treasury_summary: credit_granting.commercial_lending.commercial_treasury_summary
+  commercial_finance.commercial_lending.delinquency_rate_30d: credit_granting.commercial_lending.delinquency_rate_30d
+  commercial_finance.commercial_lending.net_charge_off_rate: credit_granting.commercial_lending.net_charge_off_rate
+  commercial_finance.commercial_lending.non_performing_loan_ratio: credit_granting.commercial_lending.non_performing_loan_ratio
+  commercial_finance.commercial_lending.origination_volume_growth: credit_granting.commercial_lending.origination_volume_growth
+  commercial_finance.commercial_lending.portfolio_dscr: credit_granting.commercial_lending.portfolio_dscr
+  commercial_finance.commercial_lending.portfolio_yield: credit_granting.commercial_lending.portfolio_yield
+  commercial_finance.commercial_lending.revolver_utilization_rate: credit_granting.commercial_lending.revolver_utilization_rate
+  commercial_finance.commercial_lending.sector_concentration_index: credit_granting.commercial_lending.sector_concentration_index
+  commercial_finance.commercial_lending.sustainable_finance_share: credit_granting.commercial_lending.sustainable_finance_share
+  commercial_finance.commercial_lending.treasury_fee_yield: credit_granting.commercial_lending.treasury_fee_yield
+  commercial_finance.commercial_lending.weighted_average_ltv: credit_granting.commercial_lending.weighted_average_ltv
+  consumer_finance.consumer_lending.bnpl_origination_growth: credit_granting.consumer_lending.bnpl_origination_growth
+  consumer_finance.consumer_lending.delinquency_rate_30d: credit_granting.consumer_lending.delinquency_rate_30d
+  consumer_finance.consumer_lending.embedded_finance_revenue_share: credit_granting.consumer_lending.embedded_finance_revenue_share
+  consumer_finance.consumer_lending.loan_tape_summary: credit_granting.consumer_lending.loan_tape_summary
+  consumer_finance.consumer_lending.merchant_acquiring_volume: credit_granting.consumer_lending.merchant_acquiring_volume
+  consumer_finance.consumer_lending.net_charge_off_rate: credit_granting.consumer_lending.net_charge_off_rate
+  consumer_finance.consumer_lending.origination_volume_growth: credit_granting.consumer_lending.origination_volume_growth
+  consumer_finance.consumer_lending.payment_volume: credit_granting.consumer_lending.payment_volume
+  consumer_finance.consumer_lending.portfolio_yield: credit_granting.consumer_lending.portfolio_yield
+  consumer_finance.consumer_lending.rtp_payment_volume: credit_granting.consumer_lending.rtp_payment_volume
+  consumer_finance.residential_mortgage.delinquency_rate_30d: credit_granting.residential_mortgage.delinquency_rate_30d
+  consumer_finance.residential_mortgage.origination_volume_growth: credit_granting.residential_mortgage.origination_volume_growth
+  consumer_finance.residential_mortgage.portfolio_yield: credit_granting.residential_mortgage.portfolio_yield
+  consumer_finance.residential_mortgage.residential_mortgage_book_summary: credit_granting.residential_mortgage.residential_mortgage_book_summary
+  consumer_finance.residential_mortgage.weighted_average_ltv: credit_granting.residential_mortgage.weighted_average_ltv
   finance.banking.efficiency_ratio: banking.depository.efficiency_ratio
   finance.banking.loan_to_deposit_ratio: banking.depository.loan_to_deposit_ratio
   finance.banking.net_interest_margin: banking.depository.net_interest_margin
@@ -160,9 +214,9 @@ aliases:
   financial_services.private_markets.liquidity_gate_frequency: funds.fund.liquidity_gate_frequency
   financial_services.private_markets.strategy_return_volatility: funds.fund.strategy_return_volatility
   financial_services.private_markets.tvpi: funds.fund.tvpi
-  financial_services.reits.ffo_payout_ratio: trusts.trust.ffo_payout_ratio
-  financial_services.reits.funds_from_operations: trusts.trust.funds_from_operations
-  financial_services.reits.same_store_noi_growth: trusts.trust.same_store_noi_growth
+  financial_services.reits.ffo_payout_ratio: real_estate.reit.ffo_payout_ratio
+  financial_services.reits.funds_from_operations: real_estate.reit.funds_from_operations
+  financial_services.reits.same_store_noi_growth: real_estate.reit.same_store_noi_growth
   financial_services.reits.supplemental: trusts.trust.trust_vehicle_summary
   financial_services.wealth_management.advisory_fee_yield: funds.fund.management_fee_yield
   financial_services.wealth_management.advisory_summary: funds.fund.fund_summary
@@ -177,3 +231,11 @@ aliases:
   insurance.insurance.loss_ratio: insurance.property_casualty.loss_ratio
   insurance.insurance.loss_summary: insurance.property_casualty.loss_summary
   insurance.insurance.premium_growth: insurance.property_casualty.premium_growth
+  transportation.public_transit.farebox_recovery_ratio: passenger_transit.public_transit.farebox_recovery_ratio
+  transportation.public_transit.on_time_performance: passenger_transit.public_transit.on_time_performance
+  transportation.public_transit.ridership_per_vehicle_hour: passenger_transit.public_transit.ridership_per_vehicle_hour
+  transportation.rail_passenger.farebox_recovery: passenger_transit.rail_passenger.farebox_recovery
+  transportation.rail_passenger.ridership_per_train_mile: passenger_transit.rail_passenger.ridership_per_train_mile
+  trusts.trust.ffo_payout_ratio: real_estate.reit.ffo_payout_ratio
+  trusts.trust.funds_from_operations: real_estate.reit.funds_from_operations
+  trusts.trust.same_store_noi_growth: real_estate.reit.same_store_noi_growth

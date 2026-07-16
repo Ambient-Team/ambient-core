@@ -1,0 +1,136 @@
+metrics:
+  passenger_transit.rail_passenger.ridership_per_train_mile:
+    id: 1863
+    name: Ridership per Train-Mile
+    description: Passenger boardings per train-mile operated (aggregated).
+    industry: Passenger Transit
+    type: Operational
+    unit: Passengers per train-mile
+    methodology: Ridership per Train-Mile = Total Boardings / Train-Miles Operated
+    datasource:
+    - Rail passenger operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    fpaWorkflow: Passenger rail productivity — load and schedule design.
+    segment: rail_passenger
+    slug: ridership_per_train_mile
+    calc:
+      expr: total_boardings / train_miles_operated
+      inputs:
+      - total_boardings
+      - train_miles_operated
+  passenger_transit.rail_passenger.farebox_recovery:
+    id: 1864
+    name: Rail Farebox Recovery Ratio
+    description: Passenger fare revenue as a share of fully allocated operating cost
+      (aggregated).
+    industry: Passenger Transit
+    type: Financial
+    unit: '%'
+    methodology: Farebox Recovery = (Fare Revenue / Operating Cost) × 100
+    datasource:
+    - Rail passenger operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Subsidy dependence — intercity and commuter rail.
+    segment: rail_passenger
+    slug: farebox_recovery
+    calc:
+      expr: fare_revenue / operating_cost * 100
+      inputs:
+      - fare_revenue
+      - operating_cost
+  passenger_transit.public_transit.farebox_recovery_ratio:
+    id: 1868
+    name: Transit Farebox Recovery Ratio
+    description: Fare and subsidy-eligible revenue as a share of operating expenses
+      (aggregated).
+    industry: Passenger Transit
+    type: Financial
+    unit: '%'
+    methodology: Farebox Recovery = (Operating Revenue / Operating Expenses) × 100
+    datasource:
+    - Public transit operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: annual
+    tech: FINTECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Municipal funding gap — bus and rail transit.
+    segment: public_transit
+    slug: farebox_recovery_ratio
+    calc:
+      expr: operating_revenue / operating_expenses * 100
+      inputs:
+      - operating_revenue
+      - operating_expenses
+  passenger_transit.public_transit.ridership_per_vehicle_hour:
+    id: 1869
+    name: Ridership per Vehicle Hour
+    description: Unlinked passenger trips per vehicle revenue hour (aggregated).
+    industry: Passenger Transit
+    type: Operational
+    unit: Passengers per vehicle hour
+    methodology: Ridership per Vehicle Hour = Unlinked Trips / Vehicle Revenue Hours
+    datasource:
+    - Public transit operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    fpaWorkflow: Service productivity — headway and crowding tradeoffs.
+    segment: public_transit
+    slug: ridership_per_vehicle_hour
+    calc:
+      expr: unlinked_trips / vehicle_revenue_hours
+      inputs:
+      - unlinked_trips
+      - vehicle_revenue_hours
+  passenger_transit.public_transit.on_time_performance:
+    id: 1870
+    name: On-Time Performance
+    description: Share of transit trips departing or arriving within agency on-time
+      standard (aggregated).
+    industry: Passenger Transit
+    type: Operational
+    unit: '%'
+    methodology: OTP = (On-Time Trips / Total Trips) × 100
+    datasource:
+    - Public transit operations summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: monthly
+    tech: DEEP TECH
+    higherIsBetter: true
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    fpaWorkflow: Service quality — distinct from aviation OTP thresholds.
+    segment: public_transit
+    slug: on_time_performance
+    calc:
+      expr: on_time_trips / total_trips * 100
+      inputs:
+      - on_time_trips
+      - total_trips

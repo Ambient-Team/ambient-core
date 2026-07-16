@@ -2,7 +2,8 @@ dataOptions:
   trusts.trust.trust_vehicle_summary:
     id: 1945
     name: Aggregated trust vehicle summary
-    description: Trust and listed-vehicle reporting (FFO, distributions, NOI). No beneficiary identifiers.
+    description: Trust and listed-vehicle reporting (FFO, distributions, NOI). No
+      beneficiary identifiers.
     industry: Trusts
     segment: trust
     format: Document
@@ -31,9 +32,6 @@ dataOptions:
     - name: average_trust_aua
       type: string
     metricIds:
-    - 1940
-    - 1941
-    - 1942
     - 1943
     - 1944
     lastUpdated: '2026-06-25 00:00:00'

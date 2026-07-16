@@ -583,3 +583,78 @@ metrics:
       inputs:
       - total_energy_cost
       - rentable_square_feet
+  real_estate.reit.funds_from_operations:
+    id: 1940
+    name: Funds From Operations
+    description: REIT FFO for the period (vehicle reporting, aggregated).
+    industry: Real Estate
+    type: Financial
+    unit: Currency
+    methodology: FFO per NAREIT or trust reporting definition (directly reported aggregate).
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Trust earnings — dividend coverage for vehicle investors.
+    segment: reit
+    slug: funds_from_operations
+    input: true
+  real_estate.reit.ffo_payout_ratio:
+    id: 1941
+    name: FFO Payout Ratio
+    description: Distributions paid relative to FFO.
+    industry: Real Estate
+    type: Financial
+    unit: '%'
+    methodology: FFO Payout = (Distributions / FFO) × 100
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: false
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 200
+    fpaWorkflow: Distribution safety — retained cash for growth and debt service.
+    segment: reit
+    slug: ffo_payout_ratio
+    calc:
+      expr: distributions / ffo * 100
+      inputs:
+      - distributions
+      - ffo
+  real_estate.reit.same_store_noi_growth:
+    id: 1942
+    name: REIT Same-Store NOI Growth
+    description: Year-over-year NOI growth on a same-store basis at the trust vehicle
+      level.
+    industry: Real Estate
+    type: Financial
+    unit: '%'
+    methodology: Same-Store NOI Growth = ((Current NOI − Prior NOI) / Prior NOI) ×
+      100
+    datasource:
+    - Aggregated trust vehicle summary
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    frequency: quarterly
+    tech: FINTECH
+    higherIsBetter: true
+    fpaWorkflow: Vehicle organic performance — excludes acquisition noise (property
+      ops on Real Estate orgs).
+    segment: reit
+    slug: same_store_noi_growth
+    calc:
+      expr: (current_noi - prior_noi) / prior_noi * 100
+      inputs:
+      - current_noi
+      - prior_noi
