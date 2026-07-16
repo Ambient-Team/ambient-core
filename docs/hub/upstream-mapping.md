@@ -1,6 +1,6 @@
 # Hub-and-spoke mapping (ambient-systems)
 
-**Purpose:** This vault is the floating-hub coordinator. Enabled spokes own business lane, technical lane, personal mirrors, or learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main. phd-moat is a theory root only (`enabled: false`) — never dispatched and never written by Ambient agents.
+**Purpose:** This hub is the floating-hub coordinator. Enabled spokes own business lane, technical lane, personal mirrors, or learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main. phd-moat is a theory root only (`enabled: false`) — never dispatched and never written by Ambient agents.
 
 Machine map: see mapping.json at repo root. Prose SSOT: company/strategy/governance/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Derivation from PhD: company/phd-derivation-map.md.
 
@@ -14,7 +14,7 @@ Machine map: see mapping.json at repo root. Prose SSOT: company/strategy/governa
 - **core** — Ambient-Team/ambient-core — Open-core contracts, catalog, shared pipeline. Local tree: C:/GitHub/ambient-core
 - **site** — Ambient-Team/ambientsystems.ai — Business lane: marketing, wiki, messaging, validation engine, leads. Local tree: C:/GitHub/ambientsystems.ai
 - **personal-site** — engineerID/EngineerID.github.io — Personal site and CV mirrors. Local tree: C:/GitHub/EngineerID.github.io
-- **code-signal** — engineerID/code-signal — Personal CodeSignal learning vault; hub hook for interview-prep. Local tree: C:/GitHub/code-signal
+- **code-signal** — engineerID/code-signal — Personal CodeSignal learning repository; hub hook for interview-prep. Local tree: C:/GitHub/code-signal
 
 **Theory root (not dispatched)**
 
@@ -30,7 +30,7 @@ Agents on this machine may **read** spoke and theory-root repos via localPath in
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
 - **commercial-public-sync** — Changes under commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries. Dormant outbound lives under commercial/archive/ and does not dispatch.
 - **founder-learning-sync** — Changes to commercial/learning/founder-uni/curriculum-map.md or spoke-expectations.md notify the site to refresh thin FU mirrors under internal-docs/hub/founder-uni/. Never sync notes.md or progress.md.
-- **career-public-sync** — Changes under people/cv/ or people/job-search-targeting.md notify the personal site. Canonical vault CV paths are people/cv/, not legacy career/cv/ paths referenced in older site readme text.
+- **career-public-sync** — Changes under people/cv/ or people/job-search-targeting.md notify the personal site. Canonical hub CV paths are people/cv/, not legacy career/cv/ paths referenced in older site readme text.
 - **interview-prep-learning** — Changes under people/interview-prep/ may notify code-signal when that spoke is enabled.
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
@@ -138,10 +138,10 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 
 ---
 
-## Related vault docs
+## Related hub docs
 
-- Lane 1 vs Lane 2 — AGENTS.md vault vs platform section
-- Site vs vault — AGENTS.md vault vs site section
+- Lane 1 vs Lane 2 — AGENTS.md hub vs platform section
+- Site vs hub — AGENTS.md hub vs site section
 - Platform summary — README.md platform summary section
 - CI self-heal (Cursor CLI and workflow_run bridge) — .github/hub/templates/CI_CURSOR_BRIDGE.md
 

@@ -1,2 +1,2 @@
-# Cursor SDK for CI self-heal (Pattern A/B, vault maintenance). Not required for local vault ops.
+# Cursor SDK for CI self-heal (Pattern A/B, hub maintenance). Not required for local hub ops.
 cursor-sdk==0.1.9

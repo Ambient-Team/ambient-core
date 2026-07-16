@@ -122,7 +122,7 @@ Finance contracts crosswalk to reference catalog industries via catalog/crosswal
 
 ## Roadmap intent (not yet in core contracts)
 
-ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and cross-jurisdictional real-estate metrics remain vault roadmap intent for Horizon 2 until a YAML is authored in ambient-core. Do not cite a contract file until it exists in the pinned core release.
+ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and cross-jurisdictional real-estate metrics remain hub roadmap intent for Horizon 2 until a YAML is authored in ambient-core. Do not cite a contract file until it exists in the pinned core release.
 
 ---
 
@@ -140,7 +140,7 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 
 - Lightweight YAML + Unity Catalog (no separate catalog service) -- intentional.
 - Observability and bridge contracts close Horizon 1 observability and FP and A alignment gaps.
-- Vertical finance and healthcare contracts expand diligence surface in open core without duplicating full schemas in this vault.
+- Vertical finance and healthcare contracts expand diligence surface in open core without duplicating full schemas in this hub.
 
 ---
 
