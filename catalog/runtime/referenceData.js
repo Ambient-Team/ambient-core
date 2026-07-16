@@ -106,7 +106,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -114,7 +114,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -132,7 +177,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -140,7 +185,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -1429,7 +1547,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -1437,7 +1555,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -1457,7 +1620,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -1465,7 +1628,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -2449,7 +2685,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -2457,7 +2693,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -2475,7 +2756,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -2483,7 +2764,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -3357,7 +3711,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -3365,7 +3719,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -3383,7 +3782,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -3391,7 +3790,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -3582,7 +4054,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -3590,7 +4062,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -3608,7 +4125,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -3616,7 +4133,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -3885,7 +4475,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -3893,7 +4483,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -3911,7 +4546,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -3919,7 +4554,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -4653,7 +5361,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -4661,7 +5369,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -4679,7 +5432,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -4687,7 +5440,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -5644,7 +6470,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -5652,7 +6478,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -5670,7 +6541,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -5678,7 +6549,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -6553,7 +7497,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -6561,7 +7505,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -6579,7 +7568,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -6587,7 +7576,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -6784,7 +7846,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -6792,7 +7854,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -6810,7 +7917,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -6818,7 +7925,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -6987,7 +8167,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -6995,7 +8175,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7013,7 +8238,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7021,7 +8246,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7190,7 +8488,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7198,7 +8496,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7216,7 +8559,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7224,7 +8567,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7599,7 +9015,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7607,7 +9023,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7625,7 +9086,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7633,7 +9094,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7800,7 +9334,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7808,7 +9342,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -7826,7 +9405,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -7834,7 +9413,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -8001,7 +9653,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -8009,7 +9661,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -8027,7 +9724,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -8035,7 +9732,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -8397,7 +10167,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -8405,7 +10175,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -8423,7 +10238,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -8431,7 +10246,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -8798,7 +10686,7 @@ export const REFERENCE_DATA = {
       "description": "Software used for financial record keeping and reporting.",
       "format": "Software",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -8806,7 +10694,52 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",
@@ -8824,7 +10757,7 @@ export const REFERENCE_DATA = {
       "description": "Records related to employee salaries and payments.",
       "format": "Document",
       "template": "Document",
-      "lastUpdated": "2024-07-31 14:25:08",
+      "lastUpdated": "2026-07-16 13:30:00",
       "dummyFields": [
         "Date",
         "Revenue_Streams",
@@ -8832,7 +10765,80 @@ export const REFERENCE_DATA = {
         "Asset_Values",
         "Liability_Amounts"
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month",

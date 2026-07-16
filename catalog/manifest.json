@@ -783,7 +783,19 @@
         {
           "catalogOptionKey": "real_estate.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "Allrealestateds-general-ledger",
@@ -815,22 +827,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "real_estate.core.financial_statements",
-              "id": 1082,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "real_estate.core.accounting_software",
               "id": 1088,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrealestateds-general-ledger",
-              "id": 1100,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -840,27 +841,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "real_estate.core.financial_statements",
-              "id": 1082,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "real_estate.core.accounting_software",
               "id": 1088,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrealestateds-general-ledger",
-              "id": 1100,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "real_estate.core.operating_margin",
@@ -885,12 +875,43 @@
         {
           "catalogOptionKey": "real_estate.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "real_estate.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allrealestateds-general-ledger",
@@ -953,28 +974,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "real_estate.core.financial_statements",
-              "id": 1082,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "real_estate.core.accounting_software",
               "id": 1088,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "real_estate.core.payroll_records",
               "id": 1094,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrealestateds-general-ledger",
-              "id": 1100,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -1089,12 +1100,43 @@
         {
           "catalogOptionKey": "real_estate.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "real_estate.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allrealestateds-general-ledger",
@@ -1126,28 +1168,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "real_estate.core.financial_statements",
-              "id": 1082,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "real_estate.core.accounting_software",
               "id": 1088,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "real_estate.core.payroll_records",
               "id": 1094,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrealestateds-general-ledger",
-              "id": 1100,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -1157,33 +1189,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "real_estate.core.financial_statements",
-              "id": 1082,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "real_estate.core.accounting_software",
               "id": 1088,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "real_estate.core.payroll_records",
               "id": 1094,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrealestateds-general-ledger",
-              "id": 1100,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "real_estate.core.revenue_growth",
@@ -4148,7 +4170,19 @@
         {
           "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "Allverticalfarmingds-general-ledger",
@@ -4180,22 +4214,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.financial_statements",
-              "id": 1083,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.accounting_software",
               "id": 1089,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allverticalfarmingds-general-ledger",
-              "id": 1101,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -4205,27 +4228,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.financial_statements",
-              "id": 1083,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.accounting_software",
               "id": 1089,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allverticalfarmingds-general-ledger",
-              "id": 1101,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "vertical_farming.core.operating_margin",
@@ -4250,12 +4262,43 @@
         {
           "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "vertical_farming.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allverticalfarmingds-general-ledger",
@@ -4318,28 +4361,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.financial_statements",
-              "id": 1083,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.accounting_software",
               "id": 1089,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "vertical_farming.core.payroll_records",
               "id": 1095,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allverticalfarmingds-general-ledger",
-              "id": 1101,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -4454,12 +4487,43 @@
         {
           "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "vertical_farming.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allverticalfarmingds-general-ledger",
@@ -4491,28 +4555,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.financial_statements",
-              "id": 1083,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.accounting_software",
               "id": 1089,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "vertical_farming.core.payroll_records",
               "id": 1095,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allverticalfarmingds-general-ledger",
-              "id": 1101,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -4522,33 +4576,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.financial_statements",
-              "id": 1083,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.accounting_software",
               "id": 1089,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "vertical_farming.core.payroll_records",
               "id": 1095,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allverticalfarmingds-general-ledger",
-              "id": 1101,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "vertical_farming.core.revenue_growth",
@@ -5453,12 +5497,43 @@
         {
           "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "vertical_farming.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
@@ -5498,6 +5573,20 @@
           "covered": true,
           "satisfiedBy": [
             {
+              "catalogOptionKey": "vertical_farming.core.accounting_software",
+              "id": 1089,
+              "name": "Accounting Software",
+              "field": "total_production_cost",
+              "via": "field"
+            },
+            {
+              "catalogOptionKey": "vertical_farming.core.payroll_records",
+              "id": 1095,
+              "name": "Payroll records",
+              "field": "total_production_cost",
+              "via": "field"
+            },
+            {
               "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
               "id": 10,
               "name": "Farm management systems",
@@ -5511,6 +5600,20 @@
           "kind": "measured",
           "covered": true,
           "satisfiedBy": [
+            {
+              "catalogOptionKey": "vertical_farming.core.accounting_software",
+              "id": 1089,
+              "name": "Accounting Software",
+              "field": "total_operational_cost",
+              "via": "field"
+            },
+            {
+              "catalogOptionKey": "vertical_farming.core.payroll_records",
+              "id": 1095,
+              "name": "Payroll records",
+              "field": "total_operational_cost",
+              "via": "field"
+            },
             {
               "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
               "id": 10,
@@ -5713,7 +5816,19 @@
         {
           "catalogOptionKey": "vertical_farming.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
@@ -5754,6 +5869,13 @@
           "covered": true,
           "satisfiedBy": [
             {
+              "catalogOptionKey": "vertical_farming.core.accounting_software",
+              "id": 1089,
+              "name": "Accounting Software",
+              "field": "produce_revenue",
+              "via": "field"
+            },
+            {
               "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
               "id": 10,
               "name": "Farm management systems",
@@ -5768,6 +5890,13 @@
           "covered": true,
           "satisfiedBy": [
             {
+              "catalogOptionKey": "vertical_farming.core.accounting_software",
+              "id": 1089,
+              "name": "Accounting Software",
+              "field": "total_production_cost",
+              "via": "field"
+            },
+            {
               "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
               "id": 10,
               "name": "Farm management systems",
@@ -5781,6 +5910,13 @@
           "kind": "measured",
           "covered": true,
           "satisfiedBy": [
+            {
+              "catalogOptionKey": "vertical_farming.core.accounting_software",
+              "id": 1089,
+              "name": "Accounting Software",
+              "field": "total_operational_cost",
+              "via": "field"
+            },
             {
               "catalogOptionKey": "QKVboc2mj2QQ8u2RFOF1",
               "id": 10,
@@ -5814,7 +5950,26 @@
         {
           "catalogOptionKey": "vertical_farming.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "SuYpCOlDxv3Q0Sf2xq9L",
@@ -5845,22 +6000,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.hr_records",
-              "id": 1077,
-              "name": "HR records",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.payroll_records",
               "id": 1095,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "SuYpCOlDxv3Q0Sf2xq9L",
-              "id": 9,
-              "name": "Harvest logs",
-              "via": "upload"
+              "field": "total_labor_costs",
+              "via": "field"
             }
           ]
         },
@@ -5870,27 +6014,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "vertical_farming.core.hr_records",
-              "id": 1077,
-              "name": "HR records",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "vertical_farming.core.payroll_records",
               "id": 1095,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "SuYpCOlDxv3Q0Sf2xq9L",
-              "id": 9,
-              "name": "Harvest logs",
-              "via": "upload"
+              "field": "total_harvested_kg",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "f3yEk5mEWwKhAFFQFyje",
@@ -7170,7 +7303,19 @@
         {
           "catalogOptionKey": "transportation.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "Alltransportationds-general-ledger",
@@ -7202,22 +7347,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.financial_statements",
-              "id": 1084,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.accounting_software",
               "id": 1090,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Alltransportationds-general-ledger",
-              "id": 1102,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -7227,27 +7361,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.financial_statements",
-              "id": 1084,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.accounting_software",
               "id": 1090,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Alltransportationds-general-ledger",
-              "id": 1102,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "transportation.core.operating_margin",
@@ -7272,12 +7395,43 @@
         {
           "catalogOptionKey": "transportation.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "transportation.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Alltransportationds-general-ledger",
@@ -7340,28 +7494,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.financial_statements",
-              "id": 1084,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.accounting_software",
               "id": 1090,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Alltransportationds-general-ledger",
-              "id": 1102,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -7476,12 +7620,43 @@
         {
           "catalogOptionKey": "transportation.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "transportation.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Alltransportationds-general-ledger",
@@ -7513,28 +7688,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.financial_statements",
-              "id": 1084,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.accounting_software",
               "id": 1090,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Alltransportationds-general-ledger",
-              "id": 1102,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -7544,33 +7709,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.financial_statements",
-              "id": 1084,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.accounting_software",
               "id": 1090,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Alltransportationds-general-ledger",
-              "id": 1102,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "transportation.core.revenue_growth",
@@ -8410,7 +8565,26 @@
         {
           "catalogOptionKey": "transportation.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -8428,16 +8602,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.hr_records",
-              "id": 1078,
-              "name": "HR records",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "drivers_left",
+              "via": "field"
             }
           ]
         },
@@ -8447,21 +8616,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "transportation.core.hr_records",
-              "id": 1078,
-              "name": "HR records",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "total_drivers",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "SAZkxRxYFtf1EIxBXWMk",
@@ -8757,7 +8921,26 @@
         {
           "catalogOptionKey": "transportation.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "DclVZaLbyz6Pwxt5Ctr1",
@@ -8797,19 +8980,8 @@
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "DclVZaLbyz6Pwxt5Ctr1",
-              "id": 16,
-              "name": "Maintenance logs",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "jHscrlnM67xOUF1IXfos",
-              "id": 12,
-              "name": "GPS tracking data",
-              "via": "upload"
+              "field": "total_maintenance_costs",
+              "via": "field"
             }
           ]
         },
@@ -8822,24 +8994,13 @@
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "DclVZaLbyz6Pwxt5Ctr1",
-              "id": 16,
-              "name": "Maintenance logs",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "jHscrlnM67xOUF1IXfos",
-              "id": 12,
-              "name": "GPS tracking data",
-              "via": "upload"
+              "field": "total_miles",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "transportation.rail_freight.train_utilization",
@@ -9519,7 +9680,19 @@
         {
           "catalogOptionKey": "passenger_transit.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -9537,16 +9710,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "passenger_transit.core.financial_statements",
-              "id": 2060,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "passenger_transit.core.accounting_software",
               "id": 2062,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -9556,21 +9724,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "passenger_transit.core.financial_statements",
-              "id": 2060,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "passenger_transit.core.accounting_software",
               "id": 2062,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "passenger_transit.core.operating_margin",
@@ -9595,12 +9758,43 @@
         {
           "catalogOptionKey": "passenger_transit.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "passenger_transit.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -9643,22 +9837,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "passenger_transit.core.financial_statements",
-              "id": 2060,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "passenger_transit.core.accounting_software",
               "id": 2062,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "passenger_transit.core.payroll_records",
               "id": 2063,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -9747,12 +9937,43 @@
         {
           "catalogOptionKey": "passenger_transit.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "passenger_transit.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -9770,22 +9991,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "passenger_transit.core.financial_statements",
-              "id": 2060,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "passenger_transit.core.accounting_software",
               "id": 2062,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "passenger_transit.core.payroll_records",
               "id": 2063,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -9795,27 +10012,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "passenger_transit.core.financial_statements",
-              "id": 2060,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "passenger_transit.core.accounting_software",
               "id": 2062,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "passenger_transit.core.payroll_records",
               "id": 2063,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "passenger_transit.core.revenue_growth",
@@ -10831,7 +11044,19 @@
         {
           "catalogOptionKey": "aviation.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -10849,16 +11074,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "aviation.core.financial_statements",
-              "id": 1815,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "aviation.core.accounting_software",
               "id": 1817,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -10868,21 +11088,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "aviation.core.financial_statements",
-              "id": 1815,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "aviation.core.accounting_software",
               "id": 1817,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "aviation.core.operating_margin",
@@ -10907,12 +11122,43 @@
         {
           "catalogOptionKey": "aviation.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "aviation.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -10955,22 +11201,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "aviation.core.financial_statements",
-              "id": 1815,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "aviation.core.accounting_software",
               "id": 1817,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "aviation.core.payroll_records",
               "id": 1818,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -11059,12 +11301,43 @@
         {
           "catalogOptionKey": "aviation.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "aviation.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -11082,22 +11355,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "aviation.core.financial_statements",
-              "id": 1815,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "aviation.core.accounting_software",
               "id": 1817,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "aviation.core.payroll_records",
               "id": 1818,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -11107,27 +11376,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "aviation.core.financial_statements",
-              "id": 1815,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "aviation.core.accounting_software",
               "id": 1817,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "aviation.core.payroll_records",
               "id": 1818,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "aviation.core.revenue_growth",
@@ -12713,7 +12978,19 @@
         {
           "catalogOptionKey": "manufacturing.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "Allmanufacturingds-general-ledger",
@@ -12745,22 +13022,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "manufacturing.core.financial_statements",
-              "id": 1085,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "manufacturing.core.accounting_software",
               "id": 1091,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allmanufacturingds-general-ledger",
-              "id": 1103,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -12770,27 +13036,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "manufacturing.core.financial_statements",
-              "id": 1085,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "manufacturing.core.accounting_software",
               "id": 1091,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allmanufacturingds-general-ledger",
-              "id": 1103,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "manufacturing.core.operating_margin",
@@ -12815,12 +13070,43 @@
         {
           "catalogOptionKey": "manufacturing.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "manufacturing.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allmanufacturingds-general-ledger",
@@ -12883,28 +13169,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "manufacturing.core.financial_statements",
-              "id": 1085,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "manufacturing.core.accounting_software",
               "id": 1091,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "manufacturing.core.payroll_records",
               "id": 1097,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allmanufacturingds-general-ledger",
-              "id": 1103,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -13019,12 +13295,43 @@
         {
           "catalogOptionKey": "manufacturing.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "manufacturing.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allmanufacturingds-general-ledger",
@@ -13056,28 +13363,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "manufacturing.core.financial_statements",
-              "id": 1085,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "manufacturing.core.accounting_software",
               "id": 1091,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "manufacturing.core.payroll_records",
               "id": 1097,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allmanufacturingds-general-ledger",
-              "id": 1103,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -13087,33 +13384,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "manufacturing.core.financial_statements",
-              "id": 1085,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "manufacturing.core.accounting_software",
               "id": 1091,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "manufacturing.core.payroll_records",
               "id": 1097,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allmanufacturingds-general-ledger",
-              "id": 1103,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "manufacturing.core.revenue_growth",
@@ -14659,7 +14946,19 @@
         {
           "catalogOptionKey": "healthcare.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "Allhealthcareds-general-ledger",
@@ -14691,22 +14990,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "healthcare.core.financial_statements",
-              "id": 1086,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "healthcare.core.accounting_software",
               "id": 1092,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allhealthcareds-general-ledger",
-              "id": 1104,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -14716,27 +15004,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "healthcare.core.financial_statements",
-              "id": 1086,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "healthcare.core.accounting_software",
               "id": 1092,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allhealthcareds-general-ledger",
-              "id": 1104,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "healthcare.core.operating_margin",
@@ -14761,12 +15038,43 @@
         {
           "catalogOptionKey": "healthcare.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "healthcare.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allhealthcareds-general-ledger",
@@ -14829,28 +15137,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "healthcare.core.financial_statements",
-              "id": 1086,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "healthcare.core.accounting_software",
               "id": 1092,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "healthcare.core.payroll_records",
               "id": 1098,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allhealthcareds-general-ledger",
-              "id": 1104,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -14965,12 +15263,43 @@
         {
           "catalogOptionKey": "healthcare.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "healthcare.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allhealthcareds-general-ledger",
@@ -15002,28 +15331,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "healthcare.core.financial_statements",
-              "id": 1086,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "healthcare.core.accounting_software",
               "id": 1092,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "healthcare.core.payroll_records",
               "id": 1098,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allhealthcareds-general-ledger",
-              "id": 1104,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -15033,33 +15352,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "healthcare.core.financial_statements",
-              "id": 1086,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "healthcare.core.accounting_software",
               "id": 1092,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "healthcare.core.payroll_records",
               "id": 1098,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allhealthcareds-general-ledger",
-              "id": 1104,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "healthcare.core.revenue_growth",
@@ -17855,7 +18164,19 @@
         {
           "catalogOptionKey": "restaurants.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "Allrestaurantsds-general-ledger",
@@ -17887,22 +18208,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "restaurants.core.financial_statements",
-              "id": 1087,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "restaurants.core.accounting_software",
               "id": 1093,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrestaurantsds-general-ledger",
-              "id": 1105,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -17912,27 +18222,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "restaurants.core.financial_statements",
-              "id": 1087,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "restaurants.core.accounting_software",
               "id": 1093,
               "name": "Accounting Software",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrestaurantsds-general-ledger",
-              "id": 1105,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "restaurants.core.operating_margin",
@@ -17957,12 +18256,43 @@
         {
           "catalogOptionKey": "restaurants.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "restaurants.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allrestaurantsds-general-ledger",
@@ -18025,28 +18355,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "restaurants.core.financial_statements",
-              "id": 1087,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "restaurants.core.accounting_software",
               "id": 1093,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "restaurants.core.payroll_records",
               "id": 1099,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrestaurantsds-general-ledger",
-              "id": 1105,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -18161,12 +18481,43 @@
         {
           "catalogOptionKey": "restaurants.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "restaurants.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         },
         {
           "catalogOptionKey": "Allrestaurantsds-general-ledger",
@@ -18198,28 +18549,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "restaurants.core.financial_statements",
-              "id": 1087,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "restaurants.core.accounting_software",
               "id": 1093,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "restaurants.core.payroll_records",
               "id": 1099,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrestaurantsds-general-ledger",
-              "id": 1105,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -18229,33 +18570,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "restaurants.core.financial_statements",
-              "id": 1087,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "restaurants.core.accounting_software",
               "id": 1093,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "restaurants.core.payroll_records",
               "id": 1099,
               "name": "Payroll records",
-              "via": "upload"
-            },
-            {
-              "catalogOptionKey": "Allrestaurantsds-general-ledger",
-              "id": 1105,
-              "name": "General ledger",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "restaurants.core.revenue_growth",
@@ -20317,7 +20648,19 @@
         {
           "catalogOptionKey": "life_sciences.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -20335,16 +20678,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "life_sciences.core.financial_statements",
-              "id": 1320,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "life_sciences.core.accounting_software",
               "id": 1322,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -20354,21 +20692,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "life_sciences.core.financial_statements",
-              "id": 1320,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "life_sciences.core.accounting_software",
               "id": 1322,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "life_sciences.core.operating_margin",
@@ -20393,12 +20726,43 @@
         {
           "catalogOptionKey": "life_sciences.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "life_sciences.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -20441,22 +20805,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "life_sciences.core.financial_statements",
-              "id": 1320,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "life_sciences.core.accounting_software",
               "id": 1322,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "life_sciences.core.payroll_records",
               "id": 1323,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -20545,12 +20905,43 @@
         {
           "catalogOptionKey": "life_sciences.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "life_sciences.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -20568,22 +20959,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "life_sciences.core.financial_statements",
-              "id": 1320,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "life_sciences.core.accounting_software",
               "id": 1322,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "life_sciences.core.payroll_records",
               "id": 1323,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -20593,27 +20980,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "life_sciences.core.financial_statements",
-              "id": 1320,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "life_sciences.core.accounting_software",
               "id": 1322,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "life_sciences.core.payroll_records",
               "id": 1323,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "life_sciences.core.revenue_growth",
@@ -21614,7 +21997,19 @@
         {
           "catalogOptionKey": "banking.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -21632,16 +22027,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "banking.core.financial_statements",
-              "id": 1515,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "banking.core.accounting_software",
               "id": 1517,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -21651,21 +22041,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "banking.core.financial_statements",
-              "id": 1515,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "banking.core.accounting_software",
               "id": 1517,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "banking.core.operating_margin",
@@ -21690,12 +22075,43 @@
         {
           "catalogOptionKey": "banking.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "banking.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -21738,22 +22154,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "banking.core.financial_statements",
-              "id": 1515,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "banking.core.accounting_software",
               "id": 1517,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "banking.core.payroll_records",
               "id": 1518,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -21842,12 +22254,43 @@
         {
           "catalogOptionKey": "banking.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "banking.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -21865,22 +22308,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "banking.core.financial_statements",
-              "id": 1515,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "banking.core.accounting_software",
               "id": 1517,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "banking.core.payroll_records",
               "id": 1518,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -21890,27 +22329,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "banking.core.financial_statements",
-              "id": 1515,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "banking.core.accounting_software",
               "id": 1517,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "banking.core.payroll_records",
               "id": 1518,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "banking.core.revenue_growth",
@@ -23253,7 +23688,19 @@
         {
           "catalogOptionKey": "financial_services.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -23271,16 +23718,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "financial_services.core.financial_statements",
-              "id": 1615,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "financial_services.core.accounting_software",
               "id": 1617,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -23290,21 +23732,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "financial_services.core.financial_statements",
-              "id": 1615,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "financial_services.core.accounting_software",
               "id": 1617,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "financial_services.core.operating_margin",
@@ -23329,12 +23766,43 @@
         {
           "catalogOptionKey": "financial_services.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "financial_services.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -23377,22 +23845,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "financial_services.core.financial_statements",
-              "id": 1615,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "financial_services.core.accounting_software",
               "id": 1617,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "financial_services.core.payroll_records",
               "id": 1618,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -23481,12 +23945,43 @@
         {
           "catalogOptionKey": "financial_services.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "financial_services.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -23504,22 +23999,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "financial_services.core.financial_statements",
-              "id": 1615,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "financial_services.core.accounting_software",
               "id": 1617,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "financial_services.core.payroll_records",
               "id": 1618,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -23529,27 +24020,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "financial_services.core.financial_statements",
-              "id": 1615,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "financial_services.core.accounting_software",
               "id": 1617,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "financial_services.core.payroll_records",
               "id": 1618,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "financial_services.core.revenue_growth",
@@ -24684,7 +25171,19 @@
         {
           "catalogOptionKey": "funds.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -24702,16 +25201,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "funds.core.financial_statements",
-              "id": 1918,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "funds.core.accounting_software",
               "id": 1920,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -24721,21 +25215,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "funds.core.financial_statements",
-              "id": 1918,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "funds.core.accounting_software",
               "id": 1920,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "funds.core.operating_margin",
@@ -24760,12 +25249,43 @@
         {
           "catalogOptionKey": "funds.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "funds.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -24808,22 +25328,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "funds.core.financial_statements",
-              "id": 1918,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "funds.core.accounting_software",
               "id": 1920,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "funds.core.payroll_records",
               "id": 1921,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -24912,12 +25428,43 @@
         {
           "catalogOptionKey": "funds.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "funds.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -24935,22 +25482,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "funds.core.financial_statements",
-              "id": 1918,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "funds.core.accounting_software",
               "id": 1920,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "funds.core.payroll_records",
               "id": 1921,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -24960,27 +25503,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "funds.core.financial_statements",
-              "id": 1918,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "funds.core.accounting_software",
               "id": 1920,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "funds.core.payroll_records",
               "id": 1921,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "funds.core.revenue_growth",
@@ -27578,7 +28117,19 @@
         {
           "catalogOptionKey": "trusts.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -27596,16 +28147,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "trusts.core.financial_statements",
-              "id": 1946,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "trusts.core.accounting_software",
               "id": 1948,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -27615,21 +28161,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "trusts.core.financial_statements",
-              "id": 1946,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "trusts.core.accounting_software",
               "id": 1948,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "trusts.core.operating_margin",
@@ -27654,12 +28195,43 @@
         {
           "catalogOptionKey": "trusts.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "trusts.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -27702,22 +28274,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "trusts.core.financial_statements",
-              "id": 1946,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "trusts.core.accounting_software",
               "id": 1948,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "trusts.core.payroll_records",
               "id": 1949,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -27806,12 +28374,43 @@
         {
           "catalogOptionKey": "trusts.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "trusts.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -27829,22 +28428,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "trusts.core.financial_statements",
-              "id": 1946,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "trusts.core.accounting_software",
               "id": 1948,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "trusts.core.payroll_records",
               "id": 1949,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -27854,27 +28449,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "trusts.core.financial_statements",
-              "id": 1946,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "trusts.core.accounting_software",
               "id": 1948,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "trusts.core.payroll_records",
               "id": 1949,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "trusts.core.revenue_growth",
@@ -28690,7 +29281,19 @@
         {
           "catalogOptionKey": "insurance.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -28708,16 +29311,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "insurance.core.financial_statements",
-              "id": 1621,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "insurance.core.accounting_software",
               "id": 1623,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -28727,21 +29325,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "insurance.core.financial_statements",
-              "id": 1621,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "insurance.core.accounting_software",
               "id": 1623,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "insurance.core.operating_margin",
@@ -28766,12 +29359,43 @@
         {
           "catalogOptionKey": "insurance.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "insurance.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -28814,22 +29438,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "insurance.core.financial_statements",
-              "id": 1621,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "insurance.core.accounting_software",
               "id": 1623,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "insurance.core.payroll_records",
               "id": 1624,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -28918,12 +29538,43 @@
         {
           "catalogOptionKey": "insurance.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "insurance.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -28941,22 +29592,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "insurance.core.financial_statements",
-              "id": 1621,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "insurance.core.accounting_software",
               "id": 1623,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "insurance.core.payroll_records",
               "id": 1624,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -28966,27 +29613,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "insurance.core.financial_statements",
-              "id": 1621,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "insurance.core.accounting_software",
               "id": 1623,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "insurance.core.payroll_records",
               "id": 1624,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "insurance.core.revenue_growth",
@@ -30062,7 +30705,19 @@
         {
           "catalogOptionKey": "credit_granting.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -30080,16 +30735,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "credit_granting.core.financial_statements",
-              "id": 1715,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "credit_granting.core.accounting_software",
               "id": 1717,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -30099,21 +30749,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "credit_granting.core.financial_statements",
-              "id": 1715,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "credit_granting.core.accounting_software",
               "id": 1717,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "credit_granting.core.operating_margin",
@@ -30138,12 +30783,43 @@
         {
           "catalogOptionKey": "credit_granting.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "credit_granting.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -30186,22 +30862,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "credit_granting.core.financial_statements",
-              "id": 1715,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "credit_granting.core.accounting_software",
               "id": 1717,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "credit_granting.core.payroll_records",
               "id": 1718,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -30290,12 +30962,43 @@
         {
           "catalogOptionKey": "credit_granting.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "credit_granting.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -30313,22 +31016,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "credit_granting.core.financial_statements",
-              "id": 1715,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "credit_granting.core.accounting_software",
               "id": 1717,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "credit_granting.core.payroll_records",
               "id": 1718,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -30338,27 +31037,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "credit_granting.core.financial_statements",
-              "id": 1715,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "credit_granting.core.accounting_software",
               "id": 1717,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "credit_granting.core.payroll_records",
               "id": 1718,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "credit_granting.core.revenue_growth",
@@ -32637,7 +33332,19 @@
         {
           "catalogOptionKey": "software_saas.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -32655,16 +33362,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "software_saas.core.financial_statements",
-              "id": 2055,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "software_saas.core.accounting_software",
               "id": 2057,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -32674,21 +33376,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "software_saas.core.financial_statements",
-              "id": 2055,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "software_saas.core.accounting_software",
               "id": 2057,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "software_saas.core.operating_margin",
@@ -32713,12 +33410,43 @@
         {
           "catalogOptionKey": "software_saas.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "software_saas.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -32761,22 +33489,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "software_saas.core.financial_statements",
-              "id": 2055,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "software_saas.core.accounting_software",
               "id": 2057,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "software_saas.core.payroll_records",
               "id": 2058,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -32865,12 +33589,43 @@
         {
           "catalogOptionKey": "software_saas.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "software_saas.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -32888,22 +33643,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "software_saas.core.financial_statements",
-              "id": 2055,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "software_saas.core.accounting_software",
               "id": 2057,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "software_saas.core.payroll_records",
               "id": 2058,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -32913,27 +33664,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "software_saas.core.financial_statements",
-              "id": 2055,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "software_saas.core.accounting_software",
               "id": 2057,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "software_saas.core.payroll_records",
               "id": 2058,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "software_saas.core.revenue_growth",
@@ -34308,7 +35055,19 @@
         {
           "catalogOptionKey": "retail.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         }
       ],
       "calc": {
@@ -34326,16 +35085,11 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "retail.core.financial_statements",
-              "id": 1641,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "retail.core.accounting_software",
               "id": 1643,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         },
@@ -34345,21 +35099,16 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "retail.core.financial_statements",
-              "id": 1641,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "retail.core.accounting_software",
               "id": 1643,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "cogs",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "retail.core.operating_margin",
@@ -34384,12 +35133,43 @@
         {
           "catalogOptionKey": "retail.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "retail.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -34432,22 +35212,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "retail.core.financial_statements",
-              "id": 1641,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "retail.core.accounting_software",
               "id": 1643,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "retail.core.payroll_records",
               "id": 1644,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
@@ -34536,12 +35312,43 @@
         {
           "catalogOptionKey": "retail.core.accounting_software",
           "name": "Accounting Software",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
         },
         {
           "catalogOptionKey": "retail.core.payroll_records",
           "name": "Payroll records",
-          "fields": []
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
         }
       ],
       "calc": {
@@ -34559,22 +35366,18 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "retail.core.financial_statements",
-              "id": 1641,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "retail.core.accounting_software",
               "id": 1643,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             },
             {
               "catalogOptionKey": "retail.core.payroll_records",
               "id": 1644,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "net_income",
+              "via": "field"
             }
           ]
         },
@@ -34584,27 +35387,23 @@
           "covered": true,
           "satisfiedBy": [
             {
-              "catalogOptionKey": "retail.core.financial_statements",
-              "id": 1641,
-              "name": "Financial statements",
-              "via": "upload"
-            },
-            {
               "catalogOptionKey": "retail.core.accounting_software",
               "id": 1643,
               "name": "Accounting Software",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             },
             {
               "catalogOptionKey": "retail.core.payroll_records",
               "id": 1644,
               "name": "Payroll records",
-              "via": "upload"
+              "field": "revenue",
+              "via": "field"
             }
           ]
         }
       ],
-      "inputCoverage": "upload"
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "retail.core.revenue_growth",
@@ -35553,7 +36352,52 @@
         944,
         956
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -35567,7 +36411,80 @@
         956,
         944
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -36720,7 +37637,52 @@
         20,
         21
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -36736,7 +37698,80 @@
         18,
         20
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -37624,7 +38659,52 @@
         946,
         958
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -37640,7 +38720,80 @@
         14,
         13
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -38401,7 +39554,52 @@
         2023,
         2025
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -38415,7 +39613,80 @@
         2025,
         2023
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -38574,7 +39845,52 @@
         1803,
         1805
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -38588,7 +39904,80 @@
         1805,
         1803
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -38827,7 +40216,52 @@
         947,
         959
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -38841,7 +40275,80 @@
         959,
         947
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -39515,7 +41022,52 @@
         948,
         960
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -39529,7 +41081,80 @@
         960,
         948
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -40417,7 +42042,52 @@
         949,
         961
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -40431,7 +42101,80 @@
         961,
         949
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41243,7 +42986,52 @@
         1303,
         1305
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41257,7 +43045,80 @@
         1305,
         1303
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41424,7 +43285,52 @@
         1503,
         1505
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41438,7 +43344,80 @@
         1505,
         1503
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41579,7 +43558,52 @@
         1603,
         1605
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41593,7 +43617,80 @@
         1605,
         1603
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41734,7 +43831,52 @@
         1973,
         1975
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -41748,7 +43890,80 @@
         1975,
         1973
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42087,7 +44302,52 @@
         1988,
         1990
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42101,7 +44361,80 @@
         1990,
         1988
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42240,7 +44573,52 @@
         1623,
         1625
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42254,7 +44632,80 @@
         1625,
         1623
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42393,7 +44844,52 @@
         1703,
         1705
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42407,7 +44903,80 @@
         1705,
         1703
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42729,7 +45298,52 @@
         2043,
         2045
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -42743,7 +45357,80 @@
         2045,
         2043
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -43070,7 +45757,52 @@
         1643,
         1645
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
@@ -43084,7 +45816,80 @@
         1645,
         1643
       ],
-      "fields": [],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
       "fieldCoverage": "upload",
       "collectionFrequency": "monthly",
       "grain": "month"
