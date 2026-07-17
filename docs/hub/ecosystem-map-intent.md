@@ -2,7 +2,7 @@
 
 **Version:** 2
 **Date:** July 13, 2026
-**Purpose:** Agent and human SSOT for repositories listed in mapping.json. Covers the floating hub, two execution lanes, personal spokes, PhD theory root, ownership, hub dispatch, spoke receivers, secrets, branching, and edit routing. Machine inventory: mapping.json at hub root. Operations detail: MAPPING.md. Branching SSOT: ecosystem-branching.md.
+**Purpose:** Agent and human SSOT for repositories listed in mapping.json. Covers the floating hub, two execution lanes, personal spokes, ownership, hub dispatch, spoke receivers, upward spoke signals, secrets, branching, and edit routing. Machine inventory: mapping.json at hub root. Operations detail: MAPPING.md. Branching SSOT: ecosystem-branching.md. Strategy cycle: ../strategy-cycle.md.
 
 Platform summary: see README Platform Summary -- ../../../README.md#platform-summary.
 
@@ -13,17 +13,16 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - Before cross-repo work, hub-sync PR review, or choosing which local clone to open.
 - When hub Active focus should reorient the business lane (site) or the technical lane (platform).
 - When unsure whether finance, legal, or archive paths trigger dispatch (they do not).
-- Before any PhD-adjacent task: agents never create, edit, or delete files under phd-moat.
+- Before changing hub-focus or roadmap: run company/strategy/strategy-cycle.md and list spoke signals from inbox/returns/.
 
 ---
 
 ## Floating hub and two lanes
 
-**Floating hub.** ambient-systems is the only coordination hub. Active focus moves over time via `_data/ecosystem/hub-focus.yaml`. Spokes reorient around that focus; they do not invent a competing center. PhD is not the hub and is not mature enough to act as hub.
+**Floating hub.** ambient-systems is the only coordination hub. Active focus moves over time via `_data/ecosystem/hub-focus.yaml` (set / review / retire in strategy-cycle.md). Spokes reorient around that focus; they do not invent a competing center.
 
 - **Business lane:** ambientsystems.ai -- company-external OS for validation, marketing, sales, and later commercial P and L.
 - **Technical lane:** ambient-systems-platform plus ambient-core -- product engine (app, Databricks bundles, jobs, CI) and contract or catalog YAML SSOT.
-- **Theory root:** phd-moat -- read-only, one-way into Ambient Systems company operating design via company/phd-derivation-map.md. PhD informs how Ambient Systems runs itself (hub and business lane), not product doctrine or client claims.
 
 ---
 
@@ -35,8 +34,8 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - GitHub: EngineerID/ambient-systems
 - Class: hub (floating focus)
 - Local: C:/GitHub/ambient-systems
-- Visibility: private hub
-- Primary edits: company/ (including phd-derivation-map.md and strategy/), corporate/, product/, commercial/, people/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
+- Visibility: private repository
+- Primary edits: company/ (including operating-lanes.md and strategy/), corporate/, product/, commercial/, people/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
 
 **Spoke platform (technical lane)**
 
@@ -78,29 +77,21 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - Local: C:/GitHub/code-signal
 - Role: Personal CodeSignal learning repository; optional interview-prep hook from hub
 
-**Theory root phd-moat (not a dispatch spoke)**
-
-- id: phd-moat
-- GitHub: EngineerID/phd-moat
-- Class: theory-root
-- Local: C:/GitHub/phd-moat
-- enabled: false (no hub-sync; no Ambient agent writes)
-- Role: Doctoral theory root -- one-way into Ambient Systems company operating design only (not product claims)
-
 Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branching.md (short branching copy).
 
 ---
 
 ## Lanes and canonical ownership
 
-**Floating hub (this hub)**
+**Floating hub (this repository)**
 
 - Active focus pointer, doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops (until site fully owns the business OS), people and career validation.
 - Ecosystem PM snapshots and Gold dashboard: operations/ecosystem/ (sync_ecosystem_dashboard.py; Actions ecosystem-dashboard-sync).
-- Hub-test customer package (production orchestration from hub): commercial/customers/hub-test/.
+- Hub-test customer package (production orchestration from repository): commercial/customers/hub-test/.
 - Ecosystem inbox: inbox/ -- PROTOCOL.md.
 - Founder Uni: commercial/learning/founder-uni/.
-- PhD derivation map: company/phd-derivation-map.md (Ambient-owned; never write into PhD).
+- Operating lanes: company/operating-lanes.md.
+- Strategy cycle and decision models: company/strategy/strategy-cycle.md and decision-models.md.
 - No production contract YAML SSOT and no deployable platform code.
 
 **Technical lane (platform plus core)**
@@ -110,21 +101,21 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS. Hub commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md. Business charter: site internal-docs/commercial/business-engine-charter.md.
+- Public and company-external commercial OS. Repository commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md. Business charter: site internal-docs/commercial/business-engine-charter.md.
 
 **Personal spokes**
 
 - Career artifacts and learning repository. Not company doctrine or GTM SSOT.
 
-**Theory root (PhD company-ops framing)**
+**Upward spoke signals (spoke to hub)**
 
-- Read-only. Only defended doctoral research production may enter the core of how Ambient Systems runs itself.
-- Not for product claims or client benefit programmes.
-- Material not yet defended is not used in that core; if company ops require something undefended, keep it peripheral and only at the minimum necessary scope.
-- Client overlap stays two separate interactions: academic (A) via PhD, and product (B) via the business lane. Do not merge them.
-- Never reverse-sync Ambient proprietary material, ops, or client data into PhD.
+- Spokes file strategy-relevant returns under inbox/returns/ using inbox/templates/spoke-signal.md (capacity, reliability, market_evidence, pin_maturity, other).
+- Strategy cycle must list those signals before changing hub-focus or roadmap priorities. See strategy-cycle.md and inbox/PROTOCOL.md.
+- Technical lane: platform/core reliability and pin maturity are first-class inputs.
+- Business lane: site market_evidence returns are first-class even while GTM is frozen.
+- Non-goal v1: automatic repository_dispatch spoke to hub.
 
-Agent sections: AGENTS.md floating hub, PhD theory root, hub vs site.
+Agent sections: AGENTS.md floating hub, research firewall, repository vs site.
 
 ---
 
@@ -132,7 +123,7 @@ Agent sections: AGENTS.md floating hub, PhD theory root, hub vs site.
 
 **Trigger:** Push to hub main under path filters in .github/workflows/hub-dispatch.yml (company/strategy/, product/, commercial/, people/, mapping.json).
 
-**Script:** .github/hub/dispatch.sh reads mapping.json, applies globalExcludes, matches syncRules, POSTs repository_dispatch with event_type ambient_hub_sync only to spokes with enabled: true. phd-moat is never dispatched.
+**Script:** .github/hub/dispatch.sh reads mapping.json, applies globalExcludes, matches syncRules, POSTs repository_dispatch with event_type ambient_hub_sync only to spokes with enabled: true.
 
 **Payload v2:** client_payload.data holds source_repo, sha, sourceRef, mappingVersion, ruleIds, payloadProfiles, changedPaths (at most 50 listed), pathCount, pathsTruncated.
 
@@ -165,7 +156,7 @@ Full secrets and troubleshooting: MAPPING.md.
 - Spokes: site
 - Profile: site-gtm
 - Site receiver copies: internal-docs/hub/upstream-mapping.md, internal-docs/hub/hub-validation-readme.md (commercial/validation/README.md), internal-docs/hub/ecosystem-map-intent.md
-- Note: dormant outbound and playbook hub leftovers live under commercial/archive/ (excluded). Site SSOT: ambientsystems.ai internal-docs/commercial/.
+- Note: dormant outbound and playbook repository leftovers live under commercial/archive/ (excluded). Site SSOT: ambientsystems.ai internal-docs/commercial/.
 
 **founder-learning-sync**
 
@@ -202,8 +193,8 @@ Full secrets and troubleshooting: MAPPING.md.
 
 Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
-- operations/finance/ and corporate/ -- confidential; excluded from dispatch (corporate is the non-PhD lane)
-- commercial/validation/ -- internal-contingent; may dispatch to site when paths match commercial-public-sync; PhD aligned via company/phd-derivation-map.md
+- operations/finance/ and corporate/ -- confidential; excluded from dispatch (corporation shell)
+- commercial/validation/ -- internal-contingent; may dispatch to site when paths match commercial-public-sync
 - people/ -- internal-contingent; career paths may dispatch to personal spokes
 
 ---
@@ -252,7 +243,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 4. Public messaging or validation mirror -- hub commercial/ and site internal-docs/ or wait for hub-sync PR on site.
 5. CV or interview prep public mirror -- hub people/ then personal spoke hub-sync PR.
 
-**Hub cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
+**Repository cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
 
 **Integration target hint:** py -3 _main/scripts/suggest_branch_name.py --from-git prints main as merge target under branch-map v4.
 
@@ -277,6 +268,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 - Spoke template -- .github/hub/templates/spoke-ecosystem.md
 - Cursor policy -- cursor-integrations.md
 - Career vs company validation -- people/validation-bridge.md
-- PhD derivation (company ops only) -- company/phd-derivation-map.md
+- Operating lanes -- ../../../company/operating-lanes.md
+- Strategy cycle -- ../strategy-cycle.md
 
 *Last alignment: July 13, 2026 | Public doctrine alignment*

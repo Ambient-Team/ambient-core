@@ -118,11 +118,15 @@ Finance vertical Gold products:
 
 Finance contracts crosswalk to reference catalog industries via catalog/crosswalk.yaml. Regenerate catalog runtime artifacts with ambient-catalog-generate in core.
 
+### Reference catalog industry identity (ISIC-first)
+
+Catalog vertical packs in ambient-core are analysis lenses tagged with official codes. Identity is ISIC Rev.4 class-level primary; NAICS 2022, NACE Rev.2, and GICS 2023 are published equivalents on the same pack (crosswalk), not competing primary trees. Manifest export may include derived ISIC section, division, and group for hierarchy browsing. Pack YAML and coverage roadmap live only in ambient-core (docs/catalog-industry-coverage.md); this repository does not duplicate pack tables. Lane 1 tracking: backlog/technical-backlog.md -- ISIC Rev.4 hierarchy full catalog alignment.
+
 ---
 
 ## Roadmap intent (not yet in core contracts)
 
-ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and cross-jurisdictional real-estate metrics remain hub roadmap intent for Horizon 2 until a YAML is authored in ambient-core. Do not cite a contract file until it exists in the pinned core release.
+ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and cross-jurisdictional real-estate metrics remain repository roadmap intent for Horizon 2 until a YAML is authored in ambient-core. Do not cite a contract file until it exists in the pinned core release.
 
 ---
 
@@ -140,7 +144,7 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 
 - Lightweight YAML + Unity Catalog (no separate catalog service) -- intentional.
 - Observability and bridge contracts close Horizon 1 observability and FP and A alignment gaps.
-- Vertical finance and healthcare contracts expand diligence surface in open core without duplicating full schemas in this hub.
+- Vertical finance and healthcare contracts expand diligence surface in open core without duplicating full schemas in this repository.
 
 ---
 
@@ -152,4 +156,4 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 - Executive summary -- 05_executive-summary.md
 - Repo map (legacy vs platform vs core) -- ../../product/engineering/LEGACY-vs-PLATFORM.md
 
-*Last alignment: July 13, 2026 | Public doctrine alignment*
+*Last alignment: July 16, 2026 | Public doctrine alignment*
