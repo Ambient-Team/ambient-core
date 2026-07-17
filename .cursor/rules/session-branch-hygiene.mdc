@@ -14,10 +14,19 @@ Local short form: docs/hub/branching.md
 - Never commit or push to main. Even one-line fixes use repo/short-kebab-scope plus a PR.
 - Never force-push main. Prefer small scoped PRs.
 
+## Existing work isolation
+
+1. Before the first new commit, inspect working-tree changes, commits not on main, and open PRs.
+2. If an existing commit or user change belongs to another task, verify its PR state and keep it separate. Never amend it or include it in the new task commit or PR.
+3. If the primary worktree is dirty or on another active branch, create an isolated worktree and new repo/* branch from updated origin/main.
+4. Give the new task its own commit and PR. Report unrelated PRs separately unless the user asks to resolve them.
+
 ## Session close-out
 
-1. Open or update a PR for in-session commits.
-2. When CI is green and the user asked for the work: merge, confirm head deleted, prune local.
-3. If abandoning: close the PR and delete the remote branch.
-4. Delete orphan hub-sync or cursor heads if auto-delete missed them.
-5. Prefer one open repo/* PR; do not leave ready PRs after the session.
+1. After summarizing completed work and creating its commit, immediately push the branch and open or update its PR into main.
+2. When required checks are green and the user asked for the work, merge the PR in the same session.
+3. A committed task is not closed until its PR is merged or explicitly abandoned.
+4. After merge: confirm the remote head is deleted, fetch with prune, delete the local repo/* branch and isolated worktree, and return the primary worktree to updated main.
+5. If abandoning: close the PR, delete the remote and local branches and isolated worktree, prune, and return the primary worktree to updated main.
+6. Before the final response, list open PRs and non-main branches. Delete orphan hub-sync or cursor heads if auto-delete missed them.
+7. Prefer one open repo/* PR; do not leave a ready in-session PR after the session.
