@@ -154,6 +154,7 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 - User journey -- 04_user-journey.md
 - Strategy -- 01_internal-master-strategy.md
 - Executive summary -- 05_executive-summary.md
+- Demo and scale value -- 06_demo-and-scale-value.md
 - Repo map (legacy vs platform vs core) -- ../../product/engineering/LEGACY-vs-PLATFORM.md
 
-*Last alignment: July 16, 2026 | Public doctrine alignment*
+*Last alignment: July 17, 2026 | Public doctrine alignment*
