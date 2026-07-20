@@ -13,7 +13,7 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - Before cross-repo work, hub-sync PR review, or choosing which local clone to open.
 - When hub Active focus should reorient the business lane (site) or the technical lane (platform).
 - When unsure whether finance, legal, or archive paths trigger dispatch (they do not).
-- Before changing hub-focus or roadmap: run company/strategy/strategy-cycle.md and list spoke signals from inbox/returns/.
+- Before changing hub-focus or roadmap: run commercial/strategy/strategy-cycle.md and list spoke signals from inbox/returns/.
 
 ---
 
@@ -35,7 +35,7 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - Class: hub (floating focus)
 - Local: C:/GitHub/ambient-systems
 - Visibility: private repository
-- Primary edits: company/ (including operating-lanes.md and strategy/), corporate/, product/, commercial/, people/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
+- Primary edits: commercial/ (hypotheses-centered OS), interface/operating-lanes.md, interface/, corporate/, product/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
 
 **Spoke platform (technical lane)**
 
@@ -86,12 +86,12 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 **Floating hub (this repository)**
 
 - Active focus pointer, doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops (until site fully owns the business OS), people and career validation.
-- Ecosystem PM snapshots and Gold dashboard: operations/ecosystem/ (sync_ecosystem_dashboard.py; Actions ecosystem-dashboard-sync).
+- Hub Active focus: `_data/ecosystem/hub-focus.yaml` (Gold dashboard removed).
 - Hub-test customer package (production orchestration from repository): commercial/customers/hub-test/.
+- Company validation cheat-sheet: commercial/hypotheses.md.
 - Ecosystem inbox: inbox/ -- PROTOCOL.md.
-- Founder Uni: commercial/learning/founder-uni/.
-- Operating lanes: company/operating-lanes.md.
-- Strategy cycle and decision models: company/strategy/strategy-cycle.md and decision-models.md.
+- Operating lanes: interface/operating-lanes.md.
+- Strategy cycle and decision models: commercial/strategy/strategy-cycle.md and decision-models.md.
 - No production contract YAML SSOT and no deployable platform code.
 
 **Technical lane (platform plus core)**
@@ -101,7 +101,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS. Repository commercial/ and site internal-docs/ stay aligned per commercial/README.md and people/validation-bridge.md. Business charter: site internal-docs/commercial/business-engine-charter.md.
+- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/people/validation-bridge.md.
 
 **Personal spokes**
 
@@ -137,10 +137,10 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **strategy-platform-intent**
 
-- Hub paths: company/strategy/** and company/strategy/backlog/**
+- Hub paths: commercial/strategy/** and commercial/strategy/backlog/**; interface/**
 - Spokes: platform, core
 - Profile: platform-intent
-- Core receiver copies: docs/hub/upstream-mapping.md (MAPPING.md), docs/hub/data-product-contracts-intent.md (company/strategy/03_data-product-contracts.md), docs/hub/ecosystem-map-intent.md (company/strategy/governance/ecosystem-map.md)
+- Core receiver copies: docs/hub/upstream-mapping.md (MAPPING.md), docs/hub/data-product-contracts-intent.md (company/strategy/03_data-product-contracts.md), docs/hub/ecosystem-map-intent.md (interface/ecosystem-map.md)
 - Platform receiver copies: docs/upstream-mapping.md, docs/hub/repos-ecosystem.md (REPOS.md), docs/hub/data-product-contracts-intent.md, docs/hub/ecosystem-map-intent.md
 
 **product-engineering-intent**
@@ -152,30 +152,22 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **commercial-public-sync**
 
-- Hub paths: commercial/validation/**
+- Hub paths: commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/**, spokes/site/public/**, spokes/site/website/**, commercial/playbook/**, commercial/charter.md
 - Spokes: site
 - Profile: site-gtm
-- Site receiver copies: internal-docs/hub/upstream-mapping.md, internal-docs/hub/hub-validation-readme.md (commercial/validation/README.md), internal-docs/hub/ecosystem-map-intent.md
-- Note: dormant outbound and playbook repository leftovers live under commercial/archive/ (excluded). Site SSOT: ambientsystems.ai internal-docs/commercial/.
-
-**founder-learning-sync**
-
-- Hub paths: commercial/learning/founder-uni/curriculum-map.md, commercial/learning/founder-uni/spoke-expectations.md
-- Spokes: site
-- Profile: site-gtm
-- Site receiver copies: internal-docs/hub/founder-uni/curriculum-map.md, internal-docs/hub/founder-uni/spoke-expectations.md
-- Never sync notes.md or progress.md
+- Site receiver: refresh mirrors from hub commercial (site remains deploy tree)
+- Note: hub commercial is SSOT for instructions and public copy; site publishes.
 
 **career-public-sync**
 
-- Hub paths: people/cv/**, people/job-search-targeting.md
+- Hub paths: commercial/people/cv/**, commercial/people/job-search-targeting.md
 - Spokes: personal-site
 - Profile: cv-public
 - Personal-site receiver copies: docs/hub/upstream-mapping.md, hub-sync/cv/ivan-damnjanovic.md, docs/hub/ecosystem-map-intent.md
 
 **interview-prep-learning**
 
-- Hub paths: people/interview-prep/**
+- Hub paths: commercial/people/interview-prep/**
 - Spokes: code-signal
 - Profile: interview-prep
 - Code-signal receiver copies: docs/hub/upstream-mapping.md, hub-sync/interview-prep/two-question-answers.md, docs/hub/ecosystem-map-intent.md
@@ -185,7 +177,7 @@ Full secrets and troubleshooting: MAPPING.md.
 - operations/finance/
 - corporate/ (legal, archive, and other corporate lane paths)
 - assets/archive/
-- commercial/archive/
+- commercial/archive/ (retired path; keep exclude harmless)
 
 ---
 
@@ -194,7 +186,7 @@ Full secrets and troubleshooting: MAPPING.md.
 Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 - operations/finance/ and corporate/ -- confidential; excluded from dispatch (corporation shell)
-- commercial/validation/ -- internal-contingent; may dispatch to site when paths match commercial-public-sync
+- commercial/hypotheses.md -- internal-contingent; may dispatch to site when paths match commercial-public-sync
 - people/ -- internal-contingent; career paths may dispatch to personal spokes
 
 ---
@@ -252,7 +244,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 ## Non-goals
 
 - Hub dispatch does not deploy Databricks or run platform jobs.
-- Hub dispatch does not sync finance, legal, assets/archive/, or commercial/archive/.
+- Hub dispatch does not sync finance, legal, or assets/archive/.
 - Hub mirrors on spokes are intent and reference copies; execution SSOT stays in each repo tree.
 - Hub dispatch does not bump ambient-core submodule pins on platform.
 
@@ -267,8 +259,8 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 - Short ecosystem orientation -- REPOS.md
 - Spoke template -- .github/hub/templates/spoke-ecosystem.md
 - Cursor policy -- cursor-integrations.md
-- Career vs company validation -- people/validation-bridge.md
-- Operating lanes -- ../../../company/operating-lanes.md
+- Career vs company validation -- commercial/people/validation-bridge.md
+- Operating lanes -- ../../../interface/operating-lanes.md
 - Strategy cycle -- ../strategy-cycle.md
 
 *Last alignment: July 13, 2026 | Public doctrine alignment*

@@ -2,7 +2,7 @@
 
 **Purpose:** This repository is the floating-hub coordinator. Enabled spokes own business lane, technical lane, personal mirrors, or learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main.
 
-Machine map: see mapping.json at repo root. Prose SSOT: company/strategy/governance/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Company ops start: company/operating-lanes.md. Strategy cycle: company/strategy/strategy-cycle.md.
+Machine map: see mapping.json at repo root. Prose SSOT: interface/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Company ops start: interface/operating-lanes.md. Strategy cycle: commercial/strategy/strategy-cycle.md.
 
 ---
 
@@ -22,15 +22,14 @@ Agents on this machine may **read** spoke repos via localPath in mapping.json. T
 
 ## Sync rules (summary)
 
-- **strategy-platform-intent** — Changes under company/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
+- **strategy-platform-intent** — Changes under commercial/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
-- **commercial-public-sync** — Changes under commercial/validation/ notify the site repo for messaging or validation mirror updates per commercial/README.md boundaries. Dormant outbound lives under commercial/archive/ and does not dispatch.
-- **founder-learning-sync** — Changes to commercial/learning/founder-uni/curriculum-map.md or spoke-expectations.md notify the site to refresh thin FU mirrors under internal-docs/hub/founder-uni/. Never sync notes.md or progress.md.
-- **career-public-sync** — Changes under people/cv/ or people/job-search-targeting.md notify the personal site. Canonical repository CV paths are people/cv/, not legacy career/cv/ paths referenced in older site readme text.
-- **interview-prep-learning** — Changes under people/interview-prep/ may notify code-signal when that spoke is enabled.
+- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/, spokes/site/public/, spokes/site/website/, commercial/playbook/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
+- **career-public-sync** — Changes under commercial/people/cv/ or commercial/people/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/people/cv/, not legacy career/cv/ paths referenced in older site readme text.
+- **interview-prep-learning** — Changes under commercial/people/interview-prep/ may notify code-signal when that spoke is enabled.
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
-**Global excludes:** operations/finance/, corporate/ (including legal and archive), assets/archive/, and commercial/archive/ never trigger dispatch.
+**Global excludes:** operations/finance/, corporate/ (including legal and archive), assets/archive/, and commercial/archive/ (path retired; keep exclude harmless) never trigger dispatch.
 
 **Inbox:** Ecosystem landing and reverse-consolidation live under inbox/ (PROTOCOL.md). Inbox paths do not have a dedicated sync rule in v1; triage into watched prefixes above so spokes are notified. Spoke outcomes that need hub decisions land in inbox/returns/ (manual or agent-assisted; no reverse repository_dispatch yet).
 
@@ -85,11 +84,11 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 4. Push the branch with the org dispatch PAT secret (see below), not GITHUB_TOKEN alone, so CI can run on the pull request.
 5. Open a pull request. Never push directly to main.
 6. **Merge policy:** do not merge hub-sync PRs until required CI is green on the PR. Pattern A remediate runs only on failed hub-sync pull_request CI, not on push to main.
-7. **After merge:** delete the `hub-sync/*` head branch (enable auto-delete in GitHub PR settings). See company/strategy/governance/ecosystem-branching.md section 6.
+7. **After merge:** delete the `hub-sync/*` head branch (enable auto-delete in GitHub PR settings). See interface/ecosystem-branching.md section 6.
 
-**Branching SSOT for all repos:** company/strategy/governance/ecosystem-branching.md (naming, worktrees, orphan prevention, CI classes).
+**Branching SSOT for all repos:** interface/ecosystem-branching.md (naming, worktrees, orphan prevention, CI classes).
 
-**Founder Uni progress (hub-owned):** commercial/learning/founder-uni/ holds curriculum-map, progress (Pass / Master / Finish), and spoke-expectations. Spokes do not own the curriculum and do not get a dedicated learning sync rule in the Focused pass. When spoke work closes an FU week (especially MVP / validation / demo weeks), file inbox/returns/ with fu-week and fu-level, or ask the hub operator to update progress.md. Do not treat fundraising or hiring curriculum as active ops under commercial freeze — see commercial/learning/founder-uni/conflicts.md.
+**Company validation (hub-owned):** commercial/ is the hypothesis-centered building-in-public OS (commercial/hypotheses.md). Product evidence: commercial/customers/hub-test/. Site is deploy spoke via commercial-public-sync.
 
 **Spoke secrets (Ambient-Team; names match GitHub Actions secrets)**
 
@@ -116,7 +115,7 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 
 ## Operations
 
-- **Automatic:** Push to main that touches company/strategy/, product/, commercial/, or people/ per workflow path filters.
+- **Automatic:** Push to main that touches commercial/strategy/, product/, commercial/, or people/ per workflow path filters.
 - **Manual replay:** workflow_dispatch on hub dispatch with optional force_rule_ids comma list and dry_run.
 - **After merge:** Ensure both dispatch secrets are set, merge hub changes to main, then test with workflow_dispatch dry_run false and force_rule_ids.
 
