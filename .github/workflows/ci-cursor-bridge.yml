@@ -70,7 +70,7 @@ jobs:
           tail -c 45000 "$LOG_FILE" > ci-failure-logs/log_tail.txt
 
       - name: Upload failure log artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ci-failure-${{ env.RUN_ID }}
           path: ci-failure-logs/
