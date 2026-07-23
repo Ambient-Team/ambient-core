@@ -5268,6 +5268,409 @@ export const REFERENCE_DATA = {
       "collectionFrequency": "monthly",
       "grain": "month"
     },
+    "construction.core.financial_statements": {
+      "name": "Financial statements",
+      "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "lastUpdated": "2024-07-31 14:25:05",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2085,
+      "industry": "Construction",
+      "segment": "core",
+      "metricIds": [
+        2070,
+        2071,
+        2072,
+        2073,
+        2075,
+        2074,
+        2081,
+        2076,
+        2077,
+        2078,
+        2079,
+        2080,
+        2082,
+        2083
+      ]
+    },
+    "construction.core.hr_records": {
+      "name": "HR records",
+      "description": "Records related to human resources and employee data.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2024-07-31 14:25:07",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2086,
+      "industry": "Construction",
+      "segment": "core",
+      "metricIds": [
+        2084
+      ]
+    },
+    "construction.core.accounting_software": {
+      "name": "Accounting Software",
+      "description": "Software used for financial record keeping and reporting.",
+      "format": "Software",
+      "template": "Document",
+      "lastUpdated": "2026-07-16 13:30:00",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2087,
+      "industry": "Construction",
+      "segment": "core",
+      "metricIds": [
+        2072,
+        2073,
+        2075
+      ]
+    },
+    "construction.core.payroll_records": {
+      "name": "Payroll records",
+      "description": "Records related to employee salaries and payments.",
+      "format": "Document",
+      "template": "Document",
+      "lastUpdated": "2026-07-16 13:30:00",
+      "dummyFields": [
+        "Date",
+        "Revenue_Streams",
+        "Operating_Expenses",
+        "Asset_Values",
+        "Liability_Amounts"
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month",
+      "id": 2088,
+      "industry": "Construction",
+      "segment": "core",
+      "metricIds": [
+        2075,
+        2073
+      ]
+    },
+    "construction.building_construction.job_cost_schedule_export": {
+      "id": 2110,
+      "name": "Job cost and schedule export",
+      "description": "Period job-level earned value, quantities, contract values, and change orders for building and civil jobs.",
+      "industry": "Construction",
+      "segment": "building_construction",
+      "format": "Document",
+      "template": "Transactional Data Template",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "job_id",
+          "type": "id"
+        },
+        {
+          "name": "job_type",
+          "type": "enum"
+        },
+        {
+          "name": "earned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "planned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "actual_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "civil_earned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "civil_planned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "installed_quantity",
+          "type": "decimal"
+        },
+        {
+          "name": "budgeted_quantity",
+          "type": "decimal"
+        },
+        {
+          "name": "approved_change_order_value",
+          "type": "decimal"
+        },
+        {
+          "name": "original_contract_value",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        2100,
+        2101,
+        2102,
+        2103,
+        2104
+      ],
+      "lastUpdated": "2026-07-23 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "construction.financial.wip_retention_gl": {
+      "id": 2111,
+      "name": "Construction WIP and retention GL",
+      "description": "Period balances for work in progress, retainage receivable, and contract revenue under percentage-of-completion accounting.",
+      "industry": "Construction",
+      "segment": "financial",
+      "format": "Document",
+      "template": "Financial Statement Template",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "work_in_progress_balance",
+          "type": "decimal"
+        },
+        {
+          "name": "contract_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "retention_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        2106,
+        2107
+      ],
+      "lastUpdated": "2026-07-23 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    "construction.operations.safety_incident_log": {
+      "id": 2112,
+      "name": "Safety incident log",
+      "description": "Period recordable incidents and hours worked for TRIR calculation.",
+      "industry": "Construction",
+      "segment": "operations",
+      "format": "Document",
+      "template": "Transactional Data Template",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "site_id",
+          "type": "id"
+        },
+        {
+          "name": "recordable_incidents",
+          "type": "decimal"
+        },
+        {
+          "name": "hours_worked",
+          "type": "decimal"
+        }
+      ],
+      "metricIds": [
+        2105
+      ],
+      "lastUpdated": "2026-07-23 00:00:00",
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
     "healthcare.core.financial_statements": {
       "name": "Financial statements",
       "description": "Records of a company's financial activities (income, expenses, assets, liabilities).",

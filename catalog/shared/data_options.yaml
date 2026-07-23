@@ -283,3 +283,8 @@ optionIds:
     hr_records: 1947
     accounting_software: 1948
     payroll_records: 1949
+  Construction:
+    financial_statements: 2085
+    hr_records: 2086
+    accounting_software: 2087
+    payroll_records: 2088

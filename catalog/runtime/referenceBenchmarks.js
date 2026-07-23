@@ -243,6 +243,70 @@ export const BENCHMARKS = {
     "higherIsBetter": true,
     "source": "Operations norms"
   },
+  "schedule_performance_index": {
+    "label": "Schedule Performance Index",
+    "unit": "Ratio",
+    "healthyLow": 0.9,
+    "healthyHigh": 1.1,
+    "higherIsBetter": true,
+    "source": "Earned-value management norms (SPI near 1.0)"
+  },
+  "cost_performance_index": {
+    "label": "Cost Performance Index",
+    "unit": "Ratio",
+    "healthyLow": 0.9,
+    "healthyHigh": 1.1,
+    "higherIsBetter": true,
+    "source": "Earned-value management norms (CPI near 1.0)"
+  },
+  "earned_value_ratio": {
+    "label": "Civil Earned Value Ratio",
+    "unit": "Ratio",
+    "healthyLow": 0.9,
+    "healthyHigh": 1.1,
+    "higherIsBetter": true,
+    "source": "Earned-value management norms"
+  },
+  "percent_complete_physical": {
+    "label": "Percent Complete (Physical)",
+    "unit": "%",
+    "healthyLow": 0,
+    "healthyHigh": 100,
+    "higherIsBetter": true,
+    "source": "Job progress tracking (context-dependent)"
+  },
+  "change_order_rate": {
+    "label": "Change Order Rate",
+    "unit": "%",
+    "healthyLow": 0,
+    "healthyHigh": 10,
+    "higherIsBetter": false,
+    "source": "Construction project-controls guidance"
+  },
+  "safety_trir": {
+    "label": "Total Recordable Incident Rate",
+    "unit": "Rate",
+    "healthyLow": 0,
+    "healthyHigh": 2,
+    "higherIsBetter": false,
+    "source": "Construction safety benchmarks (lower is better)"
+  },
+  "work_in_progress_ratio": {
+    "label": "Work-in-Progress Ratio",
+    "unit": "Ratio",
+    "healthyLow": 0.05,
+    "healthyHigh": 0.35,
+    "higherIsBetter": false,
+    "source": "Construction working-capital guidance"
+  },
+  "retention_receivable_days": {
+    "label": "Retention Receivable Days",
+    "unit": "Days",
+    "healthyLow": 30,
+    "healthyHigh": 90,
+    "higherIsBetter": false,
+    "source": "Construction retainage norms"
+  },
   "food_cost_pct": {
     "label": "Food Cost Percentage",
     "unit": "%",

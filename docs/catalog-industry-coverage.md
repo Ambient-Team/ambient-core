@@ -13,7 +13,7 @@ Authoring rules for codes on each pack: catalog/README.md -- Industry classifica
 
 When UN, Census, Eurostat, or MSCI publish breaking revisions, update `revision` fields on affected packs, regenerate the manifest, and note the migration here.
 
-## Current packs (17)
+## Current packs (18)
 
 Each row is one directory under `catalog/industries/`. Primary codes are class-level unless noted.
 
@@ -23,6 +23,7 @@ Each row is one directory under `catalog/industries/`. Primary codes are class-l
 - **passenger_transit** -- ISIC 4922 (secondary 4911); NAICS 485111; NACE 49.31 (secondary 49.10); GICS 203040; rail passenger and public/urban transit; confidence medium.
 - **aviation** -- ISIC 5110, NAICS 481111, NACE 51.10, GICS 203020.
 - **manufacturing** -- ISIC 2819, NAICS 333999, NACE 28.19, GICS 201060; machinery and discrete; confidence medium.
+- **construction** -- ISIC 4100 (secondary 4210, 4290); NAICS 236220 (secondary 237310, 237990); NACE 41.20 (secondary 42.11, 42.99); GICS 201030; segments building_construction and civil_engineering; confidence medium; specialized 43xx and utilities 4220 still uncovered.
 - **healthcare** -- ISIC 8610, NAICS 622110, NACE 86.10, GICS 351020.
 - **restaurants** -- ISIC 5610, NAICS 722511, NACE 56.10, GICS 253010.
 - **life_sciences** -- ISIC 7210, NAICS 541714, NACE 72.11, GICS 352010.
@@ -60,10 +61,11 @@ ISIC has 21 sections (A-U). Packs today materially cover only a subset:
 - **J Information and Communication** -- partial (software_saas covers 5820; most of J uncovered).
 - **K Financial and Insurance Activities** -- good coverage (banking 6419, financial_services 6612, funds 6630, credit_granting 6492, trusts 6430, insurance 6512).
 - **L Real Estate Activities** -- partial (commercial real estate and REIT lens).
+- **F Construction** -- partial (buildings 4100 + civil secondaries 4210/4290; utilities 4220 and specialized 43xx uncovered).
 - **M Professional, Scientific and Technical** -- partial (life sciences R&D lens; 7210).
 - **Q Human Health and Social Work** -- partial (provider lens; 8610 only).
 
-Uncovered or barely covered sections (no dedicated pack yet): B Mining, D Electricity/gas, E Water/waste, F Construction, N Administrative support, O Public administration, P Education, R Arts/entertainment, S Other services, T Households, U Extraterritorial.
+Uncovered or barely covered sections (no dedicated pack yet): B Mining, D Electricity/gas, E Water/waste, N Administrative support, O Public administration, P Education, R Arts/entertainment, S Other services, T Households, U Extraterritorial.
 
 ## ISIC hierarchy on manifest
 

@@ -28,6 +28,10 @@ export const CATALOG_INDUSTRY_OPTIONS = [
     "label": "Manufacturing (machinery and discrete)"
   },
   {
+    "value": "Construction",
+    "label": "Construction (buildings and civil)"
+  },
+  {
     "value": "Healthcare",
     "label": "Healthcare"
   },
