@@ -1,0 +1,155 @@
+benchmarks:
+  current_ratio:
+    label: Current Ratio
+    unit: Ratio
+    healthyLow: 1.2
+    healthyHigh: 2
+    higherIsBetter: true
+    source: General corporate-finance norms
+  quick_ratio:
+    label: Quick Ratio
+    unit: Ratio
+    healthyLow: 1
+    healthyHigh: 1.5
+    higherIsBetter: true
+    source: General corporate-finance norms
+  working_capital:
+    label: Working Capital
+    unit: Currency
+    healthyLow: 100000
+    healthyHigh: 1000000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  gross_margin:
+    label: Gross Profit Margin
+    unit: '%'
+    healthyLow: 40
+    healthyHigh: 70
+    higherIsBetter: true
+    source: Cross-industry median bands
+  operating_margin:
+    label: Operating Margin
+    unit: '%'
+    healthyLow: 10
+    healthyHigh: 25
+    higherIsBetter: true
+    source: Cross-industry median bands
+  ebitda_margin:
+    label: EBITDA Margin
+    unit: '%'
+    healthyLow: 15
+    healthyHigh: 30
+    higherIsBetter: true
+    source: Cross-industry median bands
+  net_margin:
+    label: Net Profit Margin
+    unit: '%'
+    healthyLow: 8
+    healthyHigh: 20
+    higherIsBetter: true
+    source: Cross-industry median bands
+  revenue_growth:
+    label: Revenue Growth Rate
+    unit: '%'
+    healthyLow: 10
+    healthyHigh: 30
+    higherIsBetter: true
+    source: Growth-stage guidance
+  dso:
+    label: Days Sales Outstanding
+    unit: Days
+    healthyLow: 30
+    healthyHigh: 45
+    higherIsBetter: false
+    source: Order-to-cash norms
+  dpo:
+    label: Days Payable Outstanding
+    unit: Days
+    healthyLow: 30
+    healthyHigh: 60
+    higherIsBetter: true
+    source: Procure-to-pay norms
+  ccc:
+    label: Cash Conversion Cycle
+    unit: Days
+    healthyLow: 20
+    healthyHigh: 60
+    higherIsBetter: false
+    source: Working-capital norms
+  operating_cash_flow:
+    label: Operating Cash Flow
+    unit: Currency
+    healthyLow: 200000
+    healthyHigh: 1000000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  burn_rate:
+    label: Monthly Burn Rate
+    unit: Currency/month
+    healthyLow: 50000
+    healthyHigh: 200000
+    higherIsBetter: false
+    source: Early-stage guidance
+  runway:
+    label: Cash Runway
+    unit: Months
+    healthyLow: 12
+    healthyHigh: 24
+    higherIsBetter: true
+    source: Venture norms (target ≥ 18 months)
+  schedule_performance_index:
+    label: Schedule Performance Index
+    unit: Ratio
+    healthyLow: 0.9
+    healthyHigh: 1.1
+    higherIsBetter: true
+    source: Earned-value management norms (SPI near 1.0)
+  cost_performance_index:
+    label: Cost Performance Index
+    unit: Ratio
+    healthyLow: 0.9
+    healthyHigh: 1.1
+    higherIsBetter: true
+    source: Earned-value management norms (CPI near 1.0)
+  earned_value_ratio:
+    label: Civil Earned Value Ratio
+    unit: Ratio
+    healthyLow: 0.9
+    healthyHigh: 1.1
+    higherIsBetter: true
+    source: Earned-value management norms
+  percent_complete_physical:
+    label: Percent Complete (Physical)
+    unit: '%'
+    healthyLow: 0
+    healthyHigh: 100
+    higherIsBetter: true
+    source: Job progress tracking (context-dependent)
+  change_order_rate:
+    label: Change Order Rate
+    unit: '%'
+    healthyLow: 0
+    healthyHigh: 10
+    higherIsBetter: false
+    source: Construction project-controls guidance
+  safety_trir:
+    label: Total Recordable Incident Rate
+    unit: Rate
+    healthyLow: 0
+    healthyHigh: 2
+    higherIsBetter: false
+    source: Construction safety benchmarks (lower is better)
+  work_in_progress_ratio:
+    label: Work-in-Progress Ratio
+    unit: Ratio
+    healthyLow: 0.05
+    healthyHigh: 0.35
+    higherIsBetter: false
+    source: Construction working-capital guidance
+  retention_receivable_days:
+    label: Retention Receivable Days
+    unit: Days
+    healthyLow: 30
+    healthyHigh: 90
+    higherIsBetter: false
+    source: Construction retainage norms

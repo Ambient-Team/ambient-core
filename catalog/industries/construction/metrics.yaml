@@ -1,0 +1,250 @@
+metrics:
+  construction.building_construction.schedule_performance_index:
+    id: 2100
+    name: Schedule Performance Index (SPI)
+    description: Earned value schedule efficiency for building jobs (EV / PV).
+    industry: Construction
+    type: Operational
+    unit: Ratio
+    methodology: SPI = Earned Value / Planned Value
+    datasource:
+    - Job cost and schedule export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 0.9
+    targetRangeHigh: 1.1
+    tech: FINTECH
+    validationRule: ratio
+    validRange:
+      hardMin: 0
+      hardMax: 5
+    benchmarkKey: schedule_performance_index
+    frequency: monthly
+    higherIsBetter: true
+    fpaWorkflow: Delivery control — flags building jobs slipping against the baseline schedule.
+    segment: building_construction
+    slug: schedule_performance_index
+    calc:
+      expr: earned_value / planned_value
+      inputs:
+      - earned_value
+      - planned_value
+  construction.building_construction.cost_performance_index:
+    id: 2101
+    name: Cost Performance Index (CPI)
+    description: Earned value cost efficiency for building jobs (EV / AC).
+    industry: Construction
+    type: Financial
+    unit: Ratio
+    methodology: CPI = Earned Value / Actual Cost
+    datasource:
+    - Job cost and schedule export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 0.9
+    targetRangeHigh: 1.1
+    tech: FINTECH
+    validationRule: ratio
+    validRange:
+      hardMin: 0
+      hardMax: 5
+    benchmarkKey: cost_performance_index
+    frequency: monthly
+    higherIsBetter: true
+    fpaWorkflow: Job margin protection — cost overrun early warning on building contracts.
+    segment: building_construction
+    slug: cost_performance_index
+    calc:
+      expr: earned_value / actual_cost
+      inputs:
+      - earned_value
+      - actual_cost
+  construction.civil_engineering.earned_value_ratio:
+    id: 2102
+    name: Civil Earned Value Ratio
+    description: Earned value relative to planned value on civil / infrastructure jobs.
+    industry: Construction
+    type: Operational
+    unit: Ratio
+    methodology: Civil EV Ratio = Civil Earned Value / Civil Planned Value
+    datasource:
+    - Job cost and schedule export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 0.9
+    targetRangeHigh: 1.1
+    tech: FINTECH
+    validationRule: ratio
+    validRange:
+      hardMin: 0
+      hardMax: 5
+    benchmarkKey: earned_value_ratio
+    frequency: monthly
+    higherIsBetter: true
+    fpaWorkflow: Civil program control — schedule progress on roads, rail, and other civil works.
+    segment: civil_engineering
+    slug: earned_value_ratio
+    calc:
+      expr: civil_earned_value / civil_planned_value
+      inputs:
+      - civil_earned_value
+      - civil_planned_value
+  construction.civil_engineering.percent_complete_physical:
+    id: 2103
+    name: Percent Complete (Physical)
+    description: Physical percent complete for civil work packages (quantity-based).
+    industry: Construction
+    type: Operational
+    unit: '%'
+    methodology: Percent Complete = (Installed Quantity / Budgeted Quantity) × 100
+    datasource:
+    - Job cost and schedule export
+    sensorFieldData:
+    - Field quantity surveys
+    status: data needed
+    targetRangeLow: 0
+    targetRangeHigh: 100
+    tech: FINTECH
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    benchmarkKey: percent_complete_physical
+    frequency: monthly
+    higherIsBetter: true
+    fpaWorkflow: Progress billing — supports civil earned-value and cash forecast.
+    segment: civil_engineering
+    slug: percent_complete_physical
+    calc:
+      expr: installed_quantity / budgeted_quantity * 100
+      inputs:
+      - installed_quantity
+      - budgeted_quantity
+  construction.operations.change_order_rate:
+    id: 2104
+    name: Change Order Rate
+    description: Approved change-order value as a share of original contract value.
+    industry: Construction
+    type: Operational
+    unit: '%'
+    methodology: Change Order Rate = (Approved Change Order Value / Original Contract Value) × 100
+    datasource:
+    - Job cost and schedule export
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 0
+    targetRangeHigh: 10
+    tech: FINTECH
+    validationRule: percentage
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    benchmarkKey: change_order_rate
+    frequency: monthly
+    higherIsBetter: false
+    fpaWorkflow: Scope control — change orders drive margin and dispute risk.
+    segment: operations
+    slug: change_order_rate
+    calc:
+      expr: approved_change_order_value / original_contract_value * 100
+      inputs:
+      - approved_change_order_value
+      - original_contract_value
+  construction.operations.safety_trir:
+    id: 2105
+    name: Total Recordable Incident Rate (TRIR)
+    description: OSHA-style total recordable incident rate per 200,000 hours worked.
+    industry: Construction
+    type: Operational
+    unit: Rate
+    methodology: TRIR = (Recordable Incidents × 200000) / Hours Worked
+    datasource:
+    - Safety incident log
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 0
+    targetRangeHigh: 2
+    tech: FINTECH
+    validationRule: ratio
+    validRange:
+      hardMin: 0
+      hardMax: 100
+    benchmarkKey: safety_trir
+    frequency: monthly
+    higherIsBetter: false
+    fpaWorkflow: Risk and insurance — safety performance affects premiums and stop-work risk.
+    segment: operations
+    slug: safety_trir
+    calc:
+      expr: recordable_incidents * 200000 / hours_worked
+      inputs:
+      - recordable_incidents
+      - hours_worked
+  construction.financial.work_in_progress_ratio:
+    id: 2106
+    name: Work-in-Progress Ratio
+    description: Construction WIP (costs plus recognized profit less billings) relative to contract revenue.
+    industry: Construction
+    type: Financial
+    unit: Ratio
+    methodology: WIP Ratio = Work in Progress Balance / Contract Revenue
+    datasource:
+    - Construction WIP and retention GL
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 0.05
+    targetRangeHigh: 0.35
+    tech: FINTECH
+    validationRule: ratio
+    validRange:
+      hardMin: -1
+      hardMax: 5
+    benchmarkKey: work_in_progress_ratio
+    frequency: monthly
+    higherIsBetter: false
+    fpaWorkflow: Working-capital review — WIP ties cash, billings, and percentage-of-completion accounting.
+    segment: financial
+    slug: work_in_progress_ratio
+    calc:
+      expr: work_in_progress_balance / contract_revenue
+      inputs:
+      - work_in_progress_balance
+      - contract_revenue
+  construction.financial.retention_receivable_days:
+    id: 2107
+    name: Retention Receivable Days
+    description: Average days retainage remains outstanding before release.
+    industry: Construction
+    type: Financial
+    unit: Days
+    methodology: Retention Days = (Retention Receivable / Contract Revenue) × Number of Days
+    datasource:
+    - Construction WIP and retention GL
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeLow: 30
+    targetRangeHigh: 90
+    tech: FINTECH
+    validationRule: days
+    validRange:
+      hardMin: 0
+      hardMax: 730
+    benchmarkKey: retention_receivable_days
+    frequency: monthly
+    higherIsBetter: false
+    fpaWorkflow: Cash conversion — retainage timing drives construction cash forecasts.
+    segment: financial
+    slug: retention_receivable_days
+    calc:
+      expr: retention_receivable / contract_revenue * days
+      inputs:
+      - retention_receivable
+      - contract_revenue
+      - days

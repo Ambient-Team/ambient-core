@@ -6292,6 +6292,931 @@ export const REFERENCE_DATA = {
         ]
       }
     },
+    "construction.core.current_ratio": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet"
+      ],
+      "description": "Short-term liquidity: ability to cover current liabilities with current assets.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Current Ratio = Current Assets / Current Liabilities",
+      "name": "Current Ratio",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 2,
+      "targetRangeLow": 1.2,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 20
+      },
+      "validationRule": "ratio",
+      "benchmarkKey": "current_ratio",
+      "fpaWorkflow": "Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.",
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "id": 2070,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "current_ratio"
+    },
+    "construction.core.quick_ratio": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet"
+      ],
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
+      "name": "Quick Ratio (Acid Test)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1.5,
+      "targetRangeLow": 1,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 20
+      },
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio",
+      "fpaWorkflow": "Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.",
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
+      "id": 2071,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "quick_ratio"
+    },
+    "construction.core.gross_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of revenue retained after the direct cost of goods sold.",
+      "industryTags": [
+        "Corporate Finance",
+        "SaaS",
+        "All"
+      ],
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
+      "name": "Gross Profit Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 70,
+      "targetRangeLow": 40,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "gross_margin",
+      "fpaWorkflow": "Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.",
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "id": 2072,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "gross_margin"
+    },
+    "construction.core.operating_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Operating profitability after operating expenses (EBIT margin).",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
+      "name": "Operating Margin (EBIT)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 25,
+      "targetRangeLow": 10,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_margin",
+      "fpaWorkflow": "Opex efficiency review — drives the monthly variance bridge and cost-control actions.",
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "id": 2073,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "operating_margin"
+    },
+    "construction.core.ebitda_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Core operating cash profitability before interest, tax, depreciation and amortization.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
+      "name": "EBITDA Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 30,
+      "targetRangeLow": 15,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "ebitda_margin",
+      "fpaWorkflow": "Valuation & lender reporting — primary profitability proxy in models and covenant tests.",
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
+      "id": 2074,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "ebitda_margin"
+    },
+    "construction.core.net_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Bottom-line profitability after all costs, interest and tax.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
+      "name": "Net Profit Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 20,
+      "targetRangeLow": 8,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 100
+      },
+      "validationRule": "percentage",
+      "benchmarkKey": "net_margin",
+      "fpaWorkflow": "Board P&L reporting — the headline profitability line for the monthly close pack.",
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "id": 2075,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "net_margin"
+    },
+    "construction.core.revenue_growth": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Period-over-period revenue growth rate.",
+      "industryTags": [
+        "Corporate Finance",
+        "SaaS",
+        "All"
+      ],
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
+      "name": "Revenue Growth Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 30,
+      "targetRangeLow": 10,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -100,
+        "hardMax": 1000
+      },
+      "validationRule": "percentage_unbounded",
+      "benchmarkKey": "revenue_growth",
+      "fpaWorkflow": "Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.",
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
+      "id": 2076,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "revenue_growth"
+    },
+    "construction.core.working_capital": {
+      "datasource": [
+        "Financial statements",
+        "Balance sheet",
+        "Trial balance"
+      ],
+      "description": "Operating liquidity available to fund day-to-day operations.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
+      "name": "Working Capital",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1000000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "working_capital",
+      "fpaWorkflow": "Working-capital management — feeds the 13-week cash forecast and treasury planning.",
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "id": 2077,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "working_capital"
+    },
+    "construction.core.dso": {
+      "datasource": [
+        "Accounts receivable aging",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Average number of days to collect cash after a sale.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
+      "name": "Days Sales Outstanding (DSO)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 45,
+      "targetRangeLow": 30,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 365
+      },
+      "validationRule": "days",
+      "benchmarkKey": "dso",
+      "fpaWorkflow": "Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.",
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
+      "id": 2078,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "dso"
+    },
+    "construction.core.dpo": {
+      "datasource": [
+        "Accounts payable aging",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Average number of days the business takes to pay its suppliers.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
+      "name": "Days Payable Outstanding (DPO)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 30,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 365
+      },
+      "validationRule": "days",
+      "benchmarkKey": "dpo",
+      "fpaWorkflow": "Payables optimization — balances supplier terms against the cash-conversion cycle.",
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
+      "id": 2079,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "dpo"
+    },
+    "construction.core.ccc": {
+      "datasource": [
+        "Accounts receivable aging",
+        "Accounts payable aging",
+        "Inventory records"
+      ],
+      "description": "Days to convert investments in inventory and receivables back into cash.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
+      "name": "Cash Conversion Cycle",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 60,
+      "targetRangeLow": 20,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": -180,
+        "hardMax": 365
+      },
+      "validationRule": "days_signed",
+      "benchmarkKey": "ccc",
+      "fpaWorkflow": "Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.",
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
+      "id": 2080,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "ccc"
+    },
+    "construction.core.operating_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash generated by core operations during the period.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
+      "name": "Operating Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 1000000,
+      "targetRangeLow": 200000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "operating_cash_flow",
+      "fpaWorkflow": "Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.",
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
+      "id": 2081,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "operating_cash_flow"
+    },
+    "construction.core.burn_rate": {
+      "datasource": [
+        "Bank statements",
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Net cash consumed per month (negative net operating cash flow).",
+      "industryTags": [
+        "SaaS",
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
+      "name": "Monthly Burn Rate",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 200000,
+      "targetRangeLow": 50000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency/month",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100000000
+      },
+      "validationRule": "currency",
+      "benchmarkKey": "burn_rate",
+      "fpaWorkflow": "Runway management — paired with cash balance to govern the spend plan and fundraising timing.",
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
+      "id": 2082,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "burn_rate"
+    },
+    "construction.core.runway": {
+      "datasource": [
+        "Bank statements",
+        "Financial statements"
+      ],
+      "description": "Number of months of cash remaining at the current net burn rate.",
+      "industryTags": [
+        "SaaS",
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Runway (months) = Current Cash Balance / Monthly Net Burn",
+      "name": "Cash Runway",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 24,
+      "targetRangeLow": 12,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Months",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 240
+      },
+      "validationRule": "number",
+      "benchmarkKey": "runway",
+      "fpaWorkflow": "Board & investor reporting — the survival metric that gates hiring and spend decisions.",
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
+      "id": 2083,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "runway"
+    },
+    "construction.core.headcount": {
+      "name": "Headcount (FTE)",
+      "description": "Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.",
+      "type": "Operational",
+      "unit": "Count",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "datasource": [
+        "HR records",
+        "Payroll records"
+      ],
+      "industryTags": [
+        "Corporate",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "frequency": "monthly",
+      "tech": "FINTECH",
+      "input": true,
+      "id": 2084,
+      "industry": "Construction",
+      "segment": "core",
+      "slug": "headcount"
+    },
+    "construction.building_construction.schedule_performance_index": {
+      "id": 2100,
+      "name": "Schedule Performance Index (SPI)",
+      "description": "Earned value schedule efficiency for building jobs (EV / PV).",
+      "industry": "Construction",
+      "type": "Operational",
+      "unit": "Ratio",
+      "methodology": "SPI = Earned Value / Planned Value",
+      "datasource": [
+        "Job cost and schedule export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0.9,
+      "targetRangeHigh": 1.1,
+      "tech": "FINTECH",
+      "validationRule": "ratio",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 5
+      },
+      "benchmarkKey": "schedule_performance_index",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Delivery control — flags building jobs slipping against the baseline schedule.",
+      "segment": "building_construction",
+      "slug": "schedule_performance_index",
+      "calc": {
+        "expr": "earned_value / planned_value",
+        "inputs": [
+          "earned_value",
+          "planned_value"
+        ]
+      }
+    },
+    "construction.building_construction.cost_performance_index": {
+      "id": 2101,
+      "name": "Cost Performance Index (CPI)",
+      "description": "Earned value cost efficiency for building jobs (EV / AC).",
+      "industry": "Construction",
+      "type": "Financial",
+      "unit": "Ratio",
+      "methodology": "CPI = Earned Value / Actual Cost",
+      "datasource": [
+        "Job cost and schedule export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0.9,
+      "targetRangeHigh": 1.1,
+      "tech": "FINTECH",
+      "validationRule": "ratio",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 5
+      },
+      "benchmarkKey": "cost_performance_index",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Job margin protection — cost overrun early warning on building contracts.",
+      "segment": "building_construction",
+      "slug": "cost_performance_index",
+      "calc": {
+        "expr": "earned_value / actual_cost",
+        "inputs": [
+          "earned_value",
+          "actual_cost"
+        ]
+      }
+    },
+    "construction.civil_engineering.earned_value_ratio": {
+      "id": 2102,
+      "name": "Civil Earned Value Ratio",
+      "description": "Earned value relative to planned value on civil / infrastructure jobs.",
+      "industry": "Construction",
+      "type": "Operational",
+      "unit": "Ratio",
+      "methodology": "Civil EV Ratio = Civil Earned Value / Civil Planned Value",
+      "datasource": [
+        "Job cost and schedule export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0.9,
+      "targetRangeHigh": 1.1,
+      "tech": "FINTECH",
+      "validationRule": "ratio",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 5
+      },
+      "benchmarkKey": "earned_value_ratio",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Civil program control — schedule progress on roads, rail, and other civil works.",
+      "segment": "civil_engineering",
+      "slug": "earned_value_ratio",
+      "calc": {
+        "expr": "civil_earned_value / civil_planned_value",
+        "inputs": [
+          "civil_earned_value",
+          "civil_planned_value"
+        ]
+      }
+    },
+    "construction.civil_engineering.percent_complete_physical": {
+      "id": 2103,
+      "name": "Percent Complete (Physical)",
+      "description": "Physical percent complete for civil work packages (quantity-based).",
+      "industry": "Construction",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Percent Complete = (Installed Quantity / Budgeted Quantity) × 100",
+      "datasource": [
+        "Job cost and schedule export"
+      ],
+      "sensorFieldData": [
+        "Field quantity surveys"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0,
+      "targetRangeHigh": 100,
+      "tech": "FINTECH",
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "benchmarkKey": "percent_complete_physical",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "fpaWorkflow": "Progress billing — supports civil earned-value and cash forecast.",
+      "segment": "civil_engineering",
+      "slug": "percent_complete_physical",
+      "calc": {
+        "expr": "installed_quantity / budgeted_quantity * 100",
+        "inputs": [
+          "installed_quantity",
+          "budgeted_quantity"
+        ]
+      }
+    },
+    "construction.operations.change_order_rate": {
+      "id": 2104,
+      "name": "Change Order Rate",
+      "description": "Approved change-order value as a share of original contract value.",
+      "industry": "Construction",
+      "type": "Operational",
+      "unit": "%",
+      "methodology": "Change Order Rate = (Approved Change Order Value / Original Contract Value) × 100",
+      "datasource": [
+        "Job cost and schedule export"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0,
+      "targetRangeHigh": 10,
+      "tech": "FINTECH",
+      "validationRule": "percentage",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "benchmarkKey": "change_order_rate",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "fpaWorkflow": "Scope control — change orders drive margin and dispute risk.",
+      "segment": "operations",
+      "slug": "change_order_rate",
+      "calc": {
+        "expr": "approved_change_order_value / original_contract_value * 100",
+        "inputs": [
+          "approved_change_order_value",
+          "original_contract_value"
+        ]
+      }
+    },
+    "construction.operations.safety_trir": {
+      "id": 2105,
+      "name": "Total Recordable Incident Rate (TRIR)",
+      "description": "OSHA-style total recordable incident rate per 200,000 hours worked.",
+      "industry": "Construction",
+      "type": "Operational",
+      "unit": "Rate",
+      "methodology": "TRIR = (Recordable Incidents × 200000) / Hours Worked",
+      "datasource": [
+        "Safety incident log"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0,
+      "targetRangeHigh": 2,
+      "tech": "FINTECH",
+      "validationRule": "ratio",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 100
+      },
+      "benchmarkKey": "safety_trir",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "fpaWorkflow": "Risk and insurance — safety performance affects premiums and stop-work risk.",
+      "segment": "operations",
+      "slug": "safety_trir",
+      "calc": {
+        "expr": "recordable_incidents * 200000 / hours_worked",
+        "inputs": [
+          "recordable_incidents",
+          "hours_worked"
+        ]
+      }
+    },
+    "construction.financial.work_in_progress_ratio": {
+      "id": 2106,
+      "name": "Work-in-Progress Ratio",
+      "description": "Construction WIP (costs plus recognized profit less billings) relative to contract revenue.",
+      "industry": "Construction",
+      "type": "Financial",
+      "unit": "Ratio",
+      "methodology": "WIP Ratio = Work in Progress Balance / Contract Revenue",
+      "datasource": [
+        "Construction WIP and retention GL"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 0.05,
+      "targetRangeHigh": 0.35,
+      "tech": "FINTECH",
+      "validationRule": "ratio",
+      "validRange": {
+        "hardMin": -1,
+        "hardMax": 5
+      },
+      "benchmarkKey": "work_in_progress_ratio",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "fpaWorkflow": "Working-capital review — WIP ties cash, billings, and percentage-of-completion accounting.",
+      "segment": "financial",
+      "slug": "work_in_progress_ratio",
+      "calc": {
+        "expr": "work_in_progress_balance / contract_revenue",
+        "inputs": [
+          "work_in_progress_balance",
+          "contract_revenue"
+        ]
+      }
+    },
+    "construction.financial.retention_receivable_days": {
+      "id": 2107,
+      "name": "Retention Receivable Days",
+      "description": "Average days retainage remains outstanding before release.",
+      "industry": "Construction",
+      "type": "Financial",
+      "unit": "Days",
+      "methodology": "Retention Days = (Retention Receivable / Contract Revenue) × Number of Days",
+      "datasource": [
+        "Construction WIP and retention GL"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeLow": 30,
+      "targetRangeHigh": 90,
+      "tech": "FINTECH",
+      "validationRule": "days",
+      "validRange": {
+        "hardMin": 0,
+        "hardMax": 730
+      },
+      "benchmarkKey": "retention_receivable_days",
+      "frequency": "monthly",
+      "higherIsBetter": false,
+      "fpaWorkflow": "Cash conversion — retainage timing drives construction cash forecasts.",
+      "segment": "financial",
+      "slug": "retention_receivable_days",
+      "calc": {
+        "expr": "retention_receivable / contract_revenue * days",
+        "inputs": [
+          "retention_receivable",
+          "contract_revenue",
+          "days"
+        ]
+      }
+    },
     "healthcare.core.current_ratio": {
       "datasource": [
         "Financial statements",

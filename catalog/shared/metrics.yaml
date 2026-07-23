@@ -792,3 +792,19 @@ industryIds:
     burn-rate: 1997
     runway: 1998
     headcount: 1999
+  Construction:
+    current-ratio: 2070
+    quick-ratio: 2071
+    gross-margin: 2072
+    operating-margin: 2073
+    ebitda-margin: 2074
+    net-margin: 2075
+    revenue-growth: 2076
+    working-capital: 2077
+    dso: 2078
+    dpo: 2079
+    ccc: 2080
+    operating-cash-flow: 2081
+    burn-rate: 2082
+    runway: 2083
+    headcount: 2084

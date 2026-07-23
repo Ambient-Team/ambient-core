@@ -65,6 +65,8 @@ ALLOWED_SEGMENTS = {
     "maritime_shipping",
     "public_transit",
     "freight_forwarding",
+    "building_construction",
+    "civil_engineering",
 }
 
 

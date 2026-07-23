@@ -20,7 +20,7 @@ The **core layer** (`catalog/shared/metrics.yaml`) holds metrics shared by every
 
 Every metric and data option carries a unique integer `id`, and uniqueness across the whole catalogue is enforced by the generator and by `scripts/check_naming.py`. Two kinds of id exist:
 
-- **Author-assigned native ids.** Each vertical's hand-written metrics occupy a small dedicated band: healthcare native ids use `900–999` (currently `911–915`), life-sciences native ids use the `1200–1299` band, banking and fee-market verticals use `1530–1605` (split across Banking, Financial Services, and Insurance packs), retail native ids use `1670–1689`, consumer finance natives use `1720–1799`, commercial finance natives use `1760–1789` (core expansion ids `1740–1754`), aviation natives use `1820–1859`, multimodal transportation natives (rail, maritime, transit, 3PL) use `1860–1899`, **Funds** natives use `1900–1917` and GP extension natives **`1922–1939`** (core expansion ids `1970–1984`; common data-option ids `1918–1921`), and **Trusts** natives use `1940–1949`. When adding a vertical, reserve a fresh band here before assigning ids.
+- **Author-assigned native ids.** Each vertical's hand-written metrics occupy a small dedicated band: healthcare native ids use `900–999` (currently `911–915`), life-sciences native ids use the `1200–1299` band, banking and fee-market verticals use `1530–1605` (split across Banking, Financial Services, and Insurance packs), retail native ids use `1670–1689`, consumer finance natives use `1720–1799`, commercial finance natives use `1760–1789` (core expansion ids `1740–1754`), aviation natives use `1820–1859`, multimodal transportation natives (rail, maritime, transit, 3PL) use `1860–1899`, **Funds** natives use `1900–1917` and GP extension natives **`1922–1939`** (core expansion ids `1970–1984`; common data-option ids `1918–1921`), and **Trusts** natives use `1940–1949`, and **Construction** natives use `2100–2149` (shared core expansion ids `2070–2084`; common data-option ids `2085–2088`). When adding a vertical, reserve a fresh band here before assigning ids.
 - **Generated core-layer ids.** The shared metrics are expanded into each pack with ids allocated per industry in `catalog/shared/metrics.yaml` (`industryIds`); these occupy the higher `900–1099` range and are managed by the generator rather than chosen by hand.
 
 When adding a vertical, reserve a new native band here first.
@@ -65,6 +65,8 @@ Metrics carry a `segment` field placing them within the layered model. Allowed v
 - `maritime_shipping` — ocean shipping and liner operators.
 - `public_transit` — bus and urban rail agencies.
 - `freight_forwarding` — 3PL and freight forwarders.
+- `building_construction` — building / general-contractor job delivery and economics (Construction pack).
+- `civil_engineering` — heavy civil and infrastructure delivery (Construction pack).
 
 ## Lens vs entity
 

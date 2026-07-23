@@ -1,0 +1,26 @@
+industry: Construction
+industryCodes:
+  isic:
+    revision: Rev.4
+    primary: '4100'
+    secondary:
+    - '4210'
+    - '4290'
+  naics:
+    revision: '2022'
+    primary: '236220'
+    secondary:
+    - '237310'
+    - '237990'
+  nace:
+    revision: Rev.2
+    primary: '41.20'
+    secondary:
+    - '42.11'
+    - '42.99'
+  gics:
+    revision: '2023'
+    primary: '201030'
+  confidence: medium
+  lastReviewed: '2026-07-23'
+  source: manual

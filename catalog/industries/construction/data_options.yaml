@@ -1,0 +1,97 @@
+dataOptions:
+  construction.building_construction.job_cost_schedule_export:
+    id: 2110
+    name: Job cost and schedule export
+    description: Period job-level earned value, quantities, contract values, and change
+      orders for building and civil jobs.
+    industry: Construction
+    segment: building_construction
+    format: Document
+    template: Transactional Data Template
+    fields:
+    - name: date
+      type: date
+    - name: job_id
+      type: id
+    - name: job_type
+      type: enum
+    - name: earned_value
+      type: decimal
+    - name: planned_value
+      type: decimal
+    - name: actual_cost
+      type: decimal
+    - name: civil_earned_value
+      type: decimal
+    - name: civil_planned_value
+      type: decimal
+    - name: installed_quantity
+      type: decimal
+    - name: budgeted_quantity
+      type: decimal
+    - name: approved_change_order_value
+      type: decimal
+    - name: original_contract_value
+      type: decimal
+    metricIds:
+    - 2100
+    - 2101
+    - 2102
+    - 2103
+    - 2104
+    lastUpdated: '2026-07-23 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  construction.financial.wip_retention_gl:
+    id: 2111
+    name: Construction WIP and retention GL
+    description: Period balances for work in progress, retainage receivable, and contract
+      revenue under percentage-of-completion accounting.
+    industry: Construction
+    segment: financial
+    format: Document
+    template: Financial Statement Template
+    fields:
+    - name: date
+      type: date
+    - name: account_code
+      type: id
+    - name: work_in_progress_balance
+      type: decimal
+    - name: contract_revenue
+      type: decimal
+    - name: retention_receivable
+      type: decimal
+    - name: days
+      type: decimal
+    metricIds:
+    - 2106
+    - 2107
+    lastUpdated: '2026-07-23 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month
+  construction.operations.safety_incident_log:
+    id: 2112
+    name: Safety incident log
+    description: Period recordable incidents and hours worked for TRIR calculation.
+    industry: Construction
+    segment: operations
+    format: Document
+    template: Transactional Data Template
+    fields:
+    - name: date
+      type: date
+    - name: site_id
+      type: id
+    - name: recordable_incidents
+      type: decimal
+    - name: hours_worked
+      type: decimal
+    metricIds:
+    - 2105
+    lastUpdated: '2026-07-23 00:00:00'
+    fieldCoverage: enumerated
+    collectionFrequency: monthly
+    grain: month

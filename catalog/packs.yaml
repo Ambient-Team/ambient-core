@@ -11,6 +11,8 @@ packs:
   displayLabel: Aviation
 - pack: manufacturing
   displayLabel: Manufacturing (machinery and discrete)
+- pack: construction
+  displayLabel: Construction (buildings and civil)
 - pack: healthcare
 - pack: restaurants
 - pack: life_sciences

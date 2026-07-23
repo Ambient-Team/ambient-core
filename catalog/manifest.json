@@ -202,6 +202,47 @@
       }
     },
     {
+      "value": "Construction",
+      "label": "Construction (buildings and civil)",
+      "pack": "construction",
+      "industryCodes": {
+        "isic": {
+          "revision": "Rev.4",
+          "primary": "4100",
+          "secondary": [
+            "4210",
+            "4290"
+          ],
+          "section": "F",
+          "division": "41",
+          "group": "410"
+        },
+        "naics": {
+          "revision": "2022",
+          "primary": "236220",
+          "secondary": [
+            "237310",
+            "237990"
+          ]
+        },
+        "nace": {
+          "revision": "Rev.2",
+          "primary": "41.20",
+          "secondary": [
+            "42.11",
+            "42.99"
+          ]
+        },
+        "gics": {
+          "revision": "2023",
+          "primary": "201030"
+        },
+        "confidence": "medium",
+        "lastReviewed": "2026-07-23",
+        "source": "manual"
+      }
+    },
+    {
       "value": "Healthcare",
       "label": "Healthcare",
       "pack": "healthcare",
@@ -14699,6 +14740,1601 @@
         }
       ],
       "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.current_ratio",
+      "id": 2070,
+      "name": "Current Ratio",
+      "industry": "Construction",
+      "methodology": "Current Ratio = Current Assets / Current Liabilities",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "current_assets / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "current_assets",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "current_liabilities",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.quick_ratio",
+      "id": 2071,
+      "name": "Quick Ratio (Acid Test)",
+      "industry": "Construction",
+      "methodology": "Quick Ratio = (Current Assets − Inventory) / Current Liabilities",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "(current_assets - inventory) / current_liabilities",
+        "inputs": [
+          "current_assets",
+          "inventory",
+          "current_liabilities"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "current_assets",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "inventory",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "current_liabilities",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.gross_margin",
+      "id": 2072,
+      "name": "Gross Profit Margin",
+      "industry": "Construction",
+      "methodology": "Gross Margin = ((Revenue − COGS) / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        },
+        {
+          "catalogOptionKey": "construction.core.accounting_software",
+          "name": "Accounting Software",
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "(revenue - cogs) / revenue * 100",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.accounting_software",
+              "id": 2087,
+              "name": "Accounting Software",
+              "field": "revenue",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "cogs",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.accounting_software",
+              "id": 2087,
+              "name": "Accounting Software",
+              "field": "cogs",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.core.operating_margin",
+      "id": 2073,
+      "name": "Operating Margin (EBIT)",
+      "industry": "Construction",
+      "methodology": "Operating Margin = (Operating Income / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        },
+        {
+          "catalogOptionKey": "construction.core.accounting_software",
+          "name": "Accounting Software",
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
+        },
+        {
+          "catalogOptionKey": "construction.core.payroll_records",
+          "name": "Payroll records",
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "operating_income / revenue * 100",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "operating_income",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            },
+            {
+              "catalogOptionKey": "construction.core.accounting_software",
+              "id": 2087,
+              "name": "Accounting Software",
+              "via": "upload"
+            },
+            {
+              "catalogOptionKey": "construction.core.payroll_records",
+              "id": 2088,
+              "name": "Payroll records",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.accounting_software",
+              "id": 2087,
+              "name": "Accounting Software",
+              "field": "revenue",
+              "via": "field"
+            },
+            {
+              "catalogOptionKey": "construction.core.payroll_records",
+              "id": 2088,
+              "name": "Payroll records",
+              "field": "revenue",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.ebitda_margin",
+      "id": 2074,
+      "name": "EBITDA Margin",
+      "industry": "Construction",
+      "methodology": "EBITDA Margin = (EBITDA / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "ebitda / revenue * 100",
+        "inputs": [
+          "ebitda",
+          "revenue"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "ebitda",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.net_margin",
+      "id": 2075,
+      "name": "Net Profit Margin",
+      "industry": "Construction",
+      "methodology": "Net Profit Margin = (Net Income / Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        },
+        {
+          "catalogOptionKey": "construction.core.accounting_software",
+          "name": "Accounting Software",
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "revenue",
+            "cogs",
+            "cost_of_goods",
+            "operating_expenses",
+            "net_income",
+            "produce_revenue",
+            "total_production_cost",
+            "total_operational_cost"
+          ]
+        },
+        {
+          "catalogOptionKey": "construction.core.payroll_records",
+          "name": "Payroll records",
+          "fields": [
+            "date",
+            "period_start_date",
+            "period_end_date",
+            "headcount",
+            "gross_pay",
+            "net_pay",
+            "employer_taxes",
+            "labor_cost",
+            "revenue",
+            "net_income",
+            "total_labor_costs",
+            "total_harvested_kg",
+            "total_production_cost",
+            "total_operational_cost",
+            "drivers_left",
+            "total_drivers",
+            "total_maintenance_costs",
+            "total_miles"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "net_income / revenue * 100",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "net_income",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.accounting_software",
+              "id": 2087,
+              "name": "Accounting Software",
+              "field": "net_income",
+              "via": "field"
+            },
+            {
+              "catalogOptionKey": "construction.core.payroll_records",
+              "id": 2088,
+              "name": "Payroll records",
+              "field": "net_income",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.accounting_software",
+              "id": 2087,
+              "name": "Accounting Software",
+              "field": "revenue",
+              "via": "field"
+            },
+            {
+              "catalogOptionKey": "construction.core.payroll_records",
+              "id": 2088,
+              "name": "Payroll records",
+              "field": "revenue",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.core.revenue_growth",
+      "id": 2076,
+      "name": "Revenue Growth Rate",
+      "industry": "Construction",
+      "methodology": "Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "(revenue - revenue_prior) / revenue_prior * 100",
+        "inputs": [
+          "revenue",
+          "revenue_prior"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "revenue_prior",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.working_capital",
+      "id": 2077,
+      "name": "Working Capital",
+      "industry": "Construction",
+      "methodology": "Working Capital = Current Assets − Current Liabilities",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "current_assets - current_liabilities",
+        "inputs": [
+          "current_assets",
+          "current_liabilities"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "current_assets",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "current_liabilities",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.dso",
+      "id": 2078,
+      "name": "Days Sales Outstanding (DSO)",
+      "industry": "Construction",
+      "methodology": "DSO = (Accounts Receivable / Total Credit Sales) × Number of Days",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "accounts_receivable / total_credit_sales * days",
+        "inputs": [
+          "accounts_receivable",
+          "total_credit_sales",
+          "days"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "accounts_receivable",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "total_credit_sales",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "days",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.dpo",
+      "id": 2079,
+      "name": "Days Payable Outstanding (DPO)",
+      "industry": "Construction",
+      "methodology": "DPO = (Accounts Payable / COGS) × Number of Days",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "accounts_payable / cogs * days",
+        "inputs": [
+          "accounts_payable",
+          "cogs",
+          "days"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "accounts_payable",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "cogs",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "days",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.ccc",
+      "id": 2080,
+      "name": "Cash Conversion Cycle",
+      "industry": "Construction",
+      "methodology": "CCC = DSO + Days Inventory Outstanding − DPO",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "dso + days_inventory_outstanding - dpo",
+        "inputs": [
+          "days_inventory_outstanding"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "days_inventory_outstanding",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "dpo",
+          "kind": "derived",
+          "covered": true,
+          "satisfiedBy": []
+        },
+        {
+          "name": "dso",
+          "kind": "derived",
+          "covered": true,
+          "satisfiedBy": []
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.operating_cash_flow",
+      "id": 2081,
+      "name": "Operating Cash Flow",
+      "industry": "Construction",
+      "methodology": "Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "net_income + non_cash_charges - increase_in_working_capital",
+        "inputs": [
+          "net_income",
+          "non_cash_charges",
+          "increase_in_working_capital"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "net_income",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "non_cash_charges",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "increase_in_working_capital",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.burn_rate",
+      "id": 2082,
+      "name": "Monthly Burn Rate",
+      "industry": "Construction",
+      "methodology": "Net Burn = Cash Out − Cash In (per month)",
+      "type": "Financial",
+      "unit": "Currency/month",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "cash_out - cash_in",
+        "inputs": [
+          "cash_out",
+          "cash_in"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "cash_out",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "cash_in",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.runway",
+      "id": 2083,
+      "name": "Cash Runway",
+      "industry": "Construction",
+      "methodology": "Runway (months) = Current Cash Balance / Monthly Net Burn",
+      "type": "Financial",
+      "unit": "Months",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.financial_statements",
+          "name": "Financial statements",
+          "fields": [
+            "date",
+            "statement_type",
+            "period_start_date",
+            "period_end_date"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "current_cash_balance / burn_rate",
+        "inputs": [
+          "current_cash_balance"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "current_cash_balance",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.financial_statements",
+              "id": 2085,
+              "name": "Financial statements",
+              "via": "upload"
+            }
+          ]
+        },
+        {
+          "name": "burn_rate",
+          "kind": "derived",
+          "covered": true,
+          "satisfiedBy": []
+        }
+      ],
+      "inputCoverage": "upload"
+    },
+    {
+      "catalogMetricKey": "construction.core.headcount",
+      "id": 2084,
+      "name": "Headcount (FTE)",
+      "industry": "Construction",
+      "methodology": "Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).",
+      "type": "Operational",
+      "unit": "Count",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.core.hr_records",
+          "name": "HR records",
+          "fields": [
+            "date",
+            "headcount"
+          ]
+        }
+      ],
+      "calc": null,
+      "directlyReported": true,
+      "inputs": [
+        {
+          "name": "headcount",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.core.hr_records",
+              "id": 2086,
+              "name": "HR records",
+              "field": "headcount",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.building_construction.schedule_performance_index",
+      "id": 2100,
+      "name": "Schedule Performance Index (SPI)",
+      "industry": "Construction",
+      "methodology": "SPI = Earned Value / Planned Value",
+      "type": "Operational",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+          "name": "Job cost and schedule export",
+          "fields": [
+            "date",
+            "job_id",
+            "job_type",
+            "earned_value",
+            "planned_value",
+            "actual_cost",
+            "civil_earned_value",
+            "civil_planned_value",
+            "installed_quantity",
+            "budgeted_quantity",
+            "approved_change_order_value",
+            "original_contract_value"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "earned_value / planned_value",
+        "inputs": [
+          "earned_value",
+          "planned_value"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "earned_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "earned_value",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "planned_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "planned_value",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.building_construction.cost_performance_index",
+      "id": 2101,
+      "name": "Cost Performance Index (CPI)",
+      "industry": "Construction",
+      "methodology": "CPI = Earned Value / Actual Cost",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+          "name": "Job cost and schedule export",
+          "fields": [
+            "date",
+            "job_id",
+            "job_type",
+            "earned_value",
+            "planned_value",
+            "actual_cost",
+            "civil_earned_value",
+            "civil_planned_value",
+            "installed_quantity",
+            "budgeted_quantity",
+            "approved_change_order_value",
+            "original_contract_value"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "earned_value / actual_cost",
+        "inputs": [
+          "earned_value",
+          "actual_cost"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "earned_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "earned_value",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "actual_cost",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "actual_cost",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.civil_engineering.earned_value_ratio",
+      "id": 2102,
+      "name": "Civil Earned Value Ratio",
+      "industry": "Construction",
+      "methodology": "Civil EV Ratio = Civil Earned Value / Civil Planned Value",
+      "type": "Operational",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+          "name": "Job cost and schedule export",
+          "fields": [
+            "date",
+            "job_id",
+            "job_type",
+            "earned_value",
+            "planned_value",
+            "actual_cost",
+            "civil_earned_value",
+            "civil_planned_value",
+            "installed_quantity",
+            "budgeted_quantity",
+            "approved_change_order_value",
+            "original_contract_value"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "civil_earned_value / civil_planned_value",
+        "inputs": [
+          "civil_earned_value",
+          "civil_planned_value"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "civil_earned_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "civil_earned_value",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "civil_planned_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "civil_planned_value",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.civil_engineering.percent_complete_physical",
+      "id": 2103,
+      "name": "Percent Complete (Physical)",
+      "industry": "Construction",
+      "methodology": "Percent Complete = (Installed Quantity / Budgeted Quantity) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+          "name": "Job cost and schedule export",
+          "fields": [
+            "date",
+            "job_id",
+            "job_type",
+            "earned_value",
+            "planned_value",
+            "actual_cost",
+            "civil_earned_value",
+            "civil_planned_value",
+            "installed_quantity",
+            "budgeted_quantity",
+            "approved_change_order_value",
+            "original_contract_value"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "installed_quantity / budgeted_quantity * 100",
+        "inputs": [
+          "installed_quantity",
+          "budgeted_quantity"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "installed_quantity",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "installed_quantity",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "budgeted_quantity",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "budgeted_quantity",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.operations.change_order_rate",
+      "id": 2104,
+      "name": "Change Order Rate",
+      "industry": "Construction",
+      "methodology": "Change Order Rate = (Approved Change Order Value / Original Contract Value) × 100",
+      "type": "Operational",
+      "unit": "%",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+          "name": "Job cost and schedule export",
+          "fields": [
+            "date",
+            "job_id",
+            "job_type",
+            "earned_value",
+            "planned_value",
+            "actual_cost",
+            "civil_earned_value",
+            "civil_planned_value",
+            "installed_quantity",
+            "budgeted_quantity",
+            "approved_change_order_value",
+            "original_contract_value"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "approved_change_order_value / original_contract_value * 100",
+        "inputs": [
+          "approved_change_order_value",
+          "original_contract_value"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "approved_change_order_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "approved_change_order_value",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "original_contract_value",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+              "id": 2110,
+              "name": "Job cost and schedule export",
+              "field": "original_contract_value",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.operations.safety_trir",
+      "id": 2105,
+      "name": "Total Recordable Incident Rate (TRIR)",
+      "industry": "Construction",
+      "methodology": "TRIR = (Recordable Incidents × 200000) / Hours Worked",
+      "type": "Operational",
+      "unit": "Rate",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.operations.safety_incident_log",
+          "name": "Safety incident log",
+          "fields": [
+            "date",
+            "site_id",
+            "recordable_incidents",
+            "hours_worked"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "recordable_incidents * 200000 / hours_worked",
+        "inputs": [
+          "recordable_incidents",
+          "hours_worked"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "recordable_incidents",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.operations.safety_incident_log",
+              "id": 2112,
+              "name": "Safety incident log",
+              "field": "recordable_incidents",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "hours_worked",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.operations.safety_incident_log",
+              "id": 2112,
+              "name": "Safety incident log",
+              "field": "hours_worked",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.financial.work_in_progress_ratio",
+      "id": 2106,
+      "name": "Work-in-Progress Ratio",
+      "industry": "Construction",
+      "methodology": "WIP Ratio = Work in Progress Balance / Contract Revenue",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.financial.wip_retention_gl",
+          "name": "Construction WIP and retention GL",
+          "fields": [
+            "date",
+            "account_code",
+            "work_in_progress_balance",
+            "contract_revenue",
+            "retention_receivable",
+            "days"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "work_in_progress_balance / contract_revenue",
+        "inputs": [
+          "work_in_progress_balance",
+          "contract_revenue"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "work_in_progress_balance",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.financial.wip_retention_gl",
+              "id": 2111,
+              "name": "Construction WIP and retention GL",
+              "field": "work_in_progress_balance",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "contract_revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.financial.wip_retention_gl",
+              "id": 2111,
+              "name": "Construction WIP and retention GL",
+              "field": "contract_revenue",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
+    },
+    {
+      "catalogMetricKey": "construction.financial.retention_receivable_days",
+      "id": 2107,
+      "name": "Retention Receivable Days",
+      "industry": "Construction",
+      "methodology": "Retention Days = (Retention Receivable / Contract Revenue) × Number of Days",
+      "type": "Financial",
+      "unit": "Days",
+      "frequency": "monthly",
+      "requiredSources": [
+        {
+          "catalogOptionKey": "construction.financial.wip_retention_gl",
+          "name": "Construction WIP and retention GL",
+          "fields": [
+            "date",
+            "account_code",
+            "work_in_progress_balance",
+            "contract_revenue",
+            "retention_receivable",
+            "days"
+          ]
+        }
+      ],
+      "calc": {
+        "expr": "retention_receivable / contract_revenue * days",
+        "inputs": [
+          "retention_receivable",
+          "contract_revenue",
+          "days"
+        ]
+      },
+      "directlyReported": false,
+      "inputs": [
+        {
+          "name": "retention_receivable",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.financial.wip_retention_gl",
+              "id": 2111,
+              "name": "Construction WIP and retention GL",
+              "field": "retention_receivable",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "contract_revenue",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.financial.wip_retention_gl",
+              "id": 2111,
+              "name": "Construction WIP and retention GL",
+              "field": "contract_revenue",
+              "via": "field"
+            }
+          ]
+        },
+        {
+          "name": "days",
+          "kind": "measured",
+          "covered": true,
+          "satisfiedBy": [
+            {
+              "catalogOptionKey": "construction.financial.wip_retention_gl",
+              "id": 2111,
+              "name": "Construction WIP and retention GL",
+              "field": "days",
+              "via": "field"
+            }
+          ]
+        }
+      ],
+      "inputCoverage": "complete"
     },
     {
       "catalogMetricKey": "healthcare.core.current_ratio",
@@ -40943,6 +42579,353 @@
         }
       ],
       "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.core.financial_statements",
+      "id": 2085,
+      "name": "Financial statements",
+      "industry": "Construction",
+      "metricIds": [
+        2070,
+        2071,
+        2072,
+        2073,
+        2075,
+        2074,
+        2081,
+        2076,
+        2077,
+        2078,
+        2079,
+        2080,
+        2082,
+        2083
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "statement_type",
+          "type": "enum"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.core.hr_records",
+      "id": 2086,
+      "name": "HR records",
+      "industry": "Construction",
+      "metricIds": [
+        2084
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.core.accounting_software",
+      "id": 2087,
+      "name": "Accounting Software",
+      "industry": "Construction",
+      "metricIds": [
+        2072,
+        2073,
+        2075
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "cogs",
+          "type": "decimal"
+        },
+        {
+          "name": "cost_of_goods",
+          "type": "decimal"
+        },
+        {
+          "name": "operating_expenses",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "produce_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.core.payroll_records",
+      "id": 2088,
+      "name": "Payroll records",
+      "industry": "Construction",
+      "metricIds": [
+        2075,
+        2073
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "period_start_date",
+          "type": "date"
+        },
+        {
+          "name": "period_end_date",
+          "type": "date"
+        },
+        {
+          "name": "headcount",
+          "type": "decimal"
+        },
+        {
+          "name": "gross_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "net_pay",
+          "type": "decimal"
+        },
+        {
+          "name": "employer_taxes",
+          "type": "decimal"
+        },
+        {
+          "name": "labor_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "net_income",
+          "type": "decimal"
+        },
+        {
+          "name": "total_labor_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_harvested_kg",
+          "type": "decimal"
+        },
+        {
+          "name": "total_production_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "total_operational_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "drivers_left",
+          "type": "decimal"
+        },
+        {
+          "name": "total_drivers",
+          "type": "decimal"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "upload",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.building_construction.job_cost_schedule_export",
+      "id": 2110,
+      "name": "Job cost and schedule export",
+      "industry": "Construction",
+      "metricIds": [
+        2100,
+        2101,
+        2102,
+        2103,
+        2104
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "job_id",
+          "type": "id"
+        },
+        {
+          "name": "job_type",
+          "type": "enum"
+        },
+        {
+          "name": "earned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "planned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "actual_cost",
+          "type": "decimal"
+        },
+        {
+          "name": "civil_earned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "civil_planned_value",
+          "type": "decimal"
+        },
+        {
+          "name": "installed_quantity",
+          "type": "decimal"
+        },
+        {
+          "name": "budgeted_quantity",
+          "type": "decimal"
+        },
+        {
+          "name": "approved_change_order_value",
+          "type": "decimal"
+        },
+        {
+          "name": "original_contract_value",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.financial.wip_retention_gl",
+      "id": 2111,
+      "name": "Construction WIP and retention GL",
+      "industry": "Construction",
+      "metricIds": [
+        2106,
+        2107
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "account_code",
+          "type": "id"
+        },
+        {
+          "name": "work_in_progress_balance",
+          "type": "decimal"
+        },
+        {
+          "name": "contract_revenue",
+          "type": "decimal"
+        },
+        {
+          "name": "retention_receivable",
+          "type": "decimal"
+        },
+        {
+          "name": "days",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "enumerated",
+      "collectionFrequency": "monthly",
+      "grain": "month"
+    },
+    {
+      "catalogOptionKey": "construction.operations.safety_incident_log",
+      "id": 2112,
+      "name": "Safety incident log",
+      "industry": "Construction",
+      "metricIds": [
+        2105
+      ],
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "site_id",
+          "type": "id"
+        },
+        {
+          "name": "recordable_incidents",
+          "type": "decimal"
+        },
+        {
+          "name": "hours_worked",
+          "type": "decimal"
+        }
+      ],
+      "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
     },
