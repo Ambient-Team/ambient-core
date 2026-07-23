@@ -8986,7 +8986,16 @@
         {
           "catalogOptionKey": "DclVZaLbyz6Pwxt5Ctr1",
           "name": "Maintenance logs",
-          "fields": []
+          "fields": [
+            "date",
+            "vehicle_id",
+            "maintenance_date",
+            "maintenance_type",
+            "total_maintenance_costs",
+            "total_miles",
+            "odometer_reading",
+            "work_order_id"
+          ]
         },
         {
           "catalogOptionKey": "jHscrlnM67xOUF1IXfos",
@@ -9023,6 +9032,13 @@
               "name": "Payroll records",
               "field": "total_maintenance_costs",
               "via": "field"
+            },
+            {
+              "catalogOptionKey": "DclVZaLbyz6Pwxt5Ctr1",
+              "id": 16,
+              "name": "Maintenance logs",
+              "field": "total_maintenance_costs",
+              "via": "field"
             }
           ]
         },
@@ -9035,6 +9051,13 @@
               "catalogOptionKey": "transportation.core.payroll_records",
               "id": 1096,
               "name": "Payroll records",
+              "field": "total_miles",
+              "via": "field"
+            },
+            {
+              "catalogOptionKey": "DclVZaLbyz6Pwxt5Ctr1",
+              "id": 16,
+              "name": "Maintenance logs",
               "field": "total_miles",
               "via": "field"
             }
@@ -40484,8 +40507,41 @@
       "metricIds": [
         13
       ],
-      "fields": [],
-      "fieldCoverage": "upload",
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "maintenance_date",
+          "type": "date"
+        },
+        {
+          "name": "maintenance_type",
+          "type": "enum"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        },
+        {
+          "name": "odometer_reading",
+          "type": "decimal"
+        },
+        {
+          "name": "work_order_id",
+          "type": "id"
+        }
+      ],
+      "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
     },

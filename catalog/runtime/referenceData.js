@@ -14,13 +14,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -74,13 +67,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -107,13 +93,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -178,13 +157,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -272,13 +244,6 @@ export const REFERENCE_DATA = {
     },
     "2j9pysT31hgn2DQcejtz": {
       "description": "Records of income received from renting a property.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -345,13 +310,6 @@ export const REFERENCE_DATA = {
     },
     "Grtv4vjRFWRmrDSFF8cS": {
       "description": "Records of energy consumption and billing.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -415,13 +373,6 @@ export const REFERENCE_DATA = {
     },
     "TPRNcAtqtiY387QTkah7": {
       "description": "Loan agreements used to finance property purchases.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -475,13 +426,6 @@ export const REFERENCE_DATA = {
     },
     "UVuuRwg8ksAOiP3WlKKr": {
       "description": "Documents related to the purchase of a property.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -531,13 +475,6 @@ export const REFERENCE_DATA = {
     },
     "bs0gsbE2YDGDHyqRtkx8": {
       "description": "Documents related to the sale of a property.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -587,13 +524,6 @@ export const REFERENCE_DATA = {
     },
     "gKEmKLl2XRjSbTQGztuy": {
       "description": "Software used to manage rental properties.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -679,13 +609,6 @@ export const REFERENCE_DATA = {
     },
     "jYYkOyU5EQfa40iMf9x8": {
       "description": "Documents containing an estimate of a property's value.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -732,13 +655,6 @@ export const REFERENCE_DATA = {
     },
     "ohvSqlJVvLde3k1gqYZh": {
       "description": "Loan agreements used for various purposes (e.g., equipment financing).",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1460,13 +1376,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1514,13 +1423,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1548,13 +1450,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1621,13 +1516,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1717,13 +1605,6 @@ export const REFERENCE_DATA = {
     },
     "DRHUJoXTe9TO3vlfY8bK": {
       "description": "Records related to irrigation activities.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1777,13 +1658,6 @@ export const REFERENCE_DATA = {
     },
     "QKVboc2mj2QQ8u2RFOF1": {
       "description": "Software used to manage agricultural operations.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1872,13 +1746,6 @@ export const REFERENCE_DATA = {
     },
     "SuYpCOlDxv3Q0Sf2xq9L": {
       "description": "Records of the amount and type of produce harvested.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -1925,13 +1792,6 @@ export const REFERENCE_DATA = {
     },
     "mZgKaZV2P6tbi7msxL3y": {
       "description": "Software used to monitor crop growth and health.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2598,13 +2458,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2652,13 +2505,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2686,13 +2532,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2757,13 +2596,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2853,13 +2685,6 @@ export const REFERENCE_DATA = {
     },
     "5tZAB2WLZbRDQdj6l7X6": {
       "description": "Data collected from in-vehicle sensors to monitor vehicle performance.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2905,14 +2730,40 @@ export const REFERENCE_DATA = {
     },
     "DclVZaLbyz6Pwxt5Ctr1": {
       "description": "Records of maintenance activities.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
+      "fields": [
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "vehicle_id",
+          "type": "id"
+        },
+        {
+          "name": "maintenance_date",
+          "type": "date"
+        },
+        {
+          "name": "maintenance_type",
+          "type": "enum"
+        },
+        {
+          "name": "total_maintenance_costs",
+          "type": "decimal"
+        },
+        {
+          "name": "total_miles",
+          "type": "decimal"
+        },
+        {
+          "name": "odometer_reading",
+          "type": "decimal"
+        },
+        {
+          "name": "work_order_id",
+          "type": "id"
+        }
       ],
-      "fields": [],
       "format": "Document",
       "id": 16,
       "industry": "Transportation",
@@ -2922,19 +2773,12 @@ export const REFERENCE_DATA = {
       ],
       "name": "Maintenance logs",
       "template": "Document",
-      "fieldCoverage": "upload",
+      "fieldCoverage": "enumerated",
       "collectionFrequency": "monthly",
       "grain": "month"
     },
     "Ta6fK4eo9bymVVQGYEpl": {
       "description": "Software used to manage a fleet of vehicles.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -2984,13 +2828,6 @@ export const REFERENCE_DATA = {
     },
     "i0N19s7GpHi9QTyG5dhM": {
       "description": "Records of deliveries made, including location and timing.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3040,13 +2877,6 @@ export const REFERENCE_DATA = {
     },
     "jHscrlnM67xOUF1IXfos": {
       "description": "Data collected from GPS devices to track location and movement.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3099,13 +2929,6 @@ export const REFERENCE_DATA = {
     },
     "uRTkFZUmJC2BLwoRtJxL": {
       "description": "Records of fuel consumption for vehicles or machinery.",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3625,13 +3448,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3679,13 +3495,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3712,13 +3521,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3783,13 +3585,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -3968,13 +3763,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4022,13 +3810,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4055,13 +3836,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4126,13 +3900,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4389,13 +4156,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4443,13 +4203,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4476,13 +4229,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -4547,13 +4293,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5274,13 +5013,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5328,13 +5060,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5361,13 +5086,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5432,13 +5150,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5677,13 +5388,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5731,13 +5435,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5765,13 +5462,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -5836,13 +5526,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -6786,13 +6469,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -6840,13 +6516,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -6874,13 +6543,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -6945,13 +6607,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -7814,13 +7469,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -7868,13 +7516,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -7901,13 +7542,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -7972,13 +7606,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8163,13 +7790,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8217,13 +7837,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8250,13 +7863,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8321,13 +7927,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8484,13 +8083,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8538,13 +8130,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8571,13 +8156,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8642,13 +8220,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8805,13 +8376,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8859,13 +8423,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8892,13 +8449,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -8963,13 +8513,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9332,13 +8875,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9386,13 +8922,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9419,13 +8948,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9490,13 +9012,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9651,13 +9166,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9705,13 +9213,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9738,13 +9239,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9809,13 +9303,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -9970,13 +9457,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10024,13 +9504,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10057,13 +9530,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10128,13 +9594,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10484,13 +9943,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10538,13 +9990,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10571,13 +10016,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -10642,13 +10080,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -11003,13 +10434,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Financial Statement Template",
       "lastUpdated": "2024-07-31 14:25:05",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -11057,13 +10481,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2024-07-31 14:25:07",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -11090,13 +10507,6 @@ export const REFERENCE_DATA = {
       "format": "Software",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",
@@ -11161,13 +10571,6 @@ export const REFERENCE_DATA = {
       "format": "Document",
       "template": "Document",
       "lastUpdated": "2026-07-16 13:30:00",
-      "dummyFields": [
-        "Date",
-        "Revenue_Streams",
-        "Operating_Expenses",
-        "Asset_Values",
-        "Liability_Amounts"
-      ],
       "fields": [
         {
           "name": "date",

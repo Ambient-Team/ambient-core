@@ -71,7 +71,7 @@ Operator flow, then, is: pick the metric, read its `inputs`, upload each `satisf
 
 Each **`dataOptions[]`** row in manifest version **3** includes:
 
-- **`fields`** — objects `{ name, type, … }` where `type` is a catalog enum (`decimal`, `date`, `string`, …). Optional **`unit`** (for example `USD`, `seat-km`) and **`description`** (authoring hint for and integrators). YAML may still list legacy string field names; the generator normalizes them at export time.
+- **`fields`** — objects `{ name, type, … }` where `type` is a catalog enum (`decimal`, `date`, `string`, …). Optional **`unit`** (for example `USD`, `seat-km`) and **`description`** (authoring hint for and integrators). YAML may still list legacy string field names; the generator normalizes them at export time. **`dummyFields` is retired** — typed `fields` is the only schema surface for uploads and Bronze mapping.
 - **`fieldCoverage`** — `upload` (document/financial statement path; measured inputs via upload policy) or `enumerated` (column-mapped exports; strict validation applies). Inferred at generate time when omitted; persisted by [`scripts/harden_catalog_data_options.py`](../scripts/harden_catalog_data_options.py).
 - **`collectionFrequency`** — how often the org should refresh or upload data for this template (for example `monthly`). Same concept as *source frequency* or *required upload cadence*; the YAML key is `collectionFrequency` for manifest stability.
 - **`grain`** — row-level expectation for Bronze tables (`transaction`, `day`, `week`, `month`, `quarter`).

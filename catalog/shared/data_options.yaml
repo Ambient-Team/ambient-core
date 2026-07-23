@@ -2,17 +2,10 @@ dataOptionTemplates:
   financial_statements:
     keySuffix: GvoI0Vg2YijGfgoBaqqe
     name: Financial statements
-    description: Records of a company's financial activities (income, expenses, assets,
-      liabilities).
+    description: Records of a company's financial activities (income, expenses, assets, liabilities).
     format: Document
     template: Financial Statement Template
     lastUpdated: '2024-07-31 14:25:05'
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -55,12 +48,6 @@ dataOptionTemplates:
     format: Document
     template: Document
     lastUpdated: '2024-07-31 14:25:07'
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -87,12 +74,6 @@ dataOptionTemplates:
     format: Software
     template: Document
     lastUpdated: '2026-07-16 13:30:00'
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -141,12 +122,6 @@ dataOptionTemplates:
     format: Document
     template: Document
     lastUpdated: '2026-07-16 13:30:00'
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -288,3 +263,4 @@ optionIds:
     hr_records: 2086
     accounting_software: 2087
     payroll_records: 2088
+dataOptions: {}

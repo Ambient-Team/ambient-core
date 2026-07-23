@@ -1,12 +1,6 @@
 dataOptions:
   2j9pysT31hgn2DQcejtz:
     description: Records of income received from renting a property.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -46,12 +40,6 @@ dataOptions:
     grain: month
   Grtv4vjRFWRmrDSFF8cS:
     description: Records of energy consumption and billing.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -90,12 +78,6 @@ dataOptions:
     grain: month
   TPRNcAtqtiY387QTkah7:
     description: Loan agreements used to finance property purchases.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -128,12 +110,6 @@ dataOptions:
     grain: month
   UVuuRwg8ksAOiP3WlKKr:
     description: Documents related to the purchase of a property.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -164,12 +140,6 @@ dataOptions:
     grain: month
   bs0gsbE2YDGDHyqRtkx8:
     description: Documents related to the sale of a property.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -200,12 +170,6 @@ dataOptions:
     grain: month
   gKEmKLl2XRjSbTQGztuy:
     description: Software used to manage rental properties.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -256,12 +220,6 @@ dataOptions:
     grain: month
   jYYkOyU5EQfa40iMf9x8:
     description: Documents containing an estimate of a property's value.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -291,12 +249,6 @@ dataOptions:
     grain: month
   ohvSqlJVvLde3k1gqYZh:
     description: Loan agreements used for various purposes (e.g., equipment financing).
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -744,3 +696,4 @@ dataOptions:
     fieldCoverage: upload
     collectionFrequency: quarterly
     grain: quarter
+dataOptionTemplates: {}
