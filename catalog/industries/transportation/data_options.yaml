@@ -1,12 +1,6 @@
 dataOptions:
   5tZAB2WLZbRDQdj6l7X6:
     description: Data collected from in-vehicle sensors to monitor vehicle performance.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -35,13 +29,23 @@ dataOptions:
     grain: month
   DclVZaLbyz6Pwxt5Ctr1:
     description: Records of maintenance activities.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
-    fields: []
+    fields:
+    - name: date
+      type: date
+    - name: vehicle_id
+      type: id
+    - name: maintenance_date
+      type: date
+    - name: maintenance_type
+      type: enum
+    - name: total_maintenance_costs
+      type: decimal
+    - name: total_miles
+      type: decimal
+    - name: odometer_reading
+      type: decimal
+    - name: work_order_id
+      type: id
     format: Document
     id: 16
     industry: Transportation
@@ -50,17 +54,11 @@ dataOptions:
     - 13
     name: Maintenance logs
     template: Document
-    fieldCoverage: upload
+    fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
   Ta6fK4eo9bymVVQGYEpl:
     description: Software used to manage a fleet of vehicles.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -91,12 +89,6 @@ dataOptions:
     grain: month
   i0N19s7GpHi9QTyG5dhM:
     description: Records of deliveries made, including location and timing.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -127,12 +119,6 @@ dataOptions:
     grain: month
   jHscrlnM67xOUF1IXfos:
     description: Data collected from GPS devices to track location and movement.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -166,12 +152,6 @@ dataOptions:
     grain: month
   uRTkFZUmJC2BLwoRtJxL:
     description: Records of fuel consumption for vehicles or machinery.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -199,8 +179,7 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Alltransportationds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart
-      of accounts.
+    description: Complete record of all financial transactions posted to the chart of accounts.
     fields:
     - name: date
       type: date
@@ -506,3 +485,4 @@ dataOptions:
     fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
+dataOptionTemplates: {}

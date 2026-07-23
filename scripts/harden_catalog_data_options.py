@@ -3,6 +3,7 @@
 
 For each data option on disk:
 
+- Strip forbidden ``dummyFields`` (typed ``fields`` only)
 - Set ``fieldCoverage`` (upload vs enumerated) when absent
 - Set ``collectionFrequency`` / ``grain`` from linked metric cadence
 - Normalize ``fields`` to typed objects ``{ name, type, … }``
@@ -98,6 +99,8 @@ def harden_option(
     patterns,
 ) -> dict:
     out = copy.deepcopy(option)
+    if "dummyFields" in out:
+        del out["dummyFields"]
     coverage = infer_field_coverage(out, catalog_option_key=option_key)
     out["fieldCoverage"] = coverage
     freq = strictest_linked_metric_frequency(out, metric_id_to_metric)
@@ -144,6 +147,16 @@ def _yaml_dump(data: dict) -> str:
     )
 
 
+def _assert_no_dummy_fields(doc: dict, path: Path, errors: list[str]) -> None:
+    for key in ("dataOptionTemplates", "dataOptions"):
+        mapping = doc.get(key) or {}
+        if not isinstance(mapping, dict):
+            continue
+        for opt_key, opt in mapping.items():
+            if isinstance(opt, dict) and "dummyFields" in opt:
+                errors.append(f"{path.relative_to(ROOT)}: {opt_key} still has dummyFields")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true", help="Write hardened YAML to disk")
@@ -164,11 +177,13 @@ def main() -> int:
 
     total_changes = 0
     files_touched: list[Path] = []
+    dummy_errors: list[str] = []
 
     # Shared templates (only dataOptionTemplates — not optionIds)
     shared_path = SHARED_DATA
     if shared_path.is_file():
         doc = yaml.safe_load(shared_path.read_text(encoding="utf-8")) or {}
+        _assert_no_dummy_fields(doc, shared_path, dummy_errors)
         templates = doc.get("dataOptionTemplates") or {}
         new_templates, n = _process_options_map(
             templates, metrics, metric_ids, metric_id_to_metric, exact, patterns
@@ -185,6 +200,7 @@ def main() -> int:
         if not path.is_file():
             continue
         doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        _assert_no_dummy_fields(doc, path, dummy_errors)
         options = doc.get("dataOptions") or {}
         new_options, n = _process_options_map(
             options, metrics, metric_ids, metric_id_to_metric, exact, patterns
@@ -195,6 +211,12 @@ def main() -> int:
             if args.write:
                 doc["dataOptions"] = new_options
                 path.write_text(_yaml_dump(doc), encoding="utf-8")
+
+    if dummy_errors and not args.write:
+        print("dummyFields forbidden (typed fields only):")
+        for err in dummy_errors:
+            print(f"  {err}")
+        return 1
 
     if args.write:
         print(f"Hardened {len(files_touched)} file(s), {total_changes} option(s) updated.")

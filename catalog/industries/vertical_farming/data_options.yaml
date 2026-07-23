@@ -1,12 +1,6 @@
 dataOptions:
   DRHUJoXTe9TO3vlfY8bK:
     description: Records related to irrigation activities.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -39,12 +33,6 @@ dataOptions:
     grain: month
   QKVboc2mj2QQ8u2RFOF1:
     description: Software used to manage agricultural operations.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -98,12 +86,6 @@ dataOptions:
     grain: month
   SuYpCOlDxv3Q0Sf2xq9L:
     description: Records of the amount and type of produce harvested.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -133,12 +115,6 @@ dataOptions:
     grain: month
   mZgKaZV2P6tbi7msxL3y:
     description: Software used to monitor crop growth and health.
-    dummyFields:
-    - Date
-    - Revenue_Streams
-    - Operating_Expenses
-    - Asset_Values
-    - Liability_Amounts
     fields:
     - name: date
       type: date
@@ -554,3 +530,4 @@ dataOptions:
     fieldCoverage: enumerated
     collectionFrequency: monthly
     grain: month
+dataOptionTemplates: {}
