@@ -101,7 +101,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/people/validation-bridge.md.
+- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/ivan-damnjanovic/career/validation-bridge.md.
 
 **Personal spokes**
 
@@ -152,7 +152,7 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **commercial-public-sync**
 
-- Hub paths: commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/**, spokes/site/public/**, spokes/site/website/**, commercial/playbook/**, commercial/charter.md
+- Hub paths: commercial/hypotheses.md, commercial/README.md, commercial/test/**, commercial/outbound/**, spokes/site/**, commercial/charter.md
 - Spokes: site
 - Profile: site-gtm
 - Site receiver: refresh mirrors from hub commercial (site remains deploy tree)
@@ -160,14 +160,14 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **career-public-sync**
 
-- Hub paths: commercial/people/cv/**, commercial/people/job-search-targeting.md
+- Hub paths: commercial/ivan-damnjanovic/cv/**, commercial/ivan-damnjanovic/career/job-search-targeting.md
 - Spokes: personal-site
 - Profile: cv-public
 - Personal-site receiver copies: docs/hub/upstream-mapping.md, hub-sync/cv/ivan-damnjanovic.md, docs/hub/ecosystem-map-intent.md
 
 **interview-prep-learning**
 
-- Hub paths: commercial/people/interview-prep/**
+- Hub paths: commercial/ivan-damnjanovic/pitch-prep/**
 - Spokes: code-signal
 - Profile: interview-prep
 - Code-signal receiver copies: docs/hub/upstream-mapping.md, hub-sync/interview-prep/two-question-answers.md, docs/hub/ecosystem-map-intent.md
@@ -259,7 +259,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 - Short ecosystem orientation -- REPOS.md
 - Spoke template -- .github/hub/templates/spoke-ecosystem.md
 - Cursor policy -- cursor-integrations.md
-- Career vs company validation -- commercial/people/validation-bridge.md
+- Career vs company validation -- commercial/ivan-damnjanovic/career/validation-bridge.md
 - Operating lanes -- ../../../interface/operating-lanes.md
 - Strategy cycle -- ../strategy-cycle.md
 
