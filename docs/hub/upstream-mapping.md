@@ -24,7 +24,7 @@ Agents on this machine may **read** spoke repos via localPath in mapping.json. T
 
 - **strategy-platform-intent** — Changes under commercial/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
-- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/, spokes/site/public/, spokes/site/website/, commercial/playbook/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
+- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, commercial/test/, commercial/outbound/, spokes/site/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
 - **career-public-sync** — Changes under commercial/people/cv/ or commercial/people/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/people/cv/, not legacy career/cv/ paths referenced in older site readme text.
 - **interview-prep-learning** — Changes under commercial/people/interview-prep/ may notify code-signal when that spoke is enabled.
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
