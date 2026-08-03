@@ -14,7 +14,7 @@ Machine map: see mapping.json at repo root. Prose SSOT: interface/ecosystem-map.
 - **core** — Ambient-Team/ambient-core — Open-core contracts, catalog, shared pipeline. Local tree: C:/GitHub/ambient-core
 - **site** — Ambient-Team/ambientsystems.ai — Business lane: marketing, wiki, messaging, validation engine, leads. Local tree: C:/GitHub/ambientsystems.ai
 - **personal-site** — engineerID/EngineerID.github.io — Personal site and CV mirrors. Local tree: C:/GitHub/EngineerID.github.io
-- **code-signal** — engineerID/code-signal — Personal CodeSignal learning repository; hub hook for interview-prep. Local tree: C:/GitHub/code-signal
+- **code-signal** — engineerID/code-signal — Personal CodeSignal learning repository; hub hook for pitch-prep. Local tree: C:/GitHub/code-signal
 
 Agents on this machine may **read** spoke repos via localPath in mapping.json. The cloud dispatcher never uses localPath and skips `enabled: false` entries.
 
@@ -24,9 +24,9 @@ Agents on this machine may **read** spoke repos via localPath in mapping.json. T
 
 - **strategy-platform-intent** — Changes under commercial/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
-- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/, spokes/site/public/, spokes/site/website/, commercial/playbook/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
-- **career-public-sync** — Changes under commercial/people/cv/ or commercial/people/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/people/cv/, not legacy career/cv/ paths referenced in older site readme text.
-- **interview-prep-learning** — Changes under commercial/people/interview-prep/ may notify code-signal when that spoke is enabled.
+- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, commercial/test/, commercial/outbound/, spokes/site/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
+- **career-public-sync** — Changes under commercial/ivan-damnjanovic/cv/ or commercial/ivan-damnjanovic/career/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/ivan-damnjanovic/cv/, not legacy career/cv/ paths referenced in older site readme text.
+- **interview-prep-learning** — Changes under commercial/ivan-damnjanovic/pitch-prep/ may notify code-signal when that spoke is enabled.
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
 **Global excludes:** operations/finance/, corporate/ (including legal and archive), assets/archive/, and commercial/archive/ (path retired; keep exclude harmless) never trigger dispatch.
