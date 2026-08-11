@@ -41,7 +41,7 @@ jobs:
 
       - name: Fetch MAPPING.md
         env:
-          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/upstream-mapping.md" \
@@ -52,7 +52,7 @@ jobs:
 
       - name: Fetch contracts intent
         env:
-          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/data-product-contracts-intent.md" \
@@ -63,7 +63,7 @@ jobs:
 
       - name: Fetch ecosystem map
         env:
-          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/ecosystem-map-intent.md" \
@@ -74,7 +74,7 @@ jobs:
 
       - name: Fetch spoke broadcast
         env:
-          HUB_TOKEN: ${{ secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/spoke-broadcast.md" \
