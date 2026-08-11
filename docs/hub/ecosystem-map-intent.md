@@ -195,19 +195,19 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 **On hub (Actions secrets)**
 
-- HUB_DISPATCH_TOKEN_AMBIENT -- Ambient-Team spokes (platform, core, site)
+- HUB_DISPATCH_AMBIENT_TEAM -- Ambient-Team spokes (platform, core, site)
 - HUB_DISPATCH_ENGINEERID -- engineerID spokes (hub self-dispatch if needed, personal-site, code-signal)
 
 **On Ambient-Team spokes**
 
-- HUB_FETCH_TOKEN -- read private hub at payload sha
-- HUB_DISPATCH_TOKEN_AMBIENT -- same name and PAT value as hub; push hub-sync branches and optional CI kick
+- FETCH_AMBIENT_SYSTEMS -- read private hub at payload sha
+- HUB_DISPATCH_AMBIENT_TEAM -- same name and PAT value as hub; push hub-sync branches and optional CI kick
 - CURSOR_API_KEY -- optional; CI bridge
 - DATABRICKS_HOST and DATABRICKS_TOKEN -- platform only (CI Databricks Validate)
 
 **On engineerID spokes**
 
-- HUB_FETCH_TOKEN
+- FETCH_AMBIENT_SYSTEMS
 - HUB_DISPATCH_ENGINEERID -- same PAT value as hub HUB_DISPATCH_ENGINEERID
 - CURSOR_API_KEY -- optional; CI bridge
 

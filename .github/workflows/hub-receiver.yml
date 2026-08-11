@@ -41,7 +41,7 @@ jobs:
 
       - name: Fetch MAPPING.md
         env:
-          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/upstream-mapping.md" \
@@ -52,7 +52,7 @@ jobs:
 
       - name: Fetch contracts intent
         env:
-          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/data-product-contracts-intent.md" \
@@ -63,7 +63,7 @@ jobs:
 
       - name: Fetch ecosystem map
         env:
-          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/ecosystem-map-intent.md" \
@@ -74,7 +74,7 @@ jobs:
 
       - name: Fetch spoke broadcast
         env:
-          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS || secrets.HUB_FETCH_TOKEN }}
+          HUB_TOKEN: ${{ secrets.FETCH_AMBIENT_SYSTEMS }}
         run: |
           mkdir -p docs/hub
           HTTP_STATUS=$(curl -s -w "%{http_code}" -o "docs/hub/spoke-broadcast.md" \
@@ -100,8 +100,8 @@ jobs:
       - name: Commit sync branch
         id: commit
         env:
-          # Same PAT and secret name as hub HUB_DISPATCH_TOKEN_AMBIENT.
-          HUB_SYNC_PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT }}
+          # Same PAT and secret name as hub HUB_DISPATCH_AMBIENT_TEAM.
+          HUB_SYNC_PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM }}
         run: |
           set -euo pipefail
           SYNC_BRANCH="hub-sync/${{ steps.hub.outputs.short }}"
@@ -117,7 +117,7 @@ jobs:
           if [ -n "${HUB_SYNC_PUSH_TOKEN:-}" ]; then
             git push "https://x-access-token:${HUB_SYNC_PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${SYNC_BRANCH}"
           else
-            echo "::warning::HUB_DISPATCH_TOKEN_AMBIENT not set; CI may not run on the PR."
+            echo "::warning::HUB_DISPATCH_AMBIENT_TEAM not set; CI may not run on the PR."
             git push -u origin "${SYNC_BRANCH}"
           fi
           echo "empty=false" >> "$GITHUB_OUTPUT"
@@ -140,11 +140,11 @@ jobs:
       - name: Trigger CI on hub-sync branch
         if: steps.commit.outputs.empty == 'false'
         env:
-          GH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT }}
+          GH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM }}
         run: |
           set -euo pipefail
           if [ -z "${GH_TOKEN:-}" ]; then
-            echo "HUB_DISPATCH_TOKEN_AMBIENT not set; skip CI kick."
+            echo "HUB_DISPATCH_AMBIENT_TEAM not set; skip CI kick."
             exit 0
           fi
           gh workflow run ci.yml --ref "hub-sync/${{ steps.hub.outputs.short }}"

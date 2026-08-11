@@ -95,7 +95,7 @@ jobs:
       group: cursor-remediate-${{ github.head_ref }}
       cancel-in-progress: true
     env:
-      PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT || secrets.HUB_DISPATCH_ENGINEERID || github.token }}
+      PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM || github.token }}
     steps:
       - uses: actions/checkout@v7
         with:

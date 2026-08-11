@@ -1,6 +1,6 @@
 # Pattern B: copy to TARGET_REPO/.github/workflows/ci-cursor-bridge.yml
 # On watched workflow failure: Cursor SDK local heal, open PR, enable auto-merge.
-# Requires CURSOR_API_KEY. Prefer HUB_DISPATCH_TOKEN_* for push (workflow files).
+# Requires CURSOR_API_KEY. Prefer HUB_DISPATCH_AMBIENT_TEAM for push (workflow files).
 # Copy .github/scripts/cursor_sdk_heal.py + requirements-cursor-sdk.txt from hub
 # (or use paths below after copying). See CI_CURSOR_BRIDGE.md.
 
@@ -34,7 +34,7 @@ jobs:
       cancel-in-progress: true
     env:
       CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
-      PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_TOKEN_AMBIENT || secrets.HUB_DISPATCH_ENGINEERID || github.token }}
+      PUSH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM || github.token }}
       RUN_ID: ${{ github.event.workflow_run.id }}
       RUN_URL: ${{ github.event.workflow_run.html_url }}
       WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
