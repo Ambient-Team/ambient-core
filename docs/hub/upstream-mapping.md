@@ -1,6 +1,6 @@
 # Hub-and-spoke mapping (ambient-systems)
 
-**Purpose:** This repository is the floating-hub coordinator. Enabled spokes own business lane, technical lane, personal mirrors, or learning archives. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main.
+**Purpose:** This repository is the company floating-hub coordinator for three Ambient-Team remotes (platform, core, site). Personal EngineerID spokes are disabled here. Oversight: EngineerID/master-hub. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main. Remote vs local policy: spokes/platform/engineering/remote-ci-and-local-policy.md.
 
 Machine map: see mapping.json at repo root. Prose SSOT: interface/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Company ops start: interface/operating-lanes.md. Strategy cycle: commercial/strategy/strategy-cycle.md.
 
@@ -8,15 +8,17 @@ Machine map: see mapping.json at repo root. Prose SSOT: interface/ecosystem-map.
 
 ## Spokes
 
-**Enabled dispatch spokes**
+**Enabled dispatch spokes (Ambient-Team only)**
 
-- **platform** — Ambient-Team/ambient-systems-platform — Technical lane: platform code, bundles, jobs, app, CI. Local tree: C:/GitHub/ambient-systems-platform
-- **core** — Ambient-Team/ambient-core — Open-core contracts, catalog, shared pipeline. Local tree: C:/GitHub/ambient-core
-- **site** — Ambient-Team/ambientsystems.ai — Business lane: marketing, wiki, messaging, validation engine, leads. Local tree: C:/GitHub/ambientsystems.ai
-- **personal-site** — engineerID/EngineerID.github.io — Personal site and CV mirrors. Local tree: C:/GitHub/EngineerID.github.io
-- **code-signal** — engineerID/code-signal — Personal CodeSignal learning repository; hub hook for interview-prep. Local tree: C:/GitHub/code-signal
+- **platform** — Ambient-Team/ambient-systems-platform — remoteOnly; CI and Actions prod deploy. No required local tree.
+- **core** — Ambient-Team/ambient-core — remoteOnly; public MIT contracts. No required local tree.
+- **site** — Ambient-Team/ambientsystems.ai — remoteOnly; hub-sync via GitHub; Wix publish via Actions CI Deploy Wix. No required local tree.
 
-Agents on this machine may **read** spoke repos via localPath in mapping.json. The cloud dispatcher never uses localPath and skips `enabled: false` entries.
+**Disabled on this hub**
+
+- **personal-site**, **code-signal** — enabled false; personal lane under EngineerID/master-hub.
+
+The cloud dispatcher never uses localPath and skips `enabled: false` entries. Agents must not require a local platform or core clone.
 
 ---
 
@@ -24,9 +26,9 @@ Agents on this machine may **read** spoke repos via localPath in mapping.json. T
 
 - **strategy-platform-intent** — Changes under commercial/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
-- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/, spokes/site/public/, spokes/site/website/, commercial/playbook/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
-- **career-public-sync** — Changes under commercial/people/cv/ or commercial/people/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/people/cv/, not legacy career/cv/ paths referenced in older site readme text.
-- **interview-prep-learning** — Changes under commercial/people/interview-prep/ may notify code-signal when that spoke is enabled.
+- **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, commercial/test/, commercial/outbound/, spokes/site/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
+- **career-public-sync** — Changes under commercial/ivan-damnjanovic/cv/ or commercial/ivan-damnjanovic/career/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/ivan-damnjanovic/cv/, not legacy career/cv/ paths referenced in older site readme text.
+- **interview-prep-learning** — Changes under commercial/ivan-damnjanovic/pitch-prep/ may notify code-signal when that spoke is enabled.
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
 **Global excludes:** operations/finance/, corporate/ (including legal and archive), assets/archive/, and commercial/archive/ (path retired; keep exclude harmless) never trigger dispatch.
@@ -63,10 +65,16 @@ Spokes fetch hub file content via GitHub API (contents or archive) using a spoke
 
 Configure in ambient-systems GitHub Actions secrets:
 
-- **HUB_DISPATCH_TOKEN_AMBIENT** — Fine-grained PAT for Ambient-Team spokes: ambient-systems-platform, ambient-core, ambientsystems.ai. Permissions: repository_dispatch on each target repo.
-- **HUB_DISPATCH_ENGINEERID** — Fine-grained PAT for engineerID spokes: ambient-systems (self), EngineerID.github.io, code-signal. Permissions: repository_dispatch on each target repo.
+- **HUB_DISPATCH_TOKEN_AMBIENT** / **HUB_DISPATCH_AMBIENT_TEAM** — Fine-grained PAT for Ambient-Team spokes (platform, core, site). Required for company Hub dispatch.
+- **FETCH_MASTER** — Contents: Read on EngineerID/master-hub only. Used by **Master hub sync receiver**.
 
-The dispatcher selects the token from the spoke owner (Ambient-Team vs engineerID). Both secrets are required for live dispatch to all enabled spokes.
+Upstream cascade from EngineerID/master-hub: event `master_hub_sync` → `master-hub-receiver.yml` → `interface/master-hub/**` → sync rule `master-hub-oversight` → Ambient-Team spokes. See master-hub `docs/remote-control.md`.
+
+**Spoke FETCH:** Ambient-Team repos use **FETCH_AMBIENT_SYSTEMS** (Contents: Read on this hub). Legacy name: `HUB_FETCH_TOKEN`.
+
+**Site build FETCH:** ambientsystems.ai uses **FETCH_SITE_UPDATES** (Contents: Read on ambient-core + ambient-systems-platform) for Wix `_sources`.
+
+The dispatcher selects the token from the spoke owner (Ambient-Team vs engineerID). Enabled company spokes need the Ambient-Team dispatch token on this hub only.
 
 **Reuse on spokes:** Store the same Ambient PAT on each Ambient-Team spoke as **HUB_DISPATCH_TOKEN_AMBIENT** (same secret name as on the hub). Store the same engineerID PAT on each engineerID spoke as **HUB_DISPATCH_ENGINEERID**. One PAT per org covers dispatch from the hub and git push to hub-sync branches on spokes when the token has contents, pull-requests, and actions write on that repo.
 
@@ -94,8 +102,8 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 
 - **HUB_FETCH_TOKEN** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
 - **HUB_DISPATCH_TOKEN_AMBIENT** — same PAT value as hub; git push to hub-sync branches and optional gh workflow run to kick CI.
-- **CURSOR_API_KEY** — required for CI self-heal (Pattern A/B). See .github/hub/templates/CI_CURSOR_BRIDGE.md. Missing on a spoke means logs are captured but no Cursor CLI heal runs.
-- **DATABRICKS_HOST** / **DATABRICKS_TOKEN** — platform only; CI Databricks Validate (see ambient-systems-platform docs/databricks-manual.md).
+- **CURSOR_API_KEY** — do not use; self-heal is off.
+- **DATABRICKS_HOST** / **DATABRICKS_TOKEN** / **DATABRICKS_SQL_WAREHOUSE_ID** / **FIREBASE_SERVICE_ACCOUNT** — platform Actions validate and prod deploy. See spokes/platform/engineering/remote-ci-and-local-policy.md.
 
 **Spoke secrets (engineerID)**
 
