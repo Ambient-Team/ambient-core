@@ -63,12 +63,12 @@ Spokes fetch hub file content via GitHub API (contents or archive) using a spoke
 
 Configure in ambient-systems GitHub Actions secrets:
 
-- **HUB_DISPATCH_TOKEN_AMBIENT** — Fine-grained PAT for Ambient-Team spokes: ambient-systems-platform, ambient-core, ambientsystems.ai. Permissions: repository_dispatch on each target repo.
+- **HUB_DISPATCH_AMBIENT_TEAM** — Fine-grained PAT for Ambient-Team spokes: ambient-systems-platform, ambient-core, ambientsystems.ai. Permissions: repository_dispatch on each target repo.
 - **HUB_DISPATCH_ENGINEERID** — Fine-grained PAT for engineerID spokes: ambient-systems (self), EngineerID.github.io, code-signal. Permissions: repository_dispatch on each target repo.
 
 The dispatcher selects the token from the spoke owner (Ambient-Team vs engineerID). Both secrets are required for live dispatch to all enabled spokes.
 
-**Reuse on spokes:** Store the same Ambient PAT on each Ambient-Team spoke as **HUB_DISPATCH_TOKEN_AMBIENT** (same secret name as on the hub). Store the same engineerID PAT on each engineerID spoke as **HUB_DISPATCH_ENGINEERID**. One PAT per org covers dispatch from the hub and git push to hub-sync branches on spokes when the token has contents, pull-requests, and actions write on that repo.
+**Reuse on spokes:** Store the same Ambient PAT on each Ambient-Team spoke as **HUB_DISPATCH_AMBIENT_TEAM** (same secret name as on the hub). Store the same engineerID PAT on each engineerID spoke as **HUB_DISPATCH_ENGINEERID**. One PAT per org covers dispatch from the hub and git push to hub-sync branches on spokes when the token has contents, pull-requests, and actions write on that repo.
 
 **Dry run:** Run workflow hub dispatch manually with dry_run true, or set DRY_RUN true when invoking dispatch.sh locally. No API calls are made in dry run mode.
 
@@ -92,14 +92,14 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 
 **Spoke secrets (Ambient-Team; names match GitHub Actions secrets)**
 
-- **HUB_FETCH_TOKEN** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
-- **HUB_DISPATCH_TOKEN_AMBIENT** — same PAT value as hub; git push to hub-sync branches and optional gh workflow run to kick CI.
+- **FETCH_AMBIENT_SYSTEMS** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
+- **HUB_DISPATCH_AMBIENT_TEAM** — same PAT value as hub; git push to hub-sync branches and optional gh workflow run to kick CI.
 - **CURSOR_API_KEY** — required for CI self-heal (Pattern A/B). See .github/hub/templates/CI_CURSOR_BRIDGE.md. Missing on a spoke means logs are captured but no Cursor CLI heal runs.
 - **DATABRICKS_HOST** / **DATABRICKS_TOKEN** — platform only; CI Databricks Validate (see ambient-systems-platform docs/databricks-manual.md).
 
 **Spoke secrets (engineerID)**
 
-- **HUB_FETCH_TOKEN** — read private hub at payload sha.
+- **FETCH_AMBIENT_SYSTEMS** — read private hub at payload sha.
 - **HUB_DISPATCH_ENGINEERID** — same PAT value as hub **HUB_DISPATCH_ENGINEERID**.
 - **CURSOR_API_KEY** — required for CI self-heal (Pattern A/B). Missing means logs only; no Cursor CLI heal.
 
@@ -123,12 +123,12 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 
 ## Troubleshooting (live dispatch)
 
-- **Hub dispatch HTTP 403 on Ambient-Team spokes:** Use HUB_DISPATCH_TOKEN_AMBIENT on the hub with access to each Ambient-Team target repo. engineerID-only HUB_DISPATCH_ENGINEERID cannot dispatch to Ambient-Team.
+- **Hub dispatch HTTP 403 on Ambient-Team spokes:** Use HUB_DISPATCH_AMBIENT_TEAM on the hub with access to each Ambient-Team target repo. engineerID-only HUB_DISPATCH_ENGINEERID cannot dispatch to Ambient-Team.
 - **Hub dispatch HTTP 422 too many payload properties:** client_payload allows at most 10 top-level keys. Hub wraps metadata in client_payload.data (single key).
 - **Spoke receiver: GitHub Actions is not permitted to create or approve pull requests:** In each spoke repo, Settings, Actions, General, enable workflow permission to create and approve pull requests. The sync job may still push hub-sync/SHORT_SHA; open a PR manually if needed until this is enabled.
-- **Spoke fetch HTTP 403:** HUB_FETCH_TOKEN on the spoke must read the private hub repo EngineerID/ambient-systems at the commit in client_payload.data.sha (or legacy client_payload.sha).
-- **Hub-sync merged but main CI red:** hub-sync PR may have merged without CI if push used GITHUB_TOKEN only. Set HUB_DISPATCH_TOKEN_AMBIENT (Ambient-Team) or HUB_DISPATCH_ENGINEERID (engineerID) on the spoke and require status checks before merge. Remediate skipped on push to main is expected.
-- **Hub-sync PR without CI:** Confirm spoke secret name matches hub-receiver.yml (HUB_DISPATCH_TOKEN_AMBIENT or HUB_DISPATCH_ENGINEERID, not legacy HUB_DISPATCH_AMBIENT_TEAM or HUB_SYNC_PUSH_TOKEN).
+- **Spoke fetch HTTP 403:** FETCH_AMBIENT_SYSTEMS on the spoke must read the private hub repo EngineerID/ambient-systems at the commit in client_payload.data.sha (or legacy client_payload.sha).
+- **Hub-sync merged but main CI red:** hub-sync PR may have merged without CI if push used GITHUB_TOKEN only. Set HUB_DISPATCH_AMBIENT_TEAM (Ambient-Team) or HUB_DISPATCH_ENGINEERID (engineerID) on the spoke and require status checks before merge. Remediate skipped on push to main is expected.
+- **Hub-sync PR without CI:** Confirm spoke secret name matches hub-receiver.yml (HUB_DISPATCH_AMBIENT_TEAM or HUB_DISPATCH_ENGINEERID, not any other secret name).
 - **Red check named .github/workflows/hub-receiver.yml on push with no jobs:** GitHub workflow file validation failed (invalid YAML), not a failed hub sync. repository_dispatch runs still use the Hub sync receiver workflow name when valid. Fix job-level env: do not reference steps context at job env (see ambient-core hub-receiver history).
 
 ---
