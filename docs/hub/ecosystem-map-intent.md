@@ -152,7 +152,7 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **commercial-public-sync**
 
-- Hub paths: commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/**, spokes/site/public/**, spokes/site/website/**, commercial/playbook/**, commercial/charter.md
+- Hub paths: commercial/hypotheses.md, commercial/README.md, commercial/test/**, commercial/outbound/**, spokes/site/**, commercial/charter.md
 - Spokes: site
 - Profile: site-gtm
 - Site receiver: refresh mirrors from hub commercial (site remains deploy tree)

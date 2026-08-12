@@ -26,7 +26,7 @@ Hub ambient-systems now mirrors hub-and-spoke. Deploy apps stay in your spoke re
 ### site (ambientsystems.ai)
 
 - Hub package: spokes/site/ (website instructions, messaging, public disclosures)
-- Sync: commercial-public-sync now watches spokes/site/** plus commercial hypotheses/README/playbook/charter
+- Sync: commercial-public-sync watches spokes/site/** plus commercial hypotheses, README, test, outbound, charter
 - Deploy and Astro/Wix stay in this repo. Refresh mirrors from hub spokes/site/ and commercial/ when hub-sync fires
 - Gold ecosystem dashboard is gone on the hub; do not expect operations/ecosystem/dashboard.md
 
