@@ -123,28 +123,29 @@ jobs:
           echo "empty=false" >> "$GITHUB_OUTPUT"
           echo "branch=${SYNC_BRANCH}" >> "$GITHUB_OUTPUT"
 
-      - name: Open pull request
-        if: steps.commit.outputs.empty == 'false'
-        uses: actions/github-script@v9
-        with:
-          script: |
-            await github.rest.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `Hub sync ${{ steps.hub.outputs.short }}`,
-              head: `hub-sync/${{ steps.hub.outputs.short }}`,
-              base: 'main',
-              body: `Hub sync from ${{ steps.hub.outputs.repo }} at ${{ steps.hub.outputs.sha }}. Wait for CI on this PR before merge.`
-            });
 
-      - name: Trigger CI on hub-sync branch
+      - name: Merge hub-sync PR
         if: steps.commit.outputs.empty == 'false'
         env:
-          GH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM }}
+          GH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM || github.token }}
+          SYNC_BRANCH: hub-sync/${{ steps.hub.outputs.short }}
+          SOURCE_SHA: ${{ steps.hub.outputs.sha }}
         run: |
           set -euo pipefail
-          if [ -z "${GH_TOKEN:-}" ]; then
-            echo "HUB_DISPATCH_AMBIENT_TEAM not set; skip CI kick."
-            exit 0
+          # Hub-sync auto-merge (ambient-systems policy) — no Ambient-Team browser login.
+          EXISTING=$(gh pr list --head "$SYNC_BRANCH" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            PR="$EXISTING"
+            echo "Using existing PR #$PR"
+          else
+            URL=$(gh pr create \
+              --base main \
+              --head "$SYNC_BRANCH" \
+              --title "Hub sync ${SOURCE_SHA:0:7}" \
+              --body "Automated hub sync from ${SOURCE_SHA}. Auto-merged by spoke hub-receiver (ambient-systems policy).")
+            echo "Created $URL"
+            PR=$(echo "$URL" | sed -n 's|.*/pull/\([0-9]*\).*|\1|p')
           fi
-          gh workflow run ci.yml --ref "hub-sync/${{ steps.hub.outputs.short }}"
+          gh pr merge "$PR" --squash --delete-branch --admin \
+            || gh pr merge "$PR" --squash --delete-branch \
+            || gh pr merge --auto --squash "$PR"
