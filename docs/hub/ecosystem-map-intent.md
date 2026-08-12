@@ -19,7 +19,7 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 
 ## Floating hub and two lanes
 
-**Floating hub.** ambient-systems is the only coordination hub. Active focus moves over time via `_data/ecosystem/hub-focus.yaml` (set / review / retire in strategy-cycle.md). Spokes reorient around that focus; they do not invent a competing center.
+**Company floating hub.** ambient-systems is the company coordination hub for Ambient-Team remotes (platform, core, site). Overall personal orchestration control plane is EngineerID/master-hub. Active focus for company work moves over time via `_data/ecosystem/hub-focus.yaml` (set / review / retire in strategy-cycle.md). Spokes reorient around that focus; they do not invent a competing center.
 
 - **Business lane:** ambientsystems.ai -- company-external OS for validation, marketing, sales, and later commercial P and L.
 - **Technical lane:** ambient-systems-platform plus ambient-core -- product engine (app, Databricks bundles, jobs, CI) and contract or catalog YAML SSOT.
@@ -32,8 +32,9 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 
 - id: hub (implicit)
 - GitHub: EngineerID/ambient-systems
-- Class: hub (floating focus)
-- Local: C:/GitHub/ambient-systems
+- Oversight: EngineerID/master-hub
+- Class: hub (floating focus; company orchestration only)
+- Local: C:/GitHub/ambient-systems (manager working doc; optional)
 - Visibility: private repository
 - Primary edits: commercial/ (hypotheses-centered OS), interface/operating-lanes.md, interface/, corporate/, product/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
 
@@ -42,15 +43,15 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - id: platform
 - GitHub: Ambient-Team/ambient-systems-platform
 - Class: execution
-- Local: C:/GitHub/ambient-systems-platform
-- Role: Technical lane -- platform code, Databricks bundles, jobs, app, CI and pre-commit
+- remoteOnly: true (no required local clone)
+- Role: Technical lane -- platform code, Databricks bundles, jobs, app, CI Validate, Actions prod deploy
 
 **Spoke core (technical lane contracts)**
 
 - id: core
 - GitHub: Ambient-Team/ambient-core
 - Class: execution
-- Local: C:/GitHub/ambient-core
+- remoteOnly: true (no required local clone)
 - Role: Contract and catalog YAML SSOT, shared pipeline libraries (public MIT)
 
 **Spoke site (business lane)**
@@ -58,26 +59,14 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - id: site
 - GitHub: Ambient-Team/ambientsystems.ai
 - Class: site
-- Local: C:/GitHub/ambientsystems.ai
-- Role: Business lane -- marketing site, wiki, company-external messaging, validation engine, leads, commercial charter
+- remoteOnly: true (no required local clone; Wix via Actions CI Deploy Wix)
+- Role: Business lane -- marketing site, wiki, messaging, leads; hub-sync on GitHub; production publish via Actions
 
-**Spoke personal-site**
+**Personal spokes (disabled on company hub)**
 
-- id: personal-site
-- GitHub: engineerID/EngineerID.github.io
-- Class: personal
-- Local: C:/GitHub/EngineerID.github.io
-- Role: Personal site and machine-readable CV mirrors
+- personal-site and code-signal remain in mapping.json with enabled false. Ownership: EngineerID/master-hub. Not company dispatch targets.
 
-**Spoke code-signal**
-
-- id: code-signal
-- GitHub: engineerID/code-signal
-- Class: personal
-- Local: C:/GitHub/code-signal
-- Role: Personal CodeSignal learning repository; optional interview-prep hook from hub
-
-Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branching.md (short branching copy).
+Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub/branching.md (short branching copy). Policy: spokes/platform/engineering/remote-ci-and-local-policy.md.
 
 ---
 
@@ -101,11 +90,11 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/people/validation-bridge.md.
+- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/ivan-damnjanovic/career/validation-bridge.md.
 
-**Personal spokes**
+**Personal lane (not company dispatch)**
 
-- Career artifacts and learning repository. Not company doctrine or GTM SSOT.
+- Career and personal repos are under EngineerID/master-hub. Not company doctrine or GTM SSOT. Company hub does not dispatch to them.
 
 **Upward spoke signals (spoke to hub)**
 
@@ -152,7 +141,7 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **commercial-public-sync**
 
-- Hub paths: commercial/hypotheses.md, commercial/README.md, spokes/site/messaging/**, spokes/site/public/**, spokes/site/website/**, commercial/playbook/**, commercial/charter.md
+- Hub paths: commercial/hypotheses.md, commercial/README.md, commercial/test/**, commercial/outbound/**, spokes/site/**, commercial/charter.md
 - Spokes: site
 - Profile: site-gtm
 - Site receiver: refresh mirrors from hub commercial (site remains deploy tree)
@@ -160,14 +149,14 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **career-public-sync**
 
-- Hub paths: commercial/people/cv/**, commercial/people/job-search-targeting.md
+- Hub paths: commercial/ivan-damnjanovic/cv/**, commercial/ivan-damnjanovic/career/job-search-targeting.md
 - Spokes: personal-site
 - Profile: cv-public
 - Personal-site receiver copies: docs/hub/upstream-mapping.md, hub-sync/cv/ivan-damnjanovic.md, docs/hub/ecosystem-map-intent.md
 
 **interview-prep-learning**
 
-- Hub paths: commercial/people/interview-prep/**
+- Hub paths: commercial/ivan-damnjanovic/pitch-prep/**
 - Spokes: code-signal
 - Profile: interview-prep
 - Code-signal receiver copies: docs/hub/upstream-mapping.md, hub-sync/interview-prep/two-question-answers.md, docs/hub/ecosystem-map-intent.md
@@ -191,25 +180,25 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 ---
 
-## Secrets topology (org split)
+## Secrets topology (five PATs only)
 
-**On hub (Actions secrets)**
+**On master-hub**
 
-- HUB_DISPATCH_AMBIENT_TEAM -- Ambient-Team spokes (platform, core, site)
-- HUB_DISPATCH_ENGINEERID -- engineerID spokes (hub self-dispatch if needed, personal-site, code-signal)
+- HUB_DISPATCH_ENGINEERID -- POST repository_dispatch to ambient-systems
+
+**On ambient-systems**
+
+- HUB_DISPATCH_AMBIENT_TEAM -- Hub dispatch to Ambient-Team spokes
+- FETCH_MASTER -- read EngineerID/master-hub
 
 **On Ambient-Team spokes**
 
-- FETCH_AMBIENT_SYSTEMS -- read private hub at payload sha
-- HUB_DISPATCH_AMBIENT_TEAM -- same name and PAT value as hub; push hub-sync branches and optional CI kick
-- CURSOR_API_KEY -- optional; CI bridge
-- DATABRICKS_HOST and DATABRICKS_TOKEN -- platform only (CI Databricks Validate)
+- FETCH_AMBIENT_SYSTEMS -- read private ambient-systems
+- HUB_DISPATCH_AMBIENT_TEAM -- optional; hub-sync branch push
+- FETCH_SITE_UPDATES -- site only; read core + platform for Wix `_sources`
+- DATABRICKS_HOST / DATABRICKS_TOKEN -- platform only (CI Databricks Validate)
 
-**On engineerID spokes**
-
-- FETCH_AMBIENT_SYSTEMS
-- HUB_DISPATCH_ENGINEERID -- same PAT value as hub HUB_DISPATCH_ENGINEERID
-- CURSOR_API_KEY -- optional; CI bridge
+Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 
 ---
 
@@ -259,7 +248,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 - Short ecosystem orientation -- REPOS.md
 - Spoke template -- .github/hub/templates/spoke-ecosystem.md
 - Cursor policy -- cursor-integrations.md
-- Career vs company validation -- commercial/people/validation-bridge.md
+- Career vs company validation -- commercial/ivan-damnjanovic/career/validation-bridge.md
 - Operating lanes -- ../../../interface/operating-lanes.md
 - Strategy cycle -- ../strategy-cycle.md
 
