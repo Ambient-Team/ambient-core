@@ -103,7 +103,7 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 - **FETCH_AMBIENT_SYSTEMS** — read EngineerID/ambient-systems at the hub commit in client_payload.data.
 - **HUB_DISPATCH_AMBIENT_TEAM** — optional; git push to hub-sync branches (same PAT as hub).
 - **FETCH_SITE_UPDATES** — site only; read core + platform for Wix `_sources`.
-- **DATABRICKS_HOST** / **DATABRICKS_TOKEN** / **DATABRICKS_SQL_WAREHOUSE_ID** / **FIREBASE_SERVICE_ACCOUNT** — platform deploy. See remote-ci-and-local-policy.md.
+- **DATABRICKS_HOST** / **DATABRICKS_TOKEN** / **DATABRICKS_SQL_WAREHOUSE_ID** / **FIREBASE_SERVICE_ACCOUNT** — platform deploy on Environment `production` (classic SA first; WIF after first green). See remote-ci-and-local-policy.md. Inventory: Merge spoke hub-sync PRs `inventory_platform_ci=true`.
 
 **master-hub**
 
