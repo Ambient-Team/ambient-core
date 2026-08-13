@@ -11,7 +11,7 @@ author: Ivan Damnjanovic
 
 Purpose: human-readable catalog of contract-backed data products (path B). Layer: technical lane intent.
 
-YAML source of truth: contracts/ in Ambient-Team/ambient-core on pin v0.3.7 -- https://github.com/Ambient-Team/ambient-core/tree/v0.3.7/contracts (platform pins via submodule; operator confirms submodule on Saturday item 10).
+YAML source of truth: contracts/ in Ambient-Team/ambient-core on pin v0.3.7 -- https://github.com/Ambient-Team/ambient-core/tree/v0.3.7/contracts (platform pins via submodule).
 
 Not PhD-derived claims. Not commercial SKU statements from metering contracts.
 
