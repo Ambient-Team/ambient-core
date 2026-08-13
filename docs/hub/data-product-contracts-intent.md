@@ -2,7 +2,7 @@
 title: Data product contracts
 status: active
 sensitivity: internal
-updated: 2026-07-13
+updated: 2026-08-13
 version: 4
 author: Ivan Damnjanovic
 ---
@@ -11,7 +11,7 @@ author: Ivan Damnjanovic
 
 Purpose: human-readable catalog of contract-backed data products (path B). Layer: technical lane intent.
 
-YAML source of truth: contracts/ in Ambient-Team/ambient-core on pin v0.3.3 -- https://github.com/Ambient-Team/ambient-core/tree/v0.3.3/contracts (platform pins via submodule; see ambient-systems-platform docs/ambient-core.md).
+YAML source of truth: contracts/ in Ambient-Team/ambient-core on pin v0.3.7 -- https://github.com/Ambient-Team/ambient-core/tree/v0.3.7/contracts (platform pins via submodule; operator confirms submodule on Saturday item 10).
 
 Not PhD-derived claims. Not commercial SKU statements from metering contracts.
 
@@ -100,7 +100,7 @@ These core contracts map to the Firestore Gold mirror under each org gold collec
 
 ---
 
-## Extended catalog in ambient-core (v0.3.3)
+## Extended catalog in ambient-core (v0.3.7)
 
 Full column-level semantics: ambient-core contracts/README.md on the pinned tag. Summary by domain:
 
@@ -132,7 +132,7 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 
 ## Implementation and enforcement (July 2026)
 
-- YAML in ambient-core contracts/ is the single source of truth; platform consumes via git submodule pin (currently v0.3.3).
+- YAML in ambient-core contracts/ is the single source of truth; platform consumes via git submodule pin (target **v0.3.7**; GitHub Releases “latest” UI may still show v0.3.3 until an operator publishes that release).
 - Core CLIs: validate-contracts, ambient-catalog-generate; platform CI enforces contract validation and consumption release gates.
 - Unity Catalog materialization and medallion jobs run in ambient-systems-platform OLAP layer; orchestration includes Databricks Asset Bundles and jobs (Lakeflow/declarative migration tracked in backlog/technical-backlog.md).
 - Firestore path: FirestoreConsumptionAdapter.js reads governed Gold mirror only; external BI may use Delta Sharing or UC SQL per policy.
