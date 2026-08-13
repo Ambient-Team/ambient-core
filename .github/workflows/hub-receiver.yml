@@ -13,7 +13,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Resolve hub coordinates
         id: hub
@@ -90,7 +90,7 @@ jobs:
             find docs/hub -type f -name '*.md' -print0 | xargs -0 sed -i 's/[[:space:]]*$//'
           fi
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
