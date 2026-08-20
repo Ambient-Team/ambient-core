@@ -36,7 +36,7 @@ Platform summary: see README Platform Summary -- ../../../README.md#platform-sum
 - Class: hub (floating focus; company orchestration only)
 - Local: C:/GitHub/ambient-systems (manager working doc; optional)
 - Visibility: private repository
-- Primary edits: commercial/ (hypotheses-centered OS), interface/operating-lanes.md, interface/, corporate/, product/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
+- Primary edits: commercial/ (hypotheses-centered OS), interface/operating-lanes.md, interface/, corporate/, spokes/platform/, operations/finance/, mapping.json, AGENTS.md, README.md, `_data/ecosystem/hub-focus.yaml`
 
 **Spoke platform (technical lane)**
 
@@ -90,7 +90,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/ivan-damnjanovic/career/validation-bridge.md.
+- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/ivan-damnjanovic/cv/validation-bridge.md.
 
 **Personal lane (not company dispatch)**
 
@@ -110,7 +110,7 @@ Agent sections: AGENTS.md floating hub, research firewall, repository vs site.
 
 ## Hub dispatch (summary)
 
-**Trigger:** Push to hub main under path filters in .github/workflows/hub-dispatch.yml (company/strategy/, product/, commercial/, people/, mapping.json).
+**Trigger:** Push to hub main under path filters in .github/workflows/hub-dispatch.yml (commercial/**, interface/**, spokes/**, mapping.json).
 
 **Script:** .github/hub/dispatch.sh reads mapping.json, applies globalExcludes, matches syncRules, POSTs repository_dispatch with event_type ambient_hub_sync only to spokes with enabled: true.
 
@@ -126,15 +126,15 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **strategy-platform-intent**
 
-- Hub paths: commercial/strategy/** and commercial/strategy/backlog/**; interface/**
+- Hub paths: commercial/strategy/** and commercial/strategy/**; interface/**
 - Spokes: platform, core
 - Profile: platform-intent
-- Core receiver copies: docs/hub/upstream-mapping.md (MAPPING.md), docs/hub/data-product-contracts-intent.md (company/strategy/03_data-product-contracts.md), docs/hub/ecosystem-map-intent.md (interface/ecosystem-map.md)
+- Core receiver copies: docs/hub/upstream-mapping.md (MAPPING.md), docs/hub/data-product-contracts-intent.md (commercial/strategy/03_data-product-contracts.md), docs/hub/ecosystem-map-intent.md (interface/ecosystem-map.md)
 - Platform receiver copies: docs/upstream-mapping.md, docs/hub/repos-ecosystem.md (REPOS.md), docs/hub/data-product-contracts-intent.md, docs/hub/ecosystem-map-intent.md
 
 **product-engineering-intent**
 
-- Hub paths: product/**
+- Hub paths: spokes/platform/**
 - Spokes: platform
 - Profile: platform-intent
 - Platform receiver: same fetch set as strategy rule when dispatch fires (receiver does not filter by rule id; refreshes configured mirrors)
@@ -149,14 +149,14 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **career-public-sync**
 
-- Hub paths: commercial/ivan-damnjanovic/cv/**, commercial/ivan-damnjanovic/career/job-search-targeting.md
+- Hub paths: commercial/ivan-damnjanovic/cv/**, commercial/ivan-damnjanovic/assurance/targeting.md
 - Spokes: personal-site
 - Profile: cv-public
 - Personal-site receiver copies: docs/hub/upstream-mapping.md, hub-sync/cv/ivan-damnjanovic.md, docs/hub/ecosystem-map-intent.md
 
 **interview-prep-learning**
 
-- Hub paths: commercial/ivan-damnjanovic/pitch-prep/**
+- Hub paths: commercial/ivan-damnjanovic/assurance/**, commercial/ivan-damnjanovic/advisory/**
 - Spokes: code-signal
 - Profile: interview-prep
 - Code-signal receiver copies: docs/hub/upstream-mapping.md, hub-sync/interview-prep/two-question-answers.md, docs/hub/ecosystem-map-intent.md
@@ -176,7 +176,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 - operations/finance/ and corporate/ -- confidential; excluded from dispatch (corporation shell)
 - commercial/hypotheses.md -- internal-contingent; may dispatch to site when paths match commercial-public-sync
-- people/ -- internal-contingent; career paths may dispatch to personal spokes
+- commercial/ivan-damnjanovic/ -- internal-contingent; career paths may notify disabled personal spokes only
 
 ---
 
@@ -222,7 +222,7 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 2. Platform implementation -- ambient-systems-platform repo/* PR; link from backlog entry.
 3. Contract YAML change -- ambient-core repo/* PR then platform submodule pin PR.
 4. Public messaging or validation mirror -- hub commercial/ and site internal-docs/ or wait for hub-sync PR on site.
-5. CV or interview prep public mirror -- hub people/ then personal spoke hub-sync PR.
+5. CV or interview prep public mirror -- commercial/ivan-damnjanovic/ then master-hub personal site (company personal-site spoke retired).
 
 **Repository cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
 
@@ -248,7 +248,7 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 - Short ecosystem orientation -- REPOS.md
 - Spoke template -- .github/hub/templates/spoke-ecosystem.md
 - Cursor policy -- cursor-integrations.md
-- Career vs company validation -- commercial/ivan-damnjanovic/career/validation-bridge.md
+- Career vs company validation -- commercial/ivan-damnjanovic/cv/validation-bridge.md
 - Operating lanes -- ../../../interface/operating-lanes.md
 - Strategy cycle -- ../strategy-cycle.md
 

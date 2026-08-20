@@ -33,7 +33,7 @@ Hub ambient-systems now mirrors hub-and-spoke. Deploy apps stay in your spoke re
 ### platform (ambient-systems-platform)
 
 - Hub package: spokes/platform/ (engineering assessments moved from product/engineering/)
-- Roadmap pointers: commercial/strategy/02_platform-roadmap.md and commercial/strategy/backlog/
+- Roadmap pointers: commercial/strategy/02_platform-roadmap.md and commercial/strategy/
 - Sync: spokes/platform/** and commercial/strategy/** via strategy-platform-intent / product-engineering-intent
 - Update any docs that still cite product/engineering/ to spokes/platform/engineering/
 
@@ -45,28 +45,28 @@ Hub ambient-systems now mirrors hub-and-spoke. Deploy apps stay in your spoke re
 
 ### personal-site (EngineerID.github.io)
 
-- Hub package: spokes/personal-site/ (pointers only)
-- CV SSOT: commercial/ivan-damnjanovic/cv/ (was people/cv/)
-- Sync: career-public-sync watches commercial/ivan-damnjanovic/cv/** and job-search-targeting.md
+- Company spoke package **removed** (see spokes/README.md §Retired spokes). Personal site owned under EngineerID/master-hub.
+- CV SSOT: commercial/ivan-damnjanovic/cv/
+- Sync rule career-public-sync remains disabled for company dispatch; watches cv/assurance/advisory paths only
 
 ### code-signal
 
-- Hub package: spokes/code-signal/ (pointers only)
-- Interview prep SSOT: commercial/ivan-damnjanovic/pitch-prep/data-engineering/
-- Sync: interview-prep-learning watches that path and spokes/code-signal/**
+- Company spoke package **removed** (see spokes/README.md §Retired spokes). Learning lane under master-hub.
+- Interview / drill banks: commercial/ivan-damnjanovic/assurance/ and commercial/ivan-damnjanovic/advisory/
+- Sync rule interview-prep-learning remains disabled for company dispatch
 
 ## Removed on hub
 
 - Ecosystem Gold dashboard (dashboard.md/html), sync_ecosystem_dashboard.py, ecosystem-dashboard-sync workflow
 - Active focus remains `_data/ecosystem/hub-focus.yaml` only
+- Top-level `product/`, `company/`, `people/` move-stubs (folded into spokes/platform, interface, commercial/ivan-damnjanovic)
 
 ## What spokes should do next
 
-1. On next hub-sync PR, retarget path cites: people/cv to commercial/ivan-damnjanovic/cv; product/engineering to spokes/platform/engineering; company/strategy/governance to interface/
-2. Site: treat spokes/site/ as instruction and copy SSOT from hub
-3. Platform: treat spokes/platform/engineering/ as Lane 1 assessment home
-4. Do not restore a hub Gold PM dashboard
+1. Treat spokes/site/ as instruction and copy SSOT from hub
+2. Platform: treat spokes/platform/engineering/ as Lane 1 assessment home
+3. Do not restore hub Gold PM dashboard or deleted move-stub folders
 
 Full map: interface/ecosystem-map.md. Operating lanes: interface/operating-lanes.md.
 
-*Last alignment: July 20, 2026 | Public doctrine alignment*
+*Last alignment: 2026-08-20 | Folder-depth cleanup*
