@@ -25,10 +25,10 @@ The cloud dispatcher never uses localPath and skips `enabled: false` entries. Ag
 ## Sync rules (summary)
 
 - **strategy-platform-intent** — Changes under commercial/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
-- **product-engineering-intent** — Changes under product/ notify platform for engineering assessments that may imply platform work.
+- **product-engineering-intent** — Changes under spokes/platform/** notify platform for engineering assessments that may imply platform work.
 - **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, commercial/test/, commercial/outbound/, spokes/site/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
-- **career-public-sync** — Changes under commercial/ivan-damnjanovic/cv/ or commercial/ivan-damnjanovic/career/job-search-targeting.md notify the personal site. Canonical repository CV paths are commercial/ivan-damnjanovic/cv/, not legacy career/cv/ paths referenced in older site readme text.
-- **interview-prep-learning** — Changes under commercial/ivan-damnjanovic/pitch-prep/ may notify code-signal when that spoke is enabled.
+- **career-public-sync** — Changes under commercial/ivan-damnjanovic/cv/ or commercial/ivan-damnjanovic/assurance/targeting.md notify the personal site. Canonical repository CV paths are commercial/ivan-damnjanovic/cv/, not legacy career/cv/ paths referenced in older site readme text.
+- **interview-prep-learning** — Changes under commercial/ivan-damnjanovic/assurance/** or advisory/** may notify code-signal when that spoke is enabled (currently disabled).
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
 **Global excludes:** operations/finance/, corporate/ (including legal and archive), assets/archive/, and commercial/archive/ (path retired; keep exclude harmless) never trigger dispatch.
