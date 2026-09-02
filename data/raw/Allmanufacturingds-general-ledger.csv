@@ -1,0 +1,5 @@
+date,account_code,account_name,journal_entry_id,debit,credit,period,currency
+2024-01-15,1100,Cash,JE-1001,50000.00,0.00,2024-Q1,USD
+2024-02-28,4000,Product revenue,JE-1042,0.00,125000.50,2024-Q1,USD
+2024-03-31,5000,Cost of goods sold,JE-1098,78250.25,0.00,2024-Q1,USD
+2024-03-31,1200,Accounts receivable,JE-1101,1250.50,0.00,2024-Q1,USD

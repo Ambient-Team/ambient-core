@@ -1,0 +1,4 @@
+date,transaction_date,account_id,description,amount,direction,balance,currency,net_income,non_cash_charges,increase_in_working_capital,cash_out,cash_in,current_cash_balance
+2024-01-05,2024-01-05,CHK-100,Customer remittance - Apex,25000.00,inbound,175000.00,USD,42000.00,8500.00,12000.00,38000.00,63000.00,175000.00
+2024-02-12,2024-02-12,CHK-100,Supplier payment - steel coil,18500.00,outbound,156500.00,USD,38000.00,8500.00,15000.00,42000.00,48000.00,156500.00
+2024-03-31,2024-03-31,CHK-100,Payroll and benefits,42000.00,outbound,125050.50,USD,35125.25,9200.00,8000.00,61000.00,51550.50,125050.50

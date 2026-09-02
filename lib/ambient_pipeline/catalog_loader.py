@@ -12,7 +12,7 @@ from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 
 
 def resolve_catalog_root(start: Path | None = None) -> Path:
-    """Find catalog/ directory (local checkout, submodule, or Databricks Repos)."""
+    """Find catalog/ directory (local checkout or submodule)."""
     return resolve_catalog_root_flexible(start)
 
 

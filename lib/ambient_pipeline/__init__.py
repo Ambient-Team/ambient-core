@@ -1,4 +1,8 @@
-"""ISO 8000 / BCBS 239 governance helpers for lakehouse pipelines."""
+"""ISO 8000 / BCBS 239 governance helpers for lakehouse pipelines (OSS default).
+
+Platform-only integrations (Firestore, Databricks dbutils secrets) live behind
+optional imports and are never required for ``pip install`` or local notebooks.
+"""
 
 from pkgutil import extend_path
 

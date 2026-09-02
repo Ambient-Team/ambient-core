@@ -6,14 +6,15 @@ What you get from **this repository alone** versus what belongs in a **separate 
 
 - Validate and load **data-product contracts** (`validate-contracts`, `ambient_contracts`).
 - Author and generate the **reference catalog** (`ambient-catalog-generate`, `catalog/manifest.json`, `catalog/runtime/` JS).
-- Run **governance pipeline** helpers under `lib/ambient_pipeline/` from a **git checkout** (pytest sets `pythonpath = lib`; see [USAGE.md](USAGE.md) for wheel vs checkout).
+- Run **governance pipeline** helpers under `lib/ambient_pipeline/` (local Spark/Delta runner, notebooks under `notebooks/`, demo CSVs under `data/raw/`).
+- Smoke Bronze → Silver without Databricks: `python scripts/run_oss_bronze_silver_smoke.py`.
 - Fork or integrate contracts and catalog semantics without shipping a full SaaS stack.
 
-## Not in this repository (typical downstream app)
+## Not in this repository (typical downstream / commercial platform)
 
 - **Consumption UI** (web or mobile clients), API gateways tied to a specific vendor OLTP.
-- **Lakehouse or warehouse deploy** (bundle definitions, scheduled jobs, workspace-specific notebooks).
-- **App-specific pipeline glue** (secrets resolution, Firestore or tenant sync IDs, storage path conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
+- **Managed lakehouse deploy** (Databricks Asset Bundles, scheduled workspace jobs, Unity Catalog materialization).
+- **App-specific pipeline glue** (Firestore sync, tenant sync IDs, cloud storage conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
 - **Customer-facing AI / inference / model hosting** — not shipped from this MIT core. Future proprietary AI/ML, if any, belongs only in the commercial platform application.
 - **Business-line organizations** — splitting a conglomerate into multiple tenant orgs, each with its own catalog industry, contracts, uploads, and peer set; optional holding-company rollup is platform analytics, not a second catalog industry in core.
 - **Benchmark gap decomposition and improvement workflows** — peer actuals storage, structural versus improvable waterfall/bridge UI, normalization policy, and post-benchmark action tracking on top of core metrics and contracts; see [benchmarking-lifecycle.md](benchmarking-lifecycle.md).

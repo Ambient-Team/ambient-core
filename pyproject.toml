@@ -31,6 +31,7 @@ Changelog = "https://github.com/Ambient-Team/ambient-core/releases"
 [project.optional-dependencies]
 pipeline = [
     "pyspark>=3.5.0,<5",
+    "delta-spark>=3.0.0,<5",
 ]
 postgres = ["psycopg[binary]>=3.2,<4"]
 dev = [

@@ -1,6 +1,6 @@
 # Pipeline governance helpers
 
-Ambient Core does **not** ship a medallion job runner or Databricks bundle. It ships **contracts**, **catalog** semantics, and Python modules under `lib/ambient_pipeline/` that your lakehouse jobs import. Schedules, notebooks, and deploy glue belong in your application repository.
+Ambient Core ships **contracts**, **catalog** semantics, Python modules under `lib/ambient_pipeline/`, and an **OSS Jupyter demo** under `notebooks/` that runs against `data/raw/` with local Spark/Delta. It does **not** require Databricks. Commercial deploy glue (DABs, Unity Catalog materialization, Firebase) belongs in your application repository.
 
 For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). Product inventory and catalog linkage: [contracts/README.md](../contracts/README.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
@@ -8,9 +8,9 @@ For catalog vs contracts and path env vars, see [governed-data.md](governed-data
 
 ## What lives where
 
-**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; `ambient_pipeline` helpers; `validate-contracts` and the catalog generator CLIs.
+**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; `ambient_pipeline` helpers (including local `runner`, `perf.create_local_spark`, notebook bootstrap); OSS notebooks and demo CSVs; `validate-contracts` and the catalog generator CLIs.
 
-**In your app repo:** job definitions, DABs, orchestration; tenant upload UX and entitlements; Firestore sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
+**In your app repo (optional platform):** job definitions, DABs, orchestration; tenant upload UX and entitlements; Firestore sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
 
 [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) describes pipeline health products and may reference SQL, bundles, or notebooks that are maintained **downstream** — treat it as the interface contract, not as code in this repo.
 
@@ -22,11 +22,12 @@ cd ambient-core
 pip install -e ".[pipeline,dev]"
 set AMBIENT_SPARK_TESTS=1 # Windows; use export on Unix
 pytest tests/pipeline/
+python scripts/run_oss_bronze_silver_smoke.py
 ```
 
-Java 17+ is required for Spark tests.
+Java 17+ is required for Spark tests. The smoke script maps `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
 
-**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, and `ambient_calc`. **`ambient_pipeline` requires a git checkout** (tests use `pythonpath = lib` in `pyproject.toml`). Import it from `lib/ambient_pipeline` in notebooks and jobs pinned to the same core tag.
+**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, `ambient_calc`, and `ambient_pipeline`. Notebooks call `ambient_pipeline.notebook_bootstrap.ensure_pipeline_on_path()` so a git checkout resolves `lib/` without Databricks or platform paths.
 
 ## Typical job flow (Bronze → Silver tenant-metrics)
 
@@ -62,7 +63,7 @@ flowchart LR
 
 **Orchestration helper:** `bronze_to_tenant_metrics(...)` runs steps 2–4 in order. See [tests/pipeline/test_bronze_to_tenant_metrics_contract.py](../tests/pipeline/test_bronze_to_tenant_metrics_contract.py).
 
-Platform-only (optional): `fetch_firestore_data_source` / `append_firestore_lineage_event` in `bronze_catalog_map.py` require Firebase secrets — not part of the OSS default path.
+Platform-only (optional): `fetch_firestore_data_source` / `append_firestore_lineage_event` lazy-import `firestore_bridge` and require Firebase — never imported on the OSS notebook / `pip install` default path. Secrets prefer environment variables; Databricks `dbutils` is optional when present.
 
 ## Silver → Gold (catalog, calc, and vertical contracts)
 
@@ -101,6 +102,8 @@ See [examples/pipeline/README.md](../examples/pipeline/README.md).
 
 ## Related
 
+- [../notebooks/README.md](../notebooks/README.md) — OSS Jupyter medallion flow
+- [../data/README.md](../data/README.md) — manufacturing demo CSVs
 - [USAGE.md](USAGE.md) — recipe 3 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
 - [contracts/README.md](../contracts/README.md) — SSOT products and catalog → contract flow

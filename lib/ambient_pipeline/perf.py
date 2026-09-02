@@ -213,8 +213,9 @@ def create_local_spark(
     if hadoop_home.is_dir() and not os.environ.get("HADOOP_HOME"):
         os.environ["HADOOP_HOME"] = str(hadoop_home)
         bin_path = str(hadoop_home / "bin")
+        path_sep = ";" if os.name == "nt" else ":"
         if bin_path not in os.environ.get("PATH", ""):
-            os.environ["PATH"] = f"{bin_path};{os.environ.get('PATH', '')}"
+            os.environ["PATH"] = f"{bin_path}{path_sep}{os.environ.get('PATH', '')}"
 
     builder = (
         SparkSession.builder.appName(app_name)
@@ -229,5 +230,12 @@ def create_local_spark(
         .config("spark.sql.shuffle.partitions", str(shuffle_partitions))
         .config("spark.driver.memory", "4g")
         .config("spark.ui.enabled", "false")
+        .config("spark.driver.host", "127.0.0.1")
     )
-    return configure_spark_with_delta_pip(builder).getOrCreate()
+    try:
+        return configure_spark_with_delta_pip(builder).getOrCreate()
+    except Exception as exc:
+        raise RuntimeError(
+            "Local Spark+Delta session failed. Install optional deps: "
+            'pip install -e ".[pipeline]" delta-spark'
+        ) from exc
