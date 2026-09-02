@@ -1,0 +1,5 @@
+date,sku,warehouse,quantity_on_hand,unit_cost,reorder_point,inventory_value
+2024-01-31,SKU-BEARING-6205,Plant-A,1250,4.85,400,6062.50
+2024-02-29,SKU-SHAFT-M22,Plant-A,340,28.50,120,9690.00
+2024-03-31,SKU-HOUSING-H12,Plant-B,85,1250.50,40,106292.50
+2024-03-31,SKU-SEAL-KIT-09,Plant-B,2100,1.25,800,2625.00
