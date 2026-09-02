@@ -17,9 +17,14 @@ The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipe
 
 - **`contracts/`** — data-product interfaces (CI-validated); YAML source of truth — [contracts/README.md](../contracts/README.md)
 - **`catalog/`** — reference metrics, industry packs, benchmarks; `ambient-catalog-generate` → JSON `manifest.json` and generated `runtime/*.js`
+- **`lib/ambient_pipeline/`** — governance helpers imported by lakehouse jobs and (future) demo notebooks
 - **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`)
 
 Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; precursor OLTP/Bronze and forward Parquet/Delta live in deployment ([CONVENTIONS.md](CONVENTIONS.md), [governed-data.md](governed-data.md)).
+
+## Drive demo template (inventory note)
+
+A personal Drive layout used for the commercial platform demo groups `notebooks/`, `ambient_pipeline/`, `data/`, and `contracts/` at one root so notebooks can run the medallion process locally. This GitHub tree already has **`contracts/`** at root and **`ambient_pipeline`** under **`lib/`**; it does **not** yet ship top-level **`notebooks/`** or **`data/`** demo CSVs. Target direction (no large move yet): core stays runnable with open-source Spark/Delta only — notebooks orchestrate; `ambient_pipeline` supports them; demo files match what the commercial platform shows. Details live in the inventory report for this alignment work, not as a refactor checklist here.
 
 ## Consumers
 
