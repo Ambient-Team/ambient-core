@@ -358,71 +358,30 @@ def append_firestore_lineage_event(
     rows_written: int,
     gcs_path: str,
 ) -> None:
-    """Append server-side mapping lineage to dataSources history."""
+    """Platform-only: append mapping lineage to Firestore (no-op without Firebase).
+
+    OSS / ``pip install`` path never requires ``firebase_admin`` or Databricks secrets.
+    """
     if not org_id or not source_id:
         return
     try:
-        import firebase_admin
-        from firebase_admin import credentials, firestore
-
-        from ambient_pipeline.secrets import get_secret
-        import os
-        import tempfile
-
-        if not firebase_admin._apps:
-            sa_json_str = get_secret("ambient-systems", "firebase_service_account")
-            with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as handle:
-                handle.write(sa_json_str)
-                sa_path = handle.name
-            cred = credentials.Certificate(sa_path)
-            firebase_admin.initialize_app(cred)
-            os.unlink(sa_path)
-
-        db = firestore.client()
-        db.collection("organizations").document(org_id).collection("dataSources").document(
-            source_id
-        ).collection("history").add(
-            {
-                "action": "bronze_catalog_map",
-                "run_id": run_id,
-                "status": status,
-                "rows_written": rows_written,
-                "gcs_path": gcs_path,
-                "note": "Databricks 01c catalog mapping completed.",
-            }
-        )
-    except Exception:
+        from ambient_pipeline.firestore_bridge import append_lineage_event
+    except ImportError:
         return
+    append_lineage_event(
+        org_id,
+        source_id,
+        run_id=run_id,
+        status=status,
+        rows_written=rows_written,
+        gcs_path=gcs_path,
+    )
 
 
 def fetch_firestore_data_source(org_id: str, source_id: str) -> dict[str, Any] | None:
-    """Read organizations/{orgId}/dataSources/{sourceId} using Firebase Admin + secret scope."""
+    """Platform-only: read a dataSources doc (returns None without Firebase)."""
     try:
-        import os
-        import tempfile
-
-        import firebase_admin
-        from firebase_admin import credentials, firestore
-
-        from ambient_pipeline.secrets import get_secret
-
-        if not firebase_admin._apps:
-            sa_json_str = get_secret("ambient-systems", "firebase_service_account")
-            with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as handle:
-                handle.write(sa_json_str)
-                sa_path = handle.name
-            cred = credentials.Certificate(sa_path)
-            firebase_admin.initialize_app(cred)
-            os.unlink(sa_path)
-
-        db = firestore.client()
-        snap = (
-            db.collection("organizations")
-            .document(org_id)
-            .collection("dataSources")
-            .document(source_id)
-            .get()
-        )
-        return snap.to_dict() if snap.exists else None
-    except Exception:
+        from ambient_pipeline.firestore_bridge import fetch_data_source
+    except ImportError:
         return None
+    return fetch_data_source(org_id, source_id)
