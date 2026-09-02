@@ -86,7 +86,7 @@ flowchart TB
 - **Catalog:** `load_manifest()` for metric lists; `ambient_pipeline.catalog_loader.load_data_option()` for upload-mapping rules tied to industry YAML; manifest v3 field types feed `coerce_mapped_columns()` in bronze mapping ([pipeline.md](pipeline.md)).
 - **Governance helpers** (git checkout, not full wheel): `ambient_pipeline` — provenance stamping, PII pseudonymization, bronze→tenant-metrics mapping. See [pipeline.md](pipeline.md).
 
-Execution (Databricks jobs, schedules, Firestore sync) lives in **your application repository**; core supplies contracts, catalog semantics, and reusable helpers.
+Default execution is local Spark/Delta via `notebooks/` or `scripts/run_oss_bronze_silver_smoke.py`. Managed schedules, Databricks jobs, and Firestore sync live in **your application repository**; core supplies contracts, catalog semantics, reusable helpers, and the OSS demo.
 
 ## CI gates
 

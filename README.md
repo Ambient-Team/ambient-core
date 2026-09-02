@@ -42,11 +42,12 @@ Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). 
 
 - **`contracts/`** — data-product YAML (SSOT; bundled for wheels). Product inventory and how catalog mapping ties to Silver/Gold: [contracts/README.md](contracts/README.md).
 - **`catalog/`** — industries, metrics, benchmarks; typed data-option fields and manifest **v3**; each pack tagged with ISIC, GICS, NAICS, and NACE; generator → `manifest.json` + `runtime/` JS. Field sync and coverage: [docs/catalog-input-field-gaps.md](docs/catalog-input-field-gaps.md), [docs/catalog-consumption.md](docs/catalog-consumption.md). Global taxonomy roadmap: [docs/catalog-industry-coverage.md](docs/catalog-industry-coverage.md).
-- **`lib/ambient_pipeline/`** — governance primitives for Spark/lakehouse jobs.
+- **`lib/ambient_pipeline/`** — governance primitives for local Spark/Delta and lakehouse jobs (OSS default; no Databricks required).
+- **`notebooks/`** + **`data/raw/`** — Jupyter medallion demo on manufacturing CSVs; headless smoke: `python scripts/run_oss_bronze_silver_smoke.py`.
 - **`lib/ambient_contracts`**, **`ambient_cli`** — load, validate, and ship.
 - **`lib/ambient_calc`** — open-source reference calculator: safe formula evaluation from contract inputs to metric values, shared across all industries.
 
-Layout and packages: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Scope rules: [docs/CANONICAL_SCOPE.md](docs/CANONICAL_SCOPE.md).
+Standalone path: notebooks + data + contracts + `lib`. Commercial products pin this core and add Databricks/Firebase hosting downstream. Layout and packages: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Scope rules: [docs/CANONICAL_SCOPE.md](docs/CANONICAL_SCOPE.md).
 
 This repository does **not** ship customer-facing AI, model hosting, or inference orchestration. Operator AI tooling (for example Cursor Agent in IDE sessions) is internal engineering practice, not an Ambient Core product.
 
