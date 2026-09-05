@@ -1,25 +1,20 @@
-# Demo data (OSS)
+# Demo data (storage = none in this repo)
 
-Manufacturing CSV demos for the local medallion notebooks and smoke runner. Filenames match the commercial platform demo set (`Allmanufacturingds-*.csv`).
+ambient-core does **not** ship demo sample CSVs. Samples live on [Drive](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for Colab, and with Ambient Systems demo/recording assets for platform subscription demos — **not** in this GitHub repo and **not** in ambient-systems-platform.
 
 ## Layout
 
-- **`raw/`** — upload-boundary CSVs (headers align with catalog data-option fields where those options exist).
-- Downstream notebooks write Bronze / Silver / Gold under a local output directory (default `.lakehouse/`), not into this tree.
+- **`raw/.gitkeep`** — place `Allmanufacturingds-*.csv` here yourself (Drive download or local copy).
+- **`processed/.gitkeep`** — Colab/pandas smoke writes Bronze / Silver / Gold here; gitignored outputs stay local.
 
-## Catalog alignment
+## How to obtain samples
 
-Six files map to manufacturing catalog options in `catalog/`:
+1. Open the Drive demo folder linked above (or Ambient Systems demo assets for platform recordings).
+2. Copy the `Allmanufacturingds-*.csv` files into `data/raw/`.
+3. Run `notebooks/00_colab_run_me.ipynb` or `ambient_pipeline.colab_smoke.run_colab_smoke`.
 
-- `Allmanufacturingds-general-ledger`
-- `Allmanufacturingds-bank-statements`
-- `Allmanufacturingds-balance-sheet`
-- `Allmanufacturingds-ar-aging`
-- `Allmanufacturingds-ap-aging`
-- `Allmanufacturingds-inventory-records`
-
-`Allmanufacturingds-marketing-spend` and `Allmanufacturingds-crm-pipeline` use the same field shapes as peer industry packs (marketing spend / CRM pipeline). Manufacturing catalog keys for those two names are not yet published; notebooks still ingest the CSVs for the demo set.
+Filenames expected by the smoke runner are listed in `ambient_pipeline/colab_smoke.py` (`DEMO_TABLES`) and `contracts/manufacturing-demo-raw-v1.yaml`.
 
 ## Synthetic content
 
-Rows are small, fictional demo values for local Spark/Delta runs. Do not treat them as production or customer data.
+Rows are small, fictional demo values. Do not treat them as production or customer data.

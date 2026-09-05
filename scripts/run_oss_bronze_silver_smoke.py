@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""OSS smoke: map one manufacturing demo CSV Bronze → Silver (tenant-metrics).
+"""Optional Spark smoke: map one manufacturing demo CSV Bronze → Silver.
 
-Requires a core checkout with Spark + Delta::
+Prefer the pandas Colab path (``ambient_pipeline.colab_smoke``) for the core happy
+path. This script needs Spark + Delta and an **externally supplied** CSV under
+``data/raw/`` (Drive / Ambient Systems demo assets — not shipped in git)::
 
+    # place Allmanufacturingds-*.csv into data/raw/ first
     pip install -e ".[pipeline,dev]"
     python scripts/run_oss_bronze_silver_smoke.py
 

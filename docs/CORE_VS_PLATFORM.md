@@ -6,8 +6,8 @@ What you get from **this repository alone** versus what belongs in a **separate 
 
 - Validate and load **data-product contracts** (`validate-contracts`, `ambient_contracts`).
 - Author and generate the **reference catalog** (`ambient-catalog-generate`, `catalog/manifest.json`, `catalog/runtime/` JS).
-- Run **governance pipeline** helpers under `lib/ambient_pipeline/` (local Spark/Delta runner, notebooks under `notebooks/`, demo CSVs under `data/raw/`).
-- Smoke Bronze → Silver without Databricks: `python scripts/run_oss_bronze_silver_smoke.py`.
+- Run the **free Colab / pandas** path (`ambient_pipeline/colab_smoke.py`, `notebooks/00_colab_run_me.ipynb`) with samples supplied from Drive — **storage = none** in this repo (`data/raw/.gitkeep` only).
+- Optionally use **Spark/Delta** helpers under `lib/ambient_pipeline/` when you install `.[pipeline]` and provide the same external CSVs.
 - Fork or integrate contracts and catalog semantics without shipping a full SaaS stack.
 
 ## Not in this repository (typical downstream / commercial platform)
