@@ -6,7 +6,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 
 - Validate and load **data-product contracts** (`validate-contracts`, `ambient_contracts`).
 - Author and generate the **reference catalog** (`ambient-catalog-generate`, `catalog/manifest.json`, `catalog/runtime/` JS).
-- Run the **free Colab / pandas** path (`ambient_pipeline/colab_smoke.py`, `notebooks/00_colab_run_me.ipynb`) with samples supplied from Drive — **storage = none** in this repo (`data/raw/.gitkeep` only).
+- Run the **free Colab / pandas** path ([Colab entry](https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2), `ambient_pipeline/colab_smoke.py`) with samples from the website zip ([ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip)) — **storage = none** in this repo (`data/raw/.gitkeep` only). [Drive](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) remains a runnable SSOT for development. This pack is not for scale testing; enterprise deployments run scalable tests separately.
 - Optionally use **Spark/Delta** helpers under `lib/ambient_pipeline/` when you install `.[pipeline]` and provide the same external CSVs.
 - Fork or integrate contracts and catalog semantics without shipping a full SaaS stack.
 
