@@ -4,7 +4,7 @@
 **Date:** July 13, 2026
 **Purpose:** Agent and human SSOT for repositories listed in mapping.json. Covers the floating hub, two execution lanes, personal spokes, ownership, hub dispatch, spoke receivers, upward spoke signals, secrets, branching, and edit routing. Machine inventory: mapping.json at hub root. Operations detail: MAPPING.md. Branching SSOT: ecosystem-branching.md. Strategy cycle: ../strategy-cycle.md.
 
-Platform summary: see README Platform Summary -- ../../../README.md#platform-summary.
+Business summary: see README Business Summary -- ../../../README.md#business-summary.
 
 ---
 
@@ -74,7 +74,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Floating hub (this repository)**
 
-- Active focus pointer, doctrine, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops (until site fully owns the business OS), people and career validation.
+- Active focus pointer, strategy, roadmap, contracts prose, technical backlog, product engineering assessments, commercial validation ops (until site fully owns the business OS), people and career validation.
 - Hub Active focus: `_data/ecosystem/hub-focus.yaml` (Gold dashboard removed).
 - Hub-test customer package (production orchestration from repository): commercial/customers/hub-test/.
 - Company validation cheat-sheet: commercial/hypotheses.md.
@@ -94,7 +94,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Personal lane (not company dispatch)**
 
-- Career and personal repos are under EngineerID/master-hub. Not company doctrine or GTM SSOT. Company hub does not dispatch to them.
+- Career and personal repos are under EngineerID/master-hub. Not company strategy or GTM SSOT. Company hub does not dispatch to them.
 
 **Upward spoke signals (spoke to hub)**
 
@@ -252,4 +252,4 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 - Operating lanes -- ../../../interface/operating-lanes.md
 - Strategy cycle -- ../strategy-cycle.md
 
-*Last alignment: July 13, 2026 | Public doctrine alignment*
+*Last alignment: July 13, 2026 | Strategy alignment*
