@@ -15,7 +15,7 @@ YAML source of truth: contracts/ in Ambient-Team/ambient-core on pin v0.3.7 -- h
 
 Not PhD-derived claims. Not commercial SKU statements from metering contracts.
 
-Platform summary: see README Platform Summary -- ../../README.md#platform-summary.
+Business summary: see README Business Summary -- ../../README.md#business-summary.
 
 ---
 
@@ -157,4 +157,4 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 - Demo and scale value -- 06_demo-and-scale-value.md
 - Repo map (legacy vs platform vs core) -- ../../spokes/platform/engineering/LEGACY-vs-PLATFORM.md
 
-*Last alignment: July 17, 2026 | Public doctrine alignment*
+*Last alignment: July 17, 2026 | Strategy alignment*
