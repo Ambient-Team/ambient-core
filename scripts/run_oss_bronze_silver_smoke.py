@@ -46,7 +46,13 @@ def main() -> int:
         "Allmanufacturingds-inventory-records",
     )
     out_dir = Path(os.environ.get("AMBIENT_SMOKE_OUT", str(root / ".lakehouse" / "smoke")))
-    csv_path = root / "data" / "raw" / csv_name
+    raw_dir = (root / "data" / "raw").resolve()
+    csv_path = (raw_dir / csv_name).resolve()
+    try:
+        csv_path.relative_to(raw_dir)
+    except ValueError:
+        print(f"AMBIENT_SMOKE_CSV escapes data/raw: {csv_name!r}", file=sys.stderr)
+        return 1
     if not csv_path.is_file():
         print(f"missing demo CSV: {csv_path}", file=sys.stderr)
         return 1

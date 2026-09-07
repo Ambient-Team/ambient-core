@@ -2,13 +2,26 @@
 
 from __future__ import annotations
 
+import hashlib
+import hmac
 from dataclasses import dataclass, field
 
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
+from pyspark.sql.types import StringType
 
 
 PII_INDICATORS = ("uid", "email", "name", "phone", "address")
+
+
+def hmac_sha256_hex(salt: str, value: str | None) -> str:
+    """Keyed HMAC-SHA256 hex digest (one-way pseudonymization)."""
+    raw = "" if value is None else str(value)
+    return hmac.new(
+        salt.encode("utf-8"),
+        raw.encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
 
 
 @dataclass
@@ -23,8 +36,14 @@ class PiiPseudonymizer:
         return f"PiiPseudonymizer(salt=<redacted>, transform_ts={self.transform_ts!r})"
 
     def pseudonymize_column(self, col_ref):
-        """Return expression for one-way SHA-256 pseudonymization."""
-        return F.sha2(F.concat(F.lit(self.salt), col_ref.cast("string")), 256)
+        """Return expression for one-way HMAC-SHA256 pseudonymization."""
+        salt = self.salt
+
+        @F.udf(returnType=StringType())
+        def _hmac_udf(value: str | None) -> str:
+            return hmac_sha256_hex(salt, value)
+
+        return _hmac_udf(col_ref.cast("string"))
 
     def apply(self, df: DataFrame, sensitive_field_names: list[str] | None = None) -> DataFrame:
         """Scan columns for PII indicators and pseudonymize matches."""

@@ -24,20 +24,45 @@ class ContractLoader:
     def __repr__(self) -> str:
         return f"ContractLoader(contracts_dir={self.contracts_dir!r})"
 
+    @staticmethod
+    def _safe_contract_name(contract_file: str) -> str:
+        """Reject path traversal and absolute paths in contract file names."""
+        name = str(contract_file).strip()
+        if not name:
+            raise ValueError("contract file name must be non-empty")
+        path = Path(name)
+        if path.is_absolute() or path.anchor:
+            raise ValueError(f"absolute contract paths are not allowed: {contract_file!r}")
+        parts = path.parts
+        if any(part in ("", ".", "..") for part in parts):
+            raise ValueError(f"path traversal is not allowed in contract file: {contract_file!r}")
+        if any(sep in name for sep in ("\\", "\0")):
+            raise ValueError(f"invalid contract file name: {contract_file!r}")
+        return name
+
     def resolve_path(self, contract_file: str) -> Path:
         assert self.contracts_dir is not None
-        candidates = [self.contracts_dir / contract_file]
+        safe_name = self._safe_contract_name(contract_file)
+        candidates = [self.contracts_dir / safe_name]
         for root in (
             Path.cwd(),
             Path.cwd().parent,
             Path.cwd().parent.parent,
         ):
-            candidates.append(root / "contracts" / contract_file)
-            candidates.append(root / "ambient-core" / "contracts" / contract_file)
-        candidates.append(Path("/Workspace/Contracts") / contract_file)
+            candidates.append(root / "contracts" / safe_name)
+            candidates.append(root / "ambient-core" / "contracts" / safe_name)
+        candidates.append(Path("/Workspace/Contracts") / safe_name)
         for path in candidates:
-            if path.is_file():
-                return path
+            resolved = path.resolve()
+            # Ensure the resolved file stays under its intended contracts root.
+            try:
+                resolved.relative_to(path.parent.resolve())
+            except ValueError as exc:
+                raise ValueError(
+                    f"contract path escapes contracts directory: {contract_file!r}"
+                ) from exc
+            if resolved.is_file():
+                return resolved
         raise FileNotFoundError(f"Contract file not found: {contract_file}")
 
     def load(self, contract_file: str) -> dict[str, Any]:

@@ -59,11 +59,16 @@ def get_secret_or_warn(
     env_prefix: str = "AMBIENT",
     dev_fallback: str | None = None,
 ) -> str:
-    """Like get_secret but allows a documented dev-only fallback with a warning."""
+    """Like get_secret but allows an explicit opt-in dev-only fallback with a warning.
+
+    Fail-closed by default: a fixed fallback is only used when
+    ``AMBIENT_ALLOW_DEV_SECRETS=1`` is set. Production must set real secrets.
+    """
     try:
         return get_secret(scope, key, env_prefix=env_prefix)
     except RuntimeError:
-        if dev_fallback is not None:
+        allow_dev = os.environ.get("AMBIENT_ALLOW_DEV_SECRETS", "").strip() == "1"
+        if allow_dev and dev_fallback is not None:
             warnings.warn(
                 f"Using dev-only fallback for secret {scope}/{key}. "
                 f"Set {env_prefix}_{key.upper().replace('-', '_')} for production.",

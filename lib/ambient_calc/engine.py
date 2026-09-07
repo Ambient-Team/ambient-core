@@ -75,6 +75,11 @@ def _eval(node: ast.AST, variables: Mapping[str, Any]) -> Any:
                 return None
             return left / right
         if isinstance(node.op, ast.Pow):
+            # Bound exponentiation to avoid CPU/memory exhaustion (e.g. 9**9**9).
+            if not isinstance(right, (int, float)) or abs(right) > 100:
+                raise CalcError("exponent out of allowed range")
+            if not isinstance(left, (int, float)) or abs(left) > 1e6:
+                raise CalcError("base out of allowed range for exponentiation")
             return left ** right
         raise CalcError(f"operator not allowed: {type(node.op).__name__}")
     if isinstance(node, ast.UnaryOp):
