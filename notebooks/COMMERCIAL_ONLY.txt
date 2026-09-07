@@ -1,0 +1,12 @@
+Databricks / Unity Catalog / Autoloader notebooks — commercial platform optional path.
+Not required for ambient-core Colab demo.
+
+Skip for core happy path:
+  01b_bronze_streaming.ipynb
+  01d_bronze_autoloader_spike.ipynb
+  04_unity_catalog_governance.ipynb
+
+Core entry: 00_colab_run_me.ipynb
+
+Local Spark/Delta notebooks in this folder (01–04_local_*, Master-Orchestrator)
+are optional and need external samples under data/raw/ plus pip install -e ".[pipeline]".
