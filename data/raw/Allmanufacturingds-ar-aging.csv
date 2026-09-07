@@ -1,4 +1,0 @@
-date,customer_name,invoice_id,invoice_date,due_date,amount_due,days_outstanding,aging_bucket,accounts_receivable,total_credit_sales,days,days_inventory_outstanding
-2024-03-31,Apex Components,INV-4401,2024-03-01,2024-03-31,18500.00,30,0-30,125000.00,410000.00,30,45
-2024-03-31,Northline Metals,INV-4412,2024-02-15,2024-03-16,9200.50,45,31-60,125000.00,410000.00,45,45
-2024-03-31,Harbor Tooling,INV-4420,2024-01-20,2024-02-19,15400.00,71,61-90,125000.00,410000.00,71,45

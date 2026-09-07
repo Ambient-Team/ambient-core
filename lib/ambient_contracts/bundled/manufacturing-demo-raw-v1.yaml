@@ -1,0 +1,91 @@
+product:
+  name: Manufacturing Demo Raw (academic samples)
+  version: 1.0
+  owner: ambient-core
+  description: >
+    Contract for Allmanufacturingds-* demo CSVs under data/raw/.
+    These are academic sample rows for Colab smoke runs — not live tenant data.
+  domain: Manufacturing
+  type: Source-aligned
+
+schema:
+  tables:
+    - id: ar_aging
+      table: raw.ar_aging
+      file: Allmanufacturingds-ar-aging.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: customer_name, type: string, required: true }
+        - { name: invoice_id, type: string, required: true }
+        - { name: amount_due, type: double, required: true }
+        - { name: days_outstanding, type: double, required: false }
+        - { name: aging_bucket, type: string, required: false }
+    - id: ap_aging
+      table: raw.ap_aging
+      file: Allmanufacturingds-ap-aging.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: supplier_name, type: string, required: true }
+        - { name: bill_id, type: string, required: true }
+        - { name: amount_due, type: double, required: true }
+    - id: crm_pipeline
+      table: raw.crm_pipeline
+      file: Allmanufacturingds-crm-pipeline.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: opportunity_id, type: string, required: true }
+        - { name: stage, type: string, required: false }
+        - { name: amount, type: double, required: true }
+    - id: bank_statements
+      table: raw.bank_statements
+      file: Allmanufacturingds-bank-statements.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: amount, type: double, required: true }
+        - { name: current_cash_balance, type: double, required: false }
+    - id: balance_sheet
+      table: raw.balance_sheet
+      file: Allmanufacturingds-balance-sheet.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: period_end_date, type: string, required: false }
+        - { name: inventory, type: string, required: false }
+    - id: general_ledger
+      table: raw.general_ledger
+      file: Allmanufacturingds-general-ledger.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: account_code, type: string, required: true }
+        - { name: debit, type: double, required: false }
+        - { name: credit, type: double, required: false }
+    - id: marketing_spend
+      table: raw.marketing_spend
+      file: Allmanufacturingds-marketing-spend.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: channel, type: string, required: false }
+        - { name: spend, type: double, required: true }
+        - { name: new_customers, type: double, required: false }
+    - id: inventory_records
+      table: raw.inventory_records
+      file: Allmanufacturingds-inventory-records.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: sku, type: string, required: true }
+        - { name: quantity_on_hand, type: double, required: false }
+        - { name: inventory_value, type: double, required: true }
+
+lineage:
+  bcbs239: true
+  provenance_columns:
+    - _bronze_run_id
+    - _bronze_org_id
+    - _bronze_row_hash
+    - _bronze_ingestion_ts
+    - _bronze_source_type
+    - _bronze_source_path
+
+governance:
+  multi_tenant: true
+  demo_only: true
+  note: Replace with fuller Allmanufacturingds extracts when available; keep filenames stable.

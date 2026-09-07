@@ -33,13 +33,16 @@ pipeline = [
     "pyspark>=3.5.0,<3.6",
     "delta-spark>=3.0.0,<4",
 ]
+colab = [
+    "pandas>=2.0,<3",
+]
 postgres = ["psycopg[binary]>=3.2,<4"]
 dev = [
     "pytest>=8.0,<10",
     "pytest-asyncio>=0.24,<2",
 ]
 all = [
-    "ambient-core[pipeline,dev,postgres]",
+    "ambient-core[pipeline,colab,dev,postgres]",
 ]
 
 [project.scripts]
@@ -64,4 +67,4 @@ ambient_contracts = ["bundled/*.yaml"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
-pythonpath = ["lib"]
+pythonpath = ["lib", "."]

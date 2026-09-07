@@ -1,4 +1,7 @@
-"""Local OSS pipeline runner for Bronze → Silver → Gold smoke / scale tests."""
+"""Optional local Spark/Delta runner for Bronze → Silver → Gold smoke / scale tests.
+
+Not required for the free Colab pandas path (``ambient_pipeline.colab_smoke``).
+"""
 
 from __future__ import annotations
 
