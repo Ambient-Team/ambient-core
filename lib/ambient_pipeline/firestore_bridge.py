@@ -6,13 +6,11 @@ Not imported by default notebook or ``pip install`` OSS paths. Requires
 
 from __future__ import annotations
 
+import json
 from typing import Any
 
 
 def _firestore_client():
-    import os
-    import tempfile
-
     import firebase_admin
     from firebase_admin import credentials, firestore
 
@@ -20,12 +18,15 @@ def _firestore_client():
 
     if not firebase_admin._apps:
         sa_json_str = get_secret("ambient-systems", "firebase_service_account")
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as handle:
-            handle.write(sa_json_str)
-            sa_path = handle.name
-        cred = credentials.Certificate(sa_path)
+        # Prefer in-memory cert dict so the service-account JSON is never written to disk.
+        try:
+            sa_info = json.loads(sa_json_str)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("firebase_service_account secret is not valid JSON") from exc
+        if not isinstance(sa_info, dict):
+            raise RuntimeError("firebase_service_account secret must be a JSON object")
+        cred = credentials.Certificate(sa_info)
         firebase_admin.initialize_app(cred)
-        os.unlink(sa_path)
     return firestore.client()
 
 
@@ -58,7 +59,6 @@ def append_lineage_event(
 
 
 def fetch_data_source(org_id: str, source_id: str) -> dict[str, Any] | None:
-    """Read organizations/{orgId}/dataSources/{sourceId}."""
     try:
         db = _firestore_client()
         snap = (

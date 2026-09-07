@@ -120,6 +120,8 @@ jobs:
             echo ""
             echo "Fix hub-sync receiver workflow, fetched hub files, or markdown hygiene."
             echo "Do NOT run git or gh; the workflow commits, opens a PR, and enables auto-merge."
+            echo "Do NOT modify secrets or credentials. Prefer docs/hub/ and markdown hygiene only;"
+            echo "workflow edits to hub-receiver are allowed only when required to restore sync."
             echo ""
             echo "Failed log tail:"
             cat ci-failure-logs/log_tail.txt
@@ -144,7 +146,14 @@ jobs:
           fi
           HEAL_BRANCH="cursor/heal-${RUN_ID}"
           git checkout -B "$HEAL_BRANCH"
-          git add -A
+          # Allowlist: hub docs + hub-receiver only (bridge heals hub-sync receiver failures).
+          git add -- docs/hub/ .github/workflows/hub-receiver.yml scripts/check_markdown_prose.py || true
+          if git diff --staged --quiet; then
+            echo "Agent changes were outside the heal allowlist; nothing committed." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- . >/dev/null 2>&1 || true
+            git clean -fd >/dev/null 2>&1 || true
+            exit 0
+          fi
           git commit -m "ci: cursor remediate workflow failure (run ${RUN_ID})"
           git push -u origin "HEAD:${HEAL_BRANCH}"
           PR_URL="$(gh pr create \

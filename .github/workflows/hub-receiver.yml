@@ -34,6 +34,14 @@ jobs:
             echo "error: could not resolve source_repo and sha from client_payload" >&2
             exit 1
           fi
+          # AppSec: only accept the known ambient-systems hub (no arbitrary source_repo).
+          case "$PAYLOAD_REPO" in
+            EngineerID/ambient-systems) ;;
+            *)
+              echo "error: source_repo not allowlisted: $PAYLOAD_REPO" >&2
+              exit 1
+              ;;
+          esac
           SHORT=$(printf '%.7s' "$PAYLOAD_SHA")
           echo "repo=$PAYLOAD_REPO" >> "$GITHUB_OUTPUT"
           echo "sha=$PAYLOAD_SHA" >> "$GITHUB_OUTPUT"
@@ -108,7 +116,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "${SYNC_BRANCH}"
-          git add -A
+          # Hub sync only mirrors docs/hub markdown — never stage unrelated paths.
+          git add -- docs/hub/
           if git diff --staged --quiet; then
             echo "empty=true" >> "$GITHUB_OUTPUT"
             exit 0

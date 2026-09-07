@@ -32,6 +32,11 @@ def test_safe_eval_blocks_calls_and_attributes():
         safe_eval("x.__class__", {"x": 1})
 
 
+def test_safe_eval_bounds_large_exponent():
+    with pytest.raises(CalcError, match="exponent"):
+        safe_eval("2 ** 1000", {})
+
+
 def test_safe_eval_unknown_variable_raises():
     with pytest.raises(CalcError):
         safe_eval("a + missing", {"a": 1})

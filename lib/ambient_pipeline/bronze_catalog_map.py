@@ -18,6 +18,8 @@ from ambient_pipeline.provenance import BronzeProvenanceStamper
 
 _MAX_MAPPING_JSON_LEN = 32768
 _MAPPING_VERSION = "1.0"
+# Catalog field / column names interpolated into Spark column refs must be identifiers.
+_SAFE_IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 
 @dataclass
@@ -38,13 +40,24 @@ def parse_source_id_from_gcs_path(gcs_path: str, org_id: str) -> str | None:
     return match.group(1) if match else None
 
 
+def _require_safe_ident(label: str, value: str) -> str:
+    if not _SAFE_IDENT.match(value):
+        raise ValueError(f"unsafe {label} {value!r}: expected identifier [A-Za-z_][A-Za-z0-9_]*")
+    return value
+
+
 def parse_mapping_json(raw: str | dict[str, Any] | None) -> dict[str, str]:
     if raw is None or raw == "":
         return {}
     if isinstance(raw, dict):
         parsed = raw
     else:
-        parsed = json.loads(str(raw))
+        text = str(raw)
+        if len(text) > _MAX_MAPPING_JSON_LEN:
+            raise ValueError(
+                f"mapping_json exceeds max length {_MAX_MAPPING_JSON_LEN} (got {len(text)})"
+            )
+        parsed = json.loads(text)
     if not isinstance(parsed, dict):
         raise ValueError("mapping_json must be a JSON object")
     out: dict[str, str] = {}
@@ -52,7 +65,9 @@ def parse_mapping_json(raw: str | dict[str, Any] | None) -> dict[str, str]:
         k = str(key).strip()
         v = str(val).strip() if val is not None else ""
         if k and v:
-            out[k] = v
+            out[_require_safe_ident("mapping key", k)] = _require_safe_ident(
+                "mapping header", v
+            )
     return out
 
 
@@ -218,17 +233,17 @@ def unpivot_to_tenant_metrics(
         work = work.withColumn("_period_key", F.lit(""))
         work = work.withColumn("_recorded_at", F.current_timestamp())
 
-    stack_parts: list[str] = []
     for field in value_fields:
-        safe = field.replace("`", "")
-        stack_parts.append(f"'{safe}'")
-        stack_parts.append(f"`{safe}`")
+        _require_safe_ident("unpivot field", field)
 
-    stack_expr = f"stack({len(value_fields)}, {', '.join(stack_parts)})"
-    long_df = work.select(
-        F.expr(stack_expr).alias("name", "value"),
-        F.col("_period_key"),
-        F.col("_recorded_at"),
+    # Prefer DataFrame.melt (column refs) over F.expr(stack(...)) so tenant-controlled
+    # mapping keys cannot break out of Spark SQL string literals.
+    id_cols = ["_period_key", "_recorded_at"]
+    long_df = work.select(*id_cols, *value_fields).melt(
+        ids=id_cols,
+        values=value_fields,
+        variableColumnName="name",
+        valueColumnName="value",
     )
 
     metric_id_expr = F.sha2(
