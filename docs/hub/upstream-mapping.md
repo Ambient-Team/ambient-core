@@ -11,7 +11,7 @@ Machine map: see mapping.json at repo root. Prose SSOT: interface/ecosystem-map.
 **Enabled dispatch spokes (Ambient-Team only)**
 
 - **platform** — Ambient-Team/ambient-systems-platform — remoteOnly; CI and Actions prod deploy. No required local tree.
-- **core** — Ambient-Team/ambient-core — remoteOnly; public MIT contracts. No required local tree.
+- **core** — Ambient-Team/ambient-core — remoteOnly; public contracts under the MIT License. No required local tree.
 - **site** — Ambient-Team/ambientsystems.ai — remoteOnly; hub-sync via GitHub; Wix publish via Actions CI Deploy Wix. No required local tree.
 
 **Disabled on this hub**

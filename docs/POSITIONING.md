@@ -9,19 +9,19 @@ For how this repository relates to a full product repo, see [CORE_VS_PLATFORM.md
 - **dbt / Great Expectations / Soda** — quality tests and assertions. Ambient Core adds a versioned product *interface* and catalog semantics.
 - **DataHub / OpenMetadata** — catalog, lineage, discovery. Ambient Core adds enforceable data-product contracts in one tree.
 - **ODCS** — a *spec* for data contracts. Ambient Core adds a working implementation with catalog and pipeline governance attached.
-- **Collibra** — enterprise governance suite. Ambient Core is a small, MIT, fully inspectable foundation.
+- **Collibra** — enterprise governance suite. Ambient Core is a small, fully inspectable open-source foundation under the MIT License.
 
 Ambient Core does **not** compete with LangChain, LlamaIndex, or Haystack. It does not ship customer-facing AI, model hosting, or third-party model resale. Operator AI tooling (for example Cursor Agent) is internal engineering practice, not an Ambient Core deliverable.
 
 ## Versus data governance tooling
 
-dbt, Great Expectations, and Soda assert quality; DataHub and OpenMetadata catalog and trace; ODCS standardizes how a contract is written. Ambient Core ships contracts, catalog semantics, and governance code in **one MIT tree** so definitions stay one source of truth instead of drifting across separate systems.
+dbt, Great Expectations, and Soda assert quality; DataHub and OpenMetadata catalog and trace; ODCS standardizes how a contract is written. Ambient Core ships contracts, catalog semantics, and governance code in **one open-source tree** so definitions stay one source of truth instead of drifting across separate systems.
 
 Canonical edit rules: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Embedding a release: [INTEGRATING.md](INTEGRATING.md).
 
 ## The unique angle
 
-Governed Gold-layer interfaces and reference catalog semantics in a **small, pinnable, inspectable** open core — with a hard line: **neutral and canonical here; tenancy, secrets, UI, and vendor code strictly downstream.** Commercial suites sell the whole product; frameworks never draw that line. Future proprietary AI/ML, if any, belongs only in the commercial platform application, never in this MIT core.
+Governed Gold-layer interfaces and reference catalog semantics in a **small, pinnable, inspectable** open-source repository — with a hard line: **neutral and canonical here; tenancy, secrets, UI, and vendor code strictly downstream.** Commercial suites sell the whole product; frameworks never draw that line. Future proprietary AI/ML, if any, belongs only in the commercial platform application, never in Ambient Core.
 
 ## When it fits — and when it does not
 

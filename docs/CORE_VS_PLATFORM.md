@@ -15,7 +15,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 - **Consumption UI** (web or mobile clients), API gateways tied to a specific vendor OLTP.
 - **Managed lakehouse deploy** (Databricks Asset Bundles, scheduled workspace jobs, Unity Catalog materialization).
 - **App-specific pipeline glue** (Firestore sync, tenant sync IDs, cloud storage conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
-- **Customer-facing AI / inference / model hosting** — not shipped from this MIT core. Future proprietary AI/ML, if any, belongs only in the commercial platform application.
+- **Customer-facing AI / inference / model hosting** — not shipped from this repository. Future proprietary AI/ML, if any, belongs only in the commercial platform application.
 - **Business-line organizations** — splitting a conglomerate into multiple tenant orgs, each with its own catalog industry, contracts, uploads, and peer set; optional holding-company rollup is platform analytics, not a second catalog industry in core.
 - **Benchmark gap decomposition and improvement workflows** — peer actuals storage, structural versus improvable waterfall/bridge UI, normalization policy, and post-benchmark action tracking on top of core metrics and contracts; see [benchmarking-lifecycle.md](benchmarking-lifecycle.md).
 - **Assurance and attestation workflows** — control packs, evidence sign-off, DQ and bridge reconciliation UI, external reviewer exports; see [assurance-lifecycle.md](assurance-lifecycle.md).

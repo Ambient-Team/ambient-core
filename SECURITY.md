@@ -1,6 +1,6 @@
 # Security Policy
 
-**Ambient Core** is an MIT library and schema foundation (contracts, catalog, governance). Report security issues **in this codebase** here; deployment and tenant isolation for a specific product are out of scope unless the flaw is in shipped library defaults in this tree.
+**Ambient Core** is an open-source library and schema foundation under the MIT License (contracts, catalog, governance). Report security issues **in this codebase** here; deployment and tenant isolation for a specific product are out of scope unless the flaw is in shipped library defaults in this tree.
 
 ## Supported versions
 

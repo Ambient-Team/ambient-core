@@ -144,7 +144,7 @@ ESG Carbon Metrics Product -- HKEX ESG disclosure, carbon portfolio scoring, and
 
 - Lightweight YAML + Unity Catalog (no separate catalog service) -- intentional.
 - Observability and bridge contracts close Horizon 1 observability and FP and A alignment gaps.
-- Vertical finance and healthcare contracts expand diligence surface in open core without duplicating full schemas in this repository.
+- Vertical finance and healthcare contracts expand diligence surface in Ambient Core without duplicating full schemas in this repository.
 
 ---
 

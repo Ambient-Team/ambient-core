@@ -1,6 +1,6 @@
 """Open-source reference calculator: turn declared formulas + inputs into metric values.
 
-This package closes the input -> Gold loop in the open core. Metric definitions in the
+This package closes the input -> Gold loop in Ambient Core. Metric definitions in the
 catalogue carry a machine-readable ``calc`` block (``expr`` + declared ``inputs``); this
 engine evaluates them deterministically and safely (no Python ``eval``), resolving
 metric-to-metric dependencies in topological order. A production platform may use this
