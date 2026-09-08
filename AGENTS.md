@@ -2,11 +2,19 @@
 
 Repository-wide guidance for AI agents working on this codebase (operator tooling such as Cursor Agent / IDE Auto). This repository does not ship customer-facing AI, inference services, or model orchestration.
 
+## Open source
+
+This repository is **Ambient Core**, fully **open source** (not an open-core product).
+
+- The **MIT License** is the usage license that governs how the software may be used: use, copy, modify, merge, publish, and distribute, including commercially, provided the copyright notice and license text are included. It is not a university or program brand.
+- Prefer: "Ambient Core is open source under the MIT License." Never write "open core". Never write "Ambient Core (MIT)", "MIT Ambient Core", or "MIT open core".
+- Commercial platform features live in a separate repository. That split does not make this repo open-core.
+
 ## Product AI boundary
 
 - **Customer / product AI:** none in Ambient Core. No Maestro, no open-weight hosting, no agent runtime for end users, no re-sale of third-party models.
 - **Internal AI only:** Cursor Agent / IDE (and CI Cursor SDK heal where configured) for maintainers editing this repo.
-- **Future proprietary AI/ML:** if revived, lives in the commercial platform application — never in this MIT open core, and never as commodity model resale. Do not invent product AI features here.
+- **Future proprietary AI/ML:** if revived, lives in the commercial platform application — never in this repository, and never as commodity model resale. Do not invent product AI features here.
 
 ## Cursor Cloud specific instructions
 

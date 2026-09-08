@@ -21,7 +21,7 @@ How to consume a release: [INTEGRATING.md](INTEGRATING.md).
 - Tenant **secrets**, production connection strings, commercial plan generators tied to one deployment.
 - Vendor-specific **OLTP schema registries** (for example Firestore layout) that are not neutral data contracts.
 - End-to-end tests against a full deployed multi-tenant SaaS stack.
-- **Customer-facing AI / inference / model hosting / agent runtimes** — not shipped from this MIT core. Any future proprietary AI/ML belongs only in the commercial platform application, never here.
+- **Customer-facing AI / inference / model hosting / agent runtimes** — not shipped from this repository. Any future proprietary AI/ML belongs only in the commercial platform application, never here.
 
 A consumer **may** keep small **app-only** pipeline modules (for example Databricks workspace paths or a secrets helper) next to a pinned install of this package. Shared logic belongs here.
 

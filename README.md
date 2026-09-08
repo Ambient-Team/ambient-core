@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10--3.12-blue.svg)](https://www.python.org/downloads/)
 
-**Governed data products — MIT foundation anyone can rebuild.**
+**Governed data products — open-source foundation anyone can rebuild.**
 
 Free open-source materials + a free Google account + free Google Colab. No paid Databricks, Unity Catalog, Firebase, or GCP hosting is required for the core demo.
 
@@ -105,4 +105,4 @@ Full map: **[docs/README.md](docs/README.md)**.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Ambient Core is open source under the MIT License. That license is how the software may be used: you may use, copy, modify, merge, publish, and distribute it, including commercially, provided you include the copyright notice and license text. See [LICENSE](LICENSE).

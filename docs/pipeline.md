@@ -67,7 +67,7 @@ Platform-only (optional): `fetch_firestore_data_source` / `append_firestore_line
 
 ## Silver → Gold (catalog, calc, and vertical contracts)
 
-Open core **does not** ship Spark jobs that write `finance-*-v1` or healthcare Gold tables. Recommended platform pattern:
+Ambient Core **does not** ship Spark jobs that write `finance-*-v1` or healthcare Gold tables. Recommended platform pattern:
 
 1. Read Silver long metrics from `tenant-metrics-v1` shape (or query your lakehouse Silver table).
 2. Evaluate catalog formulas with [`ambient_calc`](../lib/ambient_calc/__init__.py) (`compute_all` on manifest metrics + measured inputs).

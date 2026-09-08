@@ -52,7 +52,7 @@ Business summary: see README Business Summary -- ../../../README.md#business-sum
 - GitHub: Ambient-Team/ambient-core
 - Class: execution
 - remoteOnly: true (no required local clone)
-- Role: Contract and catalog YAML SSOT, shared pipeline libraries (public MIT)
+- Role: Contract and catalog YAML SSOT, shared pipeline libraries (public, MIT License)
 
 **Spoke site (business lane)**
 

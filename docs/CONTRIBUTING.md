@@ -4,7 +4,7 @@ Thank you for improving governed analytics foundations. Read [CODE_OF_CONDUCT.md
 
 **New here?** Start with [USAGE.md](USAGE.md), then skim [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Open a [draft PR](https://github.com/Ambient-Team/ambient-core/compare) early for feedback on contracts or catalog shape.
 
-All foundational work—contracts, catalog, shared pipeline governance—belongs in **this** repository. Application UI, deploy bindings, and tenant-specific tooling belong in **separate repos** that pin a release here. Customer-facing AI is out of scope for this MIT core.
+All foundational work—contracts, catalog, shared pipeline governance—belongs in **this** repository. Application UI, deploy bindings, and tenant-specific tooling belong in **separate repos** that pin a release here. Customer-facing AI is out of scope for Ambient Core.
 
 Start with [ECOSYSTEM.md](ECOSYSTEM.md) and [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Quick start: [USAGE.md](USAGE.md). Foundation vs full product: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
 

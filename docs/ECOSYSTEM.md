@@ -72,4 +72,4 @@ After merge here, tag on `main`, then follow [CONTRIBUTING.md — Consumer follo
 
 ## Product AI boundary
 
-Ambient Core does not ship inference, model registry, council workflows, or customer agent runtimes. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable. Future patented proprietary AI/ML, if any, belongs only in the commercial platform application — not in this MIT core, and not as resale of third-party models.
+Ambient Core does not ship inference, model registry, council workflows, or customer agent runtimes. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable. Future patented proprietary AI/ML, if any, belongs only in the commercial platform application — not in Ambient Core, and not as resale of third-party models.
