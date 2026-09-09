@@ -20,6 +20,32 @@ Free open-source materials + a free Google account + free Google Colab. No paid 
 
 **Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into `Ambient-Team/ambient-core` or `Ambient-Team/ambient-systems-platform`. Download the shared free demo pack from the website (same pack the enterprise free demo uses): [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (site path `/downloads/ambient-core-demo-samples-v1.zip`). The [Drive folder](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) remains a runnable SSOT for development.
 
+<!-- ambient-acknowledgements:begin -->
+## Third-party acknowledgements
+
+Ambient Core is built on open-source libraries. Versions below are taken from this repository's `pyproject.toml` (and `requirements-colab.txt` when present) so public docs match what integrators install.
+
+This section credits **libraries**, not human contributors. Contributor credits stay under Community / CONTRIBUTING and will grow as people join.
+
+### Ambient Core itself
+
+- **Package metadata `__version__`:** `0.3.0`
+- **License:** MIT
+
+### Dependencies
+
+- **pyyaml** `>=6.0,<7` — MIT (runtime)
+- **pyspark** `>=3.5.0,<3.6` — Apache-2.0 (optional-pipeline)
+- **delta-spark** `>=3.0.0,<4` — Apache-2.0 (optional-pipeline)
+- **pandas** `>=2.0,<3` — BSD-3-Clause (optional-colab)
+- **pytest** `>=8.0,<10` — MIT (optional-dev)
+- **pytest-asyncio** `>=0.24,<2` — Apache-2.0 (optional-dev)
+- **pandas** `>=2.0` — BSD-3-Clause (colab-file)
+- **PyYAML** `>=6.0` — MIT (colab-file)
+
+Generated 2026-09-09 by EngineerID/ambient-systems Apply acknowledgements.
+<!-- ambient-acknowledgements:end -->
+
 ## Free Colab happy path
 
 1. Sign in with a free Google account.
