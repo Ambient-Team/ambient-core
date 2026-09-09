@@ -45,6 +45,8 @@ This section credits **libraries**, not human contributors. Contributor credits 
 - **pandas** `>=2.0` — BSD-3-Clause (colab-file)
 - **PyYAML** `>=6.0` — MIT (colab-file)
 
+Company-wide catalogue (Website + Platform + Ambient Core): https://www.ambientsystems.ai/legal/acknowledgements.pdf
+
 Generated 2026-09-09 by EngineerID/ambient-systems Apply acknowledgements.
 <!-- ambient-acknowledgements:end -->
 
