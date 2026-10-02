@@ -133,7 +133,7 @@ jobs:
           echo "branch=${SYNC_BRANCH}" >> "$GITHUB_OUTPUT"
 
 
-      - name: Merge hub-sync PR
+      - name: Open hub-sync PR
         if: steps.commit.outputs.empty == 'false'
         env:
           GH_TOKEN: ${{ secrets.HUB_DISPATCH_AMBIENT_TEAM || github.token }}
@@ -141,20 +141,14 @@ jobs:
           SOURCE_SHA: ${{ steps.hub.outputs.sha }}
         run: |
           set -euo pipefail
-          # Hub-sync auto-merge (ambient-systems policy) — no Ambient-Team browser login.
           EXISTING=$(gh pr list --head "$SYNC_BRANCH" --state open --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            PR="$EXISTING"
-            echo "Using existing PR #$PR"
-          else
-            URL=$(gh pr create \
-              --base main \
-              --head "$SYNC_BRANCH" \
-              --title "Hub sync ${SOURCE_SHA:0:7}" \
-              --body "Automated hub sync from ${SOURCE_SHA}. Auto-merged by spoke hub-receiver (ambient-systems policy).")
-            echo "Created $URL"
-            PR=$(echo "$URL" | sed -n 's|.*/pull/\([0-9]*\).*|\1|p')
+            echo "Open PR #$EXISTING already exists for ${SYNC_BRANCH}; exiting."
+            exit 0
           fi
-          gh pr merge "$PR" --squash --delete-branch --admin \
-            || gh pr merge "$PR" --squash --delete-branch \
-            || gh pr merge --auto --squash "$PR"
+          URL=$(gh pr create \
+            --base main \
+            --head "$SYNC_BRANCH" \
+            --title "Hub sync ${SOURCE_SHA:0:7}" \
+            --body "Automated hub sync from ${SOURCE_SHA}. Open for owner merge (One Foreman).")
+          echo "Created $URL"

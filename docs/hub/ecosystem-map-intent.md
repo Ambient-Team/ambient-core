@@ -204,9 +204,9 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 
 ## Branching and automation
 
-- Human and agent work: repo/short-kebab-scope off main, PR only; never commit on main. Agents may merge green in-session PRs; session close-out deletes heads and clears orphans. See ecosystem-branching.md.
-- hub-sync/SHORT_SHA -- automation only; wait for required CI on execution spokes before merge; delete head after merge.
-- cursor/ -- CI remediate; Pattern B may auto-merge when green; otherwise review and delete head.
+- Human and agent work: repo/short-kebab-scope off main, PR only; never commit on main. Only the owner merges PRs; session close-out deletes heads and clears orphans. See ecosystem-branching.md.
+- hub-sync/SHORT_SHA -- automation only; hub-receiver opens a PR; wait for required CI on execution spokes; owner merges (One Foreman).
+- cursor/ -- Cloud Agent branches for owner-requested work; CI does not start agents or merge on runners.
 - Parallel agents: separate git worktree per branch (ecosystem-branching.md section 4).
 
 **Required CI on merge (execution spokes)**

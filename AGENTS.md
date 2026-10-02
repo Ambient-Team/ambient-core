@@ -13,7 +13,7 @@ This repository is **Ambient Core**, fully **open source** (not an open-core pro
 ## Product AI boundary
 
 - **Customer / product AI:** none in Ambient Core. No Maestro, no open-weight hosting, no agent runtime for end users, no re-sale of third-party models.
-- **Internal AI only:** Cursor Agent / IDE (and CI Cursor SDK heal where configured) for maintainers editing this repo.
+- **Internal AI only:** Cursor Agent / IDE for maintainers editing this repo.
 - **Future proprietary AI/ML:** if revived, lives in the commercial platform application — never in this repository, and never as commodity model resale. Do not invent product AI features here.
 
 ## Cursor Cloud specific instructions
@@ -34,3 +34,7 @@ Ambient Core is a Python foundation library (contracts, catalog, pipeline govern
 
 - Run `pytest` (config lives in `pyproject.toml`).
 - To match CI, run PySpark pipeline tests with `AMBIENT_SPARK_TESTS=1 pytest`.
+
+## Cloud Agent (One Foreman)
+
+Implement only the spec. One branch, one PR. Never push main. Smallest diff. Run the repo checks before finishing. Stop at the time box and open a PR with whatever is green. Do not spawn sub-agents or switch models. CI never starts agents or merges; only the owner merges.
