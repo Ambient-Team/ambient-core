@@ -29,9 +29,8 @@ This section credits **libraries**, not human contributors. Contributor credits 
 
 ### Ambient Core itself
 
-- **Release tag:** `v0.3.7`
-- **Package metadata `__version__`:** `0.3.0`
-- Note: git release tags may advance ahead of `__version__`; consumers should pin the **git tag** (see docs/INTEGRATING.md).
+- **Package metadata `__version__`:** `0.3.0` (must match git tag `vX.Y.Z`; see [docs/RELEASING.md](docs/RELEASING.md)).
+- Consumers should pin the **git tag** (see [docs/INTEGRATING.md](docs/INTEGRATING.md)).
 - **License:** MIT
 
 ### Dependencies
