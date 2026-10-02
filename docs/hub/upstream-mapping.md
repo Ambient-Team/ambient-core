@@ -141,7 +141,7 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 - Lane 1 vs Lane 2 — AGENTS.md repository vs platform section
 - Site vs repository — AGENTS.md repository vs site section
 - Platform summary — README.md platform summary section
-- CI self-heal (Cursor CLI and workflow_run bridge) — .github/hub/templates/CI_CURSOR_BRIDGE.md
+- One Foreman CI policy — AGENTS.md Cloud Agent (One Foreman) section; CI does not run Cursor agents or merge PRs.
 - PAT names — EngineerID/master-hub docs/pat-matrix.md
 
 *Last updated: 2026-08-11*

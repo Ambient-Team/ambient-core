@@ -10,7 +10,7 @@ Short policy for this spoke. Full SSOT: EngineerID/ambient-systems company/strat
 
 ## Session close-out
 
-- When CI is green and the work was requested this session: merge the PR (agent or human), then delete the head branch and prune local.
+- When CI is green and the work was requested this session: the owner merges the PR, then delete the head branch and prune local.
 - If abandoning: close the PR and delete the remote branch.
 - Do not leave orphan `repo/*`, `hub-sync/*`, or `cursor/*` branches or ready open PRs after a session.
 - Prefer one open `repo/*` PR per repo; do not open a second overlapping PR for the same scope.
@@ -18,8 +18,8 @@ Short policy for this spoke. Full SSOT: EngineerID/ambient-systems company/strat
 
 ## Automation
 
-- Hub automation: `hub-sync/*` from hub-receiver only; open PR, wait for CI job python, merge when green, delete head branch.
-- Do not use `cursor/*` manually; CI self-heal may open those and auto-merge when green.
+- Hub automation: `hub-sync/*` from hub-receiver only; open PR and wait for CI job python. Only the owner merges; CI does not merge or delete the head branch.
+- Do not use `cursor/*` manually for hub-sync remediate; CI does not run Cursor agents on runners (One Foreman).
 
 ## CI
 
