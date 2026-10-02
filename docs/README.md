@@ -30,6 +30,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 ## Contribute and ship
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) — setup, contract/catalog workflow, tagging, consumer follow-up.
+- [RELEASING.md](RELEASING.md) — semver, CHANGELOG, owner release steps, platform pin.
 - [../SECURITY.md](../SECURITY.md) — vulnerability reporting.
 - [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) — community standards.
 

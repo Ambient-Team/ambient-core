@@ -1,0 +1,118 @@
+name: Release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'release' && github.event.release.tag_name || github.ref }}
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Sync bundled contracts
+        run: |
+          cp contracts/*.yaml lib/ambient_contracts/bundled/
+          git diff --exit-code lib/ambient_contracts/bundled/ || (
+            echo "ERROR: bundled copies out of sync with contracts/" >&2
+            exit 1
+          )
+
+      - name: Install package
+        run: pip install -e ".[all]"
+
+      - name: Verify tag matches package version and CHANGELOG
+        run: |
+          TAG="${RELEASE_TAG}"
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Tag must look like vX.Y.Z (semver); got $TAG" >&2
+            exit 1
+          fi
+          VERSION="${TAG#v}"
+          PKG="$(python -c "import ambient_contracts; print(ambient_contracts.__version__)")"
+          if [ "$PKG" != "$VERSION" ]; then
+            echo "Tag $TAG does not match ambient_contracts.__version__ ($PKG)" >&2
+            exit 1
+          fi
+          if ! grep -qF "## [${VERSION}]" CHANGELOG.md; then
+            echo "CHANGELOG.md has no section ## [${VERSION}]" >&2
+            exit 1
+          fi
+
+      - name: Validate contracts
+        run: validate-contracts
+
+      - name: Validate reference catalog
+        run: |
+          python scripts/harden_catalog_data_options.py --check
+          python scripts/generate_reference_catalog.py --check --strict-data-option-inputs
+
+      - name: Validate catalog crosswalk
+        run: python scripts/check_crosswalk.py
+
+      - name: Catalogue hygiene (no dead trees, no mojibake)
+        run: python scripts/check_catalog_hygiene.py
+
+      - name: Catalogue naming conventions
+        run: python scripts/check_naming.py
+
+      - name: Contract meta-schema and versions
+        run: python scripts/check_contract_schema.py
+
+      - name: Metric formulas
+        run: python scripts/check_formulas.py
+
+      - name: Metric input coverage (data options -> KPIs)
+        run: python scripts/check_metric_inputs.py
+
+      - name: PHI policy (healthcare/life-sciences)
+        run: python scripts/check_phi.py
+
+      - name: Check markdown prose (no pipe tables)
+        run: python scripts/check_markdown_prose.py
+
+      - name: Run pytest
+        run: pytest
+        env:
+          AMBIENT_SPARK_TESTS: "1"
+
+      - name: Build distribution artifacts
+        run: |
+          pip install build
+          python -m build --outdir dist
+
+      - name: Verify wheel imports
+        run: |
+          python -m venv /tmp/wheel-smoke-venv
+          /tmp/wheel-smoke-venv/bin/pip install -q dist/ambient_core-*.whl
+          /tmp/wheel-smoke-venv/bin/python -c "import ambient_contracts; assert ambient_contracts.__version__"
+
+      - name: Upload GitHub Release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: ambient-core ${{ env.RELEASE_TAG }}
+          generate_release_notes: true
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
