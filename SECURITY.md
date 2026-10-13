@@ -25,4 +25,4 @@ Please include:
 
 This repo does not host live multi-tenant applications or cloud workspaces. Reports about production tenant isolation or cloud configuration should go to the **repository that deploys** those services, in addition to any issue in library code defined here.
 
-Operator AI tools (Cursor Agent / IDE) used by maintainers are not Ambient Core product surfaces.
+Operator Super Intelligence (SI) tools (Cursor Agent / IDE) used by maintainers are not Ambient Core product surfaces.

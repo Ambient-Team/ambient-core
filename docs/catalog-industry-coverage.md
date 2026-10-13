@@ -86,7 +86,7 @@ The manifest generator derives `section` (letter A-U), `division` (2-digit), and
 
 - Hierarchical taxonomy browser (section to division to class) for assigning org industry codes.
 - Cross-system mapping tables (ISIC to NAICS to NACE to GICS) beyond per-pack primaries.
-- Keyword and AI-assisted code suggestion with human review (source: expert).
+- Keyword and Super Intelligence (SI)-assisted code suggestion with human review (source: expert).
 - Peer benchmarking cohorts keyed off manifest industryCodes and tenant-selected primary system.
 
 ## Former sector profiles

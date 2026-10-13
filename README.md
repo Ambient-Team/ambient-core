@@ -6,7 +6,7 @@
 
 **Governed data products — MIT foundation.**
 
-Versioned **contracts**, a reference **catalog**, and lakehouse **governance** helpers. Built for teams that need medallion-style discipline without embedding product AI or third-party model orchestration in the open core.
+Versioned **contracts**, a reference **catalog**, and lakehouse **governance** helpers. Built for teams that need medallion-style discipline without embedding product Super Intelligence (SI) or third-party model orchestration in the open core.
 
 Use this repo on its own, as a library, or pinned inside a larger product ([INTEGRATING.md](docs/INTEGRATING.md)).
 
@@ -48,7 +48,7 @@ Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). 
 
 Layout and packages: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Scope rules: [docs/CANONICAL_SCOPE.md](docs/CANONICAL_SCOPE.md).
 
-This repository does **not** ship customer-facing AI, model hosting, or inference orchestration. Operator AI tooling (for example Cursor Agent in IDE sessions) is internal engineering practice, not an Ambient Core product.
+This repository does **not** ship customer-facing SI, model hosting, or inference orchestration. Operator SI tooling (for example Cursor Agent in IDE sessions) is internal engineering practice, not an Ambient Core product.
 
 ## Documentation
 

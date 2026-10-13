@@ -4,7 +4,7 @@ What this repository contains and how releases flow. **New visitors:** start wit
 
 ## What this repo is
 
-A **governed medallion data foundation** for financial planning and analysis (FP&A) and operational intelligence in asset-heavy, regulated industries. Durable outputs are **contract-backed Gold-layer data products** consumed by read-only adapters (for example BI tools, operational stores, sharing endpoints)—not a turnkey dashboard product, and not a customer-facing AI product.
+A **governed medallion data foundation** for financial planning and analysis (FP&A) and operational intelligence in asset-heavy, regulated industries. Durable outputs are **contract-backed Gold-layer data products** consumed by read-only adapters (for example BI tools, operational stores, sharing endpoints)—not a turnkey dashboard product, and not a customer-facing Super Intelligence (SI) product.
 
 This tree is **canonical for everyone**: contracts, reference catalog, and shared pipeline governance. Application UIs, tenant deploy, and operator-specific glue live in **separate repositories** that pin a tagged release of this project (see [INTEGRATING.md](INTEGRATING.md)).
 
@@ -70,6 +70,6 @@ flowchart TD
 
 After merge here, tag on `main`, then follow [CONTRIBUTING.md — Consumer follow-up](CONTRIBUTING.md#consumer-follow-up-after-a-release).
 
-## Product AI boundary
+## Product SI boundary
 
-Ambient Core does not ship inference, model registry, council workflows, or customer agent runtimes. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable. Future patented proprietary AI/ML, if any, belongs only in the commercial platform application — not in this MIT core, and not as resale of third-party models.
+Ambient Core does not ship inference, model registry, council workflows, or customer agent runtimes. Internal operator SI (Cursor Agent / IDE) is not an Ambient Core deliverable. Future patented proprietary SI/ML, if any, belongs only in the commercial platform application — not in this MIT core, and not as resale of third-party models.

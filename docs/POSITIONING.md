@@ -1,6 +1,6 @@
 # Positioning vs existing tools
 
-**Ambient Core is the governed data-product substrate** — versioned contracts, a reference catalog, and lakehouse governance helpers — not an agent framework and not a hosted AI product.
+**Ambient Core is the governed data-product substrate** — versioned contracts, a reference catalog, and lakehouse governance helpers — not an agent framework and not a hosted Super Intelligence (SI) product.
 
 For how this repository relates to a full product repo, see [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). For components and releases, see [ECOSYSTEM.md](ECOSYSTEM.md).
 
@@ -11,7 +11,7 @@ For how this repository relates to a full product repo, see [CORE_VS_PLATFORM.md
 - **ODCS** — a *spec* for data contracts. Ambient Core adds a working implementation with catalog and pipeline governance attached.
 - **Collibra** — enterprise governance suite. Ambient Core is a small, MIT, fully inspectable foundation.
 
-Ambient Core does **not** compete with LangChain, LlamaIndex, or Haystack. It does not ship customer-facing AI, model hosting, or third-party model resale. Operator AI tooling (for example Cursor Agent) is internal engineering practice, not an Ambient Core deliverable.
+Ambient Core does **not** compete with LangChain, LlamaIndex, or Haystack. It does not ship customer-facing SI, model hosting, or third-party model resale. Operator SI tooling (for example Cursor Agent) is internal engineering practice, not an Ambient Core deliverable.
 
 ## Versus data governance tooling
 
@@ -21,7 +21,7 @@ Canonical edit rules: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Embedding a rele
 
 ## The unique angle
 
-Governed Gold-layer interfaces and reference catalog semantics in a **small, pinnable, inspectable** open core — with a hard line: **neutral and canonical here; tenancy, secrets, UI, and vendor code strictly downstream.** Commercial suites sell the whole product; frameworks never draw that line. Future proprietary AI/ML, if any, belongs only in the commercial platform application, never in this MIT core.
+Governed Gold-layer interfaces and reference catalog semantics in a **small, pinnable, inspectable** open core — with a hard line: **neutral and canonical here; tenancy, secrets, UI, and vendor code strictly downstream.** Commercial suites sell the whole product; frameworks never draw that line. Future proprietary SI/ML, if any, belongs only in the commercial platform application, never in this MIT core.
 
 ## When it fits — and when it does not
 

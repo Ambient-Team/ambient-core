@@ -31,6 +31,6 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 
 - **Here:** contract YAML SSOT, catalog semantics, shared governance logic.
 - **Elsewhere:** web apps, operational stores, lakehouse deploy, secrets, multi-tenant runtime.
-- **Not here:** customer-facing AI, inference services, or third-party model resale. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable.
+- **Not here:** customer-facing Super Intelligence (SI), inference services, or third-party model resale. Internal operator SI (Cursor Agent / IDE) is not an Ambient Core deliverable.
 
 Component priorities: [ECOSYSTEM.md](ECOSYSTEM.md).
