@@ -15,7 +15,7 @@ Free open-source materials + a free Google account + free Google Colab. No paid 
 - **Pipeline (`.py`)** — ambient-core: yes · commercial platform: yes
 - **Hosting** — ambient-core: **you** · commercial platform: **us**
 - **Storage** — ambient-core: **none** · commercial platform: **us**
-- **CLI / local AI** — ambient-core: local · commercial platform: no CLI; try via members
+- **CLI / local Super Intelligence (SI)** — ambient-core: local · commercial platform: no CLI; try via members
 - **Demo** — ambient-core: **free Google Colab** · commercial platform: members / hosted try
 
 **Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into `Ambient-Team/ambient-core` or `Ambient-Team/ambient-systems-platform`. Download the shared free demo pack from the website (same pack the enterprise free demo uses): [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (site path `/downloads/ambient-core-demo-samples-v1.zip`). The [Drive folder](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) remains a runnable SSOT for development.
@@ -111,7 +111,7 @@ Optional Spark path (needs `.[pipeline]` and the same external CSVs): `python sc
 - Gold KPIs from the smoke run are derived only from those sample rows — not live tenants.
 - Do **not** vendor these CSVs into GitHub ambient-core or the platform repo.
 
-This repository does **not** ship customer-facing AI, model hosting, or inference orchestration. Operator AI tooling (for example Cursor Agent in IDE sessions) is internal engineering practice, not an Ambient Core product.
+This repository does **not** ship customer-facing SI, model hosting, or inference orchestration. Operator SI tooling (for example Cursor Agent in IDE sessions) is internal engineering practice, not an Ambient Core product.
 
 ## Documentation
 

@@ -45,6 +45,6 @@ Clone this repository alone and run without Databricks or Firebase:
 
 - **Here:** contract YAML SSOT, catalog semantics, shared governance logic, OSS Colab notebooks (no sample CSVs in git).
 - **Elsewhere:** web apps, operational stores, lakehouse deploy glue, secrets, multi-tenant runtime, Databricks/Firebase hosting.
-- **Not here:** customer-facing AI, inference services, or third-party model resale. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable.
+- **Not here:** customer-facing Super Intelligence (SI), inference services, or third-party model resale. Internal operator SI (Cursor Agent / IDE) is not an Ambient Core deliverable.
 
 Component priorities: [ECOSYSTEM.md](ECOSYSTEM.md).
