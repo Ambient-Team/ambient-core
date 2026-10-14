@@ -10,11 +10,10 @@ Spoke id: core. Full map on hub: https://github.com/EngineerID/ambient-systems/b
 
 ## Hub dispatch to this spoke
 
-- Rules: strategy-platform-intent
-- Hub path prefixes: company/strategy/, company/strategy/backlog/
-- Event: ambient_hub_sync via .github/workflows/hub-receiver.yml
+- The hub receiver workflow is removed. `EngineerID/ambient-systems` is not available to this repo, the fetch paths failed, and the workflow required secrets `FETCH_AMBIENT_SYSTEMS` and `HUB_DISPATCH_AMBIENT_TEAM`.
+- Files already under `docs/hub/` stay as reference prose. Nothing refreshes them automatically.
 
-## What hub-sync copies today
+## What hub-sync used to copy
 
 - Hub MAPPING.md to docs/hub/upstream-mapping.md
 - Hub company/strategy/03_data-product-contracts.md to docs/hub/data-product-contracts-intent.md
@@ -33,6 +32,6 @@ Spoke id: core. Full map on hub: https://github.com/EngineerID/ambient-systems/b
 
 ## Branching and CI
 
-See docs/hub/branching.md. Require workflow CI job python green on hub-sync PRs before merge.
+See docs/hub/branching.md. Require workflow CI job python green before merge.
 
-*Hand-maintained slice; align with hub-receiver.yml fetch steps.*
+*Hand-maintained slice. The hub receiver workflow is no longer in this repo.*

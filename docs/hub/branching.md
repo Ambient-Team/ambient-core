@@ -18,7 +18,7 @@ Short policy for this spoke. Full SSOT: EngineerID/ambient-systems company/strat
 
 ## Automation
 
-- Hub automation: `hub-sync/*` from hub-receiver only; open PR and wait for CI job python. Only the owner merges; CI does not merge or delete the head branch.
+- Hub sync receiver (`.github/workflows/hub-receiver.yml`) is removed. It only accepted `EngineerID/ambient-systems`, fetched paths that no longer return successfully, and needed `FETCH_AMBIENT_SYSTEMS` plus `HUB_DISPATCH_AMBIENT_TEAM`. GitHub had already disabled it after failed dispatches. Do not recreate `hub-sync/*` branches from that workflow.
 - Do not use `cursor/*` manually for hub-sync remediate; CI does not run Cursor agents on runners (One Foreman).
 
 ## CI
