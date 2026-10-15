@@ -74,12 +74,14 @@ Install Colab deps only: `pip install -r requirements-colab.txt` (`pandas`, `PyY
 ```bash
 git clone https://github.com/Ambient-Team/ambient-core.git
 cd ambient-core
-py -3.12 -m venv .venv
+# Windows: py -3.12 -m venv .venv
+python3.12 -m venv .venv
+source .venv/bin/activate
 # Windows: .venv\Scripts\activate
 pip install -e ".[all]"
 validate-contracts
-ambient-catalog-generate --check
-pytest
+ambient-catalog-generate --check --strict-data-option-inputs
+AMBIENT_SPARK_TESTS=1 pytest
 ```
 
 Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). More recipes: [docs/USAGE.md](docs/USAGE.md).
