@@ -35,7 +35,7 @@ Ambient Core is a Python foundation library (contracts, catalog, pipeline govern
 
 ### Verify
 
-Run these from the repo root with `.venv` active. They match the `python` job in `.github/workflows/ci.yml`. There is no separate formatter.
+Run these from the repo root with `.venv` active. They match the `python` job in `.github/workflows/ci.yml`. There is no separate formatter. Human-oriented notes and faster subsets: [docs/running-ci-locally.md](docs/running-ci-locally.md).
 
 ```bash
 cp contracts/*.yaml lib/ambient_contracts/bundled/
