@@ -90,6 +90,13 @@ def test_metrics_have_unit_and_valid_type_category() -> None:
             assert mtype in METRIC_TYPE_ENUM, f"{path} {key}: type {mtype!r}"
 
 
+def test_shared_data_option_templates_have_ids_and_metric_refs() -> None:
+    shared = yaml.safe_load((CATALOG / "shared" / "data_options.yaml").read_text(encoding="utf-8")) or {}
+    for slug, template in (shared.get("dataOptionTemplates") or {}).items():
+        assert template.get("name"), slug
+        assert template.get("metricRefs") is not None, slug
+
+
 def test_shared_metric_templates_have_type_and_unit() -> None:
     shared = yaml.safe_load((CATALOG / "shared" / "metrics.yaml").read_text(encoding="utf-8")) or {}
     for slug, metric in (shared.get("templates") or {}).items():

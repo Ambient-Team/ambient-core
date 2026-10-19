@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -63,3 +64,25 @@ def test_load_metric_by_unknown_id_returns_none(catalog_root: Path) -> None:
 def test_load_manifest_version_unknown_when_missing_key(tmp_path: Path) -> None:
     (tmp_path / "manifest.json").write_text("{}", encoding="utf-8")
     assert load_manifest_version(tmp_path) == "unknown"
+
+
+def test_load_data_option_manifest_fallback_when_not_in_pack_yaml(tmp_path: Path) -> None:
+    (tmp_path / "industries").mkdir()
+    manifest = {
+        "version": 3,
+        "dataOptions": [
+            {
+                "catalogOptionKey": "OnlyInManifestKey",
+                "id": 4242,
+                "name": "Manifest-only option",
+                "industry": "Test",
+                "metricIds": [],
+                "fields": [],
+            }
+        ],
+    }
+    (tmp_path / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    opt = load_data_option("OnlyInManifestKey", tmp_path)
+    assert opt is not None
+    assert opt.get("id") == 4242
+    assert opt.get("name") == "Manifest-only option"

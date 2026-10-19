@@ -28,6 +28,19 @@ def test_merged_catalog_validate_reports_no_errors(gen) -> None:
     assert not errors, errors[:10]
 
 
+def test_merged_catalog_data_option_ids_globally_unique(gen) -> None:
+    _metrics, data_options, *_ = gen.load_catalog()
+    seen: dict[int, str] = {}
+    for key, option in data_options.items():
+        oid = option.get("id")
+        if oid is None:
+            continue
+        oid_int = int(oid)
+        if oid_int in seen:
+            pytest.fail(f"duplicate data option id {oid_int}: {seen[oid_int]} and {key}")
+        seen[oid_int] = key
+
+
 def test_merged_catalog_metric_ids_globally_unique(gen) -> None:
     metrics, *_ = gen.load_catalog()
     seen: dict[int, str] = {}
