@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, mkdirSync, cpSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, mkdirSync, cpSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import test from 'node:test';
 
 const ROOT = join(import.meta.dirname, '..');
 const POLICY = join(ROOT, 'scripts', 'ci-policy.mjs');
+const { pathsFilterPin } = await import('./ci-policy.mjs');
 
 function runPolicy(rootDir) {
   const env = { ...process.env };
@@ -18,6 +19,29 @@ test('ci-policy script', async (t) => {
   await t.test('passes on repository workflows', () => {
     const result = runPolicy(ROOT);
     assert.equal(result.status, 0, result.stderr || result.stdout);
+  });
+
+  await t.test('pathsFilterPin matches ci.yml pin', () => {
+    assert.equal(
+      pathsFilterPin,
+      '7b450fff21473bca461d4b92ce414b9d0420d706',
+    );
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    assert.match(ci, new RegExp(`dorny/paths-filter@${pathsFilterPin}`));
+  });
+
+  await t.test('fails when paths-filter pin is wrong', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ci-policy-pin-'));
+    mkdirSync(join(dir, '.github', 'workflows'), { recursive: true });
+    cpSync(join(ROOT, '.github', 'dependabot.yml'), join(dir, '.github', 'dependabot.yml'));
+    const badCi = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8').replace(
+      pathsFilterPin,
+      'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    );
+    writeFileSync(join(dir, '.github/workflows/ci.yml'), badCi);
+    const result = runPolicy(dir);
+    assert.notEqual(result.status, 0, result.stdout);
+    assert.match(result.stderr, /paths-filter/);
   });
 
   await t.test('fails when build-test job is missing', () => {

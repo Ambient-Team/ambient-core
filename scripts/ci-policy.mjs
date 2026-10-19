@@ -5,12 +5,15 @@
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ROOT = process.env.CI_POLICY_ROOT
   ? process.env.CI_POLICY_ROOT
   : join(import.meta.dirname, '..');
 const WORKFLOWS_DIR = join(ROOT, '.github', 'workflows');
-const PATHS_FILTER_PIN = '7b450fff21473bca461d4b92ce414b9d0420d706';
+/** Pin for dorny/paths-filter (exported for tests and docs). */
+export const pathsFilterPin = '7b450fff21473bca461d4b92ce414b9d0420d706';
+const PATHS_FILTER_PIN = pathsFilterPin;
 
 const errors = [];
 
@@ -20,6 +23,19 @@ function fail(message) {
 
 function readWorkflow(name) {
   return readFileSync(join(WORKFLOWS_DIR, name), 'utf8');
+}
+
+export function checkPathsFilterPin(text) {
+  const needle = `dorny/paths-filter@${pathsFilterPin}`;
+  if (!text.includes(needle)) {
+    fail(`ci.yml: changes job must pin dorny/paths-filter@${pathsFilterPin}`);
+  }
+  const refs = [...text.matchAll(/dorny\/paths-filter@([0-9a-f]{40})/g)].map((m) => m[1]);
+  for (const ref of refs) {
+    if (ref !== pathsFilterPin) {
+      fail(`ci.yml: unexpected dorny/paths-filter pin ${ref} (expected ${pathsFilterPin})`);
+    }
+  }
 }
 
 function checkCiWorkflow(text) {
@@ -43,8 +59,15 @@ function checkCiWorkflow(text) {
   if (!/cancel-in-progress:\s*true/m.test(text)) {
     fail('ci.yml: concurrency.cancel-in-progress must be true');
   }
-  if (!text.includes(`dorny/paths-filter@${PATHS_FILTER_PIN}`)) {
-    fail(`ci.yml: changes job must pin dorny/paths-filter@${PATHS_FILTER_PIN}`);
+  checkPathsFilterPin(text);
+  if (!/group:\s*ci-\$\{\{\s*github\.workflow\s*\}\}/m.test(text)) {
+    fail('ci.yml: concurrency.group must include github.workflow');
+  }
+  if (!/github\.event\.pull_request\.number\s*\|\|\s*github\.ref/m.test(text)) {
+    fail('ci.yml: concurrency.group must key on PR number or github.ref');
+  }
+  if (/^\s+paths:\s*$/m.test(text.split('jobs:')[0] || text)) {
+    fail('ci.yml: workflow-level path filters are not allowed (use dorny/paths-filter in changes job)');
   }
   if (!/job:\s*changes|^\s*changes:/m.test(text)) {
     fail('ci.yml: must define a "changes" job');
@@ -125,4 +148,6 @@ function main() {
   console.log('CI policy check passed.');
 }
 
-main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main();
+}
