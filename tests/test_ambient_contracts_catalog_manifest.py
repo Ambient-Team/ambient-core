@@ -32,6 +32,23 @@ def test_parse_catalog_manifest_rejects_invalid_root() -> None:
         parse_catalog_manifest([])
 
 
+def test_parse_catalog_manifest_requires_metrics_array() -> None:
+    with pytest.raises(ValueError, match="manifest.metrics"):
+        parse_catalog_manifest({"version": 1, "industries": [], "dataOptions": []})
+
+
+def test_parse_catalog_manifest_rejects_incomplete_metric() -> None:
+    with pytest.raises(ValueError, match="catalogMetricKey"):
+        parse_catalog_manifest(
+            {
+                "version": 1,
+                "industries": [],
+                "metrics": [{"id": 1}],
+                "dataOptions": [],
+            }
+        )
+
+
 def test_resolve_metric_helper() -> None:
     manifest = load_manifest()
     first = manifest.metrics[0]
