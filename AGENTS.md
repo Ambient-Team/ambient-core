@@ -58,6 +58,7 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
+python scripts/check_ruff.py
 AMBIENT_SPARK_TESTS=1 pytest
 pip wheel . -w dist --no-deps
 ```

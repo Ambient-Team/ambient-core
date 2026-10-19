@@ -8,7 +8,7 @@ Overview: [ECOSYSTEM.md](ECOSYSTEM.md).
 
 - **`ambient_contracts`** — load and validate `contracts/*.yaml`
 - **`ambient_pipeline`** — ISO 8000 Silver validation, provenance stamping, catalog loaders, bronze mapping, local runner
-- **`ambient_cli`** — `validate-contracts`, `ambient-catalog-generate` wrappers
+- **`ambient_cli`** — `validate-contracts`, `ambient-catalog-generate` wrappers (`ambient_cli.catalog` delegates to `scripts/generate_reference_catalog.py`)
 - **`ambient_calc`** — safe formula evaluation for catalogue metrics
 
 The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipeline`** is exercised from a git checkout in tests; consumers may add app-specific modules alongside a pinned install.
