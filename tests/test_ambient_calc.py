@@ -44,6 +44,11 @@ def test_safe_eval_bounds_large_exponent():
         safe_eval("2 ** 1000", {})
 
 
+def test_safe_eval_bounds_large_base_for_pow():
+    with pytest.raises(CalcError, match="base out of allowed"):
+        safe_eval("10000001 ** 2", {})
+
+
 def test_safe_eval_unknown_variable_raises():
     with pytest.raises(CalcError):
         safe_eval("a + missing", {"a": 1})
@@ -108,6 +113,21 @@ def test_compute_metric_rejects_empty_expr():
 def test_compute_metric_requires_calc():
     with pytest.raises(CalcError):
         compute_metric({"slug": "headcount", "input": True}, {})
+
+
+def test_compute_all_declared_inputs_override_same_named_metric():
+    """Declared raw inputs win over computed metrics with the same slug."""
+    metrics = [
+        {"slug": "a", "calc": {"expr": "x + 1", "inputs": ["x"]}},
+        {"slug": "b", "calc": {"expr": "a + 10", "inputs": ["a"]}},
+    ]
+    with_override = compute_all(metrics, {"x": 1, "a": 50})
+    assert with_override["a"] == 2
+    assert with_override["b"] == 60
+
+    chained = compute_all(metrics, {"x": 1})
+    assert chained["a"] == 2
+    assert chained["b"] == 12
 
 
 def test_dependency_order_and_cycle_detection():
