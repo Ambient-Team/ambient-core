@@ -29,9 +29,9 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 
 Clone this repository alone and run without Databricks or Firebase:
 
-1. `pip install -r requirements-colab.txt` (or `pip install -e ".[dev]"`)
+1. `pip install -r requirements-colab.txt` (or `pip install -e ".[colab]"` for the same Colab deps from `pyproject.toml`)
 2. Download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) into `data/raw/` (or use [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) / free Colab https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2)
-3. Optional Spark: `pip install -e ".[pipeline,dev]"` and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
+3. Optional Spark: `pip install -e ".[pipeline,dev]"` (or `pip install -e ".[all]"` to match PR CI) and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
 
 **Core** = contracts + catalog + Colab/pandas pipeline + notebooks. The commercial platform pins a core release and adds hosting/storage/members — those stay downstream ([CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md)).
 

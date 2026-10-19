@@ -88,7 +88,7 @@ Names the code or workflows refer to:
 
 - `contracts/` — data-product YAML source of truth
 - `lib/ambient_contracts/bundled/` — copies of those YAML files shipped in the wheel; CI checks they match
-- `catalog/` — reference metrics, industry packs, benchmarks
+- `catalog/` — reference metrics, industry packs, benchmarks; generator CLI is `ambient-catalog-generate` (wraps `scripts/generate_reference_catalog.py`)
 - `lib/` — installable packages `ambient_contracts`, `ambient_cli`, `ambient_calc`, `ambient_pipeline`
 - `ambient_pipeline/` — Colab/pandas Bronze to Silver to Gold path used from a checkout
 - `tests/` — pytest
