@@ -5,7 +5,7 @@ GitHub Actions workflows live under [`.github/workflows/`](../.github/workflows/
 ## Workflows
 
 - **`ci`** — [`ci.yml`](../.github/workflows/ci.yml): contract and catalog checks, pytest, wheel smoke (required check name **`build-test`**).
-- **`release`** / **`cut-release`** — owner release publish; not part of pull request CI.
+- **`release`** / **`cut-release`** — owner release publish; not part of pull request CI. Those workflows may use `workflow_dispatch`; only `ci.yml` is forbidden from doing so under `scripts/ci-policy.mjs`.
 
 ## Triggers (`ci`)
 

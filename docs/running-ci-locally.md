@@ -37,6 +37,14 @@ pip wheel . -w dist --no-deps
 
 Bundled contract sync must show no diff after `cp`. If it fails, copy contracts again and commit the bundled tree.
 
+## Lint (optional)
+
+With `ruff` installed (`pip install -e ".[all]"`):
+
+```bash
+python scripts/check_ruff.py
+```
+
 ## Faster subsets
 
 - **Contracts only:** `validate-contracts` after syncing bundled YAML.

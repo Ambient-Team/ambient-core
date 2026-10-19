@@ -1,6 +1,6 @@
 # Repository inventory (agent freshness)
 
-Last reviewed: **2026-10-19** (branch `cursor/oct31-quality-pass-2b6a`, PR #130).
+Last reviewed: **2026-10-19** (batch 2 — catalog loader/schema tests, ruff check, PR #130).
 
 Use this page to see what changed recently and which verify commands apply. Update the **Last reviewed** line when you materially refresh docs or CI in the long-running quality PR.
 
@@ -24,10 +24,18 @@ Use this page to see what changed recently and which verify commands apply. Upda
 - **`ambient_cli`** — `ambient-catalog-generate` wrapper.
 - **`ambient_pipeline`** — Colab/pandas path; Spark helpers under `lib/ambient_pipeline/`.
 
+## Tests added (PR #130)
+
+- [`tests/test_catalog_loader.py`](../tests/test_catalog_loader.py) — `ambient_pipeline.catalog_loader`
+- [`tests/test_catalog_yaml_schema.py`](../tests/test_catalog_yaml_schema.py) — per-pack YAML schema and id/unit checks
+- [`tests/test_validate_contracts_cli.py`](../tests/test_validate_contracts_cli.py) — `validate-contracts` CLI
+- [`scripts/check_ruff.py`](../scripts/check_ruff.py) — optional `F` / syntax ruff pass
+
 ## Verify commands (quick)
 
 ```bash
 node scripts/ci-policy.mjs && node --test scripts/ci-policy.test.mjs
+python scripts/check_ruff.py
 # then AGENTS.md Verify block (contracts, catalog checks, AMBIENT_SPARK_TESTS=1 pytest, wheel)
 ```
 
