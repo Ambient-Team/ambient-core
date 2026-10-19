@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -17,7 +17,10 @@ def resolve_catalog_root(start: Path | None = None) -> Path:
 
 
 def _read_manifest(catalog_root: Path) -> dict[str, Any]:
-    return json.loads((catalog_root / "manifest.json").read_text(encoding="utf-8"))
+    raw = json.loads((catalog_root / "manifest.json").read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        return {}
+    return cast(dict[str, Any], raw)
 
 
 def load_manifest_version(catalog_root: Path | None = None) -> str:

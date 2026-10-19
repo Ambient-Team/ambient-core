@@ -6,7 +6,7 @@ import hashlib
 import hmac
 from dataclasses import dataclass, field
 
-from pyspark.sql import DataFrame
+from pyspark.sql import Column, DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql.types import StringType
 
@@ -35,7 +35,7 @@ class PiiPseudonymizer:
     def __repr__(self) -> str:
         return f"PiiPseudonymizer(salt=<redacted>, transform_ts={self.transform_ts!r})"
 
-    def pseudonymize_column(self, col_ref):
+    def pseudonymize_column(self, col_ref: Column) -> Column:
         """Return expression for one-way HMAC-SHA256 pseudonymization."""
         salt = self.salt
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import warnings
+from typing import cast
 
 
 def _env_key(scope: str, key: str, env_prefix: str) -> str:
@@ -21,13 +22,16 @@ def _try_dbutils_secret(scope: str, key: str) -> str | None:
 
         spark = SparkSession.getActiveSession()
         if spark is not None:
-            return DBUtils(spark).secrets.get(scope=scope, key=key)
+            return cast(str | None, DBUtils(spark).secrets.get(scope=scope, key=key))
     except Exception:
         pass
 
     try:
         dbutils  # type: ignore[name-defined]  # noqa: F821
-        return dbutils.secrets.get(scope=scope, key=key)  # type: ignore[name-defined]  # noqa: F821
+        return cast(
+            str | None,
+            dbutils.secrets.get(scope=scope, key=key),  # type: ignore[name-defined]  # noqa: F821
+        )
     except Exception:
         return None
 

@@ -32,7 +32,7 @@ FIELD_COVERAGE_UPLOAD = "upload"
 FIELD_COVERAGE_ENUMERATED = "enumerated"
 
 
-def infer_field_coverage(option: dict, *, catalog_option_key: str = "") -> str:
+def infer_field_coverage(option: dict[str, Any], *, catalog_option_key: str = "") -> str:
     """Whether measured inputs must appear as mappable columns (enumerated) or upload/document."""
     raw = str(option.get("fieldCoverage") or "").strip().lower()
     if raw in (FIELD_COVERAGE_UPLOAD, FIELD_COVERAGE_ENUMERATED):
@@ -71,8 +71,8 @@ def infer_grain_for_frequency(frequency: str) -> str:
 
 
 def strictest_linked_metric_frequency(
-    option: dict,
-    metric_id_to_metric: dict[int, dict],
+    option: dict[str, Any],
+    metric_id_to_metric: dict[int, dict[str, Any]],
 ) -> str:
     strictest: int | None = None
     label = "monthly"
@@ -190,7 +190,7 @@ def field_type_map(entries: list[Any] | None) -> dict[str, str]:
 def input_excluded_from_field_list(
     name: str,
     exact: set[str],
-    patterns: list[re.Pattern],
+    patterns: list[re.Pattern[str]],
 ) -> bool:
     lower = str(name or "").strip().lower()
     if lower in exact:
