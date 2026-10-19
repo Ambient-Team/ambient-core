@@ -29,9 +29,8 @@ This section credits **libraries**, not human contributors. Contributor credits 
 
 ### Ambient Core itself
 
-- **Release tag:** `v0.3.7`
-- **Package metadata `__version__`:** `0.3.0`
-- Note: git release tags may advance ahead of `__version__`; consumers should pin the **git tag** (see docs/INTEGRATING.md).
+- **Package metadata `__version__`:** `0.3.8` (must match git tag `vX.Y.Z`; see [docs/RELEASING.md](docs/RELEASING.md)).
+- Consumers should pin the **git tag** (see [docs/INTEGRATING.md](docs/INTEGRATING.md)).
 - **License:** MIT
 
 ### Dependencies
@@ -75,12 +74,14 @@ Install Colab deps only: `pip install -r requirements-colab.txt` (`pandas`, `PyY
 ```bash
 git clone https://github.com/Ambient-Team/ambient-core.git
 cd ambient-core
-py -3.12 -m venv .venv
+# Windows: py -3.12 -m venv .venv
+python3.12 -m venv .venv
+source .venv/bin/activate
 # Windows: .venv\Scripts\activate
 pip install -e ".[all]"
 validate-contracts
-ambient-catalog-generate --check
-pytest
+ambient-catalog-generate --check --strict-data-option-inputs
+AMBIENT_SPARK_TESTS=1 pytest
 ```
 
 Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). More recipes: [docs/USAGE.md](docs/USAGE.md).

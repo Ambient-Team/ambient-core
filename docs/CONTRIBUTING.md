@@ -61,7 +61,7 @@ Integrator-facing guides after catalog or contract changes: [governed-data.md](g
 
 ## Releases
 
-Tag `vX.Y.Z` on `main`; then complete **Consumer follow-up** below for any repo that depends on this project.
+See [RELEASING.md](RELEASING.md) for semver, CHANGELOG, and the automated release workflow. After the owner tags `vX.Y.Z` on `main`, complete **Consumer follow-up** below for any repo that depends on this project.
 
 ## Consumer follow-up (after a release)
 
