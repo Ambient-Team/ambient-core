@@ -20,6 +20,13 @@ def test_finance_banking_column_map_includes_nim():
     assert col_map.get("net_interest_margin") == "banking.depository.net_interest_margin"
 
 
+def test_contract_column_catalog_map_strips_basename_whitespace():
+    padded = contract_column_catalog_map("  finance-banking-v1.yaml  ")
+    baseline = contract_column_catalog_map("finance-banking-v1.yaml")
+    assert padded == baseline
+    assert padded
+
+
 def test_links_for_contract_file_strips_basename_whitespace():
     padded = links_for_contract_file("  finance-banking-v1.yaml  ")
     baseline = links_for_contract_file("finance-banking-v1.yaml")
