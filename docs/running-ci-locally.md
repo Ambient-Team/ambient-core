@@ -1,6 +1,6 @@
 # Running CI locally
 
-Pull request CI runs the same checks as [`.github/workflows/ci.yml`](../.github/workflows/ci.yml). Use this page when you want to reproduce CI on your machine before pushing.
+Pull request CI runs the same checks as the **`build-test`** job in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) when heavy CI is enabled. Draft PRs and docs-only changes skip heavy steps in GitHub Actions but still pass the required check; locally you can always run the full loop below. See [docs/ci.md](ci.md) for triggers and the `run_heavy` gate.
 
 ## Prerequisites
 
