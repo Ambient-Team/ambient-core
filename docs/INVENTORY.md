@@ -32,6 +32,7 @@ Use this page to see what changed recently and which verify commands apply. Upda
 - [`tests/test_catalog_merged_validate.py`](../tests/test_catalog_merged_validate.py) — generator `load_catalog()` + `validate()`
 - [`tests/test_bronze_upload_validation.py`](../tests/test_bronze_upload_validation.py) — CSV header vs mapping
 - [`tests/test_ambient_contracts_paths.py`](../tests/test_ambient_contracts_paths.py) — `AMBIENT_*_DIR` / repo root helpers
+- [`tests/test_catalog_pack_files.py`](../tests/test_catalog_pack_files.py) — required YAML files per registered pack
 - [`scripts/check_ruff.py`](../scripts/check_ruff.py) — optional `F` / syntax ruff pass
 
 ## Verify commands (quick)
