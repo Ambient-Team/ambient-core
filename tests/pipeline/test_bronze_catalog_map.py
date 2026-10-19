@@ -5,9 +5,12 @@ from __future__ import annotations
 import pytest
 
 from ambient_pipeline.bronze_catalog_map import (
+    append_firestore_lineage_event,
+    fetch_firestore_data_source,
     mapping_json_hash,
     parse_mapping_json,
     parse_source_id_from_gcs_path,
+    resolve_mapping_spec,
     stable_metric_id,
 )
 from ambient_pipeline.bronze_upload_validation import validate_csv_headers_against_mapping
@@ -80,6 +83,53 @@ def test_coerce_mapped_columns_uses_manifest_types(spark) -> None:
     assert str(row["date"]) == "2024-03-15"
     assert row["headcount"] == 42.0
     assert row["status"] == "Active"
+
+
+def test_firestore_helpers_noop_in_oss() -> None:
+    append_firestore_lineage_event(
+        "",
+        "src",
+        run_id="r",
+        status="ok",
+        rows_written=0,
+        gcs_path="gs://x",
+    )
+    assert fetch_firestore_data_source("org", "src") is None
+
+
+def test_resolve_mapping_spec_firestore_missing_document() -> None:
+    spec = resolve_mapping_spec(
+        org_id="org-1",
+        mapping_json=None,
+        catalog_option_key="",
+        source_id="src-1",
+        gcs_path="",
+        catalog_manifest_version="3",
+        firestore_fetcher=lambda _o, _s: None,
+    )
+    assert spec.source_name == "src-1"
+
+
+def test_resolve_mapping_spec_firestore_fallback() -> None:
+    def fetcher(org_id: str, source_id: str) -> dict:
+        return {
+            "catalogOptionKey": "HcCensus911CatalogOptionKey01",
+            "name": "Census upload",
+            "latestUpload": {"mapping": {"date": "Date"}},
+        }
+
+    spec = resolve_mapping_spec(
+        org_id="org-1",
+        mapping_json=None,
+        catalog_option_key="",
+        source_id="src-1",
+        gcs_path="gs://bucket/bronze/org-1/src-1/file.csv",
+        catalog_manifest_version="3",
+        firestore_fetcher=fetcher,
+    )
+    assert spec.catalog_option_key == "HcCensus911CatalogOptionKey01"
+    assert spec.catalog_field_to_csv_header["date"] == "Date"
+    assert spec.industry == "Healthcare"
 
 
 def test_coerce_mapped_columns_dates_and_currency(spark) -> None:

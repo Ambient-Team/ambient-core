@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -68,7 +68,10 @@ class ContractLoader:
     def load(self, contract_file: str) -> dict[str, Any]:
         path = self.resolve_path(contract_file)
         with path.open("r", encoding="utf-8") as handle:
-            return yaml.safe_load(handle)
+            doc = yaml.safe_load(handle)
+            if not isinstance(doc, dict):
+                raise ValueError(f"contract root must be a mapping: {contract_file}")
+            return cast(dict[str, Any], doc)
 
     def enforce_bronze_lineage(self, contract: dict[str, Any]) -> None:
         """Verify contract declares required Bronze provenance columns."""

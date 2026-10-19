@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -16,10 +16,16 @@ def resolve_catalog_root(start: Path | None = None) -> Path:
     return resolve_catalog_root_flexible(start)
 
 
+def _read_manifest(catalog_root: Path) -> dict[str, Any]:
+    raw = json.loads((catalog_root / "manifest.json").read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        return {}
+    return cast(dict[str, Any], raw)
+
+
 def load_manifest_version(catalog_root: Path | None = None) -> str:
     root = catalog_root or resolve_catalog_root()
-    data = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
-    version = data.get("version")
+    version = _read_manifest(root).get("version")
     return str(version) if version is not None else "unknown"
 
 
@@ -39,7 +45,7 @@ def _data_option_from_manifest(
     manifest_path = catalog_root / "manifest.json"
     if not manifest_path.is_file():
         return None
-    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    data = _read_manifest(catalog_root)
     for row in data.get("dataOptions") or []:
         if row.get("catalogOptionKey") == catalog_option_key:
             return {
@@ -93,8 +99,7 @@ def load_metric_by_numeric_id(
                 return dict(metric)
     manifest_path = root / "manifest.json"
     if manifest_path.is_file():
-        data = json.loads(manifest_path.read_text(encoding="utf-8"))
-        for row in data.get("metrics") or []:
+        for row in _read_manifest(root).get("metrics") or []:
             if row.get("id") == metric_id:
                 return dict(row)
     return None

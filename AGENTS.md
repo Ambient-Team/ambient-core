@@ -35,7 +35,14 @@ Ambient Core is a Python foundation library (contracts, catalog, pipeline govern
 
 ### Verify
 
-Run these from the repo root with `.venv` active. They match the `python` job in `.github/workflows/ci.yml`. There is no separate formatter. Human-oriented notes and faster subsets: [docs/running-ci-locally.md](docs/running-ci-locally.md).
+Run these from the repo root with `.venv` active. They match the heavy **`build-test`** job in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) when `run_heavy` is true. There is no separate formatter. CI policy (draft gate, path filters, Dependabot limits): [docs/ci.md](docs/ci.md). Human-oriented notes and faster subsets: [docs/running-ci-locally.md](docs/running-ci-locally.md).
+
+Before pushing workflow or Dependabot edits:
+
+```bash
+node scripts/ci-policy.mjs
+node --test scripts/ci-policy.test.mjs
+```
 
 ```bash
 cp contracts/*.yaml lib/ambient_contracts/bundled/
@@ -51,7 +58,10 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
+python scripts/check_ruff.py
+python scripts/check_mypy.py
 AMBIENT_SPARK_TESTS=1 pytest
+python scripts/check_coverage.py
 pip wheel . -w dist --no-deps
 ```
 
@@ -97,7 +107,7 @@ Names the code or workflows refer to:
 - `notebooks/` — Colab entry and optional local Spark notebooks
 - `examples/` — small pipeline examples
 - `data/raw/`, `data/processed/` — empty placeholders; demo CSVs are not in git
-- `.github/workflows/ci.yml` — pull request build and tests
+- `.github/workflows/ci.yml` — `changes`, `ci-policy`, and `build-test` jobs (EngineerID CI-minutes policy; see [docs/ci.md](docs/ci.md))
 - `.github/workflows/release.yml` and `cut-release.yml` — owner release publish; not part of PR CI
 - `.cursor/environment.json` — Cloud Agent install; no `start` command
 

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import ast
-import re
 from typing import Any, Iterable, Mapping
 
 _ALLOWED_FUNCS = {"min": min, "max": max, "abs": abs, "round": round}

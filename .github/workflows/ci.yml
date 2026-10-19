@@ -1,4 +1,10 @@
-name: CI
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: read
@@ -7,27 +13,158 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
-
 jobs:
-  python:
+  changes:
+    name: changes
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      run_heavy: ${{ steps.decision.outputs.run_heavy }}
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout (push only)
+        if: github.event_name == 'push'
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - name: Path filter
+        id: filter
+        uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706 # v4.0.2
+        with:
+          list-files: none
+          filters: |
+            heavy:
+              - 'contracts/**'
+              - 'catalog/**'
+              - 'lib/**'
+              - 'ambient_pipeline/**'
+              - 'tests/**'
+              - 'scripts/**'
+              - 'examples/**'
+              - 'notebooks/**'
+              - 'pyproject.toml'
+              - 'requirements-colab.txt'
+              - '.python-version'
+              - '.github/workflows/ci.yml'
+              - '.cursor/**'
+
+      - name: Decide RUN_HEAVY
+        id: decision
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_ACTION: ${{ github.event.action }}
+          IS_DRAFT: ${{ github.event.pull_request.draft }}
+          FILTER_HEAVY: ${{ steps.filter.outputs.heavy }}
+          PR_CHANGED_FILES: ${{ github.event.pull_request.changed_files }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_API_URL: ${{ github.api_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            echo "run_heavy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            is_draft="$IS_DRAFT"
+            if [[ -n "${PR_NUMBER:-}" && -n "${GH_TOKEN:-}" ]]; then
+              live_draft="$(curl -fsSL \
+                -H "Accept: application/vnd.github+json" \
+                -H "Authorization: Bearer ${GH_TOKEN}" \
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" \
+                | jq -r '.draft')"
+              if [[ "$live_draft" == "true" || "$live_draft" == "false" ]]; then
+                is_draft="$live_draft"
+              fi
+            fi
+            if [[ "$PR_ACTION" == "ready_for_review" ]]; then
+              is_draft="false"
+            fi
+            if [[ "$is_draft" == "true" ]]; then
+              echo "run_heavy=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            if [[ ! "$PR_CHANGED_FILES" =~ ^[0-9]+$ ]]; then
+              echo "::warning::Missing PR changed-files count; running heavy CI"
+              echo "run_heavy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if ((PR_CHANGED_FILES > 3000)); then
+              echo "run_heavy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          case "$FILTER_HEAVY" in
+            true) echo "run_heavy=true" >> "$GITHUB_OUTPUT" ;;
+            false) echo "run_heavy=false" >> "$GITHUB_OUTPUT" ;;
+            *)
+              echo "::warning::Unexpected path-filter result; running heavy CI"
+              echo "run_heavy=true" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
+  ci-policy:
+    name: ci-policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - name: Install actionlint
+        env:
+          ACTIONLINT_VERSION: "1.7.7"
+        run: |
+          set -euo pipefail
+          archive="/tmp/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          curl -sSfL "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" -o "$archive"
+          tar -xzf "$archive" -C /usr/local/bin actionlint
+          actionlint -version
+
+      - name: actionlint
+        run: actionlint -color
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+
+      - name: CI policy script and tests
+        run: |
+          node scripts/ci-policy.mjs
+          node --test scripts/ci-policy.test.mjs
+
+  build-test:
+    name: build-test
+    needs: [changes]
+    if: always() && needs.changes.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      RUN_HEAVY: ${{ needs.changes.outputs.run_heavy }}
+    steps:
+      - name: Heavy CI gate
+        run: |
+          if [[ "${RUN_HEAVY}" != "true" ]]; then
+            echo "Skipping heavy CI (draft pull request or non-impacting changes)."
+          else
+            echo "Running full build-test job."
+          fi
+
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        if: env.RUN_HEAVY == 'true'
 
       # JDK 17 is the version this repo declares for PySpark 3.5.
-      # There is no Maven or Gradle build, so Java has no dependency cache.
-      - uses: actions/setup-java@v6
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        if: env.RUN_HEAVY == 'true'
         with:
           distribution: temurin
           java-version: "17"
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        if: env.RUN_HEAVY == 'true'
         with:
           python-version: "3.11"
           cache: pip
@@ -36,6 +173,7 @@ jobs:
             requirements-colab.txt
 
       - name: Sync bundled contracts
+        if: env.RUN_HEAVY == 'true'
         run: |
           cp contracts/*.yaml lib/ambient_contracts/bundled/
           git diff --exit-code lib/ambient_contracts/bundled/ || (
@@ -44,46 +182,59 @@ jobs:
           )
 
       - name: Install package
+        if: env.RUN_HEAVY == 'true'
         run: pip install -e ".[all]"
 
       - name: Validate contracts
+        if: env.RUN_HEAVY == 'true'
         run: validate-contracts
 
       - name: Validate reference catalog
+        if: env.RUN_HEAVY == 'true'
         run: |
           python scripts/harden_catalog_data_options.py --check
           python scripts/generate_reference_catalog.py --check --strict-data-option-inputs
 
       - name: Validate catalog crosswalk
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_crosswalk.py
 
       - name: Catalogue hygiene (no dead trees, no mojibake)
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_catalog_hygiene.py
 
       - name: Catalogue naming conventions
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_naming.py
 
       - name: Contract meta-schema and versions
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_contract_schema.py
 
       - name: Metric formulas
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_formulas.py
 
       - name: Metric input coverage (data options -> KPIs)
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_metric_inputs.py
 
       - name: PHI policy (healthcare/life-sciences)
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_phi.py
 
       - name: Check markdown prose (no pipe tables)
+        if: env.RUN_HEAVY == 'true'
         run: python scripts/check_markdown_prose.py
 
       - name: Run pytest
+        if: env.RUN_HEAVY == 'true'
         run: pytest
         env:
           AMBIENT_SPARK_TESTS: "1"
 
       - name: Wheel smoke (ambient_contracts import)
+        if: env.RUN_HEAVY == 'true'
         run: |
           pip wheel . -w dist --no-deps
           python -m venv /tmp/wheel-smoke-venv

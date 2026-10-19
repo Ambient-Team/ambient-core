@@ -74,7 +74,12 @@ def validate_all_contracts(contracts_dir: Path | None = None) -> list[str]:
 
 
 def main() -> int:
+    import argparse
     import sys
+
+    argparse.ArgumentParser(
+        description="Validate Ambient Core data-product contract YAML files.",
+    ).parse_args()
 
     errors = validate_all_contracts()
     if errors:

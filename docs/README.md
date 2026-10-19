@@ -29,6 +29,10 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 
 ## Contribute and ship
 
+- [ci.md](ci.md) — GitHub Actions policy (draft gate, path filters, required `build-test` check).
+- [running-ci-locally.md](running-ci-locally.md) — reproduce heavy CI on your machine.
+- [INVENTORY.md](INVENTORY.md) — agent freshness map (CI, SSOT trees, verify shortcuts).
+- [metrics-catalog.md](metrics-catalog.md) — Q-099 tier documentation for the reference catalog.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — setup, contract/catalog workflow, tagging, consumer follow-up.
 - [RELEASING.md](RELEASING.md) — semver, CHANGELOG, owner release steps, platform pin.
 - [../SECURITY.md](../SECURITY.md) — vulnerability reporting.
