@@ -1,6 +1,6 @@
 # Pipeline governance helpers
 
-Ambient Core ships **contracts**, **catalog** semantics, a **pandas Colab path** (`ambient_pipeline/colab_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (same pack as the enterprise free demo) or use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Free Colab entry: https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2. Commercial deploy glue (DABs, Unity Catalog materialization, Firebase) belongs in your application repository.
+Ambient Core ships **contracts**, **catalog** semantics, a **pandas Colab path** (`ambient_pipeline/colab_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (same pack as the enterprise free demo) or use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data: [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). Free Colab entry: https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2. Commercial deploy glue (DABs, Unity Catalog materialization, Firebase) belongs in your application repository.
 
 For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). Product inventory and catalog linkage: [contracts/README.md](../contracts/README.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
@@ -103,7 +103,7 @@ See [examples/pipeline/README.md](../examples/pipeline/README.md).
 ## Related
 
 - [../notebooks/README.md](../notebooks/README.md) — OSS Jupyter medallion flow
-- [../data/README.md](../data/README.md) — external demo samples (website zip / Drive SSOT); no CSVs in git
+- [../data/README.md](../data/README.md) — external demo samples; hub SSOT [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/); no CSVs in git
 - [USAGE.md](USAGE.md) — recipe 3 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
 - [contracts/README.md](../contracts/README.md) — SSOT products and catalog → contract flow
