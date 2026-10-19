@@ -1,6 +1,6 @@
 # Repository inventory (agent freshness)
 
-Last reviewed: **2026-10-19** (batch 2 — catalog loader/schema tests, ruff check, PR #130).
+Last reviewed: **2026-10-19** (batch 3 — merged validate tests, ci-policy hardening, paths tests, PR #130).
 
 Use this page to see what changed recently and which verify commands apply. Update the **Last reviewed** line when you materially refresh docs or CI in the long-running quality PR.
 
@@ -29,6 +29,9 @@ Use this page to see what changed recently and which verify commands apply. Upda
 - [`tests/test_catalog_loader.py`](../tests/test_catalog_loader.py) — `ambient_pipeline.catalog_loader`
 - [`tests/test_catalog_yaml_schema.py`](../tests/test_catalog_yaml_schema.py) — per-pack YAML schema and id/unit checks
 - [`tests/test_validate_contracts_cli.py`](../tests/test_validate_contracts_cli.py) — `validate-contracts` CLI
+- [`tests/test_catalog_merged_validate.py`](../tests/test_catalog_merged_validate.py) — generator `load_catalog()` + `validate()`
+- [`tests/test_bronze_upload_validation.py`](../tests/test_bronze_upload_validation.py) — CSV header vs mapping
+- [`tests/test_ambient_contracts_paths.py`](../tests/test_ambient_contracts_paths.py) — `AMBIENT_*_DIR` / repo root helpers
 - [`scripts/check_ruff.py`](../scripts/check_ruff.py) — optional `F` / syntax ruff pass
 
 ## Verify commands (quick)

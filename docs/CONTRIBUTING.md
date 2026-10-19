@@ -38,7 +38,7 @@ validate-contracts
 pytest
 ```
 
-To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md). GitHub Actions policy (draft gate, path filters): [ci.md](ci.md). Workflow shape is enforced by `node scripts/ci-policy.mjs`.
+To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md). GitHub Actions policy (draft gate, path filters): [ci.md](ci.md). Workflow shape is enforced by `node scripts/ci-policy.mjs`. Optional lint: `python scripts/check_ruff.py` (requires `ruff` from `.[dev]` / `.[all]`).
 
 ## Contract changes
 
