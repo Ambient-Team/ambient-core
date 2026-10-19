@@ -5,6 +5,10 @@ from __future__ import annotations
 from ambient_pipeline.gold_contract_map import contract_column_catalog_map, links_for_contract_file
 
 
+def test_links_for_unknown_contract_file_is_empty():
+    assert links_for_contract_file("not-in-crosswalk-v99.yaml") == []
+
+
 def test_finance_banking_crosswalk_links():
     links = links_for_contract_file("finance-banking-v1.yaml")
     assert links
