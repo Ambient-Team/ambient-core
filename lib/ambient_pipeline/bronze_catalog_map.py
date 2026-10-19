@@ -240,8 +240,8 @@ def unpivot_to_tenant_metrics(
     # mapping keys cannot break out of Spark SQL string literals.
     id_cols = ["_period_key", "_recorded_at"]
     long_df = work.select(*id_cols, *value_fields).melt(
-        ids=id_cols,
-        values=value_fields,
+        ids=tuple(id_cols),
+        values=tuple(value_fields),
         variableColumnName="name",
         valueColumnName="value",
     )

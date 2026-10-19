@@ -66,7 +66,8 @@ class PipelinePerfRecorder:
         try:
             plan = df._jdf.queryExecution().toString()  # noqa: SLF001
         except Exception:
-            plan = df.explain(mode="formatted") or ""
+            df.explain(mode="formatted")
+            plan = ""
         prefix = f"[{label}] " if label else ""
         return f"{prefix}{plan}"
 

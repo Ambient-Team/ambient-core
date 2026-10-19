@@ -16,7 +16,7 @@ def _env_key(scope: str, key: str, env_prefix: str) -> str:
 def _try_dbutils_secret(scope: str, key: str) -> str | None:
     """Best-effort Databricks secret lookup; never required for OSS installs."""
     try:
-        from pyspark.dbutils import DBUtils  # type: ignore[import-untyped]
+        from pyspark.dbutils import DBUtils
         from pyspark.sql import SparkSession
 
         spark = SparkSession.getActiveSession()
