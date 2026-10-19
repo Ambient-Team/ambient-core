@@ -313,7 +313,12 @@ Efficiency, liquidity runway, and operating leverage; emphasis shifts from early
 
 For machine-readable ids, `requiredSources`, `inputs`, and `benchmarkKey`, use `manifest.json` after `ambient-catalog-generate`. Counts in this doc deduplicate native keys across packs; manifest rows include one entry per industry expansion for shared templates.
 
-## Related contracts
+## Related contracts and loaders
 
-Gold product metrics in [`contracts/`](../contracts/) may align with catalog keys via [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml). Crosswalk validation: `python scripts/check_crosswalk.py`.
+- **Gold product YAML** — [`contracts/`](../contracts/) and [contracts/README.md](../contracts/README.md).
+- **Catalog → contract links** — [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml) and [crosswalk.md](crosswalk.md); CI: `python scripts/check_crosswalk.py`.
+- **Runtime loaders** — `ambient_pipeline.catalog_loader` (`load_data_option`, `load_metric_by_numeric_id`); tests in [`tests/test_catalog_loader.py`](../tests/test_catalog_loader.py).
+- **Manifest parse boundary** — `ambient_contracts.catalog_manifest.load_manifest()`; models in `ambient_contracts.manifest_models`.
+- **Drift tests** — [`tests/test_catalog_contract_drift.py`](../tests/test_catalog_contract_drift.py) (crosswalk ids vs manifest and `tenant-metrics-v1` columns).
+- **Consumption** — [catalog-consumption.md](catalog-consumption.md) and [governed-data.md](governed-data.md).
 

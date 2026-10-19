@@ -37,13 +37,22 @@ pip wheel . -w dist --no-deps
 
 Bundled contract sync must show no diff after `cp`. If it fails, copy contracts again and commit the bundled tree.
 
-## Lint (optional)
+## Lint and typecheck (optional)
 
-With `ruff` installed (`pip install -e ".[all]"`):
+With dev tools installed (`pip install -e ".[all]"`):
 
 ```bash
 python scripts/check_ruff.py
+python scripts/check_mypy.py
 ```
+
+## Coverage gate (lib ≥ 85%)
+
+```bash
+python scripts/check_coverage.py
+```
+
+Writes HTML to `/opt/cursor/artifacts/coverage-html` when that directory exists (Cloud Agent VMs).
 
 ## Faster subsets
 
