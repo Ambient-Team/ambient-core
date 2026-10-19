@@ -30,7 +30,7 @@ Changelog = "https://github.com/Ambient-Team/ambient-core/releases"
 
 [project.optional-dependencies]
 pipeline = [
-    "pyspark>=3.5.0,<3.6",
+    "pyspark>=3.5.0,<4.3",
     "delta-spark>=3.0.0,<4",
 ]
 colab = [
