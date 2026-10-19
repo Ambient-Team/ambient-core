@@ -81,6 +81,7 @@ source .venv/bin/activate
 pip install -e ".[all]"
 validate-contracts
 ambient-catalog-generate --check --strict-data-option-inputs
+node scripts/ci-policy.mjs
 AMBIENT_SPARK_TESTS=1 pytest
 ```
 
