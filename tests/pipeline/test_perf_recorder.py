@@ -25,6 +25,11 @@ def test_pipeline_perf_recorder_record_stage(spark) -> None:
     assert recorder._rows  # noqa: SLF001
 
 
+def test_pipeline_perf_recorder_flush_no_rows_is_noop(spark) -> None:
+    recorder = PipelinePerfRecorder(spark)
+    recorder.flush()
+
+
 def test_pipeline_perf_recorder_timed_action_and_csv_flush(spark, tmp_path) -> None:
     df = spark.createDataFrame([(1, 2.0)], ["id", "value"])
     csv_path = tmp_path / "perf.csv"

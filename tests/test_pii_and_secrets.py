@@ -15,6 +15,12 @@ def test_hmac_sha256_hex_deterministic() -> None:
     assert a != hmac_sha256_hex("salt", "other")
 
 
+def test_pii_pseudonymizer_repr_redacts_salt() -> None:
+    text = repr(PiiPseudonymizer(salt="secret", transform_ts="t"))
+    assert "redacted" in text
+    assert "secret" not in text
+
+
 def test_pii_pseudonymizer_eq() -> None:
     a = PiiPseudonymizer(salt="s", transform_ts="t")
     b = PiiPseudonymizer(salt="s", transform_ts="t")
@@ -25,6 +31,17 @@ def test_pii_pseudonymizer_eq() -> None:
 def test_get_secret_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("AMBIENT_PII_SALT", "from-env")
     assert get_secret("ambient-systems", "pii_salt") == "from-env"
+
+
+def test_get_secret_simple_env_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("AMBIENT_TOKEN", "env-wins")
+    assert get_secret("scope", "token") == "env-wins"
+
+
+def test_get_secret_scoped_env_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("AMBIENT_API_TOKEN", raising=False)
+    monkeypatch.setenv("AMBIENT_AMBIENT_SYSTEMS_API_TOKEN", "scoped")
+    assert get_secret("ambient-systems", "api_token") == "scoped"
 
 
 def test_get_secret_missing_raises(monkeypatch: pytest.MonkeyPatch) -> None:
