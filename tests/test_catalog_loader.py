@@ -58,3 +58,8 @@ def test_load_metric_by_numeric_id_healthcare(catalog_root: Path) -> None:
 
 def test_load_metric_by_unknown_id_returns_none(catalog_root: Path) -> None:
     assert load_metric_by_numeric_id(999999999, catalog_root) is None
+
+
+def test_load_manifest_version_unknown_when_missing_key(tmp_path: Path) -> None:
+    (tmp_path / "manifest.json").write_text("{}", encoding="utf-8")
+    assert load_manifest_version(tmp_path) == "unknown"
