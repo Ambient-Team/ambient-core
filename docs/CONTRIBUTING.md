@@ -38,6 +38,8 @@ validate-contracts
 pytest
 ```
 
+To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md).
+
 ## Contract changes
 
 1. Edit YAML under `contracts/`.

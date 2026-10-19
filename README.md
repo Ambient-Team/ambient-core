@@ -125,6 +125,7 @@ Full map: **[docs/README.md](docs/README.md)**.
 - **Governed data** — [governed-data.md](docs/governed-data.md)
 - **Pipeline helpers** — [pipeline.md](docs/pipeline.md)
 - **Conventions** — [CONVENTIONS.md](docs/CONVENTIONS.md)
+- **Run CI locally** — [running-ci-locally.md](docs/running-ci-locally.md)
 - **Positioning** — [POSITIONING.md](docs/POSITIONING.md)
 
 ## Community

@@ -21,7 +21,7 @@ The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipe
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (package home is `lib/`)
 - **`notebooks/`** — entry `00_colab_run_me.ipynb`; optional local Spark notebooks; commercial skips in `COMMERCIAL_ONLY.txt`
 - **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — storage = none; samples from [website zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) or [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) (not for scale; enterprise tests separately)
-- **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`)
+- **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`, [running-ci-locally.md](running-ci-locally.md))
 
 Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; precursor OLTP/Bronze and forward Parquet/Delta live in deployment ([CONVENTIONS.md](CONVENTIONS.md), [governed-data.md](governed-data.md)).
 
@@ -29,9 +29,9 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 
 Clone this repository alone and run without Databricks or Firebase:
 
-1. `pip install -r requirements-colab.txt` (or `pip install -e ".[dev]"`)
+1. `pip install -r requirements-colab.txt` (or `pip install -e ".[colab]"` for the same Colab deps from `pyproject.toml`)
 2. Download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) into `data/raw/` (or use [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) / free Colab https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2)
-3. Optional Spark: `pip install -e ".[pipeline,dev]"` and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
+3. Optional Spark: `pip install -e ".[pipeline,dev]"` (or `pip install -e ".[all]"` to match PR CI) and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
 
 **Core** = contracts + catalog + Colab/pandas pipeline + notebooks. The commercial platform pins a core release and adds hosting/storage/members — those stay downstream ([CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md)).
 

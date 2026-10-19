@@ -7,7 +7,14 @@ from pathlib import Path
 import yaml
 import pytest
 
-from ambient_calc import CalcError, compute_all, compute_metric, safe_eval
+from ambient_calc import (
+    CalcError,
+    compute_all,
+    compute_metric,
+    formula_names,
+    safe_eval,
+    slug_of,
+)
 
 CORE = Path(__file__).resolve().parents[1] / "catalog" / "shared" / "metrics.yaml"
 
@@ -37,14 +44,90 @@ def test_safe_eval_bounds_large_exponent():
         safe_eval("2 ** 1000", {})
 
 
+def test_safe_eval_bounds_large_base_for_pow():
+    with pytest.raises(CalcError, match="base out of allowed"):
+        safe_eval("10000001 ** 2", {})
+
+
 def test_safe_eval_unknown_variable_raises():
     with pytest.raises(CalcError):
         safe_eval("a + missing", {"a": 1})
 
 
+def test_safe_eval_invalid_syntax_raises():
+    with pytest.raises(CalcError, match="invalid expression"):
+        safe_eval("1 + * 2", {})
+
+
+def test_safe_eval_rejects_non_numeric_constants():
+    with pytest.raises(CalcError, match="non-numeric constant"):
+        safe_eval('"hello"', {})
+
+
+def test_safe_eval_rejects_disallowed_operators():
+    with pytest.raises(CalcError, match="not allowed"):
+        safe_eval("a % b", {"a": 5, "b": 2})
+
+
+def test_safe_eval_whitelisted_numeric_functions():
+    assert safe_eval("min(a, b)", {"a": 3, "b": 7}) == 3
+    assert safe_eval("max(a, b)", {"a": 3, "b": 7}) == 7
+    assert safe_eval("abs(x)", {"x": -4}) == 4
+    assert safe_eval("round(x)", {"x": 3.7}) == 4
+
+
+def test_formula_names_ignores_whitelisted_functions():
+    names = formula_names("min(a, b) + c * max(d, e)")
+    assert names == {"a", "b", "c", "d", "e"}
+
+
+def test_slug_of_prefers_dotted_metric_key():
+    assert slug_of({}, key="banking.depository.net_interest_margin") == "net_interest_margin"
+
+
+def test_slug_of_raises_when_metric_unidentifiable():
+    with pytest.raises(CalcError, match="no identifiable slug"):
+        slug_of({})
+
+
+def test_compute_metric_uses_prior_computed_slugs():
+    metric = {"calc": {"expr": "gross_margin + 1", "inputs": []}}
+    assert compute_metric(metric, {}, computed={"gross_margin": 40.0}) == 41.0
+
+
+def test_compute_all_skips_measured_inputs():
+    metrics = [
+        {"slug": "raw_x", "input": True},
+        {"slug": "doubled", "calc": {"expr": "raw_x * 2", "inputs": ["raw_x"]}},
+    ]
+    out = compute_all(metrics, {"raw_x": 5})
+    assert "raw_x" not in out
+    assert out["doubled"] == 10
+
+
+def test_compute_metric_rejects_empty_expr():
+    with pytest.raises(CalcError, match="missing expr"):
+        compute_metric({"calc": {"expr": "", "inputs": []}}, {})
+
+
 def test_compute_metric_requires_calc():
     with pytest.raises(CalcError):
         compute_metric({"slug": "headcount", "input": True}, {})
+
+
+def test_compute_all_declared_inputs_override_same_named_metric():
+    """Declared raw inputs win over computed metrics with the same slug."""
+    metrics = [
+        {"slug": "a", "calc": {"expr": "x + 1", "inputs": ["x"]}},
+        {"slug": "b", "calc": {"expr": "a + 10", "inputs": ["a"]}},
+    ]
+    with_override = compute_all(metrics, {"x": 1, "a": 50})
+    assert with_override["a"] == 2
+    assert with_override["b"] == 60
+
+    chained = compute_all(metrics, {"x": 1})
+    assert chained["a"] == 2
+    assert chained["b"] == 12
 
 
 def test_dependency_order_and_cycle_detection():
