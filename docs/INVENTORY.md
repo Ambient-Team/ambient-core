@@ -1,6 +1,6 @@
 # Repository inventory (agent freshness)
 
-Last reviewed: **2026-10-19** (batch 3 — merged validate tests, ci-policy hardening, paths tests, PR #130).
+Last reviewed: **2026-10-19** (batch 4 — manifest fallback loader test, merged option id uniqueness, shared data-option templates, PR #130).
 
 Use this page to see what changed recently and which verify commands apply. Update the **Last reviewed** line when you materially refresh docs or CI in the long-running quality PR.
 
