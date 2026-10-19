@@ -58,6 +58,12 @@ function checkCiWorkflow(text) {
   if (!/RUN_HEAVY|run_heavy/m.test(text)) {
     fail('ci.yml: heavy steps must be gated with RUN_HEAVY / run_heavy');
   }
+  if (!/scripts\/\*\*|'scripts\/\*\*'/m.test(text)) {
+    fail('ci.yml: path filter heavy paths must include scripts/**');
+  }
+  if (!/ci-policy\.mjs/m.test(text)) {
+    fail('ci.yml: ci-policy job must run scripts/ci-policy.mjs');
+  }
 
   for (const jobName of ['changes', 'ci-policy', 'build-test']) {
     const marker = `  ${jobName}:\n`;
