@@ -16,14 +16,20 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.11"
-
+      # JDK 17 is the version this repo declares for PySpark 3.5.
+      # There is no Maven or Gradle build, so Java has no dependency cache.
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            pyproject.toml
+            requirements-colab.txt
 
       - name: Sync bundled contracts
         run: |
