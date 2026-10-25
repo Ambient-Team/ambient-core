@@ -76,6 +76,18 @@ Ambient Core **does not** ship Spark jobs that write `finance-*-v1` or healthcar
 
 Details: [contracts/README.md](../contracts/README.md), [crosswalk.md](crosswalk.md).
 
+### Local Spark runner — real-estate gold columns
+
+The optional helper [`ambient_pipeline.runner`](../lib/ambient_pipeline/runner.py) (`run_local_pipeline` / `run_pipeline_from_config`) writes a simplified **real-estate** Gold Delta table when Silver rows include `industry` and `name` and at least one row has `industry == "Real Estate"`. Spark `pivot` uses human-readable metric **display names**, but Delta Lake rejects column names with spaces, so the runner renames pivoted columns before write.
+
+Display name (Silver `name` / pivot value) maps to Gold column (Delta-safe):
+
+- **Net Operating Income** → `noi`
+- **Annual Debt Service** → `annual_debt_service`
+- **Market Value** → `market_value`
+
+The runner also adds **`kpi_dscr`** (`noi / annual_debt_service` when debt service is positive). Constants live in `REAL_ESTATE_GOLD_PIVOT` in `runner.py`. When `name` / `industry` are absent, Gold falls back to a per-org **summary** table (`metric_rows`, optional `distinct_metrics`) under `gold/org_kpis/summary`.
+
 Public re-exports from `ambient_pipeline`: `ContractLoader`, `BronzeProvenanceStamper`, `PiiPseudonymizer`, `SilverValidator`, plus `bronze_to_tenant_metrics`, `MappingSpec`, and mapping helpers ([`__init__.py`](../lib/ambient_pipeline/__init__.py)).
 
 ## Walkthrough by test module
