@@ -1,5 +1,7 @@
 # Ecosystem map (hub and spokes)
 
+> **Archived mirror.** See [README.md](README.md). Internal names and personal paths below may be outdated; do not use for public Ambient Core workflow.
+
 **Version:** 2
 **Date:** July 13, 2026
 **Purpose:** Agent and human SSOT for repositories listed in mapping.json. Covers the floating hub, two execution lanes, personal spokes, ownership, hub dispatch, spoke receivers, upward spoke signals, secrets, branching, and edit routing. Machine inventory: mapping.json at hub root. Operations detail: MAPPING.md. **Branching SSOT (authoritative, not this mirror):** [ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md). Strategy cycle: ../strategy-cycle.md.
@@ -90,7 +92,7 @@ Each enabled spoke may ship docs/hub/ecosystem.md (this repo slice) and docs/hub
 
 **Business lane (site)**
 
-- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: commercial/ivan-damnjanovic/cv/validation-bridge.md.
+- Public and company-external commercial OS on hub commercial/ (building in public; site is deploy spoke). Charter: commercial/charter.md. Career: [archived-personal-path]/cv/validation-bridge.md.
 
 **Personal lane (not company dispatch)**
 
@@ -149,14 +151,14 @@ Full secrets and troubleshooting: MAPPING.md.
 
 **career-public-sync**
 
-- Hub paths: commercial/ivan-damnjanovic/cv/**, commercial/ivan-damnjanovic/assurance/targeting.md
+- Hub paths: [archived-personal-path]/cv/**, [archived-personal-path]/assurance/targeting.md
 - Spokes: personal-site
 - Profile: cv-public
-- Personal-site receiver copies: docs/hub/upstream-mapping.md, hub-sync/cv/ivan-damnjanovic.md, docs/hub/ecosystem-map-intent.md
+- Personal-site receiver copies: docs/hub/upstream-mapping.md, hub-sync/cv/[archived-personal-cv].md, docs/hub/ecosystem-map-intent.md
 
 **interview-prep-learning**
 
-- Hub paths: commercial/ivan-damnjanovic/assurance/**, commercial/ivan-damnjanovic/advisory/**
+- Hub paths: [archived-personal-path]/assurance/**, [archived-personal-path]/advisory/**
 - Spokes: code-signal
 - Profile: interview-prep
 - Code-signal receiver copies: docs/hub/upstream-mapping.md, hub-sync/interview-prep/two-question-answers.md, docs/hub/ecosystem-map-intent.md
@@ -176,7 +178,7 @@ Aligns with branch-map.yaml sensitivity hints and AGENTS.md:
 
 - operations/finance/ and corporate/ -- confidential; excluded from dispatch (corporation shell)
 - commercial/hypotheses.md -- internal-contingent; may dispatch to site when paths match commercial-public-sync
-- commercial/ivan-damnjanovic/ -- internal-contingent; career paths may notify disabled personal spokes only
+- [archived-personal-path]/ -- internal-contingent; career paths may notify disabled personal spokes only
 
 ---
 
@@ -205,7 +207,7 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 ## Branching and automation
 
 - Human and agent work: repo/short-kebab-scope off main, PR only; never commit on main. Only the owner merges PRs; session close-out deletes heads and clears orphans. See ecosystem-branching.md.
-- hub-sync/SHORT_SHA -- automation only; hub-receiver opens a PR; wait for required CI on execution spokes; owner merges (One Foreman).
+- hub-sync/SHORT_SHA -- automation only; hub-receiver opens a PR; wait for required CI on execution spokes; owner merges after CI.
 - cursor/ -- Cloud Agent branches for owner-requested work; CI does not start agents or merge on runners.
 - Parallel agents: separate git worktree per branch (ecosystem-branching.md section 4).
 
@@ -222,7 +224,7 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 2. Platform implementation -- ambient-systems-platform repo/* PR; link from backlog entry.
 3. Contract YAML change -- ambient-core repo/* PR then platform submodule pin PR.
 4. Public messaging or validation mirror -- hub commercial/ and site internal-docs/ or wait for hub-sync PR on site.
-5. CV or interview prep public mirror -- commercial/ivan-damnjanovic/ then master-hub personal site (company personal-site spoke retired).
+5. CV or interview prep public mirror -- [archived-personal-path]/ then master-hub personal site (company personal-site spoke retired).
 
 **Repository cross-cutting index:** one hub PR when README.md, AGENTS.md, doc-map.yaml, mapping.json, MAPPING.md, and REPOS.md change together (ecosystem-branching.md section 8).
 
@@ -248,7 +250,7 @@ Canonical names: EngineerID/master-hub docs/pat-matrix.md.
 - Short ecosystem orientation -- REPOS.md
 - Spoke template -- .github/hub/templates/spoke-ecosystem.md
 - Cursor policy -- cursor-integrations.md
-- Career vs company validation -- commercial/ivan-damnjanovic/cv/validation-bridge.md
+- Career vs company validation -- [archived-personal-path]/cv/validation-bridge.md
 - Operating lanes -- ../../../interface/operating-lanes.md
 - Strategy cycle -- ../strategy-cycle.md
 

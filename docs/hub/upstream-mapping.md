@@ -1,5 +1,7 @@
 # Hub-and-spoke mapping (ambient-systems)
 
+> **Archived mirror.** See [README.md](README.md). Organization-specific secrets, dispatch names, and personal paths are historical only.
+
 **Purpose:** This repository is the company floating-hub coordinator for three Ambient-Team remotes (platform, core, site). Personal EngineerID spokes are disabled here. Oversight: EngineerID/master-hub. The hub records sync rules in mapping.json and dispatches GitHub repository_dispatch events when eligible paths change on main. Remote vs local policy: spokes/platform/engineering/remote-ci-and-local-policy.md.
 
 Machine map: see mapping.json at repo root. Prose SSOT: interface/ecosystem-map.md. Dispatcher script: see .github/hub/dispatch.sh. Workflow: see .github/workflows/hub-dispatch.yml. Company ops start: interface/operating-lanes.md. Strategy cycle: commercial/strategy/strategy-cycle.md.
@@ -27,8 +29,8 @@ The cloud dispatcher never uses localPath and skips `enabled: false` entries. Ag
 - **strategy-platform-intent** — Changes under commercial/strategy/ notify platform and core. Spokes should open a PR that refreshes contract drift markers, readme checklists, or doc references to the hub commit SHA.
 - **product-engineering-intent** — Changes under spokes/platform/** notify platform for engineering assessments that may imply platform work.
 - **commercial-public-sync** — Changes under commercial/hypotheses.md, commercial/README.md, commercial/test/, commercial/outbound/, spokes/site/, or commercial/charter.md notify the site deploy spoke for mirror updates. Site remains the publish/deploy repo.
-- **career-public-sync** — Changes under commercial/ivan-damnjanovic/cv/ or commercial/ivan-damnjanovic/assurance/targeting.md notify the personal site. Canonical repository CV paths are commercial/ivan-damnjanovic/cv/, not legacy career/cv/ paths referenced in older site readme text.
-- **interview-prep-learning** — Changes under commercial/ivan-damnjanovic/assurance/** or advisory/** may notify code-signal when that spoke is enabled (currently disabled).
+- **career-public-sync** — Changes under [archived-personal-path]/cv/ or [archived-personal-path]/assurance/targeting.md notify the personal site. Canonical repository CV paths are [archived-personal-path]/cv/, not legacy career/cv/ paths referenced in older site readme text.
+- **interview-prep-learning** — Changes under [archived-personal-path]/assurance/** or advisory/** may notify code-signal when that spoke is enabled (currently disabled).
 - **customer-package-platform-note** — Changes under commercial/customers/ notify platform to refresh docs/hub customer-package mirrors.
 
 **Global excludes:** operations/finance/, corporate/ (including legal and archive), assets/archive/, and commercial/archive/ (path retired; keep exclude harmless) never trigger dispatch.
@@ -141,7 +143,7 @@ Until a spoke workflow exists, dispatch still returns HTTP 204 from GitHub but n
 - Lane 1 vs Lane 2 — AGENTS.md repository vs platform section
 - Site vs repository — AGENTS.md repository vs site section
 - Platform summary — README.md platform summary section
-- One Foreman CI policy — AGENTS.md Cloud Agent (One Foreman) section; CI does not run Cursor agents or merge PRs.
+- Cloud agent workflow — AGENTS.md cloud agent section; CI does not run agents or merge pull requests.
 - PAT names — EngineerID/master-hub docs/pat-matrix.md
 
 *Last updated: 2026-08-11*
