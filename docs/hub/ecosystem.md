@@ -32,6 +32,6 @@ Spoke id: core. Full map on hub: https://github.com/EngineerID/ambient-systems/b
 
 ## Branching and CI
 
-See docs/hub/branching.md. Require workflow CI job python green before merge.
+Branching policy SSOT: [ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md). Local pointer: [docs/hub/branching.md](branching.md). Require workflow CI job **python** green before merge.
 
 *Hand-maintained slice. The hub receiver workflow is no longer in this repo.*

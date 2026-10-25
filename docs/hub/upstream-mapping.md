@@ -96,7 +96,7 @@ Each spoke adds a receiver workflow (starter template at .github/hub/templates/s
 6. **Merge policy:** do not merge hub-sync PRs until required CI is green on the PR.
 7. **After merge:** delete the `hub-sync/*` head branch.
 
-**Branching SSOT for all repos:** interface/ecosystem-branching.md.
+**Branching SSOT for all repos:** [company/strategy/governance/ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md) in EngineerID/ambient-systems.
 
 **Spoke secrets (Ambient-Team)**
 

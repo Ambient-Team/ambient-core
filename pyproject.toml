@@ -84,13 +84,7 @@ select = ["F", "E9", "E7"]
 [tool.coverage.run]
 source = ["lib"]
 branch = true
-omit = [
-  # Delta pipeline entry (OSS smoke scripts / manual runs).
-  "lib/ambient_pipeline/runner.py",
-  # Commercial / notebook bootstrap helpers (not part of PR CI library surface).
-  "lib/ambient_pipeline/colab_bootstrap.py",
-  "lib/ambient_pipeline/notebook_bootstrap.py",
-]
+omit = []
 
 [tool.coverage.report]
 fail_under = 90

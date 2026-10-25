@@ -2,7 +2,7 @@
 
 **Version:** 2
 **Date:** July 13, 2026
-**Purpose:** Agent and human SSOT for repositories listed in mapping.json. Covers the floating hub, two execution lanes, personal spokes, ownership, hub dispatch, spoke receivers, upward spoke signals, secrets, branching, and edit routing. Machine inventory: mapping.json at hub root. Operations detail: MAPPING.md. Branching SSOT: ecosystem-branching.md. Strategy cycle: ../strategy-cycle.md.
+**Purpose:** Agent and human SSOT for repositories listed in mapping.json. Covers the floating hub, two execution lanes, personal spokes, ownership, hub dispatch, spoke receivers, upward spoke signals, secrets, branching, and edit routing. Machine inventory: mapping.json at hub root. Operations detail: MAPPING.md. **Branching SSOT (authoritative, not this mirror):** [ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md). Strategy cycle: ../strategy-cycle.md.
 
 Business summary: see README Business Summary -- ../../../README.md#business-summary.
 

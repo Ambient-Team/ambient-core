@@ -1,36 +1,17 @@
 # Git branching (Ambient-Team/ambient-core)
 
-Short policy for this spoke. Full SSOT: EngineerID/ambient-systems company/strategy/governance/ecosystem-branching.md.
+This spoke keeps a **short local index** only. Authoritative branching, session close-out, worktree rules, and cross-repo edit routing live in the hub repository:
 
-## Main safety
+**[ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md)** (EngineerID/ambient-systems)
 
-- Integration branch: `main` only. Do not commit or push to `main`, including one-line fixes.
-- Human and agent work: branch `repo/short-kebab-scope` off updated `main`, open a PR into `main`.
-- Prefer small scoped PRs. Never force-push `main`.
+Do not treat this file as a second SSOT; when policy changes, update the hub document and adjust links here if needed.
 
-## Session close-out
+## Spoke-local reminders
 
-- When CI is green and the work was requested this session: the owner merges the PR, then delete the head branch and prune local.
-- If abandoning: close the PR and delete the remote branch.
-- Do not leave orphan `repo/*`, `hub-sync/*`, or `cursor/*` branches or ready open PRs after a session.
-- Prefer one open `repo/*` PR per repo; do not open a second overlapping PR for the same scope.
-- Do not merge while required CI job python is red.
+- Integration branch: `main` only — no direct commits or pushes to `main`.
+- Work on `repo/short-kebab-scope` (or automation branches your policy allows), open a PR into `main`.
+- CI job **python** must be green before merge; see [docs/ci.md](../ci.md) and [docs/ci-path-filters.md](../ci-path-filters.md).
+- Hub receiver workflow is removed; do not recreate `hub-sync/*` from it.
+- Cursor Bugbot is off for this repo; hub policy: [cursor-integrations.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/cursor-integrations.md).
 
-## Automation
-
-- Hub sync receiver (`.github/workflows/hub-receiver.yml`) is removed. It only accepted `EngineerID/ambient-systems`, fetched paths that no longer return successfully, and needed `FETCH_AMBIENT_SYSTEMS` plus `HUB_DISPATCH_AMBIENT_TEAM`. GitHub had already disabled it after failed dispatches. Do not recreate `hub-sync/*` branches from that workflow.
-- Do not use `cursor/*` manually for hub-sync remediate; CI does not run Cursor agents on runners (One Foreman).
-
-## CI
-
-Workflow CI must be green on the PR before merge. Required check on main: job python.
-
-## Parallel agents
-
-Use a separate git worktree per branch (see hub ecosystem-branching.md section 4).
-
-## Cursor Bugbot
-
-Off for this repo. Disable at https://cursor.com/dashboard/bugbot if the app still comments on PRs. Hub policy: company/strategy/governance/cursor-integrations.md in EngineerID/ambient-systems.
-
-*Hub mirror; update via hub sync or edit with hub SSOT change.*
+*Hub mirror pointer — not a policy copy.*

@@ -13,7 +13,7 @@ Related pins from the same module:
 - **`pathsFilterPin`** — commit SHA for `dorny/paths-filter@…`
 - **`actionlintVersion`**, **`actionlintCommitSha`**, **`actionlintLinuxAmd64Sha256`** — actionlint install pins in the `ci-policy` job
 
-Hub prose for branching lives in [`docs/hub/branching.md`](hub/branching.md); full EngineerID governance is in **EngineerID/ambient-systems** `company/strategy/governance/ecosystem-branching.md` (not mirrored in this repo).
+Hub branching policy SSOT: [ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md) (EngineerID/ambient-systems). This repo keeps a short pointer in [`docs/hub/branching.md`](hub/branching.md), not a full copy.
 
 ## When heavy CI runs
 

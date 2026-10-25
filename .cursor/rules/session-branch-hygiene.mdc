@@ -5,9 +5,9 @@ alwaysApply: true
 
 # Session branch hygiene
 
-Full SSOT: EngineerID/ambient-systems company/strategy/governance/ecosystem-branching.md
+Full SSOT: https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md
 
-Local short form: docs/hub/branching.md
+Local pointer (not a policy copy): docs/hub/branching.md
 
 ## Main safety
 
