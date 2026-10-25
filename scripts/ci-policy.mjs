@@ -23,6 +23,31 @@ export const heavyQualityScripts = [
 
 /** actionlint release pinned in ci-policy job (exported for tests and docs). */
 export const actionlintVersion = '1.7.7';
+/** Git commit for actionlint tag v1.7.7 (source pin). */
+export const actionlintCommitSha = '03d0035246f3e81f36aed592ffb4bebf33a03106';
+/** SHA256 of actionlint_${version}_linux_amd64.tar.gz (release artifact pin). */
+export const actionlintLinuxAmd64Sha256 =
+  '023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757';
+
+/**
+ * EngineerID CI-minutes policy: dorny paths-filter `heavy` globs (SSOT).
+ * Keep in sync with `.github/workflows/ci.yml` changes job filters.
+ */
+export const heavyCiPathFilters = [
+  'contracts/**',
+  'catalog/**',
+  'lib/**',
+  'ambient_pipeline/**',
+  'tests/**',
+  'scripts/**',
+  'examples/**',
+  'notebooks/**',
+  'pyproject.toml',
+  'requirements-colab.txt',
+  '.python-version',
+  '.github/workflows/ci.yml',
+  '.cursor/**',
+];
 
 const errors = [];
 
@@ -32,6 +57,24 @@ function fail(message) {
 
 function readWorkflow(name) {
   return readFileSync(join(WORKFLOWS_DIR, name), 'utf8');
+}
+
+export function checkHeavyCiPathFilters(text) {
+  const match = text.match(/filters:\s*\|\s*\n\s*heavy:\s*\n((?:\s+-\s+['"][^'"]+['"]\s*\n)+)/m);
+  if (!match) {
+    fail('ci.yml: could not parse dorny paths-filter heavy block');
+    return;
+  }
+  const block = match[1];
+  const found = [...block.matchAll(/-\s+['"]([^'"]+)['"]/g)].map((m) => m[1]);
+  const missing = heavyCiPathFilters.filter((g) => !found.includes(g));
+  const extra = found.filter((g) => !heavyCiPathFilters.includes(g));
+  if (missing.length > 0) {
+    fail(`ci.yml: heavy path filter missing SSOT globs: ${missing.join(', ')}`);
+  }
+  if (extra.length > 0) {
+    fail(`ci.yml: heavy path filter has globs not in SSOT: ${extra.join(', ')}`);
+  }
 }
 
 export function checkPathsFilterPin(text) {
@@ -69,8 +112,18 @@ function checkCiWorkflow(text) {
     fail('ci.yml: concurrency.cancel-in-progress must be true');
   }
   checkPathsFilterPin(text);
+  checkHeavyCiPathFilters(text);
   if (!text.includes(`ACTIONLINT_VERSION: "${actionlintVersion}"`)) {
     fail(`ci.yml: ci-policy job must pin ACTIONLINT_VERSION: "${actionlintVersion}"`);
+  }
+  if (!text.includes(`ACTIONLINT_COMMIT: "${actionlintCommitSha}"`)) {
+    fail(`ci.yml: ci-policy job must pin ACTIONLINT_COMMIT: "${actionlintCommitSha}"`);
+  }
+  if (!text.includes(`ACTIONLINT_SHA256: "${actionlintLinuxAmd64Sha256}"`)) {
+    fail(`ci.yml: ci-policy job must pin ACTIONLINT_SHA256 for linux_amd64 tarball`);
+  }
+  if (!/sha256sum\s+-c/m.test(text)) {
+    fail('ci.yml: actionlint install must verify tarball with sha256sum -c');
   }
   if (!/group:\s*ci-\$\{\{\s*github\.workflow\s*\}\}/m.test(text)) {
     fail('ci.yml: concurrency.group must include github.workflow');

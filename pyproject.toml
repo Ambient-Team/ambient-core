@@ -89,8 +89,6 @@ omit = [
   "lib/ambient_pipeline/runner.py",
   # Commercial / notebook bootstrap helpers (not part of PR CI library surface).
   "lib/ambient_pipeline/colab_bootstrap.py",
-  "lib/ambient_pipeline/colab_smoke.py",
-  "lib/ambient_pipeline/firestore_bridge.py",
   "lib/ambient_pipeline/notebook_bootstrap.py",
 ]
 

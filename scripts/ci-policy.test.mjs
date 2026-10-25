@@ -7,7 +7,14 @@ import test from 'node:test';
 
 const ROOT = join(import.meta.dirname, '..');
 const POLICY = join(ROOT, 'scripts', 'ci-policy.mjs');
-const { pathsFilterPin, heavyQualityScripts, actionlintVersion } = await import('./ci-policy.mjs');
+const {
+  pathsFilterPin,
+  heavyQualityScripts,
+  actionlintVersion,
+  actionlintCommitSha,
+  actionlintLinuxAmd64Sha256,
+  heavyCiPathFilters,
+} = await import('./ci-policy.mjs');
 
 function runPolicy(rootDir) {
   const env = { ...process.env };
@@ -24,6 +31,17 @@ test('ci-policy script', async (t) => {
   await t.test('actionlintVersion matches ci.yml pin', () => {
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     assert.match(ci, new RegExp(`ACTIONLINT_VERSION: "${actionlintVersion}"`));
+    assert.match(ci, new RegExp(`ACTIONLINT_COMMIT: "${actionlintCommitSha}"`));
+    assert.match(ci, new RegExp(`ACTIONLINT_SHA256: "${actionlintLinuxAmd64Sha256}"`));
+    assert.match(ci, /sha256sum -c/);
+  });
+
+  await t.test('heavyCiPathFilters match ci.yml heavy block', () => {
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    for (const glob of heavyCiPathFilters) {
+      const escaped = glob.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      assert.match(ci, new RegExp(`- '${escaped}'`));
+    }
   });
 
   await t.test('heavyQualityScripts are wired in ci.yml', () => {
