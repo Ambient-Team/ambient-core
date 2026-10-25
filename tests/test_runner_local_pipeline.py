@@ -11,10 +11,18 @@ from ambient_pipeline.runner import (
     REAL_ESTATE_GOLD_PIVOT,
     PipelineRunConfig,
     _ref_schema,
+    _sanitize_pivoted_columns,
     run_local_pipeline,
     run_pipeline_from_config,
 )
 from ambient_pipeline.validation import SilverValidator
+
+
+def test_sanitize_pivoted_columns_renames_spark_backtick_names(spark) -> None:
+    df = spark.createDataFrame([(100.0,)], ["`Net Operating Income`"])
+    out = _sanitize_pivoted_columns(df, REAL_ESTATE_GOLD_PIVOT)
+    assert "noi" in out.columns
+    assert "`Net Operating Income`" not in out.columns
 
 
 def test_ref_schema_has_expected_fields() -> None:
@@ -74,7 +82,7 @@ def test_run_local_pipeline_summary_gold_without_name_industry(
 
     original_validate = SilverValidator.__dict__["validate_and_tag"]
 
-    def drop_name_industry(self, df, ref_df):  # type: ignore[no-untyped-def]
+    def drop_name_industry(self, df, ref_df):
         tagged = original_validate(self, df, ref_df)
         return tagged.drop("name", "industry")
 

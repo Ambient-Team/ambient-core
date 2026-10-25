@@ -33,6 +33,17 @@ def test_resolve_catalog_dir_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
     assert resolve_catalog_root() == catalog
 
 
+def test_resolve_contracts_dir_uses_bundled_when_checkout_missing(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setenv("AMBIENT_CORE_ROOT", str(tmp_path))
+    monkeypatch.delenv("AMBIENT_CONTRACTS_DIR", raising=False)
+    bundled = resolve_contracts_dir()
+    assert bundled.is_dir()
+    assert bundled.name == "bundled"
+    assert any(bundled.glob("*.yaml"))
+
+
 def test_resolve_catalog_root_missing_manifest(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("AMBIENT_CATALOG_DIR", raising=False)
     monkeypatch.setenv("AMBIENT_CORE_ROOT", str(tmp_path))

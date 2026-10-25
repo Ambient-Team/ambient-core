@@ -85,6 +85,18 @@ def test_slug_of_prefers_dotted_metric_key():
     assert slug_of({}, key="banking.depository.net_interest_margin") == "net_interest_margin"
 
 
+def test_slug_of_uses_undotted_key():
+    assert slug_of({}, key="net-interest-margin") == "net_interest_margin"
+
+
+def test_slug_of_reads_slug_field_from_metric():
+    assert slug_of({"slug": "my-metric"}, key=None) == "my_metric"
+
+
+def test_safe_eval_unary_plus_passthrough():
+    assert safe_eval("+a", {"a": 5}) == 5
+
+
 def test_slug_of_raises_when_metric_unidentifiable():
     with pytest.raises(CalcError, match="no identifiable slug"):
         slug_of({})
