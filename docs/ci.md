@@ -1,6 +1,6 @@
 # Continuous integration
 
-GitHub Actions workflows live under [`.github/workflows/`](../.github/workflows/). This repository follows an **EngineerID CI-minutes policy**: cheap jobs always run; **heavy** work runs only when changes warrant it and the pull request is not a draft.
+GitHub Actions workflows live under [`.github/workflows/`](../.github/workflows/). This repository follows a **CI cost policy**: cheap jobs always run; **heavy** work runs only when changes warrant it and the pull request is not a draft.
 
 ## Workflows
 

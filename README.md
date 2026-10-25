@@ -18,7 +18,7 @@ Free open-source materials + a free Google account + free Google Colab. No paid 
 - **CLI / local AI** — ambient-core: local · commercial platform: no CLI; try via members
 - **Demo** — ambient-core: **free Google Colab** · commercial platform: members / hosted try
 
-**Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into `Ambient-Team/ambient-core` or `Ambient-Team/ambient-systems-platform`. Download the shared free demo pack from the website (same pack the enterprise free demo uses): [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (site path `/downloads/ambient-core-demo-samples-v1.zip`). The [Drive folder](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) remains a runnable SSOT for development. Demo recordings, screenshots, and synthetic demo data live in [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) — never in Ambient-Team repos.
+**Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into this repository. Download the shared free demo pack from the website: [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (path `/downloads/ambient-core-demo-samples-v1.zip`). A [public Drive folder](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) is an optional development mirror. Demo recordings, screenshots, and synthetic demo data are distributed outside git — never commit them here.
 
 <!-- ambient-acknowledgements:begin -->
 ## Third-party acknowledgements
@@ -46,7 +46,7 @@ This section credits **libraries**, not human contributors. Contributor credits 
 
 Company-wide catalogue (Website + Platform + Ambient Core): https://www.ambientsystems.ai/legal/acknowledgements.pdf
 
-Generated 2026-09-09 by EngineerID/ambient-systems Apply acknowledgements.
+Generated 2026-09-09 from dependency metadata in this repository.
 <!-- ambient-acknowledgements:end -->
 
 ## Free Colab happy path
@@ -108,7 +108,7 @@ Optional Spark path (needs `.[pipeline]` and the same external CSVs): `python sc
 
 ## Demo data honesty
 
-- Demo recordings, screenshots, and synthetic data: [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (not in this repo).
+- Demo recordings, screenshots, and synthetic data are distributed outside this repository (not in git).
 - Demo samples come from the **website downloadable bucket** — same pack the enterprise free demo uses: [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip). They are **not** vendored in this repo.
 - This pack is shared free demo samples. You **cannot really test scale** with it; Ambient enterprise deployment runs scalable tests separately.
 - [Drive](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) remains a runnable SSOT for development (Colab mount / local sync).

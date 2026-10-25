@@ -7,7 +7,7 @@
 
 Install: `pip install -r requirements-colab.txt` (or `%pip install pandas PyYAML` in Colab).
 
-Demo CSVs are **not** in this repo. Download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (same pack as the enterprise free demo) into `data/raw/`, or use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development. This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data: [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).
+Demo CSVs are **not** in this repo. Download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (same pack as the enterprise free demo) into `data/raw/`, or use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development. This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data are distributed outside git.
 
 ## Optional local Spark / Delta
 

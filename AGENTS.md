@@ -12,7 +12,7 @@ This repository is **Ambient Core**, fully **open source** (not an open-core pro
 
 ## Product AI boundary
 
-- **Customer / product AI:** none in Ambient Core. No Maestro, no open-weight hosting, no agent runtime for end users, no re-sale of third-party models.
+- **Customer / product AI:** none in Ambient Core. No hosted agent orchestration products, no open-weight model hosting, no agent runtime for end users, no re-sale of third-party models.
 - **Internal AI only:** Cursor Agent / IDE for maintainers editing this repo.
 - **Future proprietary AI/ML:** if revived, lives in the commercial platform application — never in this repository, and never as commodity model resale. Do not invent product AI features here.
 
@@ -88,9 +88,9 @@ Names the code or workflows refer to:
 - `PYSPARK_DRIVER_PYTHON`
 - `HADOOP_HOME`
 - `JAVA_HOME` — set by `.cursor/install.sh` to JDK 17
-- `FETCH_AMBIENT_SYSTEMS` — was used only by the removed hub receiver
-- `HUB_DISPATCH_AMBIENT_TEAM` — was used only by the removed hub receiver
 - `GITHUB_TOKEN` — Actions provides this to Release and Cut release; PR CI does not use it
+
+CI triggers, draft vs heavy jobs, and path filters: [docs/ci.md](docs/ci.md).
 
 ### Repository layout
 
@@ -101,11 +101,11 @@ Names the code or workflows refer to:
 - `ambient_pipeline/` — Colab/pandas Bronze to Silver to Gold path used from a checkout
 - `tests/` — pytest
 - `scripts/` — contract, catalog, and markdown checks
-- `docs/` — manuals, including historical hub mirrors under `docs/hub/`
+- `docs/` — manuals; `docs/hub/` holds archived coordination notes (not maintained for public consumers)
 - `notebooks/` — Colab entry and optional local Spark notebooks
 - `examples/` — small pipeline examples
 - `data/raw/`, `data/processed/` — empty placeholders; demo CSVs are not in git
-- `.github/workflows/ci.yml` — `changes`, `ci-policy`, and `build-test` jobs (EngineerID CI-minutes policy; see [docs/ci.md](docs/ci.md))
+- `.github/workflows/ci.yml` — `changes`, `ci-policy`, `quality-static`, and `build-test` jobs (see [docs/ci.md](docs/ci.md))
 - `.github/workflows/release.yml` and `cut-release.yml` — owner release publish; not part of PR CI
 - `.cursor/environment.json` — Cloud Agent install; no `start` command
 - `.cursor/settings.json` — repo-level Cursor plugin enablement (see marketplace plugins)
@@ -118,6 +118,6 @@ When you change **`ambient_cli`** or other command-line entry points, follow the
 
 Optional deeper review workflows: **Thermos** (branch-wide audit) and **Cursor Team Kit** (CI, verification, and shipping checklists) when enabled in `.cursor/settings.json`.
 
-## Cloud Agent (One Foreman)
+## Cloud agent workflow
 
-Implement only the spec. One branch, one PR. Never push main. Smallest diff. Run the repo checks before finishing. Stop at the time box and open a PR with whatever is green. Do not spawn sub-agents or switch models. CI never starts agents or merges; only the owner merges.
+Implement only the spec. One branch, one PR. Never push `main`. Smallest diff. Run the repo verify commands before finishing. Stop at the time box and open a pull request with whatever is green. Do not spawn sub-agents or switch models. CI does not merge pull requests; maintainers merge after review.

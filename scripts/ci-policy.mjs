@@ -30,7 +30,7 @@ export const actionlintLinuxAmd64Sha256 =
   '023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757';
 
 /**
- * EngineerID CI-minutes policy: dorny paths-filter `heavy` globs (SSOT).
+ * CI cost policy: dorny paths-filter `heavy` globs (SSOT).
  * Keep in sync with `.github/workflows/ci.yml` changes job filters.
  */
 export const heavyCiPathFilters = [

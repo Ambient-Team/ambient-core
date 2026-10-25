@@ -1,6 +1,6 @@
 # CI heavy path filters (SSOT)
 
-EngineerID **CI-minutes policy** uses [dorny/paths-filter](https://github.com/dorny/paths-filter) in the `changes` job to decide when **`run_heavy`** is true for ready pull requests.
+The **CI cost policy** uses [dorny/paths-filter](https://github.com/dorny/paths-filter) in the `changes` job to decide when **`run_heavy`** is true for ready pull requests.
 
 ## Single source of truth
 
@@ -13,7 +13,7 @@ Related pins from the same module:
 - **`pathsFilterPin`** — commit SHA for `dorny/paths-filter@…`
 - **`actionlintVersion`**, **`actionlintCommitSha`**, **`actionlintLinuxAmd64Sha256`** — actionlint install pins in the `ci-policy` job
 
-Hub branching policy SSOT: [ecosystem-branching.md](https://github.com/EngineerID/ambient-systems/blob/main/company/strategy/governance/ecosystem-branching.md) (EngineerID/ambient-systems). This repo keeps a short pointer in [`docs/hub/branching.md`](hub/branching.md), not a full copy.
+Branching reminders for contributors: [`docs/hub/branching.md`](hub/branching.md) (short local notes only).
 
 ## When heavy CI runs
 
