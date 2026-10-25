@@ -38,9 +38,13 @@ Outputs **`run_heavy`**:
 2. [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs) — structural policy checks.
 3. [`scripts/ci-policy.test.mjs`](../scripts/ci-policy.test.mjs) — regression tests for the policy script.
 
+### `quality-static` (always)
+
+Runs on every pull request (including **drafts**): [`scripts/check_quality_static.py`](../scripts/check_quality_static.py) — ruff, mypy, mypy `--strict` on core modules, dead-import scan, secrets pattern scan, and pack reference doc drift (`--check`). Uses `pip install -e ".[dev]"` only (no JDK/Spark).
+
 ### `build-test` (required check name)
 
-Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md).
+Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md), including static quality gates again and [`scripts/check_coverage.py`](../scripts/check_coverage.py) (pytest with **lib ≥ 90%** line / **≥ 85%** branch coverage).
 
 Pip cache is keyed on `pyproject.toml` and `requirements-colab.txt`. JDK **17** (Temurin) is installed for Spark tests (`AMBIENT_SPARK_TESTS=1`).
 

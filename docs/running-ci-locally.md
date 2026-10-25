@@ -30,26 +30,27 @@ python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
 
-AMBIENT_SPARK_TESTS=1 pytest
+python scripts/check_quality_static.py
+AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
 
 pip wheel . -w dist --no-deps
 ```
 
 Bundled contract sync must show no diff after `cp`. If it fails, copy contracts again and commit the bundled tree.
 
-## Lint and typecheck (optional)
+## Static quality (draft PR parity)
 
-With dev tools installed (`pip install -e ".[all]"`):
+Runs on every pull request in CI (`quality-static` job), including drafts:
 
 ```bash
-python scripts/check_ruff.py
-python scripts/check_mypy.py
+pip install -e ".[dev]"
+python scripts/check_quality_static.py
 ```
 
-## Coverage gate (lib ≥ 85%)
+## Coverage gate (lib ≥ 90% lines, ≥ 85% branches)
 
 ```bash
-python scripts/check_coverage.py
+AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
 ```
 
 Writes HTML to `/opt/cursor/artifacts/coverage-html` when that directory exists (Cloud Agent VMs).

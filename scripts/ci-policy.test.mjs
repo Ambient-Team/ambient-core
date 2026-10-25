@@ -7,7 +7,7 @@ import test from 'node:test';
 
 const ROOT = join(import.meta.dirname, '..');
 const POLICY = join(ROOT, 'scripts', 'ci-policy.mjs');
-const { pathsFilterPin } = await import('./ci-policy.mjs');
+const { pathsFilterPin, heavyQualityScripts } = await import('./ci-policy.mjs');
 
 function runPolicy(rootDir) {
   const env = { ...process.env };
@@ -19,6 +19,14 @@ test('ci-policy script', async (t) => {
   await t.test('passes on repository workflows', () => {
     const result = runPolicy(ROOT);
     assert.equal(result.status, 0, result.stderr || result.stdout);
+  });
+
+  await t.test('heavyQualityScripts are wired in ci.yml', () => {
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    for (const script of heavyQualityScripts) {
+      assert.match(ci, new RegExp(script.replaceAll('/', '\\/')));
+    }
+    assert.match(ci, /quality-static:/);
   });
 
   await t.test('pathsFilterPin matches ci.yml pin', () => {

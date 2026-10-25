@@ -15,6 +15,12 @@ const WORKFLOWS_DIR = join(ROOT, '.github', 'workflows');
 export const pathsFilterPin = '7b450fff21473bca461d4b92ce414b9d0420d706';
 const PATHS_FILTER_PIN = pathsFilterPin;
 
+/** Scripts the heavy build-test job must invoke (exported for tests and docs). */
+export const heavyQualityScripts = [
+  'scripts/check_quality_static.py',
+  'scripts/check_coverage.py',
+];
+
 const errors = [];
 
 function fail(message) {
@@ -78,6 +84,17 @@ function checkCiWorkflow(text) {
   if (!/^\s*build-test:/m.test(text)) {
     fail('ci.yml: must keep the required "build-test" job');
   }
+  if (!/^\s*quality-static:/m.test(text)) {
+    fail('ci.yml: must define a "quality-static" job (draft-safe lint/types)');
+  }
+  for (const script of heavyQualityScripts) {
+    if (!text.includes(script)) {
+      fail(`ci.yml: build-test must run ${script}`);
+    }
+  }
+  if (/\brun:\s*pytest\s*$/m.test(text) || /\brun:\s*pytest\n/m.test(text)) {
+    fail('ci.yml: use scripts/check_coverage.py instead of bare pytest in build-test');
+  }
   if (!/RUN_HEAVY|run_heavy/m.test(text)) {
     fail('ci.yml: heavy steps must be gated with RUN_HEAVY / run_heavy');
   }
@@ -88,7 +105,7 @@ function checkCiWorkflow(text) {
     fail('ci.yml: ci-policy job must run scripts/ci-policy.mjs');
   }
 
-  for (const jobName of ['changes', 'ci-policy', 'build-test']) {
+  for (const jobName of ['changes', 'ci-policy', 'quality-static', 'build-test']) {
     const marker = `  ${jobName}:\n`;
     const start = text.indexOf(marker);
     if (start === -1) {

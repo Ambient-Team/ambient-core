@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+"""Run fast quality gates (no Spark): lint, types, dead code, secrets scan, pack docs."""
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+STEPS: tuple[tuple[str, list[str]], ...] = (
+    ("ruff", [sys.executable, str(ROOT / "scripts" / "check_ruff.py")]),
+    ("mypy", [sys.executable, str(ROOT / "scripts" / "check_mypy.py")]),
+    ("mypy-strict", [sys.executable, str(ROOT / "scripts" / "check_mypy_strict.py")]),
+    ("dead-code", [sys.executable, str(ROOT / "scripts" / "check_dead_code.py")]),
+    ("secrets-scan", [sys.executable, str(ROOT / "scripts" / "scan_secrets_patterns.py")]),
+    (
+        "pack-reference-docs",
+        [sys.executable, str(ROOT / "scripts" / "generate_pack_reference_docs.py"), "--check"],
+    ),
+)
+
+
+def main() -> int:
+    for label, cmd in STEPS:
+        result = subprocess.run(cmd, cwd=ROOT, check=False)
+        if result.returncode != 0:
+            print(f"ERROR: {label} failed", file=sys.stderr)
+            return result.returncode
+        print(f"OK: {label}")
+    print("OK: static quality gates")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

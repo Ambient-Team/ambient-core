@@ -7,7 +7,7 @@ alwaysApply: false
 
 - Default branch: `main`. The `ci` workflow runs on **push to `main` only**, not on every branch push.
 - Pull requests use types `opened`, `synchronize`, `reopened`, `ready_for_review`. Draft PRs skip **heavy** `build-test` steps but the job still reports success.
-- Required check name stays **`build-test`**. Do not rename it. New jobs: `changes`, `ci-policy`.
+- Required check name stays **`build-test`**. Do not rename it. Standard jobs: `changes`, `ci-policy`, `quality-static`, `build-test`.
 - Heavy CI is controlled by `run_heavy` from the `changes` job (`RUN_HEAVY` in `build-test`). Do not remove the draft gate or paths-filter without updating `docs/ci.md` and `scripts/ci-policy.mjs`.
 - Pin third-party actions with commit SHAs. Pin `dorny/paths-filter` to `7b450fff21473bca461d4b92ce414b9d0420d706`.
 - Every job needs `timeout-minutes`. Use pip cache only with `pyproject.toml` (and related manifests listed in `ci.yml`).

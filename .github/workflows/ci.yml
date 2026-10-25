@@ -136,6 +136,27 @@ jobs:
           node scripts/ci-policy.mjs
           node --test scripts/ci-policy.test.mjs
 
+  quality-static:
+    name: quality-static
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            pyproject.toml
+            requirements-colab.txt
+
+      - name: Install package (dev tools)
+        run: pip install -e ".[dev]"
+
+      - name: Static quality gates
+        run: python scripts/check_quality_static.py
+
   build-test:
     name: build-test
     needs: [changes]
@@ -227,9 +248,13 @@ jobs:
         if: env.RUN_HEAVY == 'true'
         run: python scripts/check_markdown_prose.py
 
-      - name: Run pytest
+      - name: Static quality gates
         if: env.RUN_HEAVY == 'true'
-        run: pytest
+        run: python scripts/check_quality_static.py
+
+      - name: Test coverage (pytest + lib gates)
+        if: env.RUN_HEAVY == 'true'
+        run: python scripts/check_coverage.py
         env:
           AMBIENT_SPARK_TESTS: "1"
 
