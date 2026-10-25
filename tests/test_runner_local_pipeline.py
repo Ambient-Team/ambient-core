@@ -7,9 +7,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from pyspark.sql.readwriter import DataFrameWriter
-
 from ambient_pipeline.runner import (
+    REAL_ESTATE_GOLD_PIVOT,
     PipelineRunConfig,
     _ref_schema,
     run_local_pipeline,
@@ -40,42 +39,12 @@ def _write_real_estate_csv(path: Path) -> str:
     return str(path)
 
 
-def _write_metric_id_csv(path: Path) -> str:
-    path.write_text(
-        "metric_id,value\n"
-        "m-1,10.0\n"
-        "m-2,20.0\n",
-        encoding="utf-8",
-    )
-    return str(path)
-
-
 def test_run_local_pipeline_real_estate_gold(
     spark,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("AMBIENT_PII_SALT", "unit-test-salt")
-
-    original_save = DataFrameWriter.save
-    writing_stub = [False]
-
-    def save(self, path=None, format=None, mode=None, partitionBy=None, **options):  # type: ignore[no-untyped-def]
-        if path and "real_estate" in str(path) and not writing_stub[0]:
-            writing_stub[0] = True
-            try:
-                stub = (
-                    spark.createDataFrame([("org-re", 1)], ["_bronze_org_id", "kpi_rows"])
-                    .write.format("delta")
-                    .mode("overwrite")
-                )
-                original_save(stub, path)
-            finally:
-                writing_stub[0] = False
-            return None
-        return original_save(self, path, format=format, mode=mode, partitionBy=partitionBy, **options)
-
-    monkeypatch.setattr(DataFrameWriter, "save", save)
 
     csv_glob = _write_real_estate_csv(tmp_path / "bronze.csv")
     cfg = PipelineRunConfig(
@@ -89,6 +58,13 @@ def test_run_local_pipeline_real_estate_gold(
     assert out["run_id"] == "run-re"
     assert set(out["stages"]) == {"bronze", "silver", "gold"}
     assert out["stages"]["gold"]["output_rows"] >= 1
+    gold_dir = tmp_path / "lake" / "gold" / "org_kpis" / "real_estate"
+    assert gold_dir.is_dir()
+    gold_cols = set(spark.read.format("delta").load(str(gold_dir)).columns)
+    safe_names = {safe for _display, safe in REAL_ESTATE_GOLD_PIVOT}
+    assert safe_names.issubset(gold_cols)
+    assert "kpi_dscr" in gold_cols
+    assert not any(" " in name for name in gold_cols)
 
 
 def test_run_local_pipeline_summary_gold_without_name_industry(

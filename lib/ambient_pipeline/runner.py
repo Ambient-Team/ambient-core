@@ -9,9 +9,9 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
-from pyspark.sql import SparkSession
+from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
     DoubleType,
@@ -27,6 +27,13 @@ from ambient_pipeline.provenance import BronzeProvenanceStamper
 from ambient_pipeline.secrets import get_secret_or_warn
 from ambient_pipeline.validation import SilverValidator
 
+
+# Pivot display names → Delta-safe column names (no spaces or punctuation).
+REAL_ESTATE_GOLD_PIVOT: tuple[tuple[str, str], ...] = (
+    ("Net Operating Income", "noi"),
+    ("Annual Debt Service", "annual_debt_service"),
+    ("Market Value", "market_value"),
+)
 
 REFERENCE_BENCHMARKS = [
     ("Net Operating Income", "Real Estate", 0.0, None, "Currency"),
@@ -58,6 +65,16 @@ class PipelineRunConfig:
             self.cache_silver = self.optimize
         if self.apply_skew_salt is None:
             self.apply_skew_salt = self.optimize
+
+
+def _sanitize_pivoted_columns(df: DataFrame, mapping: tuple[tuple[str, str], ...]) -> DataFrame:
+    """Rename pivoted metric columns to identifiers Delta can persist."""
+    out = df
+    for metric_name, safe_name in mapping:
+        for candidate in (metric_name, f"`{metric_name}`"):
+            if candidate in out.columns:
+                out = out.withColumnRenamed(candidate, safe_name)
+    return out
 
 
 def _ref_schema() -> StructType:
@@ -161,18 +178,20 @@ def run_local_pipeline(
     pivot_parts = config.shuffle_partitions if config.optimize else 1
     if "industry" in silver_metrics.columns and "name" in silver_metrics.columns:
         re_df = silver_metrics.filter(F.col("industry") == "Real Estate")
+        pivot_metrics: list[str] = [name for name, _safe in REAL_ESTATE_GOLD_PIVOT]
         re_wide = (
             re_df.repartition(pivot_parts, "_bronze_org_id")
             .groupBy("_bronze_org_id")
-            .pivot("name", ["Net Operating Income", "Annual Debt Service", "Market Value"])
+            .pivot("name", cast(list[bool | float | int | str], pivot_metrics))
             .agg(F.first("value"))
         )
+        re_wide = _sanitize_pivoted_columns(re_wide, REAL_ESTATE_GOLD_PIVOT)
         re_kpis = re_wide.withColumn(
             "kpi_dscr",
             F.when(
-                F.col("`Annual Debt Service`").isNotNull()
-                & (F.col("`Annual Debt Service`") > 0),
-                F.col("`Net Operating Income`") / F.col("`Annual Debt Service`"),
+                F.col("annual_debt_service").isNotNull()
+                & (F.col("annual_debt_service") > 0),
+                F.col("noi") / F.col("annual_debt_service"),
             ),
         )
         (
