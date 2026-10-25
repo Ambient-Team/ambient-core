@@ -54,7 +54,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           PR_ACTION: ${{ github.event.action }}
-          IS_DRAFT: ${{ github.event.pull_request.draft }}
+          PR_IS_DRAFT: ${{ github.event.pull_request.draft }}
           FILTER_HEAVY: ${{ steps.filter.outputs.heavy }}
           PR_CHANGED_FILES: ${{ github.event.pull_request.changed_files }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -68,7 +68,7 @@ jobs:
             exit 0
           fi
           if [[ "$EVENT_NAME" == "pull_request" ]]; then
-            is_draft="$IS_DRAFT"
+            is_draft="${PR_IS_DRAFT}"
             if [[ -n "${PR_NUMBER:-}" && -n "${GH_TOKEN:-}" ]]; then
               live_draft="$(curl -fsSL \
                 -H "Accept: application/vnd.github+json" \

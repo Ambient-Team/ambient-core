@@ -22,7 +22,7 @@ The `ci` workflow uses a concurrency group per ref or pull request with **`cance
 
 ### `changes` (always)
 
-Uses [dorny/paths-filter](https://github.com/dorny/paths-filter) pinned to `7b450fff21473bca461d4b92ce414b9d0420d706` (exported as `pathsFilterPin` from [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs)) with `pull-requests: read` to classify **heavy** paths (`contracts/`, `catalog/`, `lib/`, `ambient_pipeline/`, `tests/`, `scripts/`, lockfiles, CI config, and similar). Documentation-only edits under `docs/` (and other paths not listed) do not set the heavy filter.
+Uses [dorny/paths-filter](https://github.com/dorny/paths-filter) pinned to `7b450fff21473bca461d4b92ce414b9d0420d706` (exported as `pathsFilterPin` from [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs)). The `ci-policy` job pins **actionlint** to `1.7.7` (`actionlintVersion` export). with `pull-requests: read` to classify **heavy** paths (`contracts/`, `catalog/`, `lib/`, `ambient_pipeline/`, `tests/`, `scripts/`, lockfiles, CI config, and similar). Documentation-only edits under `docs/` (and other paths not listed) do not set the heavy filter.
 
 Outputs **`run_heavy`**:
 

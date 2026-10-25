@@ -90,10 +90,6 @@ omit = [
   # Commercial / notebook bootstrap helpers (not part of PR CI library surface).
   "lib/ambient_pipeline/colab_bootstrap.py",
   "lib/ambient_pipeline/colab_smoke.py",
-  # Local Spark+Delta bootstrap and perf sink (covered by dedicated perf tests).
-  "lib/ambient_pipeline/perf.py",
-  # Databricks dbutils branches are optional; OSS path is env-only (see test_pii_and_secrets).
-  "lib/ambient_pipeline/secrets.py",
   "lib/ambient_pipeline/firestore_bridge.py",
   "lib/ambient_pipeline/notebook_bootstrap.py",
 ]
@@ -119,3 +115,7 @@ disable_error_code = ["attr-defined", "operator"]
 [[tool.mypy.overrides]]
 module = "ambient_pipeline.perf"
 disable_error_code = ["attr-defined"]
+
+[[tool.mypy.overrides]]
+module = "ambient_pipeline.pii"
+disable_error_code = ["untyped-decorator"]

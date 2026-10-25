@@ -1,6 +1,6 @@
 # Repository inventory (agent freshness)
 
-Last reviewed: **2026-10-25** (batch 7 — CI `quality-static` job, heavy `check_coverage` + `check_quality_static`, PR #130).
+Last reviewed: **2026-10-25** (batch 8 — CI fixes for draft PR, `actionlintVersion` pin, perf/secrets back in coverage gate, PR #130).
 
 Use this page to see what changed recently and which verify commands apply. Update the **Last reviewed** line when you materially refresh docs or CI in the long-running quality PR.
 

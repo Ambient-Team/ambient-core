@@ -21,6 +21,9 @@ export const heavyQualityScripts = [
   'scripts/check_coverage.py',
 ];
 
+/** actionlint release pinned in ci-policy job (exported for tests and docs). */
+export const actionlintVersion = '1.7.7';
+
 const errors = [];
 
 function fail(message) {
@@ -66,6 +69,9 @@ function checkCiWorkflow(text) {
     fail('ci.yml: concurrency.cancel-in-progress must be true');
   }
   checkPathsFilterPin(text);
+  if (!text.includes(`ACTIONLINT_VERSION: "${actionlintVersion}"`)) {
+    fail(`ci.yml: ci-policy job must pin ACTIONLINT_VERSION: "${actionlintVersion}"`);
+  }
   if (!/group:\s*ci-\$\{\{\s*github\.workflow\s*\}\}/m.test(text)) {
     fail('ci.yml: concurrency.group must include github.workflow');
   }
