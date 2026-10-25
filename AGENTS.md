@@ -108,6 +108,15 @@ Names the code or workflows refer to:
 - `.github/workflows/ci.yml` — `changes`, `ci-policy`, and `build-test` jobs (EngineerID CI-minutes policy; see [docs/ci.md](docs/ci.md))
 - `.github/workflows/release.yml` and `cut-release.yml` — owner release publish; not part of PR CI
 - `.cursor/environment.json` — Cloud Agent install; no `start` command
+- `.cursor/settings.json` — repo-level Cursor plugin enablement (see marketplace plugins)
+
+## Agent review and quality
+
+Before marking a pull request **ready for review**, run a thorough **correctness and security** pass on the full diff (not only the latest commit). Prove that the change works end-to-end with the repo verify commands below; fix root causes instead of papering over symptoms; prefer **subtraction** (smaller surface, less duplication) when it does not break behavior. Write and run tests that assert **observable behavior**, not implementation details.
+
+When you change **`ambient_cli`** or other command-line entry points, follow the **CLI for Agents** plugin skill (`cli-for-agent`): predictable flags, actionable errors, `--help` with examples, safe dry-run or check modes where applicable, and output that is easy to pipe or grep.
+
+Optional deeper review workflows: **Thermos** (branch-wide audit) and **Cursor Team Kit** (CI, verification, and shipping checklists) when enabled in `.cursor/settings.json`.
 
 ## Cloud Agent (One Foreman)
 

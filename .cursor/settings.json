@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "thermos": {
+      "enabled": true
+    },
+    "cursor-team-kit": {
+      "enabled": true
+    },
+    "cli-for-agent": {
+      "enabled": true
+    }
+  }
+}
