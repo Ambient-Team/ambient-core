@@ -32,6 +32,11 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
         [sys.executable, str(ROOT / "scripts" / "check_golden_pii_fixture_refs.py")],
     ),
     (
+        "sensitive-data-literals",
+        [sys.executable, str(ROOT / "scripts" / "check_sensitive_data_literals.py")],
+    ),
+    ("doc-links", [sys.executable, str(ROOT / "scripts" / "check_doc_links.py")]),
+    (
         "pack-reference-docs",
         [sys.executable, str(ROOT / "scripts" / "generate_pack_reference_docs.py"), "--check"],
     ),

@@ -56,7 +56,7 @@ Steps (fail fast, in order):
 8. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
 9. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.
 
-**`build-test`** also runs [`check_markdown_prose.py`](../scripts/check_markdown_prose.py) (pipe tables + no public Drive/Docs URLs) and [`check_doc_links.py`](../scripts/check_doc_links.py) (relative link targets must exist).
+**`quality-static`** runs [`check_doc_links.py`](../scripts/check_doc_links.py) (relative link targets must exist) and [`check_sensitive_data_literals.py`](../scripts/check_sensitive_data_literals.py) (emails, phones, personal paths outside `tests/` / `catalog/`). **`build-test`** also runs [`check_markdown_prose.py`](../scripts/check_markdown_prose.py) (pipe tables + no public Drive/Docs URLs) and repeats doc links on the heavy path.
 
 ### `build-test` (required check name)
 

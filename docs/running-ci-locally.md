@@ -51,6 +51,8 @@ pip install -e ".[dev]"
 python scripts/check_quality_static.py
 ```
 
+`check_quality_static.py` includes relative doc link checks (`check_doc_links.py`) and a sensitive-literal scan (emails, phones, personal paths) outside `tests/` and `catalog/`.
+
 ## Coverage gate (lib ≥ 90% lines, ≥ 95% branches)
 
 ```bash
