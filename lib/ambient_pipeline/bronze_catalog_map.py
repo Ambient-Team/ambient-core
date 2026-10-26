@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 from dataclasses import dataclass
+from collections.abc import Callable
 from typing import Any
 
 from pyspark.sql import DataFrame
@@ -94,7 +95,7 @@ def resolve_mapping_spec(
     source_id: str,
     gcs_path: str,
     catalog_manifest_version: str,
-    firestore_fetcher: Any | None = None,
+    firestore_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
 ) -> MappingSpec:
     mapping = parse_mapping_json(mapping_json)
     resolved_source_id = source_id.strip() or (
@@ -286,7 +287,7 @@ def bronze_to_tenant_metrics(
     ingestion_status: str = "success",
     ingestion_status_reason: str | None = None,
     default_type: str = "Operational",
-    firestore_fetcher: Any | None = None,
+    firestore_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
     spec: MappingSpec | None = None,
 ) -> DataFrame:
     """Map Bronze upload columns → catalog shape → unpivot → lineage stamp (Silver-ready).

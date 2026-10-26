@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Protocol
 
 
 def find_repo_root(start: Path | None = None) -> Path | None:
@@ -43,7 +43,17 @@ def ensure_pipeline_on_path(start: Path | None = None) -> Path | None:
     return root
 
 
-def apply_spark_tuning(spark: Any, extra: tuple[tuple[str, str], ...] = ()) -> None:
+class _SparkConf(Protocol):
+    def set(self, key: str, value: str) -> None: ...
+
+
+class _SparkSession(Protocol):
+    conf: _SparkConf
+
+
+def apply_spark_tuning(
+    spark: _SparkSession, extra: tuple[tuple[str, str], ...] = ()
+) -> None:
     """Set AQE / common Spark SQL knobs when the runtime allows."""
     defaults = (
         ("spark.sql.adaptive.enabled", "true"),

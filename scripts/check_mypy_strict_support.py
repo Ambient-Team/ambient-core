@@ -26,6 +26,16 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
 STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_check_quality_static.py",
     "tests/test_secrets_scan_fixtures.py",
+    # Group 1 — validate / CLI / policy smoke tests
+    "tests/test_validate_contract_main.py",
+    "tests/test_validate_contract_main_errors.py",
+    "tests/test_validate_contract_errors.py",
+    "tests/test_validate_contracts_cli.py",
+    "tests/test_ci_policy.py",
+    "tests/test_contract_validate_integration.py",
+    "tests/test_appsec_remediations.py",
+    "tests/test_cli_golden.py",
+    "tests/test_cli_ux.py",
 )
 
 

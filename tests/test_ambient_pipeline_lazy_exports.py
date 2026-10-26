@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 import ambient_pipeline as ap
 
 
@@ -16,9 +18,5 @@ def test_lazy_export_mapping_spec() -> None:
 
 
 def test_lazy_unknown_attribute_raises() -> None:
-    try:
-        _ = ap.NotARealExportName  # type: ignore[attr-defined]
-    except AttributeError as exc:
-        assert "NotARealExportName" in str(exc)
-    else:
-        raise AssertionError("expected AttributeError")
+    with pytest.raises(AttributeError, match="NotARealExportName"):
+        getattr(ap, "NotARealExportName")
