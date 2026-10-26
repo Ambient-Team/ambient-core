@@ -104,6 +104,24 @@ def test_find_platform_root_drive_iterdir_oserror(
     assert find_platform_root() == marker.resolve()
 
 
+def test_find_platform_root_module_at_fs_root_skips_parent_candidate(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """When __file__ has only one parent (e.g. /colab_bootstrap.py), skip parents[1] append."""
+    platform = tmp_path / "ambient-core"
+    _fake_platform_root(platform)
+    monkeypatch.setattr(
+        "ambient_pipeline.colab_bootstrap.__file__",
+        "/colab_bootstrap.py",
+    )
+    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES", ())
+    monkeypatch.setattr(
+        "ambient_pipeline.colab_bootstrap.Path.cwd",
+        lambda: platform,
+    )
+    assert find_platform_root() == platform.resolve()
+
+
 def test_find_platform_root_not_found(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     isolated = tmp_path / "isolated_module" / "colab_bootstrap.py"
     isolated.parent.mkdir(parents=True)

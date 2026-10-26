@@ -67,7 +67,10 @@ include = [
 ]
 
 [tool.setuptools.package-data]
-ambient_contracts = ["bundled/*.yaml"]
+ambient_contracts = ["bundled/*.yaml", "py.typed"]
+ambient_cli = ["py.typed"]
+ambient_calc = ["py.typed"]
+ambient_pipeline = ["py.typed"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

@@ -1,4 +1,4 @@
-"""Resolve ambient-core / Drive demo root on Google Colab or a local checkout."""
+"""Resolve ambient-core checkout root on Google Colab or a local workspace."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 FOLDER_MARKERS = (
-    "Ambient-Systems-Platform",  # personal Drive SSOT folder name
+    "Ambient-Systems-Platform",  # legacy Colab folder name
     "ambient-core",
 )
 DRIVE_CANDIDATES = (
