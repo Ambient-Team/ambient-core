@@ -120,7 +120,13 @@ schema = {
 errors = validate_tool_schema_document(schema, {"org_id": "tenant-a"})
 ```
 
-Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`** (non-empty when present), **`const`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), **`allOf`**, **`anyOf`** (at least one branch), **`oneOf`** (exactly one branch), and **`not`** (value must not satisfy the sub-schema). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
+Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`** (non-empty when present), **`const`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), **`allOf`**, **`anyOf`** (at least one branch), **`oneOf`** (exactly one branch), and **`not`** (value must not satisfy the sub-schema).
+
+**Local `$ref` only** — same-document pointers under **`#/definitions/...`** or **`#/$defs/...`** (cycle detection; no remote or file URLs). Use `validate_tool_schema_document` so the root document includes `definitions` / `$defs`.
+
+**`format` (strings)** — `date` (`YYYY-MM-DD`), `date-time` (ISO-8601 subset with `Z` or offset), `email` (simple `local@domain` check), `uri` (scheme plus host or path). Other format names are rejected.
+
+Remote `$ref`, arbitrary JSON Pointer paths outside `definitions` / `$defs`, and hosted catalog HTTP remain out of scope ([integrator-roadmap.md](integrator-roadmap.md)).
 
 ## Example script
 

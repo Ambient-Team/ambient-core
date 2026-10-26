@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Schema `allOf` and `const`** — additional JSON-Schema-style keywords in `ambient_cli.tool_schema`.
 - **Schema `anyOf` and `not`** — combinator keywords plus non-empty `enum` guard in `ambient_cli.tool_schema`.
 - **Plan runner results and wiring** — `IntegratorPlanStepResult`, `IntegratorPlanExecutionError`, `stop_on_error`, `merge_from_step`, `arg_from_prior`, and `resolve_step_arguments` in `ambient_cli.integrator_plan_runner`.
+- **Local `$ref` and string formats** — same-document `#/definitions` / `#/$defs` resolution with cycle detection; `format` validators `date`, `date-time`, `email`, and `uri` in `ambient_cli.tool_schema`.
 
 ### Changed
 

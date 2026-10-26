@@ -127,6 +127,64 @@ def test_validate_tool_args_one_of_zero_or_many_matches() -> None:
     assert errors_both == []
 
 
+def test_validate_tool_schema_document_local_ref_definitions() -> None:
+    schema: dict[str, Any] = {
+        "definitions": {"OrgId": {"type": "string", "minLength": 2}},
+        "properties": {"org_id": {"$ref": "#/definitions/OrgId"}},
+        "required": ["org_id"],
+    }
+    assert validate_tool_schema_document(schema, {"org_id": "acme"}) == []
+    errors = validate_tool_schema_document(schema, {"org_id": "a"})
+    assert any("minLength" in err for err in errors)
+
+
+def test_validate_tool_schema_document_local_ref_dollar_defs() -> None:
+    schema: dict[str, Any] = {
+        "$defs": {"Email": {"type": "string", "format": "email"}},
+        "properties": {"contact": {"$ref": "#/$defs/Email"}},
+    }
+    assert validate_tool_schema_document(schema, {"contact": "ops@example.com"}) == []
+    errors = validate_tool_schema_document(schema, {"contact": "not-an-email"})
+    assert any("email" in err for err in errors)
+
+
+def test_validate_tool_schema_document_rejects_external_ref() -> None:
+    schema: dict[str, Any] = {
+        "properties": {"x": {"$ref": "https://example.com/schema.json#/Foo"}},
+    }
+    errors = validate_tool_schema_document(schema, {"x": 1})
+    assert any("external" in err for err in errors)
+
+
+def test_validate_tool_schema_document_detects_cyclic_ref() -> None:
+    schema: dict[str, Any] = {
+        "definitions": {
+            "A": {"$ref": "#/definitions/B"},
+            "B": {"$ref": "#/definitions/A"},
+        },
+        "properties": {"value": {"$ref": "#/definitions/A"}},
+    }
+    errors = validate_tool_schema_document(schema, {"value": "x"})
+    assert any("cyclic" in err for err in errors)
+
+
+def test_validate_tool_args_format_date_and_date_time() -> None:
+    props: dict[str, dict[str, Any]] = {
+        "day": {"type": "string", "format": "date"},
+        "ts": {"type": "string", "format": "date-time"},
+    }
+    assert validate_tool_args(props, [], {"day": "2026-12-18", "ts": "2026-12-18T12:00:00Z"}) == []
+    errors = validate_tool_args(props, [], {"day": "18-12-2026"})
+    assert any("date" in err for err in errors)
+
+
+def test_validate_tool_args_format_uri() -> None:
+    props = {"url": {"type": "string", "format": "uri"}}
+    assert validate_tool_args(props, [], {"url": "https://ambient.example/path"}) == []
+    errors = validate_tool_args(props, [], {"url": "not a uri"})
+    assert any("uri" in err for err in errors)
+
+
 def test_validate_tool_args_pattern_on_string() -> None:
     props = {"org_id": {"type": "string", "pattern": r"[a-z]+"}}
     assert validate_tool_args(props, [], {"org_id": "acme"}) == []

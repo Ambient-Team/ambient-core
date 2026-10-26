@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Any
+from urllib.parse import urlparse
 
 _CONSTRAINT_KEYS = (
     "enum",
@@ -15,9 +17,16 @@ _CONSTRAINT_KEYS = (
     "pattern",
 )
 
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+_DATETIME_RE = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+)
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+_SUPPORTED_FORMATS = frozenset({"date", "date-time", "email", "uri"})
+
 
 def _spec_has_constraints(spec: dict[str, Any]) -> bool:
-    return any(key in spec for key in _CONSTRAINT_KEYS)
+    return any(key in spec for key in _CONSTRAINT_KEYS) or "format" in spec
 
 
 _SIMPLE_TYPES: dict[str, Any] = {
@@ -30,18 +39,84 @@ _SIMPLE_TYPES: dict[str, Any] = {
 }
 
 
-def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
+@dataclass(frozen=True)
+class _SchemaContext:
+    root: dict[str, Any]
+    ref_stack: frozenset[str]
+
+
+def _decode_json_pointer_token(token: str) -> str:
+    return token.replace("~1", "/").replace("~0", "~")
+
+
+def _resolve_local_ref(root: dict[str, Any], ref: str) -> dict[str, Any] | None:
+    """Resolve ``#/definitions/...`` or ``#/$defs/...`` within ``root``."""
+    if not ref.startswith("#/"):
+        return None
+    parts = ref[2:].split("/")
+    if not parts or parts[0] not in ("definitions", "$defs"):
+        return None
+    node: Any = root
+    for part in parts:
+        key = _decode_json_pointer_token(part)
+        if not isinstance(node, dict):
+            return None
+        node = node.get(key)
+    if isinstance(node, dict):
+        return node
+    return None
+
+
+def _validate_format(fmt: str, value: str, path: str) -> list[str]:
+    if fmt not in _SUPPORTED_FORMATS:
+        return [f"{path} unsupported format {fmt!r}"]
+    if fmt == "date":
+        if _DATE_RE.fullmatch(value) is None:
+            return [f"{path} must be format date (YYYY-MM-DD)"]
+        return []
+    if fmt == "date-time":
+        if _DATETIME_RE.fullmatch(value) is None:
+            return [f"{path} must be format date-time (ISO-8601 subset)"]
+        return []
+    if fmt == "email":
+        if _EMAIL_RE.fullmatch(value) is None:
+            return [f"{path} must be format email"]
+        return []
+    parsed = urlparse(value)
+    if not parsed.scheme or not (parsed.netloc or parsed.path):
+        return [f"{path} must be format uri"]
+    return []
+
+
+def _validate_value(
+    spec: dict[str, Any],
+    value: Any,
+    path: str,
+    ctx: _SchemaContext,
+) -> list[str]:
+    ref = spec.get("$ref")
+    if isinstance(ref, str):
+        if not ref.startswith("#/"):
+            return [f"{path} external or unsupported $ref {ref!r} (local #/definitions or #/$defs only)"]
+        if ref in ctx.ref_stack:
+            return [f"{path} cyclic $ref {ref!r}"]
+        target = _resolve_local_ref(ctx.root, ref)
+        if target is None:
+            return [f"{path} unresolved $ref {ref!r}"]
+        nested_ctx = _SchemaContext(root=ctx.root, ref_stack=ctx.ref_stack | {ref})
+        return _validate_value(target, value, path, nested_ctx)
+
     type_name = str(spec.get("type") or "").strip()
     not_spec = spec.get("not")
     if isinstance(not_spec, dict):
-        if not _validate_value(not_spec, value, path):
+        if not _validate_value(not_spec, value, path, ctx):
             return [f"{path} must not satisfy not schema"]
     all_of = spec.get("allOf")
     if isinstance(all_of, list) and all_of:
         merged: list[str] = []
         for candidate in all_of:
             if isinstance(candidate, dict):
-                merged.extend(_validate_value(candidate, value, path))
+                merged.extend(_validate_value(candidate, value, path, ctx))
         if merged:
             return merged
     any_of = spec.get("anyOf")
@@ -49,7 +124,7 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
         matches = sum(
             1
             for candidate in any_of
-            if isinstance(candidate, dict) and not _validate_value(candidate, value, path)
+            if isinstance(candidate, dict) and not _validate_value(candidate, value, path, ctx)
         )
         if matches < 1:
             return [f"{path} must match at least one anyOf schema (matched {matches})"]
@@ -59,7 +134,7 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
     if isinstance(one_of, list) and one_of:
         matches = 0
         for candidate in one_of:
-            if isinstance(candidate, dict) and not _validate_value(candidate, value, path):
+            if isinstance(candidate, dict) and not _validate_value(candidate, value, path, ctx):
                 matches += 1
         if matches != 1:
             return [f"{path} must match exactly one oneOf schema (matched {matches})"]
@@ -85,6 +160,8 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
             [str(k) for k in nested_required],
             value,
             path_prefix=path,
+            schema_root=ctx.root,
+            ref_stack=ctx.ref_stack,
         )
     if type_name == "array":
         if not isinstance(value, list):
@@ -94,7 +171,7 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
             return []
         errors: list[str] = []
         for index, item in enumerate(value):
-            errors.extend(_validate_value(item_spec, item, f"{path}[{index}]"))
+            errors.extend(_validate_value(item_spec, item, f"{path}[{index}]", ctx))
         return errors
     expected = _SIMPLE_TYPES.get(type_name)
     if expected is None:
@@ -115,6 +192,9 @@ def _validate_constraints(spec: dict[str, Any], value: Any, path: str) -> list[s
         elif value not in enum:
             errors.append(f"{path} must be one of {enum!r}")
     if isinstance(value, str):
+        fmt = spec.get("format")
+        if isinstance(fmt, str) and fmt:
+            errors.extend(_validate_format(fmt, value, path))
         min_len = spec.get("minLength")
         max_len = spec.get("maxLength")
         if isinstance(min_len, int) and len(value) < min_len:
@@ -141,6 +221,8 @@ def validate_tool_args(
     args: dict[str, Any],
     *,
     path_prefix: str = "",
+    schema_root: dict[str, Any] | None = None,
+    ref_stack: frozenset[str] | None = None,
 ) -> list[str]:
     """Validate ``args`` against a JSON-Schema-style subset (types, required, object, array).
 
@@ -149,6 +231,8 @@ def validate_tool_args(
         required: Required argument names.
         args: Caller-supplied arguments.
         path_prefix: Prefix for nested error messages.
+        schema_root: Document root for local ``#/definitions`` / ``#/$defs`` ``$ref`` (optional).
+        ref_stack: Active ``$ref`` pointers for cycle detection (internal).
 
     Returns:
         Human-readable error strings; empty when valid.
@@ -160,6 +244,8 @@ def validate_tool_args(
         >>> validate_tool_args({"name": {"type": "string"}}, ["name"], {"name": "x"})
         []
     """
+    root = schema_root if schema_root is not None else {"properties": properties}
+    ctx = _SchemaContext(root=root, ref_stack=ref_stack or frozenset())
     errors: list[str] = []
     req = required or []
     for key in req:
@@ -175,15 +261,17 @@ def validate_tool_args(
         if not isinstance(spec, dict):
             continue
         path = f"{path_prefix}.{key}" if path_prefix else key
-        errors.extend(_validate_value(spec, value, path))
+        errors.extend(_validate_value(spec, value, path, ctx))
     return errors
 
 
 def validate_tool_schema_document(schema: dict[str, Any], args: dict[str, Any]) -> list[str]:
     """Validate ``args`` against a top-level tool schema document.
 
+    Local ``$ref`` targets must live under ``definitions`` or ``$defs`` in the same document.
+
     Args:
-        schema: Object with optional ``properties`` and ``required`` keys.
+        schema: Object with optional ``properties``, ``required``, ``definitions``, ``$defs``.
         args: Caller arguments.
 
     Returns:
@@ -202,4 +290,9 @@ def validate_tool_schema_document(schema: dict[str, Any], args: dict[str, Any]) 
     required = schema.get("required")
     if not isinstance(required, list):
         required = []
-    return validate_tool_args(props, [str(k) for k in required], args)
+    return validate_tool_args(
+        props,
+        [str(k) for k in required],
+        args,
+        schema_root=schema,
+    )
