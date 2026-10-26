@@ -49,7 +49,7 @@ Steps (fail fast, in order):
 1. **ruff** — [`check_ruff.py`](../scripts/check_ruff.py): `F,E9,E7` on `lib/`, `scripts/`, `tests/`.
 2. **mypy** — [`check_mypy.py`](../scripts/check_mypy.py): project config on `lib/` and `scripts/` (`--explicit-package-bases`; one-off `migrate_catalog_layout_027.py` excluded).
 3. **mypy-strict** — [`check_mypy_strict.py`](../scripts/check_mypy_strict.py): `--strict` on every `lib/` module (34 files, SSOT list in that script).
-4. **mypy-strict-support** — [`check_mypy_strict_support.py`](../scripts/check_mypy_strict_support.py): `--strict` on quality-gate `scripts/` and selected `tests/` (incremental SSOT).
+4. **mypy-strict-support** — [`check_mypy_strict_support.py`](../scripts/check_mypy_strict_support.py): `--strict` on quality-gate `scripts/` and selected `tests/` (incremental SSOT; count grows with the quality PR).
 5. **dead-code** — [`check_dead_code.py`](../scripts/check_dead_code.py): ruff `F401,F841` unused imports/variables on `lib/`, `scripts/`, `tests/`.
 6. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
 7. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.

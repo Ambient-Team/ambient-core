@@ -21,6 +21,20 @@ export const heavyQualityScripts = [
   'scripts/check_coverage.py',
 ];
 
+/** Catalog / contract gates invoked from build-test when RUN_HEAVY (SSOT). */
+export const heavyCatalogScripts = [
+  'scripts/harden_catalog_data_options.py',
+  'scripts/generate_reference_catalog.py',
+  'scripts/check_crosswalk.py',
+  'scripts/check_catalog_hygiene.py',
+  'scripts/check_naming.py',
+  'scripts/check_contract_schema.py',
+  'scripts/check_formulas.py',
+  'scripts/check_metric_inputs.py',
+  'scripts/check_phi.py',
+  'scripts/check_markdown_prose.py',
+];
+
 /** actionlint release pinned in ci-policy job (exported for tests and docs). */
 export const actionlintVersion = '1.7.7';
 /** Git commit for actionlint tag v1.7.7 (source pin). */
@@ -147,6 +161,11 @@ function checkCiWorkflow(text) {
     fail('ci.yml: must define a "quality-static" job (draft-safe lint/types)');
   }
   for (const script of heavyQualityScripts) {
+    if (!text.includes(script)) {
+      fail(`ci.yml: build-test must run ${script}`);
+    }
+  }
+  for (const script of heavyCatalogScripts) {
     if (!text.includes(script)) {
       fail(`ci.yml: build-test must run ${script}`);
     }

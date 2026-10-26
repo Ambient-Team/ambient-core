@@ -30,6 +30,9 @@ python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
 
+node scripts/ci-policy.mjs
+node --test scripts/ci-policy.test.mjs
+
 python scripts/check_quality_static.py
 AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
 

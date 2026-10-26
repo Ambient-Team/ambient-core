@@ -221,6 +221,75 @@ def test_colab_bootstrap_parent_candidate_skips_lib_grandparent(
     assert find_platform_root() == platform.resolve()
 
 
+def test_colab_smoke_skips_required_check_when_no_required_columns(
+    tmp_path: Path,
+) -> None:
+    contracts = tmp_path / "contracts"
+    contracts.mkdir()
+    contract = """\
+product:
+  name: Optional-only smoke
+  version: 1
+schema:
+  tables:
+    - id: marketing_spend
+      table: raw.marketing_spend
+      file: Allmanufacturingds-marketing-spend.csv
+      columns:
+        - { name: date, type: string, required: false }
+        - { name: spend, type: double, required: false }
+"""
+    (contracts / "manufacturing-demo-raw-v1.yaml").write_text(
+        contract, encoding="utf-8"
+    )
+    raw = tmp_path / "data" / "raw"
+    raw.mkdir(parents=True)
+    (tmp_path / "data" / "processed").mkdir()
+    (tmp_path / "ambient_pipeline").mkdir()
+    raw.joinpath("Allmanufacturingds-marketing-spend.csv").write_text(
+        "date,spend\n2024-01-01,1.0\n",
+        encoding="utf-8",
+    )
+    result = run_colab_smoke(tmp_path, org_id="org", run_id="run-no-required")
+    assert result.bronze_tables.get("marketing_spend") == 1
+
+
+def test_colab_smoke_inventory_without_value_column_skips_sum_kpi(
+    tmp_path: Path,
+) -> None:
+    contracts = tmp_path / "contracts"
+    contracts.mkdir()
+    contract = """\
+product:
+  name: Inventory optional value
+  version: 1
+schema:
+  tables:
+    - id: inventory_records
+      table: raw.inventory_records
+      file: Allmanufacturingds-inventory-records.csv
+      columns:
+        - { name: date, type: string, required: true }
+        - { name: sku, type: string, required: true }
+        - { name: quantity_on_hand, type: double, required: false }
+        - { name: inventory_value, type: double, required: false }
+"""
+    (contracts / "manufacturing-demo-raw-v1.yaml").write_text(
+        contract, encoding="utf-8"
+    )
+    raw = tmp_path / "data" / "raw"
+    raw.mkdir(parents=True)
+    (tmp_path / "data" / "processed").mkdir()
+    (tmp_path / "ambient_pipeline").mkdir()
+    raw.joinpath("Allmanufacturingds-inventory-records.csv").write_text(
+        "date,sku,quantity_on_hand\n2024-01-01,A1,2\n",
+        encoding="utf-8",
+    )
+    result = run_colab_smoke(tmp_path, org_id="org", run_id="run-inv-optional-value")
+    assert result.gold_kpis.get("inventory_row_count") == 1
+    assert "inventory_value_sum" not in result.gold_kpis
+
+
 def test_colab_smoke_optional_kpi_branches(tmp_path: Path) -> None:
     contracts = tmp_path / "contracts"
     contracts.mkdir()
@@ -285,6 +354,29 @@ def test_perf_collect_spark_metrics_without_accumulator_updates(
     status = MagicMock(return_value=tracker)
     monkeypatch.setattr(recorder.spark.sparkContext, "statusTracker", status)
     metrics = recorder._collect_spark_metrics()  # noqa: SLF001
+    assert metrics["spill_bytes"] == 0
+
+
+def test_perf_collect_spark_metrics_ignores_unrelated_accumulators(
+    spark: SparkSession, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    recorder = PipelinePerfRecorder(spark)
+
+    class Metric:
+        def __init__(self, name: str, value: int) -> None:
+            self.name = name
+            self.value = value
+
+    class Stage:
+        def accumulatorUpdates(self) -> list[Metric]:
+            return [Metric("executor runtime", 99)]
+
+    tracker = MagicMock()
+    tracker.getStageInfos.return_value = [Stage()]
+    status = MagicMock(return_value=tracker)
+    monkeypatch.setattr(recorder.spark.sparkContext, "statusTracker", status)
+    metrics = recorder._collect_spark_metrics()  # noqa: SLF001
+    assert metrics["shuffle_read_bytes"] == 0
     assert metrics["spill_bytes"] == 0
 
 
@@ -368,6 +460,28 @@ def test_run_local_pipeline_without_silver_cache(
     )
     out = run_local_pipeline(spark, str(metrics), cfg)
     assert out["stages"]["gold"]["output_rows"] >= 1
+
+
+def test_try_dbutils_secret_falls_back_when_pyspark_dbutils_raises(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    mock_dbutils = MagicMock(
+        secrets=MagicMock(get=lambda **_kw: "notebook-dbutils")
+    )
+    monkeypatch.setitem(secrets_module.__dict__, "dbutils", mock_dbutils)
+    monkeypatch.setattr(
+        "pyspark.sql.SparkSession.getActiveSession",
+        lambda: object(),
+    )
+
+    class BrokenDBUtils:
+        def __init__(self, _spark: object) -> None:
+            raise RuntimeError("dbutils unavailable")
+
+    fake_dbutils_mod = MagicMock()
+    fake_dbutils_mod.DBUtils = BrokenDBUtils
+    monkeypatch.setitem(sys.modules, "pyspark.dbutils", fake_dbutils_mod)
+    assert _try_dbutils_secret("scope", "key") == "notebook-dbutils"
 
 
 def test_try_dbutils_secret_skips_pyspark_when_no_active_session(

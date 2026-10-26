@@ -10,6 +10,7 @@ const POLICY = join(ROOT, 'scripts', 'ci-policy.mjs');
 const {
   pathsFilterPin,
   heavyQualityScripts,
+  heavyCatalogScripts,
   actionlintVersion,
   actionlintCommitSha,
   actionlintLinuxAmd64Sha256,
@@ -50,6 +51,13 @@ test('ci-policy script', async (t) => {
       assert.match(ci, new RegExp(script.replaceAll('/', '\\/')));
     }
     assert.match(ci, /quality-static:/);
+  });
+
+  await t.test('heavyCatalogScripts are wired in ci.yml', () => {
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    for (const script of heavyCatalogScripts) {
+      assert.match(ci, new RegExp(script.replaceAll('/', '\\/')));
+    }
   });
 
   await t.test('pathsFilterPin matches ci.yml pin', () => {
