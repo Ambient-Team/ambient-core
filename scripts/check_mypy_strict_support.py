@@ -91,6 +91,31 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_contract_loader_edges.py",
     "tests/test_crosswalk_catalog_root_errors.py",
     "tests/test_firestore_bridge_client.py",
+    # Batch 20 — group 2
+    "tests/test_join_guards_edges.py",
+    "tests/test_gold_contract_map_edges.py",
+    "tests/test_manifest_models_parse_branches.py",
+    "tests/test_manifest_models_tool_dicts.py",
+    "tests/test_secrets_dbutils_paths.py",
+    "tests/test_pii_and_secrets.py",
+    "tests/test_colab_bootstrap_unit.py",
+    "tests/test_catalog_manifest_resolve.py",
+    # Batch 20 — group 3
+    "tests/catalog_script_loader.py",
+    "tests/test_provenance_pii_edges.py",
+    "tests/test_catalog_load_performance.py",
+    "tests/test_manifest_models_validation_branches.py",
+    "tests/test_version_coherence.py",
+    "tests/test_catalog_yaml_schema.py",
+    "tests/test_pack_data_quality_rules.py",
+    "tests/test_catalog_merged_validate.py",
+    # Batch 20 — group 4 (remaining test_*.py)
+    "tests/test_crosswalk_loader.py",
+    "tests/test_catalog_validator_edge_cases.py",
+    "tests/test_gold_contract_map.py",
+    "tests/test_catalog_input_coverage.py",
+    "tests/test_bronze_catalog_map_branches.py",
+    "tests/test_ambient_calc.py",
 )
 
 

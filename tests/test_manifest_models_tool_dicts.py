@@ -15,7 +15,7 @@ from ambient_contracts.manifest_models import (
 )
 
 
-def _industry_codes() -> dict:
+def _industry_codes() -> dict[str, object]:
     return {
         "isic": {"revision": "Rev.4", "primary": "0000"},
         "naics": {"revision": "2022", "primary": "000000"},

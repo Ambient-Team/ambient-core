@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sys
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
@@ -78,7 +79,7 @@ def test_find_platform_root_drive_iterdir_oserror(
     _fake_platform_root(marker)
 
     class BadDrive(Path):
-        def iterdir(self):  # type: ignore[override]
+        def iterdir(self) -> Iterator[Path]:  # type: ignore[override]
             raise OSError("permission denied")
 
     monkeypatch.setattr(

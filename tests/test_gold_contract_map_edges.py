@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+import pytest
+
 from ambient_pipeline.gold_contract_map import contract_column_catalog_map, links_for_contract_file
 
 
-def test_contract_column_catalog_map_skips_blank_metric_keys(monkeypatch) -> None:
+def test_contract_column_catalog_map_skips_blank_metric_keys(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.setattr(
         "ambient_pipeline.gold_contract_map.load_crosswalk_links",
         lambda: [

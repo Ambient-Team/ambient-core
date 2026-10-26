@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+from pyspark.sql import SparkSession
 
 from ambient_pipeline.pii import PiiPseudonymizer, hmac_sha256_hex
 from ambient_pipeline.secrets import get_secret, get_secret_or_warn
@@ -57,7 +58,7 @@ def test_get_secret_or_warn_dev_fallback(monkeypatch: pytest.MonkeyPatch) -> Non
     assert value == "dev"
 
 
-def test_pii_apply_on_spark(spark) -> None:
+def test_pii_apply_on_spark(spark: SparkSession) -> None:
     df = spark.createDataFrame([("alice@example.com",)], ["user_email"])
     out = PiiPseudonymizer(salt="test-salt", transform_ts="2026-01-01T00:00:00Z").apply(df)
     assert "_gdpr_pii_scanned" in out.columns

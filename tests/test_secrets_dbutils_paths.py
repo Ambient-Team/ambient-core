@@ -24,7 +24,7 @@ def test_get_secret_uses_dbutils_when_env_empty(monkeypatch: pytest.MonkeyPatch)
             self.secrets = FakeSecrets()
 
     fake_module = types.ModuleType("pyspark.dbutils")
-    fake_module.DBUtils = FakeDBUtils
+    setattr(fake_module, "DBUtils", FakeDBUtils)
     monkeypatch.setitem(sys.modules, "pyspark.dbutils", fake_module)
     monkeypatch.setattr("pyspark.sql.SparkSession.getActiveSession", lambda: MagicMock())
 

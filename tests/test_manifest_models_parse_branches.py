@@ -7,7 +7,7 @@ import pytest
 from ambient_contracts.manifest_models import parse_catalog_manifest
 
 
-def _metric(**overrides: object) -> dict:
+def _metric(**overrides: object) -> dict[str, object]:
     base = {
         "catalogMetricKey": "k",
         "id": 1,
