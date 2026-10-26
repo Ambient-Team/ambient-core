@@ -13,6 +13,89 @@ from pyspark.sql.types import StringType
 
 PII_INDICATORS = ("uid", "email", "name", "phone", "address")
 
+_PSEUDO_HEX_LEN = 64
+
+
+def columns_matching_pii_indicators(
+    column_names: list[str] | tuple[str, ...],
+    *,
+    extra_sensitive: list[str] | None = None,
+) -> list[str]:
+    """Return column names that match ``PII_INDICATORS`` or an explicit sensitive list.
+
+    Args:
+        column_names: DataFrame column names to scan.
+        extra_sensitive: Additional lowercase names treated as sensitive.
+
+    Returns:
+        Matching column names (original casing).
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> columns_matching_pii_indicators(["customer_name", "metric_id"])
+    """
+    extra = {str(n).lower() for n in (extra_sensitive or [])}
+    matched: list[str] = []
+    for col_name in column_names:
+        col_lower = col_name.lower()
+        if col_lower in extra or any(indicator in col_lower for indicator in PII_INDICATORS):
+            matched.append(col_name)
+    return matched
+
+
+def value_looks_pseudonymized(value: object) -> bool:
+    """True when *value* is a 64-char lowercase hex digest (HMAC-SHA256 output).
+
+    Args:
+        value: Cell value to inspect.
+
+    Returns:
+        bool.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> value_looks_pseudonymized("a" * 64)
+    """
+    if value is None:
+        return True
+    text = str(value).strip()
+    if len(text) != _PSEUDO_HEX_LEN:
+        return False
+    return all(ch in "0123456789abcdef" for ch in text)
+
+
+def assert_pii_columns_pseudonymized(
+    df: DataFrame,
+    *,
+    extra_sensitive: list[str] | None = None,
+) -> None:
+    """Raise ``AssertionError`` if configured PII columns contain non-digest values.
+
+    Args:
+        df: Spark DataFrame after the pseudonymizer stage.
+        extra_sensitive: Additional sensitive column names.
+
+    Returns:
+        None.
+
+    Raises:
+        AssertionError: When a PII column still holds a raw-looking value.
+
+    Example:
+        >>> assert_pii_columns_pseudonymized(df)
+    """
+    pii_cols = columns_matching_pii_indicators(df.columns, extra_sensitive=extra_sensitive)
+    for col in pii_cols:
+        for row in df.select(col).where(F.col(col).isNotNull()).distinct().limit(20).collect():
+            if not value_looks_pseudonymized(row[0]):
+                raise AssertionError(
+                    f"PII column {col!r} contains non-pseudonymized value {row[0]!r}"
+                )
+
 
 def hmac_sha256_hex(salt: str, value: str | None) -> str:
     """Keyed HMAC-SHA256 hex digest (one-way pseudonymization).

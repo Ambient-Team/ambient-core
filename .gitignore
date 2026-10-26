@@ -193,5 +193,5 @@ repomix-output.md
 repomix-output-*.md
 
 # Local Delta scratch for scripts/refresh_pipeline_golden.py
-tests/fixtures/pipeline/_refresh_lake/tmpdbg/
+tests/fixtures/pipeline/_refresh_lake/
 tmpdbg2/

@@ -76,17 +76,41 @@ Ambient Core **does not** ship Spark jobs that write `finance-*-v1` or healthcar
 
 Details: [contracts/README.md](../contracts/README.md), [crosswalk.md](crosswalk.md).
 
+### Local Spark runner — medallion data flow
+
+The optional helper [`ambient_pipeline.runner`](../lib/ambient_pipeline/runner.py) (`run_local_pipeline` / `run_pipeline_from_config`) runs a simplified Bronze → Silver → Gold path for OSS scale tests. Structured JSON logs go to stdout via [`log_pipeline_event`](../lib/ambient_pipeline/pipeline_logging.py) at pipeline start and after each stage; stage timings and row counts are also written under `gold/pipeline_perf` (Delta) by `PipelinePerfRecorder`.
+
+```mermaid
+flowchart TB
+  csv[Bronze CSV ingest]
+  bronze[(Bronze Delta raw_metrics)]
+  transform[Silver transform dedupe then PII hash then validate]
+  silver[(Silver Delta metrics)]
+  gold[(Gold Delta org_kpis)]
+  logs[stdout JSON logs plus pipeline_perf Delta]
+  csv --> bronze
+  bronze --> transform
+  transform --> silver
+  silver --> gold
+  transform --> logs
+  gold --> logs
+```
+
+PII matching columns (for example `name`) are pseudonymized **after** Bronze read and **before** Silver write. Gold pivots Real Estate KPIs on stable **`metric_id`** when present so display names can be hashed in Silver without breaking the wide table.
+
 ### Local Spark runner — real-estate gold columns
 
-The optional helper [`ambient_pipeline.runner`](../lib/ambient_pipeline/runner.py) (`run_local_pipeline` / `run_pipeline_from_config`) writes a simplified **real-estate** Gold Delta table when Silver rows include `industry` and `name` and at least one row has `industry == "Real Estate"`. Spark `pivot` uses human-readable metric **display names**, but Delta Lake rejects column names with spaces, so the runner renames pivoted columns before write.
+The runner writes a simplified **real-estate** Gold Delta table when Silver rows include `industry` and (`metric_id` or `name`) and at least one row has `industry == "Real Estate"`. When `metric_id` is present, pivot keys are catalog ids (`re-noi`, `re-ads`, `re-mv`) mapped to Delta-safe Gold columns. Legacy rows without `metric_id` still pivot on human-readable **display names** (renamed because Delta rejects spaces).
 
-Display name (Silver `name` / pivot value) maps to Gold column (Delta-safe):
+`metric_id` (preferred pivot) or display name (`name`) maps to Gold column:
 
-- **Net Operating Income** → `noi`
-- **Annual Debt Service** → `annual_debt_service`
-- **Market Value** → `market_value`
+- **re-noi** / Net Operating Income → `noi`
+- **re-ads** / Annual Debt Service → `annual_debt_service`
+- **re-mv** / Market Value → `market_value`
 
-The runner also adds **`kpi_dscr`** (`noi / annual_debt_service` when debt service is positive). Constants live in `REAL_ESTATE_GOLD_PIVOT` in `runner.py`. When `name` / `industry` are absent, Gold falls back to a per-org **summary** table (`metric_rows`, optional `distinct_metrics`) under `gold/org_kpis/summary`.
+The runner also adds **`kpi_dscr`** (`noi / annual_debt_service` when debt service is positive). Constants live in `REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID` and `REAL_ESTATE_GOLD_PIVOT` in `runner.py`. When `name` / `industry` are absent, Gold falls back to a per-org **summary** table (`metric_rows`, optional `distinct_metrics`) under `gold/org_kpis/summary`.
+
+Integration tests: stubbed-PII golden ([`pipeline_spark_e2e.json`](../tests/fixtures/golden/pipeline_spark_e2e.json)) and real-pseudonymization golden ([`pipeline_spark_e2e_pii.json`](../tests/fixtures/golden/pipeline_spark_e2e_pii.json)) with test-only salt from [`golden_pii_salt.env`](../tests/fixtures/pipeline/golden_pii_salt.env). Refresh both with `python scripts/refresh_pipeline_golden.py`.
 
 Public re-exports from `ambient_pipeline`: `ContractLoader`, `BronzeProvenanceStamper`, `PiiPseudonymizer`, `SilverValidator`, plus `bronze_to_tenant_metrics`, `MappingSpec`, and mapping helpers ([`__init__.py`](../lib/ambient_pipeline/__init__.py)).
 

@@ -36,6 +36,13 @@ REAL_ESTATE_GOLD_PIVOT: tuple[tuple[str, str], ...] = (
     ("Market Value", "market_value"),
 )
 
+# Prefer ``metric_id`` for gold pivot so display ``name`` can be pseudonymized in Silver.
+REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID: tuple[tuple[str, str], ...] = (
+    ("re-noi", "noi"),
+    ("re-ads", "annual_debt_service"),
+    ("re-mv", "market_value"),
+)
+
 REFERENCE_BENCHMARKS = [
     ("Net Operating Income", "Real Estate", 0.0, None, "Currency"),
     ("Annual Debt Service", "Real Estate", 0.0, None, "Currency"),
@@ -78,6 +85,38 @@ def _sanitize_pivoted_columns(df: DataFrame, mapping: tuple[tuple[str, str], ...
             if candidate in out.columns:
                 out = out.withColumnRenamed(candidate, safe_name)
     return out
+
+
+def _rename_pivoted_metric_ids(
+    df: DataFrame, mapping: tuple[tuple[str, str], ...]
+) -> DataFrame:
+    """Rename pivoted ``metric_id`` keys to Delta-safe gold column names."""
+    out = df
+    for metric_id, safe_name in mapping:
+        if metric_id in out.columns:
+            out = out.withColumnRenamed(metric_id, safe_name)
+    return out
+
+
+def _pivot_real_estate_metrics(re_df: DataFrame, pivot_parts: int) -> DataFrame:
+    """Wide Real Estate metrics for Gold (``metric_id`` pivot when available)."""
+    if "metric_id" in re_df.columns:
+        pivot_ids = [metric_id for metric_id, _safe in REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID]
+        re_wide = (
+            re_df.repartition(pivot_parts, "_bronze_org_id")
+            .groupBy("_bronze_org_id")
+            .pivot("metric_id", cast(list[bool | float | int | str], pivot_ids))
+            .agg(F.first("value"))
+        )
+        return _rename_pivoted_metric_ids(re_wide, REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID)
+    pivot_metrics = [name for name, _safe in REAL_ESTATE_GOLD_PIVOT]
+    re_wide = (
+        re_df.repartition(pivot_parts, "_bronze_org_id")
+        .groupBy("_bronze_org_id")
+        .pivot("name", cast(list[bool | float | int | str], pivot_metrics))
+        .agg(F.first("value"))
+    )
+    return _sanitize_pivoted_columns(re_wide, REAL_ESTATE_GOLD_PIVOT)
 
 
 def _ref_schema() -> StructType:
@@ -218,16 +257,12 @@ def run_local_pipeline(
         silver_metrics = silver_metrics.cache()
 
     pivot_parts = config.shuffle_partitions if config.optimize else 1
-    if "industry" in silver_metrics.columns and "name" in silver_metrics.columns:
+    has_re_keys = "industry" in silver_metrics.columns and (
+        "metric_id" in silver_metrics.columns or "name" in silver_metrics.columns
+    )
+    if has_re_keys:
         re_df = silver_metrics.filter(F.col("industry") == "Real Estate")
-        pivot_metrics: list[str] = [name for name, _safe in REAL_ESTATE_GOLD_PIVOT]
-        re_wide = (
-            re_df.repartition(pivot_parts, "_bronze_org_id")
-            .groupBy("_bronze_org_id")
-            .pivot("name", cast(list[bool | float | int | str], pivot_metrics))
-            .agg(F.first("value"))
-        )
-        re_wide = _sanitize_pivoted_columns(re_wide, REAL_ESTATE_GOLD_PIVOT)
+        re_wide = _pivot_real_estate_metrics(re_df, pivot_parts)
         re_kpis = re_wide.withColumn(
             "kpi_dscr",
             F.when(

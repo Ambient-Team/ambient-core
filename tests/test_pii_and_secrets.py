@@ -5,7 +5,12 @@ from __future__ import annotations
 import pytest
 from pyspark.sql import SparkSession
 
-from ambient_pipeline.pii import PiiPseudonymizer, hmac_sha256_hex
+from ambient_pipeline.pii import (
+    PiiPseudonymizer,
+    columns_matching_pii_indicators,
+    hmac_sha256_hex,
+    value_looks_pseudonymized,
+)
 from ambient_pipeline.secrets import get_secret, get_secret_or_warn
 
 
@@ -64,3 +69,15 @@ def test_pii_apply_on_spark(spark: SparkSession) -> None:
     assert "_gdpr_pii_scanned" in out.columns
     row = out.collect()[0]
     assert row["user_email"] != "alice@example.com"
+
+
+def test_columns_matching_pii_indicators() -> None:
+    assert columns_matching_pii_indicators(["metric_id", "name", "value"]) == ["name"]
+    assert columns_matching_pii_indicators(["org_id"], extra_sensitive=["org_id"]) == ["org_id"]
+
+
+def test_value_looks_pseudonymized() -> None:
+    digest = hmac_sha256_hex("salt", "x")
+    assert value_looks_pseudonymized(digest)
+    assert not value_looks_pseudonymized("Net Operating Income")
+    assert value_looks_pseudonymized(None)

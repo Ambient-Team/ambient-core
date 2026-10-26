@@ -1,0 +1,23 @@
+{
+  "gold_real_estate": [
+    {
+      "_bronze_org_id": "org-golden",
+      "annual_debt_service": 80000.0,
+      "kpi_dscr": 1.5,
+      "market_value": 1000000.0,
+      "noi": 120000.0
+    }
+  ],
+  "run_id": "golden-pipeline-run",
+  "stages": {
+    "bronze": {
+      "output_rows": 3
+    },
+    "gold": {
+      "output_rows": 1
+    },
+    "silver": {
+      "output_rows": 3
+    }
+  }
+}

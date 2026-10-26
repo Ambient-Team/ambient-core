@@ -18,6 +18,23 @@ HEADER = """# Ambient Core Python packages (`lib/`)
 This file is **generated** from installed package docstrings and ``__all__`` exports.
 Do not edit by hand — run ``python scripts/generate_lib_readme.py`` (or ``--check`` in CI).
 
+### Local Spark pipeline data flow (`ambient_pipeline.runner`)
+
+Bronze CSV → Bronze Delta → Silver validation → **PII pseudonymization** → Silver Delta → Gold KPI pivot. Structured logs: stdout JSON (`log_pipeline_event`) and `gold/pipeline_perf` Delta timings. See [docs/pipeline.md](../docs/pipeline.md) for the full mermaid diagram and real-estate Gold column map.
+
+```mermaid
+flowchart LR
+  B[Bronze Delta]
+  S[Silver Delta]
+  G[Gold Delta]
+  P[PII hash]
+  L[logs]
+  B --> P --> S --> G
+  B --> L
+  S --> L
+  G --> L
+```
+
 """
 
 PACKAGES: tuple[tuple[str, tuple[str, ...]], ...] = (
