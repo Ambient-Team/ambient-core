@@ -19,6 +19,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -70,7 +71,7 @@ ALLOWED_SEGMENTS = {
 }
 
 
-def _load_yaml(path: Path) -> dict:
+def _load_yaml(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
     return data if isinstance(data, dict) else {}
@@ -78,7 +79,7 @@ def _load_yaml(path: Path) -> dict:
 
 def _check_entries(
     kind: str,
-    entries: dict | None,
+    entries: dict[str, Any] | None,
     pack: str,
     ids: dict[int, str],
     errors: list[str],

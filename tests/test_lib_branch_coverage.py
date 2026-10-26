@@ -185,6 +185,24 @@ def test_colab_bootstrap_drive_iterdir_oserror_falls_back(
     assert find_platform_root() == marker.resolve()
 
 
+def test_colab_bootstrap_lib_install_layout_adds_repo_root_candidate(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo = tmp_path / "ambient-core"
+    module_file = repo / "lib" / "ambient_pipeline" / "colab_bootstrap.py"
+    module_file.parent.mkdir(parents=True)
+    module_file.write_text("# stub\n", encoding="utf-8")
+    (repo / "ambient_pipeline").mkdir()
+    (repo / "data").mkdir()
+    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.__file__", str(module_file))
+    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES", ())
+    monkeypatch.setattr(
+        "ambient_pipeline.colab_bootstrap.Path.cwd",
+        lambda: tmp_path / "elsewhere",
+    )
+    assert find_platform_root() == repo.resolve()
+
+
 def test_colab_bootstrap_parent_candidate_skips_lib_grandparent(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -268,6 +286,28 @@ def test_perf_collect_spark_metrics_without_accumulator_updates(
     monkeypatch.setattr(recorder.spark.sparkContext, "statusTracker", status)
     metrics = recorder._collect_spark_metrics()  # noqa: SLF001
     assert metrics["spill_bytes"] == 0
+
+
+def test_perf_collect_spark_metrics_counts_shuffle_read(
+    spark: SparkSession, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    recorder = PipelinePerfRecorder(spark)
+
+    class Metric:
+        def __init__(self, name: str, value: int) -> None:
+            self.name = name
+            self.value = value
+
+    class Stage:
+        def accumulatorUpdates(self) -> list[Metric]:
+            return [Metric("Shuffle Read (Remote)", 11)]
+
+    tracker = MagicMock()
+    tracker.getStageInfos.return_value = [Stage()]
+    status = MagicMock(return_value=tracker)
+    monkeypatch.setattr(recorder.spark.sparkContext, "statusTracker", status)
+    metrics = recorder._collect_spark_metrics()  # noqa: SLF001
+    assert metrics["shuffle_read_bytes"] == 11
 
 
 def test_perf_collect_spark_metrics_counts_spill_accumulator(

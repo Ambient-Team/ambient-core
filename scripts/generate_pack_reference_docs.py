@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -16,7 +17,7 @@ PACKS_FILE = CATALOG / "packs.yaml"
 OUT_DIR = ROOT / "docs" / "catalog-packs"
 
 
-def _load(path: Path) -> dict:
+def _load(path: Path) -> dict[str, Any]:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 

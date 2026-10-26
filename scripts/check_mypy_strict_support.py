@@ -21,6 +21,10 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
     "scripts/check_ruff.py",
     "scripts/scan_secrets_patterns.py",
     "scripts/validate_contracts.py",
+    # Batch 22 — catalog CI gates used in build-test
+    "scripts/generate_pack_reference_docs.py",
+    "scripts/check_naming.py",
+    "scripts/check_formulas.py",
 )
 
 STRICT_SUPPORT_TESTS: tuple[str, ...] = (

@@ -4,6 +4,16 @@ Ambient Core ships as **semver git tags** (`vX.Y.Z`). Downstream repos (especial
 
 Only the repository owner merges release PRs and runs the cut workflow. CI does not merge for you.
 
+## Monthly release cadence (ambient-core)
+
+Starting **November 2026**, ambient-core targets a **monthly** release on the **second Friday** of each month (first scheduled release: **Fri 13 Nov 2026**).
+
+- **Freeze:** the **Monday** of that release week (for Nov 2026: **Mon 9 Nov**) — avoid merging risky or wide refactors after freeze; quality and release-prep PRs should be green before then.
+- **Cut:** owner runs **Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month.
+- **Consumers:** pin the new `vX.Y.Z` tag per [Downstream: pin a core release](#downstream-pin-a-core-release) once the GitHub Release artifacts are published.
+
+Patch releases between monthly tags are still allowed when needed; they follow the same cut workflow with a patch semver bump.
+
 ## Version source of truth
 
 - **Package version:** `ambient_contracts.__version__` in `lib/ambient_contracts/__init__.py` (exported via `pyproject.toml` dynamic metadata).
