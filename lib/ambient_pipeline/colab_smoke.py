@@ -45,6 +45,7 @@ class SmokeResult:
     notes: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
+        """To dict for SmokeResult.to_dict."""
         return {
             "run_id": self.run_id,
             "org_id": self.org_id,
@@ -85,14 +86,19 @@ def run_colab_smoke(
     org_id: str = "demo-org-allmanufacturingds",
     run_id: str | None = None,
 ) -> SmokeResult:
-    """
-    Execute Bronze → Silver → Gold against data/raw samples.
+    """Execute Bronze → Silver → Gold against data/raw samples.
 
-    Writes:
-      data/processed/bronze/<table>.csv
-      data/processed/silver/<table>.csv
-      data/processed/gold/demo_kpis.csv
-      data/processed/gold/run_summary.json
+    Args:
+        root: Path.
+
+    Returns:
+        SmokeResult.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> run_colab_smoke(...)
     """
     root = Path(root)
     run_id = run_id or f"colab-smoke-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"

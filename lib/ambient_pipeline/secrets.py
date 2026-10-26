@@ -39,8 +39,18 @@ def _try_dbutils_secret(scope: str, key: str) -> str | None:
 def get_secret(scope: str, key: str, *, env_prefix: str = "AMBIENT") -> str:
     """Retrieve a secret from the environment, or optionally Databricks Secret Scope.
 
-    Local / OSS: set ``AMBIENT_{KEY}`` or ``AMBIENT_{SCOPE}_{KEY}``.
-    Databricks (optional): ``dbutils.secrets.get(scope, key)`` when available.
+    Args:
+        scope: str.
+        key: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> get_secret(...)
     """
     env_value = _env_key(scope, key, env_prefix)
     if env_value:
@@ -65,8 +75,18 @@ def get_secret_or_warn(
 ) -> str:
     """Like get_secret but allows an explicit opt-in dev-only fallback with a warning.
 
-    Fail-closed by default: a fixed fallback is only used when
-    ``AMBIENT_ALLOW_DEV_SECRETS=1`` is set. Production must set real secrets.
+    Args:
+        scope: str.
+        key: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> get_secret_or_warn(...)
     """
     try:
         return get_secret(scope, key, env_prefix=env_prefix)

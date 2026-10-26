@@ -12,7 +12,20 @@ from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 
 
 def resolve_catalog_root(start: Path | None = None) -> Path:
-    """Find ``catalog/`` for pipeline helpers (delegates to ``resolve_catalog_root_flexible``)."""
+    """Find ``catalog/`` for pipeline helpers (delegates to ``resolve_catalog_root_flexible``).
+
+    Args:
+        start: Path | None.
+
+    Returns:
+        Path.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_catalog_root(...)
+    """
     return resolve_catalog_root_flexible(start)
 
 
@@ -24,7 +37,20 @@ def _read_manifest(catalog_root: Path) -> dict[str, Any]:
 
 
 def load_manifest_version(catalog_root: Path | None = None) -> str:
-    """Return manifest ``version`` as a string, or ``unknown`` when absent."""
+    """Return manifest ``version`` as a string, or ``unknown`` when absent.
+
+    Args:
+        catalog_root: Path | None.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> load_manifest_version(...)
+    """
     root = catalog_root or resolve_catalog_root()
     version = _read_manifest(root).get("version")
     return str(version) if version is not None else "unknown"
@@ -63,7 +89,21 @@ def load_data_option(
     catalog_option_key: str,
     catalog_root: Path | None = None,
 ) -> dict[str, Any] | None:
-    """Return one dataOptions entry by catalog key (e.g. HcCensus911CatalogOptionKey01)."""
+    """Return one dataOptions entry by catalog key (e.g. HcCensus911CatalogOptionKey01).
+
+    Args:
+        catalog_option_key: str.
+        catalog_root: Path | None.
+
+    Returns:
+        dict[str, Any] | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> load_data_option(...)
+    """
     if not catalog_option_key:
         return None
     root = catalog_root or resolve_catalog_root()
@@ -87,6 +127,21 @@ def load_metric_by_numeric_id(
     metric_id: int,
     catalog_root: Path | None = None,
 ) -> dict[str, Any] | None:
+    """Load metric by numeric id.
+
+    Args:
+        metric_id: int.
+        catalog_root: Path | None.
+
+    Returns:
+        dict[str, Any] | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> load_metric_by_numeric_id(...)
+    """
     root = catalog_root or resolve_catalog_root()
     industries_dir = root / "industries"
     for pack_dir in sorted(p for p in industries_dir.iterdir() if p.is_dir()):

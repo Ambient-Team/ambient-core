@@ -10,7 +10,20 @@ from ambient_contracts.paths import resolve_catalog_root
 
 
 def resolve_catalog_root_flexible(start: Path | None = None) -> Path:
-    """Find catalog/ directory (local checkout or submodule)."""
+    """Find catalog/ directory (local checkout or submodule).
+
+    Args:
+        start: Path | None.
+
+    Returns:
+        Path.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_catalog_root_flexible(...)
+    """
     if start and (start / "manifest.json").is_file():
         return start
     candidates: list[Path] = [
@@ -46,7 +59,20 @@ def _repo_roots() -> list[Path]:
 
 
 def resolve_manifest_path() -> Path:
-    """Locate ``catalog/manifest.json`` for the current checkout or submodule layout."""
+    """Locate ``catalog/manifest.json`` for the current checkout or submodule layout.
+
+    Args:
+        None.
+
+    Returns:
+        Path.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_manifest_path()
+    """
     for root in _repo_roots():
         candidate = root / "ambient-core" / "catalog" / "manifest.json"
         if candidate.is_file():
@@ -61,7 +87,20 @@ def resolve_manifest_path() -> Path:
 
 
 def load_manifest() -> CatalogManifest:
-    """Parse ``catalog/manifest.json`` into typed manifest models."""
+    """Parse ``catalog/manifest.json`` into typed manifest models.
+
+    Args:
+        None.
+
+    Returns:
+        CatalogManifest.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> load_manifest()
+    """
     path = resolve_manifest_path()
     with path.open("r", encoding="utf-8") as handle:
         doc = json.load(handle)

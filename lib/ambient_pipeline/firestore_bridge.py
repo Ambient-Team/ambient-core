@@ -45,7 +45,21 @@ def append_lineage_event(
     rows_written: int,
     gcs_path: str,
 ) -> None:
-    """Append server-side mapping lineage to dataSources history."""
+    """Append server-side mapping lineage to dataSources history.
+
+    Args:
+        org_id: str.
+        source_id: str.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> append_lineage_event(...)
+    """
     try:
         db = _firestore_client()
         db.collection("organizations").document(org_id).collection("dataSources").document(
@@ -65,6 +79,21 @@ def append_lineage_event(
 
 
 def fetch_data_source(org_id: str, source_id: str) -> dict[str, Any] | None:
+    """Fetch data source.
+
+    Args:
+        org_id: str.
+        source_id: str.
+
+    Returns:
+        dict[str, Any] | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> fetch_data_source(...)
+    """
     try:
         db = _firestore_client()
         snap = (

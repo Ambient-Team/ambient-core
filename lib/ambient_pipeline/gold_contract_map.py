@@ -13,7 +13,20 @@ def _contract_basename(contract_file: str) -> str:
 
 
 def links_for_contract_file(contract_file: str) -> list[dict[str, Any]]:
-    """Crosswalk rows whose ``contractFile`` matches the basename."""
+    """Crosswalk rows whose ``contractFile`` matches the basename.
+
+    Args:
+        contract_file: str.
+
+    Returns:
+        list[dict[str, Any]].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> links_for_contract_file(...)
+    """
     name = _contract_basename(contract_file)
     return [
         link
@@ -25,8 +38,17 @@ def links_for_contract_file(contract_file: str) -> list[dict[str, Any]]:
 def contract_column_catalog_map(contract_file: str) -> dict[str, str]:
     """Return ``{contract_column_name: catalogMetricKey}`` using crosswalk suffix match.
 
-    Matches when the last segment of ``catalogMetricKey`` equals the contract column
-    name (for example ``banking.depository.net_interest_margin`` → ``net_interest_margin``).
+    Args:
+        contract_file: str.
+
+    Returns:
+        dict[str, str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> contract_column_catalog_map(...)
     """
     basename = _contract_basename(contract_file)
     loader = ContractLoader()

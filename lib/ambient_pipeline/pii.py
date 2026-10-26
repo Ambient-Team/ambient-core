@@ -15,7 +15,21 @@ PII_INDICATORS = ("uid", "email", "name", "phone", "address")
 
 
 def hmac_sha256_hex(salt: str, value: str | None) -> str:
-    """Keyed HMAC-SHA256 hex digest (one-way pseudonymization)."""
+    """Keyed HMAC-SHA256 hex digest (one-way pseudonymization).
+
+    Args:
+        salt: str.
+        value: str | None.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> hmac_sha256_hex(...)
+    """
     raw = "" if value is None else str(value)
     return hmac.new(
         salt.encode("utf-8"),
@@ -25,7 +39,21 @@ def hmac_sha256_hex(salt: str, value: str | None) -> str:
 
 
 def pseudonymize_string(salt: str, value: str | None) -> str:
-    """Pseudonymize one string value (shared by Spark UDF and unit tests)."""
+    """Pseudonymize one string value (shared by Spark UDF and unit tests).
+
+    Args:
+        salt: str.
+        value: str | None.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> pseudonymize_string(...)
+    """
     return hmac_sha256_hex(salt, value)
 
 
@@ -53,12 +81,39 @@ class PiiPseudonymizer:
         return f"PiiPseudonymizer(salt=<redacted>, transform_ts={self.transform_ts!r})"
 
     def pseudonymize_column(self, col_ref: Column) -> Column:
-        """Return expression for one-way HMAC-SHA256 pseudonymization."""
+        """Return expression for one-way HMAC-SHA256 pseudonymization.
+
+        Args:
+            col_ref: Column.
+
+        Returns:
+            Column.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> pseudonymize_column(...)
+        """
         udf = F.udf(_SparkPiiUdf(self.salt), StringType())
         return udf(col_ref.cast("string"))
 
     def apply(self, df: DataFrame, sensitive_field_names: list[str] | None = None) -> DataFrame:
-        """Scan columns for PII indicators and pseudonymize matches."""
+        """Scan columns for PII indicators and pseudonymize matches.
+
+        Args:
+            df: DataFrame.
+            sensitive_field_names: list[str] | None.
+
+        Returns:
+            DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> apply(...)
+        """
         pseudonymized_cols: list[str] = []
         result = df
         extra = {str(n).lower() for n in (sensitive_field_names or [])}

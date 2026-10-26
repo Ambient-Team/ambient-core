@@ -17,7 +17,20 @@ def _require_safe_catalog(catalog: str) -> str:
 
 
 def bronze_raw_metrics_org_view_sql(catalog: str) -> str:
-    """Read-only view enforcing session org filter on bronze.raw_metrics."""
+    """Read-only view enforcing session org filter on bronze.raw_metrics.
+
+    Args:
+        catalog: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> bronze_raw_metrics_org_view_sql(...)
+    """
     catalog = _require_safe_catalog(catalog)
     return f"""
 CREATE OR REPLACE VIEW {catalog}.bronze.v_raw_metrics_org AS
@@ -28,7 +41,20 @@ WHERE _bronze_org_id = {catalog}.bronze.get_current_org_id()
 
 
 def silver_metrics_org_view_sql(catalog: str) -> str:
-    """Read-only view enforcing session org filter on silver.metrics."""
+    """Read-only view enforcing session org filter on silver.metrics.
+
+    Args:
+        catalog: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> silver_metrics_org_view_sql(...)
+    """
     catalog = _require_safe_catalog(catalog)
     return f"""
 CREATE OR REPLACE VIEW {catalog}.silver.v_metrics_org AS

@@ -18,6 +18,10 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
         [sys.executable, str(ROOT / "scripts" / "check_mypy_strict_support.py")],
     ),
     ("dead-code", [sys.executable, str(ROOT / "scripts" / "check_dead_code.py")]),
+    (
+        "public-api-docstrings",
+        [sys.executable, str(ROOT / "scripts" / "check_public_api_docstrings.py")],
+    ),
     ("secrets-scan", [sys.executable, str(ROOT / "scripts" / "scan_secrets_patterns.py")]),
     (
         "pack-reference-docs",

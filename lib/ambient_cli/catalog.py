@@ -8,7 +8,20 @@ from pathlib import Path
 
 
 def main() -> None:
-    """Run the reference catalog generator script in-process (``ambient-catalog-generate``)."""
+    """Run the reference catalog generator script in-process (``ambient-catalog-generate``).
+
+    Args:
+        None.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> main()
+    """
     script = Path(__file__).resolve().parents[2] / "scripts" / "generate_reference_catalog.py"
     sys.argv[0] = str(script)
     runpy.run_path(str(script), run_name="__main__")

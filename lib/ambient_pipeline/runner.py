@@ -94,7 +94,22 @@ def run_local_pipeline(
     bronze_csv_glob: str,
     config: PipelineRunConfig,
 ) -> dict[str, Any]:
-    """Execute simplified Bronze → Silver → Gold path for local OSS testing."""
+    """Execute simplified Bronze → Silver → Gold path for local OSS testing.
+
+    Args:
+        spark: SparkSession.
+        bronze_csv_glob: str.
+        config: PipelineRunConfig.
+
+    Returns:
+        dict[str, Any].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> run_local_pipeline(...)
+    """
     perf = PipelinePerfRecorder(
         spark,
         run_id=config.run_id,
@@ -245,7 +260,22 @@ def run_pipeline_from_config(
     config: PipelineRunConfig,
     spark: SparkSession | None = None,
 ) -> dict[str, Any]:
-    """Entry point: create Spark if needed, validate contract, run pipeline."""
+    """Entry point: create Spark if needed, validate contract, run pipeline.
+
+    Args:
+        bronze_csv_glob: str.
+        config: PipelineRunConfig.
+        spark: SparkSession | None.
+
+    Returns:
+        dict[str, Any].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> run_pipeline_from_config(...)
+    """
     owns_spark = spark is None
     if spark is None:
         spark = create_local_spark(shuffle_partitions=config.shuffle_partitions)

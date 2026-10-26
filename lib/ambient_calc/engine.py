@@ -13,7 +13,21 @@ class CalcError(Exception):
 
 
 def slug_of(metric: Mapping[str, Any], key: str | None = None) -> str:
-    """Stable slug for a metric: last dotted segment of its key, else its slug/name."""
+    """Stable slug for a metric: last dotted segment of its key, else its slug/name.
+
+    Args:
+        metric: Mapping[str, Any].
+        key: str | None.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> slug_of(...)
+    """
     if key and "." in key:
         return key.rsplit(".", 1)[-1].replace("-", "_")
     if key:
@@ -25,7 +39,20 @@ def slug_of(metric: Mapping[str, Any], key: str | None = None) -> str:
 
 
 def formula_names(expr: str) -> set[str]:
-    """Return the set of variable/identifier names referenced by an expression."""
+    """Return the set of variable/identifier names referenced by an expression.
+
+    Args:
+        expr: str.
+
+    Returns:
+        set[str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> formula_names(...)
+    """
     tree = _parse(expr)
     names: set[str] = set()
     for node in ast.walk(tree):
@@ -43,8 +70,21 @@ def _parse(expr: str) -> ast.AST:
 
 
 def safe_eval(expr: str, variables: Mapping[str, Any]) -> float | None:
-    """Evaluate an arithmetic expression over ``variables``. No attribute/loop/call except
-    whitelisted numeric funcs. Returns None on division by zero or a None operand."""
+    """Evaluate an arithmetic expression over ``variables``. No attribute/loop/call except.
+
+    Args:
+        expr: str.
+        variables: Mapping[str, Any].
+
+    Returns:
+        float | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> safe_eval(...)
+    """
     tree = _parse(expr)
     return cast(float | None, _eval(tree.body, variables))
 
@@ -106,7 +146,22 @@ def compute_metric(
     inputs: Mapping[str, Any],
     computed: Mapping[str, Any] | None = None,
 ) -> float | None:
-    """Compute one metric value from raw ``inputs`` and already-``computed`` metric slugs."""
+    """Compute one metric value from raw ``inputs`` and already-``computed`` metric slugs.
+
+    Args:
+        metric: Mapping[str, Any].
+        inputs: Mapping[str, Any].
+        computed: Mapping[str, Any] | None.
+
+    Returns:
+        float | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> compute_metric(...)
+    """
     calc = metric.get("calc")
     if not calc:
         raise CalcError("metric has no calc block (it is a measured input)")
@@ -132,8 +187,22 @@ def compute_all(
     inputs: Mapping[str, Any],
     keys: Mapping[int, str] | None = None,
 ) -> dict[str, float | None]:
-    """Compute all calculated metrics in dependency order. ``metrics`` items may carry an
-    explicit ``slug``; otherwise ``slug_of`` is used. Measured inputs (no calc) are skipped."""
+    """Compute all calculated metrics in dependency order. ``metrics`` items may carry an.
+
+    Args:
+        metrics: Iterable[Mapping[str, Any]].
+        inputs: Mapping[str, Any].
+        keys: Mapping[int, str] | None.
+
+    Returns:
+        dict[str, float | None].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> compute_all(...)
+    """
     by_slug: dict[str, Mapping[str, Any]] = {}
     for m in metrics:
         slug = (m.get("slug") or slug_of(m)).replace("-", "_")

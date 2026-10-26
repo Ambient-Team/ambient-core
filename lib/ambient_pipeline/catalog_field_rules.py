@@ -33,7 +33,20 @@ FIELD_COVERAGE_ENUMERATED = "enumerated"
 
 
 def infer_field_coverage(option: dict[str, Any], *, catalog_option_key: str = "") -> str:
-    """Whether measured inputs must appear as mappable columns (enumerated) or upload/document."""
+    """Whether measured inputs must appear as mappable columns (enumerated) or upload/document.
+
+    Args:
+        option: dict[str, Any].
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> infer_field_coverage(...)
+    """
     raw = str(option.get("fieldCoverage") or "").strip().lower()
     if raw in (FIELD_COVERAGE_UPLOAD, FIELD_COVERAGE_ENUMERATED):
         return raw
@@ -58,6 +71,20 @@ def infer_field_coverage(option: dict[str, Any], *, catalog_option_key: str = ""
 
 
 def infer_grain_for_frequency(frequency: str) -> str:
+    """Infer grain for frequency.
+
+    Args:
+        frequency: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> infer_grain_for_frequency(...)
+    """
     f = str(frequency or "monthly").strip().lower()
     if f == "daily":
         return "day"
@@ -74,6 +101,21 @@ def strictest_linked_metric_frequency(
     option: dict[str, Any],
     metric_id_to_metric: dict[int, dict[str, Any]],
 ) -> str:
+    """Strictest linked metric frequency.
+
+    Args:
+        option: dict[str, Any].
+        metric_id_to_metric: dict[int, dict[str, Any]].
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> strictest_linked_metric_frequency(...)
+    """
     strictest: int | None = None
     label = "monthly"
     for mid in option.get("metricIds") or []:
@@ -109,15 +151,56 @@ _NUMERIC_HINTS = (
 
 
 def normalize_field_name(name: str) -> str:
+    """Normalize field name.
+
+    Args:
+        name: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> normalize_field_name(...)
+    """
     return re.sub(r"[^a-z0-9]+", "_", str(name or "").lower()).strip("_")
 
 
 def infer_field_type(field_name: str) -> str:
-    """Legacy kind: date | id | enum | number | string (used where manifest types absent)."""
+    """Legacy kind: date | id | enum | number | string (used where manifest types absent).
+
+    Args:
+        field_name: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> infer_field_type(...)
+    """
     return spark_coerce_kind(infer_catalog_field_type(field_name))
 
 
 def infer_catalog_field_type(field_name: str) -> str:
+    """Infer catalog field type.
+
+    Args:
+        field_name: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> infer_catalog_field_type(...)
+    """
     norm = normalize_field_name(field_name)
     tokens = set(norm.split("_"))
     if tokens & _DATE_TOKENS or norm.endswith("_date") or norm == "date":
@@ -138,6 +221,20 @@ def infer_catalog_field_type(field_name: str) -> str:
 
 
 def spark_coerce_kind(catalog_type: str) -> str:
+    """Spark coerce kind.
+
+    Args:
+        catalog_type: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> spark_coerce_kind(...)
+    """
     t = str(catalog_type or "string").strip().lower()
     if t in ("decimal", "integer", "currency"):
         return "number"
@@ -147,12 +244,40 @@ def spark_coerce_kind(catalog_type: str) -> str:
 
 
 def field_entry_name(entry: str | dict[str, Any]) -> str:
+    """Field entry name.
+
+    Args:
+        entry: str | dict[str, Any].
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> field_entry_name(...)
+    """
     if isinstance(entry, dict):
         return str(entry.get("name") or "").strip()
     return str(entry or "").strip()
 
 
 def normalize_field_entry(entry: str | dict[str, Any]) -> dict[str, Any]:
+    """Normalize field entry.
+
+    Args:
+        entry: str | dict[str, Any].
+
+    Returns:
+        dict[str, Any].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> normalize_field_entry(...)
+    """
     if isinstance(entry, dict):
         name = field_entry_name(entry)
         ftype = str(entry.get("type") or infer_catalog_field_type(name)).strip().lower()
@@ -173,12 +298,40 @@ def normalize_field_entry(entry: str | dict[str, Any]) -> dict[str, Any]:
 
 
 def normalize_field_entries(fields: list[Any] | None) -> list[dict[str, Any]]:
+    """Normalize field entries.
+
+    Args:
+        fields: list[Any] | None.
+
+    Returns:
+        list[dict[str, Any]].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> normalize_field_entries(...)
+    """
     if not fields:
         return []
     return [normalize_field_entry(f) for f in fields if field_entry_name(f)]
 
 
 def field_type_map(entries: list[Any] | None) -> dict[str, str]:
+    """Field type map.
+
+    Args:
+        entries: list[Any] | None.
+
+    Returns:
+        dict[str, str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> field_type_map(...)
+    """
     out: dict[str, str] = {}
     for row in normalize_field_entries(entries):
         name = row["name"]
@@ -192,6 +345,22 @@ def input_excluded_from_field_list(
     exact: set[str],
     patterns: list[re.Pattern[str]],
 ) -> bool:
+    """Input excluded from field list.
+
+    Args:
+        name: str.
+        exact: set[str].
+        patterns: list[re.Pattern[str]].
+
+    Returns:
+        bool.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> input_excluded_from_field_list(...)
+    """
     lower = str(name or "").strip().lower()
     if lower in exact:
         return True
@@ -199,18 +368,58 @@ def input_excluded_from_field_list(
 
 
 def is_value_field_for_unpivot_field(entry: str | dict[str, Any]) -> bool:
+    """Is value field for unpivot field.
+
+    Args:
+        entry: str | dict[str, Any].
+
+    Returns:
+        bool.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> is_value_field_for_unpivot_field(...)
+    """
     row = normalize_field_entry(entry) if not isinstance(entry, dict) or "type" not in entry else entry
     ftype = str(row.get("type") or infer_catalog_field_type(field_entry_name(row)))
     return ftype in ("decimal", "integer", "currency")
 
 
 def is_value_field_for_unpivot(field_name: str) -> bool:
-    """Fields to unpivot into tenant-metrics value rows."""
+    """Fields to unpivot into tenant-metrics value rows.
+
+    Args:
+        field_name: str.
+
+    Returns:
+        bool.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> is_value_field_for_unpivot(...)
+    """
     return spark_coerce_kind(infer_catalog_field_type(field_name)) == "number"
 
 
 def coerce_numeric_string(raw: str) -> str:
-    """Strip currency formatting for parsing (mirrors client validateCsvUpload)."""
+    """Strip currency formatting for parsing (mirrors client validateCsvUpload).
+
+    Args:
+        raw: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> coerce_numeric_string(...)
+    """
     s = str(raw or "").strip()
     if not s:
         return ""
@@ -221,6 +430,20 @@ def coerce_numeric_string(raw: str) -> str:
 
 
 def parse_float_from_cell(raw: str) -> float | None:
+    """Parse float from cell.
+
+    Args:
+        raw: str.
+
+    Returns:
+        float | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> parse_float_from_cell(...)
+    """
     cleaned = coerce_numeric_string(raw)
     if not cleaned:
         return None

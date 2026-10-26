@@ -41,6 +41,20 @@ class ContractLoader:
         return name
 
     def resolve_path(self, contract_file: str) -> Path:
+        """Resolve path.
+
+        Args:
+            contract_file: str.
+
+        Returns:
+            Path.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> resolve_path(...)
+        """
         assert self.contracts_dir is not None
         safe_name = self._safe_contract_name(contract_file)
         candidates = [self.contracts_dir / safe_name]
@@ -66,6 +80,20 @@ class ContractLoader:
         raise FileNotFoundError(f"Contract file not found: {contract_file}")
 
     def load(self, contract_file: str) -> dict[str, Any]:
+        """Load.
+
+        Args:
+            contract_file: str.
+
+        Returns:
+            dict[str, Any].
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> load(...)
+        """
         path = self.resolve_path(contract_file)
         with path.open("r", encoding="utf-8") as handle:
             doc = yaml.safe_load(handle)
@@ -74,7 +102,20 @@ class ContractLoader:
             return cast(dict[str, Any], doc)
 
     def enforce_bronze_lineage(self, contract: dict[str, Any]) -> None:
-        """Verify contract declares required Bronze provenance columns."""
+        """Verify contract declares required Bronze provenance columns.
+
+        Args:
+            contract: dict[str, Any].
+
+        Returns:
+            None.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> enforce_bronze_lineage(...)
+        """
         required = {"_bronze_run_id", "_bronze_row_hash"}
         contract_columns = set(contract.get("lineage", {}).get("provenance_columns", []))
         partition_key = contract.get("schema", {}).get("partition_key")
@@ -98,7 +139,22 @@ class ContractLoader:
         contract: dict[str, Any],
         context: str,
     ) -> None:
-        """Raise if required schema columns from contract are absent."""
+        """Raise if required schema columns from contract are absent.
+
+        Args:
+            df_columns: set[str].
+            contract: dict[str, Any].
+            context: str.
+
+        Returns:
+            None.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> assert_required_columns(...)
+        """
         schema_cols = contract.get("schema", {}).get("columns", [])
         required = {
             col["name"]

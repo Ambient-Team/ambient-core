@@ -31,6 +31,7 @@ class StageMetrics:
     environment: str = ""
 
     def to_dict(self) -> dict[str, Any]:
+        """To dict for StageMetrics.to_dict."""
         return {
             "run_id": self.run_id,
             "stage": self.stage,
@@ -62,7 +63,21 @@ class PipelinePerfRecorder:
 
     @staticmethod
     def capture_plan(df: DataFrame, label: str = "") -> str:
-        """Return formatted physical plan for *df*."""
+        """Return formatted physical plan for *df*.
+
+        Args:
+            df: DataFrame.
+            label: str.
+
+        Returns:
+            str.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> capture_plan(...)
+        """
         try:
             plan = df._jdf.queryExecution().toString()  # noqa: SLF001
         except Exception:
@@ -114,7 +129,21 @@ class PipelinePerfRecorder:
         wall_seconds: float | None = None,
         plan_label: str = "",
     ) -> StageMetrics:
-        """Record metrics for a pipeline stage."""
+        """Record metrics for a pipeline stage.
+
+        Args:
+            stage: str.
+            df: DataFrame | None.
+
+        Returns:
+            StageMetrics.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> record_stage(...)
+        """
         plan = self.capture_plan(df, plan_label) if df is not None else ""
         spark_metrics = self._collect_spark_metrics()
         metrics = StageMetrics(
@@ -142,7 +171,22 @@ class PipelinePerfRecorder:
         input_rows: int = 0,
         plan_label: str = "",
     ) -> tuple[int, StageMetrics]:
-        """Run an action on *df* and record wall time + metrics."""
+        """Run an action on *df* and record wall time + metrics.
+
+        Args:
+            stage: str.
+            df: DataFrame.
+            action: str.
+
+        Returns:
+            tuple[int, StageMetrics].
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> timed_action(...)
+        """
         start = time.perf_counter()
         if action == "count":
             output_rows = df.count()
@@ -160,7 +204,20 @@ class PipelinePerfRecorder:
         return output_rows, metrics
 
     def flush(self) -> None:
-        """Persist collected rows to Delta table or CSV fallback."""
+        """Persist collected rows to Delta table or CSV fallback.
+
+        Args:
+            None.
+
+        Returns:
+            None.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> flush()
+        """
         if not self._rows:
             return
 
@@ -199,7 +256,21 @@ def create_local_spark(
     app_name: str = "ambient-pipeline",
     shuffle_partitions: int = 8,
 ) -> SparkSession:
-    """Build a local SparkSession with Delta Lake extensions."""
+    """Build a local SparkSession with Delta Lake extensions.
+
+    Args:
+        app_name: str.
+        shuffle_partitions: int.
+
+    Returns:
+        SparkSession.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> create_local_spark(...)
+    """
     import os
     import sys
     from pathlib import Path

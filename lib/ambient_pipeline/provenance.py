@@ -31,7 +31,20 @@ class BronzeProvenanceStamper:
         )
 
     def stamp(self, df: DataFrame) -> DataFrame:
-        """Append provenance columns and row hash to *df*."""
+        """Append provenance columns and row hash to *df*.
+
+        Args:
+            df: DataFrame.
+
+        Returns:
+            DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> stamp(...)
+        """
         content_cols = [c for c in df.columns if not c.startswith("_bronze_")]
         hash_expr = F.sha2(
             F.concat_ws("|", *[F.col(c).cast("string") for c in content_cols]),
@@ -54,6 +67,20 @@ class BronzeProvenanceStamper:
         )
 
     def required_columns(self) -> set[str]:
+        """Required columns.
+
+        Args:
+            None.
+
+        Returns:
+            set[str].
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> required_columns()
+        """
         return {
             "_bronze_run_id",
             "_bronze_org_id",

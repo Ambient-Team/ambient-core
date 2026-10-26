@@ -20,7 +20,20 @@ def _crosswalk_path() -> Path | None:
 
 
 def load_crosswalk_links() -> list[dict[str, Any]]:
-    """Return crosswalk link dicts; empty if file missing or has no links."""
+    """Return crosswalk link dicts; empty if file missing or has no links.
+
+    Args:
+        None.
+
+    Returns:
+        list[dict[str, Any]].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> load_crosswalk_links()
+    """
     path = _crosswalk_path()
     if path is None:
         return []

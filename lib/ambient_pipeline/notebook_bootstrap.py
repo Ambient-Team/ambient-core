@@ -10,7 +10,17 @@ from typing import Protocol
 def find_repo_root(start: Path | None = None) -> Path | None:
     """Walk upward until a directory containing ``lib/ambient_pipeline`` is found.
 
-    Returns ``None`` when no OSS checkout layout is discovered.
+    Args:
+        start: Path | None.
+
+    Returns:
+        Path | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> find_repo_root(...)
     """
     here = (start or Path.cwd()).resolve()
     candidates = [here, *here.parents]
@@ -29,9 +39,17 @@ def find_repo_root(start: Path | None = None) -> Path | None:
 def ensure_pipeline_on_path(start: Path | None = None) -> Path | None:
     """Add ``<repo>/lib`` to ``sys.path`` so ``import ambient_pipeline`` works.
 
-    Prefer the git checkout ``lib/`` package home. Does **not** look under
-    ``databricks/lib`` or ``ambient-systems-platform`` paths. Returns the repo
-    root when found, else ``None``.
+    Args:
+        start: Path | None.
+
+    Returns:
+        Path | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> ensure_pipeline_on_path(...)
     """
     root = find_repo_root(start)
     if root is None:
@@ -54,7 +72,21 @@ class _SparkSession(Protocol):
 def apply_spark_tuning(
     spark: _SparkSession, extra: tuple[tuple[str, str], ...] = ()
 ) -> None:
-    """Set AQE / common Spark SQL knobs when the runtime allows."""
+    """Set AQE / common Spark SQL knobs when the runtime allows.
+
+    Args:
+        spark: _SparkSession.
+        extra: tuple[tuple[str, str], ...].
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> apply_spark_tuning(...)
+    """
     defaults = (
         ("spark.sql.adaptive.enabled", "true"),
         ("spark.sql.adaptive.coalescePartitions.enabled", "true"),
