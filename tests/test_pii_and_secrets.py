@@ -111,6 +111,14 @@ def test_ensure_pii_salt_rejects_empty_salt_outside_tests(
         ensure_pii_salt_allowed_for_runtime("   ")
 
 
+def test_ensure_pii_salt_allows_production_value_outside_tests(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _clear_pii_test_context(monkeypatch)
+    monkeypatch.setenv("AMBIENT_PII_SALT", "production-unique-salt-value")
+    ensure_pii_salt_allowed_for_runtime("production-unique-salt-value")
+
+
 def test_ensure_pii_salt_rejects_golden_salt_outside_tests(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

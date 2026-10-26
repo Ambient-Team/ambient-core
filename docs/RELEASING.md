@@ -6,7 +6,7 @@ Only the repository owner merges release PRs and runs the cut workflow. CI does 
 
 ## Monthly release cadence (ambient-core)
 
-Starting **November 2026**, ambient-core targets a **monthly** release on the **second Friday** of each month (first scheduled release: **Fri 13 Nov 2026**).
+Starting **November 2026**, ambient-core targets a **monthly** release on the **second Friday** of each month (first scheduled release: **Fri 13 Nov 2026**, package **`0.3.10`** / tag **`v0.3.10`** for **ambient-systems-platform** pins).
 
 - **Freeze:** the **Monday** of that release week (for Nov 2026: **Mon 9 Nov**) — avoid merging risky or wide refactors after freeze; quality and release-prep PRs should be green before then.
 - **Cut:** owner runs **Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month.
