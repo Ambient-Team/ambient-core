@@ -36,6 +36,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 - [metrics-catalog.md](metrics-catalog.md) — Q-099 tier documentation for the reference catalog.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — setup, contract/catalog workflow, tagging, consumer follow-up.
 - [RELEASING.md](RELEASING.md) — semver, CHANGELOG, owner release steps, platform pin.
+- [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md) — last-Friday cadence, core → platform → website chain, no freeze days.
 - [../SECURITY.md](../SECURITY.md) — vulnerability reporting.
 - [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) — community standards.
 
