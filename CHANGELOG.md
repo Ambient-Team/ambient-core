@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Builtin tool registration** — `register_integrator_builtin_tools` wires catalog/crosswalk handlers onto `IntegratorToolRegistry`.
 - **Per-instance tool registry** — `ambient_cli.tool_registry.IntegratorToolRegistry` and `execute_tool_plan` (v1 runs each `tool_ids` entry once; `max_tool_rounds` reserved).
 - **Wheel import smoke** — `tests/test_wheel_ambient_pipeline_import.py` verifies `ambient_pipeline` Colab and governance modules import from an installed wheel without a git checkout on `PYTHONPATH`.
+- **Integrator docs and example** — [docs/integrator-agent-tools.md](docs/integrator-agent-tools.md) and [examples/integrators/builtin_tools_walkthrough.py](examples/integrators/builtin_tools_walkthrough.py); edge tests in `tests/test_integrator_tools_edges.py`.
 
 ### Changed
 

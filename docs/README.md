@@ -27,6 +27,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs a full application repository.
 - [public-scope-and-pricing.md](public-scope-and-pricing.md) — OSS vs commercial scope; README / website messaging alignment (no price tables in git).
 - [integrator-roadmap.md](integrator-roadmap.md) — what is shipped vs deferred for integrators.
+- [integrator-agent-tools.md](integrator-agent-tools.md) — in-process catalog/crosswalk builtins, schemas, and registry (v0.3.12 train).
 
 ## Contribute and ship
 

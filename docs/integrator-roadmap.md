@@ -32,6 +32,7 @@ Branch `cursor/dec18-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11**
 - **ReAct / `max_tool_rounds`** — `ToolPlanProfile.max_tool_rounds` reserved; `execute_tool_plan` runs each id once in v1.
 - **Catalog manifest read helper** — `catalog_manifest_summary` (file SSOT; not HTTP); `register_integrator_builtin_tools` + `call_integrator_tool`.
 - **Nested tool arg schemas** — object/array support in `validate_tool_args`; builtin schemas in `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
+- **Docs and example** — [integrator-agent-tools.md](integrator-agent-tools.md); runnable [examples/integrators/builtin_tools_walkthrough.py](../examples/integrators/builtin_tools_walkthrough.py).
 
 ## Deferred (not in core yet)
 

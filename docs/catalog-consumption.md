@@ -5,7 +5,7 @@ Authoring and generator commands live in [catalog/README.md](../catalog/README.m
 ## When to use what
 
 - **List or resolve KPI definitions** — generated **manifest** via `ambient_contracts.catalog_manifest.load_manifest()` → `catalog/manifest.json`. The loader parses JSON once and returns a typed **`CatalogManifest`** (`ambient_contracts.manifest_models`); use `manifest.metrics`, `manifest.resolve_metric(id)`, or `CatalogMetric.to_tool_dict()` when you need the same camelCase objects as the raw file.
-- **Agent tools `catalog_list_metrics` / `catalog_resolve_metric`** — same manifest; CLI entrypoint is [`ambient_cli.catalog`](../lib/ambient_cli/catalog.py) (`ambient-catalog-generate`).
+- **Agent tools `catalog_list_metrics` / `catalog_resolve_metric`** — implemented in [`ambient_cli.integrator_tools`](../lib/ambient_cli/integrator_tools.py); see [integrator-agent-tools.md](integrator-agent-tools.md). Catalog generator CLI is [`ambient_cli.catalog`](../lib/ambient_cli/catalog.py) (`ambient-catalog-generate`).
 - **Upload column mapping, data-option templates, bronze field rules** — industry YAML under `catalog/industries/<pack>/` via `ambient_pipeline.catalog_loader.load_data_option()` (falls back to `manifest.json` for expanded shared options)
 - **Front-end industry picker, metric browser, enrichment** — generated JS in `catalog/runtime/*.js` (e.g. `catalogIndustries.js`)
 - **Link a catalog metric to a governed Gold contract** — [catalog/crosswalk.yaml](../catalog/crosswalk.yaml); see [crosswalk.md](crosswalk.md)
