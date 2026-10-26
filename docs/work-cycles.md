@@ -96,7 +96,7 @@ Core does not validate these; document them in your worker for consistent loggin
 Three different ideas appear in core docs and code:
 
 - **Assurance work cycle** — defend metrics with quality, lineage, and ops–finance alignment ([assurance-lifecycle.md](assurance-lifecycle.md)).
-- **`auditor` agent profile** — plan-execute profile using `contracts_validate` and governance-oriented synthesis ([AGENTS.md](AGENTS.md)); not a financial audit product.
+- **`auditor` agent profile** — plan-execute profile using `contracts_validate` and governance-oriented synthesis ([AGENTS.md](../AGENTS.md)); not a financial audit product.
 - **Pipeline audit logs** — immutable run and performance events in [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) for forensics and compliance evidence.
 
 ## Related

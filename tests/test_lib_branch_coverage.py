@@ -185,6 +185,14 @@ def test_colab_bootstrap_drive_iterdir_oserror_falls_back(
     assert find_platform_root() == marker.resolve()
 
 
+def test_find_platform_root_honors_explicit_path(tmp_path: Path) -> None:
+    root = tmp_path / "checkout"
+    root.mkdir()
+    (root / "ambient_pipeline").mkdir()
+    (root / "data").mkdir()
+    assert find_platform_root(explicit=root) == root.resolve()
+
+
 def test_colab_bootstrap_lib_install_layout_adds_repo_root_candidate(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

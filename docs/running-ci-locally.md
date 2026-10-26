@@ -29,6 +29,7 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
+python scripts/check_doc_links.py
 
 node scripts/ci-policy.mjs
 node --test scripts/ci-policy.test.mjs

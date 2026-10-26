@@ -14,6 +14,8 @@ Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make change
 
 Do **not** use markdown pipe tables (`| col |` with `|---|` separators) in `docs/`, any `README.md`, or `examples/**/*.md`. Use short paragraphs and bullet lists instead (for example `- **term** — definition`). Mermaid diagrams and code fences are fine.
 
+Do **not** link to public Google Drive or Google Docs URLs in repo docs. Point demo CSVs, recordings, and synthetic bundles at [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) instead. CI enforces Drive/Docs hostnames via `scripts/check_markdown_prose.py` and relative links via `scripts/check_doc_links.py`.
+
 CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow [../AGENTS.md](../AGENTS.md).
 
 ## Scope

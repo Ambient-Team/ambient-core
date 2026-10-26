@@ -1,6 +1,6 @@
 # Repository inventory (agent freshness)
 
-Last reviewed: **2026-10-26** (batch 23 — `heavyCatalogScripts` CI policy SSOT; mypy-strict on `check_crosswalk` / `check_phi`; branch tests; dev dep floors; PR #130).
+Last reviewed: **2026-10-26** (batch 25 — `check_doc_links.py`; package entrypoint tests; public API docstrings; PR #130).
 
 Use this page to see what changed recently and which verify commands apply. Update the **Last reviewed** line when you materially refresh docs or CI in the long-running quality PR.
 

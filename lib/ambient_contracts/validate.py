@@ -1,4 +1,4 @@
-"""Validate contract YAML structure (CI gate)."""
+"""Validate data-product contract YAML structure (CI gate and ``validate-contracts`` CLI)."""
 
 from __future__ import annotations
 

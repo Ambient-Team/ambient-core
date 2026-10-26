@@ -251,6 +251,10 @@ jobs:
         if: env.RUN_HEAVY == 'true'
         run: python scripts/check_markdown_prose.py
 
+      - name: Check doc links (relative)
+        if: env.RUN_HEAVY == 'true'
+        run: python scripts/check_doc_links.py
+
       - name: Static quality gates
         if: env.RUN_HEAVY == 'true'
         run: python scripts/check_quality_static.py
