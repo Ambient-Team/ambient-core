@@ -29,6 +29,18 @@ def pseudonymize_string(salt: str, value: str | None) -> str:
     return hmac_sha256_hex(salt, value)
 
 
+class _SparkPiiUdf:
+    """Picklable callable for Spark UDF registration (driver-testable for coverage)."""
+
+    __slots__ = ("salt",)
+
+    def __init__(self, salt: str) -> None:
+        self.salt = salt
+
+    def __call__(self, value: str | None) -> str:
+        return pseudonymize_string(self.salt, value)
+
+
 @dataclass
 class PiiPseudonymizer:
     """One-way HMAC-SHA256 pseudonymization of PII columns."""
@@ -42,13 +54,8 @@ class PiiPseudonymizer:
 
     def pseudonymize_column(self, col_ref: Column) -> Column:
         """Return expression for one-way HMAC-SHA256 pseudonymization."""
-        salt = self.salt
-
-        @F.udf(returnType=StringType())
-        def _hmac_udf(value: str | None) -> str:
-            return pseudonymize_string(salt, value)
-
-        return _hmac_udf(col_ref.cast("string"))
+        udf = F.udf(_SparkPiiUdf(self.salt), StringType())
+        return udf(col_ref.cast("string"))
 
     def apply(self, df: DataFrame, sensitive_field_names: list[str] | None = None) -> DataFrame:
         """Scan columns for PII indicators and pseudonymize matches."""

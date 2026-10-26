@@ -11,7 +11,9 @@ import pytest
 from ambient_pipeline.firestore_bridge import _firestore_client, append_lineage_event
 
 
-def _install_fake_firebase(monkeypatch: pytest.MonkeyPatch, *, apps: list) -> MagicMock:
+def _install_fake_firebase(
+    monkeypatch: pytest.MonkeyPatch, *, apps: list[object]
+) -> MagicMock:
     firebase_admin = MagicMock()
     firebase_admin._apps = apps
     credentials = MagicMock()

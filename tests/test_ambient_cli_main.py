@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import pytest
+
 from ambient_cli import catalog as catalog_cli
 
 
-def test_catalog_main_invokes_generator(monkeypatch) -> None:
+def test_catalog_main_invokes_generator(monkeypatch: pytest.MonkeyPatch) -> None:
     calls: list[str] = []
 
     def fake_run_path(path: str, run_name: str) -> None:

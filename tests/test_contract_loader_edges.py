@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from ambient_contracts.loader import ContractLoader
@@ -12,7 +14,7 @@ def test_contract_loader_repr() -> None:
     assert "ContractLoader" in repr(loader)
 
 
-def test_load_rejects_non_mapping(tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_load_rejects_non_mapping(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     contracts = tmp_path / "contracts"
     contracts.mkdir()
     bad = contracts / "bad.yaml"

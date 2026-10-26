@@ -82,6 +82,15 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/pipeline/test_perf_coverage_paths.py",
     "tests/pipeline/test_oss_demo_bronze_silver.py",
     "tests/test_runner_local_pipeline.py",
+    # Batch 20 — group 1 (zero-touch or light annotation)
+    "tests/test_lib_coverage_residual.py",
+    "tests/test_colab_smoke_run_tmp.py",
+    "tests/test_colab_smoke_unit.py",
+    "tests/test_ambient_cli_main.py",
+    "tests/test_catalog_loader.py",
+    "tests/test_contract_loader_edges.py",
+    "tests/test_crosswalk_catalog_root_errors.py",
+    "tests/test_firestore_bridge_client.py",
 )
 
 
