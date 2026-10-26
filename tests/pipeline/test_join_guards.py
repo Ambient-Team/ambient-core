@@ -1,6 +1,9 @@
 """Tests for left-join enrichment guards."""
 
+from __future__ import annotations
+
 import pytest
+from pyspark.sql import SparkSession
 
 from ambient_pipeline.join_guards import (
     assert_left_join_preserves_row_count,
@@ -9,7 +12,7 @@ from ambient_pipeline.join_guards import (
 )
 
 
-def test_left_join_one_to_one_preserves_count(spark):
+def test_left_join_one_to_one_preserves_count(spark: SparkSession) -> None:
     left = spark.createDataFrame(
         [("o1", "p1", "gold"), ("o2", "p1", "silver")],
         ["_bronze_org_id", "pipeline_name", "stage"],
@@ -23,7 +26,7 @@ def test_left_join_one_to_one_preserves_count(spark):
     assert_left_join_preserves_row_count(left, joined, "health_enrichment")
 
 
-def test_left_join_duplicate_right_raises(spark):
+def test_left_join_duplicate_right_raises(spark: SparkSession) -> None:
     left = spark.createDataFrame([("o1", "p1", "gold")], ["_bronze_org_id", "pipeline_name", "stage"])
     right = spark.createDataFrame(
         [
@@ -38,7 +41,7 @@ def test_left_join_duplicate_right_raises(spark):
         assert_left_join_preserves_row_count(left, joined, "duplicate_right")
 
 
-def test_assert_unique_keys_catches_duplicates(spark):
+def test_assert_unique_keys_catches_duplicates(spark: SparkSession) -> None:
     df = spark.createDataFrame(
         [("a", 1), ("a", 2)],
         ["key", "value"],
@@ -47,7 +50,9 @@ def test_assert_unique_keys_catches_duplicates(spark):
         assert_unique_keys(df, ["key"], "right_agg")
 
 
-def test_log_left_join_audit_warns_on_inflation(spark, capsys):
+def test_log_left_join_audit_warns_on_inflation(
+    spark: SparkSession, capsys: pytest.CaptureFixture[str]
+) -> None:
     left = spark.createDataFrame([("x",)], ["id"])
     right = spark.createDataFrame([("x",), ("x",)], ["id"])
     joined = left.join(right, "id", "left")

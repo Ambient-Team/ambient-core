@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
+from pyspark.sql import SparkSession
+
 from ambient_pipeline.perf import PipelinePerfRecorder, StageMetrics
 
 
-def test_stage_metrics_to_dict_truncates_plan(spark) -> None:
+def test_stage_metrics_to_dict_truncates_plan(spark: SparkSession) -> None:
     metrics = StageMetrics(
         run_id="r1",
         stage="bronze",
@@ -17,7 +21,7 @@ def test_stage_metrics_to_dict_truncates_plan(spark) -> None:
     assert len(data["plan_excerpt"]) <= 2000
 
 
-def test_pipeline_perf_recorder_record_stage(spark) -> None:
+def test_pipeline_perf_recorder_record_stage(spark: SparkSession) -> None:
     df = spark.createDataFrame([(1, 2.0)], ["id", "value"])
     recorder = PipelinePerfRecorder(spark, run_id="test-run", volume_gb=0.01)
     metrics = recorder.record_stage("silver", df, input_rows=1, output_rows=1, wall_seconds=0.01)
@@ -25,12 +29,14 @@ def test_pipeline_perf_recorder_record_stage(spark) -> None:
     assert recorder._rows  # noqa: SLF001
 
 
-def test_pipeline_perf_recorder_flush_no_rows_is_noop(spark) -> None:
+def test_pipeline_perf_recorder_flush_no_rows_is_noop(spark: SparkSession) -> None:
     recorder = PipelinePerfRecorder(spark)
     recorder.flush()
 
 
-def test_pipeline_perf_recorder_timed_action_and_csv_flush(spark, tmp_path) -> None:
+def test_pipeline_perf_recorder_timed_action_and_csv_flush(
+    spark: SparkSession, tmp_path: Path
+) -> None:
     df = spark.createDataFrame([(1, 2.0)], ["id", "value"])
     csv_path = tmp_path / "perf.csv"
     recorder = PipelinePerfRecorder(

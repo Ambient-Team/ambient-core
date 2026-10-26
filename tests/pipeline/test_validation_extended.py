@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 from ambient_pipeline.validation import SilverValidator
@@ -11,7 +12,7 @@ def test_silver_validator_repr() -> None:
     assert "0.95" in repr(SilverValidator())
 
 
-def test_validate_and_tag_null_and_out_of_range(spark) -> None:
+def test_validate_and_tag_null_and_out_of_range(spark: SparkSession) -> None:
     df = spark.createDataFrame(
         [
             ("Metric A", "Banking", None),
@@ -35,7 +36,7 @@ def test_validate_and_tag_null_and_out_of_range(spark) -> None:
     assert flags["Metric C"] == "SILVER_VALID"
 
 
-def test_deduplicate_metrics_keeps_latest(spark) -> None:
+def test_deduplicate_metrics_keeps_latest(spark: SparkSession) -> None:
     df = spark.createDataFrame(
         [
             ("org-1", "m1", "hash-a", "2024-01-01T00:00:00Z", 1.0),
@@ -50,7 +51,7 @@ def test_deduplicate_metrics_keeps_latest(spark) -> None:
     assert rows[0]["value"] == 2.0
 
 
-def test_apply_skew_salt_hot_orgs(spark) -> None:
+def test_apply_skew_salt_hot_orgs(spark: SparkSession) -> None:
     df = spark.createDataFrame(
         [("hot", "m1"), ("cold", "m2")],
         ["_bronze_org_id", "metric_id"],
@@ -63,7 +64,7 @@ def test_apply_skew_salt_hot_orgs(spark) -> None:
     assert cold_row["_skew_salt_bucket"] == "0"
 
 
-def test_apply_skew_salt_no_hot_orgs_returns_same_columns(spark) -> None:
+def test_apply_skew_salt_no_hot_orgs_returns_same_columns(spark: SparkSession) -> None:
     df = spark.createDataFrame([("org", "m")], ["_bronze_org_id", "metric_id"])
     out = SilverValidator().apply_skew_salt(df, [])
     assert out.columns == df.columns

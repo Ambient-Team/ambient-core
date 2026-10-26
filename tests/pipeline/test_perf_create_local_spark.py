@@ -5,6 +5,7 @@ from __future__ import annotations
 from unittest.mock import MagicMock
 
 import pytest
+from pyspark.sql import SparkSession
 
 from tests.spark_fixtures import create_local_spark as pytest_spark
 
@@ -24,7 +25,7 @@ def test_create_local_spark_uses_delta_configure(monkeypatch: pytest.MonkeyPatch
         def config(self, key: str, value: str) -> Builder:
             return self
 
-        def getOrCreate(self):
+        def getOrCreate(self) -> SparkSession:
             return real_session
 
     def fake_configure(builder: MagicMock) -> Builder:
@@ -38,7 +39,9 @@ def test_create_local_spark_uses_delta_configure(monkeypatch: pytest.MonkeyPatch
     assert session.range(1).count() == 1
 
 
-def test_write_delta_path_monkeypatched(spark, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_write_delta_path_monkeypatched(
+    spark: SparkSession, monkeypatch: pytest.MonkeyPatch
+) -> None:
     from ambient_pipeline.perf import PipelinePerfRecorder
 
     recorder = PipelinePerfRecorder(spark, output_path="/tmp/not-used")

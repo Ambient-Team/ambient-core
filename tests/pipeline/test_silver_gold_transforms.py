@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from pyspark.sql import SparkSession
+
 from ambient_pipeline.provenance import BronzeProvenanceStamper
 from ambient_pipeline.validation import SilverValidator
 
 
-def test_bronze_provenance_stamper_adds_columns(spark) -> None:
+def test_bronze_provenance_stamper_adds_columns(spark: SparkSession) -> None:
     df = spark.createDataFrame([("m1", 1.0)], ["metric_id", "value"])
     stamper = BronzeProvenanceStamper(
         org_id="org-1",
@@ -19,7 +21,7 @@ def test_bronze_provenance_stamper_adds_columns(spark) -> None:
     assert "_bronze_run_id" in cols
 
 
-def test_silver_validator_validate_and_tag(spark) -> None:
+def test_silver_validator_validate_and_tag(spark: SparkSession) -> None:
     df = spark.createDataFrame([("Debt Service Coverage Ratio", "Real Estate", 1.5)], ["name", "industry", "value"])
     ref = spark.createDataFrame(
         [("Debt Service Coverage Ratio", "Real Estate", 1.0, 2.0)],
@@ -30,7 +32,7 @@ def test_silver_validator_validate_and_tag(spark) -> None:
     assert "_iso8000_quality_flag" in tagged.columns
 
 
-def test_silver_validator_completeness_and_provenance(spark) -> None:
+def test_silver_validator_completeness_and_provenance(spark: SparkSession) -> None:
     df = spark.createDataFrame([("m1", 1.0), ("m2", None)], ["name", "value"])
     validator = SilverValidator()
     assert validator.completeness_ratio(df) == 0.5
