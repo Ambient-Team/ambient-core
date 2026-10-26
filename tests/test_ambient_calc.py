@@ -97,6 +97,20 @@ def test_safe_eval_unary_plus_passthrough():
     assert safe_eval("+a", {"a": 5}) == 5
 
 
+def test_safe_eval_unary_minus_and_none_operand():
+    assert safe_eval("-a", {"a": 3}) == -3
+    assert safe_eval("-a", {"a": None}) is None
+
+
+def test_safe_eval_rejects_disallowed_unary_operator():
+    with pytest.raises(CalcError, match="unary operator not allowed"):
+        safe_eval("~a", {"a": 1})
+
+
+def test_safe_eval_whitelisted_function_none_argument():
+    assert safe_eval("abs(x)", {"x": None}) is None
+
+
 def test_slug_of_raises_when_metric_unidentifiable():
     with pytest.raises(CalcError, match="no identifiable slug"):
         slug_of({})

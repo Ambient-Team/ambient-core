@@ -111,6 +111,7 @@ def test_type_inference_and_normalization() -> None:
     )
     assert rich["format"] == "ISO-8601"
     assert rich["unit"] == "days"
+    assert normalize_field_entries(None) == []
 
 
 def test_input_excluded_and_unpivot() -> None:

@@ -62,6 +62,74 @@ def test_create_local_spark_invokes_delta_helper(monkeypatch: pytest.MonkeyPatch
     assert session is not None
 
 
+def test_flush_appends_csv_with_header(spark, tmp_path) -> None:
+    df = spark.createDataFrame([(1,)], ["id"])
+    csv_path = tmp_path / "perf.csv"
+    recorder = PipelinePerfRecorder(spark, output_path=str(csv_path))
+    recorder.record_stage("bronze", df, output_rows=1, wall_seconds=0.01)
+    recorder.flush()
+    text = csv_path.read_text(encoding="utf-8")
+    assert "run_id" in text
+    assert "bronze" in text
+
+
+def test_collect_spark_metrics_aggregates_stage_accumulators(
+    spark, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    recorder = PipelinePerfRecorder(spark)
+
+    spill = MagicMock()
+    spill.name = "internal metrics spill size"
+    spill.value = 11
+    shuffle_read = MagicMock()
+    shuffle_read.name = "shuffle read bytes"
+    shuffle_read.value = 22
+    stage = MagicMock()
+    stage.accumulatorUpdates.return_value = [spill, shuffle_read]
+
+    tracker = MagicMock()
+    tracker.getStageInfos.return_value = [stage]
+    monkeypatch.setattr(spark.sparkContext, "statusTracker", lambda: tracker)
+
+    metrics = recorder._collect_spark_metrics()
+    assert metrics["spill_bytes"] == 11
+    assert metrics["shuffle_read_bytes"] == 22
+
+
+def test_create_local_spark_sets_hadoop_home_from_repo_bundle(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import os
+    from pathlib import Path
+
+    import delta
+
+    repo = Path(__file__).resolve().parents[2]
+    hadoop_home = repo / ".hadoop_home"
+    hadoop_home.mkdir(exist_ok=True)
+    (hadoop_home / "bin").mkdir(exist_ok=True)
+    monkeypatch.delenv("HADOOP_HOME", raising=False)
+
+    real_session = pytest_spark("ambient-hadoop-env")
+
+    class Builder:
+        def appName(self, _name: str) -> Builder:
+            return self
+
+        def master(self, _master: str) -> Builder:
+            return self
+
+        def config(self, _key: str, _value: str) -> Builder:
+            return self
+
+        def getOrCreate(self):
+            return real_session
+
+    monkeypatch.setattr(delta, "configure_spark_with_delta_pip", lambda _b: Builder())
+    create_local_spark("ambient-hadoop-env")
+    assert os.environ.get("HADOOP_HOME") == str(hadoop_home)
+
+
 def test_capture_plan_fallback_on_broken_jdf(spark) -> None:
     recorder = PipelinePerfRecorder(spark)
     broken = MagicMock()

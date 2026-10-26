@@ -45,6 +45,27 @@ def test_resolve_catalog_root_flexible_delegates_to_resolve_catalog_root(
     assert resolve_catalog_root_flexible() == repo_catalog
 
 
+def test_resolve_manifest_path_falls_back_to_flexible_catalog_root(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    catalog = tmp_path / "catalog"
+    catalog.mkdir()
+    (catalog / "manifest.json").write_text(
+        '{"version": 1, "industries": [], "metrics": [], "dataOptions": []}',
+        encoding="utf-8",
+    )
+    empty_root = tmp_path / "no_manifest_here"
+    empty_root.mkdir()
+
+    monkeypatch.setattr(catalog_manifest, "_repo_roots", lambda: [empty_root])
+    monkeypatch.setattr(
+        catalog_manifest,
+        "resolve_catalog_root_flexible",
+        lambda: catalog,
+    )
+    assert resolve_manifest_path() == catalog / "manifest.json"
+
+
 def test_resolve_manifest_path_uses_flexible_catalog_root(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
