@@ -89,7 +89,7 @@ class SilverValidator:
         if total == 0:
             return 0.0
         non_null = df.filter(F.col("value").isNotNull()).count()
-        return non_null / total
+        return float(non_null) / float(total)
 
     def assert_completeness(self, df: DataFrame, org_label: str = "") -> float:
         """Raise if completeness is below threshold."""
