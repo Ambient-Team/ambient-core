@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any, cast
 from unittest.mock import MagicMock
 
 import pytest
+from pyspark.sql import DataFrame, SparkSession
 
 from ambient_pipeline.runner import (
     REAL_ESTATE_GOLD_PIVOT,
@@ -18,7 +20,7 @@ from ambient_pipeline.runner import (
 from ambient_pipeline.validation import SilverValidator
 
 
-def test_sanitize_pivoted_columns_renames_spark_backtick_names(spark) -> None:
+def test_sanitize_pivoted_columns_renames_spark_backtick_names(spark: SparkSession) -> None:
     df = spark.createDataFrame([(100.0,)], ["`Net Operating Income`"])
     out = _sanitize_pivoted_columns(df, REAL_ESTATE_GOLD_PIVOT)
     assert "noi" in out.columns
@@ -48,7 +50,7 @@ def _write_real_estate_csv(path: Path) -> str:
 
 
 def test_run_local_pipeline_real_estate_gold(
-    spark,
+    spark: SparkSession,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -76,15 +78,17 @@ def test_run_local_pipeline_real_estate_gold(
 
 
 def test_run_local_pipeline_summary_gold_without_name_industry(
-    spark, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    spark: SparkSession, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("AMBIENT_PII_SALT", "unit-test-salt")
 
     original_validate = SilverValidator.__dict__["validate_and_tag"]
 
-    def drop_name_industry(self, df, ref_df):
+    def drop_name_industry(
+        self: SilverValidator, df: DataFrame, ref_df: DataFrame
+    ) -> DataFrame:
         tagged = original_validate(self, df, ref_df)
-        return tagged.drop("name", "industry")
+        return cast(DataFrame, tagged.drop("name", "industry"))
 
     monkeypatch.setattr(SilverValidator, "validate_and_tag", drop_name_industry)
 
@@ -115,11 +119,15 @@ def test_run_pipeline_from_config_owns_spark(tmp_path: Path, monkeypatch: pytest
         def stop(self) -> None:
             captured["stopped"] = True
 
-    def fake_create_local_spark(**_kwargs):
+    def fake_create_local_spark(**_kwargs: object) -> FakeSpark:
         captured["created"] = True
         return FakeSpark()
 
-    def fake_run_local_pipeline(spark, bronze_csv_glob, config):
+    def fake_run_local_pipeline(
+        spark: object,
+        bronze_csv_glob: str,
+        config: PipelineRunConfig,
+    ) -> dict[str, Any]:
         captured["spark"] = spark
         captured["glob"] = bronze_csv_glob
         captured["config"] = config
@@ -140,7 +148,11 @@ def test_run_pipeline_from_config_reuses_supplied_spark(
 ) -> None:
     ext = MagicMock(name="external-spark")
 
-    def fake_run_local_pipeline(spark, _glob, config):
+    def fake_run_local_pipeline(
+        spark: SparkSession,
+        _glob: str,
+        config: PipelineRunConfig,
+    ) -> dict[str, Any]:
         assert spark is ext
         return {"stages": {}, "run_id": config.run_id, "total_wall_seconds": 0.0}
 

@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from pathlib import Path
 
+from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import DoubleType, StringType, StructField, StructType
 
 from ambient_pipeline.bronze_catalog_map import bronze_to_tenant_metrics
@@ -11,7 +13,7 @@ from ambient_pipeline.perf import PipelinePerfRecorder
 from ambient_pipeline.validation import SilverValidator
 
 
-def _bronze_frame(spark):
+def _bronze_frame(spark: SparkSession) -> DataFrame:
     rows = [("2024-03-15", "100", "95")]
     return spark.createDataFrame(rows, ["Date", "OccupiedBeds", "AvailableBeds"])
 
@@ -24,7 +26,7 @@ def _mapping() -> dict[str, str]:
     }
 
 
-def test_bronze_to_tenant_metrics_idempotent_row_count(spark) -> None:
+def test_bronze_to_tenant_metrics_idempotent_row_count(spark: SparkSession) -> None:
     df = _bronze_frame(spark)
     kwargs = {
         "org_id": "org-1",
@@ -39,7 +41,7 @@ def test_bronze_to_tenant_metrics_idempotent_row_count(spark) -> None:
     assert sorted(first.columns) == sorted(second.columns)
 
 
-def test_silver_null_values_tagged_missing(spark) -> None:
+def test_silver_null_values_tagged_missing(spark: SparkSession) -> None:
     schema = StructType(
         [
             StructField("name", StringType(), True),
@@ -56,7 +58,9 @@ def test_silver_null_values_tagged_missing(spark) -> None:
     assert row["_iso8000_quality_flag"] == "SILVER_MISSING_VALUE"
 
 
-def test_perf_recorder_csv_append_writes_header_once(spark, tmp_path) -> None:
+def test_perf_recorder_csv_append_writes_header_once(
+    spark: SparkSession, tmp_path: Path
+) -> None:
     df = spark.createDataFrame([(1,)], ["id"])
     csv_path = tmp_path / "perf_evolve.csv"
     recorder = PipelinePerfRecorder(spark, output_path=str(csv_path))
@@ -69,7 +73,7 @@ def test_perf_recorder_csv_append_writes_header_once(spark, tmp_path) -> None:
     assert lines[0].startswith("run_id,")
 
 
-def test_pipeline_perf_recorder_repr_and_capture_plan(spark) -> None:
+def test_pipeline_perf_recorder_repr_and_capture_plan(spark: SparkSession) -> None:
     df = spark.createDataFrame([(1,)], ["id"])
     recorder = PipelinePerfRecorder(spark, run_id="r")
     assert "PipelinePerfRecorder" in repr(recorder)

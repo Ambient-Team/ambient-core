@@ -69,6 +69,19 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/pipeline/test_runner_config.py",
     "tests/pipeline/test_bronze_catalog_map.py",
     "tests/pipeline/test_bronze_to_tenant_metrics_contract.py",
+    # Pipeline / Spark support (batch 19 — group 2)
+    "tests/pipeline/test_join_guards.py",
+    "tests/pipeline/test_validation.py",
+    "tests/pipeline/test_validation_extended.py",
+    "tests/pipeline/test_silver_gold_transforms.py",
+    "tests/pipeline/test_perf_recorder.py",
+    "tests/pipeline/test_perf_unit.py",
+    "tests/pipeline/test_perf_create_local_spark.py",
+    # Pipeline / Spark support (batch 19 — group 3)
+    "tests/pipeline/test_gold_layer_spark.py",
+    "tests/pipeline/test_perf_coverage_paths.py",
+    "tests/pipeline/test_oss_demo_bronze_silver.py",
+    "tests/test_runner_local_pipeline.py",
 )
 
 

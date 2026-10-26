@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from unittest.mock import MagicMock
 
 import pytest
+from pyspark.sql import SparkSession
 
 from ambient_pipeline.perf import PipelinePerfRecorder, StageMetrics, create_local_spark
 from tests.spark_fixtures import create_local_spark as pytest_spark
@@ -15,7 +17,7 @@ def test_stage_metrics_repr() -> None:
     assert "StageMetrics" in repr(metrics)
 
 
-def test_timed_action_non_count_still_counts(spark) -> None:
+def test_timed_action_non_count_still_counts(spark: SparkSession) -> None:
     df = spark.createDataFrame([(1, 2.0)], ["id", "value"])
     recorder = PipelinePerfRecorder(spark)
     rows, metrics = recorder.timed_action("stage", df, action="collect", input_rows=1)
@@ -23,7 +25,9 @@ def test_timed_action_non_count_still_counts(spark) -> None:
     assert metrics.output_rows == 1
 
 
-def test_flush_writes_delta_when_output_path_is_directory(spark, tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_flush_writes_delta_when_output_path_is_directory(
+    spark: SparkSession, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     df = spark.createDataFrame([(1,)], ["id"])
     out_dir = tmp_path / "perf_out"
     recorder = PipelinePerfRecorder(spark, output_path=str(out_dir))
@@ -67,7 +71,7 @@ def test_create_local_spark_invokes_delta_helper(monkeypatch: pytest.MonkeyPatch
         def config(self, _key: str, _value: str) -> Builder:
             return self
 
-        def getOrCreate(self):
+        def getOrCreate(self) -> SparkSession:
             return real_session
 
     monkeypatch.setattr(delta, "configure_spark_with_delta_pip", lambda _b: Builder())
@@ -75,7 +79,7 @@ def test_create_local_spark_invokes_delta_helper(monkeypatch: pytest.MonkeyPatch
     assert session is not None
 
 
-def test_flush_appends_csv_with_header(spark, tmp_path) -> None:
+def test_flush_appends_csv_with_header(spark: SparkSession, tmp_path: Path) -> None:
     df = spark.createDataFrame([(1,)], ["id"])
     csv_path = tmp_path / "perf.csv"
     recorder = PipelinePerfRecorder(spark, output_path=str(csv_path))
@@ -87,7 +91,7 @@ def test_flush_appends_csv_with_header(spark, tmp_path) -> None:
 
 
 def test_collect_spark_metrics_aggregates_stage_accumulators(
-    spark, monkeypatch: pytest.MonkeyPatch
+    spark: SparkSession, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     recorder = PipelinePerfRecorder(spark)
 
@@ -135,7 +139,7 @@ def test_create_local_spark_sets_hadoop_home_from_repo_bundle(
         def config(self, _key: str, _value: str) -> Builder:
             return self
 
-        def getOrCreate(self):
+        def getOrCreate(self) -> SparkSession:
             return real_session
 
     monkeypatch.setattr(delta, "configure_spark_with_delta_pip", lambda _b: Builder())
@@ -143,7 +147,7 @@ def test_create_local_spark_sets_hadoop_home_from_repo_bundle(
     assert os.environ.get("HADOOP_HOME") == str(hadoop_home)
 
 
-def test_capture_plan_fallback_on_broken_jdf(spark) -> None:
+def test_capture_plan_fallback_on_broken_jdf(spark: SparkSession) -> None:
     recorder = PipelinePerfRecorder(spark)
     broken = MagicMock()
     broken._jdf.queryExecution.side_effect = RuntimeError("no plan")
