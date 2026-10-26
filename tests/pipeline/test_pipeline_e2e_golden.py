@@ -91,23 +91,3 @@ def test_spark_pipeline_matches_golden_with_real_pii(
     pg.assert_stage_outputs_pseudonymized(gold_df, "gold/real_estate")
     pg.assert_no_forbidden_literals(silver_df, RAW_DISPLAY_NAMES)
     pg.assert_no_forbidden_literals(gold_df, RAW_DISPLAY_NAMES)
-
-
-def test_spark_pipeline_persists_only_pseudonymized_pii_after_silver(
-    spark: SparkSession,
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """Silver and Gold Delta tables must not retain raw PII indicator columns."""
-    for key, value in pg.load_fixture_env(SALT_FIXTURE).items():
-        monkeypatch.setenv(key, value)
-
-    cfg = _pipeline_config(tmp_path)
-    run_local_pipeline(spark, str(FIXTURE_CSV), cfg)
-
-    silver_df = spark.read.format("delta").load(str(cfg.base_dir / "silver" / "metrics"))
-    gold_df = spark.read.format("delta").load(
-        str(cfg.base_dir / "gold" / "org_kpis" / "real_estate")
-    )
-    pg.assert_stage_outputs_pseudonymized(silver_df, "silver")
-    pg.assert_stage_outputs_pseudonymized(gold_df, "gold/real_estate")

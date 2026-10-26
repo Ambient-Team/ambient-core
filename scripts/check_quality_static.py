@@ -28,6 +28,10 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
     ),
     ("secrets-scan", [sys.executable, str(ROOT / "scripts" / "scan_secrets_patterns.py")]),
     (
+        "golden-pii-fixture-refs",
+        [sys.executable, str(ROOT / "scripts" / "check_golden_pii_fixture_refs.py")],
+    ),
+    (
         "pack-reference-docs",
         [sys.executable, str(ROOT / "scripts" / "generate_pack_reference_docs.py"), "--check"],
     ),

@@ -6,8 +6,10 @@ import pytest
 from pyspark.sql import SparkSession
 
 from ambient_pipeline.pii import (
+    GOLDEN_TEST_PII_SALT,
     PiiPseudonymizer,
     columns_matching_pii_indicators,
+    ensure_pii_salt_allowed_for_runtime,
     hmac_sha256_hex,
     value_looks_pseudonymized,
 )
@@ -81,3 +83,50 @@ def test_value_looks_pseudonymized() -> None:
     assert value_looks_pseudonymized(digest)
     assert not value_looks_pseudonymized("Net Operating Income")
     assert value_looks_pseudonymized(None)
+
+
+def _clear_pii_test_context(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.delenv("AMBIENT_SPARK_TESTS", raising=False)
+
+
+def test_ensure_pii_salt_rejects_missing_env_outside_tests(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _clear_pii_test_context(monkeypatch)
+    monkeypatch.delenv("AMBIENT_PII_SALT", raising=False)
+    with pytest.raises(RuntimeError, match="AMBIENT_PII_SALT"):
+        ensure_pii_salt_allowed_for_runtime("any-salt")
+
+
+def test_ensure_pii_salt_rejects_golden_salt_outside_tests(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _clear_pii_test_context(monkeypatch)
+    monkeypatch.setenv("AMBIENT_PII_SALT", GOLDEN_TEST_PII_SALT)
+    with pytest.raises(RuntimeError, match="Golden test PII salt"):
+        ensure_pii_salt_allowed_for_runtime(GOLDEN_TEST_PII_SALT)
+
+
+def test_pii_apply_rejects_golden_salt_outside_tests(
+    spark: SparkSession,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _clear_pii_test_context(monkeypatch)
+    monkeypatch.setenv("AMBIENT_PII_SALT", GOLDEN_TEST_PII_SALT)
+    df = spark.createDataFrame([("raw-name",)], ["name"])
+    pii = PiiPseudonymizer(salt=GOLDEN_TEST_PII_SALT, transform_ts="2026-01-01T00:00:00Z")
+    with pytest.raises(RuntimeError, match="Golden test PII salt"):
+        pii.apply(df)
+
+
+def test_golden_pii_fixture_matches_constant() -> None:
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    env_path = root / "tests" / "fixtures" / "pipeline" / "golden_pii_salt.env"
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        if line.strip().startswith("AMBIENT_PII_SALT="):
+            assert line.split("=", 1)[1].strip() == GOLDEN_TEST_PII_SALT
+            return
+    raise AssertionError("AMBIENT_PII_SALT not found in golden PII fixture env file")

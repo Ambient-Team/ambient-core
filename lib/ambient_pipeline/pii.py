@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import os
 from dataclasses import dataclass, field
 
 from pyspark.sql import Column, DataFrame
@@ -13,7 +14,50 @@ from pyspark.sql.types import StringType
 
 PII_INDICATORS = ("uid", "email", "name", "phone", "address")
 
+# Must match the test-only AMBIENT_PII_SALT value in tests/fixtures/pipeline/ (never production).
+GOLDEN_TEST_PII_SALT = "golden-test-salt-not-for-production"
+
 _PSEUDO_HEX_LEN = 64
+
+
+def _in_pii_test_context() -> bool:
+    """True when pytest or ``AMBIENT_SPARK_TESTS=1`` enables fixture salts."""
+    if os.environ.get("AMBIENT_SPARK_TESTS", "").strip() == "1":
+        return True
+    return bool(os.environ.get("PYTEST_CURRENT_TEST"))
+
+
+def ensure_pii_salt_allowed_for_runtime(salt: str) -> None:
+    """Refuse golden, empty, or unset env salts outside integration-test contexts.
+
+    Args:
+        salt: Salt passed to :class:`PiiPseudonymizer`.
+
+    Returns:
+        None.
+
+    Raises:
+        RuntimeError: When ``AMBIENT_PII_SALT`` is missing/empty or equals the golden
+            fixture salt outside pytest / Spark test runs.
+
+    Example:
+        >>> ensure_pii_salt_allowed_for_runtime("production-salt")
+    """
+    if _in_pii_test_context():
+        return
+    env_salt = os.environ.get("AMBIENT_PII_SALT", "").strip()
+    if not env_salt:
+        raise RuntimeError(
+            "PiiPseudonymizer requires AMBIENT_PII_SALT outside test runs. "
+            "Set a production salt or run under pytest with AMBIENT_SPARK_TESTS=1."
+        )
+    if not salt.strip():
+        raise RuntimeError("PiiPseudonymizer salt must not be empty.")
+    if salt == GOLDEN_TEST_PII_SALT or env_salt == GOLDEN_TEST_PII_SALT:
+        raise RuntimeError(
+            "Golden test PII salt is not allowed outside test runs. "
+            "Use a dedicated production AMBIENT_PII_SALT value."
+        )
 
 
 def columns_matching_pii_indicators(
@@ -192,11 +236,12 @@ class PiiPseudonymizer:
             DataFrame.
 
         Raises:
-            None: This callable does not raise.
+            RuntimeError: When :func:`ensure_pii_salt_allowed_for_runtime` rejects the salt.
 
         Example:
             >>> apply(...)
         """
+        ensure_pii_salt_allowed_for_runtime(self.salt)
         pseudonymized_cols: list[str] = []
         result = df
         extra = {str(n).lower() for n in (sensitive_field_names or [])}
