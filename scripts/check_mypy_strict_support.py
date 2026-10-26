@@ -23,6 +23,7 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
     "scripts/check_golden_pii_fixture_refs.py",
     "scripts/check_sensitive_data_literals.py",
     "scripts/check_changelog_version.py",
+    "scripts/check_pip_audit.py",
     "scripts/validate_contracts.py",
     # Batch 22 — catalog CI gates used in build-test
     "scripts/generate_pack_reference_docs.py",

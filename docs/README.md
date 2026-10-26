@@ -25,6 +25,7 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 - [CONVENTIONS.md](CONVENTIONS.md) — naming/versioning rules, the core layer, and the data-format and storage standard.
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — what must be edited only here (no downstream mirrors).
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs a full application repository.
+- [public-scope-and-pricing.md](public-scope-and-pricing.md) — OSS vs commercial scope; README / website messaging alignment (no price tables in git).
 - [integrator-roadmap.md](integrator-roadmap.md) — what is shipped vs deferred for integrators.
 
 ## Contribute and ship

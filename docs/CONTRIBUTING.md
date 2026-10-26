@@ -65,7 +65,7 @@ Integrator-facing guides after catalog or contract changes: [governed-data.md](g
 
 ## Releases
 
-See [RELEASING.md](RELEASING.md) for semver, CHANGELOG, the **monthly release cadence** (second Friday; freeze Monday of release week), and the automated release workflow. After the owner tags `vX.Y.Z` on `main`, complete **Consumer follow-up** below for any repo that depends on this project.
+See [RELEASING.md](RELEASING.md) for semver, CHANGELOG, the **monthly release cadence** (no freeze days; work through release day), and the automated release workflow. After the owner tags `vX.Y.Z` on `main`, complete **Consumer follow-up** below for any repo that depends on this project.
 
 ## Consumer follow-up (after a release)
 

@@ -56,6 +56,18 @@ def test_scan_secrets_script_exits_zero() -> None:
     assert result.returncode == 0, result.stderr or result.stdout
 
 
+def test_pip_audit_check_exits_zero() -> None:
+    script = ROOT / "scripts" / "check_pip_audit.py"
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+
+
 def test_sensitive_data_literals_check_exits_zero() -> None:
     script = ROOT / "scripts" / "check_sensitive_data_literals.py"
     result = subprocess.run(
