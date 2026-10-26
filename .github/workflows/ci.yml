@@ -155,7 +155,7 @@ jobs:
             requirements-colab.txt
 
       - name: Install package (dev tools)
-        run: pip install -e ".[dev]"
+        run: pip install -e ".[dev,colab,pipeline]"
 
       - name: Static quality gates
         run: python scripts/check_quality_static.py

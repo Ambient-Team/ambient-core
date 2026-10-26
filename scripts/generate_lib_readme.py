@@ -103,6 +103,14 @@ def _resolve_symbol(pkg_name: str, name: str) -> Any:
     return getattr(mod, name)
 
 
+def _try_resolve_symbol(pkg_name: str, name: str) -> Any | None:
+    """Resolve a public symbol, or None when an optional dependency is missing."""
+    try:
+        return _resolve_symbol(pkg_name, name)
+    except ModuleNotFoundError:
+        return None
+
+
 def render() -> str:
     sys.path.insert(0, str(LIB))
     lines = [HEADER]
@@ -116,12 +124,17 @@ def render() -> str:
                 continue
             seen.add(symbol)
             if "." in symbol:
-                obj = _resolve_symbol(pkg_name, symbol)
+                obj = _try_resolve_symbol(pkg_name, symbol)
                 label = symbol
             else:
-                obj = _resolve_symbol(pkg_name, symbol)
+                obj = _try_resolve_symbol(pkg_name, symbol)
                 label = f"`{symbol}`"
-            lines.append(f"- {label} — {_summary_for(obj)}\n")
+            summary = (
+                "(optional dependency not installed in this environment)"
+                if obj is None
+                else _summary_for(obj)
+            )
+            lines.append(f"- {label} — {summary}\n")
         for mod_name, extra_syms in EXTRA_MODULES.get(pkg_name, []):
             mod = importlib.import_module(mod_name)
             short = mod_name.split(".")[-1]
@@ -130,8 +143,16 @@ def render() -> str:
                 if sym in seen:
                     continue
                 seen.add(sym)
-                obj = getattr(mod, sym)
-                lines.append(f"- `{sym}` — {_summary_for(obj)}\n")
+                try:
+                    obj = getattr(mod, sym)
+                except ModuleNotFoundError:
+                    obj = None
+                summary = (
+                    "(optional dependency not installed in this environment)"
+                    if obj is None
+                    else _summary_for(obj)
+                )
+                lines.append(f"- `{sym}` — {summary}\n")
         lines.append("\n")
     return "".join(lines)
 
