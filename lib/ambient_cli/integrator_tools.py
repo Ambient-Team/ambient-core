@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 from ambient_contracts.crosswalk import load_crosswalk_links
@@ -29,7 +29,7 @@ def crosswalk_list_links(contract_file: str | None = None) -> list[dict[str, Any
     Example:
         >>> crosswalk_list_links("tenant-metrics-v1.yaml")
     """
-    links = load_crosswalk_links()
+    links = cast(list[dict[str, Any]], load_crosswalk_links())
     if not contract_file:
         return links
     name = contract_file.strip()
@@ -98,4 +98,4 @@ def catalog_resolve_metric(metric_id: str | int) -> dict[str, Any] | None:
     if numeric <= 0:
         raise ValueError(f"metric_id must be positive, got {numeric}")
     root = resolve_catalog_root_flexible()
-    return load_metric_by_numeric_id(numeric, root)
+    return cast(dict[str, Any] | None, load_metric_by_numeric_id(numeric, root))
