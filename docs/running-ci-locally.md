@@ -61,7 +61,7 @@ From repo root with `.venv` active and Java 17 for Spark:
 bash scripts/run_local_pr_ci.sh
 ```
 
-Paste the script output into PR comments so reviewers see the same gates CI would run on `build-test` + `quality-static`.
+Paste the script output into PR comments so reviewers see the same gates CI would run on `build-test` + `quality-static`. Prefer this over re-running GitHub Actions while org billing is tight (November 2026 release targets **Fri 27 Nov**; see [RELEASING.md](RELEASING.md)).
 
 ## Coverage gate (lib ≥ 90% lines, ≥ 95% branches)
 
