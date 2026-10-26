@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 _SIMPLE_TYPES: dict[str, Any] = {
@@ -73,6 +74,10 @@ def _validate_constraints(spec: dict[str, Any], value: Any, path: str) -> list[s
             errors.append(f"{path} shorter than minLength {min_len}")
         if isinstance(max_len, int) and len(value) > max_len:
             errors.append(f"{path} longer than maxLength {max_len}")
+        pattern = spec.get("pattern")
+        if isinstance(pattern, str) and pattern:
+            if re.fullmatch(pattern, value) is None:
+                errors.append(f"{path} does not match pattern {pattern!r}")
     if isinstance(value, int) and not isinstance(value, bool):
         minimum = spec.get("minimum")
         maximum = spec.get("maximum")

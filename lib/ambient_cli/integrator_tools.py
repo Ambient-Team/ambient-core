@@ -11,6 +11,8 @@ from typing import Any
 
 from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 from ambient_contracts.crosswalk import load_crosswalk_links
+from ambient_contracts.loader import ContractLoader
+from ambient_contracts.paths import resolve_contracts_dir
 from ambient_pipeline.catalog_loader import load_manifest_version, load_metric_by_numeric_id
 from ambient_pipeline.gold_contract_map import contract_column_catalog_map
 
@@ -47,6 +49,22 @@ BUILTIN_INTEGRATOR_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
             "contract_file": {"type": "string", "minLength": 1},
         },
         "required": ["contract_file"],
+    },
+    "contracts_list_files": {
+        "properties": {},
+        "required": [],
+    },
+    "contract_schema_summary": {
+        "properties": {
+            "contract_file": {"type": "string", "minLength": 1},
+        },
+        "required": ["contract_file"],
+    },
+    "crosswalk_links_for_metric_key": {
+        "properties": {
+            "catalog_metric_key": {"type": "string", "minLength": 1},
+        },
+        "required": ["catalog_metric_key"],
     },
 }
 
@@ -221,6 +239,101 @@ def catalog_resolve_metric_by_key(catalog_metric_key: str) -> dict[str, Any] | N
     return None
 
 
+def contracts_list_files() -> list[str]:
+    """List contract YAML basenames from the resolved contracts directory.
+
+    Args:
+        None.
+
+    Returns:
+        list[str]: Sorted ``*.yaml`` file names (not absolute paths).
+
+    Raises:
+        FileNotFoundError: When the contracts directory is missing.
+
+    Example:
+        >>> "finance-banking-v1.yaml" in contracts_list_files()
+    """
+    root = resolve_contracts_dir()
+    if not root.is_dir():
+        raise FileNotFoundError(f"contracts directory not found: {root}")
+    return sorted(path.name for path in root.glob("*.yaml") if path.is_file())
+
+
+def contract_schema_summary(contract_file: str) -> dict[str, Any]:
+    """Summarize product metadata and schema columns for one contract file.
+
+    Args:
+        contract_file: Contract YAML basename (for example ``finance-banking-v1.yaml``).
+
+    Returns:
+        dict[str, Any]: ``contract_file``, ``product``, ``schema_table``, ``columns``.
+
+    Raises:
+        ValueError: When ``contract_file`` is empty.
+        FileNotFoundError: When the contract cannot be resolved.
+
+    Example:
+        >>> contract_schema_summary("finance-banking-v1.yaml")["schema_table"]
+    """
+    name = contract_file.strip()
+    if not name:
+        raise ValueError("contract_file must be non-empty")
+    contract = ContractLoader().load(name)
+    product_raw = contract.get("product")
+    product: dict[str, Any] = product_raw if isinstance(product_raw, dict) else {}
+    schema_raw = contract.get("schema")
+    schema: dict[str, Any] = schema_raw if isinstance(schema_raw, dict) else {}
+    columns_raw = schema.get("columns")
+    raw_columns: list[Any] = columns_raw if isinstance(columns_raw, list) else []
+    columns: list[dict[str, Any]] = []
+    for col in raw_columns:
+        if not isinstance(col, dict) or not col.get("name"):
+            continue
+        columns.append(
+            {
+                "name": str(col.get("name")),
+                "type": str(col.get("type") or ""),
+                "required": bool(col.get("required")),
+            }
+        )
+    return {
+        "contract_file": name,
+        "product": {
+            "name": str(product.get("name") or ""),
+            "consumption_id": str(product.get("consumption_id") or ""),
+            "version": str(product.get("version") or ""),
+        },
+        "schema_table": str(schema.get("table") or ""),
+        "columns": columns,
+    }
+
+
+def crosswalk_links_for_metric_key(catalog_metric_key: str) -> list[dict[str, Any]]:
+    """Return crosswalk rows whose ``catalogMetricKey`` matches exactly.
+
+    Args:
+        catalog_metric_key: Dotted catalog key (for example ``banking.depository.net_interest_margin``).
+
+    Returns:
+        list[dict[str, Any]].
+
+    Raises:
+        ValueError: When the key is empty.
+
+    Example:
+        >>> crosswalk_links_for_metric_key("banking.depository.net_interest_margin")
+    """
+    key = catalog_metric_key.strip()
+    if not key:
+        raise ValueError("catalog_metric_key must be non-empty")
+    return [
+        link
+        for link in load_crosswalk_links()
+        if str(link.get("catalogMetricKey") or "").strip() == key
+    ]
+
+
 def gold_contract_column_map(contract_file: str) -> dict[str, str]:
     """Map Gold contract column names to ``catalogMetricKey`` via crosswalk (read-only).
 
@@ -265,6 +378,9 @@ def register_integrator_builtin_tools(registry: IntegratorToolRegistry) -> None:
     registry.register("catalog_list_industries", catalog_list_industries)
     registry.register("catalog_resolve_metric_by_key", catalog_resolve_metric_by_key)
     registry.register("gold_contract_column_map", gold_contract_column_map)
+    registry.register("contracts_list_files", contracts_list_files)
+    registry.register("contract_schema_summary", contract_schema_summary)
+    registry.register("crosswalk_links_for_metric_key", crosswalk_links_for_metric_key)
 
 
 def call_integrator_tool(

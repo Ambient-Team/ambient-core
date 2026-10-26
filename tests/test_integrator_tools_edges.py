@@ -10,6 +10,9 @@ from ambient_cli.integrator_tools import (
     catalog_list_metrics,
     catalog_resolve_metric,
     catalog_resolve_metric_by_key,
+    contract_schema_summary,
+    contracts_list_files,
+    crosswalk_links_for_metric_key,
     crosswalk_list_links,
     gold_contract_column_map,
     register_integrator_builtin_tools,
@@ -93,6 +96,26 @@ def test_catalog_resolve_metric_by_key_known() -> None:
 def test_gold_contract_column_map_banking() -> None:
     col_map = gold_contract_column_map("finance-banking-v1.yaml")
     assert "net_interest_margin" in col_map
+
+
+def test_contracts_list_files_includes_banking() -> None:
+    names = contracts_list_files()
+    assert "finance-banking-v1.yaml" in names
+
+
+def test_contract_schema_summary_banking_columns() -> None:
+    summary = contract_schema_summary("finance-banking-v1.yaml")
+    assert summary["schema_table"] == "gold.finance_banking"
+    col_names = [row["name"] for row in summary["columns"]]
+    assert "net_interest_margin" in col_names
+
+
+def test_crosswalk_links_for_metric_key_banking_nim() -> None:
+    links = crosswalk_links_for_metric_key("banking.depository.net_interest_margin")
+    assert links
+    assert all(
+        link.get("catalogMetricKey") == "banking.depository.net_interest_margin" for link in links
+    )
 
 
 def test_call_integrator_tool_validates_min_length_on_contract_file() -> None:

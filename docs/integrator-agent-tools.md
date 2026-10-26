@@ -6,7 +6,7 @@ Ambient Core ships **file-backed** catalog and crosswalk helpers for platform wo
 
 ## Modules
 
-- **`ambient_cli.integrator_tools`** — builtins (`crosswalk_list_links`, `catalog_list_metrics`, `catalog_resolve_metric`, `catalog_manifest_summary`), `register_integrator_builtin_tools`, `call_integrator_tool`, and `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
+- **`ambient_cli.integrator_tools`** — catalog, crosswalk, contract, and Gold-map builtins; `register_integrator_builtin_tools`, `call_integrator_tool`, and `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
 - **`ambient_cli.tool_schema`** — `validate_tool_args` and `validate_tool_schema_document` (required fields, simple types, nested **object** / **array**).
 - **`ambient_cli.tool_registry`** — `IntegratorToolRegistry` (one registry per worker/tenant), `ToolPlanProfile`, `execute_tool_plan` (v1 runs each `tool_ids` entry once).
 
@@ -44,6 +44,18 @@ Looks up one manifest metric by dotted `catalogMetricKey` (for example `real_est
 ### `gold_contract_column_map(contract_file)`
 
 Read-only map from Gold contract column names to `catalogMetricKey` via crosswalk — no lakehouse/OLAP query. Use from platform workers before Spark Gold jobs.
+
+### `contracts_list_files()`
+
+Sorted list of contract YAML basenames under the resolved `contracts/` directory (checkout or bundled package data).
+
+### `contract_schema_summary(contract_file)`
+
+Product headline (`name`, `consumption_id`, `version`), Gold `schema.table`, and column rows (`name`, `type`, `required`) for one contract file.
+
+### `crosswalk_links_for_metric_key(catalog_metric_key)`
+
+All crosswalk rows whose `catalogMetricKey` equals the argument (exact match).
 
 ## Registry and validated dispatch
 
@@ -83,7 +95,7 @@ schema = {
 errors = validate_tool_schema_document(schema, {"org_id": "tenant-a"})
 ```
 
-Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, and **`oneOf`** (exactly one branch must match). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
+Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), and **`oneOf`** (exactly one branch must match). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
 
 ## Example script
 

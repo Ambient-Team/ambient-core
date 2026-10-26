@@ -46,6 +46,41 @@ def main() -> int:
     if metric:
         print(f"resolved metric 926: {metric.get('name')!r}")
 
+    by_key = call_integrator_tool(
+        registry,
+        "catalog_resolve_metric_by_key",
+        {"catalog_metric_key": "real_estate.core.current_ratio"},
+    )
+    if by_key:
+        print(f"resolved by catalogMetricKey: {by_key.get('name')!r}")
+
+    industries = call_integrator_tool(registry, "catalog_list_industries", {})
+    print(f"catalog industries: {len(industries)}")
+
+    col_map = call_integrator_tool(
+        registry,
+        "gold_contract_column_map",
+        {"contract_file": "finance-banking-v1.yaml"},
+    )
+    print(f"finance-banking gold columns mapped: {len(col_map)}")
+
+    contract_names = call_integrator_tool(registry, "contracts_list_files", {})
+    print(f"contract yaml files: {len(contract_names)}")
+
+    schema = call_integrator_tool(
+        registry,
+        "contract_schema_summary",
+        {"contract_file": "finance-banking-v1.yaml"},
+    )
+    print(f"contract schema table: {schema.get('schema_table')!r}")
+
+    nim_links = call_integrator_tool(
+        registry,
+        "crosswalk_links_for_metric_key",
+        {"catalog_metric_key": "banking.depository.net_interest_margin"},
+    )
+    print(f"crosswalk rows for NIM key: {len(nim_links)}")
+
     links = crosswalk_list_links()
     print(f"crosswalk links (unfiltered): {len(links)}")
 

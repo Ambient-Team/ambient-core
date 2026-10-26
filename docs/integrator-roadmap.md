@@ -35,12 +35,14 @@ Branch `cursor/dec18-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11**
 - **Docs and example** — [integrator-agent-tools.md](integrator-agent-tools.md); runnable [examples/integrators/builtin_tools_walkthrough.py](../examples/integrators/builtin_tools_walkthrough.py).
 - **Catalog file read surface** — `catalog_list_industries`, `catalog_resolve_metric_by_key` (manifest SSOT; not HTTP).
 - **Gold column map tool** — `gold_contract_column_map` (crosswalk + contract schema; read-only, no OLAP).
-- **Richer tool schemas** — `enum`, string length, integer min/max, `oneOf` in `validate_tool_args`.
+- **Richer tool schemas** — `enum`, string length, integer min/max, `oneOf`, and `pattern` in `validate_tool_args`.
+- **Contract inspection builtins** — `contracts_list_files`, `contract_schema_summary` (YAML SSOT; not lakehouse reads).
+- **Crosswalk metric lookup** — `crosswalk_links_for_metric_key` for programmatic mapping checks.
 
 ## Deferred (not in core yet)
 
 - **Product agent runtime** — plan-execute workers and hosted agent HTTP APIs live in the commercial platform; Ambient Core documents maintainer-only IDE agents in [AGENTS.md](../AGENTS.md)
-- **Full JSON Schema for tool args** — `$ref`, `format`, and combinators beyond `oneOf`; v0.3.12 ships nested types plus enum/length/range/`oneOf`
+- **Full JSON Schema for tool args** — `$ref`, `format`, and combinators beyond `oneOf`; v0.3.12 ships nested types plus enum/length/range/`pattern`/`oneOf`
 - **Live Gold / OLAP reads in core agents** — remote warehouse queries; core exposes `gold_contract_column_map` only
 - **Hosted catalog API** — HTTP transport TBD; file-backed reads via integrator builtins
 - **Gold lakehouse writers** — Spark jobs that materialize `finance-*` / healthcare Gold tables from Silver + `ambient_calc` (platform repo); core supplies `gold_contract_map` and contracts only

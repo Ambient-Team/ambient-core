@@ -75,6 +75,13 @@ def test_validate_tool_args_integer_minimum() -> None:
     assert any("minimum" in err for err in errors)
 
 
+def test_validate_tool_args_pattern_on_string() -> None:
+    props = {"org_id": {"type": "string", "pattern": r"[a-z]+"}}
+    assert validate_tool_args(props, [], {"org_id": "acme"}) == []
+    errors = validate_tool_args(props, [], {"org_id": "ACME"})
+    assert any("pattern" in err for err in errors)
+
+
 def test_validate_tool_args_one_of_exactly_one_match() -> None:
     props = {
         "value": {
