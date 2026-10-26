@@ -12,7 +12,7 @@ This repository is **Ambient Core**, fully **open source** (not an open-core pro
 
 ## Product AI boundary
 
-- **Customer / product AI:** none in Ambient Core. No Maestro, no open-weight hosting, no agent runtime for end users, no re-sale of third-party models.
+- **Customer / product AI:** none in Ambient Core. No hosted agent orchestration products, no open-weight model hosting, no agent runtime for end users, no re-sale of third-party models.
 - **Internal AI only:** Cursor Agent / IDE for maintainers editing this repo.
 - **Future proprietary AI/ML:** if revived, lives in the commercial platform application — never in this repository, and never as commodity model resale. Do not invent product AI features here.
 
@@ -35,7 +35,14 @@ Ambient Core is a Python foundation library (contracts, catalog, pipeline govern
 
 ### Verify
 
-Run these from the repo root with `.venv` active. They match the `python` job in `.github/workflows/ci.yml`. There is no separate formatter. Human-oriented notes and faster subsets: [docs/running-ci-locally.md](docs/running-ci-locally.md).
+Run these from the repo root with `.venv` active. They match the heavy **`build-test`** job in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) when `run_heavy` is true. There is no separate formatter. CI policy (draft gate, path filters, Dependabot limits): [docs/ci.md](docs/ci.md). Human-oriented notes and faster subsets: [docs/running-ci-locally.md](docs/running-ci-locally.md).
+
+Before pushing workflow or Dependabot edits:
+
+```bash
+node scripts/ci-policy.mjs
+node --test scripts/ci-policy.test.mjs
+```
 
 ```bash
 cp contracts/*.yaml lib/ambient_contracts/bundled/
@@ -51,7 +58,8 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
-AMBIENT_SPARK_TESTS=1 pytest
+python scripts/check_quality_static.py
+AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
 pip wheel . -w dist --no-deps
 ```
 
@@ -80,9 +88,9 @@ Names the code or workflows refer to:
 - `PYSPARK_DRIVER_PYTHON`
 - `HADOOP_HOME`
 - `JAVA_HOME` — set by `.cursor/install.sh` to JDK 17
-- `FETCH_AMBIENT_SYSTEMS` — was used only by the removed hub receiver
-- `HUB_DISPATCH_AMBIENT_TEAM` — was used only by the removed hub receiver
 - `GITHUB_TOKEN` — Actions provides this to Release and Cut release; PR CI does not use it
+
+CI triggers, draft vs heavy jobs, and path filters: [docs/ci.md](docs/ci.md).
 
 ### Repository layout
 
@@ -93,14 +101,23 @@ Names the code or workflows refer to:
 - `ambient_pipeline/` — Colab/pandas Bronze to Silver to Gold path used from a checkout
 - `tests/` — pytest
 - `scripts/` — contract, catalog, and markdown checks
-- `docs/` — manuals, including historical hub mirrors under `docs/hub/`
+- `docs/` — manuals; `docs/hub/` holds archived coordination notes (not maintained for public consumers)
 - `notebooks/` — Colab entry and optional local Spark notebooks
 - `examples/` — small pipeline examples
 - `data/raw/`, `data/processed/` — empty placeholders; demo CSVs are not in git
-- `.github/workflows/ci.yml` — pull request build and tests
+- `.github/workflows/ci.yml` — `changes`, `ci-policy`, `quality-static`, and `build-test` jobs (see [docs/ci.md](docs/ci.md))
 - `.github/workflows/release.yml` and `cut-release.yml` — owner release publish; not part of PR CI
 - `.cursor/environment.json` — Cloud Agent install; no `start` command
+- `.cursor/settings.json` — repo-level Cursor plugin enablement (see marketplace plugins)
 
-## Cloud Agent (One Foreman)
+## Agent review and quality
 
-Implement only the spec. One branch, one PR. Never push main. Smallest diff. Run the repo checks before finishing. Stop at the time box and open a PR with whatever is green. Do not spawn sub-agents or switch models. CI never starts agents or merges; only the owner merges.
+Before marking a pull request **ready for review**, run a thorough **correctness and security** pass on the full diff (not only the latest commit). Prove that the change works end-to-end with the repo verify commands below; fix root causes instead of papering over symptoms; prefer **subtraction** (smaller surface, less duplication) when it does not break behavior. Write and run tests that assert **observable behavior**, not implementation details.
+
+When you change **`ambient_cli`** or other command-line entry points, follow the **CLI for Agents** plugin skill (`cli-for-agent`): predictable flags, actionable errors, `--help` with examples, safe dry-run or check modes where applicable, and output that is easy to pipe or grep.
+
+Optional deeper review workflows: **Thermos** (branch-wide audit) and **Cursor Team Kit** (CI, verification, and shipping checklists) when enabled in `.cursor/settings.json`.
+
+## Cloud agent workflow
+
+Implement only the spec. One branch, one PR. Never push `main`. Smallest diff. Run the repo verify commands before finishing. Stop at the time box and open a pull request with whatever is green. Do not spawn sub-agents or switch models. CI does not merge pull requests; maintainers merge after review.

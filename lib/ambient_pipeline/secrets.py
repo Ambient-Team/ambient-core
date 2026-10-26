@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import warnings
+from typing import cast
 
 
 def _env_key(scope: str, key: str, env_prefix: str) -> str:
@@ -16,18 +17,21 @@ def _env_key(scope: str, key: str, env_prefix: str) -> str:
 def _try_dbutils_secret(scope: str, key: str) -> str | None:
     """Best-effort Databricks secret lookup; never required for OSS installs."""
     try:
-        from pyspark.dbutils import DBUtils  # type: ignore[import-untyped]
+        from pyspark.dbutils import DBUtils
         from pyspark.sql import SparkSession
 
         spark = SparkSession.getActiveSession()
         if spark is not None:
-            return DBUtils(spark).secrets.get(scope=scope, key=key)
+            return cast(str | None, DBUtils(spark).secrets.get(scope=scope, key=key))
     except Exception:
         pass
 
     try:
         dbutils  # type: ignore[name-defined]  # noqa: F821
-        return dbutils.secrets.get(scope=scope, key=key)  # type: ignore[name-defined]  # noqa: F821
+        return cast(
+            str | None,
+            dbutils.secrets.get(scope=scope, key=key),  # type: ignore[name-defined]  # noqa: F821
+        )
     except Exception:
         return None
 
@@ -35,8 +39,18 @@ def _try_dbutils_secret(scope: str, key: str) -> str | None:
 def get_secret(scope: str, key: str, *, env_prefix: str = "AMBIENT") -> str:
     """Retrieve a secret from the environment, or optionally Databricks Secret Scope.
 
-    Local / OSS: set ``AMBIENT_{KEY}`` or ``AMBIENT_{SCOPE}_{KEY}``.
-    Databricks (optional): ``dbutils.secrets.get(scope, key)`` when available.
+    Args:
+        scope: str.
+        key: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> get_secret(...)
     """
     env_value = _env_key(scope, key, env_prefix)
     if env_value:
@@ -61,8 +75,18 @@ def get_secret_or_warn(
 ) -> str:
     """Like get_secret but allows an explicit opt-in dev-only fallback with a warning.
 
-    Fail-closed by default: a fixed fallback is only used when
-    ``AMBIENT_ALLOW_DEV_SECRETS=1`` is set. Production must set real secrets.
+    Args:
+        scope: str.
+        key: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> get_secret_or_warn(...)
     """
     try:
         return get_secret(scope, key, env_prefix=env_prefix)

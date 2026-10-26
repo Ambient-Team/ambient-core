@@ -3,15 +3,20 @@
 from __future__ import annotations
 
 import pytest
+from pyspark.sql import SparkSession
 
 from ambient_pipeline.bronze_catalog_map import (
+    append_firestore_lineage_event,
+    fetch_firestore_data_source,
     mapping_json_hash,
     parse_mapping_json,
     parse_source_id_from_gcs_path,
+    resolve_mapping_spec,
     stable_metric_id,
 )
 from ambient_pipeline.bronze_upload_validation import validate_csv_headers_against_mapping
 from ambient_pipeline.catalog_field_rules import coerce_numeric_string, parse_float_from_cell
+from tests.dict_helpers import JsonDict
 
 
 def test_parse_source_id_from_gcs_path() -> None:
@@ -65,7 +70,7 @@ def test_coerce_numeric_string_and_parse_float() -> None:
     assert parse_float_from_cell("not-a-number") is None
 
 
-def test_coerce_mapped_columns_uses_manifest_types(spark) -> None:
+def test_coerce_mapped_columns_uses_manifest_types(spark: SparkSession) -> None:
     from ambient_pipeline.bronze_catalog_map import apply_column_mapping, coerce_mapped_columns
 
     rows = [("2024-03-15", "42", "Active")]
@@ -82,7 +87,54 @@ def test_coerce_mapped_columns_uses_manifest_types(spark) -> None:
     assert row["status"] == "Active"
 
 
-def test_coerce_mapped_columns_dates_and_currency(spark) -> None:
+def test_firestore_helpers_noop_in_oss() -> None:
+    append_firestore_lineage_event(
+        "",
+        "src",
+        run_id="r",
+        status="ok",
+        rows_written=0,
+        gcs_path="gs://x",
+    )
+    assert fetch_firestore_data_source("org", "src") is None
+
+
+def test_resolve_mapping_spec_firestore_missing_document() -> None:
+    spec = resolve_mapping_spec(
+        org_id="org-1",
+        mapping_json=None,
+        catalog_option_key="",
+        source_id="src-1",
+        gcs_path="",
+        catalog_manifest_version="3",
+        firestore_fetcher=lambda _o, _s: None,
+    )
+    assert spec.source_name == "src-1"
+
+
+def test_resolve_mapping_spec_firestore_fallback() -> None:
+    def fetcher(org_id: str, source_id: str) -> JsonDict:
+        return {
+            "catalogOptionKey": "HcCensus911CatalogOptionKey01",
+            "name": "Census upload",
+            "latestUpload": {"mapping": {"date": "Date"}},
+        }
+
+    spec = resolve_mapping_spec(
+        org_id="org-1",
+        mapping_json=None,
+        catalog_option_key="",
+        source_id="src-1",
+        gcs_path="gs://bucket/bronze/org-1/src-1/file.csv",
+        catalog_manifest_version="3",
+        firestore_fetcher=fetcher,
+    )
+    assert spec.catalog_option_key == "HcCensus911CatalogOptionKey01"
+    assert spec.catalog_field_to_csv_header["date"] == "Date"
+    assert spec.industry == "Healthcare"
+
+
+def test_coerce_mapped_columns_dates_and_currency(spark: SparkSession) -> None:
     from ambient_pipeline.bronze_catalog_map import apply_column_mapping, coerce_mapped_columns
 
     rows = [("2024-03-15", "$1,234.50", "(99.5)", "Active")]

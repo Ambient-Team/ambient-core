@@ -1,6 +1,6 @@
 # Running CI locally
 
-Pull request CI runs the same checks as [`.github/workflows/ci.yml`](../.github/workflows/ci.yml). Use this page when you want to reproduce CI on your machine before pushing.
+Pull request CI runs the same checks as the **`build-test`** job in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) when heavy CI is enabled. Draft PRs and docs-only changes skip heavy steps in GitHub Actions but still pass the required check; locally you can always run the full loop below. See [docs/ci.md](ci.md) for triggers and the `run_heavy` gate.
 
 ## Prerequisites
 
@@ -29,13 +29,49 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
+python scripts/check_doc_links.py
 
-AMBIENT_SPARK_TESTS=1 pytest
+node scripts/ci-policy.mjs
+node --test scripts/ci-policy.test.mjs
+
+python scripts/check_quality_static.py
+AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
 
 pip wheel . -w dist --no-deps
 ```
 
 Bundled contract sync must show no diff after `cp`. If it fails, copy contracts again and commit the bundled tree.
+
+## Static quality (draft PR parity)
+
+Runs on every pull request in CI (`quality-static` job), including drafts:
+
+```bash
+pip install -e ".[dev]"
+python scripts/check_quality_static.py
+```
+
+`check_quality_static.py` includes relative doc link checks (`check_doc_links.py`) and a sensitive-literal scan (emails, phones, personal paths) outside `tests/` and `catalog/`.
+
+## Full PR CI (when GitHub Actions billing is blocked)
+
+From repo root with `.venv` active and Java 17 for Spark:
+
+```bash
+bash scripts/run_local_pr_ci.sh
+```
+
+Paste the script output into PR comments so reviewers see the same gates CI would run on `build-test` + `quality-static`. Prefer this over re-running GitHub Actions while org billing is tight (November 2026 release targets **Fri 27 Nov**; no freeze days — see [RELEASING.md](RELEASING.md)). Includes `pip-audit` via `check_pip_audit.py` when `.[all]` is installed.
+
+## Coverage gate (lib ≥ 90% lines, ≥ 95% branches)
+
+```bash
+AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
+```
+
+Also enforces **`lib/ambient_pipeline/` ≥ 95%** lines and branches (see `PACKAGE_FLOORS` in `scripts/check_coverage.py`).
+
+Writes HTML to `/opt/cursor/artifacts/coverage-html` when that directory exists (Cloud Agent VMs).
 
 ## Faster subsets
 

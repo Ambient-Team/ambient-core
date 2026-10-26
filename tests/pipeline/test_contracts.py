@@ -1,5 +1,7 @@
 """Tests for contract loading and enforcement."""
 
+from __future__ import annotations
+
 from pathlib import Path
 
 import pytest
@@ -7,26 +9,26 @@ import pytest
 from ambient_pipeline.contracts import ContractLoader
 
 
-def test_load_tenant_metrics_contract():
+def test_load_tenant_metrics_contract() -> None:
     loader = ContractLoader(contracts_dir=Path("contracts"))
     contract = loader.load("tenant-metrics-v1.yaml")
     assert contract["product"]["name"] == "Tenant Metrics"
     assert str(contract["product"]["version"]) == "1.1"
 
 
-def test_enforce_bronze_lineage_passes():
+def test_enforce_bronze_lineage_passes() -> None:
     loader = ContractLoader(contracts_dir=Path("contracts"))
     contract = loader.load("tenant-metrics-v1.yaml")
     loader.enforce_bronze_lineage(contract)
 
 
-def test_enforce_bronze_lineage_raises_on_missing():
+def test_enforce_bronze_lineage_raises_on_missing() -> None:
     loader = ContractLoader()
     with pytest.raises(RuntimeError, match="Bronze contract must declare"):
         loader.enforce_bronze_lineage({"lineage": {"provenance_columns": []}})
 
 
-def test_assert_required_columns_raises():
+def test_assert_required_columns_raises() -> None:
     loader = ContractLoader(contracts_dir=Path("contracts"))
     contract = loader.load("tenant-metrics-v1.yaml")
     with pytest.raises(RuntimeError, match="missing required contract columns"):

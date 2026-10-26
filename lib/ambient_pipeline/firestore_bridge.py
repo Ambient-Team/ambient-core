@@ -7,10 +7,16 @@ Not imported by default notebook or ``pip install`` OSS paths. Requires
 from __future__ import annotations
 
 import json
-from typing import Any
+from typing import Any, Protocol, cast
 
 
-def _firestore_client():
+class _FirestoreClient(Protocol):
+    """Minimal surface used by lineage helpers (firebase_admin.firestore.client)."""
+
+    def collection(self, path: str) -> Any: ...
+
+
+def _firestore_client() -> _FirestoreClient:
     import firebase_admin
     from firebase_admin import credentials, firestore
 
@@ -27,7 +33,7 @@ def _firestore_client():
             raise RuntimeError("firebase_service_account secret must be a JSON object")
         cred = credentials.Certificate(sa_info)
         firebase_admin.initialize_app(cred)
-    return firestore.client()
+    return cast(_FirestoreClient, firestore.client())
 
 
 def append_lineage_event(
@@ -39,7 +45,21 @@ def append_lineage_event(
     rows_written: int,
     gcs_path: str,
 ) -> None:
-    """Append server-side mapping lineage to dataSources history."""
+    """Append server-side mapping lineage to dataSources history.
+
+    Args:
+        org_id: str.
+        source_id: str.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> append_lineage_event(...)
+    """
     try:
         db = _firestore_client()
         db.collection("organizations").document(org_id).collection("dataSources").document(
@@ -59,6 +79,21 @@ def append_lineage_event(
 
 
 def fetch_data_source(org_id: str, source_id: str) -> dict[str, Any] | None:
+    """Fetch data source.
+
+    Args:
+        org_id: str.
+        source_id: str.
+
+    Returns:
+        dict[str, Any] | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> fetch_data_source(...)
+    """
     try:
         db = _firestore_client()
         snap = (

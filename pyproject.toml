@@ -40,6 +40,13 @@ postgres = ["psycopg[binary]>=3.2,<4"]
 dev = [
     "pytest>=8.0,<10",
     "pytest-asyncio>=0.24,<2",
+    "ruff>=0.11,<1",
+    "mypy>=1.14,<2",
+    "pytest-cov>=6.2,<7",
+    "types-PyYAML>=6.0,<7",
+    "hypothesis>=6.100,<7",
+    "vulture>=2.14,<3",
+    "pip-audit>=2.7,<3",
 ]
 all = [
     "ambient-core[pipeline,colab,dev,postgres]",
@@ -62,9 +69,50 @@ include = [
 ]
 
 [tool.setuptools.package-data]
-ambient_contracts = ["bundled/*.yaml"]
+ambient_contracts = ["bundled/*.yaml", "py.typed"]
+ambient_cli = ["py.typed"]
+ambient_calc = ["py.typed"]
+ambient_pipeline = ["py.typed"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
 pythonpath = ["lib", "."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["F", "E9", "E7"]
+
+[tool.coverage.run]
+source = ["lib"]
+branch = true
+omit = []
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = true
+
+[tool.mypy]
+python_version = "3.12"
+files = ["lib"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true
+disallow_untyped_defs = false
+exclude = ["^ambient_pipeline/runner\\.py$"]
+
+[[tool.mypy.overrides]]
+module = "ambient_calc.engine"
+disable_error_code = ["attr-defined", "operator"]
+
+[[tool.mypy.overrides]]
+module = "ambient_pipeline.perf"
+disable_error_code = ["attr-defined"]
+
+[[tool.mypy.overrides]]
+module = "ambient_pipeline.pii"
+disable_error_code = ["untyped-decorator"]

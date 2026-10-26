@@ -1,6 +1,6 @@
 # Pipeline governance helpers
 
-Ambient Core ships **contracts**, **catalog** semantics, a **pandas Colab path** (`ambient_pipeline/colab_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (same pack as the enterprise free demo) or use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data: [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). Free Colab entry: https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2. Commercial deploy glue (DABs, Unity Catalog materialization, Firebase) belongs in your application repository.
+Ambient Core ships **contracts**, **catalog** semantics, a **pandas Colab path** (`ambient_pipeline/colab_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in git here). Free Colab entry: [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb) (open from GitHub in Colab). Commercial deploy glue (DABs, Unity Catalog materialization, Firebase) belongs in your application repository.
 
 For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). Product inventory and catalog linkage: [contracts/README.md](../contracts/README.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
@@ -25,7 +25,7 @@ pytest tests/pipeline/
 python scripts/run_oss_bronze_silver_smoke.py
 ```
 
-Java 17+ is required for Spark tests. Prefer the pandas Colab smoke (`ambient_pipeline.colab_smoke`) with samples from the website zip (or Drive for development). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
+Java 17+ is required for Spark tests. Prefer the pandas Colab smoke (`ambient_pipeline.colab_smoke`) with samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
 
 **Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, `ambient_calc`, and `ambient_pipeline`. Notebooks call `ambient_pipeline.notebook_bootstrap.ensure_pipeline_on_path()` so a git checkout resolves `lib/` without Databricks or platform paths.
 
@@ -76,6 +76,63 @@ Ambient Core **does not** ship Spark jobs that write `finance-*-v1` or healthcar
 
 Details: [contracts/README.md](../contracts/README.md), [crosswalk.md](crosswalk.md).
 
+### Local Spark runner — medallion data flow
+
+The optional helper [`ambient_pipeline.runner`](../lib/ambient_pipeline/runner.py) (`run_local_pipeline` / `run_pipeline_from_config`) runs a simplified Bronze → Silver → Gold path for OSS scale tests. Structured JSON logs go to stdout via [`log_pipeline_event`](../lib/ambient_pipeline/pipeline_logging.py) at pipeline start and after each stage; stage timings and row counts are also written under `gold/pipeline_perf` (Delta) by `PipelinePerfRecorder`.
+
+```mermaid
+flowchart TB
+  csv[Bronze CSV ingest]
+  bronze[(Bronze Delta raw_metrics)]
+  transform[Silver transform dedupe then PII hash then validate]
+  silver[(Silver Delta metrics)]
+  gold[(Gold Delta org_kpis)]
+  logs[stdout JSON logs plus pipeline_perf Delta]
+  csv --> bronze
+  bronze --> transform
+  transform --> silver
+  silver --> gold
+  transform --> logs
+  gold --> logs
+```
+
+PII matching columns (for example `name`) are pseudonymized **after** Bronze read and **before** Silver write. Gold pivots Real Estate KPIs on stable **`metric_id`** when present so display names can be hashed in Silver without breaking the wide table.
+
+### Local Spark PII salt {#local-spark-pii-salt}
+
+`run_local_pipeline` calls `PiiPseudonymizer` during Silver transformation. Outside pytest or `AMBIENT_SPARK_TESTS=1`, **`AMBIENT_PII_SALT` must be set** to a non-empty value that is **not** the golden integration-test salt (`golden-test-salt-not-for-production`).
+
+**Setup (local lakehouse):**
+
+1. Copy [`.env.example`](../.env.example) to `.env.local` (gitignored) or export variables in your shell.
+2. Replace the `AMBIENT_PII_SALT` placeholder with a long random string unique to your machine or tenant.
+3. Install Spark extras: `pip install -e ".[pipeline]"` (or `.[all]`).
+4. Run with Java 17+ and `AMBIENT_SPARK_TESTS=1 pytest tests/pipeline/` for the full gated suite, or invoke `run_local_pipeline` from your own driver with the env var set.
+
+**Typical error (missing salt):**
+
+```text
+RuntimeError: PiiPseudonymizer requires AMBIENT_PII_SALT outside test runs. Set AMBIENT_PII_SALT to a unique non-empty value ...
+```
+
+**Fix:** `export AMBIENT_PII_SALT='your-unique-local-salt'` (or load from `.env.local` before starting Spark). Do not use the golden test value or an empty string.
+
+`AMBIENT_ALLOW_DEV_SECRETS=1` alone does **not** satisfy this check; the env var must still be set for pseudonymization. Colab/pandas smoke paths do not use this Spark pseudonymizer.
+
+### Local Spark runner — real-estate gold columns
+
+The runner writes a simplified **real-estate** Gold Delta table when Silver rows include `industry` and (`metric_id` or `name`) and at least one row has `industry == "Real Estate"`. When `metric_id` is present, pivot keys are catalog ids (`re-noi`, `re-ads`, `re-mv`) mapped to Delta-safe Gold columns. Legacy rows without `metric_id` still pivot on human-readable **display names** (renamed because Delta rejects spaces).
+
+`metric_id` (preferred pivot) or display name (`name`) maps to Gold column:
+
+- **re-noi** / Net Operating Income → `noi`
+- **re-ads** / Annual Debt Service → `annual_debt_service`
+- **re-mv** / Market Value → `market_value`
+
+The runner also adds **`kpi_dscr`** (`noi / annual_debt_service` when debt service is positive). Constants live in `REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID` and `REAL_ESTATE_GOLD_PIVOT` in `runner.py`. When `name` / `industry` are absent, Gold falls back to a per-org **summary** table (`metric_rows`, optional `distinct_metrics`) under `gold/org_kpis/summary`.
+
+Integration tests: stubbed-PII golden ([`pipeline_spark_e2e.json`](../tests/fixtures/golden/pipeline_spark_e2e.json)) and real-pseudonymization golden ([`pipeline_spark_e2e_pii.json`](../tests/fixtures/golden/pipeline_spark_e2e_pii.json)) with a test-only ``AMBIENT_PII_SALT`` loaded from a fixture under ``tests/fixtures/pipeline/`` (never use that value in production). Refresh both with `python scripts/refresh_pipeline_golden.py`.
+
 Public re-exports from `ambient_pipeline`: `ContractLoader`, `BronzeProvenanceStamper`, `PiiPseudonymizer`, `SilverValidator`, plus `bronze_to_tenant_metrics`, `MappingSpec`, and mapping helpers ([`__init__.py`](../lib/ambient_pipeline/__init__.py)).
 
 ## Walkthrough by test module
@@ -103,7 +160,7 @@ See [examples/pipeline/README.md](../examples/pipeline/README.md).
 ## Related
 
 - [../notebooks/README.md](../notebooks/README.md) — OSS Jupyter medallion flow
-- [../data/README.md](../data/README.md) — external demo samples; hub SSOT [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/); no CSVs in git
+- [../data/README.md](../data/README.md) — external demo samples; no CSVs in git
 - [USAGE.md](USAGE.md) — recipe 3 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
 - [contracts/README.md](../contracts/README.md) — SSOT products and catalog → contract flow

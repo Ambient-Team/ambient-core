@@ -66,7 +66,7 @@ The **`auditor` agent profile** in [../AGENTS.md](../AGENTS.md) validates contra
 
 ## REIT illustration (alignment, not ranking)
 
-For a real-estate or listed REIT org, assurance often requires showing that **energy and property operations** tie to **financial outcomes**: energy consumption data options in [real_estate.yaml](../catalog/industries/real_estate.yaml), NOI and cap-rate semantics in the same pack, and bridge hints for energy versus opex and NOI. Assurance succeeds when operational extracts and financial close reconcile under one definition—not when the REIT beats a peer on NOI margin ([benchmarking-lifecycle.md](benchmarking-lifecycle.md)).
+For a real-estate or listed REIT org, assurance often requires showing that **energy and property operations** tie to **financial outcomes**: energy consumption data options in [real_estate pack](../catalog/industries/real_estate/metrics.yaml), NOI and cap-rate semantics in the same pack, and bridge hints for energy versus opex and NOI. Assurance succeeds when operational extracts and financial close reconcile under one definition—not when the REIT beats a peer on NOI margin ([benchmarking-lifecycle.md](benchmarking-lifecycle.md)).
 
 ## Related
 

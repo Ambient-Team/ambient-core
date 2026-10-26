@@ -39,7 +39,7 @@ flowchart LR
 
 ### 2. Metric pack selection
 
-- **Core** — Real Estate operating metrics (NOI, cap rate, occupancy where defined); listed REIT investor metrics under `financial_services.reits.*` in [financial_services.yaml](../catalog/industries/financial_services.yaml); energy consumption fields on Real Estate data options (`energy_consumed`, `energy_cost`). Bridge rules link energy signals to financial impact narratives.
+- **Core** — Real Estate operating metrics (NOI, cap rate, occupancy where defined); listed REIT investor metrics under `financial_services.reits.*` in [financial_services pack](../catalog/industries/financial_services/metrics.yaml); energy consumption fields on Real Estate data options (`energy_consumed`, `energy_cost`). Bridge rules link energy signals to financial impact narratives.
 - **Platform** — Curated “investor pack” per mandate; effectiveness metrics (growth, distributions) versus efficiency and environmental intensity grouped for disclosure schedules.
 
 **Catalog gap (v1):** There is no dedicated `sustainability` segment or native GHG metrics in core yet. Intensity-style environmental KPIs (for example per megawatt, PUE) are expected to be platform-normalized or added in a future catalog band—not invented in prompts.

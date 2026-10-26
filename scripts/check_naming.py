@@ -19,6 +19,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -70,13 +71,19 @@ ALLOWED_SEGMENTS = {
 }
 
 
-def _load_yaml(path: Path) -> dict:
+def _load_yaml(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
     return data if isinstance(data, dict) else {}
 
 
-def _check_entries(kind: str, entries: dict, pack: str, ids: dict, errors: list) -> None:
+def _check_entries(
+    kind: str,
+    entries: dict[str, Any] | None,
+    pack: str,
+    ids: dict[int, str],
+    errors: list[str],
+) -> None:
     for key, entry in (entries or {}).items():
         if not isinstance(entry, dict):
             errors.append(f"{pack}: {kind} {key} is not a mapping")

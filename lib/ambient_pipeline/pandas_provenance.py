@@ -46,6 +46,20 @@ class PandasBronzeStamper:
             self.ingestion_ts = datetime.now(timezone.utc).isoformat()
 
     def stamp(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Stamp.
+
+        Args:
+            df: pd.DataFrame.
+
+        Returns:
+            pd.DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> stamp(...)
+        """
         out = df.copy()
         content_cols = [c for c in out.columns if not str(c).startswith("_bronze_")]
         out["_bronze_run_id"] = self.run_id
@@ -62,4 +76,18 @@ class PandasBronzeStamper:
         return out
 
     def required_columns(self) -> set[str]:
+        """Required columns.
+
+        Args:
+            None.
+
+        Returns:
+            set[str].
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> required_columns()
+        """
         return set(REQUIRED_BRONZE_COLS)

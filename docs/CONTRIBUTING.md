@@ -14,6 +14,8 @@ Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make change
 
 Do **not** use markdown pipe tables (`| col |` with `|---|` separators) in `docs/`, any `README.md`, or `examples/**/*.md`. Use short paragraphs and bullet lists instead (for example `- **term** — definition`). Mermaid diagrams and code fences are fine.
 
+Do **not** link to public Google Drive or Google Docs URLs in repo docs. Point demo CSVs, recordings, and synthetic bundles at [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) instead. CI enforces Drive/Docs hostnames via `scripts/check_markdown_prose.py` and relative links via `scripts/check_doc_links.py`.
+
 CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow [../AGENTS.md](../AGENTS.md).
 
 ## Scope
@@ -38,7 +40,7 @@ validate-contracts
 pytest
 ```
 
-To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md).
+To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md). GitHub Actions policy (draft gate, path filters): [ci.md](ci.md). Workflow shape is enforced by `node scripts/ci-policy.mjs`. Optional lint: `python scripts/check_ruff.py` (requires `ruff` from `.[dev]` / `.[all]`).
 
 ## Contract changes
 
@@ -63,7 +65,7 @@ Integrator-facing guides after catalog or contract changes: [governed-data.md](g
 
 ## Releases
 
-See [RELEASING.md](RELEASING.md) for semver, CHANGELOG, and the automated release workflow. After the owner tags `vX.Y.Z` on `main`, complete **Consumer follow-up** below for any repo that depends on this project.
+See [RELEASING.md](RELEASING.md) and [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md) for semver, CHANGELOG, the **monthly release cadence** (last Friday; no freeze days; work through release day), hub chain order, and the automated release workflow. After the owner tags `vX.Y.Z` on `main`, complete **Consumer follow-up** below for any repo that depends on this project.
 
 ## Consumer follow-up (after a release)
 

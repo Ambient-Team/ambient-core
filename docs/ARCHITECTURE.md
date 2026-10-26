@@ -8,7 +8,7 @@ Overview: [ECOSYSTEM.md](ECOSYSTEM.md).
 
 - **`ambient_contracts`** — load and validate `contracts/*.yaml`
 - **`ambient_pipeline`** — ISO 8000 Silver validation, provenance stamping, catalog loaders, bronze mapping, local runner
-- **`ambient_cli`** — `validate-contracts`, `ambient-catalog-generate` wrappers
+- **`ambient_cli`** — `validate-contracts`, `ambient-catalog-generate` wrappers (`ambient_cli.catalog` delegates to `scripts/generate_reference_catalog.py`)
 - **`ambient_calc`** — safe formula evaluation for catalogue metrics
 
 The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipeline`** is exercised from a git checkout in tests; consumers may add app-specific modules alongside a pinned install.
@@ -20,8 +20,8 @@ The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipe
 - **`ambient_pipeline/`** — Colab/pandas Bronze→Silver→Gold happy path (no Databricks)
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (package home is `lib/`)
 - **`notebooks/`** — entry `00_colab_run_me.ipynb`; optional local Spark notebooks; commercial skips in `COMMERCIAL_ONLY.txt`
-- **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — storage = none; samples from [website zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) or [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) (not for scale; enterprise tests separately). Demo recordings, screenshots, and synthetic data: [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).
-- **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`, [running-ci-locally.md](running-ci-locally.md))
+- **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — storage = none; samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (not for scale; enterprise tests separately). Demo recordings, screenshots, and synthetic data live in that tree (not in this repository).
+- **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`, [ci.md](ci.md), [running-ci-locally.md](running-ci-locally.md), [metrics-catalog.md](metrics-catalog.md), [INVENTORY.md](INVENTORY.md))
 
 Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; precursor OLTP/Bronze and forward Parquet/Delta live in deployment ([CONVENTIONS.md](CONVENTIONS.md), [governed-data.md](governed-data.md)).
 
@@ -30,7 +30,7 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 Clone this repository alone and run without Databricks or Firebase:
 
 1. `pip install -r requirements-colab.txt` (or `pip install -e ".[colab]"` for the same Colab deps from `pyproject.toml`)
-2. Download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) into `data/raw/` (or use [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) / free Colab https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2)
+2. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, then run [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb) or `ambient_pipeline.colab_smoke`
 3. Optional Spark: `pip install -e ".[pipeline,dev]"` (or `pip install -e ".[all]"` to match PR CI) and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
 
 **Core** = contracts + catalog + Colab/pandas pipeline + notebooks. The commercial platform pins a core release and adds hosting/storage/members — those stay downstream ([CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md)).

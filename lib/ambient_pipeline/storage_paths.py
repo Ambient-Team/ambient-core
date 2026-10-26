@@ -10,12 +10,39 @@ GCS_BUCKET_STEM = "ambient-systems-storage"
 
 
 def is_gcs_uri(path: str) -> bool:
-    """Return True when *path* uses a Google Cloud Storage URI."""
+    """Return True when *path* uses a Google Cloud Storage URI.
+
+    Args:
+        path: str.
+
+    Returns:
+        bool.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> is_gcs_uri(...)
+    """
     return path.strip().lower().startswith(("gs://", "gcs://"))
 
 
 def default_base_path(backend: str, env: str) -> str:
-    """Default root path per storage backend."""
+    """Default root path per storage backend.
+
+    Args:
+        backend: str.
+        env: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> default_base_path(...)
+    """
     backend = backend.strip().lower()
     if backend == "local":
         return str((__import__("pathlib").Path.cwd() / ".lakehouse" / env).resolve())
@@ -35,7 +62,23 @@ def resolve_layer_base(
     env: str,
     layer: str,
 ) -> str:
-    """Return the base path for a medallion layer (bronze, silver, gold, landing)."""
+    """Return the base path for a medallion layer (bronze, silver, gold, landing).
+
+    Args:
+        backend: str.
+        base_path: str | None.
+        env: str.
+        layer: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_layer_base(...)
+    """
     layer = layer.strip().lower()
     if layer not in VALID_LAYERS:
         raise ValueError(f"Unknown layer: {layer!r}. Expected one of {sorted(VALID_LAYERS)}")
@@ -60,7 +103,24 @@ def resolve_table_path(
     *,
     org_id: str | None = None,
 ) -> str:
-    """Return a Delta table directory path under the given layer."""
+    """Return a Delta table directory path under the given layer.
+
+    Args:
+        backend: str.
+        base_path: str | None.
+        env: str.
+        layer: str.
+        table: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_table_path(...)
+    """
     layer_base = resolve_layer_base(backend, base_path, env, layer)
     path = f"{layer_base}/{table}"
     if org_id:
@@ -72,12 +132,39 @@ def resolve_source_path(
     gcs_path: str,
     source_path: str,
 ) -> str:
-    """Prefer explicit source_path; fall back to deprecated gcs_path widget."""
+    """Prefer explicit source_path; fall back to deprecated gcs_path widget.
+
+    Args:
+        gcs_path: str.
+        source_path: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_source_path(...)
+    """
     return (source_path or gcs_path).strip()
 
 
 def catalog_for_backend(backend: str) -> tuple[str, str]:
-    """Return (catalog, schema_prefix) for optional UC registration (platform)."""
+    """Return (catalog, schema_prefix) for optional UC registration (platform).
+
+    Args:
+        backend: str.
+
+    Returns:
+        tuple[str, str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> catalog_for_backend(...)
+    """
     backend = backend.strip().lower()
     if backend == "local":
         return "spark_catalog", ""

@@ -8,17 +8,32 @@ from pathlib import Path
 import ambient_contracts
 
 
-def test_version_is_nonempty():
+def test_version_is_nonempty() -> None:
     assert ambient_contracts.__version__
 
 
-def test_pyproject_uses_dynamic_version():
+def test_pyproject_uses_dynamic_version() -> None:
     text = (Path(__file__).resolve().parents[1] / "pyproject.toml").read_text(encoding="utf-8")
     assert 'dynamic = ["version"]' in text
     assert re.search(r'attr\s*=\s*"ambient_contracts.__version__"', text)
 
 
-def test_readme_acknowledgements_version_matches_package():
+def test_changelog_has_section_for_package_version() -> None:
+    import subprocess
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    result = subprocess.run(
+        [sys.executable, str(root / "scripts" / "check_changelog_version.py")],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+
+
+def test_readme_acknowledgements_version_matches_package() -> None:
     """README documents the same __version__ as ambient_contracts (release guard)."""
     readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(encoding="utf-8")
     match = re.search(
