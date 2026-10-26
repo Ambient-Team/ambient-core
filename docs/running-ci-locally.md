@@ -57,6 +57,8 @@ python scripts/check_quality_static.py
 AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py
 ```
 
+Also enforces **`lib/ambient_pipeline/` ≥ 95%** lines and branches (see `PACKAGE_FLOORS` in `scripts/check_coverage.py`).
+
 Writes HTML to `/opt/cursor/artifacts/coverage-html` when that directory exists (Cloud Agent VMs).
 
 ## Faster subsets
