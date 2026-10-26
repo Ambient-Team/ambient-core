@@ -8,7 +8,7 @@ Only the repository owner merges release PRs and runs the cut workflow. CI does 
 
 Starting **November 2026**, ambient-core targets a **monthly** release on the **second Friday** of each month when GitHub Actions capacity allows. The **November 2026** tag is deferred to **Fri 27 Nov 2026** (end-of-month merge) because of GitHub credit limits; package **`0.3.10`** / tag **`v0.3.10`** for **ambient-systems-platform** pins ships on that date.
 
-- **Freeze:** the **Monday** of that release week (for Nov 2026: **Mon 24 Nov**) — avoid merging risky or wide refactors after freeze; quality and release-prep PRs should be green before then. While billing limits CI, verify with [`scripts/run_local_pr_ci.sh`](running-ci-locally.md) and avoid extra workflow dispatches.
+- **Freeze:** the **Monday** of that release week (for Nov 2026: **Mon 24 Nov**) — avoid merging risky or wide refactors after freeze; quality and release-prep PRs should be green before then. While billing limits CI, verify with [`scripts/run_local_pr_ci.sh`](../scripts/run_local_pr_ci.sh) (see [running-ci-locally.md](running-ci-locally.md)) and avoid extra workflow dispatches.
 - **Cut:** owner runs **Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month.
 - **Consumers:** pin the new `vX.Y.Z` tag per [Downstream: pin a core release](#downstream-pin-a-core-release) once the GitHub Release artifacts are published.
 
