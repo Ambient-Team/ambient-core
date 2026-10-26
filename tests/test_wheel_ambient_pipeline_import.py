@@ -68,3 +68,10 @@ print("ok")
     )
     assert probe.returncode == 0, probe.stderr or probe.stdout
     assert "ok" in (probe.stdout or "")
+    # Restore editable install for the rest of the test suite.
+    subprocess.run(
+        [sys.executable, "-m", "pip", "install", "-e", ".", "--no-deps"],
+        cwd=ROOT,
+        capture_output=True,
+        check=False,
+    )
