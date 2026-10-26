@@ -8,12 +8,13 @@ import subprocess
 import sys
 from pathlib import Path
 
-# Full lib/ tree (34 modules). Add new files here when they land under lib/.
+# Full lib/ tree (35 modules). Add new files here when they land under lib/.
 STRICT_MODULES: tuple[str, ...] = (
     "lib/ambient_calc/__init__.py",
     "lib/ambient_calc/engine.py",
     "lib/ambient_cli/__init__.py",
     "lib/ambient_cli/catalog.py",
+    "lib/ambient_cli/integrator_plan_runner.py",
     "lib/ambient_cli/integrator_tools.py",
     "lib/ambient_cli/tool_registry.py",
     "lib/ambient_cli/tool_schema.py",

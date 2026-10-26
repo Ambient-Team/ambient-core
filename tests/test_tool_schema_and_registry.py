@@ -75,6 +75,27 @@ def test_validate_tool_args_integer_minimum() -> None:
     assert any("minimum" in err for err in errors)
 
 
+def test_validate_tool_args_all_of_merges_subschemas() -> None:
+    props = {"name": {"allOf": [{"type": "string"}, {"minLength": 2}]}}
+    assert validate_tool_args(props, [], {"name": "ok"}) == []
+    errors = validate_tool_args(props, [], {"name": "x"})
+    assert any("minLength" in err for err in errors)
+
+
+def test_validate_tool_args_const_value() -> None:
+    props = {"version": {"const": "v1"}}
+    assert validate_tool_args(props, [], {"version": "v1"}) == []
+    errors = validate_tool_args(props, [], {"version": "v2"})
+    assert any("const" in err for err in errors)
+
+
+def test_validate_tool_args_const_with_type() -> None:
+    props = {"tag": {"type": "string", "const": "prod"}}
+    assert validate_tool_args(props, [], {"tag": "prod"}) == []
+    errors = validate_tool_args(props, [], {"tag": "dev"})
+    assert any("const" in err for err in errors)
+
+
 def test_validate_tool_args_pattern_on_string() -> None:
     props = {"org_id": {"type": "string", "pattern": r"[a-z]+"}}
     assert validate_tool_args(props, [], {"org_id": "acme"}) == []

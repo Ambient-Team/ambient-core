@@ -16,6 +16,7 @@ from ambient_cli.integrator_tools import (
     crosswalk_list_links,
     register_integrator_builtin_tools,
 )
+from ambient_cli.integrator_plan_runner import IntegratorPlanStep, run_integrator_plan
 from ambient_cli.tool_registry import IntegratorToolRegistry, ToolPlanProfile, execute_tool_plan
 from ambient_cli.tool_schema import validate_tool_schema_document
 
@@ -89,7 +90,19 @@ def main() -> int:
         max_tool_rounds=2,
     )
     plan_results = execute_tool_plan(registry, plan, shared_kwargs={})
-    print(f"tool plan returned {len(plan_results)} result(s)")
+    print(f"shared-kwargs tool plan returned {len(plan_results)} result(s)")
+
+    linear = run_integrator_plan(
+        registry,
+        [
+            IntegratorPlanStep("catalog_manifest_summary"),
+            IntegratorPlanStep(
+                "contract_schema_summary",
+                {"contract_file": "finance-banking-v1.yaml"},
+            ),
+        ],
+    )
+    print(f"per-step integrator plan returned {len(linear)} result(s)")
     return 0
 
 

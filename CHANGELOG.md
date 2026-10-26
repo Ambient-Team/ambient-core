@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Catalog and Gold read builtins** — `catalog_list_industries`, `catalog_resolve_metric_by_key`, `gold_contract_column_map` on `IntegratorToolRegistry` (file/crosswalk SSOT; not hosted HTTP or OLAP).
 - **Extended tool schema validation** — `enum`, `minLength`/`maxLength`, `minimum`/`maximum`, `pattern`, and `oneOf` in `ambient_cli.tool_schema`.
 - **Contract and crosswalk builtins** — `contracts_list_files`, `contract_schema_summary`, and `crosswalk_links_for_metric_key` on `IntegratorToolRegistry`.
+- **Integrator plan runner** — `ambient_cli.integrator_plan_runner` (`IntegratorPlanStep`, `run_integrator_plan`) for linear in-process tool plans with per-step arguments (not a hosted agent runtime).
+- **Schema `allOf` and `const`** — additional JSON-Schema-style keywords in `ambient_cli.tool_schema`.
 
 ### Changed
 

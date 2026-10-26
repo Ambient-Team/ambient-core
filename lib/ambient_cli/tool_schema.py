@@ -5,6 +5,21 @@ from __future__ import annotations
 import re
 from typing import Any
 
+_CONSTRAINT_KEYS = (
+    "enum",
+    "const",
+    "minLength",
+    "maxLength",
+    "minimum",
+    "maximum",
+    "pattern",
+)
+
+
+def _spec_has_constraints(spec: dict[str, Any]) -> bool:
+    return any(key in spec for key in _CONSTRAINT_KEYS)
+
+
 _SIMPLE_TYPES: dict[str, Any] = {
     "string": str,
     "integer": int,
@@ -17,6 +32,14 @@ _SIMPLE_TYPES: dict[str, Any] = {
 
 def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
     type_name = str(spec.get("type") or "").strip()
+    all_of = spec.get("allOf")
+    if isinstance(all_of, list) and all_of:
+        merged: list[str] = []
+        for candidate in all_of:
+            if isinstance(candidate, dict):
+                merged.extend(_validate_value(candidate, value, path))
+        if merged:
+            return merged
     one_of = spec.get("oneOf")
     if isinstance(one_of, list) and one_of:
         matches = 0
@@ -28,6 +51,10 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
         if not type_name:
             return _validate_constraints(spec, value, path)
     if not type_name:
+        if "const" in spec and value != spec["const"]:
+            return [f"{path} must equal const {spec['const']!r}"]
+        if isinstance(all_of, list) and all_of or _spec_has_constraints(spec):
+            return _validate_constraints(spec, value, path)
         return []
     if type_name == "object":
         if not isinstance(value, dict):
@@ -64,6 +91,8 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
 
 def _validate_constraints(spec: dict[str, Any], value: Any, path: str) -> list[str]:
     errors: list[str] = []
+    if "const" in spec and value != spec["const"]:
+        errors.append(f"{path} must equal const {spec['const']!r}")
     enum = spec.get("enum")
     if isinstance(enum, list) and value not in enum:
         errors.append(f"{path} must be one of {enum!r}")

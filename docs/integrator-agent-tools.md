@@ -9,6 +9,7 @@ Ambient Core ships **file-backed** catalog and crosswalk helpers for platform wo
 - **`ambient_cli.integrator_tools`** — catalog, crosswalk, contract, and Gold-map builtins; `register_integrator_builtin_tools`, `call_integrator_tool`, and `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
 - **`ambient_cli.tool_schema`** — `validate_tool_args` and `validate_tool_schema_document` (required fields, simple types, nested **object** / **array**).
 - **`ambient_cli.tool_registry`** — `IntegratorToolRegistry` (one registry per worker/tenant), `ToolPlanProfile`, `execute_tool_plan` (v1 runs each `tool_ids` entry once).
+- **`ambient_cli.integrator_plan_runner`** — `IntegratorPlanStep` and `run_integrator_plan` for linear plans with **per-step** `args` (in-process only; no HTTP agent runtime).
 
 ## Environment
 
@@ -81,6 +82,25 @@ results = execute_tool_plan(registry, plan)
 
 `call_integrator_tool` validates `args` against `BUILTIN_INTEGRATOR_TOOL_SCHEMAS` before calling the handler. Unknown tool ids raise `KeyError`; schema violations raise `ValueError` with joined messages.
 
+### Linear plans with per-step arguments
+
+When each tool needs different kwargs, use `run_integrator_plan` instead of `execute_tool_plan` (which only supports shared kwargs):
+
+```python
+from ambient_cli.integrator_plan_runner import IntegratorPlanStep, run_integrator_plan
+
+steps = [
+    IntegratorPlanStep("catalog_manifest_summary"),
+    IntegratorPlanStep(
+        "contract_schema_summary",
+        {"contract_file": "finance-banking-v1.yaml"},
+    ),
+]
+results = run_integrator_plan(registry, steps)
+```
+
+Multi-round ReAct (`max_tool_rounds` > 1) and hosted HTTP workers remain **platform** concerns; core documents the reserved field on `ToolPlanProfile` only.
+
 ## Custom tools and schemas
 
 Register your own handlers on the same registry instance, then validate with `validate_tool_schema_document` before dispatch:
@@ -95,7 +115,7 @@ schema = {
 errors = validate_tool_schema_document(schema, {"org_id": "tenant-a"})
 ```
 
-Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), and **`oneOf`** (exactly one branch must match). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
+Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`**, **`const`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), **`allOf`** (every sub-schema must match), and **`oneOf`** (exactly one branch must match). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
 
 ## Example script
 

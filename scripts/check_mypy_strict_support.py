@@ -144,6 +144,7 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     # Dec 2026 v0.3.12 train — integrator builtins
     "tests/test_integrator_tools.py",
     "tests/test_integrator_tools_edges.py",
+    "tests/test_integrator_plan_runner.py",
     "tests/test_integrators_example_walkthrough.py",
     "tests/test_tool_schema_and_registry.py",
     "tests/test_wheel_ambient_pipeline_import.py",
