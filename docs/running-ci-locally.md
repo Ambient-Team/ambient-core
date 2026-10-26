@@ -47,7 +47,7 @@ pip install -e ".[dev]"
 python scripts/check_quality_static.py
 ```
 
-## Coverage gate (lib ≥ 90% lines, ≥ 85% branches)
+## Coverage gate (lib ≥ 90% lines, ≥ 95% branches)
 
 ```bash
 AMBIENT_SPARK_TESTS=1 python scripts/check_coverage.py

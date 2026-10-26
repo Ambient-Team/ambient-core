@@ -41,14 +41,14 @@ def main() -> int:
         data = json.loads(json_path.read_text(encoding="utf-8"))
         totals = data.get("totals") or {}
         branch_pct = float(totals.get("percent_branches_covered") or 0.0)
-        if branch_pct < 85.0:
+        if branch_pct < 95.0:
             print(
-                f"ERROR: branch coverage {branch_pct:.2f}% below 85%",
+                f"ERROR: branch coverage {branch_pct:.2f}% below 95%",
                 file=sys.stderr,
             )
             return 1
 
-    print("OK: lib/ coverage >= 90% lines and >= 85% branches")
+    print("OK: lib/ coverage >= 90% lines and >= 95% branches")
     return 0
 
 

@@ -12,7 +12,7 @@ Use this page to see what changed recently and which verify commands apply. Upda
 - [`docs/ci.md`](ci.md) — triggers, `run_heavy`, Dependabot limits, concurrency group rules.
 - [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs) — structural workflow policy; no workflow-level `paths:` filters; push to `main` only.
 - [`scripts/check_quality_static.py`](../scripts/check_quality_static.py) — draft-safe ruff/mypy/secrets/pack-doc gates (CI job **`quality-static`**).
-- [`scripts/check_ruff.py`](../scripts/check_ruff.py), [`scripts/check_mypy.py`](../scripts/check_mypy.py), [`scripts/check_mypy_strict.py`](../scripts/check_mypy_strict.py), [`scripts/check_coverage.py`](../scripts/check_coverage.py) — lint, types, **lib ≥ 90% lines / ≥ 85% branches** (`pyproject.toml` coverage omit list is empty).
+- [`scripts/check_ruff.py`](../scripts/check_ruff.py), [`scripts/check_mypy.py`](../scripts/check_mypy.py), [`scripts/check_mypy_strict.py`](../scripts/check_mypy_strict.py), [`scripts/check_coverage.py`](../scripts/check_coverage.py) — lint, types, **lib ≥ 90% lines / ≥ 95% branches** (`pyproject.toml` coverage omit list is empty).
 - [`scripts/generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) — per-pack markdown under [`docs/catalog-packs/`](catalog-packs/); `--check` drift gate.
 - [`scripts/scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py), [`scripts/check_dead_code.py`](../scripts/check_dead_code.py) — secret-shaped token scan and unused-import gate.
 - [`docs/performance-profiling.md`](performance-profiling.md) — Spark `PipelinePerfRecorder` profiling notes.

@@ -70,6 +70,22 @@ def test_find_platform_root_drive_marker_nested(tmp_path: Path, monkeypatch: pyt
     assert find_platform_root() == platform.resolve()
 
 
+class _DriveListingRaisesOSError:
+    """Minimal Drive mount stub (not a Path subclass) for iterdir OSError coverage."""
+
+    def __init__(self, path: Path) -> None:
+        self._path = path
+
+    def is_dir(self) -> bool:
+        return self._path.is_dir()
+
+    def __truediv__(self, key: str) -> Path:
+        return self._path / key
+
+    def iterdir(self) -> Iterator[Path]:
+        raise OSError("permission denied")
+
+
 def test_find_platform_root_drive_iterdir_oserror(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -77,14 +93,9 @@ def test_find_platform_root_drive_iterdir_oserror(
     drive.mkdir()
     marker = drive / "ambient-core"
     _fake_platform_root(marker)
-
-    class BadDrive(Path):
-        def iterdir(self) -> Iterator[Path]:  # type: ignore[override]
-            raise OSError("permission denied")
-
     monkeypatch.setattr(
         "ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES",
-        (BadDrive(drive),),
+        (_DriveListingRaisesOSError(drive),),
     )
     monkeypatch.setattr(
         "ambient_pipeline.colab_bootstrap.Path.cwd",
