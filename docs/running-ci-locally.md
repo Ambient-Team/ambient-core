@@ -53,6 +53,16 @@ python scripts/check_quality_static.py
 
 `check_quality_static.py` includes relative doc link checks (`check_doc_links.py`) and a sensitive-literal scan (emails, phones, personal paths) outside `tests/` and `catalog/`.
 
+## Full PR CI (when GitHub Actions billing is blocked)
+
+From repo root with `.venv` active and Java 17 for Spark:
+
+```bash
+bash scripts/run_local_pr_ci.sh
+```
+
+Paste the script output into PR comments so reviewers see the same gates CI would run on `build-test` + `quality-static`.
+
 ## Coverage gate (lib ≥ 90% lines, ≥ 95% branches)
 
 ```bash

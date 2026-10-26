@@ -37,6 +37,10 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
     ),
     ("doc-links", [sys.executable, str(ROOT / "scripts" / "check_doc_links.py")]),
     (
+        "changelog-version",
+        [sys.executable, str(ROOT / "scripts" / "check_changelog_version.py")],
+    ),
+    (
         "pack-reference-docs",
         [sys.executable, str(ROOT / "scripts" / "generate_pack_reference_docs.py"), "--check"],
     ),
