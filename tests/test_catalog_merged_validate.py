@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
+import types
+
 import pytest
 
 from tests.catalog_script_loader import load_generate_reference_catalog
 
 
 @pytest.fixture(scope="module")
-def gen():
+def gen() -> types.ModuleType:
     return load_generate_reference_catalog()
 
 
-def test_merged_catalog_validate_reports_no_errors(gen) -> None:
+def test_merged_catalog_validate_reports_no_errors(gen: types.ModuleType) -> None:
     default_industry, registry_packs = gen.load_industry_registry()
     industry_entries = gen.build_industry_entries(registry_packs)
     metrics, data_options, benchmarks, _bridge, _crosswalk, pack_benchmarks = gen.load_catalog()
@@ -28,7 +30,7 @@ def test_merged_catalog_validate_reports_no_errors(gen) -> None:
     assert not errors, errors[:10]
 
 
-def test_merged_catalog_data_option_ids_globally_unique(gen) -> None:
+def test_merged_catalog_data_option_ids_globally_unique(gen: types.ModuleType) -> None:
     _metrics, data_options, *_ = gen.load_catalog()
     seen: dict[int, str] = {}
     for key, option in data_options.items():
@@ -41,7 +43,7 @@ def test_merged_catalog_data_option_ids_globally_unique(gen) -> None:
         seen[oid_int] = key
 
 
-def test_merged_catalog_metric_ids_globally_unique(gen) -> None:
+def test_merged_catalog_metric_ids_globally_unique(gen: types.ModuleType) -> None:
     metrics, *_ = gen.load_catalog()
     seen: dict[int, str] = {}
     for key, metric in metrics.items():

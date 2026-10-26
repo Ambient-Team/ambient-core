@@ -7,7 +7,7 @@ import pytest
 from ambient_contracts.manifest_models import MetricInput, MetricInputSource, parse_catalog_manifest
 
 
-def _metric(**overrides: object) -> dict:
+def _metric(**overrides: object) -> dict[str, object]:
     base = {
         "catalogMetricKey": "k",
         "id": 1,
@@ -22,7 +22,7 @@ def _metric(**overrides: object) -> dict:
     return base
 
 
-def _industry_codes() -> dict:
+def _industry_codes() -> dict[str, object]:
     return {
         "isic": {"revision": "Rev.4", "primary": "0000"},
         "naics": {"revision": "2022", "primary": "000000"},
@@ -35,19 +35,18 @@ def _industry_codes() -> dict:
 
 
 def test_metric_input_source_rejects_bad_field_id_name() -> None:
-    base_input = {
+    satisfied_template: dict[str, object] = {
+        "catalogOptionKey": "OptKey",
+        "via": "field",
+    }
+    base_input: dict[str, object] = {
         "name": "revenue",
         "kind": "field",
         "covered": True,
-        "satisfiedBy": [
-            {
-                "catalogOptionKey": "OptKey",
-                "via": "field",
-            }
-        ],
+        "satisfiedBy": [dict(satisfied_template)],
     }
     for key, bad in (("field", 1), ("id", "x"), ("name", 9)):
-        payload = {**base_input["satisfiedBy"][0], key: bad}
+        payload = {**satisfied_template, key: bad}
         with pytest.raises(ValueError, match=key):
             parse_catalog_manifest(
                 {

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import types
 from collections import Counter
 from pathlib import Path
 
@@ -18,7 +19,7 @@ METRIC_TYPE_ENUM = frozenset({"Financial", "Operational"})
 
 
 @pytest.fixture(scope="module")
-def gen():
+def gen() -> types.ModuleType:
     return load_generate_reference_catalog()
 
 
@@ -35,7 +36,7 @@ def test_every_pack_has_required_pack_yaml_fields() -> None:
             assert field in data, f"{pack_dir.name}/pack.yaml missing {field}"
 
 
-def test_industry_metrics_yaml_pass_generator_schema(gen) -> None:
+def test_industry_metrics_yaml_pass_generator_schema(gen: types.ModuleType) -> None:
     for pack_dir in _pack_dirs():
         path = pack_dir / "metrics.yaml"
         if not path.is_file():
@@ -45,7 +46,7 @@ def test_industry_metrics_yaml_pass_generator_schema(gen) -> None:
         assert not errors, f"{path}: {errors}"
 
 
-def test_industry_data_options_yaml_pass_generator_schema(gen) -> None:
+def test_industry_data_options_yaml_pass_generator_schema(gen: types.ModuleType) -> None:
     for pack_dir in _pack_dirs():
         path = pack_dir / "data_options.yaml"
         if not path.is_file():

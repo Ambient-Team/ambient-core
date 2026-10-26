@@ -18,7 +18,7 @@ INDUSTRIES = ROOT / "catalog" / "industries"
 POLICY = ROOT / "catalog" / "input_field_policy.yaml"
 
 
-def _matchers():
+def _matchers() -> tuple[set[str], list[re.Pattern[str]]]:
     pol = yaml.safe_load(POLICY.read_text(encoding="utf-8")) or {}
     exact = {str(x).strip().lower() for x in (pol.get("phiExact") or [])}
     patterns = [re.compile(str(p), re.IGNORECASE) for p in (pol.get("phiPatterns") or [])]

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 from ambient_pipeline.pii import PiiPseudonymizer, hmac_sha256_hex, pseudonymize_string
@@ -14,7 +15,7 @@ def test_bronze_provenance_repr_and_required_columns() -> None:
     assert "_bronze_row_hash" in stamper.required_columns()
 
 
-def test_bronze_provenance_uses_org_id_column_when_present(spark) -> None:
+def test_bronze_provenance_uses_org_id_column_when_present(spark: SparkSession) -> None:
     df = spark.createDataFrame([("org-row", 1.0)], ["org_id", "value"])
     stamper = BronzeProvenanceStamper(
         run_id="run-1",
@@ -25,7 +26,7 @@ def test_bronze_provenance_uses_org_id_column_when_present(spark) -> None:
     assert row["_bronze_org_id"] == "org-row"
 
 
-def test_bronze_provenance_blank_source_path_defaults_to_manual(spark) -> None:
+def test_bronze_provenance_blank_source_path_defaults_to_manual(spark: SparkSession) -> None:
     stamper = BronzeProvenanceStamper(
         run_id="run-1",
         org_id="org-1",
@@ -46,7 +47,7 @@ def test_pseudonymize_string_matches_hmac_helper() -> None:
     assert pseudonymize_string("pepper", None) == hmac_sha256_hex("pepper", None)
 
 
-def test_pseudonymize_column_udf_executes_hmac(spark) -> None:
+def test_pseudonymize_column_udf_executes_hmac(spark: SparkSession) -> None:
     pii = PiiPseudonymizer(salt="pepper", transform_ts="2026-01-01T00:00:00Z")
     out = spark.createDataFrame([(1,)], ["id"]).select(
         pii.pseudonymize_column(F.lit("plain-text")).alias("hashed")
