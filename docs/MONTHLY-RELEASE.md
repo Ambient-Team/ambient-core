@@ -4,8 +4,8 @@ This document is the **cadence and chain-order** reference for **ambient-core** 
 
 ## Cadence
 
-- **When:** the **last Friday** of each calendar month (UTC), when the owner cuts the release.
-- **Exceptions:** if GitHub Actions capacity or billing blocks CI, the owner may merge and cut on the next business day; document the slip in the release PR and CHANGELOG date if needed.
+- **When:** the **last Friday** of each calendar month (UTC) — for example **27 Nov 2026**, **18 Dec 2026**, **29 Jan 2027** (not the second Friday). **Ivan** merges and cuts the release.
+- **Exceptions:** if GitHub Actions capacity or billing blocks CI, Ivan may merge and cut on the next business day; document the slip in the release PR and CHANGELOG date if needed.
 - **No freeze days:** integration, quality, and feature work continue through release day on every track. Use local verification ([running-ci-locally.md](running-ci-locally.md), [`scripts/run_local_pr_ci.sh`](../scripts/run_local_pr_ci.sh)) when CI is throttled; avoid unnecessary workflow dispatches.
 
 ## Release chain (hub order)

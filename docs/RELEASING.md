@@ -2,14 +2,22 @@
 
 Ambient Core ships as **semver git tags** (`vX.Y.Z`). Downstream repos (especially **ambient-systems-platform**) pin that tag for pip, submodules, and container build args. Release order in the hub is: **core tag first**, then platform pins the tag, then the site.
 
-Only the repository owner merges release PRs and runs the cut workflow. CI does not merge for you.
+Only **Ivan** merges release PRs to `main` and runs the **Cut release** workflow. CI and agents do not merge for you.
 
 ## Monthly release cadence (ambient-core)
 
-See **[MONTHLY-RELEASE.md](MONTHLY-RELEASE.md)** for the full cadence (last Friday of each month), hub chain order (**core → platform → website**), and the November 2026 **`v0.3.11`** note (`v0.3.10` already exists and cannot be re-cut).
+Ambient-core ships a **monthly** semver tag on the **last Friday** of each calendar month (UTC), not the second Friday. Upcoming examples:
 
-- **No freeze days** on any track — integration and quality work continue through release day. Keep the release PR green using local verification while billing limits CI: [`scripts/run_local_pr_ci.sh`](../scripts/run_local_pr_ci.sh) (see [running-ci-locally.md](running-ci-locally.md)); avoid extra workflow dispatches.
-- **Cut:** owner runs **Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month (typically the last Friday of the month).
+- **Nov 2026** — Fri **27** Nov
+- **Dec 2026** — Fri **18** Dec
+- **Jan 2027** — Fri **29** Jan
+
+**No freeze days** on any track — integration, quality, and feature work continue through release day. Keep the monthly release PR green with local verification when CI is throttled: [`scripts/run_local_pr_ci.sh`](../scripts/run_local_pr_ci.sh) (see [running-ci-locally.md](running-ci-locally.md)); avoid extra workflow dispatches.
+
+Hub chain order (**core → platform → website**), version-bump rules, and the November **`v0.3.11`** note (`v0.3.10` already exists and cannot be re-cut) are in **[MONTHLY-RELEASE.md](MONTHLY-RELEASE.md)**.
+
+- **Merge:** Ivan merges the version PR on `main` on or before the last Friday when the branch is ready.
+- **Cut:** Ivan runs **Actions → Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month (usually that last Friday).
 - **Consumers:** pin the new `vX.Y.Z` tag per [Downstream: pin a core release](#downstream-pin-a-core-release) once the GitHub Release artifacts are published.
 
 Patch releases between monthly tags are still allowed when needed; they follow the same cut workflow with a patch semver bump.
@@ -20,16 +28,16 @@ Patch releases between monthly tags are still allowed when needed; they follow t
 - **Release identity:** git tag `vX.Y.Z` must match that version exactly (no `v` prefix in the Python string).
 - **Human changelog:** [CHANGELOG.md](../CHANGELOG.md) (Keep a Changelog).
 
-Bump the Python version and CHANGELOG in a normal PR; merge to `main`; then cut the release from GitHub (no local git required).
+Bump the Python version and CHANGELOG in a normal PR; Ivan merges to `main`; then Ivan cuts the release from GitHub (no local git required).
 
-## Owner: cut a release (GitHub mobile or web)
+## Ivan: cut a release (GitHub mobile or web)
 
 1. **Prepare a version PR on `main`**
    - Set `__version__` in `lib/ambient_contracts/__init__.py` to the new `X.Y.Z`.
    - Move items from `[Unreleased]` into a new `## [X.Y.Z] - YYYY-MM-DD` section in `CHANGELOG.md` and update compare links at the bottom.
    - Ensure CI is green on the PR.
-2. **Merge the PR** on `main` (owner only).
-3. **Actions → Cut release → Run workflow**
+2. **Merge the PR** on `main` (Ivan only).
+3. **Actions → Cut release → Run workflow** (Ivan only)
    - Branch: `main` (default).
    - **version:** leave the default if it matches `__version__` on `main` (the workflow file default tracks the current release; it must equal `ambient_contracts.__version__`).
 4. **Cut release** verifies `version`, `CHANGELOG`, and that the tag does not already exist, then creates annotated tag `vX.Y.Z` on `main`.
