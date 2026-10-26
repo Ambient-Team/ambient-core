@@ -29,6 +29,7 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
     "scripts/check_crosswalk.py",
     "scripts/check_phi.py",
     "tests/test_check_crosswalk_unit.py",
+    "tests/test_check_markdown_prose.py",
 )
 
 STRICT_SUPPORT_TESTS: tuple[str, ...] = (

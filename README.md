@@ -18,7 +18,7 @@ Free open-source materials + a free Google account + free Google Colab. No paid 
 - **CLI / local AI** — ambient-core: local · commercial platform: no CLI; try via members
 - **Demo** — ambient-core: **free Google Colab** · commercial platform: members / hosted try
 
-**Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into this repository. Download the shared free demo pack from the website: [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (path `/downloads/ambient-core-demo-samples-v1.zip`). A [public Drive folder](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) is an optional development mirror. Demo recordings, screenshots, and synthetic demo data are distributed outside git — never commit them here.
+**Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into this repository. Copy the shared free demo pack from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`. Demo recordings, screenshots, and synthetic demo data live in the same tree — never commit them to Ambient-Team repos.
 
 <!-- ambient-acknowledgements:begin -->
 ## Third-party acknowledgements
@@ -52,8 +52,8 @@ Generated 2026-09-09 from dependency metadata in this repository.
 ## Free Colab happy path
 
 1. Sign in with a free Google account.
-2. Open the free Colab entry: https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2
-3. Obtain samples (not in this repo): download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) and unpack into `data/raw/`, **or** use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development.
+2. Open [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb) from GitHub (Open in Colab).
+3. Obtain samples (not in this repo): copy `Allmanufacturingds-*.csv` from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`.
 4. Runtime → Run all (or clone this repo and run `notebooks/00_colab_run_me.ipynb` with `PLATFORM_ROOT` set).
 5. Imports `ambient_pipeline`, reads `data/raw/` samples **you supply**, runs **Bronze → Silver → Gold** (pandas), writes under `data/processed/`.
 
@@ -65,7 +65,7 @@ Install Colab deps only: `pip install -r requirements-colab.txt` (`pandas`, `PyY
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (local lakehouse; not required for Colab).
 - **`contracts/`** — data-product YAML including `manufacturing-demo-raw-v1.yaml` (no binary data).
 - **`catalog/`** — industries, metrics, benchmarks; generator → `manifest.json` + `runtime/` JS.
-- **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — placeholders only. Download the website sample zip (or use Drive for development).
+- **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — placeholders only. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).
 - **`notebooks/00_colab_run_me.ipynb`** — entry notebook. See `notebooks/COMMERCIAL_ONLY.txt` for Databricks/UC skips.
 - **`lib/ambient_contracts`**, **`ambient_cli`**, **`ambient_calc`** — load, validate, ship, and reference formulas.
 
@@ -90,7 +90,7 @@ Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). 
 Pandas smoke with **external** samples (not in git):
 
 ```bash
-# download https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip
+# copy Allmanufacturingds-*.csv from github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/
 # unpack Allmanufacturingds-*.csv into data/raw/, then:
 python -c "from pathlib import Path; from ambient_pipeline.colab_smoke import run_colab_smoke; print(run_colab_smoke(Path('.')).gold_kpis)"
 ```
@@ -99,7 +99,7 @@ Optional Spark path (needs `.[pipeline]` and the same external CSVs): `python sc
 
 ## Run order
 
-1. **Free Colab entry** — https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2 (or `00_colab_run_me.ipynb` in this repo).
+1. **Free Colab entry** — [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb) (open from GitHub in Colab).
 2. Optional: inspect local Spark notebooks under `notebooks/` (need external data + Spark).
 3. **Skip for core** (commercial / Databricks-only; see `notebooks/COMMERCIAL_ONLY.txt`):
    - `01b_bronze_streaming.ipynb`
@@ -109,9 +109,8 @@ Optional Spark path (needs `.[pipeline]` and the same external CSVs): `python sc
 ## Demo data honesty
 
 - Demo recordings, screenshots, and synthetic data are distributed outside this repository (not in git).
-- Demo samples come from the **website downloadable bucket** — same pack the enterprise free demo uses: [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip). They are **not** vendored in this repo.
+- Demo samples come from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). They are **not** vendored in this repo.
 - This pack is shared free demo samples. You **cannot really test scale** with it; Ambient enterprise deployment runs scalable tests separately.
-- [Drive](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) remains a runnable SSOT for development (Colab mount / local sync).
 - Gold KPIs from the smoke run are derived only from those sample rows — not live tenants.
 - Do **not** vendor these CSVs into GitHub ambient-core or the platform repo.
 

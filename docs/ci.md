@@ -37,7 +37,7 @@ Outputs **`run_heavy`**:
 ### `ci-policy` (always)
 
 1. **actionlint** on workflow files.
-2. [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs) — structural policy checks.
+2. [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs) — structural policy checks (including SSOT lists `heavyQualityScripts` and `heavyCatalogScripts` wired in `build-test`).
 3. [`scripts/ci-policy.test.mjs`](../scripts/ci-policy.test.mjs) — regression tests for the policy script.
 
 ### `quality-static` (always)
