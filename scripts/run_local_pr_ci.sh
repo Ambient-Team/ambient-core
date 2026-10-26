@@ -24,4 +24,5 @@ python scripts/check_quality_static.py
 python scripts/check_coverage.py
 pip wheel . -w dist --no-deps
 node scripts/ci-policy.mjs
+node --test scripts/ci-policy.test.mjs
 echo "=== OK: local PR CI passed ==="
