@@ -13,7 +13,9 @@ from pyspark.sql.types import DoubleType, StringType, StructField, StructType
 
 from ambient_pipeline.runner import (
     REAL_ESTATE_GOLD_PIVOT,
+    REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID,
     _pivot_real_estate_metrics,
+    _rename_pivoted_metric_ids,
     _sanitize_pivoted_columns,
 )
 from ambient_pipeline.validation import SilverValidator
@@ -127,6 +129,43 @@ def test_sanitize_pivoted_columns_table(
     df = spark.createDataFrame([tuple(row)], columns)
     out = _sanitize_pivoted_columns(df, mapping)
     assert expected.issubset(set(out.columns))
+
+
+def test_rename_pivoted_metric_ids_renames_present_and_skips_absent(
+    spark: SparkSession,
+) -> None:
+    """Cover rename path and no-op when a mapping key is missing from the frame."""
+    df = spark.createDataFrame(
+        [("org-1", 120000.0)],
+        ["_bronze_org_id", "re-noi"],
+    )
+    out = _rename_pivoted_metric_ids(df, REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID)
+    assert "noi" in out.columns
+    assert "re-noi" not in out.columns
+    assert out.collect()[0]["noi"] == 120000.0
+
+
+def test_pivot_real_estate_metrics_metric_id_path(spark: SparkSession) -> None:
+    """When metric_id is present, pivot keys are stable ids (not display names)."""
+    schema = StructType(
+        [
+            StructField("_bronze_org_id", StringType(), False),
+            StructField("industry", StringType(), True),
+            StructField("metric_id", StringType(), True),
+            StructField("value", DoubleType(), True),
+        ]
+    )
+    rows = [
+        ("org-1", "Real Estate", "re-noi", 120000.0),
+        ("org-1", "Real Estate", "re-ads", 80000.0),
+    ]
+    df = spark.createDataFrame(rows, schema=schema)
+    wide = _pivot_real_estate_metrics(df, pivot_parts=1)
+    assert "noi" in wide.columns
+    assert "annual_debt_service" in wide.columns
+    row = wide.collect()[0]
+    assert row["noi"] == 120000.0
+    assert row["annual_debt_service"] == 80000.0
 
 
 def test_pivot_real_estate_metrics_legacy_name_path(spark: SparkSession) -> None:
