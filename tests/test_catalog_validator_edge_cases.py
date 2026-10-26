@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import types
 
 import pytest
 import yaml
@@ -11,23 +12,25 @@ from tests.catalog_script_loader import load_generate_reference_catalog
 
 
 @pytest.fixture(scope="module")
-def gen():
+def gen() -> types.ModuleType:
     return load_generate_reference_catalog()
 
 
-def test_validate_metrics_schema_flags_unknown_type_enum(gen) -> None:
+def test_validate_metrics_schema_flags_unknown_type_enum(gen: types.ModuleType) -> None:
     errors = gen.validate_metrics_schema(
         {"bad.metric": {"id": 1, "name": "X", "industry": "Y", "type": "Weird", "unit": "x", "methodology": "m"}}
     )
     assert any("not in schema enum" in e for e in errors)
 
 
-def test_validate_metrics_schema_missing_required_field(gen) -> None:
+def test_validate_metrics_schema_missing_required_field(gen: types.ModuleType) -> None:
     errors = gen.validate_metrics_schema({"bad.metric": {"id": 1, "name": "X"}})
     assert any("missing required field" in e for e in errors)
 
 
-def test_validate_flags_empty_industry_pack_metrics(gen, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_validate_flags_empty_industry_pack_metrics(
+    gen: types.ModuleType, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """Synthetic pack with empty metrics map still must pass pack.yaml industry."""
     pack = tmp_path / "catalog" / "industries" / "empty_pack"
     pack.mkdir(parents=True)
@@ -54,7 +57,7 @@ def test_malformed_metrics_yaml_raises(tmp_path: Path) -> None:
         yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
-def test_duplicate_metric_ids_detected_in_validate(gen) -> None:
+def test_duplicate_metric_ids_detected_in_validate(gen: types.ModuleType) -> None:
     metrics = {
         "a.one": {"id": 99, "name": "A", "industry": "Banking", "type": "Financial", "unit": "Ratio", "methodology": "m"},
         "a.two": {"id": 99, "name": "B", "industry": "Banking", "type": "Financial", "unit": "Ratio", "methodology": "m"},

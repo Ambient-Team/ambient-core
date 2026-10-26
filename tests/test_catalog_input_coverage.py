@@ -17,11 +17,11 @@ from ambient_contracts.manifest_models import parse_catalog_manifest  # noqa: E4
 _COVERAGE_VALUES = {"complete", "upload", "none", "derived", "unspecified"}
 
 
-def _option(key: str, oid: int, fields: list[str]) -> dict:
+def _option(key: str, oid: int, fields: list[str]) -> dict[str, object]:
     return {"catalogOptionKey": key, "id": oid, "name": f"Option {oid}", "fields": fields}
 
 
-def test_recipe_complete_when_all_inputs_are_fields():
+def test_recipe_complete_when_all_inputs_are_fields() -> None:
     metric = {"calc": {"expr": "a / b", "inputs": ["a", "b"]}}
     linked = [_option("opt.one", 1, ["a", "b"])]
     inputs, coverage = gen.build_metric_input_recipe(metric, linked, set())
@@ -30,7 +30,7 @@ def test_recipe_complete_when_all_inputs_are_fields():
     assert all(s["via"] == "field" for i in inputs for s in i["satisfiedBy"])
 
 
-def test_recipe_upload_when_inputs_not_enumerated_but_option_linked():
+def test_recipe_upload_when_inputs_not_enumerated_but_option_linked() -> None:
     metric = {"calc": {"expr": "current_assets / current_liabilities", "inputs": ["current_assets", "current_liabilities"]}}
     linked = [_option("opt.docs", 2, ["date", "statement_type"])]
     inputs, coverage = gen.build_metric_input_recipe(metric, linked, set())
@@ -39,7 +39,7 @@ def test_recipe_upload_when_inputs_not_enumerated_but_option_linked():
     assert all(s["via"] == "upload" for i in inputs for s in i["satisfiedBy"])
 
 
-def test_recipe_none_when_no_linked_option():
+def test_recipe_none_when_no_linked_option() -> None:
     metric = {"calc": {"expr": "a / b", "inputs": ["a", "b"]}}
     inputs, coverage = gen.build_metric_input_recipe(metric, [], set())
     assert coverage == "none"
@@ -47,7 +47,7 @@ def test_recipe_none_when_no_linked_option():
     assert all(i["satisfiedBy"] == [] for i in inputs)
 
 
-def test_recipe_derived_when_only_other_metrics():
+def test_recipe_derived_when_only_other_metrics() -> None:
     metric = {"calc": {"expr": "gross_profit / revenue", "inputs": []}}
     inputs, coverage = gen.build_metric_input_recipe(metric, [], {"gross_profit", "revenue"})
     assert coverage == "derived"
@@ -55,7 +55,7 @@ def test_recipe_derived_when_only_other_metrics():
     assert all(i["kind"] == "derived" for i in inputs)
 
 
-def test_recipe_directly_reported_input_metric():
+def test_recipe_directly_reported_input_metric() -> None:
     metric = {"input": True, "slug": "tier1_capital_ratio"}
     covered = gen.build_metric_input_recipe(metric, [_option("opt.reg", 3, ["tier1_capital_ratio"])], set())
     assert covered[1] == "complete"
@@ -63,13 +63,13 @@ def test_recipe_directly_reported_input_metric():
     assert uncovered[1] == "upload"
 
 
-def test_recipe_unspecified_without_calc_or_input():
+def test_recipe_unspecified_without_calc_or_input() -> None:
     inputs, coverage = gen.build_metric_input_recipe({"name": "X"}, [], set())
     assert inputs == []
     assert coverage == "unspecified"
 
 
-def test_manifest_parses_input_recipe_and_round_trips():
+def test_manifest_parses_input_recipe_and_round_trips() -> None:
     doc = {
         "version": 1,
         "industries": [],
@@ -129,7 +129,7 @@ def test_manifest_parses_input_recipe_and_round_trips():
     assert legacy.to_tool_dict()["calc"] is None
 
 
-def test_generated_manifest_has_coverage_recipe():
+def test_generated_manifest_has_coverage_recipe() -> None:
     manifest = load_manifest()
     assert all(m.input_coverage in _COVERAGE_VALUES for m in manifest.metrics)
     nim = manifest.resolve_metric("1530")
