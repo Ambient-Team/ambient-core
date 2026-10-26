@@ -13,6 +13,10 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
     ("ruff", [sys.executable, str(ROOT / "scripts" / "check_ruff.py")]),
     ("mypy", [sys.executable, str(ROOT / "scripts" / "check_mypy.py")]),
     ("mypy-strict", [sys.executable, str(ROOT / "scripts" / "check_mypy_strict.py")]),
+    (
+        "mypy-strict-support",
+        [sys.executable, str(ROOT / "scripts" / "check_mypy_strict_support.py")],
+    ),
     ("dead-code", [sys.executable, str(ROOT / "scripts" / "check_dead_code.py")]),
     ("secrets-scan", [sys.executable, str(ROOT / "scripts" / "scan_secrets_patterns.py")]),
     (

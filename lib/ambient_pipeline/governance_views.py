@@ -28,6 +28,7 @@ WHERE _bronze_org_id = {catalog}.bronze.get_current_org_id()
 
 
 def silver_metrics_org_view_sql(catalog: str) -> str:
+    """Read-only view enforcing session org filter on silver.metrics."""
     catalog = _require_safe_catalog(catalog)
     return f"""
 CREATE OR REPLACE VIEW {catalog}.silver.v_metrics_org AS

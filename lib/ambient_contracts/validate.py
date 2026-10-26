@@ -13,6 +13,7 @@ REQUIRED_PRODUCT = {"name", "version", "owner"}
 
 
 def validate_contract_doc(doc: object, label: str) -> list[str]:
+    """Validate one parsed contract document; return human-readable error strings."""
     errors: list[str] = []
     if not isinstance(doc, dict):
         return [f"{label}: root must be a mapping"]
@@ -55,12 +56,14 @@ def validate_contract_doc(doc: object, label: str) -> list[str]:
 
 
 def validate_contract_file(path: Path) -> list[str]:
+    """Load and validate a single contract YAML file."""
     with path.open("r", encoding="utf-8") as handle:
         doc = yaml.safe_load(handle)
     return validate_contract_doc(doc, path.name)
 
 
 def validate_all_contracts(contracts_dir: Path | None = None) -> list[str]:
+    """Validate every ``*.yaml`` contract in the resolved contracts directory."""
     directory = contracts_dir or resolve_contracts_dir()
     if not directory.is_dir():
         return [f"contracts directory not found: {directory}"]

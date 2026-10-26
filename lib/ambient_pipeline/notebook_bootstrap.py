@@ -8,7 +8,10 @@ from typing import Any
 
 
 def find_repo_root(start: Path | None = None) -> Path | None:
-    """Walk upward until a directory containing ``lib/ambient_pipeline`` is found."""
+    """Walk upward until a directory containing ``lib/ambient_pipeline`` is found.
+
+    Returns ``None`` when no OSS checkout layout is discovered.
+    """
     here = (start or Path.cwd()).resolve()
     candidates = [here, *here.parents]
     # Also try relative to this module (lib/ambient_pipeline/ → repo root).
@@ -27,7 +30,8 @@ def ensure_pipeline_on_path(start: Path | None = None) -> Path | None:
     """Add ``<repo>/lib`` to ``sys.path`` so ``import ambient_pipeline`` works.
 
     Prefer the git checkout ``lib/`` package home. Does **not** look under
-    ``databricks/lib`` or ``ambient-systems-platform`` paths.
+    ``databricks/lib`` or ``ambient-systems-platform`` paths. Returns the repo
+    root when found, else ``None``.
     """
     root = find_repo_root(start)
     if root is None:

@@ -5,13 +5,14 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
+from types import ModuleType
 
 import importlib.util
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def _scan_module():
+def _scan_module() -> ModuleType:
     path = ROOT / "scripts" / "scan_secrets_patterns.py"
     spec = importlib.util.spec_from_file_location("scan_secrets_patterns", path)
     assert spec and spec.loader

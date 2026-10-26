@@ -76,7 +76,13 @@ def _load_yaml(path: Path) -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def _check_entries(kind: str, entries: dict, pack: str, ids: dict, errors: list) -> None:
+def _check_entries(
+    kind: str,
+    entries: dict | None,
+    pack: str,
+    ids: dict[int, str],
+    errors: list[str],
+) -> None:
     for key, entry in (entries or {}).items():
         if not isinstance(entry, dict):
             errors.append(f"{pack}: {kind} {key} is not a mapping")

@@ -81,7 +81,7 @@ def main() -> int:
                 errors.append(f"{slug}: expr name {name!r} is neither a declared input nor a known metric")
     # cycle detection via a dry compute over zeros
     calc_metrics = [m for m in metrics.values() if m.get("calc")]
-    all_inputs = set()
+    all_inputs: set[str] = set()
     for m in calc_metrics:
         all_inputs.update(m["calc"].get("inputs") or [])
     try:

@@ -247,9 +247,9 @@ def run_colab_smoke(
     ar_sum = kpis.get("ar_amount_due_sum")
     ap_sum = kpis.get("ap_amount_due_sum")
     inv_sum = kpis.get("inventory_value_sum")
-    if all(v is not None for v in (ar_sum, ap_sum, inv_sum)):
+    if ar_sum is not None and ap_sum is not None and inv_sum is not None:
         kpis["sample_working_capital_proxy"] = (
-            float(ar_sum) + float(inv_sum) - float(ap_sum)  # type: ignore[arg-type]
+            float(ar_sum) + float(inv_sum) - float(ap_sum)
         )
 
     result.gold_kpis = kpis

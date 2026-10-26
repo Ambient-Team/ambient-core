@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""Run mypy --strict on quality-gate scripts and selected tests (incremental SSOT)."""
+
+from __future__ import annotations
+
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+# CI / repo hygiene scripts that already pass mypy --strict (add more as they are fixed).
+STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
+    "scripts/check_catalog_hygiene.py",
+    "scripts/check_coverage.py",
+    "scripts/check_dead_code.py",
+    "scripts/check_markdown_prose.py",
+    "scripts/check_mypy.py",
+    "scripts/check_mypy_strict.py",
+    "scripts/check_mypy_strict_support.py",
+    "scripts/check_quality_static.py",
+    "scripts/check_ruff.py",
+    "scripts/scan_secrets_patterns.py",
+    "scripts/validate_contracts.py",
+)
+
+STRICT_SUPPORT_TESTS: tuple[str, ...] = (
+    "tests/test_check_quality_static.py",
+    "tests/test_secrets_scan_fixtures.py",
+)
+
+
+def main() -> int:
+    if not shutil.which("mypy"):
+        print("SKIP: mypy not installed")
+        return 0
+    root = Path(__file__).resolve().parents[1]
+    paths = [*STRICT_SUPPORT_SCRIPTS, *STRICT_SUPPORT_TESTS]
+    failures = 0
+    for rel in paths:
+        path = root / rel
+        if not path.is_file():
+            print(f"MISSING: {rel}", file=sys.stderr)
+            failures += 1
+            continue
+        result = subprocess.run(
+            [
+                "mypy",
+                "--strict",
+                "--explicit-package-bases",
+                "--config-file",
+                "pyproject.toml",
+                str(path),
+            ],
+            cwd=root,
+            check=False,
+        )
+        if result.returncode != 0:
+            failures += 1
+        else:
+            print(f"OK: mypy --strict {rel}")
+    if failures:
+        print(f"ERROR: {failures} support path(s) failed mypy --strict", file=sys.stderr)
+        return 1
+    print(f"OK: mypy --strict on {len(paths)} support paths")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -12,7 +12,7 @@ from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 
 
 def resolve_catalog_root(start: Path | None = None) -> Path:
-    """Find catalog/ directory (local checkout or submodule)."""
+    """Find ``catalog/`` for pipeline helpers (delegates to ``resolve_catalog_root_flexible``)."""
     return resolve_catalog_root_flexible(start)
 
 
@@ -24,6 +24,7 @@ def _read_manifest(catalog_root: Path) -> dict[str, Any]:
 
 
 def load_manifest_version(catalog_root: Path | None = None) -> str:
+    """Return manifest ``version`` as a string, or ``unknown`` when absent."""
     root = catalog_root or resolve_catalog_root()
     version = _read_manifest(root).get("version")
     return str(version) if version is not None else "unknown"

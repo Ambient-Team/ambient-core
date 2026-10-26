@@ -46,6 +46,7 @@ def _repo_roots() -> list[Path]:
 
 
 def resolve_manifest_path() -> Path:
+    """Locate ``catalog/manifest.json`` for the current checkout or submodule layout."""
     for root in _repo_roots():
         candidate = root / "ambient-core" / "catalog" / "manifest.json"
         if candidate.is_file():
@@ -60,6 +61,7 @@ def resolve_manifest_path() -> Path:
 
 
 def load_manifest() -> CatalogManifest:
+    """Parse ``catalog/manifest.json`` into typed manifest models."""
     path = resolve_manifest_path()
     with path.open("r", encoding="utf-8") as handle:
         doc = json.load(handle)

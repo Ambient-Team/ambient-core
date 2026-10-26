@@ -42,11 +42,21 @@ Outputs **`run_heavy`**:
 
 ### `quality-static` (always)
 
-Runs on every pull request (including **drafts**): [`scripts/check_quality_static.py`](../scripts/check_quality_static.py) — ruff, mypy, mypy `--strict` on every module under `lib/` (SSOT: [`scripts/check_mypy_strict.py`](../scripts/check_mypy_strict.py)), dead-import scan, secrets pattern scan, and pack reference doc drift (`--check`). Uses `pip install -e ".[dev]"` only (no JDK/Spark).
+Runs on every pull request (including **drafts**): [`scripts/check_quality_static.py`](../scripts/check_quality_static.py). Uses `pip install -e ".[dev]"` only (no JDK/Spark).
+
+Steps (fail fast, in order):
+
+1. **ruff** — [`check_ruff.py`](../scripts/check_ruff.py): `F,E9,E7` on `lib/`, `scripts/`, `tests/`.
+2. **mypy** — [`check_mypy.py`](../scripts/check_mypy.py): project config on `lib/` and `scripts/` (`--explicit-package-bases`; one-off `migrate_catalog_layout_027.py` excluded).
+3. **mypy-strict** — [`check_mypy_strict.py`](../scripts/check_mypy_strict.py): `--strict` on every `lib/` module (34 files, SSOT list in that script).
+4. **mypy-strict-support** — [`check_mypy_strict_support.py`](../scripts/check_mypy_strict_support.py): `--strict` on quality-gate `scripts/` and selected `tests/` (incremental SSOT).
+5. **dead-code** — [`check_dead_code.py`](../scripts/check_dead_code.py): ruff `F401,F841` unused imports/variables on `lib/`, `scripts/`, `tests/`.
+6. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
+7. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.
 
 ### `build-test` (required check name)
 
-Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md), including static quality gates again and [`scripts/check_coverage.py`](../scripts/check_coverage.py) (pytest with **lib ≥ 90%** line / **≥ 85%** branch coverage).
+Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md), including **quality-static** again and [`scripts/check_coverage.py`](../scripts/check_coverage.py) (`AMBIENT_SPARK_TESTS=1` pytest with **lib ≥ 90%** line / **≥ 85%** branch coverage; `pyproject.toml` coverage omit list is empty).
 
 Pip cache is keyed on `pyproject.toml` and `requirements-colab.txt`. JDK **17** (Temurin) is installed for Spark tests (`AMBIENT_SPARK_TESTS=1`).
 

@@ -80,7 +80,7 @@ def find_platform_root(explicit: str | Path | None = None) -> Path:
 
 
 def ensure_package_on_path(root: Path | None = None) -> Path:
-    """Insert the platform root on sys.path so ``import ambient_pipeline`` works."""
+    """Insert the platform root on ``sys.path`` so ``import ambient_pipeline`` works."""
     root = root or find_platform_root()
     root_str = str(root)
     if root_str not in sys.path:
