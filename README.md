@@ -79,11 +79,14 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 # Windows: .venv\Scripts\activate
 pip install -e ".[all]"
+cp .env.example .env.local   # optional: edit AMBIENT_PII_SALT for local Spark runs
 validate-contracts
 ambient-catalog-generate --check --strict-data-option-inputs
 node scripts/ci-policy.mjs
 AMBIENT_SPARK_TESTS=1 pytest
 ```
+
+**Local Spark / Delta** (`lib/ambient_pipeline/runner.py`): set `AMBIENT_PII_SALT` to a unique non-empty value (see `.env.example` placeholder). Required outside pytest; see [docs/pipeline.md](docs/pipeline.md#local-spark-pii-salt).
 
 Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). More recipes: [docs/USAGE.md](docs/USAGE.md).
 
@@ -95,7 +98,7 @@ Pandas smoke with **external** samples (not in git):
 python -c "from pathlib import Path; from ambient_pipeline.colab_smoke import run_colab_smoke; print(run_colab_smoke(Path('.')).gold_kpis)"
 ```
 
-Optional Spark path (needs `.[pipeline]` and the same external CSVs): `python scripts/run_oss_bronze_silver_smoke.py`.
+Optional Spark path (needs `.[pipeline]`, `AMBIENT_PII_SALT`, and the same external CSVs): `export AMBIENT_PII_SALT='your-unique-local-salt'` then `python scripts/run_oss_bronze_silver_smoke.py`.
 
 ## Run order
 

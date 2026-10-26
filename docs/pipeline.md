@@ -98,6 +98,27 @@ flowchart TB
 
 PII matching columns (for example `name`) are pseudonymized **after** Bronze read and **before** Silver write. Gold pivots Real Estate KPIs on stable **`metric_id`** when present so display names can be hashed in Silver without breaking the wide table.
 
+### Local Spark PII salt {#local-spark-pii-salt}
+
+`run_local_pipeline` calls `PiiPseudonymizer` during Silver transformation. Outside pytest or `AMBIENT_SPARK_TESTS=1`, **`AMBIENT_PII_SALT` must be set** to a non-empty value that is **not** the golden integration-test salt (`golden-test-salt-not-for-production`).
+
+**Setup (local lakehouse):**
+
+1. Copy [`.env.example`](../.env.example) to `.env.local` (gitignored) or export variables in your shell.
+2. Replace the `AMBIENT_PII_SALT` placeholder with a long random string unique to your machine or tenant.
+3. Install Spark extras: `pip install -e ".[pipeline]"` (or `.[all]`).
+4. Run with Java 17+ and `AMBIENT_SPARK_TESTS=1 pytest tests/pipeline/` for the full gated suite, or invoke `run_local_pipeline` from your own driver with the env var set.
+
+**Typical error (missing salt):**
+
+```text
+RuntimeError: PiiPseudonymizer requires AMBIENT_PII_SALT outside test runs. Set AMBIENT_PII_SALT to a unique non-empty value ...
+```
+
+**Fix:** `export AMBIENT_PII_SALT='your-unique-local-salt'` (or load from `.env.local` before starting Spark). Do not use the golden test value or an empty string.
+
+`AMBIENT_ALLOW_DEV_SECRETS=1` alone does **not** satisfy this check; the env var must still be set for pseudonymization. Colab/pandas smoke paths do not use this Spark pseudonymizer.
+
 ### Local Spark runner — real-estate gold columns
 
 The runner writes a simplified **real-estate** Gold Delta table when Silver rows include `industry` and (`metric_id` or `name`) and at least one row has `industry == "Real Estate"`. When `metric_id` is present, pivot keys are catalog ids (`re-noi`, `re-ads`, `re-mv`) mapped to Delta-safe Gold columns. Legacy rows without `metric_id` still pivot on human-readable **display names** (renamed because Delta rejects spaces).

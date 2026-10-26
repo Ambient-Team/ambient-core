@@ -17,6 +17,13 @@ PII_INDICATORS = ("uid", "email", "name", "phone", "address")
 # Must match the test-only AMBIENT_PII_SALT value in tests/fixtures/pipeline/ (never production).
 GOLDEN_TEST_PII_SALT = "golden-test-salt-not-for-production"
 
+PII_SALT_SETUP_HINT = (
+    "Set AMBIENT_PII_SALT to a unique non-empty value before running Spark pipelines "
+    "(copy .env.example to .env.local and replace the placeholder). "
+    "CI and integration tests may use AMBIENT_SPARK_TESTS=1 or pytest instead. "
+    "See docs/pipeline.md#local-spark-pii-salt."
+)
+
 _PSEUDO_HEX_LEN = 64
 
 
@@ -49,14 +56,16 @@ def ensure_pii_salt_allowed_for_runtime(salt: str) -> None:
     if not env_salt:
         raise RuntimeError(
             "PiiPseudonymizer requires AMBIENT_PII_SALT outside test runs. "
-            "Set a production salt or run under pytest with AMBIENT_SPARK_TESTS=1."
+            + PII_SALT_SETUP_HINT
         )
     if not salt.strip():
-        raise RuntimeError("PiiPseudonymizer salt must not be empty.")
+        raise RuntimeError(
+            "PiiPseudonymizer salt must not be empty. " + PII_SALT_SETUP_HINT
+        )
     if salt == GOLDEN_TEST_PII_SALT or env_salt == GOLDEN_TEST_PII_SALT:
         raise RuntimeError(
             "Golden test PII salt is not allowed outside test runs. "
-            "Use a dedicated production AMBIENT_PII_SALT value."
+            + PII_SALT_SETUP_HINT
         )
 
 

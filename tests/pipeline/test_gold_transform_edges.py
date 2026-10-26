@@ -11,7 +11,11 @@ from hypothesis import strategies as st
 from pyspark.sql import SparkSession
 from pyspark.sql.types import DoubleType, StringType, StructField, StructType
 
-from ambient_pipeline.runner import REAL_ESTATE_GOLD_PIVOT, _sanitize_pivoted_columns
+from ambient_pipeline.runner import (
+    REAL_ESTATE_GOLD_PIVOT,
+    _pivot_real_estate_metrics,
+    _sanitize_pivoted_columns,
+)
 from ambient_pipeline.validation import SilverValidator
 
 
@@ -123,6 +127,28 @@ def test_sanitize_pivoted_columns_table(
     df = spark.createDataFrame([tuple(row)], columns)
     out = _sanitize_pivoted_columns(df, mapping)
     assert expected.issubset(set(out.columns))
+
+
+def test_pivot_real_estate_metrics_legacy_name_path(spark: SparkSession) -> None:
+    """Rows without metric_id still pivot on display name and rename to safe columns."""
+    schema = StructType(
+        [
+            StructField("_bronze_org_id", StringType(), False),
+            StructField("industry", StringType(), True),
+            StructField("name", StringType(), True),
+            StructField("value", DoubleType(), True),
+        ]
+    )
+    rows = [
+        ("org-1", "Real Estate", "Net Operating Income", 120000.0),
+        ("org-1", "Real Estate", "Annual Debt Service", 80000.0),
+    ]
+    df = spark.createDataFrame(rows, schema=schema)
+    wide = _pivot_real_estate_metrics(df, pivot_parts=1)
+    assert "noi" in wide.columns
+    assert "annual_debt_service" in wide.columns
+    row = wide.collect()[0]
+    assert row["noi"] == 120000.0
 
 
 def test_real_estate_gold_pivot_empty_industry_filter(spark: SparkSession) -> None:

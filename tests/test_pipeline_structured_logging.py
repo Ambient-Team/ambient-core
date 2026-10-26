@@ -10,6 +10,7 @@ import pytest
 from pyspark.sql import SparkSession
 
 from ambient_pipeline.colab_smoke import run_colab_smoke
+from ambient_pipeline.pipeline_logging import log_pipeline_event
 from ambient_pipeline.runner import PipelineRunConfig, run_local_pipeline
 
 
@@ -23,6 +24,22 @@ def _parse_log_records(records: list[logging.LogRecord]) -> list[dict[str, objec
         if isinstance(payload, dict) and "event" in payload:
             parsed.append(payload)
     return parsed
+
+
+def test_log_pipeline_event_redacts_sensitive_field_names(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    caplog.set_level(logging.INFO, logger="ambient.pipeline")
+    log_pipeline_event(
+        "pipeline_start",
+        component="runner",
+        run_id="redact-run",
+        api_key="should-not-appear",
+        stage="bronze",
+    )
+    payload = json.loads(caplog.records[-1].getMessage())
+    assert payload["api_key"] == "<redacted>"
+    assert payload["stage"] == "bronze"
 
 
 def test_runner_emits_structured_stage_logs(

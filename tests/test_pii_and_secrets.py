@@ -7,7 +7,9 @@ from pyspark.sql import SparkSession
 
 from ambient_pipeline.pii import (
     GOLDEN_TEST_PII_SALT,
+    PII_SALT_SETUP_HINT,
     PiiPseudonymizer,
+    assert_pii_columns_pseudonymized,
     columns_matching_pii_indicators,
     ensure_pii_salt_allowed_for_runtime,
     hmac_sha256_hex,
@@ -95,8 +97,18 @@ def test_ensure_pii_salt_rejects_missing_env_outside_tests(
 ) -> None:
     _clear_pii_test_context(monkeypatch)
     monkeypatch.delenv("AMBIENT_PII_SALT", raising=False)
-    with pytest.raises(RuntimeError, match="AMBIENT_PII_SALT"):
+    with pytest.raises(RuntimeError, match="AMBIENT_PII_SALT") as exc:
         ensure_pii_salt_allowed_for_runtime("any-salt")
+    assert PII_SALT_SETUP_HINT.split(".")[0] in str(exc.value)
+
+
+def test_ensure_pii_salt_rejects_empty_salt_outside_tests(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _clear_pii_test_context(monkeypatch)
+    monkeypatch.setenv("AMBIENT_PII_SALT", "production-salt-value")
+    with pytest.raises(RuntimeError, match="must not be empty"):
+        ensure_pii_salt_allowed_for_runtime("   ")
 
 
 def test_ensure_pii_salt_rejects_golden_salt_outside_tests(
@@ -118,6 +130,18 @@ def test_pii_apply_rejects_golden_salt_outside_tests(
     pii = PiiPseudonymizer(salt=GOLDEN_TEST_PII_SALT, transform_ts="2026-01-01T00:00:00Z")
     with pytest.raises(RuntimeError, match="Golden test PII salt"):
         pii.apply(df)
+
+
+def test_assert_pii_columns_pseudonymized_rejects_raw_values(spark: SparkSession) -> None:
+    df = spark.createDataFrame([("Alice Example",)], ["customer_name"])
+    with pytest.raises(AssertionError, match="non-pseudonymized"):
+        assert_pii_columns_pseudonymized(df)
+
+
+def test_assert_pii_columns_pseudonymized_accepts_digest(spark: SparkSession) -> None:
+    digest = hmac_sha256_hex("salt", "Alice Example")
+    df = spark.createDataFrame([(digest,)], ["customer_name"])
+    assert_pii_columns_pseudonymized(df)
 
 
 def test_golden_pii_fixture_matches_constant() -> None:
