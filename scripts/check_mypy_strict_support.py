@@ -48,6 +48,18 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_catalog_contract_drift.py",
     "tests/test_bronze_upload_validation.py",
     "tests/test_governance_views.py",
+    # Group 3 — CLI catalog, integrations, and package smoke tests
+    "tests/test_ambient_cli_catalog.py",
+    "tests/test_ambient_cli_catalog_main.py",
+    "tests/test_ambient_cli_catalog_entry.py",
+    "tests/test_ambient_pipeline_lazy_exports.py",
+    "tests/test_firestore_bridge_unit.py",
+    "tests/test_gold_contract_crosswalk_integration.py",
+    "tests/test_hypothesis_catalog_contracts.py",
+    "tests/test_manifest_models_edges.py",
+    "tests/test_notebook_bootstrap_unit.py",
+    "tests/test_pii_column_tagging.py",
+    "tests/test_storage_paths_and_firestore_ids.py",
 )
 
 

@@ -7,10 +7,16 @@ Not imported by default notebook or ``pip install`` OSS paths. Requires
 from __future__ import annotations
 
 import json
-from typing import Any
+from typing import Any, Protocol, cast
 
 
-def _firestore_client() -> Any:
+class _FirestoreClient(Protocol):
+    """Minimal surface used by lineage helpers (firebase_admin.firestore.client)."""
+
+    def collection(self, path: str) -> Any: ...
+
+
+def _firestore_client() -> _FirestoreClient:
     import firebase_admin
     from firebase_admin import credentials, firestore
 
@@ -27,7 +33,7 @@ def _firestore_client() -> Any:
             raise RuntimeError("firebase_service_account secret must be a JSON object")
         cred = credentials.Certificate(sa_info)
         firebase_admin.initialize_app(cred)
-    return firestore.client()
+    return cast(_FirestoreClient, firestore.client())
 
 
 def append_lineage_event(
