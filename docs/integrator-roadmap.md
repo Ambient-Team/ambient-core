@@ -33,13 +33,16 @@ Branch `cursor/dec18-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11**
 - **Catalog manifest read helper** — `catalog_manifest_summary` (file SSOT; not HTTP); `register_integrator_builtin_tools` + `call_integrator_tool`.
 - **Nested tool arg schemas** — object/array support in `validate_tool_args`; builtin schemas in `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
 - **Docs and example** — [integrator-agent-tools.md](integrator-agent-tools.md); runnable [examples/integrators/builtin_tools_walkthrough.py](../examples/integrators/builtin_tools_walkthrough.py).
+- **Catalog file read surface** — `catalog_list_industries`, `catalog_resolve_metric_by_key` (manifest SSOT; not HTTP).
+- **Gold column map tool** — `gold_contract_column_map` (crosswalk + contract schema; read-only, no OLAP).
+- **Richer tool schemas** — `enum`, string length, integer min/max, `oneOf` in `validate_tool_args`.
 
 ## Deferred (not in core yet)
 
 - **Product agent runtime** — plan-execute workers and hosted agent HTTP APIs live in the commercial platform; Ambient Core documents maintainer-only IDE agents in [AGENTS.md](../AGENTS.md)
-- **Full JSON Schema for tool args** — draft-07 keywords (`$ref`, `oneOf`, format validators); v0.3.12 ships nested object/array + simple types only
-- **Live Gold / OLAP reads in core agents** — platform `register_tool()` handlers
-- **Hosted catalog API** — catalog folder remains SSOT; transport TBD
+- **Full JSON Schema for tool args** — `$ref`, `format`, and combinators beyond `oneOf`; v0.3.12 ships nested types plus enum/length/range/`oneOf`
+- **Live Gold / OLAP reads in core agents** — remote warehouse queries; core exposes `gold_contract_column_map` only
+- **Hosted catalog API** — HTTP transport TBD; file-backed reads via integrator builtins
 - **Gold lakehouse writers** — Spark jobs that materialize `finance-*` / healthcare Gold tables from Silver + `ambient_calc` (platform repo); core supplies `gold_contract_map` and contracts only
 - **Optional local scripts** — for example `scripts/export_catalog_wiki.py` is not part of CI; keep untracked or maintain in your fork
 

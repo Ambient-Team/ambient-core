@@ -6,9 +6,12 @@ import pytest
 
 from ambient_cli.integrator_tools import (
     call_integrator_tool,
+    catalog_list_industries,
     catalog_list_metrics,
     catalog_resolve_metric,
+    catalog_resolve_metric_by_key,
     crosswalk_list_links,
+    gold_contract_column_map,
     register_integrator_builtin_tools,
 )
 from ambient_cli.tool_registry import IntegratorToolRegistry
@@ -73,6 +76,30 @@ def test_validate_tool_args_empty_properties_allows_empty_payload() -> None:
 def test_validate_tool_schema_document_ignores_non_dict_properties() -> None:
     errors = validate_tool_schema_document({"properties": "invalid", "required": []}, {})
     assert errors == []
+
+
+def test_catalog_list_industries_non_empty() -> None:
+    industries = catalog_list_industries()
+    assert industries
+    assert "value" in industries[0]
+
+
+def test_catalog_resolve_metric_by_key_known() -> None:
+    row = catalog_resolve_metric_by_key("real_estate.core.current_ratio")
+    assert row is not None
+    assert row.get("id") == 926
+
+
+def test_gold_contract_column_map_banking() -> None:
+    col_map = gold_contract_column_map("finance-banking-v1.yaml")
+    assert "net_interest_margin" in col_map
+
+
+def test_call_integrator_tool_validates_min_length_on_contract_file() -> None:
+    registry = IntegratorToolRegistry()
+    register_integrator_builtin_tools(registry)
+    with pytest.raises(ValueError, match="minLength|shorter"):
+        call_integrator_tool(registry, "gold_contract_column_map", {"contract_file": ""})
 
 
 def test_validate_tool_args_nested_path_prefix_on_missing_field() -> None:

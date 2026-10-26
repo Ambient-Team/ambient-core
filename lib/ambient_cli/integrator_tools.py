@@ -12,6 +12,7 @@ from typing import Any
 from ambient_contracts.catalog_manifest import resolve_catalog_root_flexible
 from ambient_contracts.crosswalk import load_crosswalk_links
 from ambient_pipeline.catalog_loader import load_manifest_version, load_metric_by_numeric_id
+from ambient_pipeline.gold_contract_map import contract_column_catalog_map
 
 from ambient_cli.tool_registry import IntegratorToolRegistry
 from ambient_cli.tool_schema import validate_tool_schema_document
@@ -32,6 +33,20 @@ BUILTIN_INTEGRATOR_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catalog_manifest_summary": {
         "properties": {},
         "required": [],
+    },
+    "catalog_list_industries": {
+        "properties": {},
+        "required": [],
+    },
+    "catalog_resolve_metric_by_key": {
+        "properties": {"catalog_metric_key": {"type": "string", "minLength": 1}},
+        "required": ["catalog_metric_key"],
+    },
+    "gold_contract_column_map": {
+        "properties": {
+            "contract_file": {"type": "string", "minLength": 1},
+        },
+        "required": ["contract_file"],
     },
 }
 
@@ -154,6 +169,79 @@ def catalog_manifest_summary() -> dict[str, Any]:
     }
 
 
+def catalog_list_industries() -> list[dict[str, Any]]:
+    """List industry rows from ``catalog/manifest.json`` (file SSOT; not HTTP).
+
+    Args:
+        None.
+
+    Returns:
+        list[dict[str, Any]]: Manifest ``industries`` entries.
+
+    Raises:
+        FileNotFoundError: When catalog root cannot be resolved.
+
+    Example:
+        >>> catalog_list_industries()[0]["value"]
+    """
+    root = resolve_catalog_root_flexible()
+    path = root / "manifest.json"
+    if not path.is_file():
+        return []
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(doc, dict):
+        return []
+    industries = doc.get("industries")
+    if not isinstance(industries, list):
+        return []
+    return [row for row in industries if isinstance(row, dict)]
+
+
+def catalog_resolve_metric_by_key(catalog_metric_key: str) -> dict[str, Any] | None:
+    """Resolve a manifest metric row by ``catalogMetricKey`` (dotted key).
+
+    Args:
+        catalog_metric_key: Stable catalog key (for example ``real_estate.core.noi``).
+
+    Returns:
+        dict[str, Any] | None.
+
+    Raises:
+        ValueError: When the key is empty.
+
+    Example:
+        >>> catalog_resolve_metric_by_key("real_estate.core.current_ratio") is not None
+    """
+    key = catalog_metric_key.strip()
+    if not key:
+        raise ValueError("catalog_metric_key must be non-empty")
+    for row in _read_manifest_metrics(resolve_catalog_root_flexible()):
+        if str(row.get("catalogMetricKey") or "").strip() == key:
+            return row
+    return None
+
+
+def gold_contract_column_map(contract_file: str) -> dict[str, str]:
+    """Map Gold contract column names to ``catalogMetricKey`` via crosswalk (read-only).
+
+    Args:
+        contract_file: Contract YAML basename (for example ``finance-banking-v1.yaml``).
+
+    Returns:
+        dict[str, str]: ``{column_name: catalogMetricKey}``.
+
+    Raises:
+        ValueError: When ``contract_file`` is empty.
+
+    Example:
+        >>> gold_contract_column_map("finance-banking-v1.yaml")
+    """
+    name = contract_file.strip()
+    if not name:
+        raise ValueError("contract_file must be non-empty")
+    return contract_column_catalog_map(name)
+
+
 def register_integrator_builtin_tools(registry: IntegratorToolRegistry) -> None:
     """Register crosswalk and catalog builtins on a per-worker registry.
 
@@ -174,6 +262,9 @@ def register_integrator_builtin_tools(registry: IntegratorToolRegistry) -> None:
     registry.register("catalog_list_metrics", catalog_list_metrics)
     registry.register("catalog_resolve_metric", catalog_resolve_metric)
     registry.register("catalog_manifest_summary", catalog_manifest_summary)
+    registry.register("catalog_list_industries", catalog_list_industries)
+    registry.register("catalog_resolve_metric_by_key", catalog_resolve_metric_by_key)
+    registry.register("gold_contract_column_map", gold_contract_column_map)
 
 
 def call_integrator_tool(

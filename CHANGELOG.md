@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Per-instance tool registry** — `ambient_cli.tool_registry.IntegratorToolRegistry` and `execute_tool_plan` (v1 runs each `tool_ids` entry once; `max_tool_rounds` reserved).
 - **Wheel import smoke** — `tests/test_wheel_ambient_pipeline_import.py` verifies `ambient_pipeline` Colab and governance modules import from an installed wheel without a git checkout on `PYTHONPATH`.
 - **Integrator docs and example** — [docs/integrator-agent-tools.md](docs/integrator-agent-tools.md) and [examples/integrators/builtin_tools_walkthrough.py](examples/integrators/builtin_tools_walkthrough.py); edge tests in `tests/test_integrator_tools_edges.py`.
+- **Catalog and Gold read builtins** — `catalog_list_industries`, `catalog_resolve_metric_by_key`, `gold_contract_column_map` on `IntegratorToolRegistry` (file/crosswalk SSOT; not hosted HTTP or OLAP).
+- **Extended tool schema validation** — `enum`, `minLength`/`maxLength`, `minimum`/`maximum`, and `oneOf` in `ambient_cli.tool_schema`.
 
 ### Changed
 

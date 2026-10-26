@@ -33,6 +33,18 @@ Loads one metric by numeric manifest id (pack YAML fallback). Raises `ValueError
 
 Read-only headline: `version`, `industry_count`, `metric_count`. This is the on-disk SSOT, not a hosted catalog API.
 
+### `catalog_list_industries()`
+
+Returns manifest `industries` rows (`value`, `label`, pack metadata). File-backed catalog read surface for integrators (not HTTP).
+
+### `catalog_resolve_metric_by_key(catalog_metric_key)`
+
+Looks up one manifest metric by dotted `catalogMetricKey` (for example `real_estate.core.current_ratio`).
+
+### `gold_contract_column_map(contract_file)`
+
+Read-only map from Gold contract column names to `catalogMetricKey` via crosswalk — no lakehouse/OLAP query. Use from platform workers before Spark Gold jobs.
+
 ## Registry and validated dispatch
 
 ```python
@@ -71,7 +83,7 @@ schema = {
 errors = validate_tool_schema_document(schema, {"org_id": "tenant-a"})
 ```
 
-Nested objects and arrays are supported on property schemas (see tests in `tests/test_tool_schema_and_registry.py`).
+Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, and **`oneOf`** (exactly one branch must match). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
 
 ## Example script
 

@@ -16,6 +16,16 @@ _SIMPLE_TYPES: dict[str, Any] = {
 
 def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
     type_name = str(spec.get("type") or "").strip()
+    one_of = spec.get("oneOf")
+    if isinstance(one_of, list) and one_of:
+        matches = 0
+        for candidate in one_of:
+            if isinstance(candidate, dict) and not _validate_value(candidate, value, path):
+                matches += 1
+        if matches != 1:
+            return [f"{path} must match exactly one oneOf schema (matched {matches})"]
+        if not type_name:
+            return _validate_constraints(spec, value, path)
     if not type_name:
         return []
     if type_name == "object":
@@ -48,7 +58,29 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
         return [f"unsupported schema type {type_name!r} at {path}"]
     if not isinstance(value, expected):
         return [f"{path} expected {type_name}, got {type(value).__name__}"]
-    return []
+    return _validate_constraints(spec, value, path)
+
+
+def _validate_constraints(spec: dict[str, Any], value: Any, path: str) -> list[str]:
+    errors: list[str] = []
+    enum = spec.get("enum")
+    if isinstance(enum, list) and value not in enum:
+        errors.append(f"{path} must be one of {enum!r}")
+    if isinstance(value, str):
+        min_len = spec.get("minLength")
+        max_len = spec.get("maxLength")
+        if isinstance(min_len, int) and len(value) < min_len:
+            errors.append(f"{path} shorter than minLength {min_len}")
+        if isinstance(max_len, int) and len(value) > max_len:
+            errors.append(f"{path} longer than maxLength {max_len}")
+    if isinstance(value, int) and not isinstance(value, bool):
+        minimum = spec.get("minimum")
+        maximum = spec.get("maximum")
+        if isinstance(minimum, int) and value < minimum:
+            errors.append(f"{path} below minimum {minimum}")
+        if isinstance(maximum, int) and value > maximum:
+            errors.append(f"{path} above maximum {maximum}")
+    return errors
 
 
 def validate_tool_args(

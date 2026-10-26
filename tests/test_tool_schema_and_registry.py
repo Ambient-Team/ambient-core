@@ -61,6 +61,32 @@ def test_validate_tool_schema_document_wraps_properties() -> None:
     assert any("missing" in err for err in errors)
 
 
+def test_validate_tool_args_enum_and_min_length() -> None:
+    props = {"mode": {"type": "string", "enum": ["read", "write"], "minLength": 3}}
+    assert validate_tool_args(props, ["mode"], {"mode": "read"}) == []
+    errors = validate_tool_args(props, [], {"mode": "bad"})
+    assert any("one of" in err for err in errors)
+
+
+def test_validate_tool_args_integer_minimum() -> None:
+    props = {"metric_id": {"type": "integer", "minimum": 1}}
+    assert validate_tool_args(props, ["metric_id"], {"metric_id": 5}) == []
+    errors = validate_tool_args(props, [], {"metric_id": 0})
+    assert any("minimum" in err for err in errors)
+
+
+def test_validate_tool_args_one_of_exactly_one_match() -> None:
+    props = {
+        "value": {
+            "oneOf": [{"type": "string"}, {"type": "integer"}],
+        }
+    }
+    assert validate_tool_args(props, [], {"value": "text"}) == []
+    assert validate_tool_args(props, [], {"value": 42}) == []
+    errors = validate_tool_args(props, [], {"value": 3.14})
+    assert any("oneOf" in err for err in errors)
+
+
 def test_execute_tool_plan_runs_each_id_once_v1() -> None:
     registry = IntegratorToolRegistry()
     registry.register("one", lambda: 1)
