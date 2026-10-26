@@ -122,7 +122,9 @@ def test_compute_metric_uses_prior_computed_slugs() -> None:
 
 
 def test_compute_all_skips_measured_inputs() -> None:
-    metrics = [
+    from typing import Any, Mapping
+
+    metrics: list[Mapping[str, Any]] = [
         {"slug": "raw_x", "input": True},
         {"slug": "doubled", "calc": {"expr": "raw_x * 2", "inputs": ["raw_x"]}},
     ]

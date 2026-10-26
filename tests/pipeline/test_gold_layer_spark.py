@@ -28,15 +28,23 @@ def _mapping() -> dict[str, str]:
 
 def test_bronze_to_tenant_metrics_idempotent_row_count(spark: SparkSession) -> None:
     df = _bronze_frame(spark)
-    kwargs = {
-        "org_id": "org-1",
-        "mapping_json": _mapping(),
-        "catalog_option_key": "HcCensus911CatalogOptionKey01",
-        "run_id": "run-idempotent",
-        "ingestion_ts": datetime.now(timezone.utc).isoformat(),
-    }
-    first = bronze_to_tenant_metrics(df, **kwargs)
-    second = bronze_to_tenant_metrics(df, **kwargs)
+    ingestion_ts = datetime.now(timezone.utc).isoformat()
+    first = bronze_to_tenant_metrics(
+        df,
+        org_id="org-1",
+        mapping_json=_mapping(),
+        catalog_option_key="HcCensus911CatalogOptionKey01",
+        run_id="run-idempotent",
+        ingestion_ts=ingestion_ts,
+    )
+    second = bronze_to_tenant_metrics(
+        df,
+        org_id="org-1",
+        mapping_json=_mapping(),
+        catalog_option_key="HcCensus911CatalogOptionKey01",
+        run_id="run-idempotent",
+        ingestion_ts=ingestion_ts,
+    )
     assert first.count() == second.count()
     assert sorted(first.columns) == sorted(second.columns)
 

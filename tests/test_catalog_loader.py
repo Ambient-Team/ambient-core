@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import cast
 
 import pytest
 
@@ -19,7 +18,7 @@ from ambient_pipeline.catalog_loader import (
 
 @pytest.fixture(scope="module")
 def catalog_root() -> Path:
-    return cast(Path, resolve_catalog_root())
+    return resolve_catalog_root()
 
 
 def test_resolve_catalog_root_flexible_accepts_catalog_dir() -> None:

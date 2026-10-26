@@ -35,7 +35,9 @@ def test_flush_default_path_calls_write_delta(
     assert called
 
 
-def test_collect_spark_metrics_reads_stage_accumulators(spark: SparkSession) -> None:
+def test_collect_spark_metrics_reads_stage_accumulators(
+    spark: SparkSession, monkeypatch: pytest.MonkeyPatch
+) -> None:
     recorder = PipelinePerfRecorder(spark)
 
     class Metric:
@@ -53,7 +55,11 @@ def test_collect_spark_metrics_reads_stage_accumulators(spark: SparkSession) -> 
 
     status = MagicMock()
     status.getStageInfos.return_value = [Stage()]
-    recorder.spark.sparkContext.statusTracker = MagicMock(return_value=status)
+    monkeypatch.setattr(
+        recorder.spark.sparkContext,
+        "statusTracker",
+        MagicMock(return_value=status),
+    )
     metrics = recorder._collect_spark_metrics()  # noqa: SLF001
     assert metrics["shuffle_read_bytes"] == 10
     assert metrics["shuffle_write_bytes"] == 20
