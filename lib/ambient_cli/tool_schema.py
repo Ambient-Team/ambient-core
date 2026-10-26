@@ -32,6 +32,10 @@ _SIMPLE_TYPES: dict[str, Any] = {
 
 def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
     type_name = str(spec.get("type") or "").strip()
+    not_spec = spec.get("not")
+    if isinstance(not_spec, dict):
+        if not _validate_value(not_spec, value, path):
+            return [f"{path} must not satisfy not schema"]
     all_of = spec.get("allOf")
     if isinstance(all_of, list) and all_of:
         merged: list[str] = []
@@ -40,6 +44,17 @@ def _validate_value(spec: dict[str, Any], value: Any, path: str) -> list[str]:
                 merged.extend(_validate_value(candidate, value, path))
         if merged:
             return merged
+    any_of = spec.get("anyOf")
+    if isinstance(any_of, list) and any_of:
+        matches = sum(
+            1
+            for candidate in any_of
+            if isinstance(candidate, dict) and not _validate_value(candidate, value, path)
+        )
+        if matches < 1:
+            return [f"{path} must match at least one anyOf schema (matched {matches})"]
+        if not type_name:
+            return _validate_constraints(spec, value, path)
     one_of = spec.get("oneOf")
     if isinstance(one_of, list) and one_of:
         matches = 0
@@ -94,8 +109,11 @@ def _validate_constraints(spec: dict[str, Any], value: Any, path: str) -> list[s
     if "const" in spec and value != spec["const"]:
         errors.append(f"{path} must equal const {spec['const']!r}")
     enum = spec.get("enum")
-    if isinstance(enum, list) and value not in enum:
-        errors.append(f"{path} must be one of {enum!r}")
+    if isinstance(enum, list):
+        if not enum:
+            errors.append(f"{path} enum must be non-empty when present")
+        elif value not in enum:
+            errors.append(f"{path} must be one of {enum!r}")
     if isinstance(value, str):
         min_len = spec.get("minLength")
         max_len = spec.get("maxLength")

@@ -102,7 +102,8 @@ def main() -> int:
             ),
         ],
     )
-    print(f"per-step integrator plan returned {len(linear)} result(s)")
+    ok_steps = sum(1 for row in linear if row.ok)
+    print(f"per-step integrator plan: {ok_steps}/{len(linear)} step(s) ok")
     return 0
 
 

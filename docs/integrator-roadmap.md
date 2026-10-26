@@ -39,12 +39,13 @@ Branch `cursor/dec18-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11**
 - **Contract inspection builtins** — `contracts_list_files`, `contract_schema_summary` (YAML SSOT; not lakehouse reads).
 - **Crosswalk metric lookup** — `crosswalk_links_for_metric_key` for programmatic mapping checks.
 - **Linear plan runner** — `ambient_cli.integrator_plan_runner` (`IntegratorPlanStep`, `run_integrator_plan`); per-step validated dispatch without HTTP.
-- **Schema combinators** — `allOf` and `const` in `validate_tool_args` (with existing `oneOf`).
+- **Schema combinators** — `allOf`, `anyOf`, `oneOf`, `not`, and `const` in `validate_tool_args` (enum non-empty guard).
+- **Plan runner ergonomics** — `IntegratorPlanStepResult`, `IntegratorPlanExecutionError`, `stop_on_error`, `merge_from_step`, `arg_from_prior`, `resolve_step_arguments`.
 
 ## Deferred (not in core yet)
 
 - **Product agent runtime** — plan-execute workers and hosted agent HTTP APIs live in the commercial platform; Ambient Core documents maintainer-only IDE agents in [AGENTS.md](../AGENTS.md)
-- **Full JSON Schema for tool args** — `$ref`, `format`, and combinators beyond `allOf`/`oneOf`; v0.3.12 ships nested types plus enum/`const`/length/range/`pattern`/`allOf`/`oneOf`
+- **Full JSON Schema for tool args** — `$ref`, `format`, and combinators beyond the shipped set; v0.3.12 ships nested types plus enum/`const`/length/range/`pattern`/`allOf`/`anyOf`/`oneOf`/`not`
 - **Live Gold / OLAP reads in core agents** — remote warehouse queries; core exposes `gold_contract_column_map` only
 - **Hosted catalog API** — HTTP transport TBD; file-backed reads via integrator builtins
 - **Gold lakehouse writers** — Spark jobs that materialize `finance-*` / healthcare Gold tables from Silver + `ambient_calc` (platform repo); core supplies `gold_contract_map` and contracts only

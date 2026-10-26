@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from ambient_cli.tool_registry import (
     IntegratorToolRegistry,
     ToolPlanProfile,
@@ -94,6 +96,35 @@ def test_validate_tool_args_const_with_type() -> None:
     assert validate_tool_args(props, [], {"tag": "prod"}) == []
     errors = validate_tool_args(props, [], {"tag": "dev"})
     assert any("const" in err for err in errors)
+
+
+def test_validate_tool_args_any_of_at_least_one() -> None:
+    props = {"value": {"anyOf": [{"type": "string"}, {"type": "integer"}]}}
+    assert validate_tool_args(props, [], {"value": "x"}) == []
+    assert validate_tool_args(props, [], {"value": 1}) == []
+    errors = validate_tool_args(props, [], {"value": 3.14})
+    assert any("anyOf" in err for err in errors)
+
+
+def test_validate_tool_args_not_rejects_matching_branch() -> None:
+    props = {"value": {"not": {"type": "string"}}}
+    assert validate_tool_args(props, [], {"value": 1}) == []
+    errors = validate_tool_args(props, [], {"value": "blocked"})
+    assert any("not" in err for err in errors)
+
+
+def test_validate_tool_args_enum_empty_list_fails() -> None:
+    props: dict[str, dict[str, Any]] = {"mode": {"enum": []}}
+    errors = validate_tool_args(props, [], {"mode": "a"})
+    assert any("non-empty" in err for err in errors)
+
+
+def test_validate_tool_args_one_of_zero_or_many_matches() -> None:
+    props = {"value": {"oneOf": [{"type": "string"}, {"type": "integer"}]}}
+    errors = validate_tool_args(props, [], {"value": 3.14})
+    assert any("oneOf" in err and "matched 0" in err for err in errors)
+    errors_both = validate_tool_args(props, [], {"value": 1})
+    assert errors_both == []
 
 
 def test_validate_tool_args_pattern_on_string() -> None:

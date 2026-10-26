@@ -9,7 +9,7 @@ Ambient Core ships **file-backed** catalog and crosswalk helpers for platform wo
 - **`ambient_cli.integrator_tools`** — catalog, crosswalk, contract, and Gold-map builtins; `register_integrator_builtin_tools`, `call_integrator_tool`, and `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
 - **`ambient_cli.tool_schema`** — `validate_tool_args` and `validate_tool_schema_document` (required fields, simple types, nested **object** / **array**).
 - **`ambient_cli.tool_registry`** — `IntegratorToolRegistry` (one registry per worker/tenant), `ToolPlanProfile`, `execute_tool_plan` (v1 runs each `tool_ids` entry once).
-- **`ambient_cli.integrator_plan_runner`** — `IntegratorPlanStep` and `run_integrator_plan` for linear plans with **per-step** `args` (in-process only; no HTTP agent runtime).
+- **`ambient_cli.integrator_plan_runner`** — `IntegratorPlanStep`, `IntegratorPlanStepResult`, `run_integrator_plan`, and `resolve_step_arguments` (per-step `args`, prior-step wiring, optional `stop_on_error=False`; in-process only).
 
 ## Environment
 
@@ -97,7 +97,12 @@ steps = [
     ),
 ]
 results = run_integrator_plan(registry, steps)
+for row in results:
+    if row.ok:
+        print(row.tool_id, row.result)
 ```
+
+`IntegratorPlanStep.merge_from_step` shallow-merges a prior step's **dict** result into `args` (later keys win). `arg_from_prior` maps argument names to `(step_index, result_key)` tuples. Failures raise `IntegratorPlanExecutionError` when `stop_on_error=True` (default); set `stop_on_error=False` to collect `IntegratorPlanStepResult` rows with `ok=False` and continue.
 
 Multi-round ReAct (`max_tool_rounds` > 1) and hosted HTTP workers remain **platform** concerns; core documents the reserved field on `ToolPlanProfile` only.
 
@@ -115,7 +120,7 @@ schema = {
 errors = validate_tool_schema_document(schema, {"org_id": "tenant-a"})
 ```
 
-Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`**, **`const`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), **`allOf`** (every sub-schema must match), and **`oneOf`** (exactly one branch must match). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
+Nested objects and arrays are supported on property schemas. Additional draft-07-style keywords: **`enum`** (non-empty when present), **`const`**, **`minLength`** / **`maxLength`**, **`minimum`** / **`maximum`**, **`pattern`** (full-string match via `re.fullmatch`), **`allOf`**, **`anyOf`** (at least one branch), **`oneOf`** (exactly one branch), and **`not`** (value must not satisfy the sub-schema). `$ref` and format validators remain deferred (see [integrator-roadmap.md](integrator-roadmap.md)).
 
 ## Example script
 

@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Contract and crosswalk builtins** — `contracts_list_files`, `contract_schema_summary`, and `crosswalk_links_for_metric_key` on `IntegratorToolRegistry`.
 - **Integrator plan runner** — `ambient_cli.integrator_plan_runner` (`IntegratorPlanStep`, `run_integrator_plan`) for linear in-process tool plans with per-step arguments (not a hosted agent runtime).
 - **Schema `allOf` and `const`** — additional JSON-Schema-style keywords in `ambient_cli.tool_schema`.
+- **Schema `anyOf` and `not`** — combinator keywords plus non-empty `enum` guard in `ambient_cli.tool_schema`.
+- **Plan runner results and wiring** — `IntegratorPlanStepResult`, `IntegratorPlanExecutionError`, `stop_on_error`, `merge_from_step`, `arg_from_prior`, and `resolve_step_arguments` in `ambient_cli.integrator_plan_runner`.
 
 ### Changed
 
