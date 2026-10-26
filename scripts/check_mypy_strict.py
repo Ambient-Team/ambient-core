@@ -23,6 +23,11 @@ STRICT_MODULES: tuple[str, ...] = (
     "lib/ambient_pipeline/secrets.py",
     "lib/ambient_pipeline/pii.py",
     "lib/ambient_pipeline/runner.py",
+    "lib/ambient_contracts/manifest_models.py",
+    "lib/ambient_pipeline/bronze_catalog_map.py",
+    "lib/ambient_pipeline/validation.py",
+    "lib/ambient_pipeline/provenance.py",
+    "lib/ambient_pipeline/join_guards.py",
 )
 
 
