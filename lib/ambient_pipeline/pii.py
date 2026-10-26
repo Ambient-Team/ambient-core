@@ -24,6 +24,11 @@ def hmac_sha256_hex(salt: str, value: str | None) -> str:
     ).hexdigest()
 
 
+def pseudonymize_string(salt: str, value: str | None) -> str:
+    """Pseudonymize one string value (shared by Spark UDF and unit tests)."""
+    return hmac_sha256_hex(salt, value)
+
+
 @dataclass
 class PiiPseudonymizer:
     """One-way HMAC-SHA256 pseudonymization of PII columns."""
@@ -41,7 +46,7 @@ class PiiPseudonymizer:
 
         @F.udf(returnType=StringType())
         def _hmac_udf(value: str | None) -> str:
-            return hmac_sha256_hex(salt, value)
+            return pseudonymize_string(salt, value)
 
         return _hmac_udf(col_ref.cast("string"))
 

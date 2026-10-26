@@ -39,6 +39,19 @@ def test_flush_writes_delta_when_output_path_is_directory(spark, tmp_path, monke
     assert written == [str(out_dir)]
 
 
+def test_create_local_spark_wraps_delta_configuration_errors(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import delta
+
+    def _boom(_builder: object) -> object:
+        raise RuntimeError("delta not available")
+
+    monkeypatch.setattr(delta, "configure_spark_with_delta_pip", _boom)
+    with pytest.raises(RuntimeError, match="Local Spark\\+Delta session failed"):
+        create_local_spark("ambient-perf-delta-fail")
+
+
 def test_create_local_spark_invokes_delta_helper(monkeypatch: pytest.MonkeyPatch) -> None:
     import delta
 

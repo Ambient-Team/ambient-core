@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import ast
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable, Mapping, cast
 
 _ALLOWED_FUNCS = {"min": min, "max": max, "abs": abs, "round": round}
 
@@ -46,7 +46,7 @@ def safe_eval(expr: str, variables: Mapping[str, Any]) -> float | None:
     """Evaluate an arithmetic expression over ``variables``. No attribute/loop/call except
     whitelisted numeric funcs. Returns None on division by zero or a None operand."""
     tree = _parse(expr)
-    return _eval(tree.body, variables)
+    return cast(float | None, _eval(tree.body, variables))
 
 
 def _eval(node: ast.AST, variables: Mapping[str, Any]) -> Any:

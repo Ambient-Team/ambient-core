@@ -98,7 +98,9 @@ def test_resolve_manifest_path_uses_resolve_catalog_root_when_flexible_missing(
     def _missing_flexible() -> Path:
         raise FileNotFoundError("no catalog")
 
-    monkeypatch.setattr(catalog_manifest, "_repo_roots", lambda: [tmp_path])
+    empty_root = tmp_path / "no_manifest"
+    empty_root.mkdir()
+    monkeypatch.setattr(catalog_manifest, "_repo_roots", lambda: [empty_root])
     monkeypatch.setattr(
         catalog_manifest,
         "resolve_catalog_root_flexible",
