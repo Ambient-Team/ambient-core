@@ -191,3 +191,7 @@ cython_debug/
 # Repomix (local LLM context pack; regenerate with npx repomix)
 repomix-output.md
 repomix-output-*.md
+
+# Local Delta scratch for scripts/refresh_pipeline_golden.py
+tests/fixtures/pipeline/_refresh_lake/tmpdbg/
+tmpdbg2/

@@ -52,8 +52,9 @@ Steps (fail fast, in order):
 4. **mypy-strict-support** — [`check_mypy_strict_support.py`](../scripts/check_mypy_strict_support.py): `--strict` on quality-gate `scripts/` and selected `tests/` (incremental SSOT; count grows with the quality PR).
 5. **dead-code** — [`check_dead_code.py`](../scripts/check_dead_code.py): ruff `F401,F841` on `lib/`, `scripts/`, `tests/`; **vulture** on `lib/` with [`vulture_whitelist.py`](../scripts/vulture_whitelist.py) for public APIs exercised in tests/notebooks.
 6. **public-api-docstrings** — [`check_public_api_docstrings.py`](../scripts/check_public_api_docstrings.py): every public `lib/` callable must document Args, Returns, Raises, and Example (maintainer refresh via [`enrich_public_api_docstrings.py`](../scripts/enrich_public_api_docstrings.py)).
-7. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
-8. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.
+7. **lib-readme** — [`generate_lib_readme.py`](../scripts/generate_lib_readme.py) `--check`: generated [`lib/README.md`](../lib/README.md) public API index must match package docstrings.
+8. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
+9. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.
 
 **`build-test`** also runs [`check_markdown_prose.py`](../scripts/check_markdown_prose.py) (pipe tables + no public Drive/Docs URLs) and [`check_doc_links.py`](../scripts/check_doc_links.py) (relative link targets must exist).
 

@@ -38,6 +38,7 @@ STRICT_MODULES: tuple[str, ...] = (
     "lib/ambient_pipeline/notebook_bootstrap.py",
     "lib/ambient_pipeline/pandas_provenance.py",
     "lib/ambient_pipeline/perf.py",
+    "lib/ambient_pipeline/pipeline_logging.py",
     "lib/ambient_pipeline/pii.py",
     "lib/ambient_pipeline/provenance.py",
     "lib/ambient_pipeline/runner.py",

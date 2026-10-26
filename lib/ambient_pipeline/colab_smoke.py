@@ -18,6 +18,7 @@ import pandas as pd
 import yaml
 
 from ambient_pipeline.pandas_provenance import PandasBronzeStamper
+from ambient_pipeline.pipeline_logging import log_pipeline_event
 
 # Expected raw demo files (reuse Drive / Ambient Systems demo assets; do not invent live customers).
 DEMO_TABLES = {
@@ -102,6 +103,13 @@ def run_colab_smoke(
     """
     root = Path(root)
     run_id = run_id or f"colab-smoke-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+    log_pipeline_event(
+        "pipeline_start",
+        component="colab_smoke",
+        run_id=run_id,
+        org_id=org_id,
+        root=str(root),
+    )
     raw_dir = root / "data" / "raw"
     contracts_dir = root / "contracts"
     out = root / "data" / "processed"
@@ -268,5 +276,13 @@ def run_colab_smoke(
     pd.DataFrame(kpi_rows).to_csv(gold_dir / "demo_kpis.csv", index=False)
     (gold_dir / "run_summary.json").write_text(
         json.dumps(result.to_dict(), indent=2, default=str), encoding="utf-8"
+    )
+    log_pipeline_event(
+        "pipeline_complete",
+        component="colab_smoke",
+        run_id=run_id,
+        bronze_tables=len(result.bronze_tables),
+        silver_tables=len(result.silver_tables),
+        gold_kpis=len(result.gold_kpis),
     )
     return result

@@ -21,6 +21,7 @@ from pyspark.sql.types import (
 )
 
 from ambient_pipeline.contracts import ContractLoader
+from ambient_pipeline.pipeline_logging import log_pipeline_event
 from ambient_pipeline.perf import PipelinePerfRecorder, create_local_spark
 from ambient_pipeline.pii import PiiPseudonymizer
 from ambient_pipeline.provenance import BronzeProvenanceStamper
@@ -59,6 +60,8 @@ class PipelineRunConfig:
     optimize: bool = True
     cache_silver: bool | None = None
     apply_skew_salt: bool | None = None
+    transform_ts: str | None = None
+    ingestion_ts: str | None = None
 
     def __post_init__(self) -> None:
         if self.cache_silver is None:
@@ -110,13 +113,20 @@ def run_local_pipeline(
     Example:
         >>> run_local_pipeline(...)
     """
+    log_pipeline_event(
+        "pipeline_start",
+        component="runner",
+        run_id=config.run_id,
+        org_id=config.org_id,
+        bronze_csv_glob=bronze_csv_glob,
+    )
     perf = PipelinePerfRecorder(
         spark,
         run_id=config.run_id,
         volume_gb=config.volume_gb,
         output_path=str(config.base_dir / "gold" / "pipeline_perf"),
     )
-    transform_ts = datetime.now(timezone.utc).isoformat()
+    transform_ts = config.transform_ts or datetime.now(timezone.utc).isoformat()
     results: dict[str, Any] = {"stages": {}}
 
     bronze_path = str(config.base_dir / "bronze" / "raw_metrics")
@@ -132,6 +142,7 @@ def run_local_pipeline(
         org_id=config.org_id,
         source_type="csv",
         source_path=bronze_csv_glob,
+        ingestion_ts=config.ingestion_ts,
     )
     bronze_df = stamper.stamp(raw_df)
     (
@@ -148,6 +159,14 @@ def run_local_pipeline(
         output_rows=bronze_rows,
         wall_seconds=time.perf_counter() - t0,
     ).to_dict()
+    log_pipeline_event(
+        "pipeline_stage_complete",
+        component="runner",
+        run_id=config.run_id,
+        stage="bronze",
+        output_rows=bronze_rows,
+        input_rows=input_rows,
+    )
 
     # —— Silver
     t0 = time.perf_counter()
@@ -183,6 +202,14 @@ def run_local_pipeline(
         output_rows=silver_rows,
         wall_seconds=time.perf_counter() - t0,
     ).to_dict()
+    log_pipeline_event(
+        "pipeline_stage_complete",
+        component="runner",
+        run_id=config.run_id,
+        stage="silver",
+        output_rows=silver_rows,
+        input_rows=bronze_rows,
+    )
 
     # —— Gold (simplified KPI pivot when Real Estate metrics exist)
     t0 = time.perf_counter()
@@ -243,6 +270,14 @@ def run_local_pipeline(
         output_rows=gold_rows,
         wall_seconds=time.perf_counter() - t0,
     ).to_dict()
+    log_pipeline_event(
+        "pipeline_stage_complete",
+        component="runner",
+        run_id=config.run_id,
+        stage="gold",
+        output_rows=gold_rows,
+        input_rows=silver_rows,
+    )
 
     if config.cache_silver:
         silver_metrics.unpersist()
@@ -251,6 +286,12 @@ def run_local_pipeline(
     results["run_id"] = perf.run_id
     results["total_wall_seconds"] = sum(
         s["wall_seconds"] for s in results["stages"].values()
+    )
+    log_pipeline_event(
+        "pipeline_complete",
+        component="runner",
+        run_id=config.run_id,
+        total_wall_seconds=results["total_wall_seconds"],
     )
     return results
 
@@ -280,6 +321,12 @@ def run_pipeline_from_config(
     if spark is None:
         spark = create_local_spark(shuffle_partitions=config.shuffle_partitions)
 
+    log_pipeline_event(
+        "pipeline_entry",
+        component="runner",
+        run_id=config.run_id,
+        entry="run_pipeline_from_config",
+    )
     loader = ContractLoader()
     contract = loader.load("tenant-metrics-v1.yaml")
     loader.enforce_bronze_lineage(contract)

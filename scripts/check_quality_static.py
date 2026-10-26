@@ -22,6 +22,10 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
         "public-api-docstrings",
         [sys.executable, str(ROOT / "scripts" / "check_public_api_docstrings.py")],
     ),
+    (
+        "lib-readme",
+        [sys.executable, str(ROOT / "scripts" / "generate_lib_readme.py"), "--check"],
+    ),
     ("secrets-scan", [sys.executable, str(ROOT / "scripts" / "scan_secrets_patterns.py")]),
     (
         "pack-reference-docs",
