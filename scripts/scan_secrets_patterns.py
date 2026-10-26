@@ -36,13 +36,16 @@ def scan_paths(paths: list[Path]) -> list[str]:
 
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
-    targets = sorted((root / "lib").rglob("*.py"))
+    targets: list[Path] = []
+    for sub in ("lib", "scripts"):
+        targets.extend(sorted((root / sub).rglob("*.py")))
+    targets = [p for p in targets if "tests" not in p.parts]
     errors = scan_paths(targets)
     if errors:
         for err in errors:
             print(f"SECRET SCAN: {err}")
         return 1
-    print(f"OK: scanned {len(targets)} lib file(s)")
+    print(f"OK: scanned {len(targets)} lib/ and scripts/ file(s)")
     return 0
 
 

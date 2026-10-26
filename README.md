@@ -71,11 +71,13 @@ Install Colab deps only: `pip install -r requirements-colab.txt` (`pandas`, `PyY
 
 ## Quick start (library / CI)
 
+Prerequisites: **Python 3.10–3.12** and **Java 17+** (`JAVA_HOME`) when running Spark tests (`AMBIENT_SPARK_TESTS=1`). See [running-ci-locally.md](docs/running-ci-locally.md).
+
 ```bash
 git clone https://github.com/Ambient-Team/ambient-core.git
 cd ambient-core
 # Windows: py -3.12 -m venv .venv
-python3.12 -m venv .venv
+python3.12 -m venv .venv   # or: python3 -m venv .venv
 source .venv/bin/activate
 # Windows: .venv\Scripts\activate
 pip install -e ".[all]"
@@ -87,6 +89,8 @@ AMBIENT_SPARK_TESTS=1 pytest
 ```
 
 **Local Spark / Delta** (`lib/ambient_pipeline/runner.py`): set `AMBIENT_PII_SALT` to a unique non-empty value (see `.env.example` placeholder). Required outside pytest; see [docs/pipeline.md](docs/pipeline.md#local-spark-pii-salt).
+
+**Contributors editing `contracts/`:** copy YAML into the wheel bundle before `validate-contracts` — `cp contracts/*.yaml lib/ambient_contracts/bundled/` (CI enforces a clean diff).
 
 Pin a release from another project: [docs/INTEGRATING.md](docs/INTEGRATING.md). More recipes: [docs/USAGE.md](docs/USAGE.md).
 

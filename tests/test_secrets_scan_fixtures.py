@@ -39,6 +39,11 @@ def test_lib_tree_has_no_secret_shaped_tokens() -> None:
     assert errors == []
 
 
+def test_scripts_tree_has_no_secret_shaped_tokens() -> None:
+    errors = scan_paths(sorted((ROOT / "scripts").rglob("*.py")))
+    assert errors == []
+
+
 def test_scan_secrets_script_exits_zero() -> None:
     script = ROOT / "scripts" / "scan_secrets_patterns.py"
     result = subprocess.run(
