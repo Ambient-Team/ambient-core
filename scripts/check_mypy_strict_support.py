@@ -36,6 +36,18 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_appsec_remediations.py",
     "tests/test_cli_golden.py",
     "tests/test_cli_ux.py",
+    # Group 2 — contracts, catalog, and governance unit tests
+    "tests/test_ambient_contracts_paths.py",
+    "tests/test_ambient_contracts_loader.py",
+    "tests/test_ambient_contracts_catalog_manifest.py",
+    "tests/test_catalog_field_rules.py",
+    "tests/test_catalog_loader_pack_paths.py",
+    "tests/test_catalog_loader_manifest_edges.py",
+    "tests/test_catalog_manifest_resolve_branches.py",
+    "tests/test_catalog_pack_files.py",
+    "tests/test_catalog_contract_drift.py",
+    "tests/test_bronze_upload_validation.py",
+    "tests/test_governance_views.py",
 )
 
 
