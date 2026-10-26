@@ -9,14 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Integrator agent builtins** — `ambient_cli.integrator_tools` (`crosswalk_list_links`, `catalog_list_metrics`, `catalog_resolve_metric`) for in-process agent workers (Jan 2027 / **v0.3.12** train).
-- **Tool argument validation** — `ambient_cli.tool_schema.validate_tool_args` (required fields and simple JSON types).
+- **Integrator agent builtins** — `ambient_cli.integrator_tools` (`crosswalk_list_links`, `catalog_list_metrics`, `catalog_resolve_metric`, `catalog_manifest_summary`) for in-process agent workers (**Dec 2026 / v0.3.12** train, **Fri 18 Dec 2026**).
+- **Tool argument validation** — `ambient_cli.tool_schema` (`validate_tool_args`, `validate_tool_schema_document`) with nested **object** and **array** types; `call_integrator_tool` validates builtin schemas before dispatch.
+- **Builtin tool registration** — `register_integrator_builtin_tools` wires catalog/crosswalk handlers onto `IntegratorToolRegistry`.
 - **Per-instance tool registry** — `ambient_cli.tool_registry.IntegratorToolRegistry` and `execute_tool_plan` (v1 runs each `tool_ids` entry once; `max_tool_rounds` reserved).
 - **Wheel import smoke** — `tests/test_wheel_ambient_pipeline_import.py` verifies `ambient_pipeline` Colab and governance modules import from an installed wheel without a git checkout on `PYTHONPATH`.
 
 ### Changed
 
-- **Integrator roadmap** — top deferred items moved to the **v0.3.12 (29 Jan 2027)** train; `ambient_pipeline` wheel path documented as shipped from `lib/ambient_pipeline` (no checkout required for pip installs).
+- **Integrator roadmap** — top deferred items on the **v0.3.12 (18 Dec 2026)** train; `ambient_pipeline` wheel path documented as shipped from `lib/ambient_pipeline` (no checkout required for pip installs).
 
 ## [0.3.11] - 2026-11-27
 

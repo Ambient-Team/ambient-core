@@ -13,7 +13,7 @@ This document is the **cadence and chain-order** reference for **ambient-core** 
 Hub monthly cuts on **ambient-core** (UTC), last Friday unless noted:
 
 - **27 Nov 2026** — November 2026 (ships **`v0.3.11`**; see below)
-- **18 Dec 2026** — December 2026
+- **18 Dec 2026** — December 2026 (target **`v0.3.12`** integrator train)
 - **29 Jan 2027** — January 2027
 - **26 Feb 2027** — February 2027
 - **19 Mar 2027** — March 2027 (hub release date)

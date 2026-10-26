@@ -20,9 +20,9 @@ Release **`v0.3.11`** / package **`0.3.11`** ([CHANGELOG.md](../CHANGELOG.md)). 
 - **Pipeline helpers** — [pipeline.md](pipeline.md), `bronze_to_tenant_metrics`, `gold_contract_map`, `ambient_pipeline` (checkout), examples under [examples/pipeline/](../examples/pipeline/)
 - **Crosswalk** — YAML SSOT + `load_crosswalk_links()`; CI `scripts/check_crosswalk.py`; `tests/test_crosswalk_loader.py`
 
-## In progress — v0.3.12 (29 Jan 2027 train)
+## In progress — v0.3.12 (18 Dec 2026 train)
 
-Branch `cursor/jan29-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11** PR **#130**; **no PR** until **#130** merges). See [CHANGELOG.md](../CHANGELOG.md) `[Unreleased]`.
+Branch `cursor/dec18-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11** PR **#130**; **no PR** until **#130** merges). Release day **Fri 18 Dec 2026** per [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md). See [CHANGELOG.md](../CHANGELOG.md) `[Unreleased]`.
 
 - **`ambient_pipeline` on the wheel** — `lib/ambient_pipeline` ships in the wheel; `tests/test_wheel_ambient_pipeline_import.py` asserts imports without checkout `PYTHONPATH`. The `pipeline` extra still adds PySpark only.
 - **Crosswalk agent tool** — `ambient_cli.integrator_tools.crosswalk_list_links`; tests in `tests/test_integrator_tools.py`.
@@ -30,11 +30,13 @@ Branch `cursor/jan29-v0312-integrator-deferred-2b6a` (stacked on Nov **v0.3.11**
 - **Per-instance tool registry** — `ambient_cli.tool_registry.IntegratorToolRegistry` (not a process-global singleton).
 - **Tool args validation** — `ambient_cli.tool_schema.validate_tool_args` (required + simple types).
 - **ReAct / `max_tool_rounds`** — `ToolPlanProfile.max_tool_rounds` reserved; `execute_tool_plan` runs each id once in v1.
+- **Catalog manifest read helper** — `catalog_manifest_summary` (file SSOT; not HTTP); `register_integrator_builtin_tools` + `call_integrator_tool`.
+- **Nested tool arg schemas** — object/array support in `validate_tool_args`; builtin schemas in `BUILTIN_INTEGRATOR_TOOL_SCHEMAS`.
 
 ## Deferred (not in core yet)
 
 - **Product agent runtime** — plan-execute workers and hosted agent HTTP APIs live in the commercial platform; Ambient Core documents maintainer-only IDE agents in [AGENTS.md](../AGENTS.md)
-- **Full JSON Schema for tool args** — draft-07 / nested objects; v0.3.12 ships simple-type validation only
+- **Full JSON Schema for tool args** — draft-07 keywords (`$ref`, `oneOf`, format validators); v0.3.12 ships nested object/array + simple types only
 - **Live Gold / OLAP reads in core agents** — platform `register_tool()` handlers
 - **Hosted catalog API** — catalog folder remains SSOT; transport TBD
 - **Gold lakehouse writers** — Spark jobs that materialize `finance-*` / healthcare Gold tables from Silver + `ambient_calc` (platform repo); core supplies `gold_contract_map` and contracts only

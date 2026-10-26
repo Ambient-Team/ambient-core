@@ -141,13 +141,10 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_ambient_calc.py",
     # Batch 21 — lib branch coverage closure
     "tests/test_lib_branch_coverage.py",
-    # Jan 2027 v0.3.12 train — integrator builtins
+    # Dec 2026 v0.3.12 train — integrator builtins
     "tests/test_integrator_tools.py",
     "tests/test_tool_schema_and_registry.py",
     "tests/test_wheel_ambient_pipeline_import.py",
-    "lib/ambient_cli/integrator_tools.py",
-    "lib/ambient_cli/tool_registry.py",
-    "lib/ambient_cli/tool_schema.py",
 )
 
 

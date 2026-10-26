@@ -6,7 +6,7 @@ from __future__ import annotations
 import os
 import sys
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,10 +61,7 @@ def main() -> int:
                 transform_ts=FIXED_TRANSFORM_TS,
                 ingestion_ts=FIXED_INGESTION_TS,
             )
-            return cast(
-                dict[str, Any],
-                run_local_pipeline(spark, str(FIXTURE_CSV), cfg),
-            )
+            return run_local_pipeline(spark, str(FIXTURE_CSV), cfg)
 
         with patch.object(PiiPseudonymizer, "apply", _skip_pii_apply):
             result_stub = _run_lake("stub")

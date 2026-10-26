@@ -6,7 +6,7 @@ import os
 import sys
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING
 
 import pytest
 
@@ -29,7 +29,7 @@ def create_local_spark(app_name: str = "pytest-ambient") -> SparkSession:
     """Local Spark with Delta (matches ``ambient_pipeline.perf.create_local_spark``)."""
     from ambient_pipeline.perf import create_local_spark as _delta_spark
 
-    return cast(SparkSession, _delta_spark(app_name, shuffle_partitions=2))
+    return _delta_spark(app_name, shuffle_partitions=2)
 
 
 @pytest.fixture(scope="session")
