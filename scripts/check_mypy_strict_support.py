@@ -60,6 +60,15 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_notebook_bootstrap_unit.py",
     "tests/test_pii_column_tagging.py",
     "tests/test_storage_paths_and_firestore_ids.py",
+    # Pipeline / Spark support (batch 19 — group 1)
+    "tests/dict_helpers.py",
+    "tests/spark_fixtures.py",
+    "tests/pipeline/test_catalog_manifest.py",
+    "tests/pipeline/test_catalog_sample_csv_bronze.py",
+    "tests/pipeline/test_contracts.py",
+    "tests/pipeline/test_runner_config.py",
+    "tests/pipeline/test_bronze_catalog_map.py",
+    "tests/pipeline/test_bronze_to_tenant_metrics_contract.py",
 )
 
 

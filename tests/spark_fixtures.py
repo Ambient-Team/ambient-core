@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import os
 import sys
+from collections.abc import Iterator
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 import pytest
 
@@ -26,13 +27,15 @@ SPARK_TESTS_ENABLED = (
 
 def create_local_spark(app_name: str = "pytest-ambient") -> SparkSession:
     """Local Spark with Delta (matches ``ambient_pipeline.perf.create_local_spark``)."""
+    from pyspark.sql import SparkSession as _SparkSession
+
     from ambient_pipeline.perf import create_local_spark as _delta_spark
 
-    return _delta_spark(app_name, shuffle_partitions=2)
+    return cast(_SparkSession, _delta_spark(app_name, shuffle_partitions=2))
 
 
 @pytest.fixture(scope="session")
-def spark():
+def spark() -> Iterator[SparkSession]:
     if not SPARK_TESTS_ENABLED:
         pytest.skip("Spark tests disabled — set AMBIENT_SPARK_TESTS=1 to force")
     session: SparkSession | None = None

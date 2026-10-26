@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+from pyspark.sql import SparkSession
 
 from ambient_pipeline.bronze_catalog_map import (
     append_firestore_lineage_event,
@@ -15,6 +16,7 @@ from ambient_pipeline.bronze_catalog_map import (
 )
 from ambient_pipeline.bronze_upload_validation import validate_csv_headers_against_mapping
 from ambient_pipeline.catalog_field_rules import coerce_numeric_string, parse_float_from_cell
+from tests.dict_helpers import JsonDict
 
 
 def test_parse_source_id_from_gcs_path() -> None:
@@ -68,7 +70,7 @@ def test_coerce_numeric_string_and_parse_float() -> None:
     assert parse_float_from_cell("not-a-number") is None
 
 
-def test_coerce_mapped_columns_uses_manifest_types(spark) -> None:
+def test_coerce_mapped_columns_uses_manifest_types(spark: SparkSession) -> None:
     from ambient_pipeline.bronze_catalog_map import apply_column_mapping, coerce_mapped_columns
 
     rows = [("2024-03-15", "42", "Active")]
@@ -111,7 +113,7 @@ def test_resolve_mapping_spec_firestore_missing_document() -> None:
 
 
 def test_resolve_mapping_spec_firestore_fallback() -> None:
-    def fetcher(org_id: str, source_id: str) -> dict:
+    def fetcher(org_id: str, source_id: str) -> JsonDict:
         return {
             "catalogOptionKey": "HcCensus911CatalogOptionKey01",
             "name": "Census upload",
@@ -132,7 +134,7 @@ def test_resolve_mapping_spec_firestore_fallback() -> None:
     assert spec.industry == "Healthcare"
 
 
-def test_coerce_mapped_columns_dates_and_currency(spark) -> None:
+def test_coerce_mapped_columns_dates_and_currency(spark: SparkSession) -> None:
     from ambient_pipeline.bronze_catalog_map import apply_column_mapping, coerce_mapped_columns
 
     rows = [("2024-03-15", "$1,234.50", "(99.5)", "Active")]
