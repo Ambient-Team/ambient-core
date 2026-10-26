@@ -50,7 +50,15 @@ def _seed_demo_tree(root: Path) -> None:
             [{"date": "2024-01-01", "amount": 10.0, "current_cash_balance": 1000.0}]
         ),
         "balance_sheet": pd.DataFrame(
-            [{"date": "2024-01-01", "period_end_date": "2024-01-31", "inventory": "50"}]
+            [
+                {
+                    "date": "2024-01-01",
+                    "period_end_date": "2024-01-31",
+                    "inventory": "50",
+                    "days": "45 days",
+                    "days_inventory_outstanding": "12 days",
+                }
+            ]
         ),
         "general_ledger": pd.DataFrame(
             [{"date": "2024-01-01", "account_code": "1000", "debit": 10.0, "credit": 5.0}]

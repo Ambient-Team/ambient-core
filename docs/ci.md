@@ -42,7 +42,7 @@ Outputs **`run_heavy`**:
 
 ### `quality-static` (always)
 
-Runs on every pull request (including **drafts**): [`scripts/check_quality_static.py`](../scripts/check_quality_static.py) — ruff, mypy, mypy `--strict` on the incremental module list in [`scripts/check_mypy_strict.py`](../scripts/check_mypy_strict.py) (contracts loaders, manifest models, bronze mapping, validation/provenance/join guards, catalog CLI, and related pipeline helpers), dead-import scan, secrets pattern scan, and pack reference doc drift (`--check`). Uses `pip install -e ".[dev]"` only (no JDK/Spark).
+Runs on every pull request (including **drafts**): [`scripts/check_quality_static.py`](../scripts/check_quality_static.py) — ruff, mypy, mypy `--strict` on every module under `lib/` (SSOT: [`scripts/check_mypy_strict.py`](../scripts/check_mypy_strict.py)), dead-import scan, secrets pattern scan, and pack reference doc drift (`--check`). Uses `pip install -e ".[dev]"` only (no JDK/Spark).
 
 ### `build-test` (required check name)
 

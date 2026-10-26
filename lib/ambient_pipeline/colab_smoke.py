@@ -61,7 +61,10 @@ def _load_contract(contracts_dir: Path) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(f"Missing contract: {path}")
     with path.open("r", encoding="utf-8") as handle:
-        return yaml.safe_load(handle)
+        loaded = yaml.safe_load(handle)
+    if not isinstance(loaded, dict):
+        raise ValueError(f"Contract must be a YAML mapping: {path}")
+    return loaded
 
 
 def _assert_required_columns(

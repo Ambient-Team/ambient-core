@@ -10,7 +10,7 @@ import json
 from typing import Any
 
 
-def _firestore_client():
+def _firestore_client() -> Any:
     import firebase_admin
     from firebase_admin import credentials, firestore
 
