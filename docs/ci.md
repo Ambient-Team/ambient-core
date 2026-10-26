@@ -54,6 +54,8 @@ Steps (fail fast, in order):
 6. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
 7. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.
 
+**`build-test`** also runs [`check_markdown_prose.py`](../scripts/check_markdown_prose.py) (pipe tables + no public Drive/Docs URLs) and [`check_doc_links.py`](../scripts/check_doc_links.py) (relative link targets must exist).
+
 ### `build-test` (required check name)
 
 Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md), including **quality-static** again and [`scripts/check_coverage.py`](../scripts/check_coverage.py) (`AMBIENT_SPARK_TESTS=1` pytest with **lib ≥ 90%** line / **≥ 95%** branch coverage; `pyproject.toml` coverage omit list is empty).
