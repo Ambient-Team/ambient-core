@@ -23,6 +23,22 @@ EXCLUDED_DOC_PREFIXES: tuple[str, ...] = (
 )
 
 SITE_TITLE = "Ambient Core"
+COMMERCIAL_BANNER_URL = "https://www.ambientsystems.ai"
+COMMERCIAL_BANNER_LINK_TEXT = "www.ambientsystems.ai"
+COMMERCIAL_BANNER_VISIBLE = (
+    f"Looking for the commercial version? Visit {COMMERCIAL_BANNER_LINK_TEXT}"
+)
+
+
+def commercial_banner_html() -> str:
+    """Accessible one-line banner (first element in every page body)."""
+    link = (
+        f'<a href="{html.escape(COMMERCIAL_BANNER_URL, quote=True)}">'
+        f"{html.escape(COMMERCIAL_BANNER_LINK_TEXT)}</a>"
+    )
+    return f"""  <aside class="commercial-banner" role="complementary" aria-label="Commercial product">
+    <p>Looking for the commercial version? Visit {link}</p>
+  </aside>"""
 
 
 def _should_include_doc(rel_posix: str) -> bool:
@@ -79,12 +95,46 @@ def _page_shell(title: str, body_html: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(title)} — {SITE_TITLE}</title>
   <style>
-    body {{ font-family: system-ui, sans-serif; line-height: 1.5; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; }}
+    body {{ font-family: system-ui, sans-serif; line-height: 1.5; max-width: 52rem; margin: 0 auto 2rem; padding: 0 1rem; }}
+    .commercial-banner {{
+      font-size: 0.875rem;
+      line-height: 1.4;
+      padding: 0.5rem 1rem;
+      margin: 0 -1rem 1rem;
+      text-align: center;
+      background: #eef2f6;
+      color: #1a1a1a;
+      border-bottom: 1px solid #cbd5e1;
+    }}
+    .commercial-banner a {{
+      color: #0b4a6f;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }}
+    .commercial-banner a:focus-visible {{
+      outline: 2px solid #0b4a6f;
+      outline-offset: 2px;
+    }}
+    @media (prefers-color-scheme: dark) {{
+      .commercial-banner {{
+        background: #1e293b;
+        color: #f1f5f9;
+        border-bottom-color: #334155;
+      }}
+      .commercial-banner a {{
+        color: #7dd3fc;
+      }}
+      .commercial-banner a:focus-visible {{
+        outline-color: #7dd3fc;
+      }}
+    }}
     pre {{ overflow-x: auto; }}
     code {{ font-size: 0.9em; }}
   </style>
 </head>
 <body>
+{commercial_banner_html()}
   <header><p><a href="index.html">{SITE_TITLE}</a></p></header>
   <main>
 {body_html}

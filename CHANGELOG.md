@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **GitHub Pages workflow** — `.github/workflows/pages.yml` publishes a public markdown site from `README.md`, integrator-facing `docs/`, and `catalog/README.md` on push to `main` only (`https://ambient-team.github.io/ambient-core/`). PR CI runs `scripts/check_pages_site.py` (build plus `check_pages_site_safe.py`).
+- **GitHub Pages workflow** — `.github/workflows/pages.yml` publishes a public markdown site from `README.md`, integrator-facing `docs/`, and `catalog/README.md` on push to `main` only (`https://ambient-team.github.io/ambient-core/`). PR CI runs `scripts/check_pages_site.py` (build plus `check_pages_site_safe.py`). Every page includes a commercial-product banner linking to `https://www.ambientsystems.ai`.
 
 ## [0.3.11] - 2026-11-27
 

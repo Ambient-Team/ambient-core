@@ -22,6 +22,10 @@ def test_build_site_writes_index_and_passes_safety(tmp_path: Path) -> None:
     files = pages_build.build_site(out)
     assert (out / "index.html").is_file()
     assert files
+    index = (out / "index.html").read_text(encoding="utf-8")
+    assert "Looking for the commercial version? Visit" in index
+    assert pages_build.COMMERCIAL_BANNER_LINK_TEXT in index
+    assert f'href="{pages_build.COMMERCIAL_BANNER_URL}"' in index
     proc = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "check_pages_site_safe.py"), str(out)],
         cwd=ROOT,

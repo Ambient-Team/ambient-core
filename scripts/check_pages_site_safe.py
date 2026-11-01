@@ -18,12 +18,29 @@ from check_sensitive_data_literals import (  # noqa: E402
     SSN_RE,
 )
 from scan_secrets_patterns import find_secret_hits  # noqa: E402
+import build_pages_site  # noqa: E402
 
 FORBIDDEN_SUBSTRINGS = (
     "BEGIN PRIVATE KEY",
     "ghp_",
     "sk_live_",
 )
+
+
+def _banner_errors(rel: str, text: str) -> list[str]:
+    if not rel.endswith(".html"):
+        return []
+    errors: list[str] = []
+    if 'role="complementary"' not in text and "commercial-banner" not in text:
+        errors.append(f"{rel}: missing commercial banner landmark")
+    if "Looking for the commercial version? Visit" not in text:
+        errors.append(f"{rel}: missing commercial banner copy")
+    href = f'href="{build_pages_site.COMMERCIAL_BANNER_URL}"'
+    if href not in text:
+        errors.append(f"{rel}: missing commercial banner link {href}")
+    if build_pages_site.COMMERCIAL_BANNER_LINK_TEXT not in text:
+        errors.append(f"{rel}: missing link label {build_pages_site.COMMERCIAL_BANNER_LINK_TEXT!r}")
+    return errors
 
 
 def _email_ok(match: re.Match[str]) -> bool:
@@ -40,6 +57,7 @@ def scan_site_dir(site_dir: Path) -> list[str]:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         rel = path.relative_to(site_dir).as_posix()
+        errors.extend(_banner_errors(rel, text))
         for token in FORBIDDEN_SUBSTRINGS:
             if token in text:
                 errors.append(f"{rel}: forbidden substring {token!r}")
