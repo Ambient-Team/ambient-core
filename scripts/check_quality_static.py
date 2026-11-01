@@ -44,6 +44,7 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
         "pack-reference-docs",
         [sys.executable, str(ROOT / "scripts" / "generate_pack_reference_docs.py"), "--check"],
     ),
+    ("pages-site", [sys.executable, str(ROOT / "scripts" / "check_pages_site.py")]),
 )
 
 

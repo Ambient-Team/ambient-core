@@ -47,6 +47,7 @@ jobs:
               - 'requirements-colab.txt'
               - '.python-version'
               - '.github/workflows/ci.yml'
+              - '.github/workflows/pages.yml'
               - '.cursor/**'
 
       - name: Decide RUN_HEAVY

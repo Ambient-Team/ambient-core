@@ -1,0 +1,64 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "docs/**"
+      - "catalog/README.md"
+      - "scripts/build_pages_site.py"
+      - "scripts/check_pages_site_safe.py"
+      - "scripts/check_pages_site.py"
+      - ".github/workflows/pages.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build-pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+
+      - name: Install markdown (site build only)
+        run: pip install "markdown>=3.5,<4"
+
+      - name: Build static site
+        run: python scripts/build_pages_site.py --out _site
+
+      - name: Public-safe content scan
+        run: python scripts/check_pages_site_safe.py _site
+
+      - name: Configure Pages
+        uses: actions/configure-pages@9796030470a6408590341795c4d4b381927e173 # v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@798b2e5430a1aa7632b6971797e34d9a3e054a0 # v4
+        with:
+          path: _site
+
+  deploy:
+    name: deploy-pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@ec96d628b589c0b8dab3260ad4901772beb0d5fe # v4
