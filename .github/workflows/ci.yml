@@ -186,7 +186,7 @@ jobs:
         run: python scripts/check_pages_site_safe.py _site
 
       - name: Upload site preview artifact
-        uses: actions/upload-artifact@26f96dfa697d3751fb237e47fecc8cdd89f54a5e # v4.6.0
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: ambient-core-pages-site
           path: _site
