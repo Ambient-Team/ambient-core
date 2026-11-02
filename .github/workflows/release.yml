@@ -120,7 +120,7 @@ jobs:
           /tmp/wheel-smoke-venv/bin/python -c "import ambient_contracts; assert ambient_contracts.__version__"
 
       - name: Upload GitHub Release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ env.RELEASE_TAG }}
           name: ambient-core ${{ env.RELEASE_TAG }}
