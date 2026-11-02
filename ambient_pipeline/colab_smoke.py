@@ -12,7 +12,7 @@ import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 import yaml
@@ -61,7 +61,10 @@ def _load_contract(contracts_dir: Path) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(f"Missing contract: {path}")
     with path.open("r", encoding="utf-8") as handle:
-        return yaml.safe_load(handle)
+        loaded = yaml.safe_load(handle)
+    if not isinstance(loaded, dict):
+        raise TypeError(f"Contract YAML must be a mapping: {path}")
+    return cast(dict[str, Any], loaded)
 
 
 def _assert_required_columns(
@@ -244,7 +247,7 @@ def run_colab_smoke(
     ar_sum = kpis.get("ar_amount_due_sum")
     ap_sum = kpis.get("ap_amount_due_sum")
     inv_sum = kpis.get("inventory_value_sum")
-    if all(v is not None for v in (ar_sum, ap_sum, inv_sum)):
+    if ar_sum is not None and ap_sum is not None and inv_sum is not None:
         kpis["sample_working_capital_proxy"] = float(ar_sum) + float(inv_sum) - float(ap_sum)
 
     result.gold_kpis = kpis

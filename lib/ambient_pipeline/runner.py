@@ -9,9 +9,9 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
-from pyspark.sql import SparkSession
+from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
     DoubleType,
@@ -21,12 +21,27 @@ from pyspark.sql.types import (
 )
 
 from ambient_pipeline.contracts import ContractLoader
+from ambient_pipeline.pipeline_logging import log_pipeline_event
 from ambient_pipeline.perf import PipelinePerfRecorder, create_local_spark
 from ambient_pipeline.pii import PiiPseudonymizer
 from ambient_pipeline.provenance import BronzeProvenanceStamper
 from ambient_pipeline.secrets import get_secret_or_warn
 from ambient_pipeline.validation import SilverValidator
 
+
+# Pivot display names → Delta-safe column names (no spaces or punctuation).
+REAL_ESTATE_GOLD_PIVOT: tuple[tuple[str, str], ...] = (
+    ("Net Operating Income", "noi"),
+    ("Annual Debt Service", "annual_debt_service"),
+    ("Market Value", "market_value"),
+)
+
+# Prefer ``metric_id`` for gold pivot so display ``name`` can be pseudonymized in Silver.
+REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID: tuple[tuple[str, str], ...] = (
+    ("re-noi", "noi"),
+    ("re-ads", "annual_debt_service"),
+    ("re-mv", "market_value"),
+)
 
 REFERENCE_BENCHMARKS = [
     ("Net Operating Income", "Real Estate", 0.0, None, "Currency"),
@@ -52,12 +67,56 @@ class PipelineRunConfig:
     optimize: bool = True
     cache_silver: bool | None = None
     apply_skew_salt: bool | None = None
+    transform_ts: str | None = None
+    ingestion_ts: str | None = None
 
     def __post_init__(self) -> None:
         if self.cache_silver is None:
             self.cache_silver = self.optimize
         if self.apply_skew_salt is None:
             self.apply_skew_salt = self.optimize
+
+
+def _sanitize_pivoted_columns(df: DataFrame, mapping: tuple[tuple[str, str], ...]) -> DataFrame:
+    """Rename pivoted metric columns to identifiers Delta can persist."""
+    out = df
+    for metric_name, safe_name in mapping:
+        for candidate in (metric_name, f"`{metric_name}`"):
+            if candidate in out.columns:
+                out = out.withColumnRenamed(candidate, safe_name)
+    return out
+
+
+def _rename_pivoted_metric_ids(
+    df: DataFrame, mapping: tuple[tuple[str, str], ...]
+) -> DataFrame:
+    """Rename pivoted ``metric_id`` keys to Delta-safe gold column names."""
+    out = df
+    for metric_id, safe_name in mapping:
+        if metric_id in out.columns:
+            out = out.withColumnRenamed(metric_id, safe_name)
+    return out
+
+
+def _pivot_real_estate_metrics(re_df: DataFrame, pivot_parts: int) -> DataFrame:
+    """Wide Real Estate metrics for Gold (``metric_id`` pivot when available)."""
+    if "metric_id" in re_df.columns:
+        pivot_ids = [metric_id for metric_id, _safe in REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID]
+        re_wide = (
+            re_df.repartition(pivot_parts, "_bronze_org_id")
+            .groupBy("_bronze_org_id")
+            .pivot("metric_id", cast(list[bool | float | int | str], pivot_ids))
+            .agg(F.first("value"))
+        )
+        return _rename_pivoted_metric_ids(re_wide, REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID)
+    pivot_metrics = [name for name, _safe in REAL_ESTATE_GOLD_PIVOT]
+    re_wide = (
+        re_df.repartition(pivot_parts, "_bronze_org_id")
+        .groupBy("_bronze_org_id")
+        .pivot("name", cast(list[bool | float | int | str], pivot_metrics))
+        .agg(F.first("value"))
+    )
+    return _sanitize_pivoted_columns(re_wide, REAL_ESTATE_GOLD_PIVOT)
 
 
 def _ref_schema() -> StructType:
@@ -77,14 +136,36 @@ def run_local_pipeline(
     bronze_csv_glob: str,
     config: PipelineRunConfig,
 ) -> dict[str, Any]:
-    """Execute simplified Bronze → Silver → Gold path for local OSS testing."""
+    """Execute simplified Bronze → Silver → Gold path for local OSS testing.
+
+    Args:
+        spark: SparkSession.
+        bronze_csv_glob: str.
+        config: PipelineRunConfig.
+
+    Returns:
+        dict[str, Any].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> run_local_pipeline(...)
+    """
+    log_pipeline_event(
+        "pipeline_start",
+        component="runner",
+        run_id=config.run_id,
+        org_id=config.org_id,
+        bronze_csv_glob=bronze_csv_glob,
+    )
     perf = PipelinePerfRecorder(
         spark,
         run_id=config.run_id,
         volume_gb=config.volume_gb,
         output_path=str(config.base_dir / "gold" / "pipeline_perf"),
     )
-    transform_ts = datetime.now(timezone.utc).isoformat()
+    transform_ts = config.transform_ts or datetime.now(timezone.utc).isoformat()
     results: dict[str, Any] = {"stages": {}}
 
     bronze_path = str(config.base_dir / "bronze" / "raw_metrics")
@@ -100,6 +181,7 @@ def run_local_pipeline(
         org_id=config.org_id,
         source_type="csv",
         source_path=bronze_csv_glob,
+        ingestion_ts=config.ingestion_ts,
     )
     bronze_df = stamper.stamp(raw_df)
     (
@@ -116,6 +198,14 @@ def run_local_pipeline(
         output_rows=bronze_rows,
         wall_seconds=time.perf_counter() - t0,
     ).to_dict()
+    log_pipeline_event(
+        "pipeline_stage_complete",
+        component="runner",
+        run_id=config.run_id,
+        stage="bronze",
+        output_rows=bronze_rows,
+        input_rows=input_rows,
+    )
 
     # —— Silver
     t0 = time.perf_counter()
@@ -151,6 +241,14 @@ def run_local_pipeline(
         output_rows=silver_rows,
         wall_seconds=time.perf_counter() - t0,
     ).to_dict()
+    log_pipeline_event(
+        "pipeline_stage_complete",
+        component="runner",
+        run_id=config.run_id,
+        stage="silver",
+        output_rows=silver_rows,
+        input_rows=bronze_rows,
+    )
 
     # —— Gold (simplified KPI pivot when Real Estate metrics exist)
     t0 = time.perf_counter()
@@ -159,20 +257,18 @@ def run_local_pipeline(
         silver_metrics = silver_metrics.cache()
 
     pivot_parts = config.shuffle_partitions if config.optimize else 1
-    if "industry" in silver_metrics.columns and "name" in silver_metrics.columns:
+    has_re_keys = "industry" in silver_metrics.columns and (
+        "metric_id" in silver_metrics.columns or "name" in silver_metrics.columns
+    )
+    if has_re_keys:
         re_df = silver_metrics.filter(F.col("industry") == "Real Estate")
-        re_wide = (
-            re_df.repartition(pivot_parts, "_bronze_org_id")
-            .groupBy("_bronze_org_id")
-            .pivot("name", ["Net Operating Income", "Annual Debt Service", "Market Value"])
-            .agg(F.first("value"))
-        )
+        re_wide = _pivot_real_estate_metrics(re_df, pivot_parts)
         re_kpis = re_wide.withColumn(
             "kpi_dscr",
             F.when(
-                F.col("`Annual Debt Service`").isNotNull()
-                & (F.col("`Annual Debt Service`") > 0),
-                F.col("`Net Operating Income`") / F.col("`Annual Debt Service`"),
+                F.col("annual_debt_service").isNotNull()
+                & (F.col("annual_debt_service") > 0),
+                F.col("noi") / F.col("annual_debt_service"),
             ),
         )
         (
@@ -209,6 +305,14 @@ def run_local_pipeline(
         output_rows=gold_rows,
         wall_seconds=time.perf_counter() - t0,
     ).to_dict()
+    log_pipeline_event(
+        "pipeline_stage_complete",
+        component="runner",
+        run_id=config.run_id,
+        stage="gold",
+        output_rows=gold_rows,
+        input_rows=silver_rows,
+    )
 
     if config.cache_silver:
         silver_metrics.unpersist()
@@ -218,6 +322,12 @@ def run_local_pipeline(
     results["total_wall_seconds"] = sum(
         s["wall_seconds"] for s in results["stages"].values()
     )
+    log_pipeline_event(
+        "pipeline_complete",
+        component="runner",
+        run_id=config.run_id,
+        total_wall_seconds=results["total_wall_seconds"],
+    )
     return results
 
 
@@ -226,11 +336,32 @@ def run_pipeline_from_config(
     config: PipelineRunConfig,
     spark: SparkSession | None = None,
 ) -> dict[str, Any]:
-    """Entry point: create Spark if needed, validate contract, run pipeline."""
+    """Entry point: create Spark if needed, validate contract, run pipeline.
+
+    Args:
+        bronze_csv_glob: str.
+        config: PipelineRunConfig.
+        spark: SparkSession | None.
+
+    Returns:
+        dict[str, Any].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> run_pipeline_from_config(...)
+    """
     owns_spark = spark is None
     if spark is None:
         spark = create_local_spark(shuffle_partitions=config.shuffle_partitions)
 
+    log_pipeline_event(
+        "pipeline_entry",
+        component="runner",
+        run_id=config.run_id,
+        entry="run_pipeline_from_config",
+    )
     loader = ContractLoader()
     contract = loader.load("tenant-metrics-v1.yaml")
     loader.enforce_bronze_lineage(contract)

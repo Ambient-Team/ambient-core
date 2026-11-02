@@ -1,4 +1,4 @@
-"""Resolve ambient-core / Drive demo root on Google Colab or a local checkout."""
+"""Resolve ambient-core checkout root on Google Colab or a local workspace."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 FOLDER_MARKERS = (
-    "Ambient-Systems-Platform",  # personal Drive SSOT folder name
+    "Ambient-Systems-Platform",  # legacy Colab folder name
     "ambient-core",
 )
 DRIVE_CANDIDATES = (
@@ -17,7 +17,20 @@ DRIVE_CANDIDATES = (
 
 
 def find_platform_root(explicit: str | Path | None = None) -> Path:
-    """Return the folder that contains ambient_pipeline/, data/, contracts/, notebooks/."""
+    """Return the folder that contains ambient_pipeline/, data/, contracts/, notebooks/.
+
+    Args:
+        explicit: str | Path | None.
+
+    Returns:
+        Path.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> find_platform_root(...)
+    """
     import os
 
     if explicit is None:
@@ -80,7 +93,20 @@ def find_platform_root(explicit: str | Path | None = None) -> Path:
 
 
 def ensure_package_on_path(root: Path | None = None) -> Path:
-    """Insert the platform root on sys.path so ``import ambient_pipeline`` works."""
+    """Insert the platform root on ``sys.path`` so ``import ambient_pipeline`` works.
+
+    Args:
+        root: Path | None.
+
+    Returns:
+        Path.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> ensure_package_on_path(...)
+    """
     root = root or find_platform_root()
     root_str = str(root)
     if root_str not in sys.path:

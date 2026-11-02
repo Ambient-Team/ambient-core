@@ -25,12 +25,18 @@ Ambient Core is **self-contained**: everything you need to develop, integrate, a
 - [CONVENTIONS.md](CONVENTIONS.md) — naming/versioning rules, the core layer, and the data-format and storage standard.
 - [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — what must be edited only here (no downstream mirrors).
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — foundation vs a full application repository.
+- [public-scope-and-pricing.md](public-scope-and-pricing.md) — OSS vs commercial scope; README / website messaging alignment (no price tables in git).
 - [integrator-roadmap.md](integrator-roadmap.md) — what is shipped vs deferred for integrators.
 
 ## Contribute and ship
 
+- [ci.md](ci.md) — GitHub Actions policy (draft gate, path filters, required `build-test` check).
+- [running-ci-locally.md](running-ci-locally.md) — reproduce heavy CI on your machine.
+- [INVENTORY.md](INVENTORY.md) — agent freshness map (CI, SSOT trees, verify shortcuts).
+- [metrics-catalog.md](metrics-catalog.md) — Q-099 tier documentation for the reference catalog.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — setup, contract/catalog workflow, tagging, consumer follow-up.
 - [RELEASING.md](RELEASING.md) — semver, CHANGELOG, owner release steps, platform pin.
+- [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md) — last-Friday cadence, core → platform → website chain, no freeze days.
 - [../SECURITY.md](../SECURITY.md) — vulnerability reporting.
 - [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) — community standards.
 

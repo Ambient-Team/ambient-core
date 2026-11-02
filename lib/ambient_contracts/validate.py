@@ -1,4 +1,4 @@
-"""Validate contract YAML structure (CI gate)."""
+"""Validate data-product contract YAML structure (CI gate and ``validate-contracts`` CLI)."""
 
 from __future__ import annotations
 
@@ -13,6 +13,21 @@ REQUIRED_PRODUCT = {"name", "version", "owner"}
 
 
 def validate_contract_doc(doc: object, label: str) -> list[str]:
+    """Validate one parsed contract document; return human-readable error strings.
+
+    Args:
+        doc: object.
+        label: str.
+
+    Returns:
+        list[str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> validate_contract_doc(...)
+    """
     errors: list[str] = []
     if not isinstance(doc, dict):
         return [f"{label}: root must be a mapping"]
@@ -55,12 +70,40 @@ def validate_contract_doc(doc: object, label: str) -> list[str]:
 
 
 def validate_contract_file(path: Path) -> list[str]:
+    """Load and validate a single contract YAML file.
+
+    Args:
+        path: Path.
+
+    Returns:
+        list[str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> validate_contract_file(...)
+    """
     with path.open("r", encoding="utf-8") as handle:
         doc = yaml.safe_load(handle)
     return validate_contract_doc(doc, path.name)
 
 
 def validate_all_contracts(contracts_dir: Path | None = None) -> list[str]:
+    """Validate every ``*.yaml`` contract in the resolved contracts directory.
+
+    Args:
+        contracts_dir: Path | None.
+
+    Returns:
+        list[str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> validate_all_contracts(...)
+    """
     directory = contracts_dir or resolve_contracts_dir()
     if not directory.is_dir():
         return [f"contracts directory not found: {directory}"]
@@ -74,7 +117,26 @@ def validate_all_contracts(contracts_dir: Path | None = None) -> list[str]:
 
 
 def main() -> int:
+    """Main.
+
+    Args:
+        None.
+
+    Returns:
+        int.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> main()
+    """
+    import argparse
     import sys
+
+    argparse.ArgumentParser(
+        description="Validate Ambient Core data-product contract YAML files.",
+    ).parse_args()
 
     errors = validate_all_contracts()
     if errors:

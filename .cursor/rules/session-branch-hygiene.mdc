@@ -5,9 +5,7 @@ alwaysApply: true
 
 # Session branch hygiene
 
-Full SSOT: EngineerID/ambient-systems company/strategy/governance/ecosystem-branching.md
-
-Local short form: docs/hub/branching.md
+Local short form: docs/hub/branching.md. CI policy: docs/ci.md.
 
 ## Main safety
 
@@ -28,5 +26,5 @@ Local short form: docs/hub/branching.md
 3. A committed task is not closed until its PR is merged or explicitly abandoned.
 4. After merge: confirm the remote head is deleted, fetch with prune, delete the local repo/* branch and isolated worktree, and return the primary worktree to updated main.
 5. If abandoning: close the PR, delete the remote and local branches and isolated worktree, prune, and return the primary worktree to updated main.
-6. Before the final response, list open PRs and non-main branches. Delete orphan hub-sync or cursor heads if auto-delete missed them.
+6. Before the final response, list open PRs and non-main branches. Delete orphan automation heads if auto-delete missed them.
 7. Prefer one open repo/* PR; do not leave a ready in-session PR after the session.

@@ -18,6 +18,7 @@ import pandas as pd
 import yaml
 
 from ambient_pipeline.pandas_provenance import PandasBronzeStamper
+from ambient_pipeline.pipeline_logging import log_pipeline_event
 
 # Expected raw demo files (reuse Drive / Ambient Systems demo assets; do not invent live customers).
 DEMO_TABLES = {
@@ -45,6 +46,7 @@ class SmokeResult:
     notes: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
+        """To dict for SmokeResult.to_dict."""
         return {
             "run_id": self.run_id,
             "org_id": self.org_id,
@@ -61,7 +63,10 @@ def _load_contract(contracts_dir: Path) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(f"Missing contract: {path}")
     with path.open("r", encoding="utf-8") as handle:
-        return yaml.safe_load(handle)
+        loaded = yaml.safe_load(handle)
+    if not isinstance(loaded, dict):
+        raise ValueError(f"Contract must be a YAML mapping: {path}")
+    return loaded
 
 
 def _assert_required_columns(
@@ -82,17 +87,29 @@ def run_colab_smoke(
     org_id: str = "demo-org-allmanufacturingds",
     run_id: str | None = None,
 ) -> SmokeResult:
-    """
-    Execute Bronze → Silver → Gold against data/raw samples.
+    """Execute Bronze → Silver → Gold against data/raw samples.
 
-    Writes:
-      data/processed/bronze/<table>.csv
-      data/processed/silver/<table>.csv
-      data/processed/gold/demo_kpis.csv
-      data/processed/gold/run_summary.json
+    Args:
+        root: Path.
+
+    Returns:
+        SmokeResult.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> run_colab_smoke(...)
     """
     root = Path(root)
     run_id = run_id or f"colab-smoke-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+    log_pipeline_event(
+        "pipeline_start",
+        component="colab_smoke",
+        run_id=run_id,
+        org_id=org_id,
+        root=str(root),
+    )
     raw_dir = root / "data" / "raw"
     contracts_dir = root / "contracts"
     out = root / "data" / "processed"
@@ -244,8 +261,10 @@ def run_colab_smoke(
     ar_sum = kpis.get("ar_amount_due_sum")
     ap_sum = kpis.get("ap_amount_due_sum")
     inv_sum = kpis.get("inventory_value_sum")
-    if all(v is not None for v in (ar_sum, ap_sum, inv_sum)):
-        kpis["sample_working_capital_proxy"] = float(ar_sum) + float(inv_sum) - float(ap_sum)
+    if ar_sum is not None and ap_sum is not None and inv_sum is not None:
+        kpis["sample_working_capital_proxy"] = (
+            float(ar_sum) + float(inv_sum) - float(ap_sum)
+        )
 
     result.gold_kpis = kpis
 
@@ -257,5 +276,13 @@ def run_colab_smoke(
     pd.DataFrame(kpi_rows).to_csv(gold_dir / "demo_kpis.csv", index=False)
     (gold_dir / "run_summary.json").write_text(
         json.dumps(result.to_dict(), indent=2, default=str), encoding="utf-8"
+    )
+    log_pipeline_event(
+        "pipeline_complete",
+        component="colab_smoke",
+        run_id=run_id,
+        bronze_tables=len(result.bronze_tables),
+        silver_tables=len(result.silver_tables),
+        gold_kpis=len(result.gold_kpis),
     )
     return result

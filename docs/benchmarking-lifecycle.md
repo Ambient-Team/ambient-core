@@ -39,7 +39,7 @@ flowchart LR
 
 ### 2. Metric selection
 
-- **Core** — Metrics carry `type` (Financial / Operational), `segment`, and `fpaWorkflow`; operating drivers sit beside `*.core.*` close metrics in each pack (for example Real Estate NOI and cap rate in [real_estate.yaml](../catalog/industries/real_estate.yaml); listed REIT investor metrics under `financial_services.reits.*` in [financial_services.yaml](../catalog/industries/financial_services.yaml)).
+- **Core** — Metrics carry `type` (Financial / Operational), `segment`, and `fpaWorkflow`; operating drivers sit beside `*.core.*` close metrics in each pack (for example Real Estate NOI and cap rate in [real_estate pack](../catalog/industries/real_estate/metrics.yaml); listed REIT investor metrics under `financial_services.reits.*` in [financial_services pack](../catalog/industries/financial_services/metrics.yaml)).
 - **Platform** — Curated benchmark packs per tenant org; effectiveness versus efficiency groupings in the product UI.
 
 ### 3. Operational definitions
@@ -125,5 +125,5 @@ Optional future core enhancements (not required for the lifecycle doc): export c
 - [catalog-consumption.md](catalog-consumption.md) — manifest, segment filtering, metadata conventions
 - [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — what is not in OSS
 - [crosswalk.md](crosswalk.md) — metric to Gold product links
-- [AGENTS.md](AGENTS.md) — one analysis lens per agent run
+- [AGENTS.md](../AGENTS.md) — one analysis lens per agent run
 - [catalog/README.md](../catalog/README.md) — benchmarks.yaml and terminology

@@ -14,6 +14,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -25,19 +26,22 @@ PACKS = [
 CONTRACT_DOMAINS = {"Healthcare", "Life Sciences"}
 
 
-def _load(path: Path) -> dict:
+def _load(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
-        return yaml.safe_load(handle) or {}
+        loaded = yaml.safe_load(handle)
+    return loaded if isinstance(loaded, dict) else {}
 
 
-def _matchers():
+def _matchers() -> tuple[set[str], list[re.Pattern[str]]]:
     pol = _load(POLICY)
     exact = {str(x).strip().lower() for x in (pol.get("phiExact") or [])}
-    patterns = [re.compile(str(p), re.IGNORECASE) for p in (pol.get("phiPatterns") or [])]
+    patterns = [
+        re.compile(str(p), re.IGNORECASE) for p in (pol.get("phiPatterns") or [])
+    ]
     return exact, patterns
 
 
-def _hit(name: str, exact: set, patterns: list) -> bool:
+def _hit(name: str, exact: set[str], patterns: list[re.Pattern[str]]) -> bool:
     low = str(name).strip().lower()
     return low in exact or any(p.search(low) for p in patterns)
 

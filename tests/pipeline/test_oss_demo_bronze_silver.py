@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
+from pyspark.sql import SparkSession
 
 ROOT = Path(__file__).resolve().parents[2]
 DEMO_CSV = ROOT / "data" / "raw" / "Allmanufacturingds-inventory-records.csv"
@@ -104,7 +105,7 @@ def test_demo_csv_headers_match_catalog_option() -> None:
 
 
 @pytest.mark.skipif(not DEMO_CSV.is_file(), reason="external demo CSV not supplied")
-def test_inventory_csv_bronze_to_silver_contract(spark) -> None:
+def test_inventory_csv_bronze_to_silver_contract(spark: SparkSession) -> None:
     from ambient_pipeline.bronze_catalog_map import bronze_to_tenant_metrics
     from ambient_pipeline.catalog_loader import load_data_option
     from ambient_pipeline.contracts import ContractLoader

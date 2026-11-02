@@ -86,6 +86,8 @@ Validation enforces globally unique ids, same-industry `metricIds` on data optio
 
 See [governed-data.md](../docs/governed-data.md) and [benchmarking-lifecycle.md](../docs/benchmarking-lifecycle.md).
 
+**Metrics tiers (Q-099 groundwork)** — reading-order map of Finance vs OPS and tier 1–3 metrics as authored today: [docs/metrics-catalog.md](../docs/metrics-catalog.md).
+
 ## Boundaries
 
 - **Catalog** — intent (KPIs, data sets, field hints, per-industry benchmark guardrails, taxonomy tags).

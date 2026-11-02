@@ -2,12 +2,12 @@
 
 ## Core happy path (free Colab)
 
-- **Free Colab entry:** https://colab.research.google.com/drive/1RUficLuL14xLSozVPBjpSeBKT6_wGxG2
-- **`00_colab_run_me.ipynb`** — repo copy of the entry notebook. Sets `PLATFORM_ROOT` to Drive or a local clone with **external** `data/raw/` samples. Pandas Bronze → Silver → Gold. No Databricks.
+- **Free Colab entry:** [`00_colab_run_me.ipynb`](00_colab_run_me.ipynb) (open this file from GitHub in Colab)
+- **`00_colab_run_me.ipynb`** — entry notebook. Sets `PLATFORM_ROOT` to a local clone (or Colab checkout) with **external** `data/raw/` samples from `demos/ambient-core/`. Pandas Bronze → Silver → Gold. No Databricks.
 
 Install: `pip install -r requirements-colab.txt` (or `%pip install pandas PyYAML` in Colab).
 
-Demo CSVs are **not** in this repo. Download [ambient-core-demo-samples-v1.zip](https://ambientsystems.ai/downloads/ambient-core-demo-samples-v1.zip) (same pack as the enterprise free demo) into `data/raw/`, or use the [Drive SSOT](https://drive.google.com/drive/folders/1YTmpKrb5J2hqdiD3GJI2cGmFA2cRA1Ne) for development. This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data: [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).
+Demo CSVs are **not** in this repo. Copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`. This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in Ambient-Team repos).
 
 ## Optional local Spark / Delta
 

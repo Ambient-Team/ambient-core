@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 from dataclasses import dataclass
+from collections.abc import Callable
 from typing import Any
 
 from pyspark.sql import DataFrame
@@ -34,6 +35,21 @@ class MappingSpec:
 
 
 def parse_source_id_from_gcs_path(gcs_path: str, org_id: str) -> str | None:
+    """Parse source id from gcs path.
+
+    Args:
+        gcs_path: str.
+        org_id: str.
+
+    Returns:
+        str | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> parse_source_id_from_gcs_path(...)
+    """
     if not gcs_path or not org_id:
         return None
     match = re.search(rf"bronze/{re.escape(org_id)}/([^/]+)/", gcs_path.replace("\\", "/"))
@@ -47,6 +63,20 @@ def _require_safe_ident(label: str, value: str) -> str:
 
 
 def parse_mapping_json(raw: str | dict[str, Any] | None) -> dict[str, str]:
+    """Parse mapping json.
+
+    Args:
+        raw: str | dict[str, Any] | None.
+
+    Returns:
+        dict[str, str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> parse_mapping_json(...)
+    """
     if raw is None or raw == "":
         return {}
     if isinstance(raw, dict):
@@ -72,6 +102,20 @@ def parse_mapping_json(raw: str | dict[str, Any] | None) -> dict[str, str]:
 
 
 def mapping_json_hash(mapping: dict[str, str]) -> str:
+    """Mapping json hash.
+
+    Args:
+        mapping: dict[str, str].
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> mapping_json_hash(...)
+    """
     payload = json.dumps(mapping, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
 
@@ -82,6 +126,23 @@ def stable_metric_id(
     field_name: str,
     period_key: str = "",
 ) -> str:
+    """Stable metric id.
+
+    Args:
+        org_id: str.
+        catalog_option_key: str.
+        field_name: str.
+        period_key: str.
+
+    Returns:
+        str.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> stable_metric_id(...)
+    """
     seed = f"{org_id}|{catalog_option_key}|{field_name}|{period_key}"
     return hashlib.sha256(seed.encode("utf-8")).hexdigest()[:32]
 
@@ -94,8 +155,22 @@ def resolve_mapping_spec(
     source_id: str,
     gcs_path: str,
     catalog_manifest_version: str,
-    firestore_fetcher: Any | None = None,
+    firestore_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
 ) -> MappingSpec:
+    """Resolve mapping spec.
+
+    Args:
+        None.
+
+    Returns:
+        MappingSpec.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> resolve_mapping_spec()
+    """
     mapping = parse_mapping_json(mapping_json)
     resolved_source_id = source_id.strip() or (
         parse_source_id_from_gcs_path(gcs_path, org_id) or ""
@@ -133,7 +208,21 @@ def resolve_mapping_spec(
 
 
 def apply_column_mapping(df: DataFrame, mapping: dict[str, str]) -> DataFrame:
-    """Rename CSV headers to catalog field names ({catalogField: csvHeader})."""
+    """Rename CSV headers to catalog field names ({catalogField: csvHeader}).
+
+    Args:
+        df: DataFrame.
+        mapping: dict[str, str].
+
+    Returns:
+        DataFrame.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> apply_column_mapping(...)
+    """
     out = df
     for catalog_field, csv_header in mapping.items():
         if csv_header in out.columns:
@@ -146,7 +235,22 @@ def coerce_mapped_columns(
     field_names: list[str],
     catalog_field_types: dict[str, str] | None = None,
 ) -> DataFrame:
-    """Apply catalog field typing after rename (date / numeric / string)."""
+    """Apply catalog field typing after rename (date / numeric / string).
+
+    Args:
+        df: DataFrame.
+        field_names: list[str].
+        catalog_field_types: dict[str, str] | None.
+
+    Returns:
+        DataFrame.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> coerce_mapped_columns(...)
+    """
     out = df
     type_map = catalog_field_types or {}
     for field in field_names:
@@ -189,6 +293,20 @@ def coerce_mapped_columns(
 
 
 def catalog_types_for_option(option: dict[str, Any] | None) -> dict[str, str]:
+    """Catalog types for option.
+
+    Args:
+        option: dict[str, Any] | None.
+
+    Returns:
+        dict[str, str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> catalog_types_for_option(...)
+    """
     if not option:
         return {}
     from ambient_pipeline.catalog_field_rules import field_type_map
@@ -197,6 +315,23 @@ def catalog_types_for_option(option: dict[str, Any] | None) -> dict[str, str]:
 
 
 def filter_raw_uploads(df: DataFrame, org_id: str, run_id: str, gcs_path: str) -> DataFrame:
+    """Filter raw uploads.
+
+    Args:
+        df: DataFrame.
+        org_id: str.
+        run_id: str.
+        gcs_path: str.
+
+    Returns:
+        DataFrame.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> filter_raw_uploads(...)
+    """
     scoped = df.filter(F.col("_bronze_org_id") == org_id)
     if gcs_path:
         scoped = scoped.filter(F.col("_bronze_source_path") == gcs_path)
@@ -219,6 +354,22 @@ def unpivot_to_tenant_metrics(
     *,
     default_type: str = "Operational",
 ) -> DataFrame:
+    """Unpivot to tenant metrics.
+
+    Args:
+        df: DataFrame.
+        spec: MappingSpec.
+        org_id: str.
+
+    Returns:
+        DataFrame.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> unpivot_to_tenant_metrics(...)
+    """
     mapped_fields = [f for f in spec.catalog_field_to_csv_header if f in df.columns]
     value_fields = [f for f in mapped_fields if is_value_field_for_unpivot(f)]
     if not value_fields:
@@ -240,8 +391,8 @@ def unpivot_to_tenant_metrics(
     # mapping keys cannot break out of Spark SQL string literals.
     id_cols = ["_period_key", "_recorded_at"]
     long_df = work.select(*id_cols, *value_fields).melt(
-        ids=id_cols,
-        values=value_fields,
+        ids=tuple(id_cols),
+        values=tuple(value_fields),
         variableColumnName="name",
         valueColumnName="value",
     )
@@ -286,13 +437,22 @@ def bronze_to_tenant_metrics(
     ingestion_status: str = "success",
     ingestion_status_reason: str | None = None,
     default_type: str = "Operational",
-    firestore_fetcher: Any | None = None,
+    firestore_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
     spec: MappingSpec | None = None,
 ) -> DataFrame:
     """Map Bronze upload columns → catalog shape → unpivot → lineage stamp (Silver-ready).
 
-    Canonical order: **map → coerce → unpivot → stamp**. Do not stamp wide rows before
-    unpivot — ``unpivot_to_tenant_metrics`` drops columns not selected by ``stack()``.
+    Args:
+        df: DataFrame.
+
+    Returns:
+        DataFrame.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> bronze_to_tenant_metrics(...)
     """
     resolved = spec or resolve_mapping_spec(
         org_id=org_id,
@@ -342,6 +502,21 @@ def stamp_lineage_columns(
     org_id: str,
     ingestion_ts: str,
 ) -> DataFrame:
+    """Stamp lineage columns.
+
+    Args:
+        df: DataFrame.
+        spec: MappingSpec.
+
+    Returns:
+        DataFrame.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> stamp_lineage_columns(...)
+    """
     stamper = BronzeProvenanceStamper(
         run_id=run_id,
         org_id=org_id,
@@ -375,7 +550,18 @@ def append_firestore_lineage_event(
 ) -> None:
     """Platform-only: append mapping lineage to Firestore (no-op without Firebase).
 
-    OSS / ``pip install`` path never requires ``firebase_admin`` or Databricks secrets.
+    Args:
+        org_id: str.
+        source_id: str.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> append_firestore_lineage_event(...)
     """
     if not org_id or not source_id:
         return
@@ -394,7 +580,21 @@ def append_firestore_lineage_event(
 
 
 def fetch_firestore_data_source(org_id: str, source_id: str) -> dict[str, Any] | None:
-    """Platform-only: read a dataSources doc (returns None without Firebase)."""
+    """Platform-only: read a dataSources doc (returns None without Firebase).
+
+    Args:
+        org_id: str.
+        source_id: str.
+
+    Returns:
+        dict[str, Any] | None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> fetch_firestore_data_source(...)
+    """
     try:
         from ambient_pipeline.firestore_bridge import fetch_data_source
     except ImportError:

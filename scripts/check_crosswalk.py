@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from typing import Any, cast
 
 import yaml
 
@@ -15,14 +16,16 @@ MANIFEST = ROOT / "catalog" / "manifest.json"
 CONTRACTS = ROOT / "contracts"
 
 
-def _load_manifest() -> dict:
+def _load_manifest() -> dict[str, Any]:
     with MANIFEST.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+        return cast(dict[str, Any], json.load(handle))
 
 
-def _metric_index(manifest: dict) -> tuple[dict[int, dict], dict[str, dict]]:
-    by_id: dict[int, dict] = {}
-    by_key: dict[str, dict] = {}
+def _metric_index(
+    manifest: dict[str, Any],
+) -> tuple[dict[int, dict[str, Any]], dict[str, dict[str, Any]]]:
+    by_id: dict[int, dict[str, Any]] = {}
+    by_key: dict[str, dict[str, Any]] = {}
     for metric in manifest.get("metrics") or []:
         if not isinstance(metric, dict):
             continue
@@ -35,7 +38,7 @@ def _metric_index(manifest: dict) -> tuple[dict[int, dict], dict[str, dict]]:
     return by_id, by_key
 
 
-def consumption_id_from_contract(doc: dict) -> str | None:
+def consumption_id_from_contract(doc: dict[str, Any]) -> str | None:
     product = doc.get("product")
     if isinstance(product, dict):
         raw = product.get("consumption_id")
@@ -72,7 +75,7 @@ def main() -> int:
     by_id, by_key = _metric_index(manifest)
     errors: list[str] = []
 
-    contract_cache: dict[str, dict] = {}
+    contract_cache: dict[str, dict[str, Any]] = {}
     for idx, link in enumerate(links):
         if not isinstance(link, dict):
             errors.append(f"links[{idx}]: must be a mapping")

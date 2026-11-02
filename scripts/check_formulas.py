@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -29,7 +30,7 @@ CORE = CATALOG / "shared" / "metrics.yaml"
 INDUSTRY = CATALOG / "industries"
 
 
-def _load(path: Path) -> dict:
+def _load(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         return yaml.safe_load(handle) or {}
 
@@ -38,8 +39,8 @@ def _slug(key: str) -> str:
     return key.rsplit(".", 1)[-1].replace("-", "_")
 
 
-def gather() -> dict:
-    metrics: dict[str, dict] = {}
+def gather() -> dict[str, dict[str, Any]]:
+    metrics: dict[str, dict[str, Any]] = {}
     for key, m in (_load(CORE).get("templates") or {}).items():
         slug = m.get("slug") or _slug(key)
         m = {**m, "slug": slug}
@@ -81,7 +82,7 @@ def main() -> int:
                 errors.append(f"{slug}: expr name {name!r} is neither a declared input nor a known metric")
     # cycle detection via a dry compute over zeros
     calc_metrics = [m for m in metrics.values() if m.get("calc")]
-    all_inputs = set()
+    all_inputs: set[str] = set()
     for m in calc_metrics:
         all_inputs.update(m["calc"].get("inputs") or [])
     try:

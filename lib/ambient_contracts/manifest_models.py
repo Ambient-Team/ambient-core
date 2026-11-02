@@ -40,6 +40,7 @@ class CatalogField:
     description: str | None = None
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for CatalogField.to_tool_dict."""
         out: dict[str, Any] = {"name": self.name, "type": self.type}
         if self.nullable is not None:
             out["nullable"] = self.nullable
@@ -67,6 +68,7 @@ class RequiredSource:
     fields: tuple[str, ...]
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for RequiredSource.to_tool_dict."""
         out: dict[str, Any] = {
             "catalogOptionKey": self.catalog_option_key,
             "fields": list(self.fields),
@@ -82,6 +84,7 @@ class MetricCalc:
     inputs: tuple[str, ...]
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for MetricCalc.to_tool_dict."""
         return {"expr": self.expr, "inputs": list(self.inputs)}
 
 
@@ -94,6 +97,7 @@ class MetricInputSource:
     name: str | None = None
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for MetricInputSource.to_tool_dict."""
         out: dict[str, Any] = {
             "catalogOptionKey": self.catalog_option_key,
             "via": self.via,
@@ -115,6 +119,7 @@ class MetricInput:
     satisfied_by: tuple[MetricInputSource, ...]
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for MetricInput.to_tool_dict."""
         return {
             "name": self.name,
             "kind": self.kind,
@@ -140,6 +145,7 @@ class CatalogMetric:
     frequency: str | None = None
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for CatalogMetric.to_tool_dict."""
         out: dict[str, Any] = {
             "catalogMetricKey": self.catalog_metric_key,
             "id": self.id,
@@ -173,6 +179,7 @@ class CatalogDataOption:
     field_coverage: str | None = None
 
     def to_tool_dict(self) -> dict[str, Any]:
+        """To tool dict for CatalogDataOption.to_tool_dict."""
         out: dict[str, Any] = {
             "catalogOptionKey": self.catalog_option_key,
             "id": self.id,
@@ -198,10 +205,38 @@ class CatalogManifest:
     data_options: tuple[CatalogDataOption, ...]
 
     def metrics_for_industry(self, industry: str) -> list[CatalogMetric]:
+        """Metrics for industry.
+
+        Args:
+            industry: str.
+
+        Returns:
+            list[CatalogMetric].
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> metrics_for_industry(...)
+        """
         want = str(industry).strip()
         return [m for m in self.metrics if m.industry == want]
 
     def resolve_metric(self, metric_id: str) -> CatalogMetric | None:
+        """Resolve metric.
+
+        Args:
+            metric_id: str.
+
+        Returns:
+            CatalogMetric | None.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> resolve_metric(...)
+        """
         want = str(metric_id).strip()
         for metric in self.metrics:
             if str(metric.id) == want:
@@ -410,7 +445,20 @@ def _parse_industry_entry(raw: object, path: str) -> CatalogIndustryEntry:
 
 
 def parse_catalog_manifest(doc: object) -> CatalogManifest:
-    """Parse manifest JSON into typed models. Raises ValueError on invalid shape."""
+    """Parse manifest JSON into typed models. Raises ValueError on invalid shape.
+
+    Args:
+        doc: object.
+
+    Returns:
+        CatalogManifest.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> parse_catalog_manifest(...)
+    """
     root = _expect_mapping(doc, "manifest")
     version = _expect_int(root.get("version"), "manifest.version")
     industries_raw = _expect_list(root.get("industries"), "manifest.industries")

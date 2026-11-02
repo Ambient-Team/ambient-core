@@ -7,13 +7,13 @@ on:
   workflow_call:
     inputs:
       release_tag:
-        description: Git tag to build (for example v0.3.8)
+        description: Git tag to build (for example v0.3.11)
         required: true
         type: string
   workflow_dispatch:
     inputs:
       release_tag:
-        description: Git tag to build or rebuild (for example v0.3.8)
+        description: Git tag to build or rebuild (for example v0.3.11)
         required: true
         type: string
   push:

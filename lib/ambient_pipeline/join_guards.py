@@ -17,7 +17,22 @@ def _normalize_keys(keys: KeyList) -> list[str]:
 
 
 def assert_unique_keys(df: DataFrame, keys: KeyList, label: str) -> None:
-    """Raise if duplicate key combinations exist in df."""
+    """Raise if duplicate key combinations exist in df.
+
+    Args:
+        df: DataFrame.
+        keys: KeyList.
+        label: str.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> assert_unique_keys(...)
+    """
     key_cols = _normalize_keys(keys)
     total = df.count()
     if total == 0:
@@ -33,7 +48,22 @@ def assert_unique_keys(df: DataFrame, keys: KeyList, label: str) -> None:
 def assert_left_join_preserves_row_count(
     left: DataFrame, joined: DataFrame, label: str
 ) -> None:
-    """Raise if a left join inflated row count (duplicate keys on the right)."""
+    """Raise if a left join inflated row count (duplicate keys on the right).
+
+    Args:
+        left: DataFrame.
+        joined: DataFrame.
+        label: str.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> assert_left_join_preserves_row_count(...)
+    """
     left_n = left.count()
     joined_n = joined.count()
     if joined_n > left_n:
@@ -51,7 +81,24 @@ def log_left_join_audit(
     *,
     logger: Callable[[str], None] = print,
 ) -> None:
-    """Log left and joined row counts; warn when joined count exceeds left."""
+    """Log left and joined row counts; warn when joined count exceeds left.
+
+    Args:
+        left: DataFrame.
+        right: DataFrame.
+        joined: DataFrame.
+        keys: KeyList.
+        label: str.
+
+    Returns:
+        None.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> log_left_join_audit(...)
+    """
     key_cols = _normalize_keys(keys)
     left_n = left.count()
     joined_n = joined.count()

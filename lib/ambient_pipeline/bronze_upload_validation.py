@@ -11,9 +11,20 @@ def validate_csv_headers_against_mapping(
     csv_headers: list[str],
     mapping_json: str | dict[str, Any] | None,
 ) -> tuple[bool, str | None]:
-    """
-    Ensure every mapped CSV header exists on the file.
-    mapping_json uses {catalogField: csvHeader}.
+    """Ensure every mapped CSV header exists on the file.
+
+    Args:
+        csv_headers: list[str].
+        mapping_json: str | dict[str, Any] | None.
+
+    Returns:
+        tuple[bool, str | None].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> validate_csv_headers_against_mapping(...)
     """
     mapping = parse_mapping_json(mapping_json)
     if not mapping:
@@ -26,6 +37,20 @@ def validate_csv_headers_against_mapping(
 
 
 def parse_mapping_widget(raw: str) -> dict[str, str]:
+    """Parse mapping widget.
+
+    Args:
+        raw: str.
+
+    Returns:
+        dict[str, str].
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> parse_mapping_widget(...)
+    """
     try:
         return parse_mapping_json(raw or "{}")
     except ValueError as exc:

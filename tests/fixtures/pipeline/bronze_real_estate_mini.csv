@@ -1,0 +1,4 @@
+metric_id,name,industry,value
+re-noi,Net Operating Income,Real Estate,120000.0
+re-ads,Annual Debt Service,Real Estate,80000.0
+re-mv,Market Value,Real Estate,1000000.0

@@ -19,7 +19,21 @@ class SilverValidator:
         return f"SilverValidator(completeness_threshold={self.completeness_threshold})"
 
     def validate_and_tag(self, df: DataFrame, ref_df: DataFrame) -> DataFrame:
-        """Join reference benchmarks and tag rows with ISO 8000 quality flags."""
+        """Join reference benchmarks and tag rows with ISO 8000 quality flags.
+
+        Args:
+            df: DataFrame.
+            ref_df: DataFrame.
+
+        Returns:
+            DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> validate_and_tag(...)
+        """
         joined = df.join(
             ref_df,
             (F.col("name") == F.col("ref_metric_name"))
@@ -84,15 +98,42 @@ class SilverValidator:
         return validated
 
     def completeness_ratio(self, df: DataFrame) -> float:
-        """Fraction of rows with non-null value column."""
+        """Fraction of rows with non-null value column.
+
+        Args:
+            df: DataFrame.
+
+        Returns:
+            float.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> completeness_ratio(...)
+        """
         total = df.count()
         if total == 0:
             return 0.0
         non_null = df.filter(F.col("value").isNotNull()).count()
-        return non_null / total
+        return float(non_null) / float(total)
 
     def assert_completeness(self, df: DataFrame, org_label: str = "") -> float:
-        """Raise if completeness is below threshold."""
+        """Raise if completeness is below threshold.
+
+        Args:
+            df: DataFrame.
+            org_label: str.
+
+        Returns:
+            float.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> assert_completeness(...)
+        """
         ratio = self.completeness_ratio(df)
         if ratio < self.completeness_threshold:
             label = f" for {org_label}" if org_label else ""
@@ -103,7 +144,20 @@ class SilverValidator:
         return ratio
 
     def deduplicate_metrics(self, df: DataFrame) -> DataFrame:
-        """Remove exact duplicates and keep latest per (org_id, metric_id)."""
+        """Remove exact duplicates and keep latest per (org_id, metric_id).
+
+        Args:
+            df: DataFrame.
+
+        Returns:
+            DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> deduplicate_metrics(...)
+        """
         from pyspark.sql.window import Window
 
         deduped = df.dropDuplicates(["_bronze_row_hash"])
@@ -117,6 +171,22 @@ class SilverValidator:
         )
 
     def add_silver_provenance(self, df: DataFrame, run_id: str, transform_ts: str) -> DataFrame:
+        """Add silver provenance.
+
+        Args:
+            df: DataFrame.
+            run_id: str.
+            transform_ts: str.
+
+        Returns:
+            DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> add_silver_provenance(...)
+        """
         return (
             df.withColumn("_silver_run_id", F.lit(run_id))
             .withColumn("_silver_transform_ts", F.lit(transform_ts))
@@ -130,7 +200,22 @@ class SilverValidator:
         hot_org_ids: list[str],
         salt_buckets: int = 8,
     ) -> DataFrame:
-        """Salt join key for hot org partitions to reduce skew in downstream aggregations."""
+        """Salt join key for hot org partitions to reduce skew in downstream aggregations.
+
+        Args:
+            df: DataFrame.
+            hot_org_ids: list[str].
+            salt_buckets: int.
+
+        Returns:
+            DataFrame.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> apply_skew_salt(...)
+        """
         if not hot_org_ids:
             return df
 

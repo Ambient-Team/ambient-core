@@ -46,13 +46,13 @@ Hub ambient-systems now mirrors hub-and-spoke. Deploy apps stay in your spoke re
 ### personal-site (EngineerID.github.io)
 
 - Company spoke package **removed** (see spokes/README.md §Retired spokes). Personal site owned under EngineerID/master-hub.
-- CV SSOT: commercial/ivan-damnjanovic/cv/
+- CV SSOT: [archived-personal-path]/cv/
 - Sync rule career-public-sync remains disabled for company dispatch; watches cv/assurance/advisory paths only
 
 ### code-signal
 
 - Company spoke package **removed** (see spokes/README.md §Retired spokes). Learning lane under master-hub.
-- Interview / drill banks: commercial/ivan-damnjanovic/assurance/ and commercial/ivan-damnjanovic/advisory/
+- Interview / drill banks: [archived-personal-path]/assurance/ and [archived-personal-path]/advisory/
 - Sync rule interview-prep-learning remains disabled for company dispatch
 
 ## Removed on hub

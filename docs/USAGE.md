@@ -17,7 +17,7 @@ pip install -e ".[all]"
 **From a pinned git URL (downstream apps):**
 
 ```bash
-pip install "ambient-core[dev] @ git+<repository-url>@v0.3.0"
+pip install "ambient-core[dev] @ git+<repository-url>@v0.3.11"
 ```
 
 PyPI is **not** the documented distribution path unless publishing is added later.
