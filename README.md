@@ -36,7 +36,7 @@ This section credits **libraries**, not human contributors. Contributor credits 
 ### Dependencies
 
 - **pyyaml** `>=6.0,<7` — MIT (runtime)
-- **pyspark** `>=3.5.0,<3.6` — Apache-2.0 (optional-pipeline)
+- **pyspark** `>=3.5.8,<3.6` — Apache-2.0 (optional-pipeline)
 - **delta-spark** `>=3.0.0,<4` — Apache-2.0 (optional-pipeline)
 - **pandas** `>=2.0,<3` — BSD-3-Clause (optional-colab)
 - **pytest** `>=8.0,<10` — MIT (optional-dev)
