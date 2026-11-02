@@ -161,6 +161,34 @@ jobs:
       - name: Static quality gates
         run: python scripts/check_quality_static.py
 
+  pages-preview:
+    name: pages-preview
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+
+      - name: Install markdown (site build only)
+        run: pip install "markdown>=3.5,<4"
+
+      - name: Build static site
+        run: python scripts/build_pages_site.py --out _site
+
+      - name: Public-safe content scan
+        run: python scripts/check_pages_site_safe.py _site
+
+      - name: Upload site preview artifact
+        uses: actions/upload-artifact@26f96dfa697d3751fb237e47fecc8cdd89f54a5e # v4.6.0
+        with:
+          name: ambient-core-pages-site
+          path: _site
+          retention-days: 14
+
   build-test:
     name: build-test
     needs: [changes]

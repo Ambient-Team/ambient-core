@@ -10,6 +10,7 @@ on:
       - "scripts/build_pages_site.py"
       - "scripts/check_pages_site_safe.py"
       - "scripts/check_pages_site.py"
+      - "scripts/pages/**"
       - ".github/workflows/pages.yml"
 
 permissions:
