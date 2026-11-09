@@ -62,7 +62,7 @@ Steps (fail fast, in order):
 
 Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md), including **quality-static** again and [`scripts/check_coverage.py`](../scripts/check_coverage.py) (`AMBIENT_SPARK_TESTS=1` pytest with **lib ≥ 90%** line / **≥ 95%** branch coverage; `pyproject.toml` coverage omit list is empty).
 
-Pip cache is keyed on `pyproject.toml` and `requirements-colab.txt`. JDK **17** (Temurin) is installed for Spark tests (`AMBIENT_SPARK_TESTS=1`).
+Pip cache is keyed on `pyproject.toml`. JDK **17** (Temurin) is installed for Spark tests (`AMBIENT_SPARK_TESTS=1`).
 
 ## Dependabot
 

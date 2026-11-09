@@ -1,5 +1,5 @@
 Databricks / Unity Catalog / Autoloader notebooks — commercial platform optional path.
-Not required for ambient-core Colab demo.
+Not required for ambient-core pandas notebook demo.
 
 Skip for core happy path:
   01b_bronze_streaming.ipynb

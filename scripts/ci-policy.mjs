@@ -59,7 +59,6 @@ export const heavyCiPathFilters = [
   'examples/**',
   'notebooks/**',
   'pyproject.toml',
-  'requirements-colab.txt',
   '.python-version',
   '.github/workflows/ci.yml',
   '.cursor/**',

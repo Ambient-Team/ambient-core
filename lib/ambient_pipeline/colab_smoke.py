@@ -1,9 +1,9 @@
 """
 Colab / local pandas smoke: Bronze → Silver → Gold against data/raw demo CSVs.
 
-No Databricks. No Unity Catalog. Works with free Google Colab + Drive mount.
+No Databricks. No Unity Catalog. Works from a local clone or Jupyter notebook.
 Demo CSVs under data/raw/ are academic samples (Allmanufacturingds-*), not live tenants.
-Samples are supplied externally (Drive or download) — not shipped in this GitHub repo.
+Samples are supplied externally — not shipped in this GitHub repo.
 """
 
 from __future__ import annotations

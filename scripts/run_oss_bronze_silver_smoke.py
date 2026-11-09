@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Optional Spark smoke: map one manufacturing demo CSV Bronze → Silver.
 
-Prefer the pandas Colab path (``ambient_pipeline.colab_smoke``) for the core happy
+Prefer the pandas smoke path (``ambient_pipeline.colab_smoke``) for the core happy
 path. This script needs Spark + Delta and an **externally supplied** CSV under
 ``data/raw/`` (Drive / Ambient Systems demo assets — not shipped in git)::
 

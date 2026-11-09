@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **No GitHub Pages from this repo** — removed `.github/workflows/pages.yml` and site builders; `scripts/check_pages_site.py` fails CI if Pages publish paths reappear. Public site is the org root (`ambient-team.github.io`).
 - **Vendor marketing scan** — `scripts/check_vendor_marketing.py` fails CI when user-visible docs promote blocked vendor brands or forge CTAs.
 
+### Removed
+
+- **`firebase_admin` Firestore bridge** — deleted `lib/ambient_pipeline/firestore_bridge.py` and `append_firestore_lineage_event` / `fetch_firestore_data_source` helpers (no in-repo replacement).
+- **Colab pip extra and `requirements-colab.txt`** — pandas notebook deps live under the `notebook` optional extra in `pyproject.toml`.
+- **`google.colab` notebook cells** — entry notebook is local/Jupyter only; `ambient_pipeline.colab_smoke` remains the pandas smoke API.
+
 ## [0.3.11] - 2026-11-27
 
 ### Added

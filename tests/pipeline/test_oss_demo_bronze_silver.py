@@ -148,19 +148,3 @@ def test_secrets_env_only_no_dbutils(monkeypatch: pytest.MonkeyPatch) -> None:
     assert secrets.get_secret("ambient-systems", "pii_salt") == "from-env"
 
 
-def test_firestore_helpers_noop_without_firebase() -> None:
-    pytest.importorskip("pyspark")
-    from ambient_pipeline.bronze_catalog_map import (
-        append_firestore_lineage_event,
-        fetch_firestore_data_source,
-    )
-
-    append_firestore_lineage_event(
-        "org",
-        "src",
-        run_id="r",
-        status="ok",
-        rows_written=0,
-        gcs_path="",
-    )
-    assert fetch_firestore_data_source("org", "src") is None

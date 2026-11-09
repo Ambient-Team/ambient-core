@@ -5,7 +5,7 @@
 
 **Governed data products — open-source foundation anyone can rebuild.**
 
-Free open-source materials, a hosted notebook runtime, and external demo CSVs. No paid Databricks, Unity Catalog, managed document store, or cloud hosting is required for the core demo.
+Free open-source materials, local notebooks, and external demo CSVs. No paid Databricks, Unity Catalog, managed document store, or cloud hosting is required for the core demo.
 
 ## Product matrix (authoritative)
 
@@ -15,14 +15,14 @@ Free open-source materials, a hosted notebook runtime, and external demo CSVs. N
 - **Hosting** — ambient-core: **you** · commercial platform: **us**
 - **Storage** — ambient-core: **none** · commercial platform: **us**
 - **CLI / local AI** — ambient-core: local · commercial platform: no CLI; try via members
-- **Demo** — ambient-core: **free hosted notebook path** · commercial platform: members / hosted try
+- **Demo** — ambient-core: **pandas notebook / smoke CLI** · commercial platform: members / hosted try
 
 **Storage split (important):** ambient-core has no storage of its own. Demo sample CSVs are **not** checked into this repository. Copy the shared free demo pack from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`. Demo recordings, screenshots, and synthetic demo data live in the same tree — never commit them to Ambient-Team repos.
 
 <!-- ambient-acknowledgements:begin -->
 ## Third-party acknowledgements
 
-Ambient Core is built on open-source libraries. Versions below are taken from this repository's `pyproject.toml` (and `requirements-colab.txt` when present) so public docs match what integrators install.
+Ambient Core is built on open-source libraries. Versions below are taken from this repository's `pyproject.toml` so public docs match what integrators install.
 
 This section credits **libraries**, not human contributors. Contributor credits stay under Community / CONTRIBUTING and will grow as people join.
 
@@ -37,25 +37,20 @@ This section credits **libraries**, not human contributors. Contributor credits 
 - **pyyaml** `>=6.0,<7` — MIT (runtime)
 - **pyspark** `>=3.5.8,<3.6` — Apache-2.0 (optional-pipeline)
 - **delta-spark** `>=3.0.0,<4` — Apache-2.0 (optional-pipeline)
-- **pandas** `>=2.0,<3` — BSD-3-Clause (optional-colab)
+- **pandas** `>=2.0,<3` — BSD-3-Clause (optional-notebook)
 - **pytest** `>=8.0,<10` — MIT (optional-dev)
 - **pytest-asyncio** `>=0.24,<2` — Apache-2.0 (optional-dev)
-- **pandas** `>=2.0` — BSD-3-Clause (colab-file)
-- **PyYAML** `>=6.0` — MIT (colab-file)
-
 Company-wide catalogue (Website + Platform + Ambient Core): https://www.ambientsystems.ai/legal/acknowledgements.pdf
 
 Generated 2026-09-09 from dependency metadata in this repository.
 <!-- ambient-acknowledgements:end -->
 
-## Hosted notebook happy path
+## Notebook happy path
 
-1. Open [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb) in your forge or a hosted notebook runtime.
-2. Obtain samples (not in this repo): copy `Allmanufacturingds-*.csv` from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`.
-3. Runtime → Run all (or clone this repo and run `notebooks/00_colab_run_me.ipynb` with `PLATFORM_ROOT` set).
+1. Clone the repository and install `pip install -e ".[notebook]"` (pandas + PyYAML from `pyproject.toml`).
+2. Copy `Allmanufacturingds-*.csv` from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`.
+3. Open [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb) in Jupyter or run all cells with `PLATFORM_ROOT` pointing at the repo root.
 4. Imports `ambient_pipeline`, reads `data/raw/` samples **you supply**, runs **Bronze → Silver → Gold** (pandas), writes under `data/processed/`.
-
-Install notebook deps only: `pip install -r requirements-colab.txt` (`pandas`, `PyYAML`).
 
 ## What's in this repo (code only — no demo datasets)
 
@@ -104,7 +99,7 @@ Optional Spark path (needs `.[pipeline]`, `AMBIENT_PII_SALT`, and the same exter
 
 ## Run order
 
-1. **Hosted notebook entry** — [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb).
+1. **Notebook entry** — [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb).
 2. Optional: inspect local Spark notebooks under `notebooks/` (need external data + Spark).
 3. **Skip for core** (commercial / Databricks-only; see `notebooks/COMMERCIAL_ONLY.txt`):
    - `01b_bronze_streaming.ipynb`

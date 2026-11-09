@@ -63,7 +63,7 @@ flowchart LR
 
 **Orchestration helper:** `bronze_to_tenant_metrics(...)` runs steps 2–4 in order. See [tests/pipeline/test_bronze_to_tenant_metrics_contract.py](../tests/pipeline/test_bronze_to_tenant_metrics_contract.py).
 
-Platform-only (optional): `fetch_firestore_data_source` / `append_firestore_lineage_event` lazy-import `firestore_bridge` and require a configured document-store SDK — never imported on the OSS notebook / `pip install` default path. Secrets prefer environment variables; Databricks `dbutils` is optional when present.
+Platform-only document-store sync belongs in your application repository (not shipped here). Secrets prefer environment variables; Databricks `dbutils` is optional when present.
 
 ## Silver → Gold (catalog, calc, and vertical contracts)
 

@@ -29,7 +29,7 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 
 Clone this repository alone and run without Databricks or a managed document store:
 
-1. `pip install -r requirements-colab.txt` (or `pip install -e ".[colab]"` for the same notebook deps from `pyproject.toml`)
+1. `pip install -e ".[notebook]"` for pandas notebook deps from `pyproject.toml`
 2. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, then run [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb) or `ambient_pipeline.colab_smoke`
 3. Optional Spark: `pip install -e ".[pipeline,dev]"` (or `pip install -e ".[all]"` to match PR CI) and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
 

@@ -6,7 +6,7 @@ This page keeps **repository docs** aligned with how Ambient Core is described o
 
 - **Open source** under the [MIT License](../LICENSE): contracts, reference catalog, and pipeline governance libraries anyone can inspect, fork, and run locally.
 - **No hosted product** in this tree: no tenancy, billing UI, managed storage, or customer-facing AI.
-- **Free path:** hosted notebook runtime + external demo CSVs from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/); optional local Spark with your own `AMBIENT_PII_SALT` and Java 17.
+- **Free path:** local notebook or `colab_smoke` CLI + external demo CSVs from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/); optional local Spark with your own `AMBIENT_PII_SALT` and Java 17.
 
 ## What the commercial platform is (separate repository)
 

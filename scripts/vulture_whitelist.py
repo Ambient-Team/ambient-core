@@ -5,8 +5,6 @@ WHITELIST = [
     "assert_required_columns",  # contracts, notebooks, tests
     "stable_metric_id",
     "filter_raw_uploads",
-    "append_firestore_lineage_event",
-    "fetch_firestore_data_source",
     "validate_csv_headers_against_mapping",
     "parse_mapping_widget",
     "infer_field_coverage",

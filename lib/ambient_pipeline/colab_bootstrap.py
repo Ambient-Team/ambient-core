@@ -1,4 +1,4 @@
-"""Resolve ambient-core checkout root on Google Colab or a local workspace."""
+"""Resolve ambient-core checkout root in a notebook kernel or local workspace."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 FOLDER_MARKERS = (
-    "Ambient-Systems-Platform",  # legacy Colab folder name
+    "Ambient-Systems-Platform",  # legacy checkout folder name
     "ambient-core",
 )
 DRIVE_CANDIDATES = (

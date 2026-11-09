@@ -6,8 +6,6 @@ import pytest
 from pyspark.sql import SparkSession
 
 from ambient_pipeline.bronze_catalog_map import (
-    append_firestore_lineage_event,
-    fetch_firestore_data_source,
     mapping_json_hash,
     parse_mapping_json,
     parse_source_id_from_gcs_path,
@@ -85,18 +83,6 @@ def test_coerce_mapped_columns_uses_manifest_types(spark: SparkSession) -> None:
     assert str(row["date"]) == "2024-03-15"
     assert row["headcount"] == 42.0
     assert row["status"] == "Active"
-
-
-def test_firestore_helpers_noop_in_oss() -> None:
-    append_firestore_lineage_event(
-        "",
-        "src",
-        run_id="r",
-        status="ok",
-        rows_written=0,
-        gcs_path="gs://x",
-    )
-    assert fetch_firestore_data_source("org", "src") is None
 
 
 def test_resolve_mapping_spec_firestore_missing_document() -> None:

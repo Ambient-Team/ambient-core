@@ -76,7 +76,6 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_ambient_cli_catalog_main.py",
     "tests/test_ambient_cli_catalog_entry.py",
     "tests/test_ambient_pipeline_lazy_exports.py",
-    "tests/test_firestore_bridge_unit.py",
     "tests/test_gold_contract_crosswalk_integration.py",
     "tests/test_hypothesis_catalog_contracts.py",
     "tests/test_manifest_models_edges.py",
@@ -113,7 +112,6 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_catalog_loader.py",
     "tests/test_contract_loader_edges.py",
     "tests/test_crosswalk_catalog_root_errors.py",
-    "tests/test_firestore_bridge_client.py",
     # Batch 20 — group 2
     "tests/test_join_guards_edges.py",
     "tests/test_gold_contract_map_edges.py",

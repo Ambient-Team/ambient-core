@@ -1,4 +1,4 @@
-"""Resolve ambient-core checkout root on Google Colab or a local workspace."""
+"""Resolve ambient-core checkout root in a notebook kernel or local workspace."""
 
 from __future__ import annotations
 

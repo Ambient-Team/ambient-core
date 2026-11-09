@@ -1,9 +1,9 @@
 """ISO 8000 / BCBS 239 governance helpers for lakehouse pipelines.
 
-Colab/pandas path (``pandas_provenance``, ``colab_smoke``) needs no Spark.
+Pandas notebook path (``pandas_provenance``, ``colab_smoke``) needs no Spark.
 Spark/Delta helpers are optional for local lakehouse runs and load lazily.
-Platform-only integrations (Firestore, Databricks dbutils secrets) live behind
-optional imports and are never required for ``pip install`` or free Colab.
+Databricks ``dbutils`` secrets are optional when present and never required
+for ``pip install`` or the OSS pandas smoke path.
 """
 
 from __future__ import annotations

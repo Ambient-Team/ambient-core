@@ -2,19 +2,14 @@
 
 from __future__ import annotations
 
-import builtins
-from typing import Any
-
 import pytest
 from pyspark.sql import SparkSession
 
 from ambient_pipeline.bronze_catalog_map import (
     MappingSpec,
-    append_firestore_lineage_event,
     apply_column_mapping,
     catalog_types_for_option,
     coerce_mapped_columns,
-    fetch_firestore_data_source,
     filter_raw_uploads,
     parse_mapping_json,
     resolve_mapping_spec,
@@ -52,28 +47,6 @@ def test_resolve_mapping_spec_fills_catalog_key_from_firestore() -> None:
     )
     assert spec.catalog_option_key == "HcCensus911CatalogOptionKey01"
     assert spec.catalog_field_to_csv_header["date"] == "Date"
-
-
-def test_firestore_helpers_return_when_bridge_unimportable(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    real_import = builtins.__import__
-
-    def blocked_import(name: str, *args: Any, **kwargs: Any) -> Any:
-        if name == "ambient_pipeline.firestore_bridge":
-            raise ImportError("firebase not installed")
-        return real_import(name, *args, **kwargs)
-
-    monkeypatch.setattr(builtins, "__import__", blocked_import)
-    append_firestore_lineage_event(
-        "org",
-        "src",
-        run_id="r1",
-        status="ok",
-        rows_written=3,
-        gcs_path="gs://b/o",
-    )
-    assert fetch_firestore_data_source("org", "src") is None
 
 
 def test_apply_column_mapping_ignores_missing_csv_headers(spark: SparkSession) -> None:

@@ -30,7 +30,6 @@ STRICT_MODULES: tuple[str, ...] = (
     "lib/ambient_pipeline/colab_bootstrap.py",
     "lib/ambient_pipeline/colab_smoke.py",
     "lib/ambient_pipeline/contracts.py",
-    "lib/ambient_pipeline/firestore_bridge.py",
     "lib/ambient_pipeline/firestore_sync_ids.py",
     "lib/ambient_pipeline/gold_contract_map.py",
     "lib/ambient_pipeline/governance_views.py",

@@ -41,8 +41,8 @@ FORBIDDEN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
 )
 
 COLAB_ALLOWED = re.compile(
-    r"colab\s*=|[,_\[]colab|colab[_\-\./\],]|\[colab\]|optional-colab|colab-file|"
-    r"requirements-colab|00_colab|/colab|\.colab",
+    r"colab\s*=|[,_\[]colab|colab[_\-\./\],]|\[colab\]|optional-notebook|"
+    r"00_colab|/colab|\.colab|colab_smoke|colab_bootstrap",
     re.IGNORECASE,
 )
 
