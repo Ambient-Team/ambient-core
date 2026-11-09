@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Ambient Core GitHub Pages site (landing + public docs)."""
+"""Build the Ambient Core public project site (landing + docs)."""
 
 from __future__ import annotations
 
@@ -12,8 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PAGES_BASE_PATH = "/ambient-core/"
 SITE_CSS_SRC = ROOT / "scripts" / "pages" / "site.css"
-GITHUB_REPO = "https://github.com/Ambient-Team/ambient-core"
-LICENSE_URL = f"{GITHUB_REPO}/blob/main/LICENSE"
+CLONE_URL = "<repository-url>"
+LICENSE_REL = "LICENSE"
+SITE_DOCUMENTATION = "docs/README.html"
 
 EXCLUDED_DOC_PREFIXES: tuple[str, ...] = (
     "docs/hub/",
@@ -36,6 +37,7 @@ COMMERCIAL_BANNER_VISIBLE = (
 REQUIRED_SITE_PAGES: tuple[str, ...] = (
     "index.html",
     "changelog.html",
+    "LICENSE",
     "assets/site.css",
     "docs/README.html",
     "docs/INTEGRATING.html",
@@ -106,7 +108,7 @@ def doc_page_hrefs(sources: list[tuple[Path, str]]) -> list[tuple[str, str]]:
 
 def _md_to_html(body: str) -> str:
     try:
-        import markdown  # type: ignore[import-untyped]
+        import markdown
 
         return str(markdown.markdown(body, extensions=["extra", "sane_lists"]))
     except ImportError:
@@ -140,8 +142,7 @@ def _site_header(nav_current: NavKey) -> str:
           {item("home", "index.html", "Home")}
           {item("docs", "docs/README.html", "Documentation")}
           {item("changelog", "changelog.html", "Changelog")}
-          <li><a href="{html.escape(GITHUB_REPO, quote=True)}">GitHub</a></li>
-          <li><a href="{html.escape(LICENSE_URL, quote=True)}">MIT License</a></li>
+          <li><a href="{html.escape(LICENSE_REL, quote=True)}">MIT License</a></li>
         </ul>
       </nav>
     </div>
@@ -183,13 +184,12 @@ def _landing_body(version: str) -> str:
         <h1>{html.escape(SITE_TITLE)}</h1>
         <p class="lead">Governed data products — open-source foundation anyone can rebuild.</p>
         <p>Ambient Core is fully open source under the MIT License. It ships governed
-        YAML contracts, a reference metrics catalog, Colab/pandas and optional Spark
+        YAML contracts, a reference metrics catalog, pandas notebook and optional Spark
         pipeline helpers, and maintainer CLIs — with no hosted storage in this repository.</p>
         <p class="meta-links">
           <a href="docs/README.html">Read the documentation</a>
-          <a href="{html.escape(GITHUB_REPO, quote=True)}">View on GitHub</a>
           <a href="changelog.html">Changelog</a>
-          <a href="{html.escape(LICENSE_URL, quote=True)}">MIT License</a>
+          <a href="{html.escape(LICENSE_REL, quote=True)}">MIT License</a>
         </p>
       </section>
       <section class="card-grid" aria-labelledby="caps-heading">
@@ -198,9 +198,9 @@ def _landing_body(version: str) -> str:
           <ul>
             <li><strong>Contracts</strong> — data-product YAML in <code>contracts/</code></li>
             <li><strong>Catalog</strong> — industries, metrics, benchmarks under <code>catalog/</code></li>
-            <li><strong>Pipeline</strong> — Colab/pandas Bronze→Silver→Gold and optional Spark helpers</li>
+            <li><strong>Pipeline</strong> — pandas Bronze→Silver→Gold and optional Spark helpers</li>
             <li><strong>Libraries</strong> — <code>ambient_contracts</code>, <code>ambient_cli</code>, <code>ambient_calc</code></li>
-            <li><strong>Notebooks</strong> — Colab entry notebook (samples supplied separately)</li>
+            <li><strong>Notebooks</strong> — entry notebook (samples supplied separately)</li>
           </ul>
         </div>
         <div class="card">
@@ -216,7 +216,7 @@ def _landing_body(version: str) -> str:
         <h2>Quick start (library / CI)</h2>
         <p>Package version <strong>{html.escape(version)}</strong> (pin git tag <code>v{html.escape(version)}</code>).
         Requires Python 3.10–3.12; Java 17+ for local Spark tests.</p>
-        <pre><code>git clone {GITHUB_REPO}.git
+        <pre><code>git clone {CLONE_URL}
 cd ambient-core
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -259,6 +259,10 @@ def build_site(out_dir: Path) -> list[Path]:
     assets_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(SITE_CSS_SRC, assets_dir / "site.css")
     written: list[Path] = [assets_dir / "site.css"]
+    license_src = ROOT / "LICENSE"
+    if license_src.is_file():
+        shutil.copy2(license_src, out_dir / "LICENSE")
+        written.append(out_dir / "LICENSE")
 
     version = _package_version()
     landing = _landing_body(version)

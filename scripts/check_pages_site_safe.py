@@ -19,6 +19,7 @@ from check_sensitive_data_literals import (  # noqa: E402
 )
 from scan_secrets_patterns import find_secret_hits  # noqa: E402
 import build_pages_site  # noqa: E402
+from check_vendor_marketing import scan_site_dir as scan_vendor_marketing  # noqa: E402
 
 FORBIDDEN_SUBSTRINGS = (
     "BEGIN PRIVATE KEY",
@@ -131,6 +132,7 @@ def scan_site_dir(site_dir: Path) -> list[str]:
         return [f"site directory missing: {site_dir}"]
     errors.extend(_required_page_errors(site_dir))
     errors.extend(_navigation_link_errors(site_dir))
+    errors.extend(scan_vendor_marketing(site_dir))
     for path in sorted(site_dir.rglob("*")):
         if not path.is_file():
             continue

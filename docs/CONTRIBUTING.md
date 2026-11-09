@@ -2,7 +2,7 @@
 
 Thank you for improving governed analytics foundations. Read [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) before participating.
 
-**New here?** Start with [USAGE.md](USAGE.md), then skim [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Open a [draft PR](https://github.com/Ambient-Team/ambient-core/compare) early for feedback on contracts or catalog shape.
+**New here?** Start with [USAGE.md](USAGE.md), then skim [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Open a **draft change request** early for feedback on contracts or catalog shape.
 
 All foundational work—contracts, catalog, shared pipeline governance—belongs in **this** repository. Application UI, deploy bindings, and tenant-specific tooling belong in **separate repos** that pin a release here. Customer-facing AI is out of scope for Ambient Core.
 
@@ -14,7 +14,7 @@ Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make change
 
 Do **not** use markdown pipe tables (`| col |` with `|---|` separators) in `docs/`, any `README.md`, or `examples/**/*.md`. Use short paragraphs and bullet lists instead (for example `- **term** — definition`). Mermaid diagrams and code fences are fine.
 
-Do **not** link to public Google Drive or Google Docs URLs in repo docs. Point demo CSVs, recordings, and synthetic bundles at [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) instead. CI enforces Drive/Docs hostnames via `scripts/check_markdown_prose.py` and relative links via `scripts/check_doc_links.py`.
+Do **not** link to public cloud file-sharing URLs blocked by `scripts/check_markdown_prose.py`. Point demo CSVs, recordings, and synthetic bundles at [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) instead. CI enforces that policy and relative links via `scripts/check_doc_links.py`.
 
 CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow [../AGENTS.md](../AGENTS.md).
 
@@ -40,7 +40,7 @@ validate-contracts
 pytest
 ```
 
-To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md). GitHub Actions policy (draft gate, path filters): [ci.md](ci.md). Workflow shape is enforced by `node scripts/ci-policy.mjs`. Optional lint: `python scripts/check_ruff.py` (requires `ruff` from `.[dev]` / `.[all]`).
+To mirror the full pull request workflow (catalog checks, Spark tests, wheel smoke), see [running-ci-locally.md](running-ci-locally.md). CI policy (draft gate, path filters): [ci.md](ci.md). Workflow shape is enforced by `node scripts/ci-policy.mjs`. Optional lint: `python scripts/check_ruff.py` (requires `ruff` from `.[dev]` / `.[all]`).
 
 ## Contract changes
 

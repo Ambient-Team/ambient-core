@@ -33,6 +33,7 @@ export const heavyCatalogScripts = [
   'scripts/check_metric_inputs.py',
   'scripts/check_phi.py',
   'scripts/check_markdown_prose.py',
+  'scripts/check_vendor_marketing.py',
   'scripts/check_doc_links.py',
 ];
 

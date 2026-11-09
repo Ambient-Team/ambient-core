@@ -103,6 +103,9 @@ jobs:
       - name: Check markdown prose (no pipe tables)
         run: python scripts/check_markdown_prose.py
 
+      - name: Check vendor marketing (public copy)
+        run: python scripts/check_vendor_marketing.py
+
       - name: Run pytest
         run: pytest
         env:

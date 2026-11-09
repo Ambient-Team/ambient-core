@@ -19,6 +19,7 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
+python scripts/check_vendor_marketing.py
 python scripts/check_doc_links.py
 python scripts/check_quality_static.py
 python scripts/check_coverage.py

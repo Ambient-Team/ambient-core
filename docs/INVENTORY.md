@@ -45,4 +45,4 @@ pip wheel . -w dist --no-deps
 ## Out of scope for this repo
 
 - Demo recordings and synthetic demo CSVs — [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (or your own samples under `data/raw/`); not stored in git.
-- GitHub Actions minutes (org quota) — run verify locally when Actions fails instantly.
+- Remote CI minutes (org quota) — run verify locally when CI fails instantly.

@@ -204,7 +204,7 @@ schema:
         - name: triggered_by_user_id
           type: string
           required: false
-          description: "Firebase UID of the user who triggered the run (if http/manual)"
+          description: "Auth provider UID of the user who triggered the run (if http/manual)"
         - name: submitted_ts
           type: timestamp
           required: true

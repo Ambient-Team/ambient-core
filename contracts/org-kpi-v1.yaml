@@ -115,7 +115,7 @@ consumption_contract:
     - "Adapter: Firestore sync (explicit consumption adapter contract only)"
     - "Delta Sharing: Power BI, Snowflake, Tableau, ERP adapters (Gold only)"
     - "BI tools: Tableau, Power BI, Looker (Gold schema access)"
-    - "Microsoft Fabric: OneLake shortcut to Gold ADLS external location; Direct Lake semantic model (read-only)"
+    - "OneLake shortcut to Gold ADLS external location; Direct Lake semantic model (read-only)"
   forbidden: "Any direct Silver/Bronze access or embedding of KPI logic in consumption layers"
 
 consumption:

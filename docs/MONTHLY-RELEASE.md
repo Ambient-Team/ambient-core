@@ -6,7 +6,7 @@ This document is the **cadence and chain-order** reference for **ambient-core** 
 
 - **When:** the **last Friday** of each calendar month (UTC), when Ivan merges and cuts the core tag. This is **not** the second Friday of the month.
 - **No freeze days:** integration, quality, and feature work continue through release day on every track. Use local verification ([running-ci-locally.md](running-ci-locally.md), [`scripts/run_local_pr_ci.sh`](../scripts/run_local_pr_ci.sh)) when CI is throttled; avoid unnecessary workflow dispatches.
-- **Exceptions:** if GitHub Actions capacity or billing blocks CI, Ivan may merge and cut on the next business day; document the slip in the release PR and CHANGELOG date if needed.
+- **Exceptions:** if remote CI capacity or billing blocks CI, Ivan may merge and cut on the next business day; document the slip in the release PR and CHANGELOG date if needed.
 
 ### Scheduled last Fridays (2026–27)
 
@@ -31,7 +31,7 @@ Hub monthly cuts on **ambient-core** (UTC), last Friday unless noted:
 
 Ship downstream only **after** the upstream artifact exists. Same **`vX.Y.Z`** everywhere in a given monthly wave:
 
-1. **ambient-core** — Ivan merges the version PR to `main`, then runs **Cut release** → annotated tag `vX.Y.Z` and GitHub Release wheel/sdist ([RELEASING.md](RELEASING.md)).
+1. **ambient-core** — Ivan merges the version PR to `main`, then runs **Cut release** → annotated tag `vX.Y.Z` and release wheel/sdist ([RELEASING.md](RELEASING.md)).
 2. **ambient-systems-platform (dev)** — bump core pin (submodule, pip git ref, container build args); deploy or validate in **dev**; run consumer CI.
 3. **ambient-systems-platform (prod)** — promote the same pin to **prod** after dev is green.
 4. **Website / spokes** — publish messaging and docs that reference the **prod** platform pin (no price tables in this open-source repo).
