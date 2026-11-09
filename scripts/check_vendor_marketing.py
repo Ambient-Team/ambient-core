@@ -54,10 +54,16 @@ def _colab_violation(line: str) -> bool:
     return COLAB_ALLOWED.search(line) is None
 
 
+ORG_LANDING_REDIRECT_HOST = re.compile(r"ambient-team\.github\.io", re.IGNORECASE)
+
+
 def _scan_text(rel: str, text: str, *, line_offset: int = 1) -> list[str]:
     errors: list[str] = []
     for lineno, line in enumerate(text.splitlines(), start=line_offset):
         for label, pattern in FORBIDDEN_PATTERNS:
+            if label == "GitHub Pages host":
+                if rel == "scripts/build_pages_site.py" and ORG_LANDING_REDIRECT_HOST.search(line):
+                    continue
             if pattern.search(line):
                 errors.append(f"{rel}:{lineno}: forbidden {label!r}")
         if _colab_violation(line):
@@ -116,6 +122,20 @@ def scan_tree_paths(paths: list[Path]) -> list[str]:
     return errors
 
 
+def _scan_redirect_stub_text(rel: str, text: str) -> list[str]:
+    """Scan built redirect stubs; allow the single org-landing ``github.io`` URL."""
+    errors: list[str] = []
+    for lineno, line in enumerate(text.splitlines(), start=1):
+        for label, pattern in FORBIDDEN_PATTERNS:
+            if label == "GitHub Pages host":
+                continue
+            if pattern.search(line):
+                errors.append(f"{rel}:{lineno}: forbidden {label!r}")
+        if _colab_violation(line):
+            errors.append(f"{rel}:{lineno}: forbidden bare Colab vendor copy")
+    return errors
+
+
 def scan_site_dir(site_dir: Path) -> list[str]:
     if not site_dir.is_dir():
         return [f"site directory missing: {site_dir}"]
@@ -127,6 +147,9 @@ def scan_site_dir(site_dir: Path) -> list[str]:
             continue
         rel = path.relative_to(site_dir).as_posix()
         text = path.read_text(encoding="utf-8", errors="replace")
+        if rel in {"index.html", "404.html"}:
+            errors.extend(_scan_redirect_stub_text(rel, text))
+            continue
         errors.extend(_scan_text(rel, text))
     return errors
 
