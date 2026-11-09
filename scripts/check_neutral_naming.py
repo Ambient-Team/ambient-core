@@ -43,7 +43,6 @@ SKIP_DIRS = {
     ".pytest_cache",
     ".ruff_cache",
 }
-SKIP_NAME_SUFFIXES = (".egg-info",)
 SKIP_FILES = {".coverage"}
 
 PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
