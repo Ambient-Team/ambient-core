@@ -59,8 +59,6 @@ ALLOWED_FILES = frozenset(
     {
         ROOT / "scripts" / "check_sensitive_data_literals.py",
         ROOT / "scripts" / "scan_secrets_patterns.py",
-        ROOT / "tests" / "fixtures" / "secrets_scan" / "sample_tokens.txt",
-        ROOT / "tests" / "fixtures" / "secrets_scan" / "README.md",
     }
 )
 

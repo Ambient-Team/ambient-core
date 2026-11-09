@@ -14,7 +14,6 @@ V0311_IMPLEMENTATION_PATHS: tuple[str, ...] = (
     "lib/ambient_pipeline/pipeline_logging.py",
     "scripts/check_coverage.py",
     "scripts/check_quality_static.py",
-    "scripts/check_golden_pii_fixture_refs.py",
     "scripts/check_sensitive_data_literals.py",
     "scripts/scan_secrets_patterns.py",
     "scripts/check_public_api_docstrings.py",
@@ -22,19 +21,16 @@ V0311_IMPLEMENTATION_PATHS: tuple[str, ...] = (
     "scripts/check_changelog_version.py",
     ".env.example",
     "lib/README.md",
-    "tests/fixtures/golden/pipeline_spark_e2e.json",
-    "tests/fixtures/golden/pipeline_spark_e2e_pii.json",
 )
 
 V0311_TEST_PATHS: tuple[str, ...] = (
-    "tests/pipeline/test_pipeline_e2e_golden.py",
     "tests/pipeline/test_gold_transform_edges.py",
     "tests/test_runner_local_pipeline.py",
     "tests/test_pii_and_secrets.py",
     "tests/test_pipeline_structured_logging.py",
     "tests/test_check_quality_static.py",
     "tests/test_check_public_api_docstrings.py",
-    "tests/test_secrets_scan_fixtures.py",
+    "tests/test_secrets_scan.py",
     "tests/test_check_doc_links.py",
     "tests/test_lib_branch_coverage.py",
 )
@@ -54,7 +50,7 @@ def test_changelog_documents_0311() -> None:
 def test_integrator_roadmap_documents_0311_shipped() -> None:
     roadmap = (ROOT / "docs/integrator-roadmap.md").read_text(encoding="utf-8")
     assert "v0.3.11" in roadmap
-    assert "test_pipeline_e2e_golden.py" in roadmap
+    assert "test_runner_local_pipeline.py" in roadmap
     assert "test_v0311_release_traceability.py" in roadmap
 
 

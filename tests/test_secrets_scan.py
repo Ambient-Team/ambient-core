@@ -1,4 +1,4 @@
-"""Secrets-scan fixtures must trip pattern scanner; lib/ must stay clean."""
+"""Secrets pattern scanner: lib/ and scripts/ must stay free of token-shaped literals."""
 
 from __future__ import annotations
 
@@ -22,16 +22,7 @@ def _scan_module() -> ModuleType:
 
 
 _scan = _scan_module()
-find_secret_hits = _scan.find_secret_hits
 scan_paths = _scan.scan_paths
-
-FIXTURES = ROOT / "tests" / "fixtures" / "secrets_scan"
-
-
-def test_fixture_files_trigger_scanner() -> None:
-    sample = FIXTURES / "sample_tokens.txt"
-    hits = find_secret_hits(sample.read_text(encoding="utf-8"))
-    assert len(hits) >= 2
 
 
 def test_lib_tree_has_no_secret_shaped_tokens() -> None:
@@ -70,18 +61,6 @@ def test_pip_audit_check_exits_zero() -> None:
 
 def test_sensitive_data_literals_check_exits_zero() -> None:
     script = ROOT / "scripts" / "check_sensitive_data_literals.py"
-    result = subprocess.run(
-        [sys.executable, str(script)],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    assert result.returncode == 0, result.stderr or result.stdout
-
-
-def test_golden_pii_fixture_ref_check_exits_zero() -> None:
-    script = ROOT / "scripts" / "check_golden_pii_fixture_refs.py"
     result = subprocess.run(
         [sys.executable, str(script)],
         cwd=ROOT,

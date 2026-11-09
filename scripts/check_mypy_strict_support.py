@@ -20,7 +20,6 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
     "scripts/check_quality_static.py",
     "scripts/check_ruff.py",
     "scripts/scan_secrets_patterns.py",
-    "scripts/check_golden_pii_fixture_refs.py",
     "scripts/check_sensitive_data_literals.py",
     "scripts/check_changelog_version.py",
     "scripts/check_pip_audit.py",
@@ -38,8 +37,6 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
     "tests/test_check_doc_links.py",
     "scripts/check_public_api_docstrings.py",
     "scripts/generate_lib_readme.py",
-    "scripts/pipeline_golden_util.py",
-    "scripts/refresh_pipeline_golden.py",
     "scripts/vulture_whitelist.py",
     "tests/test_package_public_entrypoints.py",
     "tests/test_check_public_api_docstrings.py",
@@ -48,7 +45,7 @@ STRICT_SUPPORT_SCRIPTS: tuple[str, ...] = (
 
 STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_check_quality_static.py",
-    "tests/test_secrets_scan_fixtures.py",
+    "tests/test_secrets_scan.py",
     # Group 1 — validate / CLI / policy smoke tests
     "tests/test_validate_contract_main.py",
     "tests/test_validate_contract_main_errors.py",
@@ -57,7 +54,6 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_ci_policy.py",
     "tests/test_contract_validate_integration.py",
     "tests/test_appsec_remediations.py",
-    "tests/test_cli_golden.py",
     "tests/test_cli_ux.py",
     # Group 2 — contracts, catalog, and governance unit tests
     "tests/test_ambient_contracts_paths.py",

@@ -6,7 +6,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-# Patterns must stay in sync with tests/fixtures/secrets_scan/README.md
+# Patterns detect AWS keys, PEM blocks, GitHub PATs, and Stripe live keys.
 PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"AKIA[0-9A-Z]{16}"),  # AWS key id shape
     re.compile(r"-----BEGIN (?:RSA |EC )?PRIVATE KEY-----"),
