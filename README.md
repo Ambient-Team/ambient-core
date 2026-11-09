@@ -49,17 +49,17 @@ Generated 2026-09-09 from dependency metadata in this repository.
 
 1. Clone the repository and install `pip install -e ".[notebook]"` (pandas + PyYAML from `pyproject.toml`).
 2. Copy `Allmanufacturingds-*.csv` from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`.
-3. Open [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb) in Jupyter or run all cells with `PLATFORM_ROOT` pointing at the repo root.
+3. Open [`notebooks/00_notebook_demo.ipynb`](notebooks/00_notebook_demo.ipynb) in Jupyter or run all cells with `PLATFORM_ROOT` pointing at the repo root.
 4. Imports `ambient_pipeline`, reads `data/raw/` samples **you supply**, runs **Bronze → Silver → Gold** (pandas), writes under `data/processed/`.
 
 ## What's in this repo (code only — no demo datasets)
 
-- **`ambient_pipeline/`** — pandas Bronze→Silver→Gold (`colab_bootstrap`, `colab_smoke`, `pandas_provenance`).
+- **`ambient_pipeline/`** — pandas Bronze→Silver→Gold (`notebook_bootstrap`, `notebook_smoke`, `pandas_provenance`).
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (local lakehouse; not required for the notebook demo).
 - **`contracts/`** — data-product YAML including `manufacturing-demo-raw-v1.yaml` (no binary data).
 - **`catalog/`** — industries, metrics, benchmarks; generator → `manifest.json` + `runtime/` JS.
 - **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — placeholders only. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).
-- **`notebooks/00_colab_run_me.ipynb`** — entry notebook. See `notebooks/COMMERCIAL_ONLY.txt` for Databricks/UC skips.
+- **`notebooks/00_notebook_demo.ipynb`** — entry notebook. See `notebooks/COMMERCIAL_ONLY.txt` for Databricks/UC skips.
 - **`lib/ambient_contracts`**, **`ambient_cli`**, **`ambient_calc`** — load, validate, ship, and reference formulas.
 
 ## Quick start (library / CI)
@@ -92,14 +92,14 @@ Pandas smoke with **external** samples (not in git):
 ```bash
 # copy Allmanufacturingds-*.csv from EngineerID/ambient-systems demos/ambient-core/
 # unpack Allmanufacturingds-*.csv into data/raw/, then:
-python -c "from pathlib import Path; from ambient_pipeline.colab_smoke import run_colab_smoke; print(run_colab_smoke(Path('.')).gold_kpis)"
+python -c "from pathlib import Path; from ambient_pipeline.notebook_smoke import run_notebook_smoke; print(run_notebook_smoke(Path('.')).gold_kpis)"
 ```
 
 Optional Spark path (needs `.[pipeline]`, `AMBIENT_PII_SALT`, and the same external CSVs): `export AMBIENT_PII_SALT='your-unique-local-salt'` then `python scripts/run_oss_bronze_silver_smoke.py`.
 
 ## Run order
 
-1. **Notebook entry** — [`notebooks/00_colab_run_me.ipynb`](notebooks/00_colab_run_me.ipynb).
+1. **Notebook entry** — [`notebooks/00_notebook_demo.ipynb`](notebooks/00_notebook_demo.ipynb).
 2. Optional: inspect local Spark notebooks under `notebooks/` (need external data + Spark).
 3. **Skip for core** (commercial / Databricks-only; see `notebooks/COMMERCIAL_ONLY.txt`):
    - `01b_bronze_streaming.ipynb`

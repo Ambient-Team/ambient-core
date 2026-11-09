@@ -28,7 +28,7 @@ def test_catalog_types_for_option_empty() -> None:
     assert catalog_types_for_option(None) == {}
 
 
-def test_resolve_mapping_spec_fills_catalog_key_from_firestore() -> None:
+def test_resolve_mapping_spec_fills_catalog_key_from_source_fetcher() -> None:
     def fetcher(_org: str, _src: str) -> JsonDict:
         return {
             "catalogOptionKey": "HcCensus911CatalogOptionKey01",
@@ -43,7 +43,7 @@ def test_resolve_mapping_spec_fills_catalog_key_from_firestore() -> None:
         source_id="src-1",
         gcs_path="",
         catalog_manifest_version="3",
-        firestore_fetcher=fetcher,
+        source_fetcher=fetcher,
     )
     assert spec.catalog_option_key == "HcCensus911CatalogOptionKey01"
     assert spec.catalog_field_to_csv_header["date"] == "Date"

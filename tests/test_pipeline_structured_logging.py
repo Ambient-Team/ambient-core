@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from pyspark.sql import SparkSession
 
-from ambient_pipeline.colab_smoke import run_colab_smoke
+from ambient_pipeline.notebook_smoke import run_notebook_smoke
 from ambient_pipeline.pipeline_logging import log_pipeline_event
 from ambient_pipeline.runner import PipelineRunConfig, run_local_pipeline
 
@@ -80,7 +80,7 @@ def test_runner_emits_structured_stage_logs(
         assert "salt" not in blob.lower() or "<redacted>" in blob
 
 
-def test_colab_smoke_emits_start_and_complete(
+def test_notebook_smoke_emits_start_and_complete(
     tmp_path: Path, caplog: pytest.LogCaptureFixture
 ) -> None:
     caplog.set_level(logging.INFO, logger="ambient.pipeline")
@@ -94,9 +94,9 @@ def test_colab_smoke_emits_start_and_complete(
     (tmp_path / "data" / "raw").mkdir(parents=True)
     (tmp_path / "data" / "processed").mkdir(parents=True)
 
-    run_colab_smoke(tmp_path, org_id="org-smoke", run_id="smoke-log-run")
+    run_notebook_smoke(tmp_path, org_id="org-smoke", run_id="smoke-log-run")
 
     events = _parse_log_records(caplog.records)
     assert any(e.get("event") == "pipeline_start" for e in events)
     assert any(e.get("event") == "pipeline_complete" for e in events)
-    assert all(e.get("component") == "colab_smoke" for e in events)
+    assert all(e.get("component") == "notebook_smoke" for e in events)

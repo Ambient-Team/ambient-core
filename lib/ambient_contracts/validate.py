@@ -3,10 +3,35 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import yaml
 
 from ambient_contracts.paths import resolve_contracts_dir
+
+
+def contract_store_section(doc: dict[str, Any]) -> dict[str, Any] | None:
+    """Return store config from ``store`` (preferred) or deprecated legacy key.
+
+    Args:
+        doc: Parsed contract document.
+
+    Returns:
+        Store section mapping when present, else ``None``.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> contract_store_section({"store": {"paths": []}})
+    """
+    store = doc.get("store")
+    if isinstance(store, dict):
+        return store
+    legacy = doc.get("firestore")
+    if isinstance(legacy, dict):
+        return legacy
+    return None
 
 REQUIRED_TOP_LEVEL = {"product", "schema", "lineage", "governance"}
 REQUIRED_PRODUCT = {"name", "version", "owner"}
@@ -52,9 +77,9 @@ def validate_contract_doc(doc: object, label: str) -> list[str]:
                 f"{label}: lineage.provenance_columns must be non-empty when declared"
             )
 
-    firestore = doc.get("firestore")
-    if isinstance(firestore, dict):
-        paths = firestore.get("paths")
+    store = contract_store_section(doc)
+    if isinstance(store, dict):
+        paths = store.get("paths")
         if isinstance(paths, list) and len(paths) > 0:
             consumption = doc.get("consumption_contract")
             allowed = None
@@ -62,7 +87,7 @@ def validate_contract_doc(doc: object, label: str) -> list[str]:
                 allowed = consumption.get("allowed_paths")
             if not isinstance(allowed, list) or len(allowed) == 0:
                 errors.append(
-                    f"{label}: firestore.paths is non-empty but "
+                    f"{label}: store.paths is non-empty but "
                     "consumption_contract.allowed_paths is missing or empty"
                 )
 

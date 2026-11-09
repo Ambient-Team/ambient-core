@@ -19,7 +19,7 @@ The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipe
 - **`catalog/`** — reference metrics, industry packs, benchmarks; `ambient-catalog-generate` → JSON `manifest.json` and generated `runtime/*.js`
 - **`ambient_pipeline/`** — pandas Bronze→Silver→Gold happy path (no Databricks)
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (package home is `lib/`)
-- **`notebooks/`** — entry `00_colab_run_me.ipynb`; optional local Spark notebooks; commercial skips in `COMMERCIAL_ONLY.txt`
+- **`notebooks/`** — entry `00_notebook_demo.ipynb`; optional local Spark notebooks; commercial skips in `COMMERCIAL_ONLY.txt`
 - **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — storage = none; samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (not for scale; enterprise tests separately). Demo recordings, screenshots, and synthetic data live in that tree (not in this repository).
 - **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`, [ci.md](ci.md), [running-ci-locally.md](running-ci-locally.md), [metrics-catalog.md](metrics-catalog.md), [INVENTORY.md](INVENTORY.md))
 
@@ -30,7 +30,7 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 Clone this repository alone and run without Databricks or a managed document store:
 
 1. `pip install -e ".[notebook]"` for pandas notebook deps from `pyproject.toml`
-2. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, then run [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb) or `ambient_pipeline.colab_smoke`
+2. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, then run [`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb) or `ambient_pipeline.notebook_smoke`
 3. Optional Spark: `pip install -e ".[pipeline,dev]"` (or `pip install -e ".[all]"` to match PR CI) and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
 
 **Core** = contracts + catalog + pandas pipeline + notebooks. The commercial platform pins a core release and adds hosting/storage/members — those stay downstream ([CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md)).

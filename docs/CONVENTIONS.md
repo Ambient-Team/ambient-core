@@ -111,7 +111,7 @@ When a key is renamed, the old key is recorded in `catalog/aliases.yaml` mapping
 
 Contract files live in `contracts/` and are named `product-slug-vMAJOR.yaml` (for example `healthcare-provider-ops-v1.yaml`). The major version in the filename must match the major component of `product.version` inside the file. Backward-incompatible schema changes (removing a column, narrowing a type, making an optional column required) require a major-version bump and a new file; backward-compatible additions are minor bumps recorded only in `product.version`. This relationship is checked by `scripts/check_contract_schema.py`.
 
-Vertical Gold products declare **`product.consumption_id`** (for example `FINANCE_BANKING`) aligned with `contractProductId` in [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml). Platform-facing products may instead expose `firestore.paths[].logical_key` (for example `TENANT_METRICS` on tenant-metrics). CI validates crosswalk ids with `python scripts/check_crosswalk.py`.
+Vertical Gold products declare **`product.consumption_id`** (for example `FINANCE_BANKING`) aligned with `contractProductId` in [`catalog/crosswalk.yaml`](../catalog/crosswalk.yaml). Platform-facing products may instead expose `store.paths[].logical_key` (for example `TENANT_METRICS` on tenant-metrics). CI validates crosswalk ids with `python scripts/check_crosswalk.py`.
 
 ## The core layer and calculation
 

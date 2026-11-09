@@ -1,6 +1,6 @@
 # Pipeline governance helpers
 
-Ambient Core ships **contracts**, **catalog** semantics, a **pandas notebook path** (`ambient_pipeline/colab_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in git here). Hosted notebook entry: [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb). Commercial deploy glue (DABs, Unity Catalog materialization, optional document store sync) belongs in your application repository.
+Ambient Core ships **contracts**, **catalog** semantics, a **pandas notebook path** (`ambient_pipeline/notebook_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in git here). Hosted notebook entry: [`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb). Commercial deploy glue (DABs, Unity Catalog materialization, optional document store sync) belongs in your application repository.
 
 For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). Product inventory and catalog linkage: [contracts/README.md](../contracts/README.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
@@ -8,7 +8,7 @@ For catalog vs contracts and path env vars, see [governed-data.md](governed-data
 
 ## What lives where
 
-**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; pandas helpers under `ambient_pipeline/`; optional Spark helpers under `lib/ambient_pipeline/`; OSS notebooks (`00_colab_run_me.ipynb`); `data/raw/.gitkeep` only (samples outside git); `validate-contracts` and the catalog generator CLIs.
+**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; pandas helpers under `ambient_pipeline/`; optional Spark helpers under `lib/ambient_pipeline/`; OSS notebooks (`00_notebook_demo.ipynb`); `data/raw/.gitkeep` only (samples outside git); `validate-contracts` and the catalog generator CLIs.
 
 **In your app repo (optional platform):** job definitions, DABs, orchestration; tenant upload UX and entitlements; document-store sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
 
@@ -25,7 +25,7 @@ pytest tests/pipeline/
 python scripts/run_oss_bronze_silver_smoke.py
 ```
 
-Java 17+ is required for Spark tests. Prefer the pandas notebook smoke (`ambient_pipeline.colab_smoke`) with samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
+Java 17+ is required for Spark tests. Prefer the pandas notebook smoke (`ambient_pipeline.notebook_smoke`) with samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
 
 **Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, `ambient_calc`, and `ambient_pipeline`. Notebooks call `ambient_pipeline.notebook_bootstrap.ensure_pipeline_on_path()` so a git checkout resolves `lib/` without Databricks or platform paths.
 

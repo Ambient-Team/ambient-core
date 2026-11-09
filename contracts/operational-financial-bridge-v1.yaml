@@ -95,16 +95,16 @@ delta_sharing:
 
 consumption_contract:
   allowed_paths:
-    - "Adapter: Firestore sync (Consumption Adapter v1 only)"
+    - "Adapter: document store sync (Consumption Adapter v1 only)"
     - "Delta Sharing to corporate data stack"
     - "ambient-cli read-only product commands"
   forbidden: "Direct Silver/Bronze access or client-side bridge logic in React"
 
-firestore_sync:
+store_sync:
   enabled: false
   note: "Bridge fields embedded on orgKpis and pipelineHealth documents until dedicated collection cutover"
 
-firestore:
+store:
   paths: []
   required_document_fields:
     - org_id

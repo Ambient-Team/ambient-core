@@ -14,6 +14,6 @@ Obtain the manufacturing demo CSV pack from that folder for local and hosted not
 ## Quick start
 
 1. Copy `Allmanufacturingds-*.csv` from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, or use your own files with the same names.
-2. Run `notebooks/00_colab_run_me.ipynb` in Jupyter or `ambient_pipeline.colab_smoke.run_colab_smoke` locally.
+2. Run `notebooks/00_notebook_demo.ipynb` in Jupyter or `ambient_pipeline.notebook_smoke.run_notebook_smoke` locally.
 
-Filenames expected by the smoke runner are listed in `ambient_pipeline/colab_smoke.py` (`DEMO_TABLES`) and `contracts/manufacturing-demo-raw-v1.yaml`.
+Filenames expected by the smoke runner are listed in `ambient_pipeline/notebook_smoke.py` (`DEMO_TABLES`) and `contracts/manufacturing-demo-raw-v1.yaml`.

@@ -66,10 +66,10 @@ consumption_contract:
   allowed_paths:
     - "Internal: Gold KPI calculators"
     - "Direct: read-only service principal on Unity Catalog views"
-    - "Adapter: Firestore sync (explicit contract only — see consumption-adapter-v1)"
+    - "Adapter: document store sync (explicit contract only — see consumption-adapter-v1)"
   forbidden: "Direct Bronze access by any consumer"
 
-firestore:
+store:
   paths:
     - collection: tenantMetrics
       logical_key: TENANT_METRICS

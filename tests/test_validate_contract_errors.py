@@ -51,13 +51,13 @@ def test_validate_contract_doc_empty_provenance_columns() -> None:
     assert any("provenance_columns must be non-empty" in e for e in errors)
 
 
-def test_validate_contract_doc_firestore_paths_need_consumption() -> None:
+def test_validate_contract_doc_store_paths_need_consumption() -> None:
     doc = {
         "product": {"name": "X", "version": "1", "owner": "o"},
         "schema": {},
         "lineage": {},
         "governance": {},
-        "firestore": {"paths": [{"logical_key": "lk"}]},
+        "store": {"paths": [{"logical_key": "lk"}]},
     }
     errors = validate_contract_doc(doc, "x.yaml")
     assert any("allowed_paths" in e for e in errors)

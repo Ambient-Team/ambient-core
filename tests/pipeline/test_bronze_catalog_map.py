@@ -85,7 +85,7 @@ def test_coerce_mapped_columns_uses_manifest_types(spark: SparkSession) -> None:
     assert row["status"] == "Active"
 
 
-def test_resolve_mapping_spec_firestore_missing_document() -> None:
+def test_resolve_mapping_spec_source_missing_document() -> None:
     spec = resolve_mapping_spec(
         org_id="org-1",
         mapping_json=None,
@@ -93,12 +93,12 @@ def test_resolve_mapping_spec_firestore_missing_document() -> None:
         source_id="src-1",
         gcs_path="",
         catalog_manifest_version="3",
-        firestore_fetcher=lambda _o, _s: None,
+        source_fetcher=lambda _o, _s: None,
     )
     assert spec.source_name == "src-1"
 
 
-def test_resolve_mapping_spec_firestore_fallback() -> None:
+def test_resolve_mapping_spec_source_fetcher_fallback() -> None:
     def fetcher(org_id: str, source_id: str) -> JsonDict:
         return {
             "catalogOptionKey": "HcCensus911CatalogOptionKey01",
@@ -113,7 +113,7 @@ def test_resolve_mapping_spec_firestore_fallback() -> None:
         source_id="src-1",
         gcs_path="gs://bucket/bronze/org-1/src-1/file.csv",
         catalog_manifest_version="3",
-        firestore_fetcher=fetcher,
+        source_fetcher=fetcher,
     )
     assert spec.catalog_option_key == "HcCensus911CatalogOptionKey01"
     assert spec.catalog_field_to_csv_header["date"] == "Date"

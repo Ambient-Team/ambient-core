@@ -11,5 +11,5 @@ def test_detects_google_colab_copy() -> None:
 
 
 def test_allows_colab_module_identifiers() -> None:
-    errors = _scan_text("docs/pipeline.md", "Use `ambient_pipeline.colab_smoke`.")
+    errors = _scan_text("docs/pipeline.md", "Use `ambient_pipeline.notebook_smoke`.")
     assert not errors

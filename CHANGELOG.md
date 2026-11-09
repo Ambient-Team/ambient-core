@@ -16,7 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **`firebase_admin` Firestore bridge** — deleted `lib/ambient_pipeline/firestore_bridge.py` and `append_firestore_lineage_event` / `fetch_firestore_data_source` helpers (no in-repo replacement).
 - **Colab pip extra and `requirements-colab.txt`** — pandas notebook deps live under the `notebook` optional extra in `pyproject.toml`.
-- **`google.colab` notebook cells** — entry notebook is local/Jupyter only; `ambient_pipeline.colab_smoke` remains the pandas smoke API.
+- **`google.colab` notebook cells** — entry notebook is local/Jupyter only (`notebooks/00_notebook_demo.ipynb`).
+
+### Deprecated (remove after ambient-systems-platform migrates)
+
+- **`ambient_pipeline.colab_smoke`** / **`colab_bootstrap`** — thin re-exports of `notebook_smoke` / `notebook_bootstrap`.
+- **`ambient_pipeline.firestore_sync_ids`** — re-exports `sync_ids`.
+- **Contract YAML key `firestore`** — use `store`; validator still accepts the legacy key.
+- **`firestore_fetcher`** kwarg on bronze mapping helpers — use `source_fetcher`.
 
 ## [0.3.11] - 2026-11-27
 

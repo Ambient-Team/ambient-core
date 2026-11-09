@@ -1,6 +1,6 @@
 """Optional local Spark/Delta runner for Bronze → Silver → Gold smoke / scale tests.
 
-Not required for the pandas smoke path (``ambient_pipeline.colab_smoke``).
+Not required for the pandas smoke path (``ambient_pipeline.notebook_smoke``).
 """
 
 from __future__ import annotations

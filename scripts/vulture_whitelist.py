@@ -15,7 +15,7 @@ WHITELIST = [
     "parse_float_from_cell",
     "load_metric_by_numeric_id",
     "ensure_package_on_path",
-    "run_colab_smoke",
+    "run_notebook_smoke",
     "pipeline_health_document_id",
     "audit_performance_document_id",
     "bronze_raw_metrics_org_view_sql",

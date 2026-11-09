@@ -83,7 +83,7 @@ operational_financial_bridge:
     - kpi_sensor_anomaly_count
     - kpi_equipment_uptime_pct
     - kpi_yield_per_sqm
-  firestore_fields:
+  store_fields:
     - operational_financial_aligned
     - variance_detected_count
     - bridge_mappings
@@ -112,7 +112,7 @@ delta_sharing:
 consumption_contract:
   allowed_paths:
     - "Direct: read-only service principal on Unity Catalog Gold tables/views"
-    - "Adapter: Firestore sync (explicit consumption adapter contract only)"
+    - "Adapter: document store sync (explicit consumption adapter contract only)"
     - "Delta Sharing: Power BI, Snowflake, Tableau, ERP adapters (Gold only)"
     - "BI tools: Tableau, Power BI, Looker (Gold schema access)"
     - "OneLake shortcut to Gold ADLS external location; Direct Lake semantic model (read-only)"
@@ -126,7 +126,7 @@ consumption:
     rls_mapping: unity_catalog_to_semantic_model
     purview_catalog: optional
 
-firestore:
+store:
   paths:
     - collection: orgKpis
       logical_key: ORG_KPIS

@@ -23,7 +23,7 @@ Each item under `links:`:
 - **`catalogMetricKey`** — stable key from `manifest.json` (e.g. `1cvcTcHNt1VYX867UUG7`)
 - **`metricId`** — numeric `id` from the same manifest row (sanity check for humans/tools)
 - **`contractFile`** — basename under `contracts/` (e.g. `tenant-metrics-v1.yaml`)
-- **`contractProductId`** — logical product id in your stack (e.g. Firestore `logical_key` / consumption id such as `TENANT_METRICS`)
+- **`contractProductId`** — logical product id in your stack (e.g. contract `store.paths[].logical_key` or consumption id such as `TENANT_METRICS`)
 
 ## Example in this repo
 

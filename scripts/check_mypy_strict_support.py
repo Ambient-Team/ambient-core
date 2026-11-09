@@ -81,7 +81,7 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_manifest_models_edges.py",
     "tests/test_notebook_bootstrap_unit.py",
     "tests/test_pii_column_tagging.py",
-    "tests/test_storage_paths_and_firestore_ids.py",
+    "tests/test_storage_paths_and_sync_ids.py",
     # Pipeline / Spark support (batch 19 — group 1)
     "tests/dict_helpers.py",
     "tests/spark_fixtures.py",
@@ -106,8 +106,8 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_runner_local_pipeline.py",
     # Batch 20 — group 1 (zero-touch or light annotation)
     "tests/test_lib_coverage_residual.py",
-    "tests/test_colab_smoke_run_tmp.py",
-    "tests/test_colab_smoke_unit.py",
+    "tests/test_notebook_smoke_run_tmp.py",
+    "tests/test_notebook_smoke_unit.py",
     "tests/test_ambient_cli_main.py",
     "tests/test_catalog_loader.py",
     "tests/test_contract_loader_edges.py",
@@ -119,7 +119,7 @@ STRICT_SUPPORT_TESTS: tuple[str, ...] = (
     "tests/test_manifest_models_tool_dicts.py",
     "tests/test_secrets_dbutils_paths.py",
     "tests/test_pii_and_secrets.py",
-    "tests/test_colab_bootstrap_unit.py",
+    "tests/test_notebook_bootstrap_unit.py",
     "tests/test_catalog_manifest_resolve.py",
     # Batch 20 — group 3
     "tests/catalog_script_loader.py",

@@ -1,4 +1,4 @@
-"""Unit tests for colab_smoke helpers (module stays off the coverage gate omit list)."""
+"""Unit tests for notebook_smoke helpers (module stays off the coverage gate omit list)."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from ambient_pipeline.colab_smoke import (
+from ambient_pipeline.notebook_smoke import (
     CONTRACT_FILE,
     DEMO_TABLES,
     SmokeResult,

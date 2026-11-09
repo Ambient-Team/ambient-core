@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import sys
-from collections.abc import Iterator
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -14,8 +13,8 @@ from pyspark.sql import SparkSession
 from ambient_pipeline.bronze_catalog_map import filter_raw_uploads, resolve_mapping_spec
 from ambient_pipeline.catalog_field_rules import strictest_linked_metric_frequency
 from ambient_pipeline.catalog_loader import load_metric_by_numeric_id
-from ambient_pipeline.colab_bootstrap import find_platform_root
-from ambient_pipeline.colab_smoke import run_colab_smoke
+from ambient_pipeline.notebook_bootstrap import find_platform_root
+from ambient_pipeline.notebook_smoke import run_notebook_smoke
 from ambient_pipeline.join_guards import assert_unique_keys, log_left_join_audit
 from ambient_pipeline.pandas_provenance import PandasBronzeStamper
 from ambient_pipeline.perf import PipelinePerfRecorder
@@ -28,8 +27,8 @@ from tests.dict_helpers import JsonDict
 def test_resolve_mapping_spec_preserves_preset_catalog_option_key() -> None:
     def fetcher(_org: str, _src: str) -> JsonDict:
         return {
-            "catalogOptionKey": "FirestoreKey",
-            "name": "From Firestore",
+            "catalogOptionKey": "RemoteKey",
+            "name": "From remote store",
             "latestUpload": {"mapping": {"date": "Date"}},
         }
 
@@ -40,7 +39,7 @@ def test_resolve_mapping_spec_preserves_preset_catalog_option_key() -> None:
         source_id="src-1",
         gcs_path="gs://bucket/bronze/org-1/src-1/x.csv",
         catalog_manifest_version="3",
-        firestore_fetcher=fetcher,
+        source_fetcher=fetcher,
     )
     assert spec.catalog_option_key == "PresetKey"
     assert spec.catalog_field_to_csv_header["date"] == "Date"
@@ -81,110 +80,6 @@ def test_load_metric_from_manifest_when_pack_metrics_miss_id(tmp_path: Path) -> 
     assert metric.get("name") == "Manifest only"
 
 
-class _DriveRootWithNestedMarker:
-    def __init__(self, drive: Path, nested: Path) -> None:
-        self._drive = drive
-        self._nested = nested
-
-    def is_dir(self) -> bool:
-        return self._drive.is_dir()
-
-    def __truediv__(self, key: str) -> Path:
-        return self._drive / key
-
-    def iterdir(self) -> Iterator[Path]:
-        yield self._nested
-
-
-def test_colab_bootstrap_skips_non_directory_drive_children(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    drive = tmp_path / "drive"
-    drive.mkdir()
-    platform = drive / "ambient-core"
-    (platform / "ambient_pipeline").mkdir(parents=True)
-    (platform / "data").mkdir()
-    (drive / "notes.txt").write_text("not a directory", encoding="utf-8")
-
-    class _DriveWithFileChild:
-        def __init__(self, root: Path) -> None:
-            self._root = root
-
-        def is_dir(self) -> bool:
-            return self._root.is_dir()
-
-        def __truediv__(self, key: str) -> Path:
-            return self._root / key
-
-        def iterdir(self) -> Iterator[Path]:
-            yield self._root / "notes.txt"
-            yield self._root / "ambient-core"
-
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES",
-        (_DriveWithFileChild(drive),),
-    )
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.Path.cwd",
-        lambda: tmp_path / "nowhere",
-    )
-    assert find_platform_root() == platform.resolve()
-
-
-def test_colab_bootstrap_finds_nested_drive_marker(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    drive = tmp_path / "drive"
-    drive.mkdir()
-    nested_parent = drive / "nested"
-    nested_parent.mkdir()
-    platform = nested_parent / "ambient-core"
-    (platform / "ambient_pipeline").mkdir(parents=True)
-    (platform / "data").mkdir()
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES",
-        (_DriveRootWithNestedMarker(drive, nested_parent),),
-    )
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.Path.cwd",
-        lambda: tmp_path / "nowhere",
-    )
-    assert find_platform_root() == platform.resolve()
-
-
-class _DriveListingRaisesOSError:
-    def __init__(self, path: Path) -> None:
-        self._path = path
-
-    def is_dir(self) -> bool:
-        return self._path.is_dir()
-
-    def __truediv__(self, key: str) -> Path:
-        return self._path / key
-
-    def iterdir(self) -> Iterator[Path]:
-        raise OSError("permission denied")
-
-
-def test_colab_bootstrap_drive_iterdir_oserror_falls_back(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    drive = tmp_path / "drive"
-    drive.mkdir()
-    marker = drive / "ambient-core"
-    (marker / "ambient_pipeline").mkdir(parents=True)
-    (marker / "data").mkdir()
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES",
-        (_DriveListingRaisesOSError(drive),),
-    )
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.Path.cwd",
-        lambda: marker,
-    )
-    assert find_platform_root() == marker.resolve()
-
-
 def test_find_platform_root_honors_explicit_path(tmp_path: Path) -> None:
     root = tmp_path / "checkout"
     root.mkdir()
@@ -193,43 +88,41 @@ def test_find_platform_root_honors_explicit_path(tmp_path: Path) -> None:
     assert find_platform_root(explicit=root) == root.resolve()
 
 
-def test_colab_bootstrap_lib_install_layout_adds_repo_root_candidate(
+def test_notebook_bootstrap_lib_install_layout_adds_repo_root_candidate(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     repo = tmp_path / "ambient-core"
-    module_file = repo / "lib" / "ambient_pipeline" / "colab_bootstrap.py"
+    module_file = repo / "lib" / "ambient_pipeline" / "notebook_bootstrap.py"
     module_file.parent.mkdir(parents=True)
     module_file.write_text("# stub\n", encoding="utf-8")
     (repo / "ambient_pipeline").mkdir()
     (repo / "data").mkdir()
-    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.__file__", str(module_file))
-    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES", ())
+    monkeypatch.setattr("ambient_pipeline.notebook_bootstrap.__file__", str(module_file))
     monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.Path.cwd",
+        "ambient_pipeline.notebook_bootstrap.Path.cwd",
         lambda: tmp_path / "elsewhere",
     )
     assert find_platform_root() == repo.resolve()
 
 
-def test_colab_bootstrap_parent_candidate_skips_lib_grandparent(
+def test_notebook_bootstrap_parent_candidate_skips_lib_grandparent(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module_file = tmp_path / "pkg" / "colab_bootstrap.py"
+    module_file = tmp_path / "pkg" / "notebook_bootstrap.py"
     module_file.parent.mkdir(parents=True)
     module_file.write_text("# stub\n", encoding="utf-8")
     platform = tmp_path / "ambient-core"
     (platform / "ambient_pipeline").mkdir(parents=True)
     (platform / "data").mkdir()
-    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.__file__", str(module_file))
-    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES", ())
+    monkeypatch.setattr("ambient_pipeline.notebook_bootstrap.__file__", str(module_file))
     monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.Path.cwd",
+        "ambient_pipeline.notebook_bootstrap.Path.cwd",
         lambda: platform,
     )
     assert find_platform_root() == platform.resolve()
 
 
-def test_colab_smoke_skips_required_check_when_no_required_columns(
+def test_notebook_smoke_skips_required_check_when_no_required_columns(
     tmp_path: Path,
 ) -> None:
     contracts = tmp_path / "contracts"
@@ -258,11 +151,11 @@ schema:
         "date,spend\n2024-01-01,1.0\n",
         encoding="utf-8",
     )
-    result = run_colab_smoke(tmp_path, org_id="org", run_id="run-no-required")
+    result = run_notebook_smoke(tmp_path, org_id="org", run_id="run-no-required")
     assert result.bronze_tables.get("marketing_spend") == 1
 
 
-def test_colab_smoke_inventory_without_value_column_skips_sum_kpi(
+def test_notebook_smoke_inventory_without_value_column_skips_sum_kpi(
     tmp_path: Path,
 ) -> None:
     contracts = tmp_path / "contracts"
@@ -293,12 +186,12 @@ schema:
         "date,sku,quantity_on_hand\n2024-01-01,A1,2\n",
         encoding="utf-8",
     )
-    result = run_colab_smoke(tmp_path, org_id="org", run_id="run-inv-optional-value")
+    result = run_notebook_smoke(tmp_path, org_id="org", run_id="run-inv-optional-value")
     assert result.gold_kpis.get("inventory_row_count") == 1
     assert "inventory_value_sum" not in result.gold_kpis
 
 
-def test_colab_smoke_optional_kpi_branches(tmp_path: Path) -> None:
+def test_notebook_smoke_optional_kpi_branches(tmp_path: Path) -> None:
     contracts = tmp_path / "contracts"
     contracts.mkdir()
     src = Path(__file__).resolve().parents[1] / "contracts" / "manufacturing-demo-raw-v1.yaml"
@@ -311,18 +204,18 @@ def test_colab_smoke_optional_kpi_branches(tmp_path: Path) -> None:
         "date,channel,spend,new_customers\n2024-01-01,web,25.0,0\n",
         encoding="utf-8",
     )
-    result = run_colab_smoke(tmp_path, org_id="org", run_id="run-kpi-branches")
+    result = run_notebook_smoke(tmp_path, org_id="org", run_id="run-kpi-branches")
     assert result.gold_kpis.get("marketing_spend_sum") == 25.0
     assert result.gold_kpis.get("marketing_spend_per_new_customer") is None
 
 
-def test_colab_smoke_bank_kpi_skips_missing_cash_balance_column(tmp_path: Path) -> None:
-    from tests.test_colab_smoke_run_tmp import _seed_demo_tree
+def test_notebook_smoke_bank_kpi_skips_missing_cash_balance_column(tmp_path: Path) -> None:
+    from tests.test_notebook_smoke_run_tmp import _seed_demo_tree
 
     _seed_demo_tree(tmp_path)
     bank = tmp_path / "data" / "raw" / "Allmanufacturingds-bank-statements.csv"
     bank.write_text("date,amount\n2024-01-01,-10.0\n", encoding="utf-8")
-    result = run_colab_smoke(tmp_path, org_id="org", run_id="run-bank-kpi")
+    result = run_notebook_smoke(tmp_path, org_id="org", run_id="run-bank-kpi")
     assert result.gold_kpis.get("bank_current_cash_balance_last") is None
 
 

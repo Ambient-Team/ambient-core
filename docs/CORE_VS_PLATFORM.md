@@ -6,7 +6,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 
 - Validate and load **data-product contracts** (`validate-contracts`, `ambient_contracts`).
 - Author and generate the **reference catalog** (`ambient-catalog-generate`, `catalog/manifest.json`, `catalog/runtime/` JS).
-- Run the **free pandas notebook** path ([`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb), `ambient_pipeline/colab_smoke.py`) with sample CSVs copied from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo (`data/raw/.gitkeep` only). This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same `demos/ambient-core/` tree (not in Ambient-Team repos).
+- Run the **free pandas notebook** path ([`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb), `ambient_pipeline/notebook_smoke.py`) with sample CSVs copied from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo (`data/raw/.gitkeep` only). This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same `demos/ambient-core/` tree (not in Ambient-Team repos).
 - Optionally use **Spark/Delta** helpers under `lib/ambient_pipeline/` when you install `.[pipeline]` and provide the same external CSVs.
 - Fork or integrate contracts and catalog semantics without shipping a full SaaS stack.
 
