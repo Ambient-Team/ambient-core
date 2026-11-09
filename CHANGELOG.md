@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.11] - 2026-11-09
+
 ### Added
 
 - **No GitHub Pages from this repo** — removed `.github/workflows/pages.yml` and site builders; `scripts/check_pages_site.py` fails CI if Pages publish paths reappear. Public site is the org root (`ambient-team.github.io`).
 - **Vendor marketing scan** — `scripts/check_vendor_marketing.py` fails CI when user-visible docs promote blocked vendor brands or forge CTAs.
+- Spark pipeline **E2E golden** tests (stubbed and real-PII paths), `metric_id`-based Real Estate gold pivot, and Silver/Gold **PII output guards**.
+- **`AMBIENT_PII_SALT` runtime policy** for `PiiPseudonymizer` (blocks missing, empty, or golden test salt outside pytest / `AMBIENT_SPARK_TESTS=1`); `.env.example` placeholder and pipeline docs.
+- **Structured pipeline logging** (`log_pipeline_event`) and generated **`lib/README.md`** API index (`generate_lib_readme.py --check` in CI).
+- **Quality-static gates:** public API docstring check, vulture dead-code pass, golden PII fixture reference scan, sensitive-literal scan (emails, phones, personal paths), doc link check, secret-shaped token scan for `lib/` and `scripts/`.
+- **`lib/ambient_pipeline/` coverage floor** (95% lines / 95% branches) in `check_coverage.py`.
+- PEP 561 **`py.typed`** markers; mypy strict on core and support paths; broad lib branch/edge test coverage.
 
 ### Removed
 
@@ -24,17 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`ambient_pipeline.firestore_sync_ids`** — re-exports `sync_ids`.
 - **Contract YAML key `firestore`** — use `store`; validator still accepts the legacy key.
 - **`firestore_fetcher`** kwarg on bronze mapping helpers — use `source_fetcher`.
-
-## [0.3.11] - 2026-11-27
-
-### Added
-
-- Spark pipeline **E2E golden** tests (stubbed and real-PII paths), `metric_id`-based Real Estate gold pivot, and Silver/Gold **PII output guards**.
-- **`AMBIENT_PII_SALT` runtime policy** for `PiiPseudonymizer` (blocks missing, empty, or golden test salt outside pytest / `AMBIENT_SPARK_TESTS=1`); `.env.example` placeholder and pipeline docs.
-- **Structured pipeline logging** (`log_pipeline_event`) and generated **`lib/README.md`** API index (`generate_lib_readme.py --check` in CI).
-- **Quality-static gates:** public API docstring check, vulture dead-code pass, golden PII fixture reference scan, sensitive-literal scan (emails, phones, personal paths), doc link check, secret-shaped token scan for `lib/` and `scripts/`.
-- **`lib/ambient_pipeline/` coverage floor** (95% lines / 95% branches) in `check_coverage.py`.
-- PEP 561 **`py.typed`** markers; mypy strict on core and support paths; broad lib branch/edge test coverage.
 
 ### Changed
 
