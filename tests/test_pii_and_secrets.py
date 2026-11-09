@@ -151,14 +151,3 @@ def test_assert_pii_columns_pseudonymized_accepts_digest(spark: SparkSession) ->
     df = spark.createDataFrame([(digest,)], ["customer_name"])
     assert_pii_columns_pseudonymized(df)
 
-
-def test_golden_pii_fixture_matches_constant() -> None:
-    from pathlib import Path
-
-    root = Path(__file__).resolve().parents[1]
-    env_path = root / "tests" / "fixtures" / "pipeline" / "golden_pii_salt.env"
-    for line in env_path.read_text(encoding="utf-8").splitlines():
-        if line.strip().startswith("AMBIENT_PII_SALT="):
-            assert line.split("=", 1)[1].strip() == GOLDEN_TEST_PII_SALT
-            return
-    raise AssertionError("AMBIENT_PII_SALT not found in golden PII fixture env file")

@@ -131,7 +131,7 @@ The runner writes a simplified **real-estate** Gold Delta table when Silver rows
 
 The runner also adds **`kpi_dscr`** (`noi / annual_debt_service` when debt service is positive). Constants live in `REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID` and `REAL_ESTATE_GOLD_PIVOT` in `runner.py`. When `name` / `industry` are absent, Gold falls back to a per-org **summary** table (`metric_rows`, optional `distinct_metrics`) under `gold/org_kpis/summary`.
 
-Integration tests: stubbed-PII golden ([`pipeline_spark_e2e.json`](../tests/fixtures/golden/pipeline_spark_e2e.json)) and real-pseudonymization golden ([`pipeline_spark_e2e_pii.json`](../tests/fixtures/golden/pipeline_spark_e2e_pii.json)) with a test-only ``AMBIENT_PII_SALT`` loaded from a fixture under ``tests/fixtures/pipeline/`` (never use that value in production). Refresh both with `python scripts/refresh_pipeline_golden.py`.
+Spark integration coverage uses temporary CSV fixtures in [`test_runner_local_pipeline.py`](../tests/test_runner_local_pipeline.py) and [`test_gold_transform_edges.py`](../tests/pipeline/test_gold_transform_edges.py); pytest or ``AMBIENT_SPARK_TESTS=1`` enables the well-known blocked salt constant in `lib/ambient_pipeline/pii.py`.
 
 Public re-exports from `ambient_pipeline`: `ContractLoader`, `BronzeProvenanceStamper`, `PiiPseudonymizer`, `SilverValidator`, plus `bronze_to_tenant_metrics`, `MappingSpec`, and mapping helpers ([`__init__.py`](../lib/ambient_pipeline/__init__.py)).
 

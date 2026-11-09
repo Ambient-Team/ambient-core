@@ -14,7 +14,7 @@ from pyspark.sql.types import StringType
 
 PII_INDICATORS = ("uid", "email", "name", "phone", "address")
 
-# Must match the test-only AMBIENT_PII_SALT value in tests/fixtures/pipeline/ (never production).
+# Well-known placeholder; must not be used as AMBIENT_PII_SALT outside pytest / CI Spark tests.
 GOLDEN_TEST_PII_SALT = "golden-test-salt-not-for-production"
 
 PII_SALT_SETUP_HINT = (

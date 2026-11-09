@@ -6,11 +6,10 @@ What Ambient Core provides today versus planned deferrals. For consumption guide
 
 Release **`v0.3.11`** / package **`0.3.11`** ([CHANGELOG.md](../CHANGELOG.md)). Traceability is enforced by `tests/test_v0311_release_traceability.py`.
 
-- **Spark pipeline E2E goldens** (stubbed and real-PII paths) — `tests/pipeline/test_pipeline_e2e_golden.py`, `tests/fixtures/golden/`, `scripts/pipeline_golden_util.py`
 - **`metric_id` Real Estate gold pivot** — `lib/ambient_pipeline/runner.py`; `tests/pipeline/test_gold_transform_edges.py`, `tests/test_runner_local_pipeline.py`
-- **PII salt policy and Silver/Gold output guards** — `lib/ambient_pipeline/pii.py`, `.env.example`, [pipeline.md](pipeline.md#local-spark-pii-salt); `tests/test_pii_and_secrets.py`, PII path in E2E golden
+- **PII salt policy and Silver/Gold output guards** — `lib/ambient_pipeline/pii.py`, `.env.example`, [pipeline.md](pipeline.md#local-spark-pii-salt); `tests/test_pii_and_secrets.py`
 - **Structured pipeline logging** — `ambient_pipeline.pipeline_logging`; `tests/test_pipeline_structured_logging.py`
-- **Static quality gates** — `scripts/check_quality_static.py` (docstrings, vulture, golden PII ref scan, sensitive literals, doc links, secrets scan, `lib/README.md` check); `tests/test_check_quality_static.py`, `tests/test_secrets_scan_fixtures.py`, `tests/test_check_public_api_docstrings.py`, `tests/test_check_doc_links.py`
+- **Static quality gates** — `scripts/check_quality_static.py` (docstrings, vulture, sensitive literals, doc links, secrets scan, `lib/README.md` check); `tests/test_check_quality_static.py`, `tests/test_secrets_scan.py`, `tests/test_check_public_api_docstrings.py`, `tests/test_check_doc_links.py`
 - **`ambient_pipeline` coverage floor (95%/95%)** — `scripts/check_coverage.py` (PR CI and `scripts/run_local_pr_ci.sh`)
 - **PEP 561 `py.typed`** and mypy strict — `lib/*/py.typed`, `scripts/check_mypy_strict.py` via quality-static
 
