@@ -1,4 +1,4 @@
-"""Shared mapping types for tests (Firestore docs, YAML-shaped dicts)."""
+"""Shared mapping types for tests (document-store dicts, YAML-shaped dicts)."""
 
 from __future__ import annotations
 

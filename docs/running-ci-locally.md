@@ -1,6 +1,6 @@
 # Running CI locally
 
-Pull request CI runs the same checks as the **`build-test`** job in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) when heavy CI is enabled. Draft PRs and docs-only changes skip heavy steps in GitHub Actions but still pass the required check; locally you can always run the full loop below. See [docs/ci.md](ci.md) for triggers and the `run_heavy` gate.
+Pull request CI runs the same checks as the **`build-test`** job in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) when heavy CI is enabled. Draft PRs and docs-only changes skip heavy steps in remote CI but still pass the required check; locally you can always run the full loop below. See [docs/ci.md](ci.md) for triggers and the `run_heavy` gate.
 
 ## Prerequisites
 
@@ -29,6 +29,7 @@ python scripts/check_formulas.py
 python scripts/check_metric_inputs.py
 python scripts/check_phi.py
 python scripts/check_markdown_prose.py
+python scripts/check_vendor_marketing.py
 python scripts/check_doc_links.py
 
 node scripts/ci-policy.mjs
@@ -53,7 +54,7 @@ python scripts/check_quality_static.py
 
 `check_quality_static.py` includes relative doc link checks (`check_doc_links.py`) and a sensitive-literal scan (emails, phones, personal paths) outside `tests/` and `catalog/`.
 
-## Full PR CI (when GitHub Actions billing is blocked)
+## Full PR CI (when remote CI billing is blocked)
 
 From repo root with `.venv` active and Java 17 for Spark:
 
@@ -61,7 +62,7 @@ From repo root with `.venv` active and Java 17 for Spark:
 bash scripts/run_local_pr_ci.sh
 ```
 
-Paste the script output into PR comments so reviewers see the same gates CI would run on `build-test` + `quality-static`. Prefer this over re-running GitHub Actions while org billing is tight (November 2026 release targets **Fri 27 Nov**; no freeze days — see [RELEASING.md](RELEASING.md)). Includes `pip-audit` via `check_pip_audit.py` when `.[all]` is installed.
+Paste the script output into PR comments so reviewers see the same gates CI would run on `build-test` + `quality-static`. Prefer this over re-running remote CI while org billing is tight (November 2026 release targets **Fri 27 Nov**; no freeze days — see [RELEASING.md](RELEASING.md)). Includes `pip-audit` via `check_pip_audit.py` when `.[all]` is installed.
 
 ## Coverage gate (lib ≥ 90% lines, ≥ 95% branches)
 

@@ -1,4 +1,4 @@
-"""Pandas Bronze provenance stamping (Colab / local; no Spark required)."""
+"""Pandas Bronze provenance stamping (notebook / local; no Spark required)."""
 
 from __future__ import annotations
 

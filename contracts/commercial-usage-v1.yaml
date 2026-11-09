@@ -46,7 +46,7 @@ lineage:
   bcbs239: false
   provenance_columns: ["org_id", "_snapshot_ts"]
   sources:
-    - "Firestore: organizations/{orgId}.commercial (platform-written mirror)"
+    - "document store: organizations/{orgId}.commercial (platform-written mirror)"
     - "functions/commercial_sync.py (hourly entitlements sync)"
     - "functions/commercial/usage.py + trigger_databricks_pipeline.py (metering events)"
 

@@ -9,7 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **GitHub Pages workflow** — `.github/workflows/pages.yml` publishes the Ambient Core project site (landing page, public documentation, changelog) on push to `main` only at `https://ambient-team.github.io/ambient-core/`. PR CI runs `scripts/check_pages_site.py` and uploads a `ambient-core-pages-site` workflow artifact for preview. Every page includes the commercial banner linking to `https://www.ambientsystems.ai`.
+- **No GitHub Pages from this repo** — removed `.github/workflows/pages.yml` and site builders; `scripts/check_pages_site.py` fails CI if Pages publish paths reappear. Public site is the org root (`ambient-team.github.io`).
+- **Vendor marketing scan** — `scripts/check_vendor_marketing.py` fails CI when user-visible docs promote blocked vendor brands or forge CTAs.
+
+### Removed
+
+- **`firebase_admin` Firestore bridge** — deleted `lib/ambient_pipeline/firestore_bridge.py` and `append_firestore_lineage_event` / `fetch_firestore_data_source` helpers (no in-repo replacement).
+- **Colab pip extra and `requirements-colab.txt`** — pandas notebook deps live under the `notebook` optional extra in `pyproject.toml`.
+- **`google.colab` notebook cells** — entry notebook is local/Jupyter only (`notebooks/00_notebook_demo.ipynb`).
+
+### Deprecated (remove after ambient-systems-platform migrates)
+
+- **`ambient_pipeline.colab_smoke`** / **`colab_bootstrap`** — thin re-exports of `notebook_smoke` / `notebook_bootstrap`.
+- **`ambient_pipeline.firestore_sync_ids`** — re-exports `sync_ids`.
+- **Contract YAML key `firestore`** — use `store`; validator still accepts the legacy key.
+- **`firestore_fetcher`** kwarg on bronze mapping helpers — use `source_fetcher`.
 
 ## [0.3.11] - 2026-11-27
 
@@ -30,13 +44,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Colab bootstrap / secrets branch coverage gaps; gold transform and runner edge cases covered by tests.
+- Notebook bootstrap / secrets branch coverage gaps; gold transform and runner edge cases covered by tests.
 
 ## [0.3.8] - 2026-10-02
 
 ### Added
 
-- GitHub Actions **Release** workflow on tag `vX.Y.Z` that runs CI checks, verifies the tag matches package metadata, builds wheel and sdist artifacts, and attaches them to the GitHub Release.
+- **Release** workflow on tag `vX.Y.Z` that runs CI checks, verifies the tag matches package metadata, builds wheel and sdist artifacts, and attaches them to the release.
 - **Cut release** workflow (`workflow_dispatch`) for owners without local git: validates version and CHANGELOG on `main`, pushes the annotated tag, then invokes Release (GITHUB_TOKEN tag pushes do not trigger tag workflows).
 - [docs/RELEASING.md](docs/RELEASING.md) for maintainers and downstream integrators.
 
@@ -50,9 +64,3 @@ Baseline semver release for integrators (for example **ambient-systems-platform*
 - Reference **catalog** with industry packs, manifest generation, and validation scripts.
 - **ambient_pipeline**, **ambient_calc**, and **ambient_cli** packages installable from this tree.
 - CI validation for contracts, catalog, naming, formulas, PHI policy, and PySpark pipeline tests.
-
-[Unreleased]: https://github.com/Ambient-Team/ambient-core/compare/v0.3.11...HEAD
-[0.3.11]: https://github.com/Ambient-Team/ambient-core/compare/v0.3.10...v0.3.11
-[0.3.10]: https://github.com/Ambient-Team/ambient-core/compare/v0.3.8...v0.3.10
-[0.3.8]: https://github.com/Ambient-Team/ambient-core/compare/v0.3.0...v0.3.8
-[0.3.0]: https://github.com/Ambient-Team/ambient-core/releases/tag/v0.3.0

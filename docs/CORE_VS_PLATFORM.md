@@ -6,7 +6,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 
 - Validate and load **data-product contracts** (`validate-contracts`, `ambient_contracts`).
 - Author and generate the **reference catalog** (`ambient-catalog-generate`, `catalog/manifest.json`, `catalog/runtime/` JS).
-- Run the **free Colab / pandas** path ([`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb), `ambient_pipeline/colab_smoke.py`) with sample CSVs copied from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo (`data/raw/.gitkeep` only). This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same `demos/ambient-core/` tree (not in Ambient-Team repos).
+- Run the **free pandas notebook** path ([`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb), `ambient_pipeline/notebook_smoke.py`) with sample CSVs copied from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo (`data/raw/.gitkeep` only). This pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same `demos/ambient-core/` tree (not in Ambient-Team repos).
 - Optionally use **Spark/Delta** helpers under `lib/ambient_pipeline/` when you install `.[pipeline]` and provide the same external CSVs.
 - Fork or integrate contracts and catalog semantics without shipping a full SaaS stack.
 
@@ -14,7 +14,7 @@ What you get from **this repository alone** versus what belongs in a **separate 
 
 - **Consumption UI** (web or mobile clients), API gateways tied to a specific vendor OLTP.
 - **Managed lakehouse deploy** (Databricks Asset Bundles, scheduled workspace jobs, Unity Catalog materialization).
-- **App-specific pipeline glue** (Firestore sync, tenant sync IDs, cloud storage conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
+- **App-specific pipeline glue** (document-store sync, tenant sync IDs, cloud storage conventions)—may live beside imported `ambient_pipeline` in the consumer repo.
 - **Customer-facing AI / inference / model hosting** — not shipped from this repository. Future proprietary AI/ML, if any, belongs only in the commercial platform application.
 - **Business-line organizations** — splitting a conglomerate into multiple tenant orgs, each with its own catalog industry, contracts, uploads, and peer set; optional holding-company rollup is platform analytics, not a second catalog industry in core.
 - **Benchmark gap decomposition and improvement workflows** — peer actuals storage, structural versus improvable waterfall/bridge UI, normalization policy, and post-benchmark action tracking on top of core metrics and contracts; see [benchmarking-lifecycle.md](benchmarking-lifecycle.md).

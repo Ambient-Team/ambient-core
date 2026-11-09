@@ -33,6 +33,8 @@ export const heavyCatalogScripts = [
   'scripts/check_metric_inputs.py',
   'scripts/check_phi.py',
   'scripts/check_markdown_prose.py',
+  'scripts/check_vendor_marketing.py',
+  'scripts/check_neutral_naming.py',
   'scripts/check_doc_links.py',
 ];
 
@@ -58,10 +60,8 @@ export const heavyCiPathFilters = [
   'examples/**',
   'notebooks/**',
   'pyproject.toml',
-  'requirements-colab.txt',
   '.python-version',
   '.github/workflows/ci.yml',
-  '.github/workflows/pages.yml',
   '.cursor/**',
 ];
 

@@ -1,4 +1,4 @@
-"""run_colab_smoke against tmp-path CSVs (no demo files committed to the repo)."""
+"""run_notebook_smoke against tmp-path CSVs (no demo files committed to the repo)."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from ambient_pipeline.colab_smoke import DEMO_TABLES, run_colab_smoke
+from ambient_pipeline.notebook_smoke import DEMO_TABLES, run_notebook_smoke
 
 
 def _seed_demo_tree(root: Path) -> None:
@@ -81,9 +81,9 @@ def _seed_demo_tree(root: Path) -> None:
         frames[table_id].to_csv(raw / filename, index=False)
 
 
-def test_run_colab_smoke_processes_tmp_demo_csvs(tmp_path: Path) -> None:
+def test_run_notebook_smoke_processes_tmp_demo_csvs(tmp_path: Path) -> None:
     _seed_demo_tree(tmp_path)
-    result = run_colab_smoke(tmp_path, org_id="org-test", run_id="run-test")
+    result = run_notebook_smoke(tmp_path, org_id="org-test", run_id="run-test")
     assert result.bronze_tables
     assert result.silver_tables
     assert result.gold_kpis.get("ar_amount_due_sum") == 100.0
@@ -92,7 +92,7 @@ def test_run_colab_smoke_processes_tmp_demo_csvs(tmp_path: Path) -> None:
     assert summary["run_id"] == "run-test"
 
 
-def test_run_colab_smoke_notes_missing_raw_files(tmp_path: Path) -> None:
+def test_run_notebook_smoke_notes_missing_raw_files(tmp_path: Path) -> None:
     contracts = tmp_path / "contracts"
     contracts.mkdir()
     shutil.copy(
@@ -100,5 +100,5 @@ def test_run_colab_smoke_notes_missing_raw_files(tmp_path: Path) -> None:
         contracts / "manufacturing-demo-raw-v1.yaml",
     )
     (tmp_path / "data" / "raw").mkdir(parents=True)
-    result = run_colab_smoke(tmp_path, run_id="run-empty")
+    result = run_notebook_smoke(tmp_path, run_id="run-empty")
     assert any("SKIP missing raw file" in note for note in result.notes)

@@ -11,7 +11,7 @@ import ambient_pipeline.secrets as secrets_module
 from ambient_contracts.loader import ContractLoader
 from ambient_pipeline import catalog_field_rules
 from ambient_pipeline.catalog_loader import load_data_option
-from ambient_pipeline.colab_smoke import _load_contract
+from ambient_pipeline.notebook_smoke import _load_contract
 from ambient_pipeline.pandas_provenance import PandasBronzeStamper
 from ambient_pipeline.pii import _SparkPiiUdf, hmac_sha256_hex
 
@@ -51,30 +51,6 @@ def test_infer_integer_for_count_suffix_when_hints_narrowed(
     assert catalog_field_rules.infer_catalog_field_type("widget_count") == "integer"
 
 
-def test_colab_bootstrap_skips_non_directory_drive_candidates(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    from ambient_pipeline.colab_bootstrap import find_platform_root
-
-    isolated = tmp_path / "isolated" / "colab_bootstrap.py"
-    isolated.parent.mkdir(parents=True)
-    monkeypatch.setattr("ambient_pipeline.colab_bootstrap.__file__", str(isolated))
-    file_candidate = tmp_path / "not-a-drive"
-    file_candidate.write_text("x", encoding="utf-8")
-    platform = tmp_path / "ambient-core"
-    (platform / "ambient_pipeline").mkdir(parents=True)
-    (platform / "data").mkdir()
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.DRIVE_CANDIDATES",
-        (file_candidate,),
-    )
-    monkeypatch.setattr(
-        "ambient_pipeline.colab_bootstrap.Path.cwd",
-        lambda: platform,
-    )
-    assert find_platform_root() == platform.resolve()
-
-
 def test_load_contract_missing_file(tmp_path: Path) -> None:
     with pytest.raises(FileNotFoundError, match="Missing contract"):
         _load_contract(tmp_path / "contracts")
@@ -83,7 +59,7 @@ def test_load_contract_missing_file(tmp_path: Path) -> None:
 def test_load_contract_rejects_non_mapping(tmp_path: Path) -> None:
     contracts = tmp_path / "contracts"
     contracts.mkdir()
-    from ambient_pipeline.colab_smoke import CONTRACT_FILE
+    from ambient_pipeline.notebook_smoke import CONTRACT_FILE
 
     (contracts / CONTRACT_FILE).write_text("- not a mapping\n", encoding="utf-8")
     with pytest.raises(ValueError, match="YAML mapping"):

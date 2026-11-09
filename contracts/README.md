@@ -88,7 +88,7 @@ For table names, required columns, and consumption rules, read each product YAML
 
 ## Authoring and validation
 
-New or changed contracts must include top-level sections **`product`**, **`schema`**, **`lineage`**, and **`governance`**. The `product` section requires `name`, `version`, and `owner`. Optional sections include `quality`, `freshness`, `firestore`, and `consumption_contract` with additional rules in the validator. Filenames follow `{product-slug}-v{MAJOR}.yaml` and must match the major component of `product.version` — [docs/CONVENTIONS.md](../docs/CONVENTIONS.md#contract-files-and-versions).
+New or changed contracts must include top-level sections **`product`**, **`schema`**, **`lineage`**, and **`governance`**. The `product` section requires `name`, `version`, and `owner`. Optional sections include `quality`, `freshness`, `store` (legacy contract key — see CHANGELOG), and `consumption_contract` with additional rules in the validator. Filenames follow `{product-slug}-v{MAJOR}.yaml` and must match the major component of `product.version` — [docs/CONVENTIONS.md](../docs/CONVENTIONS.md#contract-files-and-versions).
 
 Workflow:
 

@@ -76,7 +76,7 @@ PACKAGES: tuple[tuple[str, tuple[str, ...]], ...] = (
 EXTRA_MODULES = {
     "ambient_pipeline": [
         ("ambient_pipeline.runner", ("run_local_pipeline", "run_pipeline_from_config", "PipelineRunConfig")),
-        ("ambient_pipeline.colab_smoke", ("run_colab_smoke", "SmokeResult")),
+        ("ambient_pipeline.notebook_smoke", ("run_notebook_smoke", "SmokeResult")),
         ("ambient_pipeline.pipeline_logging", ("log_pipeline_event",)),
     ],
 }

@@ -45,6 +45,7 @@ STEPS: tuple[tuple[str, list[str]], ...] = (
         [sys.executable, str(ROOT / "scripts" / "generate_pack_reference_docs.py"), "--check"],
     ),
     ("pages-site", [sys.executable, str(ROOT / "scripts" / "check_pages_site.py")]),
+    ("neutral-naming", [sys.executable, str(ROOT / "scripts" / "check_neutral_naming.py")]),
 )
 
 

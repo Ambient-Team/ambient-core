@@ -1,6 +1,6 @@
 # Pipeline governance helpers
 
-Ambient Core ships **contracts**, **catalog** semantics, a **pandas Colab path** (`ambient_pipeline/colab_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in git here). Free Colab entry: [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb) (open from GitHub in Colab). Commercial deploy glue (DABs, Unity Catalog materialization, Firebase) belongs in your application repository.
+Ambient Core ships **contracts**, **catalog** semantics, a **pandas notebook path** (`ambient_pipeline/notebook_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in git here). Hosted notebook entry: [`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb). Commercial deploy glue (DABs, Unity Catalog materialization, optional document store sync) belongs in your application repository.
 
 For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). Product inventory and catalog linkage: [contracts/README.md](../contracts/README.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
@@ -8,9 +8,9 @@ For catalog vs contracts and path env vars, see [governed-data.md](governed-data
 
 ## What lives where
 
-**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; Colab/pandas helpers under `ambient_pipeline/`; optional Spark helpers under `lib/ambient_pipeline/`; OSS notebooks (`00_colab_run_me.ipynb`); `data/raw/.gitkeep` only (samples outside git); `validate-contracts` and the catalog generator CLIs.
+**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; pandas helpers under `ambient_pipeline/`; optional Spark helpers under `lib/ambient_pipeline/`; OSS notebooks (`00_notebook_demo.ipynb`); `data/raw/.gitkeep` only (samples outside git); `validate-contracts` and the catalog generator CLIs.
 
-**In your app repo (optional platform):** job definitions, DABs, orchestration; tenant upload UX and entitlements; Firestore sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
+**In your app repo (optional platform):** job definitions, DABs, orchestration; tenant upload UX and entitlements; document-store sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
 
 [observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) describes pipeline health products and may reference SQL, bundles, or notebooks that are maintained **downstream** — treat it as the interface contract, not as code in this repo.
 
@@ -25,7 +25,7 @@ pytest tests/pipeline/
 python scripts/run_oss_bronze_silver_smoke.py
 ```
 
-Java 17+ is required for Spark tests. Prefer the pandas Colab smoke (`ambient_pipeline.colab_smoke`) with samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
+Java 17+ is required for Spark tests. Prefer the pandas notebook smoke (`ambient_pipeline.notebook_smoke`) with samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
 
 **Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, `ambient_calc`, and `ambient_pipeline`. Notebooks call `ambient_pipeline.notebook_bootstrap.ensure_pipeline_on_path()` so a git checkout resolves `lib/` without Databricks or platform paths.
 
@@ -63,7 +63,7 @@ flowchart LR
 
 **Orchestration helper:** `bronze_to_tenant_metrics(...)` runs steps 2–4 in order. See [tests/pipeline/test_bronze_to_tenant_metrics_contract.py](../tests/pipeline/test_bronze_to_tenant_metrics_contract.py).
 
-Platform-only (optional): `fetch_firestore_data_source` / `append_firestore_lineage_event` lazy-import `firestore_bridge` and require Firebase — never imported on the OSS notebook / `pip install` default path. Secrets prefer environment variables; Databricks `dbutils` is optional when present.
+Platform-only document-store sync belongs in your application repository (not shipped here). Secrets prefer environment variables; Databricks `dbutils` is optional when present.
 
 ## Silver → Gold (catalog, calc, and vertical contracts)
 
@@ -117,7 +117,7 @@ RuntimeError: PiiPseudonymizer requires AMBIENT_PII_SALT outside test runs. Set 
 
 **Fix:** `export AMBIENT_PII_SALT='your-unique-local-salt'` (or load from `.env.local` before starting Spark). Do not use the golden test value or an empty string.
 
-`AMBIENT_ALLOW_DEV_SECRETS=1` alone does **not** satisfy this check; the env var must still be set for pseudonymization. Colab/pandas smoke paths do not use this Spark pseudonymizer.
+`AMBIENT_ALLOW_DEV_SECRETS=1` alone does **not** satisfy this check; the env var must still be set for pseudonymization. Pandas notebook smoke paths do not use this Spark pseudonymizer.
 
 ### Local Spark runner — real-estate gold columns
 

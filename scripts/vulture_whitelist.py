@@ -5,8 +5,6 @@ WHITELIST = [
     "assert_required_columns",  # contracts, notebooks, tests
     "stable_metric_id",
     "filter_raw_uploads",
-    "append_firestore_lineage_event",
-    "fetch_firestore_data_source",
     "validate_csv_headers_against_mapping",
     "parse_mapping_widget",
     "infer_field_coverage",
@@ -17,7 +15,7 @@ WHITELIST = [
     "parse_float_from_cell",
     "load_metric_by_numeric_id",
     "ensure_package_on_path",
-    "run_colab_smoke",
+    "run_notebook_smoke",
     "pipeline_health_document_id",
     "audit_performance_document_id",
     "bronze_raw_metrics_org_view_sql",

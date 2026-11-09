@@ -44,10 +44,8 @@ jobs:
               - 'examples/**'
               - 'notebooks/**'
               - 'pyproject.toml'
-              - 'requirements-colab.txt'
               - '.python-version'
               - '.github/workflows/ci.yml'
-              - '.github/workflows/pages.yml'
               - '.cursor/**'
 
       - name: Decide RUN_HEAVY
@@ -151,24 +149,19 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-          cache-dependency-path: |
-            pyproject.toml
-            requirements-colab.txt
+          cache-dependency-path: pyproject.toml
 
       - name: Install package (dev tools)
-        run: pip install -e ".[dev,colab,pipeline]"
+        run: pip install -e ".[dev,notebook,pipeline]"
 
       - name: Static quality gates
         run: python scripts/check_quality_static.py
 
-  pages-preview:
-    name: pages-preview
+  no-pages-publish:
+    name: no-pages-publish
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions:
-      contents: read
-      actions: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
 
@@ -176,21 +169,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install markdown (site build only)
-        run: pip install "markdown>=3.5,<4"
-
-      - name: Build static site
-        run: python scripts/build_pages_site.py --out _site
-
-      - name: Public-safe content scan
-        run: python scripts/check_pages_site_safe.py _site
-
-      - name: Upload site preview artifact
-        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
-        with:
-          name: ambient-core-pages-site
-          path: _site
-          retention-days: 14
+      - name: Assert no GitHub Pages publish from this repo
+        run: python scripts/check_pages_site.py
 
   build-test:
     name: build-test
@@ -224,9 +204,7 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-          cache-dependency-path: |
-            pyproject.toml
-            requirements-colab.txt
+          cache-dependency-path: pyproject.toml
 
       - name: Sync bundled contracts
         if: env.RUN_HEAVY == 'true'
@@ -282,6 +260,14 @@ jobs:
       - name: Check markdown prose (no pipe tables)
         if: env.RUN_HEAVY == 'true'
         run: python scripts/check_markdown_prose.py
+
+      - name: Check vendor marketing (public copy)
+        if: env.RUN_HEAVY == 'true'
+        run: python scripts/check_vendor_marketing.py
+
+      - name: Check neutral naming (deprecated vendor tokens)
+        if: env.RUN_HEAVY == 'true'
+        run: python scripts/check_neutral_naming.py
 
       - name: Check doc links (relative)
         if: env.RUN_HEAVY == 'true'

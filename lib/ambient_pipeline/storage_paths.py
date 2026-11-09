@@ -10,7 +10,7 @@ GCS_BUCKET_STEM = "ambient-systems-storage"
 
 
 def is_gcs_uri(path: str) -> bool:
-    """Return True when *path* uses a Google Cloud Storage URI.
+    """Return True when *path* uses a ``gs://`` object-storage URI.
 
     Args:
         path: str.

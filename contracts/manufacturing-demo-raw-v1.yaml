@@ -4,7 +4,7 @@ product:
   owner: ambient-core
   description: >
     Contract for Allmanufacturingds-* demo CSVs under data/raw/.
-    These are academic sample rows for Colab smoke runs — not live tenant data.
+    These are academic sample rows for hosted notebook smoke runs — not live tenant data.
   domain: Manufacturing
   type: Source-aligned
 

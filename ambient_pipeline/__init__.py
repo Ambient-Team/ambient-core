@@ -1,7 +1,7 @@
-"""ambient-core pipeline helpers — free Colab / pandas happy path.
+"""ambient-core pipeline helpers — free Jupyter notebook / pandas happy path.
 
 Spark and Delta helpers also ship under ``lib/ambient_pipeline/`` for optional
-local lakehouse runs. They are not required for the Colab Bronze→Silver→Gold path.
+local lakehouse runs. They are not required for the notebook Bronze→Silver→Gold path.
 Databricks / Unity Catalog integrations are commercial-platform optional.
 """
 

@@ -30,7 +30,7 @@ product:
       frequency: daily
       schedule: "0 2 * * *"  # 2 AM UTC
       serverless: true
-      firestore_sync:
+      store_sync:
         enabled: true
         collection: pipelineHealth
         document_key: "org_id|pipeline_name|stage"
@@ -42,7 +42,7 @@ product:
       schedule: "0 2 * * *"  # 2 AM UTC — legacy parallel run Days 1-7 only
       status: deprecated_after_cutover
       materialize_observability: true
-      firestore_sync:
+      store_sync:
         enabled: true
         collection: pipelineHealth
         document_key: "org_id|pipeline_name|stage"
@@ -124,7 +124,7 @@ schema:
         - name: _bronze_ingest_ts
           type: timestamp
           required: false
-          description: "When the raw run event arrived in Firestore (Bronze)"
+          description: "When the raw run event arrived in document store (Bronze)"
 
     - table_name: freshness
       description: |
@@ -204,7 +204,7 @@ schema:
         - name: triggered_by_user_id
           type: string
           required: false
-          description: "Firebase UID of the user who triggered the run (if http/manual)"
+          description: "Auth provider UID of the user who triggered the run (if http/manual)"
         - name: submitted_ts
           type: timestamp
           required: true
@@ -262,7 +262,7 @@ schema:
           required: false
           description: |
             Run parameters:
-            { "org_id": "demo-org", "period": "daily", "data_source": "firestore", "force_full": false }
+            { "org_id": "demo-org", "period": "daily", "data_source": "platform_store", "force_full": false }
         - name: run_date
           type: date
           required: true
@@ -466,12 +466,12 @@ lineage:
       ingestion_method: lakeflow_declarative
       frequency: "real-time"
     - schema: bronze
-      table: pipelineRuns  # Firestore-synced table (legacy parallel Days 1-7)
+      table: pipelineRuns  # document store-synced table (legacy parallel Days 1-7)
       frequency: "real-time"
       status: deprecated_after_cutover
   downstream:
     - consumer: DataPipelinesPage (React)
-      endpoint: "Gold SQL API or Firestore views"
+      endpoint: "Gold SQL API or document store views"
     - consumer: Observability Dashboard (Tableau)
       endpoint: "ADLS Gen2 / Direct SQL"
     - consumer: Alert System (Cloud Scheduler + Pub/Sub)
@@ -482,7 +482,7 @@ operational_financial_validation:
     Pipeline Observability doubles as the operational-to-financial alignment signal for the
     Command Centre. When quality_check_passed is false or dq_anomaly_count > 0, consumption
     UI surfaces covenant risk (watermelon KPI guard).
-  firestore_consumption_fields:
+  store_consumption_fields:
     - operational_financial_aligned
     - ops_financial_variance_count
     - location_ids
@@ -494,7 +494,7 @@ operational_financial_validation:
       - quality_check_passed == false
       - dq_anomaly_count > 0
 
-firestore_sync:
+store_sync:
   consumption_adapter: v1
   org_gold_path: organizations/{orgId}/gold/{docId}
   audit_performance_events:

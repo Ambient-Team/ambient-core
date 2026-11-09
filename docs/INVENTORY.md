@@ -27,7 +27,7 @@ Use this page to see what changed recently and which verify commands apply. Upda
 
 - Catalog: loader/schema/merged/pack/Hypothesis/property tests; [`test_pack_data_quality_rules.py`](../tests/test_pack_data_quality_rules.py); [`test_catalog_field_rules.py`](../tests/test_catalog_field_rules.py)
 - Contracts / CLI: validator errors, golden CLI, [`test_cli_ux.py`](../tests/test_cli_ux.py), [`test_hypothesis_catalog_contracts.py`](../tests/test_hypothesis_catalog_contracts.py)
-- Pipeline / Spark: gold-layer idempotency/null tests, validation dedupe/skew, bronze Firestore fallback, perf/secrets coverage tests, [`test_colab_smoke_run_tmp.py`](../tests/test_colab_smoke_run_tmp.py), [`test_firestore_bridge_client.py`](../tests/test_firestore_bridge_client.py), [`test_colab_bootstrap_unit.py`](../tests/test_colab_bootstrap_unit.py), [`test_notebook_bootstrap_unit.py`](../tests/test_notebook_bootstrap_unit.py), [`test_runner_local_pipeline.py`](../tests/test_runner_local_pipeline.py); shared Spark fixture uses Delta (`tests/spark_fixtures.py`)
+- Pipeline / Spark: gold-layer idempotency/null tests, validation dedupe/skew, mapping `source_fetcher` injection tests, perf/secrets coverage tests, [`test_notebook_smoke_run_tmp.py`](../tests/test_notebook_smoke_run_tmp.py), [`test_notebook_bootstrap_unit.py`](../tests/test_notebook_bootstrap_unit.py), [`test_notebook_bootstrap_unit.py`](../tests/test_notebook_bootstrap_unit.py), [`test_runner_local_pipeline.py`](../tests/test_runner_local_pipeline.py); shared Spark fixture uses Delta (`tests/spark_fixtures.py`)
 - Security: [`test_secrets_scan_fixtures.py`](../tests/test_secrets_scan_fixtures.py), [`test_pii_column_tagging.py`](../tests/test_pii_column_tagging.py)
 - Policy: [`test_ci_policy.py`](../tests/test_ci_policy.py)
 
@@ -45,4 +45,4 @@ pip wheel . -w dist --no-deps
 ## Out of scope for this repo
 
 - Demo recordings and synthetic demo CSVs — [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (or your own samples under `data/raw/`); not stored in git.
-- GitHub Actions minutes (org quota) — run verify locally when Actions fails instantly.
+- Remote CI minutes (org quota) — run verify locally when CI fails instantly.

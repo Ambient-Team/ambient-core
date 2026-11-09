@@ -20,7 +20,7 @@ Hub chain order (**core → platform dev → platform prod → website**), the *
 
 - **Merge:** Ivan merges the version PR on `main` on or before the last Friday when the branch is ready.
 - **Cut:** Ivan runs **Actions → Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month (usually that last Friday).
-- **Consumers:** pin the new `vX.Y.Z` tag per [Downstream: pin a core release](#downstream-pin-a-core-release) once the GitHub Release artifacts are published.
+- **Consumers:** pin the new `vX.Y.Z` tag per [Downstream: pin a core release](#downstream-pin-a-core-release) once release artifacts are published.
 
 Patch releases between monthly tags are still allowed when needed; they follow the same cut workflow with a patch semver bump.
 
@@ -30,9 +30,9 @@ Patch releases between monthly tags are still allowed when needed; they follow t
 - **Release identity:** git tag `vX.Y.Z` must match that version exactly (no `v` prefix in the Python string).
 - **Human changelog:** [CHANGELOG.md](../CHANGELOG.md) (Keep a Changelog).
 
-Bump the Python version and CHANGELOG in a normal PR; Ivan merges to `main`; then Ivan cuts the release from GitHub (no local git required).
+Bump the Python version and CHANGELOG in a normal PR; Ivan merges to `main`; then Ivan cuts the release from the forge UI (no local git required).
 
-## Ivan: cut a release (GitHub mobile or web)
+## Ivan: cut a release (forge mobile or web)
 
 1. **Prepare a version PR on `main`**
    - Set `__version__` in `lib/ambient_contracts/__init__.py` to the new `X.Y.Z`.
@@ -43,7 +43,7 @@ Bump the Python version and CHANGELOG in a normal PR; Ivan merges to `main`; the
    - Branch: `main` (default).
    - **version:** leave the default if it matches `__version__` on `main` (the workflow file default tracks the current release; it must equal `ambient_contracts.__version__`).
 4. **Cut release** verifies `version`, `CHANGELOG`, and that the tag does not already exist, then creates annotated tag `vX.Y.Z` on `main`.
-5. Because **tags pushed by `GITHUB_TOKEN` do not start other workflows**, Cut release immediately calls **Release**, which re-runs validation and tests, builds wheel and sdist, and creates the GitHub Release with artifacts attached.
+5. Because **tags pushed by `GITHUB_TOKEN` do not start other workflows**, Cut release immediately calls **Release**, which re-runs validation and tests, builds wheel and sdist, and attaches artifacts to the release record.
 
 Maintainers with local git can still tag manually; a tag push also triggers **Release** (`.github/workflows/release.yml`).
 
@@ -52,8 +52,8 @@ Maintainers with local git can still tag manually; a tag push also triggers **Re
 Use the **same tag everywhere** you depend on core:
 
 - **Git submodule or checkout:** `git fetch --tags && git checkout vX.Y.Z` in the `ambient-core` path.
-- **Pip from git:** `ambient-core @ git+https://github.com/Ambient-Team/ambient-core.git@vX.Y.Z`
-- **Built wheel:** download the wheel from the GitHub Release for that tag and `pip install ambient_core-X.Y.Z-py3-none-any.whl` (verify hash in your supply chain process).
+- **Pip from git:** `ambient-core @ git+<repository-url>@vX.Y.Z`
+- **Built wheel:** download the wheel from the release for that tag and `pip install ambient_core-X.Y.Z-py3-none-any.whl` (verify hash in your supply chain process).
 
 Then re-run consumer CI (contract validation, `ambient-catalog-generate --check`, tests). On **ambient-systems-platform**, roll **dev** first, then **prod**, then update the **website** — same tag at each step. Details: [INTEGRATING.md](INTEGRATING.md), [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md), and [CONTRIBUTING.md — Consumer follow-up](CONTRIBUTING.md#consumer-follow-up-after-a-release).
 

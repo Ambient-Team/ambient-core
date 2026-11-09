@@ -1,10 +1,10 @@
-"""Unit tests for storage path helpers and Firestore document id builders."""
+"""Unit tests for storage path helpers and document-store id builders."""
 
 from __future__ import annotations
 
 import pytest
 
-from ambient_pipeline.firestore_sync_ids import (
+from ambient_pipeline.sync_ids import (
     audit_performance_document_id,
     pipeline_health_document_id,
 )
@@ -74,6 +74,6 @@ def test_catalog_for_backend_gcs_and_platform() -> None:
     assert catalog_for_backend("dbfs")[0] == "ambient_systems_scaletest"
 
 
-def test_firestore_document_ids() -> None:
+def test_sync_document_ids() -> None:
     assert pipeline_health_document_id("o1", "pipe", "bronze") == "o1|pipe|bronze"
     assert audit_performance_document_id("o1", "evt") == "o1|evt"

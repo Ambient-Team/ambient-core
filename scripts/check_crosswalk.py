@@ -44,9 +44,11 @@ def consumption_id_from_contract(doc: dict[str, Any]) -> str | None:
         raw = product.get("consumption_id")
         if isinstance(raw, str) and raw.strip():
             return raw.strip()
-    firestore = doc.get("firestore")
-    if isinstance(firestore, dict):
-        paths = firestore.get("paths")
+    store = doc.get("store")
+    if not isinstance(store, dict):
+        store = doc.get("firestore")
+    if isinstance(store, dict):
+        paths = store.get("paths")
         if isinstance(paths, list):
             for entry in paths:
                 if isinstance(entry, dict):

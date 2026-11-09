@@ -1,6 +1,6 @@
 # Continuous integration
 
-GitHub Actions workflows live under [`.github/workflows/`](../.github/workflows/). This repository follows a **CI cost policy**: cheap jobs always run; **heavy** work runs only when changes warrant it and the pull request is not a draft.
+CI workflows live under [`.github/workflows/`](../.github/workflows/). This repository follows a **CI cost policy**: cheap jobs always run; **heavy** work runs only when changes warrant it and the pull request is not a draft.
 
 ## Workflows
 
@@ -29,7 +29,7 @@ The `ci-policy` job pins **actionlint** `1.7.7` by version, git commit (`actionl
 Outputs **`run_heavy`**:
 
 - **Push to `main`** — `true`.
-- **Draft pull request** — `false` (live status from the GitHub API, not only the event payload).
+- **Draft pull request** — `false` (live status from the forge API, not only the event payload).
 - **Ready PR, only docs/metadata changes** — `false`.
 - **Ready PR, heavy paths touched** — `true`.
 - **Ambiguous filter or large PR (>3000 files)** — `true` (safe default).
@@ -56,13 +56,13 @@ Steps (fail fast, in order):
 8. **secrets-scan** — [`scan_secrets_patterns.py`](../scripts/scan_secrets_patterns.py): pattern scan over repository sources.
 9. **pack-reference-docs** — [`generate_pack_reference_docs.py`](../scripts/generate_pack_reference_docs.py) `--check`: industry pack reference doc drift.
 
-**`quality-static`** runs [`check_doc_links.py`](../scripts/check_doc_links.py) (relative link targets must exist) and [`check_sensitive_data_literals.py`](../scripts/check_sensitive_data_literals.py) (emails, phones, personal paths outside `tests/` / `catalog/`). **`build-test`** also runs [`check_markdown_prose.py`](../scripts/check_markdown_prose.py) (pipe tables + no public Drive/Docs URLs) and repeats doc links on the heavy path.
+**`quality-static`** runs [`check_doc_links.py`](../scripts/check_doc_links.py) (relative link targets must exist) and [`check_sensitive_data_literals.py`](../scripts/check_sensitive_data_literals.py) (emails, phones, personal paths outside `tests/` / `catalog/`). **`build-test`** also runs [`check_markdown_prose.py`](../scripts/check_markdown_prose.py) (pipe tables + no public Drive/Docs URLs), [`check_vendor_marketing.py`](../scripts/check_vendor_marketing.py) (no blocked vendor marketing in user-visible copy), and repeats doc links on the heavy path.
 
 ### `build-test` (required check name)
 
 Depends on `changes`. When `run_heavy` is `false`, the job **still succeeds** after a short gate step; heavy steps are skipped. When `run_heavy` is `true`, it runs the full sequence documented in [running-ci-locally.md](running-ci-locally.md), including **quality-static** again and [`scripts/check_coverage.py`](../scripts/check_coverage.py) (`AMBIENT_SPARK_TESTS=1` pytest with **lib ≥ 90%** line / **≥ 95%** branch coverage; `pyproject.toml` coverage omit list is empty).
 
-Pip cache is keyed on `pyproject.toml` and `requirements-colab.txt`. JDK **17** (Temurin) is installed for Spark tests (`AMBIENT_SPARK_TESTS=1`).
+Pip cache is keyed on `pyproject.toml`. JDK **17** (Temurin) is installed for Spark tests (`AMBIENT_SPARK_TESTS=1`).
 
 ## Dependabot
 

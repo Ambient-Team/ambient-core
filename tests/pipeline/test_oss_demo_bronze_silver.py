@@ -1,6 +1,6 @@
-"""OSS path: Colab/pandas smoke and optional Spark path without Databricks.
+"""OSS path: notebook/pandas smoke and optional Spark path without Databricks.
 
-Demo CSVs are external (Drive / Ambient Systems assets). Tests that need samples
+Demo CSVs are external (Ambient Systems assets). Tests that need samples
 either use temp fixtures or skip when data/raw has no CSVs.
 """
 
@@ -25,17 +25,17 @@ def test_no_demo_csvs_committed() -> None:
     assert (ROOT / "data" / "processed" / ".gitkeep").is_file()
 
 
-def test_colab_pandas_smoke_with_external_fixture(tmp_path: Path) -> None:
+def test_notebook_pandas_smoke_with_external_fixture(tmp_path: Path) -> None:
     """Pandas Bronze→Silver→Gold runs when samples are supplied externally."""
     import sys
 
-    # Prefer top-level ambient_pipeline (Colab layout), then lib/
+    # Prefer top-level ambient_pipeline (checkout layout), then lib/
     for p in (ROOT, ROOT / "lib"):
         s = str(p)
         if s not in sys.path:
             sys.path.insert(0, s)
 
-    from ambient_pipeline.colab_smoke import DEMO_TABLES, run_colab_smoke
+    from ambient_pipeline.notebook_smoke import DEMO_TABLES, run_notebook_smoke
 
     # Minimal fixture root mirroring repo layout
     raw = tmp_path / "data" / "raw"
@@ -65,7 +65,7 @@ def test_colab_pandas_smoke_with_external_fixture(tmp_path: Path) -> None:
 
     assert set(DEMO_TABLES.values()) == set(samples)
 
-    result = run_colab_smoke(tmp_path, org_id="test-org", run_id="test-colab-001")
+    result = run_notebook_smoke(tmp_path, org_id="test-org", run_id="test-notebook-001")
     assert result.bronze_tables
     assert result.silver_tables
     assert result.gold_kpis.get("ar_amount_due_sum") == 100.0
@@ -76,7 +76,7 @@ def test_colab_pandas_smoke_with_external_fixture(tmp_path: Path) -> None:
     )
 
 
-def test_colab_bootstrap_finds_repo_root() -> None:
+def test_notebook_bootstrap_finds_repo_root() -> None:
     import sys
 
     for p in (ROOT, ROOT / "lib"):
@@ -84,7 +84,7 @@ def test_colab_bootstrap_finds_repo_root() -> None:
         if s not in sys.path:
             sys.path.insert(0, s)
 
-    from ambient_pipeline.colab_bootstrap import ensure_package_on_path, find_platform_root
+    from ambient_pipeline.notebook_bootstrap import ensure_package_on_path, find_platform_root
 
     found = find_platform_root(ROOT)
     assert found == ROOT.resolve()
@@ -148,19 +148,3 @@ def test_secrets_env_only_no_dbutils(monkeypatch: pytest.MonkeyPatch) -> None:
     assert secrets.get_secret("ambient-systems", "pii_salt") == "from-env"
 
 
-def test_firestore_helpers_noop_without_firebase() -> None:
-    pytest.importorskip("pyspark")
-    from ambient_pipeline.bronze_catalog_map import (
-        append_firestore_lineage_event,
-        fetch_firestore_data_source,
-    )
-
-    append_firestore_lineage_event(
-        "org",
-        "src",
-        run_id="r",
-        status="ok",
-        rows_written=0,
-        gcs_path="",
-    )
-    assert fetch_firestore_data_source("org", "src") is None

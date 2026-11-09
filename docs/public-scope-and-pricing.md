@@ -6,7 +6,7 @@ This page keeps **repository docs** aligned with how Ambient Core is described o
 
 - **Open source** under the [MIT License](../LICENSE): contracts, reference catalog, and pipeline governance libraries anyone can inspect, fork, and run locally.
 - **No hosted product** in this tree: no tenancy, billing UI, managed storage, or customer-facing AI.
-- **Free path:** Google Colab + external demo CSVs from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/); optional local Spark with your own `AMBIENT_PII_SALT` and Java 17.
+- **Free path:** local notebook or `notebook_smoke` CLI + external demo CSVs from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/); optional local Spark with your own `AMBIENT_PII_SALT` and Java 17.
 
 ## What the commercial platform is (separate repository)
 
@@ -20,7 +20,7 @@ The authoritative split is the bullet list in [README.md](../README.md#product-m
 
 - **Contracts, notebooks, pipeline code** — in ambient-core and in the commercial platform (platform pins a core tag).
 - **Hosting and storage** — ambient-core: **you**; commercial platform: **us**.
-- **Demo** — ambient-core: free Google Colab; commercial platform: members / hosted try.
+- **Demo** — ambient-core: free hosted notebook path; commercial platform: members / hosted try.
 
 When marketing or pricing pages change, update the **README product matrix** and this doc in the same PR as any technical scope change. Do not duplicate price tables in git; link to the website for SKUs and fees.
 

@@ -24,10 +24,10 @@ def test_consumption_id_from_product() -> None:
     assert mod.consumption_id_from_contract(doc) == "prod-a"
 
 
-def test_consumption_id_from_firestore_paths() -> None:
+def test_consumption_id_from_store_paths() -> None:
     mod = _crosswalk_module()
     doc = {
-        "firestore": {
+        "store": {
             "paths": [{"logical_key": "logical-b"}, {"logical_key": "  "}],
         }
     }

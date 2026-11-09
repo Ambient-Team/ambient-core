@@ -1,6 +1,6 @@
 # Ambient Core — Architecture
 
-Vendor-neutral **open foundation** for contracts, catalog, and lakehouse governance — rebuildable with free OSS materials + free Google account + free Colab. Full products add hosting/storage/members in **other repositories** that pin a release of this tree.
+Vendor-neutral **open foundation** for contracts, catalog, and lakehouse governance — rebuildable with free OSS materials and a hosted notebook runtime. Full products add hosting/storage/members in **other repositories** that pin a release of this tree.
 
 Overview: [ECOSYSTEM.md](ECOSYSTEM.md).
 
@@ -17,9 +17,9 @@ The installable wheel ships packages listed in `pyproject.toml`. **`ambient_pipe
 
 - **`contracts/`** — data-product interfaces (CI-validated); YAML source of truth — [contracts/README.md](../contracts/README.md)
 - **`catalog/`** — reference metrics, industry packs, benchmarks; `ambient-catalog-generate` → JSON `manifest.json` and generated `runtime/*.js`
-- **`ambient_pipeline/`** — Colab/pandas Bronze→Silver→Gold happy path (no Databricks)
+- **`ambient_pipeline/`** — pandas Bronze→Silver→Gold happy path (no Databricks)
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (package home is `lib/`)
-- **`notebooks/`** — entry `00_colab_run_me.ipynb`; optional local Spark notebooks; commercial skips in `COMMERCIAL_ONLY.txt`
+- **`notebooks/`** — entry `00_notebook_demo.ipynb`; optional local Spark notebooks; commercial skips in `COMMERCIAL_ONLY.txt`
 - **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — storage = none; samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (not for scale; enterprise tests separately). Demo recordings, screenshots, and synthetic data live in that tree (not in this repository).
 - **`docs/`** — manuals (`USAGE.md`, `CONVENTIONS.md`, `CORE_VS_PLATFORM.md`, `ECOSYSTEM.md`, this file, `CONTRIBUTING.md`, [ci.md](ci.md), [running-ci-locally.md](running-ci-locally.md), [metrics-catalog.md](metrics-catalog.md), [INVENTORY.md](INVENTORY.md))
 
@@ -27,13 +27,13 @@ Together, `contracts/` and `catalog/` are the **plain-text SSOT layer** in git; 
 
 ## Standalone OSS path
 
-Clone this repository alone and run without Databricks or Firebase:
+Clone this repository alone and run without Databricks or a managed document store:
 
-1. `pip install -r requirements-colab.txt` (or `pip install -e ".[colab]"` for the same Colab deps from `pyproject.toml`)
-2. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, then run [`notebooks/00_colab_run_me.ipynb`](../notebooks/00_colab_run_me.ipynb) or `ambient_pipeline.colab_smoke`
+1. `pip install -e ".[notebook]"` for pandas notebook deps from `pyproject.toml`
+2. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/`, then run [`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb) or `ambient_pipeline.notebook_smoke`
 3. Optional Spark: `pip install -e ".[pipeline,dev]"` (or `pip install -e ".[all]"` to match PR CI) and `python scripts/run_oss_bronze_silver_smoke.py` with the same external CSVs
 
-**Core** = contracts + catalog + Colab/pandas pipeline + notebooks. The commercial platform pins a core release and adds hosting/storage/members — those stay downstream ([CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md)).
+**Core** = contracts + catalog + pandas pipeline + notebooks. The commercial platform pins a core release and adds hosting/storage/members — those stay downstream ([CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md)).
 
 ## Consumers
 
@@ -43,8 +43,8 @@ Clone this repository alone and run without Databricks or Firebase:
 
 ## Layer boundary (in this repo)
 
-- **Here:** contract YAML SSOT, catalog semantics, shared governance logic, OSS Colab notebooks (no sample CSVs in git).
-- **Elsewhere:** web apps, operational stores, lakehouse deploy glue, secrets, multi-tenant runtime, Databricks/Firebase hosting.
+- **Here:** contract YAML SSOT, catalog semantics, shared governance logic, OSS notebooks (no sample CSVs in git).
+- **Elsewhere:** web apps, operational stores, lakehouse deploy glue, secrets, multi-tenant runtime, optional document-store hosting.
 - **Not here:** customer-facing AI, inference services, or third-party model resale. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable.
 
 Component priorities: [ECOSYSTEM.md](ECOSYSTEM.md).

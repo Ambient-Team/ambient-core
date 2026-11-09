@@ -98,11 +98,11 @@ CI triggers, draft vs heavy jobs, and path filters: [docs/ci.md](docs/ci.md).
 - `lib/ambient_contracts/bundled/` — copies of those YAML files shipped in the wheel; CI checks they match
 - `catalog/` — reference metrics, industry packs, benchmarks; generator CLI is `ambient-catalog-generate` (wraps `scripts/generate_reference_catalog.py`)
 - `lib/` — installable packages `ambient_contracts`, `ambient_cli`, `ambient_calc`, `ambient_pipeline`
-- `ambient_pipeline/` — Colab/pandas Bronze to Silver to Gold path used from a checkout
+- `ambient_pipeline/` — notebook/pandas Bronze to Silver to Gold path used from a checkout
 - `tests/` — pytest
 - `scripts/` — contract, catalog, and markdown checks
 - `docs/` — manuals; `docs/hub/` holds archived coordination notes (not maintained for public consumers)
-- `notebooks/` — Colab entry and optional local Spark notebooks
+- `notebooks/` — Jupyter demo entry and optional local Spark notebooks
 - `examples/` — small pipeline examples
 - `data/raw/`, `data/processed/` — empty placeholders; demo CSVs are not in git
 - `.github/workflows/ci.yml` — `changes`, `ci-policy`, `quality-static`, and `build-test` jobs (see [docs/ci.md](docs/ci.md))

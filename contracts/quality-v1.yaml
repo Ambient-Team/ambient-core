@@ -63,11 +63,11 @@ governance:
 consumption_contract:
   allowed_paths:
     - "Internal monitoring & observability"
-    - "Customer-facing pipeline health (via Firestore adapter)"
+    - "Customer-facing pipeline health (via document store adapter)"
     - "Audit exports for compliance (SOC 2, BCBS 239)"
   forbidden: "Any modification of DQ scores outside the governed pipeline"
 
-firestore:
+store:
   paths:
     - collection: qualityScorecard
       logical_key: QUALITY

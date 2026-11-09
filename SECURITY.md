@@ -10,8 +10,8 @@ Security fixes are applied to the latest tagged release on `main`. Older tags ar
 
 If you discover a security issue in **this repository** (for example credential leakage in examples, unsafe defaults in library code, or a dependency concern):
 
-1. Prefer **GitHub Security Advisories** for this repository (private disclosure).
-2. If Advisories are unavailable, open a private channel with the maintainers or use the repository contact listed in the GitHub organization profile.
+1. Prefer **private security advisories** on your forge (if available).
+2. If advisories are unavailable, open a private channel with the maintainers via the contact listed on [ambientsystems.ai](https://www.ambientsystems.ai/).
 
 Do not open a public issue with exploit details for unfixed vulnerabilities.
 

@@ -1,6 +1,6 @@
 """Optional local Spark/Delta runner for Bronze → Silver → Gold smoke / scale tests.
 
-Not required for the free Colab pandas path (``ambient_pipeline.colab_smoke``).
+Not required for the pandas smoke path (``ambient_pipeline.notebook_smoke``).
 """
 
 from __future__ import annotations
@@ -98,6 +98,15 @@ def _rename_pivoted_metric_ids(
     return out
 
 
+def _cast_real_estate_metric_values(df: DataFrame) -> DataFrame:
+    """Cast pivoted metric columns to double (Silver ``value`` may be string)."""
+    out = df
+    for col_name in ("noi", "annual_debt_service", "market_value"):
+        if col_name in out.columns:
+            out = out.withColumn(col_name, F.col(col_name).cast(DoubleType()))
+    return out
+
+
 def _pivot_real_estate_metrics(re_df: DataFrame, pivot_parts: int) -> DataFrame:
     """Wide Real Estate metrics for Gold (``metric_id`` pivot when available)."""
     if "metric_id" in re_df.columns:
@@ -108,7 +117,8 @@ def _pivot_real_estate_metrics(re_df: DataFrame, pivot_parts: int) -> DataFrame:
             .pivot("metric_id", cast(list[bool | float | int | str], pivot_ids))
             .agg(F.first("value"))
         )
-        return _rename_pivoted_metric_ids(re_wide, REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID)
+        re_wide = _rename_pivoted_metric_ids(re_wide, REAL_ESTATE_GOLD_PIVOT_BY_METRIC_ID)
+        return _cast_real_estate_metric_values(re_wide)
     pivot_metrics = [name for name, _safe in REAL_ESTATE_GOLD_PIVOT]
     re_wide = (
         re_df.repartition(pivot_parts, "_bronze_org_id")
@@ -116,7 +126,8 @@ def _pivot_real_estate_metrics(re_df: DataFrame, pivot_parts: int) -> DataFrame:
         .pivot("name", cast(list[bool | float | int | str], pivot_metrics))
         .agg(F.first("value"))
     )
-    return _sanitize_pivoted_columns(re_wide, REAL_ESTATE_GOLD_PIVOT)
+    re_wide = _sanitize_pivoted_columns(re_wide, REAL_ESTATE_GOLD_PIVOT)
+    return _cast_real_estate_metric_values(re_wide)
 
 
 def _ref_schema() -> StructType:

@@ -43,7 +43,7 @@ def log_pipeline_event(
 
     Args:
         event: Short event name (for example ``pipeline_stage_complete``).
-        component: Logical owner (``runner`` or ``colab_smoke``).
+        component: Logical owner (``runner`` or ``notebook_smoke``).
         run_id: Pipeline run identifier (never a secret).
         **fields: Additional scalar fields (secrets are redacted by key name).
 

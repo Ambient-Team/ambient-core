@@ -22,18 +22,15 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Ambient-Team/ambient-core"
-Documentation = "https://github.com/Ambient-Team/ambient-core/blob/main/docs/README.md"
-Repository = "https://github.com/Ambient-Team/ambient-core"
-Issues = "https://github.com/Ambient-Team/ambient-core/issues"
-Changelog = "https://github.com/Ambient-Team/ambient-core/releases"
+Homepage = "https://www.ambientsystems.ai/"
+Documentation = "https://www.ambientsystems.ai/"
 
 [project.optional-dependencies]
 pipeline = [
     "pyspark>=3.5.8,<4.3",
     "delta-spark>=3.0.0,<5",
 ]
-colab = [
+notebook = [
     "pandas>=2.0,<3",
 ]
 postgres = ["psycopg[binary]>=3.2,<4"]
@@ -52,7 +49,7 @@ dev = [
     "urllib3>=2.8.0,<3",
 ]
 all = [
-    "ambient-core[pipeline,colab,dev,postgres]",
+    "ambient-core[pipeline,notebook,dev,postgres]",
 ]
 
 [project.scripts]

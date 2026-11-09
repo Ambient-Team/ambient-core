@@ -1,6 +1,6 @@
 # Benchmarking lifecycle: core vs platform
 
-Ambient Core is designed to support **benchmarking-style** FP&A and operational intelligence: fixed KPI definitions, peer-appropriate metrics within an [analysis lens](governed-data.md#analysis-lens-and-multi-org-tenancy), and guardrail bands—not the full commercial loop from peer comparison through gap decomposition to managed improvement. That second half lives in a **paid multi-tenant platform** (for example [ambient-systems-platform](https://github.com/Ambient-Team/ambient-systems-platform)) on top of governed Gold data.
+Ambient Core is designed to support **benchmarking-style** FP&A and operational intelligence: fixed KPI definitions, peer-appropriate metrics within an [analysis lens](governed-data.md#analysis-lens-and-multi-org-tenancy), and guardrail bands—not the full commercial loop from peer comparison through gap decomposition to managed improvement. That second half lives in a **paid multi-tenant platform** (for example **ambient-systems-platform**) on top of governed Gold data.
 
 Practitioner benchmarking separates two phases that must not be conflated: a **performance-comparison** phase (levels, gaps, pace-setters) and a **practice-improvement** phase (what to change, whether it is transferable, and how to sustain gains). Core ships the measurement vocabulary and contracts; the platform ships population comparison, normalization policy, structural-vs-improvable decomposition, and action workflows.
 

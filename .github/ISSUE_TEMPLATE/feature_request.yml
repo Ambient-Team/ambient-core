@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Foundational features belong in this repo ([CANONICAL_SCOPE](https://github.com/Ambient-Team/ambient-core/blob/main/docs/CANONICAL_SCOPE.md)). App-specific UI or deploy belongs in your application repo.
+        Foundational features belong in this repo ([CANONICAL_SCOPE](../../docs/CANONICAL_SCOPE.md)). App-specific UI or deploy belongs in your application repo.
   - type: textarea
     id: problem
     attributes:
