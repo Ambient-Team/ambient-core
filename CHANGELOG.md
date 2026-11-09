@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Project site workflow** — `.github/workflows/pages.yml` publishes the Ambient Core project site (landing page, public documentation, changelog) on push to `main` only. PR CI runs `scripts/check_pages_site.py` and uploads a workflow artifact for preview. Every page includes the commercial banner linking to `https://www.ambientsystems.ai`.
-- **Vendor marketing scan** — `scripts/check_vendor_marketing.py` fails CI when user-visible docs or built pages promote blocked vendor brands or forge CTAs.
+- **No GitHub Pages from this repo** — removed `.github/workflows/pages.yml` and site builders; `scripts/check_pages_site.py` fails CI if Pages publish paths reappear. Public site is the org root (`ambient-team.github.io`).
+- **Vendor marketing scan** — `scripts/check_vendor_marketing.py` fails CI when user-visible docs promote blocked vendor brands or forge CTAs.
 
 ## [0.3.11] - 2026-11-27
 

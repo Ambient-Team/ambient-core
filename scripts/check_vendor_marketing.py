@@ -14,7 +14,6 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from check_markdown_prose import iter_doc_files  # noqa: E402
 
 SCAN_EXTRA: tuple[Path, ...] = (
-    ROOT / "scripts" / "build_pages_site.py",
     ROOT / "pyproject.toml",
     ROOT / "CHANGELOG.md",
     ROOT / "SECURITY.md",
@@ -54,16 +53,10 @@ def _colab_violation(line: str) -> bool:
     return COLAB_ALLOWED.search(line) is None
 
 
-ORG_LANDING_REDIRECT_HOST = re.compile(r"ambient-team\.github\.io", re.IGNORECASE)
-
-
 def _scan_text(rel: str, text: str, *, line_offset: int = 1) -> list[str]:
     errors: list[str] = []
     for lineno, line in enumerate(text.splitlines(), start=line_offset):
         for label, pattern in FORBIDDEN_PATTERNS:
-            if label == "GitHub Pages host":
-                if rel == "scripts/build_pages_site.py" and ORG_LANDING_REDIRECT_HOST.search(line):
-                    continue
             if pattern.search(line):
                 errors.append(f"{rel}:{lineno}: forbidden {label!r}")
         if _colab_violation(line):
@@ -122,35 +115,16 @@ def scan_tree_paths(paths: list[Path]) -> list[str]:
     return errors
 
 
-def _scan_redirect_stub_text(rel: str, text: str) -> list[str]:
-    """Scan built redirect stubs; allow the single org-landing ``github.io`` URL."""
-    errors: list[str] = []
-    for lineno, line in enumerate(text.splitlines(), start=1):
-        for label, pattern in FORBIDDEN_PATTERNS:
-            if label == "GitHub Pages host":
-                continue
-            if pattern.search(line):
-                errors.append(f"{rel}:{lineno}: forbidden {label!r}")
-        if _colab_violation(line):
-            errors.append(f"{rel}:{lineno}: forbidden bare Colab vendor copy")
-    return errors
-
-
 def scan_site_dir(site_dir: Path) -> list[str]:
+    """Scan a built site tree; ambient-core must not ship one (fail on any file)."""
     if not site_dir.is_dir():
         return [f"site directory missing: {site_dir}"]
     errors: list[str] = []
     for path in sorted(site_dir.rglob("*")):
         if not path.is_file():
             continue
-        if path.suffix not in {".html", ".css", ".js", ".json", ".txt", ".md"}:
-            continue
         rel = path.relative_to(site_dir).as_posix()
-        text = path.read_text(encoding="utf-8", errors="replace")
-        if rel in {"index.html", "404.html"}:
-            errors.extend(_scan_redirect_stub_text(rel, text))
-            continue
-        errors.extend(_scan_text(rel, text))
+        errors.append(f"{rel}: built Pages output is not allowed in ambient-core")
     return errors
 
 
