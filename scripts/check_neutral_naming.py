@@ -43,6 +43,7 @@ SKIP_DIRS = {
     ".pytest_cache",
     ".ruff_cache",
 }
+SKIP_NAME_SUFFIXES = (".egg-info",)
 SKIP_FILES = {".coverage"}
 
 PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
@@ -65,6 +66,8 @@ def scan_repo() -> list[str]:
         if not path.is_file():
             continue
         if any(part in SKIP_DIRS for part in path.parts):
+            continue
+        if any(part.endswith(".egg-info") for part in path.parts):
             continue
         rel = path.relative_to(ROOT).as_posix()
         if rel in SKIP_FILES or _allowed(rel):
