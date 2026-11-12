@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import ast
-from typing import Any, Iterable, Mapping, cast
+from typing import Any, Iterable, Mapping
 
 from ambient_calc.results import MISSING_INPUT, ZERO_DENOMINATOR, EvalResult
 
