@@ -1,0 +1,155 @@
+product:
+  name: Finance Corporate Ratios
+  version: 1.0
+  owner: analytics
+  consumption_id: FINANCE_CORPORATE_RATIOS
+  description: "Corporate financial statement ratios aligned with CFI's Definitive Guide to Financial Ratios (Apr 2024). Ending balance-sheet stocks are the default; optional averaged inputs are supplied upstream when analysts switch basis. Catalog slugs match the contract column names."
+  domain: Corporate Finance
+  type: Derived
+
+schema:
+  table: gold.finance_corporate_ratios
+  primary_key: corporate_ratios_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: corporate_ratios_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period
+      type: date
+      required: true
+    - name: balance_basis
+      type: string
+      required: false
+      enum: [ending, average_two_year]
+    - name: return_on_equity
+      type: double
+      required: false
+    - name: return_on_assets
+      type: double
+      required: false
+    - name: return_on_invested_capital
+      type: double
+      required: false
+    - name: gross_margin
+      type: double
+      required: false
+    - name: operating_profit_margin
+      type: double
+      required: false
+    - name: net_profit_margin
+      type: double
+      required: false
+    - name: ebitda_margin
+      type: double
+      required: false
+    - name: effective_interest_rate
+      type: double
+      required: false
+    - name: interest_burden
+      type: double
+      required: false
+    - name: effective_tax_rate
+      type: double
+      required: false
+    - name: tax_burden
+      type: double
+      required: false
+    - name: total_asset_turnover
+      type: double
+      required: false
+    - name: ppe_turnover
+      type: double
+      required: false
+    - name: cash_turnover
+      type: double
+      required: false
+    - name: cash_days
+      type: double
+      required: false
+    - name: accounts_receivable_turnover
+      type: double
+      required: false
+    - name: accounts_receivable_days
+      type: double
+      required: false
+    - name: inventory_turnover
+      type: double
+      required: false
+    - name: inventory_days
+      type: double
+      required: false
+    - name: accounts_payable_turnover
+      type: double
+      required: false
+    - name: accounts_payable_days
+      type: double
+      required: false
+    - name: total_assets_to_equity
+      type: double
+      required: false
+    - name: debt_to_equity
+      type: double
+      required: false
+    - name: debt_to_tangible_net_worth
+      type: double
+      required: false
+    - name: debt_to_ebitda
+      type: double
+      required: false
+    - name: net_debt_to_ebitda
+      type: double
+      required: false
+    - name: current_ratio
+      type: double
+      required: false
+    - name: quick_ratio
+      type: double
+      required: false
+    - name: quick_ratio_quick_assets
+      type: double
+      required: false
+    - name: ebitda_to_interest
+      type: double
+      required: false
+    - name: ebit_to_interest
+      type: double
+      required: false
+    - name: ebitda_less_capex_to_interest
+      type: double
+      required: false
+    - name: fixed_charge_coverage
+      type: double
+      required: false
+    - name: nopat
+      type: double
+      required: false
+    - name: net_debt
+      type: double
+      required: false
+    - name: invested_capital
+      type: double
+      required: false
+    - name: tangible_net_worth
+      type: double
+      required: false
+    - name: quick_assets
+      type: double
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555

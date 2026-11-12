@@ -1,0 +1,625 @@
+{
+  "label": "synthetic",
+  "disclaimer": "This entire dataset is synthetic and was made up for golden tests. It is not based on any real company, including the anonymized retailer examples in the CFI guide. Figures are in USD and internally consistent across the income statement, the two year-end balance sheets, and the cash flow statement.",
+  "entity_name": "Harbor Ridge Components Ltd (synthetic)",
+  "currency": "USD",
+  "scale": "units",
+  "analysis_period": {
+    "label": "Year 2",
+    "type": "annual",
+    "day_count_convention": 365,
+    "notes": "The guide's day ratios use 365 and assume an annual period. These fixtures are annual."
+  },
+  "primary_balance_basis": "ending_current_year",
+  "balance_basis_notes": "Primary expected values use Year 2 ending balances, which is the common-practice convention in the guide (formula boxes show the current-year balance-sheet account; the guide notes that two-year averages are more accurate academically but rarely used in practice). An optional average_balances expected set is included so both conventions can be tested. DuPont identities hold under either convention only when every balance-sheet term in the identity uses the same basis.",
+  "income_statement_year_2": {
+    "revenue": 1200000,
+    "cost_of_goods_sold": 720000,
+    "gross_profit": 480000,
+    "operating_expenses_excluding_da": 216000,
+    "depreciation": 36000,
+    "amortization": 12000,
+    "depreciation_and_amortization": 48000,
+    "operating_profit_ebit": 216000,
+    "interest_expense_gross": 24000,
+    "interest_income": 0,
+    "earnings_before_tax": 192000,
+    "tax_expense": 48000,
+    "net_income": 144000,
+    "notes": "Interest income is zero, so gross and net interest expense are the same in this fixture. There are no non-controlling interests, discontinued operations, or below-tax line items, so tax_expense equals EBT minus net income."
+  },
+  "balance_sheet": {
+    "year_1_ending": {
+      "cash": 70000,
+      "marketable_securities": 20000,
+      "accounts_receivable": 90000,
+      "inventory": 110000,
+      "prepaid_expenses": 10000,
+      "current_assets": 300000,
+      "ppe_net": 388000,
+      "intangible_assets": 50000,
+      "total_assets": 738000,
+      "accounts_payable": 80000,
+      "other_current_liabilities": 30000,
+      "current_portion_long_term_debt": 20000,
+      "current_liabilities": 130000,
+      "long_term_interest_bearing_debt": 190000,
+      "interest_bearing_liabilities": 210000,
+      "total_liabilities": 320000,
+      "total_shareholders_equity": 418000
+    },
+    "year_2_ending": {
+      "cash": 80000,
+      "marketable_securities": 20000,
+      "accounts_receivable": 100000,
+      "inventory": 120000,
+      "prepaid_expenses": 10000,
+      "current_assets": 330000,
+      "ppe_net": 400000,
+      "intangible_assets": 50000,
+      "total_assets": 780000,
+      "accounts_payable": 90000,
+      "other_current_liabilities": 30000,
+      "current_portion_long_term_debt": 20000,
+      "current_liabilities": 140000,
+      "long_term_interest_bearing_debt": 180000,
+      "interest_bearing_liabilities": 200000,
+      "total_liabilities": 320000,
+      "total_shareholders_equity": 460000
+    },
+    "articulation_notes": "Year 2 PP&E net equals Year 1 PP&E net plus capex minus depreciation and amortization (388000 + 60000 - 48000 = 400000). Year 2 equity equals Year 1 equity plus net income minus dividends (418000 + 144000 - 102000 = 460000). Both balance sheets balance (assets = liabilities + equity). Intangible assets and prepaid expenses are unchanged. Marketable securities are unchanged."
+  },
+  "cash_flow_statement_year_2": {
+    "net_income": 144000,
+    "depreciation_and_amortization": 48000,
+    "increase_in_accounts_receivable": 10000,
+    "increase_in_inventory": 10000,
+    "increase_in_prepaid_expenses": 0,
+    "increase_in_accounts_payable": 10000,
+    "increase_in_other_current_liabilities": 0,
+    "cash_from_operations": 182000,
+    "capital_expenditures": 60000,
+    "cash_from_investing": -60000,
+    "net_repayment_of_interest_bearing_debt": 10000,
+    "dividends_paid": 102000,
+    "cash_from_financing": -112000,
+    "net_change_in_cash": 10000,
+    "opening_cash": 70000,
+    "closing_cash": 80000,
+    "notes": "Indirect-method operating cash flow. Capital expenditures are a cash outflow in investing. Net repayment of interest-bearing debt is 10,000 (long-term debt falls from 190,000 to 180,000; current portion is unchanged)."
+  },
+  "derived_line_items_year_2_ending": {
+    "ebitda": 264000,
+    "ebitda_formula": "operating_profit_ebit + depreciation_and_amortization",
+    "effective_tax_rate_decimal": "0.25",
+    "nopat": 162000,
+    "nopat_formula": "operating_profit_ebit * (1 - tax_expense / earnings_before_tax)",
+    "net_debt": 120000,
+    "net_debt_formula": "interest_bearing_liabilities - cash",
+    "invested_capital": 580000,
+    "invested_capital_formula": "net_debt + total_shareholders_equity",
+    "tangible_net_worth": 410000,
+    "tangible_net_worth_formula": "total_shareholders_equity - intangible_assets",
+    "quick_assets_strict": 200000,
+    "quick_assets_strict_formula": "cash + marketable_securities + accounts_receivable",
+    "working_capital_dollars_not_a_cfi_ratio": 190000,
+    "working_capital_dollars_note": "Included only as a cross-check. The guide's 'working capital ratio' is the current ratio, not this dollar figure."
+  },
+  "derived_line_items_average_balances": {
+    "average_total_assets": 759000,
+    "average_total_shareholders_equity": 439000,
+    "average_interest_bearing_liabilities": 205000,
+    "average_cash": 75000,
+    "average_accounts_receivable": 95000,
+    "average_inventory": 115000,
+    "average_accounts_payable": 85000,
+    "average_ppe_net": 394000,
+    "average_net_debt": 130000,
+    "average_invested_capital": 569000,
+    "average_tangible_net_worth": 389000,
+    "notes": "Simple average of Year 1 and Year 2 ending balances."
+  },
+  "expected_ratios_ending_current_year": {
+    "return_on_equity": {
+      "id": "return_on_equity",
+      "basis": "ending_current_year",
+      "value": "0.31304347826086956521739130434782608695652173913043",
+      "unit": "%",
+      "value_decimal": "0.31304347826086956521739130434782608695652173913043",
+      "value_percent": "31.304347826086956521739130434782608695652173913043"
+    },
+    "return_on_assets": {
+      "id": "return_on_assets",
+      "basis": "ending_current_year",
+      "value": "0.18461538461538461538461538461538461538461538461538",
+      "unit": "%",
+      "value_decimal": "0.18461538461538461538461538461538461538461538461538",
+      "value_percent": "18.461538461538461538461538461538461538461538461538"
+    },
+    "return_on_invested_capital": {
+      "id": "return_on_invested_capital",
+      "basis": "ending_current_year",
+      "value": "0.27931034482758620689655172413793103448275862068966",
+      "unit": "%",
+      "value_decimal": "0.27931034482758620689655172413793103448275862068966",
+      "value_percent": "27.931034482758620689655172413793103448275862068966"
+    },
+    "gross_margin": {
+      "id": "gross_margin",
+      "basis": "ending_current_year",
+      "value": "0.4",
+      "unit": "%",
+      "value_decimal": "0.4",
+      "value_percent": "40"
+    },
+    "operating_profit_margin": {
+      "id": "operating_profit_margin",
+      "basis": "ending_current_year",
+      "value": "0.18",
+      "unit": "%",
+      "value_decimal": "0.18",
+      "value_percent": "18"
+    },
+    "net_profit_margin": {
+      "id": "net_profit_margin",
+      "basis": "ending_current_year",
+      "value": "0.12",
+      "unit": "%",
+      "value_decimal": "0.12",
+      "value_percent": "12"
+    },
+    "ebitda_margin": {
+      "id": "ebitda_margin",
+      "basis": "ending_current_year",
+      "value": "0.22",
+      "unit": "%",
+      "value_decimal": "0.22",
+      "value_percent": "22"
+    },
+    "effective_interest_rate": {
+      "id": "effective_interest_rate",
+      "basis": "ending_current_year",
+      "value": "0.12",
+      "unit": "%",
+      "value_decimal": "0.12",
+      "value_percent": "12"
+    },
+    "interest_burden": {
+      "id": "interest_burden",
+      "basis": "ending_current_year",
+      "value": "0.88888888888888888888888888888888888888888888888889",
+      "unit": "%",
+      "value_decimal": "0.88888888888888888888888888888888888888888888888889",
+      "value_percent": "88.888888888888888888888888888888888888888888888889"
+    },
+    "effective_tax_rate": {
+      "id": "effective_tax_rate",
+      "basis": "ending_current_year",
+      "value": "0.25",
+      "unit": "%",
+      "value_decimal": "0.25",
+      "value_percent": "25"
+    },
+    "tax_burden": {
+      "id": "tax_burden",
+      "basis": "ending_current_year",
+      "value": "0.75",
+      "unit": "%",
+      "value_decimal": "0.75",
+      "value_percent": "75"
+    },
+    "total_asset_turnover": {
+      "id": "total_asset_turnover",
+      "basis": "ending_current_year",
+      "value": "1.5384615384615384615384615384615384615384615384615",
+      "unit": "x",
+      "value_multiple": "1.5384615384615384615384615384615384615384615384615"
+    },
+    "ppe_turnover": {
+      "id": "ppe_turnover",
+      "basis": "ending_current_year",
+      "value": "3",
+      "unit": "x",
+      "value_multiple": "3"
+    },
+    "cash_turnover": {
+      "id": "cash_turnover",
+      "basis": "ending_current_year",
+      "value": "15",
+      "unit": "x",
+      "value_multiple": "15"
+    },
+    "cash_days": {
+      "id": "cash_days",
+      "basis": "ending_current_year",
+      "value": "24.333333333333333333333333333333333333333333333333",
+      "unit": "days",
+      "value_days": "24.333333333333333333333333333333333333333333333333"
+    },
+    "accounts_receivable_turnover": {
+      "id": "accounts_receivable_turnover",
+      "basis": "ending_current_year",
+      "value": "12",
+      "unit": "x",
+      "value_multiple": "12"
+    },
+    "accounts_receivable_days": {
+      "id": "accounts_receivable_days",
+      "basis": "ending_current_year",
+      "value": "30.416666666666666666666666666666666666666666666667",
+      "unit": "days",
+      "value_days": "30.416666666666666666666666666666666666666666666667"
+    },
+    "inventory_turnover": {
+      "id": "inventory_turnover",
+      "basis": "ending_current_year",
+      "value": "6",
+      "unit": "x",
+      "value_multiple": "6"
+    },
+    "inventory_days": {
+      "id": "inventory_days",
+      "basis": "ending_current_year",
+      "value": "60.833333333333333333333333333333333333333333333333",
+      "unit": "days",
+      "value_days": "60.833333333333333333333333333333333333333333333333"
+    },
+    "accounts_payable_turnover": {
+      "id": "accounts_payable_turnover",
+      "basis": "ending_current_year",
+      "value": "8",
+      "unit": "x",
+      "value_multiple": "8"
+    },
+    "accounts_payable_days": {
+      "id": "accounts_payable_days",
+      "basis": "ending_current_year",
+      "value": "45.625",
+      "unit": "days",
+      "value_days": "45.625"
+    },
+    "total_assets_to_equity": {
+      "id": "total_assets_to_equity",
+      "basis": "ending_current_year",
+      "value": "1.6956521739130434782608695652173913043478260869565",
+      "unit": "x",
+      "value_multiple": "1.6956521739130434782608695652173913043478260869565"
+    },
+    "debt_to_equity": {
+      "id": "debt_to_equity",
+      "basis": "ending_current_year",
+      "value": "0.43478260869565217391304347826086956521739130434783",
+      "unit": "x",
+      "value_multiple": "0.43478260869565217391304347826086956521739130434783"
+    },
+    "debt_to_tangible_net_worth": {
+      "id": "debt_to_tangible_net_worth",
+      "basis": "ending_current_year",
+      "value": "0.4878048780487804878048780487804878048780487804878",
+      "unit": "x",
+      "value_multiple": "0.4878048780487804878048780487804878048780487804878"
+    },
+    "debt_to_ebitda": {
+      "id": "debt_to_ebitda",
+      "basis": "ending_current_year",
+      "value": "0.75757575757575757575757575757575757575757575757576",
+      "unit": "x",
+      "value_multiple": "0.75757575757575757575757575757575757575757575757576"
+    },
+    "net_debt_to_ebitda": {
+      "id": "net_debt_to_ebitda",
+      "basis": "ending_current_year",
+      "value": "0.45454545454545454545454545454545454545454545454545",
+      "unit": "x",
+      "value_multiple": "0.45454545454545454545454545454545454545454545454545"
+    },
+    "current_ratio": {
+      "id": "current_ratio",
+      "basis": "ending_current_year",
+      "value": "2.3571428571428571428571428571428571428571428571429",
+      "unit": "x",
+      "value_multiple": "2.3571428571428571428571428571428571428571428571429"
+    },
+    "quick_ratio": {
+      "id": "quick_ratio",
+      "basis": "ending_current_year",
+      "value": "1.5",
+      "unit": "x",
+      "value_multiple": "1.5"
+    },
+    "quick_ratio_quick_assets": {
+      "id": "quick_ratio_quick_assets",
+      "basis": "ending_current_year",
+      "value": "1.4285714285714285714285714285714285714285714285714",
+      "unit": "x",
+      "value_multiple": "1.4285714285714285714285714285714285714285714285714"
+    },
+    "ebitda_to_interest": {
+      "id": "ebitda_to_interest",
+      "basis": "ending_current_year",
+      "value": "11",
+      "unit": "x",
+      "value_multiple": "11"
+    },
+    "ebit_to_interest": {
+      "id": "ebit_to_interest",
+      "basis": "ending_current_year",
+      "value": "9",
+      "unit": "x",
+      "value_multiple": "9"
+    },
+    "ebitda_less_capex_to_interest": {
+      "id": "ebitda_less_capex_to_interest",
+      "basis": "ending_current_year",
+      "value": "8.5",
+      "unit": "x",
+      "value_multiple": "8.5"
+    },
+    "fixed_charge_coverage": {
+      "id": "fixed_charge_coverage",
+      "basis": "ending_current_year",
+      "value": "4.6363636363636363636363636363636363636363636363636",
+      "unit": "x",
+      "value_multiple": "4.6363636363636363636363636363636363636363636363636"
+    }
+  },
+  "expected_ratios_average_balances": {
+    "return_on_equity": {
+      "id": "return_on_equity",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "0.32801822323462414578587699316628701594533029612756",
+      "unit": "%",
+      "value_decimal": "0.32801822323462414578587699316628701594533029612756",
+      "value_percent": "32.801822323462414578587699316628701594533029612756"
+    },
+    "return_on_assets": {
+      "id": "return_on_assets",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "0.18972332015810276679841897233201581027667984189723",
+      "unit": "%",
+      "value_decimal": "0.18972332015810276679841897233201581027667984189723",
+      "value_percent": "18.972332015810276679841897233201581027667984189723"
+    },
+    "return_on_invested_capital": {
+      "id": "return_on_invested_capital",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "0.28471001757469244288224956063268892794376098418278",
+      "unit": "%",
+      "value_decimal": "0.28471001757469244288224956063268892794376098418278",
+      "value_percent": "28.471001757469244288224956063268892794376098418278"
+    },
+    "effective_interest_rate": {
+      "id": "effective_interest_rate",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "0.11707317073170731707317073170731707317073170731707",
+      "unit": "%",
+      "value_decimal": "0.11707317073170731707317073170731707317073170731707",
+      "value_percent": "11.707317073170731707317073170731707317073170731707"
+    },
+    "total_asset_turnover": {
+      "id": "total_asset_turnover",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "1.5810276679841897233201581027667984189723320158103",
+      "unit": "x",
+      "value_multiple": "1.5810276679841897233201581027667984189723320158103"
+    },
+    "ppe_turnover": {
+      "id": "ppe_turnover",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "3.0456852791878172588832487309644670050761421319797",
+      "unit": "x",
+      "value_multiple": "3.0456852791878172588832487309644670050761421319797"
+    },
+    "cash_turnover": {
+      "id": "cash_turnover",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "16",
+      "unit": "x",
+      "value_multiple": "16"
+    },
+    "cash_days": {
+      "id": "cash_days",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "22.8125",
+      "unit": "days",
+      "value_days": "22.8125"
+    },
+    "accounts_receivable_turnover": {
+      "id": "accounts_receivable_turnover",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "12.631578947368421052631578947368421052631578947368",
+      "unit": "x",
+      "value_multiple": "12.631578947368421052631578947368421052631578947368"
+    },
+    "accounts_receivable_days": {
+      "id": "accounts_receivable_days",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "28.895833333333333333333333333333333333333333333333",
+      "unit": "days",
+      "value_days": "28.895833333333333333333333333333333333333333333333"
+    },
+    "inventory_turnover": {
+      "id": "inventory_turnover",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "6.2608695652173913043478260869565217391304347826087",
+      "unit": "x",
+      "value_multiple": "6.2608695652173913043478260869565217391304347826087"
+    },
+    "inventory_days": {
+      "id": "inventory_days",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "58.298611111111111111111111111111111111111111111111",
+      "unit": "days",
+      "value_days": "58.298611111111111111111111111111111111111111111111"
+    },
+    "accounts_payable_turnover": {
+      "id": "accounts_payable_turnover",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "8.4705882352941176470588235294117647058823529411765",
+      "unit": "x",
+      "value_multiple": "8.4705882352941176470588235294117647058823529411765"
+    },
+    "accounts_payable_days": {
+      "id": "accounts_payable_days",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "43.090277777777777777777777777777777777777777777778",
+      "unit": "days",
+      "value_days": "43.090277777777777777777777777777777777777777777778"
+    },
+    "total_assets_to_equity": {
+      "id": "total_assets_to_equity",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "1.7289293849658314350797266514806378132118451025057",
+      "unit": "x",
+      "value_multiple": "1.7289293849658314350797266514806378132118451025057"
+    },
+    "debt_to_equity": {
+      "id": "debt_to_equity",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "0.46697038724373576309794988610478359908883826879271",
+      "unit": "x",
+      "value_multiple": "0.46697038724373576309794988610478359908883826879271"
+    },
+    "debt_to_tangible_net_worth": {
+      "id": "debt_to_tangible_net_worth",
+      "basis": "average_of_year_1_and_year_2_ending",
+      "value": "0.52699228791773778920308483290488431876606683804627",
+      "unit": "x",
+      "value_multiple": "0.52699228791773778920308483290488431876606683804627"
+    }
+  },
+  "identity_checks_ending_current_year": {
+    "tax_burden_equals_one_minus_effective_tax_rate": {
+      "left": "tax_burden",
+      "right": "1 - effective_tax_rate",
+      "left_value": "0.75",
+      "right_value": "0.75",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "net_profit_margin_equals_tax_burden_x_interest_burden_x_ebit_margin": {
+      "left": "net_profit_margin",
+      "right": "tax_burden * interest_burden * operating_profit_margin",
+      "left_value": "0.12",
+      "right_value": "0.12",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "roa_equals_net_profit_margin_x_total_asset_turnover": {
+      "left": "return_on_assets",
+      "right": "net_profit_margin * total_asset_turnover",
+      "left_value": "0.18461538461538461538461538461538461538461538461538",
+      "right_value": "0.18461538461538461538461538461538461538461538461538",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "roe_two_lever": {
+      "left": "return_on_equity",
+      "right": "return_on_assets * total_assets_to_equity",
+      "left_value": "0.31304347826086956521739130434782608695652173913043",
+      "right_value": "0.31304347826086956521739130434782608695652173913042",
+      "absolute_difference": "0.00000000000000000000000000000000000000000000000001",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "roe_three_lever": {
+      "left": "return_on_equity",
+      "right": "net_profit_margin * total_asset_turnover * total_assets_to_equity",
+      "left_value": "0.31304347826086956521739130434782608695652173913043",
+      "right_value": "0.31304347826086956521739130434782608695652173913042",
+      "absolute_difference": "0.00000000000000000000000000000000000000000000000001",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "roe_five_lever": {
+      "left": "return_on_equity",
+      "right": "tax_burden * interest_burden * operating_profit_margin * total_asset_turnover * total_assets_to_equity",
+      "left_value": "0.31304347826086956521739130434782608695652173913043",
+      "right_value": "0.31304347826086956521739130434782608695652173913042",
+      "absolute_difference": "0.00000000000000000000000000000000000000000000000001",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "cash_days_equals_365_over_cash_turnover": {
+      "left": "cash_days",
+      "right": "365 / cash_turnover",
+      "left_value": "24.333333333333333333333333333333333333333333333333",
+      "right_value": "24.333333333333333333333333333333333333333333333333",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "accounts_receivable_days_equals_365_over_turnover": {
+      "left": "accounts_receivable_days",
+      "right": "365 / accounts_receivable_turnover",
+      "left_value": "30.416666666666666666666666666666666666666666666667",
+      "right_value": "30.416666666666666666666666666666666666666666666667",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "inventory_days_equals_365_over_turnover": {
+      "left": "inventory_days",
+      "right": "365 / inventory_turnover",
+      "left_value": "60.833333333333333333333333333333333333333333333333",
+      "right_value": "60.833333333333333333333333333333333333333333333333",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    },
+    "accounts_payable_days_equals_365_over_turnover": {
+      "left": "accounts_payable_days",
+      "right": "365 / accounts_payable_turnover",
+      "left_value": "45.625",
+      "right_value": "45.625",
+      "absolute_difference": "0",
+      "holds": true,
+      "tolerance_note": "These identities are exact in this fixture (rational arithmetic). Implementations may use a relative tolerance of 1e-12 or an absolute tolerance of 1e-10 on the decimal form."
+    }
+  },
+  "arithmetic_workings_ending_current_year": {
+    "return_on_equity": "144000 / 460000",
+    "return_on_assets": "144000 / 780000",
+    "return_on_invested_capital": "162000 / 580000  (NOPAT = 216000 * (1 - 0.25) = 162000; invested capital = (200000 - 80000) + 460000 = 580000)",
+    "gross_margin": "480000 / 1200000",
+    "operating_profit_margin": "216000 / 1200000",
+    "net_profit_margin": "144000 / 1200000",
+    "ebitda_margin": "264000 / 1200000",
+    "effective_interest_rate": "24000 / 200000",
+    "interest_burden": "192000 / 216000",
+    "effective_tax_rate": "48000 / 192000",
+    "tax_burden": "144000 / 192000",
+    "total_asset_turnover": "1200000 / 780000",
+    "ppe_turnover": "1200000 / 400000",
+    "cash_turnover": "1200000 / 80000",
+    "cash_days": "80000 * 365 / 1200000",
+    "accounts_receivable_turnover": "1200000 / 100000",
+    "accounts_receivable_days": "100000 * 365 / 1200000",
+    "inventory_turnover": "720000 / 120000",
+    "inventory_days": "120000 * 365 / 720000",
+    "accounts_payable_turnover": "720000 / 90000",
+    "accounts_payable_days": "90000 * 365 / 720000",
+    "total_assets_to_equity": "780000 / 460000",
+    "debt_to_equity": "200000 / 460000",
+    "debt_to_tangible_net_worth": "200000 / 410000",
+    "debt_to_ebitda": "200000 / 264000",
+    "net_debt_to_ebitda": "120000 / 264000",
+    "current_ratio": "330000 / 140000",
+    "quick_ratio": "(330000 - 120000) / 140000",
+    "quick_ratio_quick_assets": "(80000 + 20000 + 100000) / 140000",
+    "ebitda_to_interest": "264000 / 24000",
+    "ebit_to_interest": "216000 / 24000",
+    "ebitda_less_capex_to_interest": "(264000 - 60000) / 24000",
+    "fixed_charge_coverage": "(264000 - 60000) / (24000 + 20000)"
+  },
+  "implementation_notes_for_tests": {
+    "percentage_storage": "value_decimal is the raw quotient (e.g. 0.12). value_percent is that quotient times 100 (e.g. 12). Either storage is acceptable if the unit is declared.",
+    "primary_set": "Assert every key in expected_ratios_ending_current_year. quick_ratio is the guide's formula-box definition (current assets minus inventory). quick_ratio_quick_assets is the stricter cash + marketable securities + accounts receivable form described in the guide's prose.",
+    "variants": "ebitda_margin, net_debt_to_ebitda, ebit_to_interest, ebitda_less_capex_to_interest, and fixed_charge_coverage are documented variants from the guide, not separate chapters.",
+    "average_set": "expected_ratios_average_balances covers only ratios whose denominator (or stock term) is a balance-sheet item. Income-statement-only ratios do not change with the balance basis and are omitted from that object.",
+    "not_in_guide": "Do not treat working capital in dollars, the cash conversion cycle, or credit-sales DSO as CFI-guide ratios when testing this fixture."
+  }
+}

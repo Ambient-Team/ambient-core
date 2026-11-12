@@ -14,6 +14,8 @@ Groundwork for queue item **Q-099**. This document describes the reference catal
 
 Authoring conventions (keys, id bands, `calc` blocks): [CONVENTIONS.md](CONVENTIONS.md). Pack layout: [catalog/README.md](../catalog/README.md).
 
+**CFI financial ratios** — return, profitability, expense, utilization, solvency, and liquidity templates aligned with CFI's Definitive Guide to Financial Ratios (Apr 2024) are documented in [ratios/cfi-ratios.md](ratios/cfi-ratios.md). Templates are tagged `cfiGuideRatio: true` in `catalog/shared/metrics.yaml` with slugs matching the spec (for example `return_on_equity`, `accounts_receivable_days`, `quick_ratio_quick_assets`).
+
 ## Lens: Finance vs OPS
 
 - **Finance (fintech lens)** — metrics with `tech: FINTECH`, or `type: Financial` when `tech` is absent.

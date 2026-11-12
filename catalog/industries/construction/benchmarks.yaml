@@ -96,7 +96,7 @@ benchmarks:
     healthyLow: 12
     healthyHigh: 24
     higherIsBetter: true
-    source: Venture norms (target ≥ 18 months)
+    source: "Venture norms (target \u2265 18 months)"
   schedule_performance_index:
     label: Schedule Performance Index
     unit: Ratio
@@ -153,3 +153,255 @@ benchmarks:
     healthyHigh: 90
     higherIsBetter: false
     source: Construction retainage norms
+  gross_profit:
+    label: Gross Profit
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  ebitda_derived:
+    label: EBITDA (derived)
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  effective_tax_rate:
+    label: Effective Tax Rate
+    unit: '%'
+    healthyLow: 0.15
+    healthyHigh: 0.35
+    higherIsBetter: false
+    source: CFI ratio guidance
+  nopat:
+    label: NOPAT
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  net_debt:
+    label: Net Debt
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  invested_capital:
+    label: Invested Capital
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  tangible_net_worth:
+    label: Tangible Net Worth
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  quick_assets:
+    label: Quick Assets
+    unit: Currency
+    healthyLow: 0
+    healthyHigh: 1000000000.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  return_on_equity:
+    label: Return on Equity
+    unit: '%'
+    healthyLow: 0.1
+    healthyHigh: 0.25
+    higherIsBetter: true
+    source: CFI ratio guidance
+  return_on_assets:
+    label: Return on Assets
+    unit: '%'
+    healthyLow: 0.05
+    healthyHigh: 0.15
+    higherIsBetter: true
+    source: CFI ratio guidance
+  return_on_invested_capital:
+    label: ROIC
+    unit: '%'
+    healthyLow: 0.08
+    healthyHigh: 0.2
+    higherIsBetter: true
+    source: CFI ratio guidance
+  operating_profit_margin:
+    label: Operating Profit Margin
+    unit: '%'
+    healthyLow: 0.08
+    healthyHigh: 0.2
+    higherIsBetter: true
+    source: CFI ratio guidance
+  net_profit_margin:
+    label: Net Profit Margin (decimal)
+    unit: '%'
+    healthyLow: 0.05
+    healthyHigh: 0.15
+    higherIsBetter: true
+    source: CFI ratio guidance
+  effective_interest_rate:
+    label: Effective Interest Rate
+    unit: '%'
+    healthyLow: 0.03
+    healthyHigh: 0.12
+    higherIsBetter: false
+    source: CFI ratio guidance
+  interest_burden:
+    label: Interest Burden
+    unit: '%'
+    healthyLow: 0.7
+    healthyHigh: 1.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  tax_burden:
+    label: Tax Burden
+    unit: '%'
+    healthyLow: 0.6
+    healthyHigh: 0.85
+    higherIsBetter: true
+    source: CFI ratio guidance
+  total_asset_turnover:
+    label: Total Asset Turnover
+    unit: x
+    healthyLow: 0.8
+    healthyHigh: 2.5
+    higherIsBetter: true
+    source: CFI ratio guidance
+  ppe_turnover:
+    label: PP&E Turnover
+    unit: x
+    healthyLow: 1.0
+    healthyHigh: 5.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  cash_turnover:
+    label: Cash Turnover
+    unit: x
+    healthyLow: 5.0
+    healthyHigh: 50.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  cash_days:
+    label: Cash Days
+    unit: Days
+    healthyLow: 5.0
+    healthyHigh: 60.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  accounts_receivable_turnover:
+    label: A/R Turnover
+    unit: x
+    healthyLow: 6.0
+    healthyHigh: 15.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  accounts_receivable_days:
+    label: A/R Days
+    unit: Days
+    healthyLow: 20.0
+    healthyHigh: 45.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  inventory_days:
+    label: Inventory Days
+    unit: Days
+    healthyLow: 20.0
+    healthyHigh: 90.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  accounts_payable_turnover:
+    label: A/P Turnover
+    unit: x
+    healthyLow: 4.0
+    healthyHigh: 12.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  accounts_payable_days:
+    label: A/P Days
+    unit: Days
+    healthyLow: 20.0
+    healthyHigh: 60.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  total_assets_to_equity:
+    label: Equity Multiplier
+    unit: x
+    healthyLow: 1.2
+    healthyHigh: 3.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  debt_to_equity:
+    label: Debt to Equity
+    unit: x
+    healthyLow: 0.2
+    healthyHigh: 1.5
+    higherIsBetter: false
+    source: CFI ratio guidance
+  debt_to_tangible_net_worth:
+    label: Debt to Tangible Net Worth
+    unit: x
+    healthyLow: 0.2
+    healthyHigh: 1.8
+    higherIsBetter: false
+    source: CFI ratio guidance
+  debt_to_ebitda:
+    label: Debt to EBITDA
+    unit: x
+    healthyLow: 0.5
+    healthyHigh: 4.0
+    higherIsBetter: false
+    source: CFI ratio guidance
+  net_debt_to_ebitda:
+    label: Net Debt to EBITDA
+    unit: x
+    healthyLow: 0.0
+    healthyHigh: 3.5
+    higherIsBetter: false
+    source: CFI ratio guidance
+  quick_ratio_quick_assets:
+    label: Quick Ratio (strict)
+    unit: x
+    healthyLow: 0.8
+    healthyHigh: 2.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  ebitda_to_interest:
+    label: EBITDA to Interest
+    unit: x
+    healthyLow: 3.0
+    healthyHigh: 12.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  ebit_to_interest:
+    label: EBIT to Interest
+    unit: x
+    healthyLow: 2.5
+    healthyHigh: 10.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  ebitda_less_capex_to_interest:
+    label: EBITDA-Capex to Interest
+    unit: x
+    healthyLow: 2.0
+    healthyHigh: 8.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  fixed_charge_coverage:
+    label: Fixed Charge Coverage
+    unit: x
+    healthyLow: 1.5
+    healthyHigh: 5.0
+    higherIsBetter: true
+    source: CFI ratio guidance
+  inventory_turnover:
+    label: Inventory Turnover
+    unit: Turns
+    healthyLow: 4
+    healthyHigh: 12
+    higherIsBetter: true
+    source: Sector-dependent guidance
