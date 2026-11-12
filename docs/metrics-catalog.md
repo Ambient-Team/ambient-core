@@ -14,7 +14,7 @@ Groundwork for queue item **Q-099**. This document describes the reference catal
 
 Authoring conventions (keys, id bands, `calc` blocks): [CONVENTIONS.md](CONVENTIONS.md). Pack layout: [catalog/README.md](../catalog/README.md).
 
-**CFI financial ratios** — return, profitability, expense, utilization, solvency, and liquidity templates aligned with CFI's Definitive Guide to Financial Ratios (Apr 2024) are documented in [ratios/cfi-ratios.md](ratios/cfi-ratios.md). Templates are tagged `cfiGuideRatio: true` in `catalog/shared/metrics.yaml` with slugs matching the spec (for example `return_on_equity`, `accounts_receivable_days`, `quick_ratio_quick_assets`).
+**Standard corporate ratio pack** — additional return, expense, utilization, solvency, and liquidity templates (beyond legacy FP&A defaults) are documented in [ratios/corporate-ratios.md](ratios/corporate-ratios.md). Templates are tagged `corporateRatioPack: true` in `catalog/shared/metrics.yaml` (for example `return_on_equity`, `accounts_receivable_days`, `quick_ratio_quick_assets`).
 
 ## Lens: Finance vs OPS
 

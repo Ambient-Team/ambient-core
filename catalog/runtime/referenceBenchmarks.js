@@ -225,7 +225,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "ebitda_derived": {
     "label": "EBITDA (derived)",
@@ -233,7 +233,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "effective_tax_rate": {
     "label": "Effective Tax Rate",
@@ -241,7 +241,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.15,
     "healthyHigh": 0.35,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "nopat": {
     "label": "NOPAT",
@@ -249,7 +249,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "net_debt": {
     "label": "Net Debt",
@@ -257,7 +257,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "invested_capital": {
     "label": "Invested Capital",
@@ -265,7 +265,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "tangible_net_worth": {
     "label": "Tangible Net Worth",
@@ -273,7 +273,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "quick_assets": {
     "label": "Quick Assets",
@@ -281,7 +281,7 @@ export const BENCHMARKS = {
     "healthyLow": 0,
     "healthyHigh": 1000000000.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "return_on_equity": {
     "label": "Return on Equity",
@@ -289,7 +289,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.1,
     "healthyHigh": 0.25,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "return_on_assets": {
     "label": "Return on Assets",
@@ -297,7 +297,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.05,
     "healthyHigh": 0.15,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "return_on_invested_capital": {
     "label": "ROIC",
@@ -305,7 +305,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.08,
     "healthyHigh": 0.2,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "operating_profit_margin": {
     "label": "Operating Profit Margin",
@@ -313,7 +313,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.08,
     "healthyHigh": 0.2,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "net_profit_margin": {
     "label": "Net Profit Margin (decimal)",
@@ -321,7 +321,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.05,
     "healthyHigh": 0.15,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "effective_interest_rate": {
     "label": "Effective Interest Rate",
@@ -329,7 +329,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.03,
     "healthyHigh": 0.12,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "interest_burden": {
     "label": "Interest Burden",
@@ -337,7 +337,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.7,
     "healthyHigh": 1.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "tax_burden": {
     "label": "Tax Burden",
@@ -345,7 +345,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.6,
     "healthyHigh": 0.85,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "total_asset_turnover": {
     "label": "Total Asset Turnover",
@@ -353,7 +353,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.8,
     "healthyHigh": 2.5,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "ppe_turnover": {
     "label": "PP&E Turnover",
@@ -361,7 +361,7 @@ export const BENCHMARKS = {
     "healthyLow": 1.0,
     "healthyHigh": 5.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "cash_turnover": {
     "label": "Cash Turnover",
@@ -369,7 +369,7 @@ export const BENCHMARKS = {
     "healthyLow": 5.0,
     "healthyHigh": 50.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "cash_days": {
     "label": "Cash Days",
@@ -377,7 +377,7 @@ export const BENCHMARKS = {
     "healthyLow": 5.0,
     "healthyHigh": 60.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "accounts_receivable_turnover": {
     "label": "A/R Turnover",
@@ -385,7 +385,7 @@ export const BENCHMARKS = {
     "healthyLow": 6.0,
     "healthyHigh": 15.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "accounts_receivable_days": {
     "label": "A/R Days",
@@ -393,7 +393,7 @@ export const BENCHMARKS = {
     "healthyLow": 20.0,
     "healthyHigh": 45.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "inventory_days": {
     "label": "Inventory Days",
@@ -401,7 +401,7 @@ export const BENCHMARKS = {
     "healthyLow": 20.0,
     "healthyHigh": 90.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "accounts_payable_turnover": {
     "label": "A/P Turnover",
@@ -409,7 +409,7 @@ export const BENCHMARKS = {
     "healthyLow": 4.0,
     "healthyHigh": 12.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "accounts_payable_days": {
     "label": "A/P Days",
@@ -417,7 +417,7 @@ export const BENCHMARKS = {
     "healthyLow": 20.0,
     "healthyHigh": 60.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "total_assets_to_equity": {
     "label": "Equity Multiplier",
@@ -425,7 +425,7 @@ export const BENCHMARKS = {
     "healthyLow": 1.2,
     "healthyHigh": 3.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "debt_to_equity": {
     "label": "Debt to Equity",
@@ -433,7 +433,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.2,
     "healthyHigh": 1.5,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "debt_to_tangible_net_worth": {
     "label": "Debt to Tangible Net Worth",
@@ -441,7 +441,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.2,
     "healthyHigh": 1.8,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "debt_to_ebitda": {
     "label": "Debt to EBITDA",
@@ -449,7 +449,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.5,
     "healthyHigh": 4.0,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "net_debt_to_ebitda": {
     "label": "Net Debt to EBITDA",
@@ -457,7 +457,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.0,
     "healthyHigh": 3.5,
     "higherIsBetter": false,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "quick_ratio_quick_assets": {
     "label": "Quick Ratio (strict)",
@@ -465,7 +465,7 @@ export const BENCHMARKS = {
     "healthyLow": 0.8,
     "healthyHigh": 2.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "ebitda_to_interest": {
     "label": "EBITDA to Interest",
@@ -473,7 +473,7 @@ export const BENCHMARKS = {
     "healthyLow": 3.0,
     "healthyHigh": 12.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "ebit_to_interest": {
     "label": "EBIT to Interest",
@@ -481,7 +481,7 @@ export const BENCHMARKS = {
     "healthyLow": 2.5,
     "healthyHigh": 10.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "ebitda_less_capex_to_interest": {
     "label": "EBITDA-Capex to Interest",
@@ -489,7 +489,7 @@ export const BENCHMARKS = {
     "healthyLow": 2.0,
     "healthyHigh": 8.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "fixed_charge_coverage": {
     "label": "Fixed Charge Coverage",
@@ -497,7 +497,7 @@ export const BENCHMARKS = {
     "healthyLow": 1.5,
     "healthyHigh": 5.0,
     "higherIsBetter": true,
-    "source": "CFI ratio guidance"
+    "source": "Corporate ratio norms"
   },
   "inventory_turnover": {
     "label": "Inventory Turnover",

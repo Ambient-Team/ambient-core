@@ -57,7 +57,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -389,7 +389,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 974,
       "industry": "Real Estate",
       "segment": "core",
@@ -434,7 +434,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 980,
       "industry": "Real Estate",
       "segment": "core",
@@ -638,7 +638,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "real_estate.core.cfi_gross_profit": {
+    "real_estate.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -656,10 +656,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -671,12 +670,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3289,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_ebitda": {
+    "real_estate.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -694,10 +694,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -710,12 +709,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3290,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_effective_tax_rate": {
+    "real_estate.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -733,10 +733,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -750,11 +749,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3291,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_nopat": {
+    "real_estate.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -772,10 +772,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -786,12 +785,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3292,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_net_debt": {
+    "real_estate.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -809,10 +809,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -824,12 +823,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3293,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_invested_capital": {
+    "real_estate.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -847,10 +847,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -861,12 +860,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3294,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_tangible_net_worth": {
+    "real_estate.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -884,10 +884,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -899,12 +898,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3295,
       "industry": "Real Estate",
       "segment": "core"
     },
-    "real_estate.core.cfi_quick_assets": {
+    "real_estate.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -922,10 +922,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -938,7 +937,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3296,
       "industry": "Real Estate",
       "segment": "core"
@@ -961,10 +961,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -978,6 +977,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3297,
       "industry": "Real Estate",
       "segment": "core"
@@ -1000,10 +1000,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -1017,6 +1016,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3298,
       "industry": "Real Estate",
       "segment": "core"
@@ -1039,10 +1039,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -1053,6 +1052,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3299,
       "industry": "Real Estate",
       "segment": "core"
@@ -1075,10 +1075,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -1095,6 +1094,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3300,
       "industry": "Real Estate",
       "segment": "core"
@@ -1117,10 +1117,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -1137,6 +1136,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3301,
       "industry": "Real Estate",
       "segment": "core"
@@ -1159,10 +1159,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -1175,7 +1174,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3302,
       "industry": "Real Estate",
       "segment": "core"
@@ -1198,10 +1198,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -1214,7 +1213,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3303,
       "industry": "Real Estate",
       "segment": "core"
@@ -1237,10 +1237,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -1253,7 +1252,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3304,
       "industry": "Real Estate",
       "segment": "core"
@@ -1276,10 +1276,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1292,7 +1291,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3305,
       "industry": "Real Estate",
       "segment": "core"
@@ -1315,10 +1315,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1331,7 +1330,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3306,
       "industry": "Real Estate",
       "segment": "core"
@@ -1354,10 +1354,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1370,7 +1369,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3307,
       "industry": "Real Estate",
       "segment": "core"
@@ -1393,10 +1393,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -1409,7 +1408,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3308,
       "industry": "Real Estate",
       "segment": "core"
@@ -1432,10 +1432,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1448,7 +1447,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3309,
       "industry": "Real Estate",
       "segment": "core"
@@ -1471,10 +1471,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -1490,7 +1489,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3310,
       "industry": "Real Estate",
       "segment": "core"
@@ -1513,10 +1513,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1532,7 +1531,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3311,
       "industry": "Real Estate",
       "segment": "core"
@@ -1555,10 +1555,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -1571,7 +1570,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3312,
       "industry": "Real Estate",
       "segment": "core"
@@ -1594,10 +1594,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -1610,7 +1609,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3313,
       "industry": "Real Estate",
       "segment": "core"
@@ -1633,10 +1633,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -1652,7 +1651,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3314,
       "industry": "Real Estate",
       "segment": "core"
@@ -1675,10 +1675,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -1691,7 +1690,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3315,
       "industry": "Real Estate",
       "segment": "core"
@@ -1714,10 +1714,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -1730,7 +1729,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3316,
       "industry": "Real Estate",
       "segment": "core"
@@ -1753,10 +1753,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -1768,7 +1767,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3317,
       "industry": "Real Estate",
       "segment": "core"
@@ -1791,10 +1791,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -1806,7 +1805,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3318,
       "industry": "Real Estate",
       "segment": "core"
@@ -1829,10 +1829,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -1842,7 +1841,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3319,
       "industry": "Real Estate",
       "segment": "core"
@@ -1865,10 +1865,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -1884,6 +1883,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3320,
       "industry": "Real Estate",
       "segment": "core"
@@ -1906,10 +1906,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1921,7 +1920,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3321,
       "industry": "Real Estate",
       "segment": "core"
@@ -1944,10 +1944,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1960,7 +1959,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3322,
       "industry": "Real Estate",
       "segment": "core"
@@ -1983,10 +1983,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -1999,7 +1998,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3323,
       "industry": "Real Estate",
       "segment": "core"
@@ -2022,10 +2022,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -2039,7 +2038,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3324,
       "industry": "Real Estate",
       "segment": "core"
@@ -2855,7 +2855,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -3187,7 +3187,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 975,
       "industry": "Vertical Farming",
       "segment": "core",
@@ -3232,7 +3232,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 981,
       "industry": "Vertical Farming",
       "segment": "core",
@@ -3436,7 +3436,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "vertical_farming.core.cfi_gross_profit": {
+    "vertical_farming.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3454,10 +3454,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -3469,12 +3468,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3505,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_ebitda": {
+    "vertical_farming.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3492,10 +3492,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -3508,12 +3507,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3506,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_effective_tax_rate": {
+    "vertical_farming.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3531,10 +3531,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -3548,11 +3547,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3507,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_nopat": {
+    "vertical_farming.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3570,10 +3570,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -3584,12 +3583,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3508,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_net_debt": {
+    "vertical_farming.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3607,10 +3607,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -3622,12 +3621,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3509,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_invested_capital": {
+    "vertical_farming.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3645,10 +3645,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -3659,12 +3658,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3510,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_tangible_net_worth": {
+    "vertical_farming.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3682,10 +3682,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -3697,12 +3696,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3511,
       "industry": "Vertical Farming",
       "segment": "core"
     },
-    "vertical_farming.core.cfi_quick_assets": {
+    "vertical_farming.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -3720,10 +3720,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -3736,7 +3735,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3512,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3759,10 +3759,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -3776,6 +3775,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3513,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3798,10 +3798,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -3815,6 +3814,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3514,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3837,10 +3837,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -3851,6 +3850,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3515,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3873,10 +3873,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -3893,6 +3892,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3516,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3915,10 +3915,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -3935,6 +3934,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3517,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3957,10 +3957,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -3973,7 +3972,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3518,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -3996,10 +3996,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -4012,7 +4011,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3519,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4035,10 +4035,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -4051,7 +4050,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3520,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4074,10 +4074,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4090,7 +4089,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3521,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4113,10 +4113,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4129,7 +4128,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3522,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4152,10 +4152,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4168,7 +4167,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3523,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4191,10 +4191,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -4207,7 +4206,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3524,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4230,10 +4230,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4246,7 +4245,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3525,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4269,10 +4269,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -4288,7 +4287,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3526,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4311,10 +4311,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4330,7 +4329,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3527,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4353,10 +4353,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -4369,7 +4368,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3528,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4392,10 +4392,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -4408,7 +4407,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3529,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4431,10 +4431,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -4450,7 +4449,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3530,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4473,10 +4473,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -4489,7 +4488,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3531,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4512,10 +4512,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -4528,7 +4527,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3532,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4551,10 +4551,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -4566,7 +4565,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3533,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4589,10 +4589,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -4604,7 +4603,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3534,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4627,10 +4627,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -4640,7 +4639,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3535,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4663,10 +4663,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -4682,6 +4681,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3536,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4704,10 +4704,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4719,7 +4718,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3537,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4742,10 +4742,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4758,7 +4757,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3538,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4781,10 +4781,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4797,7 +4796,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3539,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -4820,10 +4820,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -4837,7 +4836,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3540,
       "industry": "Vertical Farming",
       "segment": "core"
@@ -5486,7 +5486,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -5818,7 +5818,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 976,
       "industry": "Transportation",
       "segment": "core",
@@ -5863,7 +5863,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 982,
       "industry": "Transportation",
       "segment": "core",
@@ -6067,7 +6067,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "transportation.core.cfi_gross_profit": {
+    "transportation.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6085,10 +6085,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -6100,12 +6099,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3433,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_ebitda": {
+    "transportation.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6123,10 +6123,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -6139,12 +6138,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3434,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_effective_tax_rate": {
+    "transportation.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6162,10 +6162,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -6179,11 +6178,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3435,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_nopat": {
+    "transportation.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6201,10 +6201,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -6215,12 +6214,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3436,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_net_debt": {
+    "transportation.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6238,10 +6238,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -6253,12 +6252,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3437,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_invested_capital": {
+    "transportation.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6276,10 +6276,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -6290,12 +6289,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3438,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_tangible_net_worth": {
+    "transportation.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6313,10 +6313,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -6328,12 +6327,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3439,
       "industry": "Transportation",
       "segment": "core"
     },
-    "transportation.core.cfi_quick_assets": {
+    "transportation.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -6351,10 +6351,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -6367,7 +6366,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3440,
       "industry": "Transportation",
       "segment": "core"
@@ -6390,10 +6390,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -6407,6 +6406,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3441,
       "industry": "Transportation",
       "segment": "core"
@@ -6429,10 +6429,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -6446,6 +6445,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3442,
       "industry": "Transportation",
       "segment": "core"
@@ -6468,10 +6468,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -6482,6 +6481,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3443,
       "industry": "Transportation",
       "segment": "core"
@@ -6504,10 +6504,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -6524,6 +6523,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3444,
       "industry": "Transportation",
       "segment": "core"
@@ -6546,10 +6546,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -6566,6 +6565,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3445,
       "industry": "Transportation",
       "segment": "core"
@@ -6588,10 +6588,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -6604,7 +6603,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3446,
       "industry": "Transportation",
       "segment": "core"
@@ -6627,10 +6627,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -6643,7 +6642,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3447,
       "industry": "Transportation",
       "segment": "core"
@@ -6666,10 +6666,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -6682,7 +6681,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3448,
       "industry": "Transportation",
       "segment": "core"
@@ -6705,10 +6705,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -6721,7 +6720,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3449,
       "industry": "Transportation",
       "segment": "core"
@@ -6744,10 +6744,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -6760,7 +6759,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3450,
       "industry": "Transportation",
       "segment": "core"
@@ -6783,10 +6783,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -6799,7 +6798,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3451,
       "industry": "Transportation",
       "segment": "core"
@@ -6822,10 +6822,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -6838,7 +6837,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3452,
       "industry": "Transportation",
       "segment": "core"
@@ -6861,10 +6861,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -6877,7 +6876,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3453,
       "industry": "Transportation",
       "segment": "core"
@@ -6900,10 +6900,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -6919,7 +6918,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3454,
       "industry": "Transportation",
       "segment": "core"
@@ -6942,10 +6942,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -6961,7 +6960,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3455,
       "industry": "Transportation",
       "segment": "core"
@@ -6984,10 +6984,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -7000,7 +6999,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3456,
       "industry": "Transportation",
       "segment": "core"
@@ -7023,10 +7023,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -7039,7 +7038,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3457,
       "industry": "Transportation",
       "segment": "core"
@@ -7062,10 +7062,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -7081,7 +7080,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3458,
       "industry": "Transportation",
       "segment": "core"
@@ -7104,10 +7104,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -7120,7 +7119,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3459,
       "industry": "Transportation",
       "segment": "core"
@@ -7143,10 +7143,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -7159,7 +7158,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3460,
       "industry": "Transportation",
       "segment": "core"
@@ -7182,10 +7182,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -7197,7 +7196,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3461,
       "industry": "Transportation",
       "segment": "core"
@@ -7220,10 +7220,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -7235,7 +7234,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3462,
       "industry": "Transportation",
       "segment": "core"
@@ -7258,10 +7258,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -7271,7 +7270,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3463,
       "industry": "Transportation",
       "segment": "core"
@@ -7294,10 +7294,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -7313,6 +7312,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3464,
       "industry": "Transportation",
       "segment": "core"
@@ -7335,10 +7335,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -7350,7 +7349,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3465,
       "industry": "Transportation",
       "segment": "core"
@@ -7373,10 +7373,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -7389,7 +7388,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3466,
       "industry": "Transportation",
       "segment": "core"
@@ -7412,10 +7412,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -7428,7 +7427,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3467,
       "industry": "Transportation",
       "segment": "core"
@@ -7451,10 +7451,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -7468,7 +7467,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3468,
       "industry": "Transportation",
       "segment": "core"
@@ -7934,7 +7934,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -8266,7 +8266,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 2028,
       "industry": "Passenger Transit",
       "segment": "core",
@@ -8311,7 +8311,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 2029,
       "industry": "Passenger Transit",
       "segment": "core",
@@ -8515,7 +8515,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "passenger_transit.core.cfi_gross_profit": {
+    "passenger_transit.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8533,10 +8533,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -8548,12 +8547,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3253,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_ebitda": {
+    "passenger_transit.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8571,10 +8571,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -8587,12 +8586,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3254,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_effective_tax_rate": {
+    "passenger_transit.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8610,10 +8610,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -8627,11 +8626,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3255,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_nopat": {
+    "passenger_transit.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8649,10 +8649,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -8663,12 +8662,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3256,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_net_debt": {
+    "passenger_transit.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8686,10 +8686,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -8701,12 +8700,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3257,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_invested_capital": {
+    "passenger_transit.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8724,10 +8724,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -8738,12 +8737,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3258,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_tangible_net_worth": {
+    "passenger_transit.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8761,10 +8761,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -8776,12 +8775,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3259,
       "industry": "Passenger Transit",
       "segment": "core"
     },
-    "passenger_transit.core.cfi_quick_assets": {
+    "passenger_transit.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -8799,10 +8799,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -8815,7 +8814,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3260,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -8838,10 +8838,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -8855,6 +8854,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3261,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -8877,10 +8877,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -8894,6 +8893,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3262,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -8916,10 +8916,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -8930,6 +8929,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3263,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -8952,10 +8952,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -8972,6 +8971,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3264,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -8994,10 +8994,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -9014,6 +9013,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3265,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9036,10 +9036,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -9052,7 +9051,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3266,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9075,10 +9075,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -9091,7 +9090,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3267,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9114,10 +9114,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -9130,7 +9129,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3268,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9153,10 +9153,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9169,7 +9168,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3269,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9192,10 +9192,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9208,7 +9207,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3270,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9231,10 +9231,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9247,7 +9246,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3271,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9270,10 +9270,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -9286,7 +9285,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3272,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9309,10 +9309,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9325,7 +9324,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3273,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9348,10 +9348,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -9367,7 +9366,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3274,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9390,10 +9390,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9409,7 +9408,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3275,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9432,10 +9432,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -9448,7 +9447,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3276,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9471,10 +9471,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -9487,7 +9486,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3277,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9510,10 +9510,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -9529,7 +9528,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3278,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9552,10 +9552,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -9568,7 +9567,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3279,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9591,10 +9591,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -9607,7 +9606,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3280,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9630,10 +9630,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -9645,7 +9644,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3281,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9668,10 +9668,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -9683,7 +9682,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3282,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9706,10 +9706,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -9719,7 +9718,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3283,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9742,10 +9742,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -9761,6 +9760,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3284,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9783,10 +9783,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9798,7 +9797,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3285,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9821,10 +9821,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9837,7 +9836,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3286,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9860,10 +9860,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9876,7 +9875,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3287,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -9899,10 +9899,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -9916,7 +9915,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3288,
       "industry": "Passenger Transit",
       "segment": "core"
@@ -10130,7 +10130,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -10462,7 +10462,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1808,
       "industry": "Aviation",
       "segment": "core",
@@ -10507,7 +10507,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1809,
       "industry": "Aviation",
       "segment": "core",
@@ -10711,7 +10711,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "aviation.core.cfi_gross_profit": {
+    "aviation.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10729,10 +10729,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -10744,12 +10743,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 2821,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_ebitda": {
+    "aviation.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10767,10 +10767,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -10783,12 +10782,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 2822,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_effective_tax_rate": {
+    "aviation.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10806,10 +10806,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -10823,11 +10822,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2823,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_nopat": {
+    "aviation.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10845,10 +10845,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -10859,12 +10858,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 2824,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_net_debt": {
+    "aviation.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10882,10 +10882,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -10897,12 +10896,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 2825,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_invested_capital": {
+    "aviation.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10920,10 +10920,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -10934,12 +10933,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 2826,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_tangible_net_worth": {
+    "aviation.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10957,10 +10957,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -10972,12 +10971,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 2827,
       "industry": "Aviation",
       "segment": "core"
     },
-    "aviation.core.cfi_quick_assets": {
+    "aviation.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -10995,10 +10995,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -11011,7 +11010,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 2828,
       "industry": "Aviation",
       "segment": "core"
@@ -11034,10 +11034,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -11051,6 +11050,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2829,
       "industry": "Aviation",
       "segment": "core"
@@ -11073,10 +11073,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -11090,6 +11089,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2830,
       "industry": "Aviation",
       "segment": "core"
@@ -11112,10 +11112,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -11126,6 +11125,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 2831,
       "industry": "Aviation",
       "segment": "core"
@@ -11148,10 +11148,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -11168,6 +11167,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2832,
       "industry": "Aviation",
       "segment": "core"
@@ -11190,10 +11190,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -11210,6 +11209,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2833,
       "industry": "Aviation",
       "segment": "core"
@@ -11232,10 +11232,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -11248,7 +11247,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 2834,
       "industry": "Aviation",
       "segment": "core"
@@ -11271,10 +11271,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -11287,7 +11286,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 2835,
       "industry": "Aviation",
       "segment": "core"
@@ -11310,10 +11310,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -11326,7 +11325,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 2836,
       "industry": "Aviation",
       "segment": "core"
@@ -11349,10 +11349,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -11365,7 +11364,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 2837,
       "industry": "Aviation",
       "segment": "core"
@@ -11388,10 +11388,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -11404,7 +11403,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 2838,
       "industry": "Aviation",
       "segment": "core"
@@ -11427,10 +11427,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -11443,7 +11442,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 2839,
       "industry": "Aviation",
       "segment": "core"
@@ -11466,10 +11466,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -11482,7 +11481,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 2840,
       "industry": "Aviation",
       "segment": "core"
@@ -11505,10 +11505,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -11521,7 +11520,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 2841,
       "industry": "Aviation",
       "segment": "core"
@@ -11544,10 +11544,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -11563,7 +11562,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 2842,
       "industry": "Aviation",
       "segment": "core"
@@ -11586,10 +11586,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -11605,7 +11604,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 2843,
       "industry": "Aviation",
       "segment": "core"
@@ -11628,10 +11628,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -11644,7 +11643,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 2844,
       "industry": "Aviation",
       "segment": "core"
@@ -11667,10 +11667,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -11683,7 +11682,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 2845,
       "industry": "Aviation",
       "segment": "core"
@@ -11706,10 +11706,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -11725,7 +11724,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 2846,
       "industry": "Aviation",
       "segment": "core"
@@ -11748,10 +11748,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -11764,7 +11763,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 2847,
       "industry": "Aviation",
       "segment": "core"
@@ -11787,10 +11787,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -11803,7 +11802,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 2848,
       "industry": "Aviation",
       "segment": "core"
@@ -11826,10 +11826,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -11841,7 +11840,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 2849,
       "industry": "Aviation",
       "segment": "core"
@@ -11864,10 +11864,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -11879,7 +11878,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 2850,
       "industry": "Aviation",
       "segment": "core"
@@ -11902,10 +11902,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -11915,7 +11914,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 2851,
       "industry": "Aviation",
       "segment": "core"
@@ -11938,10 +11938,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -11957,6 +11956,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2852,
       "industry": "Aviation",
       "segment": "core"
@@ -11979,10 +11979,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -11994,7 +11993,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 2853,
       "industry": "Aviation",
       "segment": "core"
@@ -12017,10 +12017,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -12033,7 +12032,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 2854,
       "industry": "Aviation",
       "segment": "core"
@@ -12056,10 +12056,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -12072,7 +12071,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 2855,
       "industry": "Aviation",
       "segment": "core"
@@ -12095,10 +12095,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -12112,7 +12111,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 2856,
       "industry": "Aviation",
       "segment": "core"
@@ -12544,7 +12544,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -12876,7 +12876,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 977,
       "industry": "Manufacturing",
       "segment": "core",
@@ -12921,7 +12921,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 983,
       "industry": "Manufacturing",
       "segment": "core",
@@ -13125,7 +13125,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "manufacturing.core.cfi_gross_profit": {
+    "manufacturing.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13143,10 +13143,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -13158,12 +13157,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3217,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_ebitda": {
+    "manufacturing.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13181,10 +13181,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -13197,12 +13196,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3218,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_effective_tax_rate": {
+    "manufacturing.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13220,10 +13220,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -13237,11 +13236,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3219,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_nopat": {
+    "manufacturing.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13259,10 +13259,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -13273,12 +13272,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3220,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_net_debt": {
+    "manufacturing.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13296,10 +13296,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -13311,12 +13310,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3221,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_invested_capital": {
+    "manufacturing.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13334,10 +13334,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -13348,12 +13347,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3222,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_tangible_net_worth": {
+    "manufacturing.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13371,10 +13371,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -13386,12 +13385,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3223,
       "industry": "Manufacturing",
       "segment": "core"
     },
-    "manufacturing.core.cfi_quick_assets": {
+    "manufacturing.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -13409,10 +13409,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -13425,7 +13424,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3224,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13448,10 +13448,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -13465,6 +13464,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3225,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13487,10 +13487,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -13504,6 +13503,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3226,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13526,10 +13526,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -13540,6 +13539,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3227,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13562,10 +13562,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -13582,6 +13581,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3228,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13604,10 +13604,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -13624,6 +13623,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3229,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13646,10 +13646,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -13662,7 +13661,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3230,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13685,10 +13685,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -13701,7 +13700,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3231,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13724,10 +13724,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -13740,7 +13739,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3232,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13763,10 +13763,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -13779,7 +13778,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3233,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13802,10 +13802,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -13818,7 +13817,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3234,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13841,10 +13841,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -13857,7 +13856,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3235,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13880,10 +13880,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -13896,7 +13895,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3236,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13919,10 +13919,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -13935,7 +13934,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3237,
       "industry": "Manufacturing",
       "segment": "core"
@@ -13958,10 +13958,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -13977,7 +13976,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3238,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14000,10 +14000,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -14019,7 +14018,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3239,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14042,10 +14042,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -14058,7 +14057,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3240,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14081,10 +14081,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -14097,7 +14096,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3241,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14120,10 +14120,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -14139,7 +14138,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3242,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14162,10 +14162,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -14178,7 +14177,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3243,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14201,10 +14201,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -14217,7 +14216,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3244,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14240,10 +14240,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -14255,7 +14254,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3245,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14278,10 +14278,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -14293,7 +14292,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3246,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14316,10 +14316,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -14329,7 +14328,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3247,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14352,10 +14352,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -14371,6 +14370,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3248,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14393,10 +14393,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -14408,7 +14407,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3249,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14431,10 +14431,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -14447,7 +14446,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3250,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14470,10 +14470,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -14486,7 +14485,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3251,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14509,10 +14509,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -14526,7 +14525,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3252,
       "industry": "Manufacturing",
       "segment": "core"
@@ -14789,7 +14789,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -15121,7 +15121,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 2078,
       "industry": "Construction",
       "segment": "core",
@@ -15166,7 +15166,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 2079,
       "industry": "Construction",
       "segment": "core",
@@ -15370,7 +15370,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "construction.core.cfi_gross_profit": {
+    "construction.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15388,10 +15388,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -15403,12 +15402,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 2929,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_ebitda": {
+    "construction.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15426,10 +15426,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -15442,12 +15441,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 2930,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_effective_tax_rate": {
+    "construction.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15465,10 +15465,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -15482,11 +15481,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2931,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_nopat": {
+    "construction.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15504,10 +15504,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -15518,12 +15517,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 2932,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_net_debt": {
+    "construction.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15541,10 +15541,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -15556,12 +15555,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 2933,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_invested_capital": {
+    "construction.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15579,10 +15579,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -15593,12 +15592,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 2934,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_tangible_net_worth": {
+    "construction.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15616,10 +15616,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -15631,12 +15630,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 2935,
       "industry": "Construction",
       "segment": "core"
     },
-    "construction.core.cfi_quick_assets": {
+    "construction.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -15654,10 +15654,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -15670,7 +15669,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 2936,
       "industry": "Construction",
       "segment": "core"
@@ -15693,10 +15693,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -15710,6 +15709,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2937,
       "industry": "Construction",
       "segment": "core"
@@ -15732,10 +15732,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -15749,6 +15748,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2938,
       "industry": "Construction",
       "segment": "core"
@@ -15771,10 +15771,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -15785,6 +15784,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 2939,
       "industry": "Construction",
       "segment": "core"
@@ -15807,10 +15807,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -15827,6 +15826,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2940,
       "industry": "Construction",
       "segment": "core"
@@ -15849,10 +15849,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -15869,6 +15868,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2941,
       "industry": "Construction",
       "segment": "core"
@@ -15891,10 +15891,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -15907,7 +15906,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 2942,
       "industry": "Construction",
       "segment": "core"
@@ -15930,10 +15930,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -15946,7 +15945,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 2943,
       "industry": "Construction",
       "segment": "core"
@@ -15969,10 +15969,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -15985,7 +15984,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 2944,
       "industry": "Construction",
       "segment": "core"
@@ -16008,10 +16008,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16024,7 +16023,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 2945,
       "industry": "Construction",
       "segment": "core"
@@ -16047,10 +16047,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16063,7 +16062,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 2946,
       "industry": "Construction",
       "segment": "core"
@@ -16086,10 +16086,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16102,7 +16101,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 2947,
       "industry": "Construction",
       "segment": "core"
@@ -16125,10 +16125,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -16141,7 +16140,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 2948,
       "industry": "Construction",
       "segment": "core"
@@ -16164,10 +16164,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16180,7 +16179,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 2949,
       "industry": "Construction",
       "segment": "core"
@@ -16203,10 +16203,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -16222,7 +16221,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 2950,
       "industry": "Construction",
       "segment": "core"
@@ -16245,10 +16245,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16264,7 +16263,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 2951,
       "industry": "Construction",
       "segment": "core"
@@ -16287,10 +16287,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -16303,7 +16302,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 2952,
       "industry": "Construction",
       "segment": "core"
@@ -16326,10 +16326,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -16342,7 +16341,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 2953,
       "industry": "Construction",
       "segment": "core"
@@ -16365,10 +16365,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -16384,7 +16383,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 2954,
       "industry": "Construction",
       "segment": "core"
@@ -16407,10 +16407,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -16423,7 +16422,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 2955,
       "industry": "Construction",
       "segment": "core"
@@ -16446,10 +16446,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -16462,7 +16461,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 2956,
       "industry": "Construction",
       "segment": "core"
@@ -16485,10 +16485,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -16500,7 +16499,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 2957,
       "industry": "Construction",
       "segment": "core"
@@ -16523,10 +16523,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -16538,7 +16537,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 2958,
       "industry": "Construction",
       "segment": "core"
@@ -16561,10 +16561,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -16574,7 +16573,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 2959,
       "industry": "Construction",
       "segment": "core"
@@ -16597,10 +16597,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -16616,6 +16615,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2960,
       "industry": "Construction",
       "segment": "core"
@@ -16638,10 +16638,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16653,7 +16652,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 2961,
       "industry": "Construction",
       "segment": "core"
@@ -16676,10 +16676,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16692,7 +16691,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 2962,
       "industry": "Construction",
       "segment": "core"
@@ -16715,10 +16715,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16731,7 +16730,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 2963,
       "industry": "Construction",
       "segment": "core"
@@ -16754,10 +16754,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -16771,7 +16770,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 2964,
       "industry": "Construction",
       "segment": "core"
@@ -17122,7 +17122,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -17454,7 +17454,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 978,
       "industry": "Healthcare",
       "segment": "core",
@@ -17499,7 +17499,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 984,
       "industry": "Healthcare",
       "segment": "core",
@@ -17703,7 +17703,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "healthcare.core.cfi_gross_profit": {
+    "healthcare.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17721,10 +17721,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -17736,12 +17735,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3109,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_ebitda": {
+    "healthcare.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17759,10 +17759,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -17775,12 +17774,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3110,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_effective_tax_rate": {
+    "healthcare.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17798,10 +17798,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -17815,11 +17814,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3111,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_nopat": {
+    "healthcare.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17837,10 +17837,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -17851,12 +17850,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3112,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_net_debt": {
+    "healthcare.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17874,10 +17874,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -17889,12 +17888,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3113,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_invested_capital": {
+    "healthcare.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17912,10 +17912,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -17926,12 +17925,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3114,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_tangible_net_worth": {
+    "healthcare.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17949,10 +17949,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -17964,12 +17963,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3115,
       "industry": "Healthcare",
       "segment": "core"
     },
-    "healthcare.core.cfi_quick_assets": {
+    "healthcare.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -17987,10 +17987,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -18003,7 +18002,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3116,
       "industry": "Healthcare",
       "segment": "core"
@@ -18026,10 +18026,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -18043,6 +18042,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3117,
       "industry": "Healthcare",
       "segment": "core"
@@ -18065,10 +18065,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -18082,6 +18081,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3118,
       "industry": "Healthcare",
       "segment": "core"
@@ -18104,10 +18104,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -18118,6 +18117,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3119,
       "industry": "Healthcare",
       "segment": "core"
@@ -18140,10 +18140,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -18160,6 +18159,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3120,
       "industry": "Healthcare",
       "segment": "core"
@@ -18182,10 +18182,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -18202,6 +18201,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3121,
       "industry": "Healthcare",
       "segment": "core"
@@ -18224,10 +18224,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -18240,7 +18239,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3122,
       "industry": "Healthcare",
       "segment": "core"
@@ -18263,10 +18263,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -18279,7 +18278,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3123,
       "industry": "Healthcare",
       "segment": "core"
@@ -18302,10 +18302,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -18318,7 +18317,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3124,
       "industry": "Healthcare",
       "segment": "core"
@@ -18341,10 +18341,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -18357,7 +18356,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3125,
       "industry": "Healthcare",
       "segment": "core"
@@ -18380,10 +18380,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -18396,7 +18395,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3126,
       "industry": "Healthcare",
       "segment": "core"
@@ -18419,10 +18419,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -18435,7 +18434,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3127,
       "industry": "Healthcare",
       "segment": "core"
@@ -18458,10 +18458,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -18474,7 +18473,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3128,
       "industry": "Healthcare",
       "segment": "core"
@@ -18497,10 +18497,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -18513,7 +18512,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3129,
       "industry": "Healthcare",
       "segment": "core"
@@ -18536,10 +18536,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -18555,7 +18554,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3130,
       "industry": "Healthcare",
       "segment": "core"
@@ -18578,10 +18578,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -18597,7 +18596,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3131,
       "industry": "Healthcare",
       "segment": "core"
@@ -18620,10 +18620,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -18636,7 +18635,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3132,
       "industry": "Healthcare",
       "segment": "core"
@@ -18659,10 +18659,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -18675,7 +18674,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3133,
       "industry": "Healthcare",
       "segment": "core"
@@ -18698,10 +18698,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -18717,7 +18716,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3134,
       "industry": "Healthcare",
       "segment": "core"
@@ -18740,10 +18740,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -18756,7 +18755,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3135,
       "industry": "Healthcare",
       "segment": "core"
@@ -18779,10 +18779,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -18795,7 +18794,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3136,
       "industry": "Healthcare",
       "segment": "core"
@@ -18818,10 +18818,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -18833,7 +18832,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3137,
       "industry": "Healthcare",
       "segment": "core"
@@ -18856,10 +18856,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -18871,7 +18870,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3138,
       "industry": "Healthcare",
       "segment": "core"
@@ -18894,10 +18894,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -18907,7 +18906,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3139,
       "industry": "Healthcare",
       "segment": "core"
@@ -18930,10 +18930,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -18949,6 +18948,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3140,
       "industry": "Healthcare",
       "segment": "core"
@@ -18971,10 +18971,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -18986,7 +18985,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3141,
       "industry": "Healthcare",
       "segment": "core"
@@ -19009,10 +19009,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -19025,7 +19024,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3142,
       "industry": "Healthcare",
       "segment": "core"
@@ -19048,10 +19048,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -19064,7 +19063,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3143,
       "industry": "Healthcare",
       "segment": "core"
@@ -19087,10 +19087,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -19104,7 +19103,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3144,
       "industry": "Healthcare",
       "segment": "core"
@@ -19887,7 +19887,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -20219,7 +20219,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 979,
       "industry": "Restaurants",
       "segment": "core",
@@ -20264,7 +20264,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 985,
       "industry": "Restaurants",
       "segment": "core",
@@ -20468,7 +20468,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "restaurants.core.cfi_gross_profit": {
+    "restaurants.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20486,10 +20486,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -20501,12 +20500,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3325,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_ebitda": {
+    "restaurants.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20524,10 +20524,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -20540,12 +20539,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3326,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_effective_tax_rate": {
+    "restaurants.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20563,10 +20563,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -20580,11 +20579,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3327,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_nopat": {
+    "restaurants.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20602,10 +20602,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -20616,12 +20615,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3328,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_net_debt": {
+    "restaurants.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20639,10 +20639,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -20654,12 +20653,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3329,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_invested_capital": {
+    "restaurants.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20677,10 +20677,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -20691,12 +20690,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3330,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_tangible_net_worth": {
+    "restaurants.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20714,10 +20714,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -20729,12 +20728,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3331,
       "industry": "Restaurants",
       "segment": "core"
     },
-    "restaurants.core.cfi_quick_assets": {
+    "restaurants.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -20752,10 +20752,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -20768,7 +20767,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3332,
       "industry": "Restaurants",
       "segment": "core"
@@ -20791,10 +20791,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -20808,6 +20807,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3333,
       "industry": "Restaurants",
       "segment": "core"
@@ -20830,10 +20830,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -20847,6 +20846,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3334,
       "industry": "Restaurants",
       "segment": "core"
@@ -20869,10 +20869,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -20883,6 +20882,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3335,
       "industry": "Restaurants",
       "segment": "core"
@@ -20905,10 +20905,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -20925,6 +20924,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3336,
       "industry": "Restaurants",
       "segment": "core"
@@ -20947,10 +20947,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -20967,6 +20966,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3337,
       "industry": "Restaurants",
       "segment": "core"
@@ -20989,10 +20989,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -21005,7 +21004,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3338,
       "industry": "Restaurants",
       "segment": "core"
@@ -21028,10 +21028,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -21044,7 +21043,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3339,
       "industry": "Restaurants",
       "segment": "core"
@@ -21067,10 +21067,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -21083,7 +21082,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3340,
       "industry": "Restaurants",
       "segment": "core"
@@ -21106,10 +21106,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21122,7 +21121,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3341,
       "industry": "Restaurants",
       "segment": "core"
@@ -21145,10 +21145,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21161,7 +21160,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3342,
       "industry": "Restaurants",
       "segment": "core"
@@ -21184,10 +21184,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21200,7 +21199,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3343,
       "industry": "Restaurants",
       "segment": "core"
@@ -21223,10 +21223,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -21239,7 +21238,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3344,
       "industry": "Restaurants",
       "segment": "core"
@@ -21262,10 +21262,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21278,7 +21277,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3345,
       "industry": "Restaurants",
       "segment": "core"
@@ -21301,10 +21301,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -21320,7 +21319,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3346,
       "industry": "Restaurants",
       "segment": "core"
@@ -21343,10 +21343,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21362,7 +21361,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3347,
       "industry": "Restaurants",
       "segment": "core"
@@ -21385,10 +21385,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -21401,7 +21400,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3348,
       "industry": "Restaurants",
       "segment": "core"
@@ -21424,10 +21424,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -21440,7 +21439,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3349,
       "industry": "Restaurants",
       "segment": "core"
@@ -21463,10 +21463,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -21482,7 +21481,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3350,
       "industry": "Restaurants",
       "segment": "core"
@@ -21505,10 +21505,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -21521,7 +21520,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3351,
       "industry": "Restaurants",
       "segment": "core"
@@ -21544,10 +21544,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -21560,7 +21559,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3352,
       "industry": "Restaurants",
       "segment": "core"
@@ -21583,10 +21583,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -21598,7 +21597,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3353,
       "industry": "Restaurants",
       "segment": "core"
@@ -21621,10 +21621,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -21636,7 +21635,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3354,
       "industry": "Restaurants",
       "segment": "core"
@@ -21659,10 +21659,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -21672,7 +21671,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3355,
       "industry": "Restaurants",
       "segment": "core"
@@ -21695,10 +21695,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -21714,6 +21713,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3356,
       "industry": "Restaurants",
       "segment": "core"
@@ -21736,10 +21736,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21751,7 +21750,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3357,
       "industry": "Restaurants",
       "segment": "core"
@@ -21774,10 +21774,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21790,7 +21789,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3358,
       "industry": "Restaurants",
       "segment": "core"
@@ -21813,10 +21813,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21829,7 +21828,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3359,
       "industry": "Restaurants",
       "segment": "core"
@@ -21852,10 +21852,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -21869,7 +21868,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3360,
       "industry": "Restaurants",
       "segment": "core"
@@ -22408,7 +22408,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -22740,7 +22740,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1308,
       "industry": "Life Sciences",
       "segment": "core",
@@ -22785,7 +22785,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1309,
       "industry": "Life Sciences",
       "segment": "core",
@@ -22989,7 +22989,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "life_sciences.core.cfi_gross_profit": {
+    "life_sciences.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23007,10 +23007,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -23022,12 +23021,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3181,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_ebitda": {
+    "life_sciences.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23045,10 +23045,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -23061,12 +23060,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3182,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_effective_tax_rate": {
+    "life_sciences.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23084,10 +23084,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -23101,11 +23100,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3183,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_nopat": {
+    "life_sciences.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23123,10 +23123,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -23137,12 +23136,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3184,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_net_debt": {
+    "life_sciences.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23160,10 +23160,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -23175,12 +23174,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3185,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_invested_capital": {
+    "life_sciences.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23198,10 +23198,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -23212,12 +23211,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3186,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_tangible_net_worth": {
+    "life_sciences.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23235,10 +23235,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -23250,12 +23249,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3187,
       "industry": "Life Sciences",
       "segment": "core"
     },
-    "life_sciences.core.cfi_quick_assets": {
+    "life_sciences.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -23273,10 +23273,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -23289,7 +23288,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3188,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23312,10 +23312,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -23329,6 +23328,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3189,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23351,10 +23351,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -23368,6 +23367,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3190,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23390,10 +23390,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -23404,6 +23403,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3191,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23426,10 +23426,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -23446,6 +23445,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3192,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23468,10 +23468,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -23488,6 +23487,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3193,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23510,10 +23510,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -23526,7 +23525,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3194,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23549,10 +23549,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -23565,7 +23564,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3195,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23588,10 +23588,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -23604,7 +23603,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3196,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23627,10 +23627,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -23643,7 +23642,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3197,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23666,10 +23666,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -23682,7 +23681,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3198,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23705,10 +23705,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -23721,7 +23720,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3199,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23744,10 +23744,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -23760,7 +23759,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3200,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23783,10 +23783,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -23799,7 +23798,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3201,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23822,10 +23822,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -23841,7 +23840,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3202,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23864,10 +23864,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -23883,7 +23882,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3203,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23906,10 +23906,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -23922,7 +23921,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3204,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23945,10 +23945,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -23961,7 +23960,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3205,
       "industry": "Life Sciences",
       "segment": "core"
@@ -23984,10 +23984,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -24003,7 +24002,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3206,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24026,10 +24026,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -24042,7 +24041,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3207,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24065,10 +24065,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -24081,7 +24080,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3208,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24104,10 +24104,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -24119,7 +24118,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3209,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24142,10 +24142,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -24157,7 +24156,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3210,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24180,10 +24180,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -24193,7 +24192,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3211,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24216,10 +24216,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -24235,6 +24234,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3212,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24257,10 +24257,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -24272,7 +24271,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3213,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24295,10 +24295,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -24311,7 +24310,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3214,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24334,10 +24334,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -24350,7 +24349,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3215,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24373,10 +24373,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -24390,7 +24389,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3216,
       "industry": "Life Sciences",
       "segment": "core"
@@ -24578,7 +24578,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -24910,7 +24910,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1508,
       "industry": "Banking",
       "segment": "core",
@@ -24955,7 +24955,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1509,
       "industry": "Banking",
       "segment": "core",
@@ -25159,7 +25159,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "banking.core.cfi_gross_profit": {
+    "banking.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25177,10 +25177,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -25192,12 +25191,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 2857,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_ebitda": {
+    "banking.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25215,10 +25215,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -25231,12 +25230,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 2858,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_effective_tax_rate": {
+    "banking.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25254,10 +25254,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -25271,11 +25270,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2859,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_nopat": {
+    "banking.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25293,10 +25293,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -25307,12 +25306,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 2860,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_net_debt": {
+    "banking.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25330,10 +25330,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -25345,12 +25344,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 2861,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_invested_capital": {
+    "banking.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25368,10 +25368,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -25382,12 +25381,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 2862,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_tangible_net_worth": {
+    "banking.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25405,10 +25405,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -25420,12 +25419,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 2863,
       "industry": "Banking",
       "segment": "core"
     },
-    "banking.core.cfi_quick_assets": {
+    "banking.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -25443,10 +25443,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -25459,7 +25458,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 2864,
       "industry": "Banking",
       "segment": "core"
@@ -25482,10 +25482,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -25499,6 +25498,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2865,
       "industry": "Banking",
       "segment": "core"
@@ -25521,10 +25521,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -25538,6 +25537,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2866,
       "industry": "Banking",
       "segment": "core"
@@ -25560,10 +25560,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -25574,6 +25573,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 2867,
       "industry": "Banking",
       "segment": "core"
@@ -25596,10 +25596,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -25616,6 +25615,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2868,
       "industry": "Banking",
       "segment": "core"
@@ -25638,10 +25638,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -25658,6 +25657,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2869,
       "industry": "Banking",
       "segment": "core"
@@ -25680,10 +25680,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -25696,7 +25695,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 2870,
       "industry": "Banking",
       "segment": "core"
@@ -25719,10 +25719,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -25735,7 +25734,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 2871,
       "industry": "Banking",
       "segment": "core"
@@ -25758,10 +25758,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -25774,7 +25773,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 2872,
       "industry": "Banking",
       "segment": "core"
@@ -25797,10 +25797,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -25813,7 +25812,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 2873,
       "industry": "Banking",
       "segment": "core"
@@ -25836,10 +25836,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -25852,7 +25851,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 2874,
       "industry": "Banking",
       "segment": "core"
@@ -25875,10 +25875,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -25891,7 +25890,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 2875,
       "industry": "Banking",
       "segment": "core"
@@ -25914,10 +25914,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -25930,7 +25929,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 2876,
       "industry": "Banking",
       "segment": "core"
@@ -25953,10 +25953,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -25969,7 +25968,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 2877,
       "industry": "Banking",
       "segment": "core"
@@ -25992,10 +25992,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -26011,7 +26010,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 2878,
       "industry": "Banking",
       "segment": "core"
@@ -26034,10 +26034,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -26053,7 +26052,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 2879,
       "industry": "Banking",
       "segment": "core"
@@ -26076,10 +26076,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -26092,7 +26091,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 2880,
       "industry": "Banking",
       "segment": "core"
@@ -26115,10 +26115,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -26131,7 +26130,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 2881,
       "industry": "Banking",
       "segment": "core"
@@ -26154,10 +26154,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -26173,7 +26172,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 2882,
       "industry": "Banking",
       "segment": "core"
@@ -26196,10 +26196,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -26212,7 +26211,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 2883,
       "industry": "Banking",
       "segment": "core"
@@ -26235,10 +26235,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -26251,7 +26250,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 2884,
       "industry": "Banking",
       "segment": "core"
@@ -26274,10 +26274,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -26289,7 +26288,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 2885,
       "industry": "Banking",
       "segment": "core"
@@ -26312,10 +26312,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -26327,7 +26326,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 2886,
       "industry": "Banking",
       "segment": "core"
@@ -26350,10 +26350,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -26363,7 +26362,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 2887,
       "industry": "Banking",
       "segment": "core"
@@ -26386,10 +26386,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -26405,6 +26404,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 2888,
       "industry": "Banking",
       "segment": "core"
@@ -26427,10 +26427,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -26442,7 +26441,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 2889,
       "industry": "Banking",
       "segment": "core"
@@ -26465,10 +26465,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -26481,7 +26480,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 2890,
       "industry": "Banking",
       "segment": "core"
@@ -26504,10 +26504,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -26520,7 +26519,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 2891,
       "industry": "Banking",
       "segment": "core"
@@ -26543,10 +26543,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -26560,7 +26559,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 2892,
       "industry": "Banking",
       "segment": "core"
@@ -26930,7 +26930,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -27262,7 +27262,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1608,
       "industry": "Financial Services",
       "segment": "core",
@@ -27307,7 +27307,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1609,
       "industry": "Financial Services",
       "segment": "core",
@@ -27511,7 +27511,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "financial_services.core.cfi_gross_profit": {
+    "financial_services.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27529,10 +27529,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -27544,12 +27543,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3037,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_ebitda": {
+    "financial_services.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27567,10 +27567,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -27583,12 +27582,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3038,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_effective_tax_rate": {
+    "financial_services.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27606,10 +27606,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -27623,11 +27622,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3039,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_nopat": {
+    "financial_services.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27645,10 +27645,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -27659,12 +27658,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3040,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_net_debt": {
+    "financial_services.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27682,10 +27682,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -27697,12 +27696,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3041,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_invested_capital": {
+    "financial_services.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27720,10 +27720,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -27734,12 +27733,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3042,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_tangible_net_worth": {
+    "financial_services.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27757,10 +27757,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -27772,12 +27771,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3043,
       "industry": "Financial Services",
       "segment": "core"
     },
-    "financial_services.core.cfi_quick_assets": {
+    "financial_services.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -27795,10 +27795,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -27811,7 +27810,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3044,
       "industry": "Financial Services",
       "segment": "core"
@@ -27834,10 +27834,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -27851,6 +27850,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3045,
       "industry": "Financial Services",
       "segment": "core"
@@ -27873,10 +27873,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -27890,6 +27889,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3046,
       "industry": "Financial Services",
       "segment": "core"
@@ -27912,10 +27912,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -27926,6 +27925,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3047,
       "industry": "Financial Services",
       "segment": "core"
@@ -27948,10 +27948,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -27968,6 +27967,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3048,
       "industry": "Financial Services",
       "segment": "core"
@@ -27990,10 +27990,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -28010,6 +28009,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3049,
       "industry": "Financial Services",
       "segment": "core"
@@ -28032,10 +28032,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -28048,7 +28047,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3050,
       "industry": "Financial Services",
       "segment": "core"
@@ -28071,10 +28071,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -28087,7 +28086,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3051,
       "industry": "Financial Services",
       "segment": "core"
@@ -28110,10 +28110,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -28126,7 +28125,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3052,
       "industry": "Financial Services",
       "segment": "core"
@@ -28149,10 +28149,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28165,7 +28164,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3053,
       "industry": "Financial Services",
       "segment": "core"
@@ -28188,10 +28188,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28204,7 +28203,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3054,
       "industry": "Financial Services",
       "segment": "core"
@@ -28227,10 +28227,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28243,7 +28242,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3055,
       "industry": "Financial Services",
       "segment": "core"
@@ -28266,10 +28266,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -28282,7 +28281,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3056,
       "industry": "Financial Services",
       "segment": "core"
@@ -28305,10 +28305,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28321,7 +28320,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3057,
       "industry": "Financial Services",
       "segment": "core"
@@ -28344,10 +28344,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -28363,7 +28362,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3058,
       "industry": "Financial Services",
       "segment": "core"
@@ -28386,10 +28386,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28405,7 +28404,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3059,
       "industry": "Financial Services",
       "segment": "core"
@@ -28428,10 +28428,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -28444,7 +28443,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3060,
       "industry": "Financial Services",
       "segment": "core"
@@ -28467,10 +28467,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -28483,7 +28482,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3061,
       "industry": "Financial Services",
       "segment": "core"
@@ -28506,10 +28506,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -28525,7 +28524,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3062,
       "industry": "Financial Services",
       "segment": "core"
@@ -28548,10 +28548,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -28564,7 +28563,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3063,
       "industry": "Financial Services",
       "segment": "core"
@@ -28587,10 +28587,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -28603,7 +28602,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3064,
       "industry": "Financial Services",
       "segment": "core"
@@ -28626,10 +28626,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -28641,7 +28640,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3065,
       "industry": "Financial Services",
       "segment": "core"
@@ -28664,10 +28664,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -28679,7 +28678,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3066,
       "industry": "Financial Services",
       "segment": "core"
@@ -28702,10 +28702,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -28715,7 +28714,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3067,
       "industry": "Financial Services",
       "segment": "core"
@@ -28738,10 +28738,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -28757,6 +28756,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3068,
       "industry": "Financial Services",
       "segment": "core"
@@ -28779,10 +28779,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28794,7 +28793,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3069,
       "industry": "Financial Services",
       "segment": "core"
@@ -28817,10 +28817,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28833,7 +28832,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3070,
       "industry": "Financial Services",
       "segment": "core"
@@ -28856,10 +28856,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28872,7 +28871,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3071,
       "industry": "Financial Services",
       "segment": "core"
@@ -28895,10 +28895,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -28912,7 +28911,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3072,
       "industry": "Financial Services",
       "segment": "core"
@@ -29168,7 +29168,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -29500,7 +29500,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1978,
       "industry": "Funds",
       "segment": "core",
@@ -29545,7 +29545,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1979,
       "industry": "Funds",
       "segment": "core",
@@ -29749,7 +29749,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "funds.core.cfi_gross_profit": {
+    "funds.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29767,10 +29767,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -29782,12 +29781,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3073,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_ebitda": {
+    "funds.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29805,10 +29805,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -29821,12 +29820,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3074,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_effective_tax_rate": {
+    "funds.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29844,10 +29844,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -29861,11 +29860,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3075,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_nopat": {
+    "funds.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29883,10 +29883,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -29897,12 +29896,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3076,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_net_debt": {
+    "funds.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29920,10 +29920,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -29935,12 +29934,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3077,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_invested_capital": {
+    "funds.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29958,10 +29958,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -29972,12 +29971,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3078,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_tangible_net_worth": {
+    "funds.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -29995,10 +29995,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -30010,12 +30009,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3079,
       "industry": "Funds",
       "segment": "core"
     },
-    "funds.core.cfi_quick_assets": {
+    "funds.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -30033,10 +30033,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -30049,7 +30048,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3080,
       "industry": "Funds",
       "segment": "core"
@@ -30072,10 +30072,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -30089,6 +30088,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3081,
       "industry": "Funds",
       "segment": "core"
@@ -30111,10 +30111,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -30128,6 +30127,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3082,
       "industry": "Funds",
       "segment": "core"
@@ -30150,10 +30150,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -30164,6 +30163,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3083,
       "industry": "Funds",
       "segment": "core"
@@ -30186,10 +30186,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -30206,6 +30205,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3084,
       "industry": "Funds",
       "segment": "core"
@@ -30228,10 +30228,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -30248,6 +30247,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3085,
       "industry": "Funds",
       "segment": "core"
@@ -30270,10 +30270,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -30286,7 +30285,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3086,
       "industry": "Funds",
       "segment": "core"
@@ -30309,10 +30309,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -30325,7 +30324,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3087,
       "industry": "Funds",
       "segment": "core"
@@ -30348,10 +30348,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -30364,7 +30363,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3088,
       "industry": "Funds",
       "segment": "core"
@@ -30387,10 +30387,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -30403,7 +30402,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3089,
       "industry": "Funds",
       "segment": "core"
@@ -30426,10 +30426,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -30442,7 +30441,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3090,
       "industry": "Funds",
       "segment": "core"
@@ -30465,10 +30465,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -30481,7 +30480,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3091,
       "industry": "Funds",
       "segment": "core"
@@ -30504,10 +30504,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -30520,7 +30519,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3092,
       "industry": "Funds",
       "segment": "core"
@@ -30543,10 +30543,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -30559,7 +30558,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3093,
       "industry": "Funds",
       "segment": "core"
@@ -30582,10 +30582,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -30601,7 +30600,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3094,
       "industry": "Funds",
       "segment": "core"
@@ -30624,10 +30624,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -30643,7 +30642,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3095,
       "industry": "Funds",
       "segment": "core"
@@ -30666,10 +30666,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -30682,7 +30681,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3096,
       "industry": "Funds",
       "segment": "core"
@@ -30705,10 +30705,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -30721,7 +30720,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3097,
       "industry": "Funds",
       "segment": "core"
@@ -30744,10 +30744,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -30763,7 +30762,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3098,
       "industry": "Funds",
       "segment": "core"
@@ -30786,10 +30786,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -30802,7 +30801,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3099,
       "industry": "Funds",
       "segment": "core"
@@ -30825,10 +30825,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -30841,7 +30840,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3100,
       "industry": "Funds",
       "segment": "core"
@@ -30864,10 +30864,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -30879,7 +30878,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3101,
       "industry": "Funds",
       "segment": "core"
@@ -30902,10 +30902,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -30917,7 +30916,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3102,
       "industry": "Funds",
       "segment": "core"
@@ -30940,10 +30940,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -30953,7 +30952,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3103,
       "industry": "Funds",
       "segment": "core"
@@ -30976,10 +30976,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -30995,6 +30994,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3104,
       "industry": "Funds",
       "segment": "core"
@@ -31017,10 +31017,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -31032,7 +31031,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3105,
       "industry": "Funds",
       "segment": "core"
@@ -31055,10 +31055,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -31071,7 +31070,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3106,
       "industry": "Funds",
       "segment": "core"
@@ -31094,10 +31094,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -31110,7 +31109,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3107,
       "industry": "Funds",
       "segment": "core"
@@ -31133,10 +31133,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -31150,7 +31149,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3108,
       "industry": "Funds",
       "segment": "core"
@@ -31961,7 +31961,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -32293,7 +32293,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1993,
       "industry": "Trusts",
       "segment": "core",
@@ -32338,7 +32338,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1994,
       "industry": "Trusts",
       "segment": "core",
@@ -32542,7 +32542,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "trusts.core.cfi_gross_profit": {
+    "trusts.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32560,10 +32560,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -32575,12 +32574,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3469,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_ebitda": {
+    "trusts.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32598,10 +32598,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -32614,12 +32613,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3470,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_effective_tax_rate": {
+    "trusts.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32637,10 +32637,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -32654,11 +32653,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3471,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_nopat": {
+    "trusts.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32676,10 +32676,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -32690,12 +32689,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3472,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_net_debt": {
+    "trusts.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32713,10 +32713,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -32728,12 +32727,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3473,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_invested_capital": {
+    "trusts.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32751,10 +32751,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -32765,12 +32764,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3474,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_tangible_net_worth": {
+    "trusts.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32788,10 +32788,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -32803,12 +32802,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3475,
       "industry": "Trusts",
       "segment": "core"
     },
-    "trusts.core.cfi_quick_assets": {
+    "trusts.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -32826,10 +32826,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -32842,7 +32841,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3476,
       "industry": "Trusts",
       "segment": "core"
@@ -32865,10 +32865,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -32882,6 +32881,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3477,
       "industry": "Trusts",
       "segment": "core"
@@ -32904,10 +32904,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -32921,6 +32920,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3478,
       "industry": "Trusts",
       "segment": "core"
@@ -32943,10 +32943,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -32957,6 +32956,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3479,
       "industry": "Trusts",
       "segment": "core"
@@ -32979,10 +32979,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -32999,6 +32998,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3480,
       "industry": "Trusts",
       "segment": "core"
@@ -33021,10 +33021,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -33041,6 +33040,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3481,
       "industry": "Trusts",
       "segment": "core"
@@ -33063,10 +33063,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -33079,7 +33078,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3482,
       "industry": "Trusts",
       "segment": "core"
@@ -33102,10 +33102,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -33118,7 +33117,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3483,
       "industry": "Trusts",
       "segment": "core"
@@ -33141,10 +33141,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -33157,7 +33156,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3484,
       "industry": "Trusts",
       "segment": "core"
@@ -33180,10 +33180,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33196,7 +33195,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3485,
       "industry": "Trusts",
       "segment": "core"
@@ -33219,10 +33219,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33235,7 +33234,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3486,
       "industry": "Trusts",
       "segment": "core"
@@ -33258,10 +33258,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33274,7 +33273,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3487,
       "industry": "Trusts",
       "segment": "core"
@@ -33297,10 +33297,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -33313,7 +33312,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3488,
       "industry": "Trusts",
       "segment": "core"
@@ -33336,10 +33336,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33352,7 +33351,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3489,
       "industry": "Trusts",
       "segment": "core"
@@ -33375,10 +33375,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -33394,7 +33393,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3490,
       "industry": "Trusts",
       "segment": "core"
@@ -33417,10 +33417,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33436,7 +33435,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3491,
       "industry": "Trusts",
       "segment": "core"
@@ -33459,10 +33459,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -33475,7 +33474,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3492,
       "industry": "Trusts",
       "segment": "core"
@@ -33498,10 +33498,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -33514,7 +33513,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3493,
       "industry": "Trusts",
       "segment": "core"
@@ -33537,10 +33537,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -33556,7 +33555,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3494,
       "industry": "Trusts",
       "segment": "core"
@@ -33579,10 +33579,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -33595,7 +33594,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3495,
       "industry": "Trusts",
       "segment": "core"
@@ -33618,10 +33618,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -33634,7 +33633,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3496,
       "industry": "Trusts",
       "segment": "core"
@@ -33657,10 +33657,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -33672,7 +33671,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3497,
       "industry": "Trusts",
       "segment": "core"
@@ -33695,10 +33695,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -33710,7 +33709,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3498,
       "industry": "Trusts",
       "segment": "core"
@@ -33733,10 +33733,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -33746,7 +33745,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3499,
       "industry": "Trusts",
       "segment": "core"
@@ -33769,10 +33769,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -33788,6 +33787,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3500,
       "industry": "Trusts",
       "segment": "core"
@@ -33810,10 +33810,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33825,7 +33824,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3501,
       "industry": "Trusts",
       "segment": "core"
@@ -33848,10 +33848,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33864,7 +33863,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3502,
       "industry": "Trusts",
       "segment": "core"
@@ -33887,10 +33887,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33903,7 +33902,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3503,
       "industry": "Trusts",
       "segment": "core"
@@ -33926,10 +33926,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -33943,7 +33942,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3504,
       "industry": "Trusts",
       "segment": "core"
@@ -34049,7 +34049,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -34381,7 +34381,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1628,
       "industry": "Insurance",
       "segment": "core",
@@ -34426,7 +34426,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1629,
       "industry": "Insurance",
       "segment": "core",
@@ -34630,7 +34630,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "insurance.core.cfi_gross_profit": {
+    "insurance.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34648,10 +34648,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -34663,12 +34662,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3145,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_ebitda": {
+    "insurance.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34686,10 +34686,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -34702,12 +34701,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3146,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_effective_tax_rate": {
+    "insurance.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34725,10 +34725,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -34742,11 +34741,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3147,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_nopat": {
+    "insurance.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34764,10 +34764,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -34778,12 +34777,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3148,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_net_debt": {
+    "insurance.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34801,10 +34801,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -34816,12 +34815,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3149,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_invested_capital": {
+    "insurance.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34839,10 +34839,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -34853,12 +34852,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3150,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_tangible_net_worth": {
+    "insurance.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34876,10 +34876,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -34891,12 +34890,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3151,
       "industry": "Insurance",
       "segment": "core"
     },
-    "insurance.core.cfi_quick_assets": {
+    "insurance.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -34914,10 +34914,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -34930,7 +34929,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3152,
       "industry": "Insurance",
       "segment": "core"
@@ -34953,10 +34953,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -34970,6 +34969,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3153,
       "industry": "Insurance",
       "segment": "core"
@@ -34992,10 +34992,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -35009,6 +35008,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3154,
       "industry": "Insurance",
       "segment": "core"
@@ -35031,10 +35031,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -35045,6 +35044,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3155,
       "industry": "Insurance",
       "segment": "core"
@@ -35067,10 +35067,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -35087,6 +35086,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3156,
       "industry": "Insurance",
       "segment": "core"
@@ -35109,10 +35109,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -35129,6 +35128,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3157,
       "industry": "Insurance",
       "segment": "core"
@@ -35151,10 +35151,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -35167,7 +35166,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3158,
       "industry": "Insurance",
       "segment": "core"
@@ -35190,10 +35190,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -35206,7 +35205,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3159,
       "industry": "Insurance",
       "segment": "core"
@@ -35229,10 +35229,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -35245,7 +35244,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3160,
       "industry": "Insurance",
       "segment": "core"
@@ -35268,10 +35268,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35284,7 +35283,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3161,
       "industry": "Insurance",
       "segment": "core"
@@ -35307,10 +35307,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35323,7 +35322,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3162,
       "industry": "Insurance",
       "segment": "core"
@@ -35346,10 +35346,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35362,7 +35361,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3163,
       "industry": "Insurance",
       "segment": "core"
@@ -35385,10 +35385,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -35401,7 +35400,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3164,
       "industry": "Insurance",
       "segment": "core"
@@ -35424,10 +35424,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35440,7 +35439,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3165,
       "industry": "Insurance",
       "segment": "core"
@@ -35463,10 +35463,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -35482,7 +35481,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3166,
       "industry": "Insurance",
       "segment": "core"
@@ -35505,10 +35505,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35524,7 +35523,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3167,
       "industry": "Insurance",
       "segment": "core"
@@ -35547,10 +35547,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -35563,7 +35562,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3168,
       "industry": "Insurance",
       "segment": "core"
@@ -35586,10 +35586,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -35602,7 +35601,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3169,
       "industry": "Insurance",
       "segment": "core"
@@ -35625,10 +35625,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -35644,7 +35643,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3170,
       "industry": "Insurance",
       "segment": "core"
@@ -35667,10 +35667,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -35683,7 +35682,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3171,
       "industry": "Insurance",
       "segment": "core"
@@ -35706,10 +35706,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -35722,7 +35721,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3172,
       "industry": "Insurance",
       "segment": "core"
@@ -35745,10 +35745,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -35760,7 +35759,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3173,
       "industry": "Insurance",
       "segment": "core"
@@ -35783,10 +35783,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -35798,7 +35797,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3174,
       "industry": "Insurance",
       "segment": "core"
@@ -35821,10 +35821,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -35834,7 +35833,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3175,
       "industry": "Insurance",
       "segment": "core"
@@ -35857,10 +35857,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -35876,6 +35875,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3176,
       "industry": "Insurance",
       "segment": "core"
@@ -35898,10 +35898,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35913,7 +35912,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3177,
       "industry": "Insurance",
       "segment": "core"
@@ -35936,10 +35936,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35952,7 +35951,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3178,
       "industry": "Insurance",
       "segment": "core"
@@ -35975,10 +35975,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -35991,7 +35990,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3179,
       "industry": "Insurance",
       "segment": "core"
@@ -36014,10 +36014,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -36031,7 +36030,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3180,
       "industry": "Insurance",
       "segment": "core"
@@ -36248,7 +36248,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -36580,7 +36580,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1708,
       "industry": "Credit Granting",
       "segment": "core",
@@ -36625,7 +36625,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1709,
       "industry": "Credit Granting",
       "segment": "core",
@@ -36829,7 +36829,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "credit_granting.core.cfi_gross_profit": {
+    "credit_granting.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -36847,10 +36847,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -36862,12 +36861,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3001,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_ebitda": {
+    "credit_granting.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -36885,10 +36885,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -36901,12 +36900,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3002,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_effective_tax_rate": {
+    "credit_granting.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -36924,10 +36924,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -36941,11 +36940,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3003,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_nopat": {
+    "credit_granting.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -36963,10 +36963,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -36977,12 +36976,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3004,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_net_debt": {
+    "credit_granting.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -37000,10 +37000,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -37015,12 +37014,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3005,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_invested_capital": {
+    "credit_granting.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -37038,10 +37038,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -37052,12 +37051,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3006,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_tangible_net_worth": {
+    "credit_granting.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -37075,10 +37075,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -37090,12 +37089,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3007,
       "industry": "Credit Granting",
       "segment": "core"
     },
-    "credit_granting.core.cfi_quick_assets": {
+    "credit_granting.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -37113,10 +37113,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -37129,7 +37128,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3008,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37152,10 +37152,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -37169,6 +37168,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3009,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37191,10 +37191,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -37208,6 +37207,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3010,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37230,10 +37230,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -37244,6 +37243,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3011,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37266,10 +37266,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -37286,6 +37285,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3012,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37308,10 +37308,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -37328,6 +37327,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3013,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37350,10 +37350,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -37366,7 +37365,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3014,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37389,10 +37389,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -37405,7 +37404,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3015,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37428,10 +37428,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -37444,7 +37443,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3016,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37467,10 +37467,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -37483,7 +37482,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3017,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37506,10 +37506,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -37522,7 +37521,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3018,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37545,10 +37545,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -37561,7 +37560,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3019,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37584,10 +37584,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -37600,7 +37599,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3020,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37623,10 +37623,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -37639,7 +37638,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3021,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37662,10 +37662,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -37681,7 +37680,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3022,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37704,10 +37704,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -37723,7 +37722,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3023,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37746,10 +37746,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -37762,7 +37761,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3024,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37785,10 +37785,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -37801,7 +37800,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3025,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37824,10 +37824,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -37843,7 +37842,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3026,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37866,10 +37866,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -37882,7 +37881,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3027,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37905,10 +37905,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -37921,7 +37920,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3028,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37944,10 +37944,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -37959,7 +37958,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3029,
       "industry": "Credit Granting",
       "segment": "core"
@@ -37982,10 +37982,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -37997,7 +37996,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3030,
       "industry": "Credit Granting",
       "segment": "core"
@@ -38020,10 +38020,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -38033,7 +38032,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3031,
       "industry": "Credit Granting",
       "segment": "core"
@@ -38056,10 +38056,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -38075,6 +38074,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3032,
       "industry": "Credit Granting",
       "segment": "core"
@@ -38097,10 +38097,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -38112,7 +38111,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3033,
       "industry": "Credit Granting",
       "segment": "core"
@@ -38135,10 +38135,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -38151,7 +38150,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3034,
       "industry": "Credit Granting",
       "segment": "core"
@@ -38174,10 +38174,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -38190,7 +38189,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3035,
       "industry": "Credit Granting",
       "segment": "core"
@@ -38213,10 +38213,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -38230,7 +38229,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3036,
       "industry": "Credit Granting",
       "segment": "core"
@@ -39002,7 +39002,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -39334,7 +39334,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 2048,
       "industry": "Software (SaaS)",
       "segment": "core",
@@ -39379,7 +39379,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 2049,
       "industry": "Software (SaaS)",
       "segment": "core",
@@ -39583,7 +39583,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "software_saas.core.cfi_gross_profit": {
+    "software_saas.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39601,10 +39601,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -39616,12 +39615,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3397,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_ebitda": {
+    "software_saas.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39639,10 +39639,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -39655,12 +39654,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3398,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_effective_tax_rate": {
+    "software_saas.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39678,10 +39678,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -39695,11 +39694,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3399,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_nopat": {
+    "software_saas.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39717,10 +39717,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -39731,12 +39730,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3400,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_net_debt": {
+    "software_saas.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39754,10 +39754,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -39769,12 +39768,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3401,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_invested_capital": {
+    "software_saas.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39792,10 +39792,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -39806,12 +39805,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3402,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_tangible_net_worth": {
+    "software_saas.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39829,10 +39829,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -39844,12 +39843,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3403,
       "industry": "Software (SaaS)",
       "segment": "core"
     },
-    "software_saas.core.cfi_quick_assets": {
+    "software_saas.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -39867,10 +39867,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -39883,7 +39882,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3404,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -39906,10 +39906,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -39923,6 +39922,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3405,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -39945,10 +39945,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -39962,6 +39961,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3406,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -39984,10 +39984,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -39998,6 +39997,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3407,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40020,10 +40020,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -40040,6 +40039,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3408,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40062,10 +40062,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -40082,6 +40081,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3409,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40104,10 +40104,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -40120,7 +40119,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3410,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40143,10 +40143,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -40159,7 +40158,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3411,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40182,10 +40182,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -40198,7 +40197,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3412,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40221,10 +40221,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40237,7 +40236,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3413,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40260,10 +40260,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40276,7 +40275,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3414,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40299,10 +40299,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40315,7 +40314,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3415,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40338,10 +40338,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -40354,7 +40353,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3416,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40377,10 +40377,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40393,7 +40392,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3417,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40416,10 +40416,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -40435,7 +40434,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3418,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40458,10 +40458,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40477,7 +40476,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3419,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40500,10 +40500,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -40516,7 +40515,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3420,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40539,10 +40539,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -40555,7 +40554,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3421,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40578,10 +40578,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -40597,7 +40596,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3422,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40620,10 +40620,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -40636,7 +40635,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3423,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40659,10 +40659,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -40675,7 +40674,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3424,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40698,10 +40698,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -40713,7 +40712,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3425,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40736,10 +40736,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -40751,7 +40750,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3426,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40774,10 +40774,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -40787,7 +40786,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3427,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40810,10 +40810,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -40829,6 +40828,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3428,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40851,10 +40851,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40866,7 +40865,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3429,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40889,10 +40889,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40905,7 +40904,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3430,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40928,10 +40928,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40944,7 +40943,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3431,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -40967,10 +40967,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -40984,7 +40983,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3432,
       "industry": "Software (SaaS)",
       "segment": "core"
@@ -41364,7 +41364,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -41696,7 +41696,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_receivable_days (revenue, 365-day).",
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1648,
       "industry": "Retail",
       "segment": "core",
@@ -41741,7 +41741,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
-      "cfiGuideNote": "Distinct from CFI accounts_payable_days (365-day fixed).",
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1649,
       "industry": "Retail",
       "segment": "core",
@@ -41945,7 +41945,7 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
-    "retail.core.cfi_gross_profit": {
+    "retail.core.derived_gross_profit": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -41963,10 +41963,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Gross Profit (derived)",
-      "description": "Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue minus COGS; building block for margins",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "gross_profit",
@@ -41978,12 +41977,13 @@ export const REFERENCE_DATA = {
           "cogs"
         ]
       },
-      "methodology": "Gross Profit (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
       "id": 3361,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_ebitda": {
+    "retail.core.derived_ebitda": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42001,10 +42001,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA (derived)",
-      "description": "EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT plus depreciation and amortization",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "ebitda_derived",
@@ -42017,12 +42016,13 @@ export const REFERENCE_DATA = {
           "amortization"
         ]
       },
-      "methodology": "EBITDA (derived) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
       "id": 3362,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_effective_tax_rate": {
+    "retail.core.derived_effective_tax_rate": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42040,10 +42040,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Tax Rate",
-      "description": "Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).",
+      "description": "Tax expense divided by earnings before tax",
       "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
       "unit": "%",
       "higherIsBetter": false,
@@ -42057,11 +42056,12 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3363,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_nopat": {
+    "retail.core.derived_nopat": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42079,10 +42079,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Operating Profit After Tax (NOPAT)",
-      "description": "EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "nopat",
@@ -42093,12 +42092,13 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
       "id": 3364,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_net_debt": {
+    "retail.core.derived_net_debt": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42116,10 +42116,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt",
-      "description": "Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities minus cash",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "net_debt",
@@ -42131,12 +42130,13 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Net Debt — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
       "id": 3365,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_invested_capital": {
+    "retail.core.derived_invested_capital": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42154,10 +42154,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Invested Capital",
-      "description": "Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt plus total shareholders' equity",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "invested_capital",
@@ -42168,12 +42167,13 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Invested Capital — see docs/ratios/cfi-ratios.md",
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
       "id": 3366,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_tangible_net_worth": {
+    "retail.core.derived_tangible_net_worth": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42191,10 +42191,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tangible Net Worth",
-      "description": "Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Shareholders' equity minus intangible assets",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "tangible_net_worth",
@@ -42206,12 +42205,13 @@ export const REFERENCE_DATA = {
           "intangible_assets"
         ]
       },
-      "methodology": "Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3367,
       "industry": "Retail",
       "segment": "core"
     },
-    "retail.core.cfi_quick_assets": {
+    "retail.core.derived_quick_assets": {
       "datasource": [
         "Financial statements",
         "Trial balance",
@@ -42229,10 +42229,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Assets (strict)",
-      "description": "Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
       "unit": "Currency (e.g., USD)",
       "validationRule": "currency_signed",
       "benchmarkKey": "quick_assets",
@@ -42245,7 +42244,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Quick Assets (strict) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
       "id": 3368,
       "industry": "Retail",
       "segment": "core"
@@ -42268,10 +42268,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Equity (ROE)",
-      "description": "Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by shareholders' equity",
       "methodology": "ROE = Net Income / Total Shareholders' Equity",
       "unit": "%",
       "higherIsBetter": true,
@@ -42285,6 +42284,7 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3369,
       "industry": "Retail",
       "segment": "core"
@@ -42307,10 +42307,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Assets (ROA)",
-      "description": "Net income divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income divided by total assets",
       "methodology": "ROA = Net Income / Total Assets",
       "unit": "%",
       "higherIsBetter": true,
@@ -42324,6 +42323,7 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3370,
       "industry": "Retail",
       "segment": "core"
@@ -42346,10 +42346,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Return on Invested Capital (ROIC)",
-      "description": "NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).",
+      "description": "NOPAT divided by invested capital",
       "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
       "unit": "%",
       "higherIsBetter": true,
@@ -42360,6 +42359,7 @@ export const REFERENCE_DATA = {
         "expr": "nopat / max(invested_capital, 0)",
         "inputs": []
       },
+      "corporateRatioPack": true,
       "id": 3371,
       "industry": "Retail",
       "segment": "core"
@@ -42382,10 +42382,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Operating Profit Margin (EBIT)",
-      "description": "EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.",
+      "description": "EBIT divided by revenue, decimal quotient Alias of operating_margin at percent scale.",
       "methodology": "Operating Profit Margin = EBIT / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -42402,6 +42401,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3372,
       "industry": "Retail",
       "segment": "core"
@@ -42424,10 +42424,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
-      "name": "Net Profit Margin (CFI decimal quotient)",
-      "description": "Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue, decimal quotient (Ambient corporate ratio pack). Alias of net_margin at percent scale.",
       "methodology": "Net Profit Margin = Net Income / Revenue",
       "unit": "%",
       "higherIsBetter": true,
@@ -42444,6 +42443,7 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3373,
       "industry": "Retail",
       "segment": "core"
@@ -42466,10 +42466,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Effective Interest Rate",
-      "description": "Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
       "unit": "%",
       "higherIsBetter": false,
       "validationRule": "percentage",
@@ -42482,7 +42481,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Effective Interest Rate — see docs/ratios/cfi-ratios.md",
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
       "id": 3374,
       "industry": "Retail",
       "segment": "core"
@@ -42505,10 +42505,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Interest Burden",
-      "description": "EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBT relative to EBIT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -42521,7 +42520,8 @@ export const REFERENCE_DATA = {
           "operating_income"
         ]
       },
-      "methodology": "Interest Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
       "id": 3375,
       "industry": "Retail",
       "segment": "core"
@@ -42544,10 +42544,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Tax Burden",
-      "description": "Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net income relative to EBT; DuPont lever",
       "unit": "%",
       "higherIsBetter": true,
       "validationRule": "percentage",
@@ -42560,7 +42559,8 @@ export const REFERENCE_DATA = {
           "earnings_before_tax"
         ]
       },
-      "methodology": "Tax Burden — see docs/ratios/cfi-ratios.md",
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
       "id": 3376,
       "industry": "Retail",
       "segment": "core"
@@ -42583,10 +42583,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Asset Turnover",
-      "description": "Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by total assets",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -42599,7 +42598,8 @@ export const REFERENCE_DATA = {
           "total_assets"
         ]
       },
-      "methodology": "Total Asset Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
       "id": 3377,
       "industry": "Retail",
       "segment": "core"
@@ -42622,10 +42622,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "PP&E Turnover",
-      "description": "Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by net PP&E",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -42638,7 +42637,8 @@ export const REFERENCE_DATA = {
           "ppe_net"
         ]
       },
-      "methodology": "PP&E Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
       "id": 3378,
       "industry": "Retail",
       "segment": "core"
@@ -42661,10 +42661,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Turnover",
-      "description": "Revenue divided by cash (CFI Definitive Guide (Apr 2024)).",
+      "description": "Revenue divided by cash",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -42677,7 +42676,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
       "id": 3379,
       "industry": "Retail",
       "segment": "core"
@@ -42700,10 +42700,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Cash Days",
-      "description": "Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -42716,7 +42715,8 @@ export const REFERENCE_DATA = {
           "cash"
         ]
       },
-      "methodology": "Cash Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
       "id": 3380,
       "industry": "Retail",
       "segment": "core"
@@ -42739,10 +42739,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Turnover",
-      "description": "Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -42755,7 +42754,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
       "id": 3381,
       "industry": "Retail",
       "segment": "core"
@@ -42778,10 +42778,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Receivable Days",
-      "description": "Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -42797,7 +42796,8 @@ export const REFERENCE_DATA = {
           "accounts_receivable"
         ]
       },
-      "methodology": "Accounts Receivable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
       "id": 3382,
       "industry": "Retail",
       "segment": "core"
@@ -42820,10 +42820,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Turnover (ending balance)",
-      "description": "COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -42839,7 +42838,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
       "id": 3383,
       "industry": "Retail",
       "segment": "core"
@@ -42862,10 +42862,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Inventory Days",
-      "description": "Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
       "unit": "Days",
       "higherIsBetter": false,
       "validationRule": "days",
@@ -42878,7 +42877,8 @@ export const REFERENCE_DATA = {
           "inventory"
         ]
       },
-      "methodology": "Inventory Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
       "id": 3384,
       "industry": "Retail",
       "segment": "core"
@@ -42901,10 +42901,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Turnover",
-      "description": "COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).",
+      "description": "COGS divided by accounts payable",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -42917,7 +42916,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Turnover — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
       "id": 3385,
       "industry": "Retail",
       "segment": "core"
@@ -42940,10 +42940,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Accounts Payable Days",
-      "description": "Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
       "unit": "Days",
       "higherIsBetter": true,
       "validationRule": "days",
@@ -42959,7 +42958,8 @@ export const REFERENCE_DATA = {
           "accounts_payable"
         ]
       },
-      "methodology": "Accounts Payable Days — see docs/ratios/cfi-ratios.md",
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
       "id": 3386,
       "industry": "Retail",
       "segment": "core"
@@ -42982,10 +42982,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Total Assets to Equity (Equity Multiplier)",
-      "description": "Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).",
+      "description": "Financial leverage lever in DuPont",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -42998,7 +42997,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md",
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
       "id": 3387,
       "industry": "Retail",
       "segment": "core"
@@ -43021,10 +43021,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Equity",
-      "description": "Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing liabilities divided by equity",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -43037,7 +43036,8 @@ export const REFERENCE_DATA = {
           "total_shareholders_equity"
         ]
       },
-      "methodology": "Debt to Equity — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
       "id": 3388,
       "industry": "Retail",
       "segment": "core"
@@ -43060,10 +43060,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to Tangible Net Worth",
-      "description": "Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -43075,7 +43074,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
       "id": 3389,
       "industry": "Retail",
       "segment": "core"
@@ -43098,10 +43098,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Debt to EBITDA",
-      "description": "Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Gross interest-bearing debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -43113,7 +43112,8 @@ export const REFERENCE_DATA = {
           "interest_bearing_liabilities"
         ]
       },
-      "methodology": "Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3390,
       "industry": "Retail",
       "segment": "core"
@@ -43136,10 +43136,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Net Debt to EBITDA",
-      "description": "Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).",
+      "description": "Net debt divided by EBITDA",
       "unit": "x",
       "higherIsBetter": false,
       "validationRule": "ratio",
@@ -43149,7 +43148,8 @@ export const REFERENCE_DATA = {
         "expr": "net_debt / max(ebitda_derived, 0)",
         "inputs": []
       },
-      "methodology": "Net Debt to EBITDA — see docs/ratios/cfi-ratios.md",
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
       "id": 3391,
       "industry": "Retail",
       "segment": "core"
@@ -43172,10 +43172,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Quick Ratio (Quick Assets)",
-      "description": "Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
       "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
       "unit": "x",
       "higherIsBetter": true,
@@ -43191,6 +43190,7 @@ export const REFERENCE_DATA = {
           "current_liabilities"
         ]
       },
+      "corporateRatioPack": true,
       "id": 3392,
       "industry": "Retail",
       "segment": "core"
@@ -43213,10 +43213,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA to Interest (Interest Coverage)",
-      "description": "EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBITDA divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -43228,7 +43227,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
       "id": 3393,
       "industry": "Retail",
       "segment": "core"
@@ -43251,10 +43251,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBIT to Interest",
-      "description": "EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).",
+      "description": "EBIT divided by gross interest expense",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -43267,7 +43266,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBIT to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
       "id": 3394,
       "industry": "Retail",
       "segment": "core"
@@ -43290,10 +43290,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "EBITDA Less Capex to Interest",
-      "description": "Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA coverage",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -43306,7 +43305,8 @@ export const REFERENCE_DATA = {
           "interest_expense"
         ]
       },
-      "methodology": "EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md",
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
       "id": 3395,
       "industry": "Retail",
       "segment": "core"
@@ -43329,10 +43329,9 @@ export const REFERENCE_DATA = {
       "tech": "FINTECH",
       "type": "Financial",
       "frequency": "annual",
-      "cfiGuideRatio": true,
       "balanceBasisDefault": "ending",
       "name": "Fixed Charge Coverage",
-      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
       "unit": "x",
       "higherIsBetter": true,
       "validationRule": "ratio",
@@ -43346,7 +43345,8 @@ export const REFERENCE_DATA = {
           "current_portion_long_term_debt"
         ]
       },
-      "methodology": "Fixed Charge Coverage — see docs/ratios/cfi-ratios.md",
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
       "id": 3396,
       "industry": "Retail",
       "segment": "core"

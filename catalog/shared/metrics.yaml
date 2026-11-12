@@ -4,7 +4,8 @@ templates:
     - Financial statements
     - Trial balance
     - Balance sheet
-    description: 'Short-term liquidity: ability to cover current liabilities with current assets.'
+    description: 'Short-term liquidity: ability to cover current liabilities with current
+      assets.'
     industryTags:
     - Corporate Finance
     - All
@@ -25,7 +26,8 @@ templates:
       hardMax: 20
     validationRule: ratio
     benchmarkKey: current_ratio
-    fpaWorkflow: Liquidity & solvency review — feeds covenant monitoring and the monthly board liquidity pack.
+    fpaWorkflow: Liquidity & solvency review — feeds covenant monitoring and the monthly board
+      liquidity pack.
     calc:
       expr: current_assets / current_liabilities
       inputs:
@@ -36,7 +38,9 @@ templates:
     - Financial statements
     - Trial balance
     - Balance sheet
-    description: Acid-test liquidity excluding inventory (CFI Definitive Guide (Apr 2024)). Default CFI formula box; see quick_ratio_quick_assets for the strict quick-assets definition.
+    description: 'Acid-test liquidity excluding inventory — most conservative short-term solvency
+      view. Default formula: current assets minus inventory. See quick_ratio_quick_assets
+      for the alternate convention (cash + marketable securities + receivables).'
     industryTags:
     - Corporate Finance
     - All
@@ -57,7 +61,8 @@ templates:
       hardMax: 20
     validationRule: ratio
     benchmarkKey: quick_ratio
-    fpaWorkflow: Liquidity stress testing — pairs with cash-flow forecasting for downside scenarios.
+    fpaWorkflow: Liquidity stress testing — pairs with cash-flow forecasting for downside
+      scenarios.
     calc:
       expr: (current_assets - inventory) / current_liabilities
       inputs:
@@ -90,7 +95,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_margin
-    fpaWorkflow: Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual analysis.
+    fpaWorkflow: Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual
+      analysis.
     calc:
       expr: (revenue - cogs) / revenue * 100
       inputs:
@@ -121,7 +127,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: operating_margin
-    fpaWorkflow: Opex efficiency review — drives the monthly variance bridge and cost-control actions.
+    fpaWorkflow: Opex efficiency review — drives the monthly variance bridge and cost-control
+      actions.
     calc:
       expr: operating_income / revenue * 100
       inputs:
@@ -131,7 +138,8 @@ templates:
     datasource:
     - Financial statements
     - General ledger
-    description: Core operating cash profitability before interest, tax, depreciation and amortization.
+    description: Core operating cash profitability before interest, tax, depreciation and
+      amortization.
     industryTags:
     - Corporate Finance
     - All
@@ -152,7 +160,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: ebitda_margin
-    fpaWorkflow: Valuation & lender reporting — primary profitability proxy in models and covenant tests.
+    fpaWorkflow: Valuation & lender reporting — primary profitability proxy in models and
+      covenant tests.
     calc:
       expr: ebitda / revenue * 100
       inputs:
@@ -183,7 +192,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: net_margin
-    fpaWorkflow: Board P&L reporting — the headline profitability line for the monthly close pack.
+    fpaWorkflow: Board P&L reporting — the headline profitability line for the monthly close
+      pack.
     calc:
       expr: net_income / revenue * 100
       inputs:
@@ -198,7 +208,8 @@ templates:
     - Corporate Finance
     - SaaS
     - All
-    methodology: Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior Period Revenue) × 100
+    methodology: Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior
+      Period Revenue) × 100
     name: Revenue Growth Rate
     sensorFieldData:
     - Not Applicable
@@ -247,7 +258,8 @@ templates:
       hardMax: 1000000000
     validationRule: currency_signed
     benchmarkKey: working_capital
-    fpaWorkflow: Working-capital management — feeds the 13-week cash forecast and treasury planning.
+    fpaWorkflow: Working-capital management — feeds the 13-week cash forecast and treasury
+      planning.
     calc:
       expr: current_assets - current_liabilities
       inputs:
@@ -279,14 +291,16 @@ templates:
       hardMax: 365
     validationRule: days
     benchmarkKey: dso
-    fpaWorkflow: Receivables & collections review — directly improves the cash-conversion cycle and forecast accuracy.
+    fpaWorkflow: Receivables & collections review — directly improves the cash-conversion
+      cycle and forecast accuracy.
     calc:
       expr: accounts_receivable / total_credit_sales * days
       inputs:
       - accounts_receivable
       - total_credit_sales
       - days
-    cfiGuideNote: Distinct from CFI accounts_receivable_days (revenue, 365-day).
+    standardRatioNote: 'Parameterized DSO (credit sales and caller-supplied days). Standard
+      convention: accounts_receivable_days (revenue, 365-day year).'
   dpo:
     datasource:
     - Accounts payable aging
@@ -313,14 +327,16 @@ templates:
       hardMax: 365
     validationRule: days
     benchmarkKey: dpo
-    fpaWorkflow: Payables optimization — balances supplier terms against the cash-conversion cycle.
+    fpaWorkflow: Payables optimization — balances supplier terms against the cash-conversion
+      cycle.
     calc:
       expr: accounts_payable / cogs * days
       inputs:
       - accounts_payable
       - cogs
       - days
-    cfiGuideNote: Distinct from CFI accounts_payable_days (365-day fixed).
+    standardRatioNote: 'Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days
+      (365-day year).'
   ccc:
     datasource:
     - Accounts receivable aging
@@ -347,7 +363,8 @@ templates:
       hardMax: 365
     validationRule: days_signed
     benchmarkKey: ccc
-    fpaWorkflow: Cash-efficiency program — a north-star working-capital KPI tracked in the treasury review.
+    fpaWorkflow: Cash-efficiency program — a north-star working-capital KPI tracked in the
+      treasury review.
     calc:
       expr: dso + days_inventory_outstanding - dpo
       inputs:
@@ -361,7 +378,8 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working Capital
+    methodology: Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working
+      Capital
     name: Operating Cash Flow
     sensorFieldData:
     - Not Applicable
@@ -412,7 +430,8 @@ templates:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: burn_rate
-    fpaWorkflow: Runway management — paired with cash balance to govern the spend plan and fundraising timing.
+    fpaWorkflow: Runway management — paired with cash balance to govern the spend plan and
+      fundraising timing.
     calc:
       expr: cash_out - cash_in
       inputs:
@@ -444,17 +463,20 @@ templates:
       hardMax: 240
     validationRule: number
     benchmarkKey: runway
-    fpaWorkflow: Board & investor reporting — the survival metric that gates hiring and spend decisions.
+    fpaWorkflow: Board & investor reporting — the survival metric that gates hiring and spend
+      decisions.
     calc:
       expr: current_cash_balance / burn_rate
       inputs:
       - current_cash_balance
   headcount:
     name: Headcount (FTE)
-    description: Period-end count of active full-time-equivalent employees. A directly measured input, not a derived ratio.
+    description: Period-end count of active full-time-equivalent employees. A directly measured
+      input, not a derived ratio.
     type: Operational
     unit: Count
-    methodology: Period-end count of active employees expressed as full-time equivalents (directly measured, not calculated).
+    methodology: Period-end count of active employees expressed as full-time equivalents (directly
+      measured, not calculated).
     datasource:
     - HR records
     - Payroll records
@@ -467,7 +489,7 @@ templates:
     frequency: monthly
     tech: FINTECH
     input: true
-  cfi-gross-profit:
+  derived-gross-profit:
     datasource:
     - Financial statements
     - Trial balance
@@ -482,10 +504,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Gross Profit (derived)
-    description: Revenue minus COGS; building block for margins (CFI Definitive Guide (Apr 2024)).
+    description: Revenue minus COGS; building block for margins 
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: gross_profit
@@ -495,8 +516,9 @@ templates:
       inputs:
       - revenue
       - cogs
-    methodology: Gross Profit (derived) — see docs/ratios/cfi-ratios.md
-  cfi-ebitda:
+    methodology: Gross Profit (derived)
+    corporateRatioPack: true
+  derived-ebitda:
     datasource:
     - Financial statements
     - Trial balance
@@ -511,10 +533,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: EBITDA (derived)
-    description: EBIT plus depreciation and amortization (CFI Definitive Guide (Apr 2024)).
+    description: EBIT plus depreciation and amortization 
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: ebitda_derived
@@ -525,8 +546,9 @@ templates:
       - operating_income
       - depreciation
       - amortization
-    methodology: EBITDA (derived) — see docs/ratios/cfi-ratios.md
-  cfi-effective-tax-rate:
+    methodology: EBITDA (derived)
+    corporateRatioPack: true
+  derived-effective-tax-rate:
     datasource:
     - Financial statements
     - Trial balance
@@ -541,10 +563,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Effective Tax Rate
-    description: Tax expense divided by earnings before tax (CFI Definitive Guide (Apr 2024)).
+    description: Tax expense divided by earnings before tax 
     methodology: Effective Tax Rate = Tax Expense / Earnings Before Tax
     unit: '%'
     higherIsBetter: false
@@ -556,7 +577,8 @@ templates:
       inputs:
       - tax_expense
       - earnings_before_tax
-  cfi-nopat:
+    corporateRatioPack: true
+  derived-nopat:
     datasource:
     - Financial statements
     - Trial balance
@@ -571,10 +593,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Net Operating Profit After Tax (NOPAT)
-    description: EBIT adjusted for cash taxes using the effective tax rate (CFI Definitive Guide (Apr 2024)).
+    description: EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate
+      ratio pack).
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: nopat
@@ -583,8 +605,9 @@ templates:
       expr: operating_income * (1 - effective_tax_rate)
       inputs:
       - operating_income
-    methodology: Net Operating Profit After Tax (NOPAT) — see docs/ratios/cfi-ratios.md
-  cfi-net-debt:
+    methodology: Net Operating Profit After Tax (NOPAT)
+    corporateRatioPack: true
+  derived-net-debt:
     datasource:
     - Financial statements
     - Trial balance
@@ -599,10 +622,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Net Debt
-    description: Interest-bearing liabilities minus cash (CFI Definitive Guide (Apr 2024)).
+    description: Interest-bearing liabilities minus cash 
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: net_debt
@@ -612,8 +634,9 @@ templates:
       inputs:
       - interest_bearing_liabilities
       - cash
-    methodology: Net Debt — see docs/ratios/cfi-ratios.md
-  cfi-invested-capital:
+    methodology: Net Debt
+    corporateRatioPack: true
+  derived-invested-capital:
     datasource:
     - Financial statements
     - Trial balance
@@ -628,10 +651,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Invested Capital
-    description: Net debt plus total shareholders' equity (CFI Definitive Guide (Apr 2024)).
+    description: Net debt plus total shareholders' equity 
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: invested_capital
@@ -640,8 +662,9 @@ templates:
       expr: net_debt + total_shareholders_equity
       inputs:
       - total_shareholders_equity
-    methodology: Invested Capital — see docs/ratios/cfi-ratios.md
-  cfi-tangible-net-worth:
+    methodology: Invested Capital
+    corporateRatioPack: true
+  derived-tangible-net-worth:
     datasource:
     - Financial statements
     - Trial balance
@@ -656,10 +679,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Tangible Net Worth
-    description: Shareholders' equity minus intangible assets (CFI Definitive Guide (Apr 2024)).
+    description: Shareholders' equity minus intangible assets 
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: tangible_net_worth
@@ -669,8 +691,9 @@ templates:
       inputs:
       - total_shareholders_equity
       - intangible_assets
-    methodology: Tangible Net Worth — see docs/ratios/cfi-ratios.md
-  cfi-quick-assets:
+    methodology: Tangible Net Worth
+    corporateRatioPack: true
+  derived-quick-assets:
     datasource:
     - Financial statements
     - Trial balance
@@ -685,10 +708,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Quick Assets (strict)
-    description: Cash, marketable securities, and accounts receivable (CFI Definitive Guide (Apr 2024)).
+    description: Cash, marketable securities, and accounts receivable (Ambient corporate ratio
+      pack).
     unit: Currency (e.g., USD)
     validationRule: currency_signed
     benchmarkKey: quick_assets
@@ -699,7 +722,8 @@ templates:
       - cash
       - marketable_securities
       - accounts_receivable
-    methodology: Quick Assets (strict) — see docs/ratios/cfi-ratios.md
+    methodology: Quick Assets (strict)
+    corporateRatioPack: true
   return-on-equity:
     datasource:
     - Financial statements
@@ -715,10 +739,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Return on Equity (ROE)
-    description: Net income divided by shareholders' equity (CFI Definitive Guide (Apr 2024)).
+    description: Net income divided by shareholders' equity 
     methodology: ROE = Net Income / Total Shareholders' Equity
     unit: '%'
     higherIsBetter: true
@@ -730,6 +753,7 @@ templates:
       inputs:
       - net_income
       - total_shareholders_equity
+    corporateRatioPack: true
   return-on-assets:
     datasource:
     - Financial statements
@@ -745,10 +769,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Return on Assets (ROA)
-    description: Net income divided by total assets (CFI Definitive Guide (Apr 2024)).
+    description: Net income divided by total assets 
     methodology: ROA = Net Income / Total Assets
     unit: '%'
     higherIsBetter: true
@@ -760,6 +783,7 @@ templates:
       inputs:
       - net_income
       - total_assets
+    corporateRatioPack: true
   return-on-invested-capital:
     datasource:
     - Financial statements
@@ -775,10 +799,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Return on Invested Capital (ROIC)
-    description: NOPAT divided by invested capital (CFI Definitive Guide (Apr 2024)).
+    description: NOPAT divided by invested capital 
     methodology: ROIC = NOPAT / (Net Debt + Equity)
     unit: '%'
     higherIsBetter: true
@@ -788,6 +811,7 @@ templates:
     calc:
       expr: nopat / max(invested_capital, 0)
       inputs: []
+    corporateRatioPack: true
   operating-profit-margin:
     datasource:
     - Financial statements
@@ -803,10 +827,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Operating Profit Margin (EBIT)
-    description: EBIT divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of operating_margin at percent scale.
+    description: EBIT divided by revenue, decimal quotient 
+      Alias of operating_margin at percent scale.
     methodology: Operating Profit Margin = EBIT / Revenue
     unit: '%'
     higherIsBetter: true
@@ -820,6 +844,7 @@ templates:
       inputs:
       - operating_income
       - revenue
+    corporateRatioPack: true
   net-profit-margin:
     datasource:
     - Financial statements
@@ -835,10 +860,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
-    name: Net Profit Margin (CFI decimal quotient)
-    description: Net income divided by revenue, decimal quotient (CFI Definitive Guide (Apr 2024)). Alias of net_margin at percent scale.
+    name: Net Profit Margin (decimal quotient)
+    description: Net income divided by revenue, decimal quotient (Ambient corporate ratio
+      pack). Alias of net_margin at percent scale.
     methodology: Net Profit Margin = Net Income / Revenue
     unit: '%'
     higherIsBetter: true
@@ -852,6 +877,7 @@ templates:
       inputs:
       - net_income
       - revenue
+    corporateRatioPack: true
   effective-interest-rate:
     datasource:
     - Financial statements
@@ -867,10 +893,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Effective Interest Rate
-    description: Gross interest expense divided by interest-bearing liabilities (CFI Definitive Guide (Apr 2024)).
+    description: Gross interest expense divided by interest-bearing liabilities (Ambient corporate
+      ratio pack).
     unit: '%'
     higherIsBetter: false
     validationRule: percentage
@@ -881,7 +907,8 @@ templates:
       inputs:
       - interest_expense
       - interest_bearing_liabilities
-    methodology: Effective Interest Rate — see docs/ratios/cfi-ratios.md
+    methodology: Effective Interest Rate
+    corporateRatioPack: true
   interest-burden:
     datasource:
     - Financial statements
@@ -897,10 +924,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Interest Burden
-    description: EBT relative to EBIT; DuPont lever (CFI Definitive Guide (Apr 2024)).
+    description: EBT relative to EBIT; DuPont lever 
     unit: '%'
     higherIsBetter: true
     validationRule: percentage
@@ -911,7 +937,8 @@ templates:
       inputs:
       - earnings_before_tax
       - operating_income
-    methodology: Interest Burden — see docs/ratios/cfi-ratios.md
+    methodology: Interest Burden
+    corporateRatioPack: true
   tax-burden:
     datasource:
     - Financial statements
@@ -927,10 +954,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Tax Burden
-    description: Net income relative to EBT; DuPont lever (CFI Definitive Guide (Apr 2024)).
+    description: Net income relative to EBT; DuPont lever 
     unit: '%'
     higherIsBetter: true
     validationRule: percentage
@@ -941,7 +967,8 @@ templates:
       inputs:
       - net_income
       - earnings_before_tax
-    methodology: Tax Burden — see docs/ratios/cfi-ratios.md
+    methodology: Tax Burden
+    corporateRatioPack: true
   total-asset-turnover:
     datasource:
     - Financial statements
@@ -957,10 +984,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Total Asset Turnover
-    description: Revenue divided by total assets (CFI Definitive Guide (Apr 2024)).
+    description: Revenue divided by total assets 
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -971,7 +997,8 @@ templates:
       inputs:
       - revenue
       - total_assets
-    methodology: Total Asset Turnover — see docs/ratios/cfi-ratios.md
+    methodology: Total Asset Turnover
+    corporateRatioPack: true
   ppe-turnover:
     datasource:
     - Financial statements
@@ -987,10 +1014,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: PP&E Turnover
-    description: Revenue divided by net PP&E (CFI Definitive Guide (Apr 2024)).
+    description: Revenue divided by net PP&E 
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1001,7 +1027,8 @@ templates:
       inputs:
       - revenue
       - ppe_net
-    methodology: PP&E Turnover — see docs/ratios/cfi-ratios.md
+    methodology: PP&E Turnover
+    corporateRatioPack: true
   cash-turnover:
     datasource:
     - Financial statements
@@ -1017,10 +1044,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Cash Turnover
-    description: Revenue divided by cash (CFI Definitive Guide (Apr 2024)).
+    description: Revenue divided by cash 
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1031,7 +1057,8 @@ templates:
       inputs:
       - revenue
       - cash
-    methodology: Cash Turnover — see docs/ratios/cfi-ratios.md
+    methodology: Cash Turnover
+    corporateRatioPack: true
   cash-days:
     datasource:
     - Financial statements
@@ -1047,10 +1074,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Cash Days
-    description: Cash balance expressed as days of revenue at a 365-day year (CFI Definitive Guide (Apr 2024)).
+    description: Cash balance expressed as days of revenue at a 365-day year (Ambient corporate
+      ratio pack).
     unit: Days
     higherIsBetter: false
     validationRule: days
@@ -1061,7 +1088,8 @@ templates:
       inputs:
       - revenue
       - cash
-    methodology: Cash Days — see docs/ratios/cfi-ratios.md
+    methodology: Cash Days
+    corporateRatioPack: true
   accounts-receivable-turnover:
     datasource:
     - Financial statements
@@ -1077,10 +1105,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Accounts Receivable Turnover
-    description: Revenue divided by accounts receivable (CFI Definitive Guide (Apr 2024)). Not parameterized DSO.
+    description: Revenue divided by accounts receivable  Not
+      parameterized DSO.
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1091,7 +1119,8 @@ templates:
       inputs:
       - revenue
       - accounts_receivable
-    methodology: Accounts Receivable Turnover — see docs/ratios/cfi-ratios.md
+    methodology: Accounts Receivable Turnover
+    corporateRatioPack: true
   accounts-receivable-days:
     datasource:
     - Financial statements
@@ -1107,10 +1136,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Accounts Receivable Days
-    description: Receivable balance in days of revenue; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DSO.
+    description: Receivable balance in days of revenue; 365-day convention (Ambient corporate
+      ratio pack). Distinct from catalog DSO.
     unit: Days
     higherIsBetter: false
     validationRule: days
@@ -1123,7 +1152,8 @@ templates:
       inputs:
       - revenue
       - accounts_receivable
-    methodology: Accounts Receivable Days — see docs/ratios/cfi-ratios.md
+    methodology: Accounts Receivable Days
+    corporateRatioPack: true
   inventory-turnover:
     datasource:
     - Financial statements
@@ -1139,10 +1169,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Inventory Turnover (ending balance)
-    description: COGS divided by ending inventory (CFI Definitive Guide (Apr 2024)). Distinct from average-inventory variants.
+    description: COGS divided by ending inventory  Distinct
+      from average-inventory variants.
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1155,7 +1185,8 @@ templates:
       inputs:
       - cogs
       - inventory
-    methodology: Inventory Turnover (ending balance) — see docs/ratios/cfi-ratios.md
+    methodology: Inventory Turnover (ending balance)
+    corporateRatioPack: true
   inventory-days:
     datasource:
     - Financial statements
@@ -1171,10 +1202,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Inventory Days
-    description: Inventory held in days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)).
+    description: Inventory held in days of COGS; 365-day convention (Ambient corporate ratio
+      pack).
     unit: Days
     higherIsBetter: false
     validationRule: days
@@ -1185,7 +1216,8 @@ templates:
       inputs:
       - cogs
       - inventory
-    methodology: Inventory Days — see docs/ratios/cfi-ratios.md
+    methodology: Inventory Days
+    corporateRatioPack: true
   accounts-payable-turnover:
     datasource:
     - Financial statements
@@ -1201,10 +1233,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Accounts Payable Turnover
-    description: COGS divided by accounts payable (CFI Definitive Guide (Apr 2024)).
+    description: COGS divided by accounts payable 
     unit: x
     higherIsBetter: false
     validationRule: ratio
@@ -1215,7 +1246,8 @@ templates:
       inputs:
       - cogs
       - accounts_payable
-    methodology: Accounts Payable Turnover — see docs/ratios/cfi-ratios.md
+    methodology: Accounts Payable Turnover
+    corporateRatioPack: true
   accounts-payable-days:
     datasource:
     - Financial statements
@@ -1231,10 +1263,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Accounts Payable Days
-    description: Payables expressed as days of COGS; 365-day convention (CFI Definitive Guide (Apr 2024)). Distinct from catalog DPO.
+    description: Payables expressed as days of COGS; 365-day convention (Ambient corporate
+      ratio pack). Distinct from catalog DPO.
     unit: Days
     higherIsBetter: true
     validationRule: days
@@ -1247,7 +1279,8 @@ templates:
       inputs:
       - cogs
       - accounts_payable
-    methodology: Accounts Payable Days — see docs/ratios/cfi-ratios.md
+    methodology: Accounts Payable Days
+    corporateRatioPack: true
   total-assets-to-equity:
     datasource:
     - Financial statements
@@ -1263,10 +1296,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Total Assets to Equity (Equity Multiplier)
-    description: Financial leverage lever in DuPont (CFI Definitive Guide (Apr 2024)).
+    description: Financial leverage lever in DuPont 
     unit: x
     higherIsBetter: false
     validationRule: ratio
@@ -1277,7 +1309,8 @@ templates:
       inputs:
       - total_assets
       - total_shareholders_equity
-    methodology: Total Assets to Equity (Equity Multiplier) — see docs/ratios/cfi-ratios.md
+    methodology: Total Assets to Equity (Equity Multiplier)
+    corporateRatioPack: true
   debt-to-equity:
     datasource:
     - Financial statements
@@ -1293,10 +1326,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Debt to Equity
-    description: Interest-bearing liabilities divided by equity (CFI Definitive Guide (Apr 2024)).
+    description: Interest-bearing liabilities divided by equity 
     unit: x
     higherIsBetter: false
     validationRule: ratio
@@ -1307,7 +1339,8 @@ templates:
       inputs:
       - interest_bearing_liabilities
       - total_shareholders_equity
-    methodology: Debt to Equity — see docs/ratios/cfi-ratios.md
+    methodology: Debt to Equity
+    corporateRatioPack: true
   debt-to-tangible-net-worth:
     datasource:
     - Financial statements
@@ -1323,10 +1356,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Debt to Tangible Net Worth
-    description: Interest-bearing debt divided by tangible net worth (CFI Definitive Guide (Apr 2024)).
+    description: Interest-bearing debt divided by tangible net worth (Ambient corporate ratio
+      pack).
     unit: x
     higherIsBetter: false
     validationRule: ratio
@@ -1336,7 +1369,8 @@ templates:
       expr: interest_bearing_liabilities / max(tangible_net_worth, 0)
       inputs:
       - interest_bearing_liabilities
-    methodology: Debt to Tangible Net Worth — see docs/ratios/cfi-ratios.md
+    methodology: Debt to Tangible Net Worth
+    corporateRatioPack: true
   debt-to-ebitda:
     datasource:
     - Financial statements
@@ -1352,10 +1386,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Debt to EBITDA
-    description: Gross interest-bearing debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).
+    description: Gross interest-bearing debt divided by EBITDA 
     unit: x
     higherIsBetter: false
     validationRule: ratio
@@ -1365,7 +1398,8 @@ templates:
       expr: interest_bearing_liabilities / max(ebitda_derived, 0)
       inputs:
       - interest_bearing_liabilities
-    methodology: Debt to EBITDA — see docs/ratios/cfi-ratios.md
+    methodology: Debt to EBITDA
+    corporateRatioPack: true
   net-debt-to-ebitda:
     datasource:
     - Financial statements
@@ -1381,10 +1415,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Net Debt to EBITDA
-    description: Net debt divided by EBITDA (CFI Definitive Guide (Apr 2024)).
+    description: Net debt divided by EBITDA 
     unit: x
     higherIsBetter: false
     validationRule: ratio
@@ -1393,7 +1426,8 @@ templates:
     calc:
       expr: net_debt / max(ebitda_derived, 0)
       inputs: []
-    methodology: Net Debt to EBITDA — see docs/ratios/cfi-ratios.md
+    methodology: Net Debt to EBITDA
+    corporateRatioPack: true
   quick-ratio-quick-assets:
     datasource:
     - Financial statements
@@ -1409,10 +1443,10 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Quick Ratio (Quick Assets)
-    description: Strict quick assets over current liabilities (CFI Definitive Guide (Apr 2024)). Formula-box quick_ratio remains default.
+    description: Strict quick assets over current liabilities 
+      Formula-box quick_ratio remains default.
     methodology: Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities
     unit: x
     higherIsBetter: true
@@ -1425,6 +1459,7 @@ templates:
       expr: quick_assets / max(current_liabilities, 0)
       inputs:
       - current_liabilities
+    corporateRatioPack: true
   ebitda-to-interest:
     datasource:
     - Financial statements
@@ -1440,10 +1475,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: EBITDA to Interest (Interest Coverage)
-    description: EBITDA divided by gross interest expense (CFI Definitive Guide (Apr 2024)).
+    description: EBITDA divided by gross interest expense 
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1453,7 +1487,8 @@ templates:
       expr: ebitda_derived / max(interest_expense, 0)
       inputs:
       - interest_expense
-    methodology: EBITDA to Interest (Interest Coverage) — see docs/ratios/cfi-ratios.md
+    methodology: EBITDA to Interest (Interest Coverage)
+    corporateRatioPack: true
   ebit-to-interest:
     datasource:
     - Financial statements
@@ -1469,10 +1504,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: EBIT to Interest
-    description: EBIT divided by gross interest expense (CFI Definitive Guide (Apr 2024)).
+    description: EBIT divided by gross interest expense 
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1483,7 +1517,8 @@ templates:
       inputs:
       - operating_income
       - interest_expense
-    methodology: EBIT to Interest — see docs/ratios/cfi-ratios.md
+    methodology: EBIT to Interest
+    corporateRatioPack: true
   ebitda-less-capex-to-interest:
     datasource:
     - Financial statements
@@ -1499,10 +1534,9 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: EBITDA Less Capex to Interest
-    description: Capex-adjusted EBITDA coverage (CFI Definitive Guide (Apr 2024)).
+    description: Capex-adjusted EBITDA coverage 
     unit: x
     higherIsBetter: true
     validationRule: ratio
@@ -1513,7 +1547,8 @@ templates:
       inputs:
       - capital_expenditures
       - interest_expense
-    methodology: EBITDA Less Capex to Interest — see docs/ratios/cfi-ratios.md
+    methodology: EBITDA Less Capex to Interest
+    corporateRatioPack: true
   fixed-charge-coverage:
     datasource:
     - Financial statements
@@ -1529,22 +1564,24 @@ templates:
     tech: FINTECH
     type: Financial
     frequency: annual
-    cfiGuideRatio: true
     balanceBasisDefault: ending
     name: Fixed Charge Coverage
-    description: Capex-adjusted EBITDA over interest plus current debt maturities (CFI Definitive Guide (Apr 2024)).
+    description: Capex-adjusted EBITDA over interest plus current debt maturities (Ambient
+      corporate ratio pack).
     unit: x
     higherIsBetter: true
     validationRule: ratio
     benchmarkKey: fixed_charge_coverage
     slug: fixed_charge_coverage
     calc:
-      expr: (ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)
+      expr: (ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt,
+        0)
       inputs:
       - capital_expenditures
       - interest_expense
       - current_portion_long_term_debt
-    methodology: Fixed Charge Coverage — see docs/ratios/cfi-ratios.md
+    methodology: Fixed Charge Coverage
+    corporateRatioPack: true
 industryIds:
   Healthcare:
     current-ratio: 930
@@ -1562,14 +1599,14 @@ industryIds:
     burn-rate: 1002
     runway: 1008
     headcount: 1080
-    cfi-gross-profit: 3109
-    cfi-ebitda: 3110
-    cfi-effective-tax-rate: 3111
-    cfi-nopat: 3112
-    cfi-net-debt: 3113
-    cfi-invested-capital: 3114
-    cfi-tangible-net-worth: 3115
-    cfi-quick-assets: 3116
+    derived-gross-profit: 3109
+    derived-ebitda: 3110
+    derived-effective-tax-rate: 3111
+    derived-nopat: 3112
+    derived-net-debt: 3113
+    derived-invested-capital: 3114
+    derived-tangible-net-worth: 3115
+    derived-quick-assets: 3116
     return-on-equity: 3117
     return-on-assets: 3118
     return-on-invested-capital: 3119
@@ -1614,14 +1651,14 @@ industryIds:
     burn-rate: 1001
     runway: 1007
     headcount: 1081
-    cfi-gross-profit: 3217
-    cfi-ebitda: 3218
-    cfi-effective-tax-rate: 3219
-    cfi-nopat: 3220
-    cfi-net-debt: 3221
-    cfi-invested-capital: 3222
-    cfi-tangible-net-worth: 3223
-    cfi-quick-assets: 3224
+    derived-gross-profit: 3217
+    derived-ebitda: 3218
+    derived-effective-tax-rate: 3219
+    derived-nopat: 3220
+    derived-net-debt: 3221
+    derived-invested-capital: 3222
+    derived-tangible-net-worth: 3223
+    derived-quick-assets: 3224
     return-on-equity: 3225
     return-on-assets: 3226
     return-on-invested-capital: 3227
@@ -1666,14 +1703,14 @@ industryIds:
     burn-rate: 998
     runway: 1004
     headcount: 1082
-    cfi-gross-profit: 3289
-    cfi-ebitda: 3290
-    cfi-effective-tax-rate: 3291
-    cfi-nopat: 3292
-    cfi-net-debt: 3293
-    cfi-invested-capital: 3294
-    cfi-tangible-net-worth: 3295
-    cfi-quick-assets: 3296
+    derived-gross-profit: 3289
+    derived-ebitda: 3290
+    derived-effective-tax-rate: 3291
+    derived-nopat: 3292
+    derived-net-debt: 3293
+    derived-invested-capital: 3294
+    derived-tangible-net-worth: 3295
+    derived-quick-assets: 3296
     return-on-equity: 3297
     return-on-assets: 3298
     return-on-invested-capital: 3299
@@ -1718,14 +1755,14 @@ industryIds:
     burn-rate: 1003
     runway: 1009
     headcount: 1083
-    cfi-gross-profit: 3325
-    cfi-ebitda: 3326
-    cfi-effective-tax-rate: 3327
-    cfi-nopat: 3328
-    cfi-net-debt: 3329
-    cfi-invested-capital: 3330
-    cfi-tangible-net-worth: 3331
-    cfi-quick-assets: 3332
+    derived-gross-profit: 3325
+    derived-ebitda: 3326
+    derived-effective-tax-rate: 3327
+    derived-nopat: 3328
+    derived-net-debt: 3329
+    derived-invested-capital: 3330
+    derived-tangible-net-worth: 3331
+    derived-quick-assets: 3332
     return-on-equity: 3333
     return-on-assets: 3334
     return-on-invested-capital: 3335
@@ -1770,14 +1807,14 @@ industryIds:
     burn-rate: 1000
     runway: 1006
     headcount: 1084
-    cfi-gross-profit: 3433
-    cfi-ebitda: 3434
-    cfi-effective-tax-rate: 3435
-    cfi-nopat: 3436
-    cfi-net-debt: 3437
-    cfi-invested-capital: 3438
-    cfi-tangible-net-worth: 3439
-    cfi-quick-assets: 3440
+    derived-gross-profit: 3433
+    derived-ebitda: 3434
+    derived-effective-tax-rate: 3435
+    derived-nopat: 3436
+    derived-net-debt: 3437
+    derived-invested-capital: 3438
+    derived-tangible-net-worth: 3439
+    derived-quick-assets: 3440
     return-on-equity: 3441
     return-on-assets: 3442
     return-on-invested-capital: 3443
@@ -1822,14 +1859,14 @@ industryIds:
     burn-rate: 999
     runway: 1005
     headcount: 1085
-    cfi-gross-profit: 3505
-    cfi-ebitda: 3506
-    cfi-effective-tax-rate: 3507
-    cfi-nopat: 3508
-    cfi-net-debt: 3509
-    cfi-invested-capital: 3510
-    cfi-tangible-net-worth: 3511
-    cfi-quick-assets: 3512
+    derived-gross-profit: 3505
+    derived-ebitda: 3506
+    derived-effective-tax-rate: 3507
+    derived-nopat: 3508
+    derived-net-debt: 3509
+    derived-invested-capital: 3510
+    derived-tangible-net-worth: 3511
+    derived-quick-assets: 3512
     return-on-equity: 3513
     return-on-assets: 3514
     return-on-invested-capital: 3515
@@ -1874,14 +1911,14 @@ industryIds:
     burn-rate: 1312
     runway: 1313
     headcount: 1314
-    cfi-gross-profit: 3181
-    cfi-ebitda: 3182
-    cfi-effective-tax-rate: 3183
-    cfi-nopat: 3184
-    cfi-net-debt: 3185
-    cfi-invested-capital: 3186
-    cfi-tangible-net-worth: 3187
-    cfi-quick-assets: 3188
+    derived-gross-profit: 3181
+    derived-ebitda: 3182
+    derived-effective-tax-rate: 3183
+    derived-nopat: 3184
+    derived-net-debt: 3185
+    derived-invested-capital: 3186
+    derived-tangible-net-worth: 3187
+    derived-quick-assets: 3188
     return-on-equity: 3189
     return-on-assets: 3190
     return-on-invested-capital: 3191
@@ -1926,14 +1963,14 @@ industryIds:
     burn-rate: 1512
     runway: 1513
     headcount: 1514
-    cfi-gross-profit: 2857
-    cfi-ebitda: 2858
-    cfi-effective-tax-rate: 2859
-    cfi-nopat: 2860
-    cfi-net-debt: 2861
-    cfi-invested-capital: 2862
-    cfi-tangible-net-worth: 2863
-    cfi-quick-assets: 2864
+    derived-gross-profit: 2857
+    derived-ebitda: 2858
+    derived-effective-tax-rate: 2859
+    derived-nopat: 2860
+    derived-net-debt: 2861
+    derived-invested-capital: 2862
+    derived-tangible-net-worth: 2863
+    derived-quick-assets: 2864
     return-on-equity: 2865
     return-on-assets: 2866
     return-on-invested-capital: 2867
@@ -1978,14 +2015,14 @@ industryIds:
     burn-rate: 1612
     runway: 1613
     headcount: 1614
-    cfi-gross-profit: 3037
-    cfi-ebitda: 3038
-    cfi-effective-tax-rate: 3039
-    cfi-nopat: 3040
-    cfi-net-debt: 3041
-    cfi-invested-capital: 3042
-    cfi-tangible-net-worth: 3043
-    cfi-quick-assets: 3044
+    derived-gross-profit: 3037
+    derived-ebitda: 3038
+    derived-effective-tax-rate: 3039
+    derived-nopat: 3040
+    derived-net-debt: 3041
+    derived-invested-capital: 3042
+    derived-tangible-net-worth: 3043
+    derived-quick-assets: 3044
     return-on-equity: 3045
     return-on-assets: 3046
     return-on-invested-capital: 3047
@@ -2030,14 +2067,14 @@ industryIds:
     burn-rate: 1632
     runway: 1633
     headcount: 1634
-    cfi-gross-profit: 3145
-    cfi-ebitda: 3146
-    cfi-effective-tax-rate: 3147
-    cfi-nopat: 3148
-    cfi-net-debt: 3149
-    cfi-invested-capital: 3150
-    cfi-tangible-net-worth: 3151
-    cfi-quick-assets: 3152
+    derived-gross-profit: 3145
+    derived-ebitda: 3146
+    derived-effective-tax-rate: 3147
+    derived-nopat: 3148
+    derived-net-debt: 3149
+    derived-invested-capital: 3150
+    derived-tangible-net-worth: 3151
+    derived-quick-assets: 3152
     return-on-equity: 3153
     return-on-assets: 3154
     return-on-invested-capital: 3155
@@ -2082,14 +2119,14 @@ industryIds:
     burn-rate: 1652
     runway: 1653
     headcount: 1654
-    cfi-gross-profit: 3361
-    cfi-ebitda: 3362
-    cfi-effective-tax-rate: 3363
-    cfi-nopat: 3364
-    cfi-net-debt: 3365
-    cfi-invested-capital: 3366
-    cfi-tangible-net-worth: 3367
-    cfi-quick-assets: 3368
+    derived-gross-profit: 3361
+    derived-ebitda: 3362
+    derived-effective-tax-rate: 3363
+    derived-nopat: 3364
+    derived-net-debt: 3365
+    derived-invested-capital: 3366
+    derived-tangible-net-worth: 3367
+    derived-quick-assets: 3368
     return-on-equity: 3369
     return-on-assets: 3370
     return-on-invested-capital: 3371
@@ -2134,14 +2171,14 @@ industryIds:
     burn-rate: 1712
     runway: 1713
     headcount: 1714
-    cfi-gross-profit: 2965
-    cfi-ebitda: 2966
-    cfi-effective-tax-rate: 2967
-    cfi-nopat: 2968
-    cfi-net-debt: 2969
-    cfi-invested-capital: 2970
-    cfi-tangible-net-worth: 2971
-    cfi-quick-assets: 2972
+    derived-gross-profit: 2965
+    derived-ebitda: 2966
+    derived-effective-tax-rate: 2967
+    derived-nopat: 2968
+    derived-net-debt: 2969
+    derived-invested-capital: 2970
+    derived-tangible-net-worth: 2971
+    derived-quick-assets: 2972
     return-on-equity: 2973
     return-on-assets: 2974
     return-on-invested-capital: 2975
@@ -2186,14 +2223,14 @@ industryIds:
     burn-rate: 1752
     runway: 1753
     headcount: 1754
-    cfi-gross-profit: 2893
-    cfi-ebitda: 2894
-    cfi-effective-tax-rate: 2895
-    cfi-nopat: 2896
-    cfi-net-debt: 2897
-    cfi-invested-capital: 2898
-    cfi-tangible-net-worth: 2899
-    cfi-quick-assets: 2900
+    derived-gross-profit: 2893
+    derived-ebitda: 2894
+    derived-effective-tax-rate: 2895
+    derived-nopat: 2896
+    derived-net-debt: 2897
+    derived-invested-capital: 2898
+    derived-tangible-net-worth: 2899
+    derived-quick-assets: 2900
     return-on-equity: 2901
     return-on-assets: 2902
     return-on-invested-capital: 2903
@@ -2238,14 +2275,14 @@ industryIds:
     burn-rate: 1712
     runway: 1713
     headcount: 1714
-    cfi-gross-profit: 3001
-    cfi-ebitda: 3002
-    cfi-effective-tax-rate: 3003
-    cfi-nopat: 3004
-    cfi-net-debt: 3005
-    cfi-invested-capital: 3006
-    cfi-tangible-net-worth: 3007
-    cfi-quick-assets: 3008
+    derived-gross-profit: 3001
+    derived-ebitda: 3002
+    derived-effective-tax-rate: 3003
+    derived-nopat: 3004
+    derived-net-debt: 3005
+    derived-invested-capital: 3006
+    derived-tangible-net-worth: 3007
+    derived-quick-assets: 3008
     return-on-equity: 3009
     return-on-assets: 3010
     return-on-invested-capital: 3011
@@ -2290,14 +2327,14 @@ industryIds:
     burn-rate: 2052
     runway: 2053
     headcount: 2054
-    cfi-gross-profit: 3397
-    cfi-ebitda: 3398
-    cfi-effective-tax-rate: 3399
-    cfi-nopat: 3400
-    cfi-net-debt: 3401
-    cfi-invested-capital: 3402
-    cfi-tangible-net-worth: 3403
-    cfi-quick-assets: 3404
+    derived-gross-profit: 3397
+    derived-ebitda: 3398
+    derived-effective-tax-rate: 3399
+    derived-nopat: 3400
+    derived-net-debt: 3401
+    derived-invested-capital: 3402
+    derived-tangible-net-worth: 3403
+    derived-quick-assets: 3404
     return-on-equity: 3405
     return-on-assets: 3406
     return-on-invested-capital: 3407
@@ -2342,14 +2379,14 @@ industryIds:
     burn-rate: 2032
     runway: 2033
     headcount: 2034
-    cfi-gross-profit: 3253
-    cfi-ebitda: 3254
-    cfi-effective-tax-rate: 3255
-    cfi-nopat: 3256
-    cfi-net-debt: 3257
-    cfi-invested-capital: 3258
-    cfi-tangible-net-worth: 3259
-    cfi-quick-assets: 3260
+    derived-gross-profit: 3253
+    derived-ebitda: 3254
+    derived-effective-tax-rate: 3255
+    derived-nopat: 3256
+    derived-net-debt: 3257
+    derived-invested-capital: 3258
+    derived-tangible-net-worth: 3259
+    derived-quick-assets: 3260
     return-on-equity: 3261
     return-on-assets: 3262
     return-on-invested-capital: 3263
@@ -2394,14 +2431,14 @@ industryIds:
     burn-rate: 1812
     runway: 1813
     headcount: 1814
-    cfi-gross-profit: 2821
-    cfi-ebitda: 2822
-    cfi-effective-tax-rate: 2823
-    cfi-nopat: 2824
-    cfi-net-debt: 2825
-    cfi-invested-capital: 2826
-    cfi-tangible-net-worth: 2827
-    cfi-quick-assets: 2828
+    derived-gross-profit: 2821
+    derived-ebitda: 2822
+    derived-effective-tax-rate: 2823
+    derived-nopat: 2824
+    derived-net-debt: 2825
+    derived-invested-capital: 2826
+    derived-tangible-net-worth: 2827
+    derived-quick-assets: 2828
     return-on-equity: 2829
     return-on-assets: 2830
     return-on-invested-capital: 2831
@@ -2446,14 +2483,14 @@ industryIds:
     burn-rate: 1982
     runway: 1983
     headcount: 1984
-    cfi-gross-profit: 3073
-    cfi-ebitda: 3074
-    cfi-effective-tax-rate: 3075
-    cfi-nopat: 3076
-    cfi-net-debt: 3077
-    cfi-invested-capital: 3078
-    cfi-tangible-net-worth: 3079
-    cfi-quick-assets: 3080
+    derived-gross-profit: 3073
+    derived-ebitda: 3074
+    derived-effective-tax-rate: 3075
+    derived-nopat: 3076
+    derived-net-debt: 3077
+    derived-invested-capital: 3078
+    derived-tangible-net-worth: 3079
+    derived-quick-assets: 3080
     return-on-equity: 3081
     return-on-assets: 3082
     return-on-invested-capital: 3083
@@ -2498,14 +2535,14 @@ industryIds:
     burn-rate: 1997
     runway: 1998
     headcount: 1999
-    cfi-gross-profit: 3469
-    cfi-ebitda: 3470
-    cfi-effective-tax-rate: 3471
-    cfi-nopat: 3472
-    cfi-net-debt: 3473
-    cfi-invested-capital: 3474
-    cfi-tangible-net-worth: 3475
-    cfi-quick-assets: 3476
+    derived-gross-profit: 3469
+    derived-ebitda: 3470
+    derived-effective-tax-rate: 3471
+    derived-nopat: 3472
+    derived-net-debt: 3473
+    derived-invested-capital: 3474
+    derived-tangible-net-worth: 3475
+    derived-quick-assets: 3476
     return-on-equity: 3477
     return-on-assets: 3478
     return-on-invested-capital: 3479
@@ -2550,14 +2587,14 @@ industryIds:
     burn-rate: 2082
     runway: 2083
     headcount: 2084
-    cfi-gross-profit: 2929
-    cfi-ebitda: 2930
-    cfi-effective-tax-rate: 2931
-    cfi-nopat: 2932
-    cfi-net-debt: 2933
-    cfi-invested-capital: 2934
-    cfi-tangible-net-worth: 2935
-    cfi-quick-assets: 2936
+    derived-gross-profit: 2929
+    derived-ebitda: 2930
+    derived-effective-tax-rate: 2931
+    derived-nopat: 2932
+    derived-net-debt: 2933
+    derived-invested-capital: 2934
+    derived-tangible-net-worth: 2935
+    derived-quick-assets: 2936
     return-on-equity: 2937
     return-on-assets: 2938
     return-on-invested-capital: 2939

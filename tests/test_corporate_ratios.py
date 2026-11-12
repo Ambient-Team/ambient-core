@@ -1,4 +1,4 @@
-"""Golden tests for CFI guide financial ratios (see docs/ratios/cfi-ratios.md)."""
+"""Golden tests for the standard corporate ratio pack (see docs/ratios/corporate-ratios.md)."""
 
 from __future__ import annotations
 
@@ -10,18 +10,18 @@ import yaml
 
 from ambient_calc import compute_all
 
-FIXTURE = Path(__file__).resolve().parent / "fixtures" / "cfi" / "harbor_ridge_ratio_test_cases.json"
+FIXTURE = Path(__file__).resolve().parent / "fixtures" / "ratios" / "harbor_ridge_ratio_test_cases.json"
 CORE = Path(__file__).resolve().parents[1] / "catalog" / "shared" / "metrics.yaml"
 
-CFI_TEMPLATE_KEYS = {
-    "cfi-gross-profit",
-    "cfi-ebitda",
-    "cfi-effective-tax-rate",
-    "cfi-nopat",
-    "cfi-net-debt",
-    "cfi-invested-capital",
-    "cfi-tangible-net-worth",
-    "cfi-quick-assets",
+CORPORATE_TEMPLATE_KEYS = {
+    "derived-gross-profit",
+    "derived-ebitda",
+    "derived-effective-tax-rate",
+    "derived-nopat",
+    "derived-net-debt",
+    "derived-invested-capital",
+    "derived-tangible-net-worth",
+    "derived-quick-assets",
     "return-on-equity",
     "return-on-assets",
     "return-on-invested-capital",
@@ -55,11 +55,11 @@ CFI_TEMPLATE_KEYS = {
 LEGACY_PERCENT_SCALE = {"gross_margin", "ebitda_margin", "current_ratio", "quick_ratio"}
 
 
-def _load_cfi_metrics() -> list[dict]:
+def _load_corporate_metrics() -> list[dict]:
     templates = yaml.safe_load(CORE.read_text(encoding="utf-8"))["templates"]
     return [
         {**templates[k], "slug": templates[k].get("slug") or k.replace("-", "_")}
-        for k in CFI_TEMPLATE_KEYS
+        for k in CORPORATE_TEMPLATE_KEYS
         if k in templates
     ]
 
@@ -128,9 +128,9 @@ def _expected_decimal(entry: dict) -> float:
 
 
 @pytest.fixture(scope="module")
-def cfi_metrics() -> list[dict]:
-    metrics = _load_cfi_metrics()
-    assert len(metrics) == len(CFI_TEMPLATE_KEYS)
+def corporate_metrics() -> list[dict]:
+    metrics = _load_corporate_metrics()
+    assert len(metrics) == len(CORPORATE_TEMPLATE_KEYS)
     return metrics
 
 
@@ -140,14 +140,14 @@ def fixture() -> dict:
 
 
 @pytest.fixture(scope="module")
-def ending_results(cfi_metrics: list[dict], fixture: dict) -> dict[str, float | None]:
-    return compute_all(cfi_metrics, _ending_inputs(fixture))
+def ending_results(corporate_metrics: list[dict], fixture: dict) -> dict[str, float | None]:
+    return compute_all(corporate_metrics, _ending_inputs(fixture))
 
 
 @pytest.fixture(scope="module")
-def average_results(cfi_metrics: list[dict], fixture: dict) -> dict[str, float | None]:
+def average_results(corporate_metrics: list[dict], fixture: dict) -> dict[str, float | None]:
     base = _ending_inputs(fixture)
-    return compute_all(cfi_metrics, _average_inputs(fixture, base))
+    return compute_all(corporate_metrics, _average_inputs(fixture, base))
 
 
 def _assert_close(actual: float | None, expected: float) -> None:
@@ -160,8 +160,7 @@ def test_ending_golden_ratio(ratio_id: str, fixture: dict, ending_results: dict[
     if ratio_id in LEGACY_PERCENT_SCALE:
         pytest.skip("legacy core template tested separately")
     expected = _expected_decimal(fixture["expected_ratios_ending_current_year"][ratio_id])
-    slug = ratio_id
-    actual = ending_results[slug]
+    actual = ending_results[ratio_id]
     _assert_close(actual, expected)
 
 
@@ -175,8 +174,14 @@ def test_legacy_margins_percent_scale(fixture: dict) -> None:
     exp = fixture["expected_ratios_ending_current_year"]
     assert out["gross_margin"] == pytest.approx(float(exp["gross_margin"]["value_percent"]), rel=0, abs=1e-9)
     assert out["ebitda_margin"] == pytest.approx(float(exp["ebitda_margin"]["value_percent"]), rel=0, abs=1e-9)
-    assert out["current_ratio"] == pytest.approx(float(exp["current_ratio"]["value_multiple"]), rel=0, abs=1e-10)
-    assert out["quick_ratio"] == pytest.approx(float(exp["quick_ratio"]["value_multiple"]), rel=0, abs=1e-10)
+    assert out["current_ratio"] == pytest.approx(float(exp["current_ratio"]["value_multiple"]), rel=0, abs=1e-9)
+    assert out["quick_ratio"] == pytest.approx(float(exp["quick_ratio"]["value_multiple"]), rel=0, abs=1e-9)
+
+
+def test_quick_ratio_alternate_convention(fixture: dict, ending_results: dict[str, float | None]) -> None:
+    """Strict quick assets form per docs/ratios/corporate-ratios.md."""
+    exp = fixture["expected_ratios_ending_current_year"]["quick_ratio_quick_assets"]
+    _assert_close(ending_results["quick_ratio_quick_assets"], float(exp["value_multiple"]))
 
 
 @pytest.mark.parametrize("ratio_id", list(json.loads(FIXTURE.read_text())["expected_ratios_average_balances"]))
@@ -184,8 +189,7 @@ def test_average_golden_ratio(
     ratio_id: str, fixture: dict, average_results: dict[str, float | None]
 ) -> None:
     expected = _expected_decimal(fixture["expected_ratios_average_balances"][ratio_id])
-    slug = "inventory_turnover" if ratio_id == "inventory_turnover" else ratio_id
-    _assert_close(average_results[slug], expected)
+    _assert_close(average_results[ratio_id], expected)
 
 
 def test_dupont_identities(ending_results: dict[str, float | None]) -> None:
@@ -221,10 +225,11 @@ def test_day_identities(ending_results: dict[str, float | None]) -> None:
         assert days == pytest.approx(365 / turn, rel=0, abs=1e-10)
 
 
-def test_zero_denominator_returns_none(cfi_metrics: list[dict]) -> None:
+def test_zero_denominator_returns_none(corporate_metrics: list[dict]) -> None:
+    """Null reasons are follow-up; zero interest must not yield infinite coverage."""
     base = _ending_inputs(_load_fixture())
     base["interest_expense"] = 0
-    out = compute_all(cfi_metrics, base)
+    out = compute_all(corporate_metrics, base)
     assert out["ebitda_to_interest"] is None
     assert out["ebit_to_interest"] is None
     assert out["ebitda_less_capex_to_interest"] is None

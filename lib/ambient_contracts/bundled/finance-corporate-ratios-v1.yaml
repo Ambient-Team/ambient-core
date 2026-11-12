@@ -3,7 +3,7 @@ product:
   version: 1.0
   owner: analytics
   consumption_id: FINANCE_CORPORATE_RATIOS
-  description: "Corporate financial statement ratios aligned with CFI's Definitive Guide to Financial Ratios (Apr 2024). Ending balance-sheet stocks are the default; optional averaged inputs are supplied upstream when analysts switch basis. Catalog slugs match the contract column names."
+  description: "Standard corporate financial statement ratios (Ambient corporate ratio pack). Ending balance-sheet stocks are the default; optional averaged inputs are supplied upstream when analysts switch basis. Catalog slugs match the contract column names."
   domain: Corporate Finance
   type: Derived
 

@@ -1,6 +1,6 @@
 {
   "label": "synthetic",
-  "disclaimer": "This entire dataset is synthetic and was made up for golden tests. It is not based on any real company, including the anonymized retailer examples in the CFI guide. Figures are in USD and internally consistent across the income statement, the two year-end balance sheets, and the cash flow statement.",
+  "disclaimer": "This entire dataset is synthetic and was made up for golden tests. It is not based on any real company. Figures are in USD and internally consistent across the income statement, the two year-end balance sheets, and the cash flow statement.",
   "entity_name": "Harbor Ridge Components Ltd (synthetic)",
   "currency": "USD",
   "scale": "units",
@@ -102,8 +102,8 @@
     "tangible_net_worth_formula": "total_shareholders_equity - intangible_assets",
     "quick_assets_strict": 200000,
     "quick_assets_strict_formula": "cash + marketable_securities + accounts_receivable",
-    "working_capital_dollars_not_a_cfi_ratio": 190000,
-    "working_capital_dollars_note": "Included only as a cross-check. The guide's 'working capital ratio' is the current ratio, not this dollar figure."
+    "working_capital_dollars_not_in_standard_pack": 190000,
+    "working_capital_dollars_note": "Included only as a cross-check. Working capital ratio means current ratio, not this dollar figure."
   },
   "derived_line_items_average_balances": {
     "average_total_assets": 759000,
@@ -620,6 +620,6 @@
     "primary_set": "Assert every key in expected_ratios_ending_current_year. quick_ratio is the guide's formula-box definition (current assets minus inventory). quick_ratio_quick_assets is the stricter cash + marketable securities + accounts receivable form described in the guide's prose.",
     "variants": "ebitda_margin, net_debt_to_ebitda, ebit_to_interest, ebitda_less_capex_to_interest, and fixed_charge_coverage are documented variants from the guide, not separate chapters.",
     "average_set": "expected_ratios_average_balances covers only ratios whose denominator (or stock term) is a balance-sheet item. Income-statement-only ratios do not change with the balance basis and are omitted from that object.",
-    "not_in_guide": "Do not treat working capital in dollars, the cash conversion cycle, or credit-sales DSO as CFI-guide ratios when testing this fixture."
+    "not_in_standard_pack": "Do not treat working capital in dollars, the cash conversion cycle, or credit-sales DSO as standard-pack ratios when testing this fixture."
   }
 }
