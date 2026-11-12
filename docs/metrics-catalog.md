@@ -14,6 +14,8 @@ Groundwork for queue item **Q-099**. This document describes the reference catal
 
 Authoring conventions (keys, id bands, `calc` blocks): [CONVENTIONS.md](CONVENTIONS.md). Pack layout: [catalog/README.md](../catalog/README.md).
 
+**Standard corporate ratio pack** — additional return, expense, utilization, solvency, and liquidity templates (beyond legacy FP&A defaults) are documented in [ratios/corporate-ratios.md](ratios/corporate-ratios.md). Templates are tagged `corporateRatioPack: true` in `catalog/shared/metrics.yaml` (for example `return_on_equity`, `accounts_receivable_days`, `quick_ratio_quick_assets`).
+
 ## Lens: Finance vs OPS
 
 - **Finance (fintech lens)** — metrics with `tech: FINTECH`, or `type: Financial` when `tech` is absent.

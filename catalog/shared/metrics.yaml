@@ -4,8 +4,8 @@ templates:
     - Financial statements
     - Trial balance
     - Balance sheet
-    description: 'Short-term liquidity: ability to cover current liabilities with
-      current assets.'
+    description: 'Short-term liquidity: ability to cover current liabilities with current
+      assets.'
     industryTags:
     - Corporate Finance
     - All
@@ -26,8 +26,8 @@ templates:
       hardMax: 20
     validationRule: ratio
     benchmarkKey: current_ratio
-    fpaWorkflow: Liquidity & solvency review — feeds covenant monitoring and the monthly
-      board liquidity pack.
+    fpaWorkflow: Liquidity & solvency review — feeds covenant monitoring and the monthly board
+      liquidity pack.
     calc:
       expr: current_assets / current_liabilities
       inputs:
@@ -38,8 +38,9 @@ templates:
     - Financial statements
     - Trial balance
     - Balance sheet
-    description: Acid-test liquidity excluding inventory — most conservative short-term
-      solvency view.
+    description: 'Acid-test liquidity excluding inventory — most conservative short-term solvency
+      view. Default formula: current assets minus inventory. See quick_ratio_quick_assets
+      for the alternate convention (cash + marketable securities + receivables).'
     industryTags:
     - Corporate Finance
     - All
@@ -94,8 +95,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: gross_margin
-    fpaWorkflow: Unit-economics and pricing review — anchors contribution-margin and
-      budget-vs-actual analysis.
+    fpaWorkflow: Unit-economics and pricing review — anchors contribution-margin and budget-vs-actual
+      analysis.
     calc:
       expr: (revenue - cogs) / revenue * 100
       inputs:
@@ -137,8 +138,8 @@ templates:
     datasource:
     - Financial statements
     - General ledger
-    description: Core operating cash profitability before interest, tax, depreciation
-      and amortization.
+    description: Core operating cash profitability before interest, tax, depreciation and
+      amortization.
     industryTags:
     - Corporate Finance
     - All
@@ -159,8 +160,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: ebitda_margin
-    fpaWorkflow: Valuation & lender reporting — primary profitability proxy in models
-      and covenant tests.
+    fpaWorkflow: Valuation & lender reporting — primary profitability proxy in models and
+      covenant tests.
     calc:
       expr: ebitda / revenue * 100
       inputs:
@@ -191,8 +192,8 @@ templates:
       hardMax: 100
     validationRule: percentage
     benchmarkKey: net_margin
-    fpaWorkflow: Board P&L reporting — the headline profitability line for the monthly
-      close pack.
+    fpaWorkflow: Board P&L reporting — the headline profitability line for the monthly close
+      pack.
     calc:
       expr: net_income / revenue * 100
       inputs:
@@ -207,8 +208,8 @@ templates:
     - Corporate Finance
     - SaaS
     - All
-    methodology: Revenue Growth = ((Current Period Revenue − Prior Period Revenue)
-      / Prior Period Revenue) × 100
+    methodology: Revenue Growth = ((Current Period Revenue − Prior Period Revenue) / Prior
+      Period Revenue) × 100
     name: Revenue Growth Rate
     sensorFieldData:
     - Not Applicable
@@ -225,8 +226,7 @@ templates:
       hardMax: 1000
     validationRule: percentage_unbounded
     benchmarkKey: revenue_growth
-    fpaWorkflow: Growth planning — drives top-line forecast, hiring plan and the rolling
-      re-forecast.
+    fpaWorkflow: Growth planning — drives top-line forecast, hiring plan and the rolling re-forecast.
     calc:
       expr: (revenue - revenue_prior) / revenue_prior * 100
       inputs:
@@ -258,8 +258,8 @@ templates:
       hardMax: 1000000000
     validationRule: currency_signed
     benchmarkKey: working_capital
-    fpaWorkflow: Working-capital management — feeds the 13-week cash forecast and
-      treasury planning.
+    fpaWorkflow: Working-capital management — feeds the 13-week cash forecast and treasury
+      planning.
     calc:
       expr: current_assets - current_liabilities
       inputs:
@@ -299,6 +299,8 @@ templates:
       - accounts_receivable
       - total_credit_sales
       - days
+    standardRatioNote: 'Parameterized DSO (credit sales and caller-supplied days). Standard
+      convention: accounts_receivable_days (revenue, 365-day year).'
   dpo:
     datasource:
     - Accounts payable aging
@@ -333,13 +335,14 @@ templates:
       - accounts_payable
       - cogs
       - days
+    standardRatioNote: 'Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days
+      (365-day year).'
   ccc:
     datasource:
     - Accounts receivable aging
     - Accounts payable aging
     - Inventory records
-    description: Days to convert investments in inventory and receivables back into
-      cash.
+    description: Days to convert investments in inventory and receivables back into cash.
     industryTags:
     - Corporate Finance
     - All
@@ -360,8 +363,8 @@ templates:
       hardMax: 365
     validationRule: days_signed
     benchmarkKey: ccc
-    fpaWorkflow: Cash-efficiency program — a north-star working-capital KPI tracked
-      in the treasury review.
+    fpaWorkflow: Cash-efficiency program — a north-star working-capital KPI tracked in the
+      treasury review.
     calc:
       expr: dso + days_inventory_outstanding - dpo
       inputs:
@@ -375,8 +378,8 @@ templates:
     industryTags:
     - Corporate Finance
     - All
-    methodology: Operating Cash Flow = Net Income + Non-Cash Charges − Increase in
-      Working Capital
+    methodology: Operating Cash Flow = Net Income + Non-Cash Charges − Increase in Working
+      Capital
     name: Operating Cash Flow
     sensorFieldData:
     - Not Applicable
@@ -393,8 +396,7 @@ templates:
       hardMax: 1000000000
     validationRule: currency_signed
     benchmarkKey: operating_cash_flow
-    fpaWorkflow: Cash-flow forecasting — the anchor of the direct/indirect cash-flow
-      statement.
+    fpaWorkflow: Cash-flow forecasting — the anchor of the direct/indirect cash-flow statement.
     calc:
       expr: net_income + non_cash_charges - increase_in_working_capital
       inputs:
@@ -428,8 +430,8 @@ templates:
       hardMax: 100000000
     validationRule: currency
     benchmarkKey: burn_rate
-    fpaWorkflow: Runway management — paired with cash balance to govern the spend
-      plan and fundraising timing.
+    fpaWorkflow: Runway management — paired with cash balance to govern the spend plan and
+      fundraising timing.
     calc:
       expr: cash_out - cash_in
       inputs:
@@ -461,20 +463,20 @@ templates:
       hardMax: 240
     validationRule: number
     benchmarkKey: runway
-    fpaWorkflow: Board & investor reporting — the survival metric that gates hiring
-      and spend decisions.
+    fpaWorkflow: Board & investor reporting — the survival metric that gates hiring and spend
+      decisions.
     calc:
       expr: current_cash_balance / burn_rate
       inputs:
       - current_cash_balance
   headcount:
     name: Headcount (FTE)
-    description: Period-end count of active full-time-equivalent employees. A directly
-      measured input, not a derived ratio.
+    description: Period-end count of active full-time-equivalent employees. A directly measured
+      input, not a derived ratio.
     type: Operational
     unit: Count
-    methodology: Period-end count of active employees expressed as full-time equivalents
-      (directly measured, not calculated).
+    methodology: Period-end count of active employees expressed as full-time equivalents (directly
+      measured, not calculated).
     datasource:
     - HR records
     - Payroll records
@@ -487,6 +489,1100 @@ templates:
     frequency: monthly
     tech: FINTECH
     input: true
+  derived-gross-profit:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Gross Profit (derived)
+    description: Revenue minus COGS; building block for margins 
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: gross_profit
+    slug: gross_profit
+    calc:
+      expr: revenue - cogs
+      inputs:
+      - revenue
+      - cogs
+    methodology: Gross Profit (derived)
+    corporateRatioPack: true
+  derived-ebitda:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: EBITDA (derived)
+    description: EBIT plus depreciation and amortization 
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: ebitda_derived
+    slug: ebitda_derived
+    calc:
+      expr: operating_income + depreciation + amortization
+      inputs:
+      - operating_income
+      - depreciation
+      - amortization
+    methodology: EBITDA (derived)
+    corporateRatioPack: true
+  derived-effective-tax-rate:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Effective Tax Rate
+    description: Tax expense divided by earnings before tax 
+    methodology: Effective Tax Rate = Tax Expense / Earnings Before Tax
+    unit: '%'
+    higherIsBetter: false
+    validationRule: percentage
+    benchmarkKey: effective_tax_rate
+    slug: effective_tax_rate
+    calc:
+      expr: tax_expense / max(earnings_before_tax, 0)
+      inputs:
+      - tax_expense
+      - earnings_before_tax
+    corporateRatioPack: true
+  derived-nopat:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Net Operating Profit After Tax (NOPAT)
+    description: EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate
+      ratio pack).
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: nopat
+    slug: nopat
+    calc:
+      expr: operating_income * (1 - effective_tax_rate)
+      inputs:
+      - operating_income
+    methodology: Net Operating Profit After Tax (NOPAT)
+    corporateRatioPack: true
+  derived-net-debt:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Net Debt
+    description: Interest-bearing liabilities minus cash 
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: net_debt
+    slug: net_debt
+    calc:
+      expr: interest_bearing_liabilities - cash
+      inputs:
+      - interest_bearing_liabilities
+      - cash
+    methodology: Net Debt
+    corporateRatioPack: true
+  derived-invested-capital:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Invested Capital
+    description: Net debt plus total shareholders' equity 
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: invested_capital
+    slug: invested_capital
+    calc:
+      expr: net_debt + total_shareholders_equity
+      inputs:
+      - total_shareholders_equity
+    methodology: Invested Capital
+    corporateRatioPack: true
+  derived-tangible-net-worth:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Tangible Net Worth
+    description: Shareholders' equity minus intangible assets 
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: tangible_net_worth
+    slug: tangible_net_worth
+    calc:
+      expr: total_shareholders_equity - intangible_assets
+      inputs:
+      - total_shareholders_equity
+      - intangible_assets
+    methodology: Tangible Net Worth
+    corporateRatioPack: true
+  derived-quick-assets:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Quick Assets (strict)
+    description: Cash, marketable securities, and accounts receivable (Ambient corporate ratio
+      pack).
+    unit: Currency (e.g., USD)
+    validationRule: currency_signed
+    benchmarkKey: quick_assets
+    slug: quick_assets
+    calc:
+      expr: cash + marketable_securities + accounts_receivable
+      inputs:
+      - cash
+      - marketable_securities
+      - accounts_receivable
+    methodology: Quick Assets (strict)
+    corporateRatioPack: true
+  return-on-equity:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Return on Equity (ROE)
+    description: Net income divided by shareholders' equity 
+    methodology: ROE = Net Income / Total Shareholders' Equity
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: return_on_equity
+    slug: return_on_equity
+    calc:
+      expr: net_income / max(total_shareholders_equity, 0)
+      inputs:
+      - net_income
+      - total_shareholders_equity
+    corporateRatioPack: true
+  return-on-assets:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Return on Assets (ROA)
+    description: Net income divided by total assets 
+    methodology: ROA = Net Income / Total Assets
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: return_on_assets
+    slug: return_on_assets
+    calc:
+      expr: net_income / max(total_assets, 0)
+      inputs:
+      - net_income
+      - total_assets
+    corporateRatioPack: true
+  return-on-invested-capital:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Return on Invested Capital (ROIC)
+    description: NOPAT divided by invested capital 
+    methodology: ROIC = NOPAT / (Net Debt + Equity)
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: return_on_invested_capital
+    slug: return_on_invested_capital
+    calc:
+      expr: nopat / max(invested_capital, 0)
+      inputs: []
+    corporateRatioPack: true
+  operating-profit-margin:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Operating Profit Margin (EBIT)
+    description: EBIT divided by revenue as a decimal quotient. Alias of operating_margin
+      at percent scale; see docs/ratios/corporate-ratios.md.
+      Alias of operating_margin at percent scale.
+    methodology: Operating Profit Margin = EBIT / Revenue
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: operating_profit_margin
+    slug: operating_profit_margin
+    relatedBenchmarkKeys:
+    - operating_margin
+    calc:
+      expr: operating_income / max(revenue, 0)
+      inputs:
+      - operating_income
+      - revenue
+    corporateRatioPack: true
+  net-profit-margin:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Net Profit Margin (decimal quotient)
+    description: Net income divided by revenue as a decimal quotient. Alias of net_margin
+      at percent scale; see docs/ratios/corporate-ratios.md.
+    methodology: Net Profit Margin = Net Income / Revenue
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: net_profit_margin
+    slug: net_profit_margin
+    relatedBenchmarkKeys:
+    - net_margin
+    calc:
+      expr: net_income / max(revenue, 0)
+      inputs:
+      - net_income
+      - revenue
+    corporateRatioPack: true
+  effective-interest-rate:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Effective Interest Rate
+    description: Gross interest expense divided by interest-bearing liabilities (Ambient corporate
+      ratio pack).
+    unit: '%'
+    higherIsBetter: false
+    validationRule: percentage
+    benchmarkKey: effective_interest_rate
+    slug: effective_interest_rate
+    calc:
+      expr: interest_expense / max(interest_bearing_liabilities, 0)
+      inputs:
+      - interest_expense
+      - interest_bearing_liabilities
+    methodology: Effective Interest Rate
+    corporateRatioPack: true
+  interest-burden:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Interest Burden
+    description: EBT relative to EBIT; DuPont lever 
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: interest_burden
+    slug: interest_burden
+    calc:
+      expr: earnings_before_tax / max(operating_income, 0)
+      inputs:
+      - earnings_before_tax
+      - operating_income
+    methodology: Interest Burden
+    corporateRatioPack: true
+  tax-burden:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Tax Burden
+    description: Net income relative to EBT; DuPont lever 
+    unit: '%'
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: tax_burden
+    slug: tax_burden
+    calc:
+      expr: net_income / max(earnings_before_tax, 0)
+      inputs:
+      - net_income
+      - earnings_before_tax
+    methodology: Tax Burden
+    corporateRatioPack: true
+  total-asset-turnover:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Total Asset Turnover
+    description: Revenue divided by total assets 
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: total_asset_turnover
+    slug: total_asset_turnover
+    calc:
+      expr: revenue / max(total_assets, 0)
+      inputs:
+      - revenue
+      - total_assets
+    methodology: Total Asset Turnover
+    corporateRatioPack: true
+  ppe-turnover:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: PP&E Turnover
+    description: Revenue divided by net PP&E 
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: ppe_turnover
+    slug: ppe_turnover
+    calc:
+      expr: revenue / max(ppe_net, 0)
+      inputs:
+      - revenue
+      - ppe_net
+    methodology: PP&E Turnover
+    corporateRatioPack: true
+  cash-turnover:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Cash Turnover
+    description: Revenue divided by cash 
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: cash_turnover
+    slug: cash_turnover
+    calc:
+      expr: revenue / max(cash, 0)
+      inputs:
+      - revenue
+      - cash
+    methodology: Cash Turnover
+    corporateRatioPack: true
+  cash-days:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Cash Days
+    description: Cash balance expressed as days of revenue at a 365-day year (Ambient corporate
+      ratio pack).
+    unit: Days
+    higherIsBetter: false
+    validationRule: days
+    benchmarkKey: cash_days
+    slug: cash_days
+    calc:
+      expr: cash * 365 / max(revenue, 0)
+      inputs:
+      - revenue
+      - cash
+    methodology: Cash Days
+    corporateRatioPack: true
+  accounts-receivable-turnover:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Accounts Receivable Turnover
+    description: Revenue divided by accounts receivable  Not
+      parameterized DSO.
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: accounts_receivable_turnover
+    slug: accounts_receivable_turnover
+    calc:
+      expr: revenue / max(accounts_receivable, 0)
+      inputs:
+      - revenue
+      - accounts_receivable
+    methodology: Accounts Receivable Turnover
+    corporateRatioPack: true
+  accounts-receivable-days:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Accounts Receivable Days
+    description: Receivable balance in days of revenue; 365-day convention (Ambient corporate
+      ratio pack). Distinct from catalog DSO.
+    unit: Days
+    higherIsBetter: false
+    validationRule: days
+    benchmarkKey: accounts_receivable_days
+    slug: accounts_receivable_days
+    relatedBenchmarkKeys:
+    - dso
+    calc:
+      expr: accounts_receivable * 365 / max(revenue, 0)
+      inputs:
+      - revenue
+      - accounts_receivable
+    methodology: Accounts Receivable Days
+    corporateRatioPack: true
+  inventory-turnover:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Inventory Turnover (ending balance)
+    description: COGS divided by ending inventory  Distinct
+      from average-inventory variants.
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: inventory_turnover
+    slug: inventory_turnover
+    relatedBenchmarkKeys:
+    - inventory_turnover
+    calc:
+      expr: cogs / max(inventory, 0)
+      inputs:
+      - cogs
+      - inventory
+    methodology: Inventory Turnover (ending balance)
+    corporateRatioPack: true
+  inventory-days:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Inventory Days
+    description: Inventory held in days of COGS; 365-day convention (Ambient corporate ratio
+      pack).
+    unit: Days
+    higherIsBetter: false
+    validationRule: days
+    benchmarkKey: inventory_days
+    slug: inventory_days
+    calc:
+      expr: inventory * 365 / max(cogs, 0)
+      inputs:
+      - cogs
+      - inventory
+    methodology: Inventory Days
+    corporateRatioPack: true
+  accounts-payable-turnover:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Accounts Payable Turnover
+    description: COGS divided by accounts payable 
+    unit: x
+    higherIsBetter: false
+    validationRule: ratio
+    benchmarkKey: accounts_payable_turnover
+    slug: accounts_payable_turnover
+    calc:
+      expr: cogs / max(accounts_payable, 0)
+      inputs:
+      - cogs
+      - accounts_payable
+    methodology: Accounts Payable Turnover
+    corporateRatioPack: true
+  accounts-payable-days:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Accounts Payable Days
+    description: Payables expressed as days of COGS; 365-day convention (Ambient corporate
+      ratio pack). Distinct from catalog DPO.
+    unit: Days
+    higherIsBetter: true
+    validationRule: days
+    benchmarkKey: accounts_payable_days
+    slug: accounts_payable_days
+    relatedBenchmarkKeys:
+    - dpo
+    calc:
+      expr: accounts_payable * 365 / max(cogs, 0)
+      inputs:
+      - cogs
+      - accounts_payable
+    methodology: Accounts Payable Days
+    corporateRatioPack: true
+  total-assets-to-equity:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Total Assets to Equity (Equity Multiplier)
+    description: Financial leverage lever in DuPont 
+    unit: x
+    higherIsBetter: false
+    validationRule: ratio
+    benchmarkKey: total_assets_to_equity
+    slug: total_assets_to_equity
+    calc:
+      expr: total_assets / max(total_shareholders_equity, 0)
+      inputs:
+      - total_assets
+      - total_shareholders_equity
+    methodology: Total Assets to Equity (Equity Multiplier)
+    corporateRatioPack: true
+  debt-to-equity:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Debt to Equity
+    description: Interest-bearing liabilities divided by equity 
+    unit: x
+    higherIsBetter: false
+    validationRule: ratio
+    benchmarkKey: debt_to_equity
+    slug: debt_to_equity
+    calc:
+      expr: interest_bearing_liabilities / max(total_shareholders_equity, 0)
+      inputs:
+      - interest_bearing_liabilities
+      - total_shareholders_equity
+    methodology: Debt to Equity
+    corporateRatioPack: true
+  debt-to-tangible-net-worth:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Debt to Tangible Net Worth
+    description: Interest-bearing debt divided by tangible net worth (Ambient corporate ratio
+      pack).
+    unit: x
+    higherIsBetter: false
+    validationRule: ratio
+    benchmarkKey: debt_to_tangible_net_worth
+    slug: debt_to_tangible_net_worth
+    calc:
+      expr: interest_bearing_liabilities / max(tangible_net_worth, 0)
+      inputs:
+      - interest_bearing_liabilities
+    methodology: Debt to Tangible Net Worth
+    corporateRatioPack: true
+  debt-to-ebitda:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Debt to EBITDA
+    description: Gross interest-bearing debt divided by EBITDA 
+    unit: x
+    higherIsBetter: false
+    validationRule: ratio
+    benchmarkKey: debt_to_ebitda
+    slug: debt_to_ebitda
+    calc:
+      expr: interest_bearing_liabilities / max(ebitda_derived, 0)
+      inputs:
+      - interest_bearing_liabilities
+    methodology: Debt to EBITDA
+    corporateRatioPack: true
+  net-debt-to-ebitda:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Net Debt to EBITDA
+    description: Net debt divided by EBITDA 
+    unit: x
+    higherIsBetter: false
+    validationRule: ratio
+    benchmarkKey: net_debt_to_ebitda
+    slug: net_debt_to_ebitda
+    calc:
+      expr: net_debt / max(ebitda_derived, 0)
+      inputs: []
+    methodology: Net Debt to EBITDA
+    corporateRatioPack: true
+  quick-ratio-quick-assets:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Quick Ratio (Quick Assets)
+    description: Strict quick assets over current liabilities 
+      Formula-box quick_ratio remains default.
+    methodology: Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: quick_ratio_quick_assets
+    slug: quick_ratio_quick_assets
+    relatedBenchmarkKeys:
+    - quick_ratio
+    calc:
+      expr: quick_assets / max(current_liabilities, 0)
+      inputs:
+      - current_liabilities
+    corporateRatioPack: true
+  ebitda-to-interest:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: EBITDA to Interest (Interest Coverage)
+    description: EBITDA divided by gross interest expense 
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: ebitda_to_interest
+    slug: ebitda_to_interest
+    calc:
+      expr: ebitda_derived / max(interest_expense, 0)
+      inputs:
+      - interest_expense
+    methodology: EBITDA to Interest (Interest Coverage)
+    corporateRatioPack: true
+  ebit-to-interest:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: EBIT to Interest
+    description: EBIT divided by gross interest expense 
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: ebit_to_interest
+    slug: ebit_to_interest
+    calc:
+      expr: operating_income / max(interest_expense, 0)
+      inputs:
+      - operating_income
+      - interest_expense
+    methodology: EBIT to Interest
+    corporateRatioPack: true
+  ebitda-less-capex-to-interest:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: EBITDA Less Capex to Interest
+    description: Capex-adjusted EBITDA coverage 
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: ebitda_less_capex_to_interest
+    slug: ebitda_less_capex_to_interest
+    calc:
+      expr: (ebitda_derived - capital_expenditures) / max(interest_expense, 0)
+      inputs:
+      - capital_expenditures
+      - interest_expense
+    methodology: EBITDA Less Capex to Interest
+    corporateRatioPack: true
+  fixed-charge-coverage:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    industryTags:
+    - Corporate Finance
+    - All
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    frequency: annual
+    balanceBasisDefault: ending
+    name: Fixed Charge Coverage
+    description: Capex-adjusted EBITDA over interest plus current debt maturities (Ambient
+      corporate ratio pack).
+    unit: x
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: fixed_charge_coverage
+    slug: fixed_charge_coverage
+    calc:
+      expr: (ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt,
+        0)
+      inputs:
+      - capital_expenditures
+      - interest_expense
+      - current_portion_long_term_debt
+    methodology: Fixed Charge Coverage
+    corporateRatioPack: true
 industryIds:
   Healthcare:
     current-ratio: 930
@@ -504,6 +1600,42 @@ industryIds:
     burn-rate: 1002
     runway: 1008
     headcount: 1080
+    derived-gross-profit: 3109
+    derived-ebitda: 3110
+    derived-effective-tax-rate: 3111
+    derived-nopat: 3112
+    derived-net-debt: 3113
+    derived-invested-capital: 3114
+    derived-tangible-net-worth: 3115
+    derived-quick-assets: 3116
+    return-on-equity: 3117
+    return-on-assets: 3118
+    return-on-invested-capital: 3119
+    operating-profit-margin: 3120
+    net-profit-margin: 3121
+    effective-interest-rate: 3122
+    interest-burden: 3123
+    tax-burden: 3124
+    total-asset-turnover: 3125
+    ppe-turnover: 3126
+    cash-turnover: 3127
+    cash-days: 3128
+    accounts-receivable-turnover: 3129
+    accounts-receivable-days: 3130
+    inventory-turnover: 3131
+    inventory-days: 3132
+    accounts-payable-turnover: 3133
+    accounts-payable-days: 3134
+    total-assets-to-equity: 3135
+    debt-to-equity: 3136
+    debt-to-tangible-net-worth: 3137
+    debt-to-ebitda: 3138
+    net-debt-to-ebitda: 3139
+    quick-ratio-quick-assets: 3140
+    ebitda-to-interest: 3141
+    ebit-to-interest: 3142
+    ebitda-less-capex-to-interest: 3143
+    fixed-charge-coverage: 3144
   Manufacturing:
     current-ratio: 929
     quick-ratio: 935
@@ -520,6 +1652,42 @@ industryIds:
     burn-rate: 1001
     runway: 1007
     headcount: 1081
+    derived-gross-profit: 3217
+    derived-ebitda: 3218
+    derived-effective-tax-rate: 3219
+    derived-nopat: 3220
+    derived-net-debt: 3221
+    derived-invested-capital: 3222
+    derived-tangible-net-worth: 3223
+    derived-quick-assets: 3224
+    return-on-equity: 3225
+    return-on-assets: 3226
+    return-on-invested-capital: 3227
+    operating-profit-margin: 3228
+    net-profit-margin: 3229
+    effective-interest-rate: 3230
+    interest-burden: 3231
+    tax-burden: 3232
+    total-asset-turnover: 3233
+    ppe-turnover: 3234
+    cash-turnover: 3235
+    cash-days: 3236
+    accounts-receivable-turnover: 3237
+    accounts-receivable-days: 3238
+    inventory-turnover: 3239
+    inventory-days: 3240
+    accounts-payable-turnover: 3241
+    accounts-payable-days: 3242
+    total-assets-to-equity: 3243
+    debt-to-equity: 3244
+    debt-to-tangible-net-worth: 3245
+    debt-to-ebitda: 3246
+    net-debt-to-ebitda: 3247
+    quick-ratio-quick-assets: 3248
+    ebitda-to-interest: 3249
+    ebit-to-interest: 3250
+    ebitda-less-capex-to-interest: 3251
+    fixed-charge-coverage: 3252
   Real Estate:
     current-ratio: 926
     quick-ratio: 932
@@ -536,6 +1704,42 @@ industryIds:
     burn-rate: 998
     runway: 1004
     headcount: 1082
+    derived-gross-profit: 3289
+    derived-ebitda: 3290
+    derived-effective-tax-rate: 3291
+    derived-nopat: 3292
+    derived-net-debt: 3293
+    derived-invested-capital: 3294
+    derived-tangible-net-worth: 3295
+    derived-quick-assets: 3296
+    return-on-equity: 3297
+    return-on-assets: 3298
+    return-on-invested-capital: 3299
+    operating-profit-margin: 3300
+    net-profit-margin: 3301
+    effective-interest-rate: 3302
+    interest-burden: 3303
+    tax-burden: 3304
+    total-asset-turnover: 3305
+    ppe-turnover: 3306
+    cash-turnover: 3307
+    cash-days: 3308
+    accounts-receivable-turnover: 3309
+    accounts-receivable-days: 3310
+    inventory-turnover: 3311
+    inventory-days: 3312
+    accounts-payable-turnover: 3313
+    accounts-payable-days: 3314
+    total-assets-to-equity: 3315
+    debt-to-equity: 3316
+    debt-to-tangible-net-worth: 3317
+    debt-to-ebitda: 3318
+    net-debt-to-ebitda: 3319
+    quick-ratio-quick-assets: 3320
+    ebitda-to-interest: 3321
+    ebit-to-interest: 3322
+    ebitda-less-capex-to-interest: 3323
+    fixed-charge-coverage: 3324
   Restaurants:
     current-ratio: 931
     quick-ratio: 937
@@ -552,6 +1756,42 @@ industryIds:
     burn-rate: 1003
     runway: 1009
     headcount: 1083
+    derived-gross-profit: 3325
+    derived-ebitda: 3326
+    derived-effective-tax-rate: 3327
+    derived-nopat: 3328
+    derived-net-debt: 3329
+    derived-invested-capital: 3330
+    derived-tangible-net-worth: 3331
+    derived-quick-assets: 3332
+    return-on-equity: 3333
+    return-on-assets: 3334
+    return-on-invested-capital: 3335
+    operating-profit-margin: 3336
+    net-profit-margin: 3337
+    effective-interest-rate: 3338
+    interest-burden: 3339
+    tax-burden: 3340
+    total-asset-turnover: 3341
+    ppe-turnover: 3342
+    cash-turnover: 3343
+    cash-days: 3344
+    accounts-receivable-turnover: 3345
+    accounts-receivable-days: 3346
+    inventory-turnover: 3347
+    inventory-days: 3348
+    accounts-payable-turnover: 3349
+    accounts-payable-days: 3350
+    total-assets-to-equity: 3351
+    debt-to-equity: 3352
+    debt-to-tangible-net-worth: 3353
+    debt-to-ebitda: 3354
+    net-debt-to-ebitda: 3355
+    quick-ratio-quick-assets: 3356
+    ebitda-to-interest: 3357
+    ebit-to-interest: 3358
+    ebitda-less-capex-to-interest: 3359
+    fixed-charge-coverage: 3360
   Transportation:
     current-ratio: 928
     quick-ratio: 934
@@ -568,6 +1808,42 @@ industryIds:
     burn-rate: 1000
     runway: 1006
     headcount: 1084
+    derived-gross-profit: 3433
+    derived-ebitda: 3434
+    derived-effective-tax-rate: 3435
+    derived-nopat: 3436
+    derived-net-debt: 3437
+    derived-invested-capital: 3438
+    derived-tangible-net-worth: 3439
+    derived-quick-assets: 3440
+    return-on-equity: 3441
+    return-on-assets: 3442
+    return-on-invested-capital: 3443
+    operating-profit-margin: 3444
+    net-profit-margin: 3445
+    effective-interest-rate: 3446
+    interest-burden: 3447
+    tax-burden: 3448
+    total-asset-turnover: 3449
+    ppe-turnover: 3450
+    cash-turnover: 3451
+    cash-days: 3452
+    accounts-receivable-turnover: 3453
+    accounts-receivable-days: 3454
+    inventory-turnover: 3455
+    inventory-days: 3456
+    accounts-payable-turnover: 3457
+    accounts-payable-days: 3458
+    total-assets-to-equity: 3459
+    debt-to-equity: 3460
+    debt-to-tangible-net-worth: 3461
+    debt-to-ebitda: 3462
+    net-debt-to-ebitda: 3463
+    quick-ratio-quick-assets: 3464
+    ebitda-to-interest: 3465
+    ebit-to-interest: 3466
+    ebitda-less-capex-to-interest: 3467
+    fixed-charge-coverage: 3468
   Vertical Farming:
     current-ratio: 927
     quick-ratio: 933
@@ -584,6 +1860,42 @@ industryIds:
     burn-rate: 999
     runway: 1005
     headcount: 1085
+    derived-gross-profit: 3505
+    derived-ebitda: 3506
+    derived-effective-tax-rate: 3507
+    derived-nopat: 3508
+    derived-net-debt: 3509
+    derived-invested-capital: 3510
+    derived-tangible-net-worth: 3511
+    derived-quick-assets: 3512
+    return-on-equity: 3513
+    return-on-assets: 3514
+    return-on-invested-capital: 3515
+    operating-profit-margin: 3516
+    net-profit-margin: 3517
+    effective-interest-rate: 3518
+    interest-burden: 3519
+    tax-burden: 3520
+    total-asset-turnover: 3521
+    ppe-turnover: 3522
+    cash-turnover: 3523
+    cash-days: 3524
+    accounts-receivable-turnover: 3525
+    accounts-receivable-days: 3526
+    inventory-turnover: 3527
+    inventory-days: 3528
+    accounts-payable-turnover: 3529
+    accounts-payable-days: 3530
+    total-assets-to-equity: 3531
+    debt-to-equity: 3532
+    debt-to-tangible-net-worth: 3533
+    debt-to-ebitda: 3534
+    net-debt-to-ebitda: 3535
+    quick-ratio-quick-assets: 3536
+    ebitda-to-interest: 3537
+    ebit-to-interest: 3538
+    ebitda-less-capex-to-interest: 3539
+    fixed-charge-coverage: 3540
   Life Sciences:
     current-ratio: 1300
     quick-ratio: 1301
@@ -600,6 +1912,42 @@ industryIds:
     burn-rate: 1312
     runway: 1313
     headcount: 1314
+    derived-gross-profit: 3181
+    derived-ebitda: 3182
+    derived-effective-tax-rate: 3183
+    derived-nopat: 3184
+    derived-net-debt: 3185
+    derived-invested-capital: 3186
+    derived-tangible-net-worth: 3187
+    derived-quick-assets: 3188
+    return-on-equity: 3189
+    return-on-assets: 3190
+    return-on-invested-capital: 3191
+    operating-profit-margin: 3192
+    net-profit-margin: 3193
+    effective-interest-rate: 3194
+    interest-burden: 3195
+    tax-burden: 3196
+    total-asset-turnover: 3197
+    ppe-turnover: 3198
+    cash-turnover: 3199
+    cash-days: 3200
+    accounts-receivable-turnover: 3201
+    accounts-receivable-days: 3202
+    inventory-turnover: 3203
+    inventory-days: 3204
+    accounts-payable-turnover: 3205
+    accounts-payable-days: 3206
+    total-assets-to-equity: 3207
+    debt-to-equity: 3208
+    debt-to-tangible-net-worth: 3209
+    debt-to-ebitda: 3210
+    net-debt-to-ebitda: 3211
+    quick-ratio-quick-assets: 3212
+    ebitda-to-interest: 3213
+    ebit-to-interest: 3214
+    ebitda-less-capex-to-interest: 3215
+    fixed-charge-coverage: 3216
   Banking:
     current-ratio: 1500
     quick-ratio: 1501
@@ -616,6 +1964,42 @@ industryIds:
     burn-rate: 1512
     runway: 1513
     headcount: 1514
+    derived-gross-profit: 2857
+    derived-ebitda: 2858
+    derived-effective-tax-rate: 2859
+    derived-nopat: 2860
+    derived-net-debt: 2861
+    derived-invested-capital: 2862
+    derived-tangible-net-worth: 2863
+    derived-quick-assets: 2864
+    return-on-equity: 2865
+    return-on-assets: 2866
+    return-on-invested-capital: 2867
+    operating-profit-margin: 2868
+    net-profit-margin: 2869
+    effective-interest-rate: 2870
+    interest-burden: 2871
+    tax-burden: 2872
+    total-asset-turnover: 2873
+    ppe-turnover: 2874
+    cash-turnover: 2875
+    cash-days: 2876
+    accounts-receivable-turnover: 2877
+    accounts-receivable-days: 2878
+    inventory-turnover: 2879
+    inventory-days: 2880
+    accounts-payable-turnover: 2881
+    accounts-payable-days: 2882
+    total-assets-to-equity: 2883
+    debt-to-equity: 2884
+    debt-to-tangible-net-worth: 2885
+    debt-to-ebitda: 2886
+    net-debt-to-ebitda: 2887
+    quick-ratio-quick-assets: 2888
+    ebitda-to-interest: 2889
+    ebit-to-interest: 2890
+    ebitda-less-capex-to-interest: 2891
+    fixed-charge-coverage: 2892
   Financial Services:
     current-ratio: 1600
     quick-ratio: 1601
@@ -632,6 +2016,42 @@ industryIds:
     burn-rate: 1612
     runway: 1613
     headcount: 1614
+    derived-gross-profit: 3037
+    derived-ebitda: 3038
+    derived-effective-tax-rate: 3039
+    derived-nopat: 3040
+    derived-net-debt: 3041
+    derived-invested-capital: 3042
+    derived-tangible-net-worth: 3043
+    derived-quick-assets: 3044
+    return-on-equity: 3045
+    return-on-assets: 3046
+    return-on-invested-capital: 3047
+    operating-profit-margin: 3048
+    net-profit-margin: 3049
+    effective-interest-rate: 3050
+    interest-burden: 3051
+    tax-burden: 3052
+    total-asset-turnover: 3053
+    ppe-turnover: 3054
+    cash-turnover: 3055
+    cash-days: 3056
+    accounts-receivable-turnover: 3057
+    accounts-receivable-days: 3058
+    inventory-turnover: 3059
+    inventory-days: 3060
+    accounts-payable-turnover: 3061
+    accounts-payable-days: 3062
+    total-assets-to-equity: 3063
+    debt-to-equity: 3064
+    debt-to-tangible-net-worth: 3065
+    debt-to-ebitda: 3066
+    net-debt-to-ebitda: 3067
+    quick-ratio-quick-assets: 3068
+    ebitda-to-interest: 3069
+    ebit-to-interest: 3070
+    ebitda-less-capex-to-interest: 3071
+    fixed-charge-coverage: 3072
   Insurance:
     current-ratio: 1620
     quick-ratio: 1621
@@ -648,6 +2068,42 @@ industryIds:
     burn-rate: 1632
     runway: 1633
     headcount: 1634
+    derived-gross-profit: 3145
+    derived-ebitda: 3146
+    derived-effective-tax-rate: 3147
+    derived-nopat: 3148
+    derived-net-debt: 3149
+    derived-invested-capital: 3150
+    derived-tangible-net-worth: 3151
+    derived-quick-assets: 3152
+    return-on-equity: 3153
+    return-on-assets: 3154
+    return-on-invested-capital: 3155
+    operating-profit-margin: 3156
+    net-profit-margin: 3157
+    effective-interest-rate: 3158
+    interest-burden: 3159
+    tax-burden: 3160
+    total-asset-turnover: 3161
+    ppe-turnover: 3162
+    cash-turnover: 3163
+    cash-days: 3164
+    accounts-receivable-turnover: 3165
+    accounts-receivable-days: 3166
+    inventory-turnover: 3167
+    inventory-days: 3168
+    accounts-payable-turnover: 3169
+    accounts-payable-days: 3170
+    total-assets-to-equity: 3171
+    debt-to-equity: 3172
+    debt-to-tangible-net-worth: 3173
+    debt-to-ebitda: 3174
+    net-debt-to-ebitda: 3175
+    quick-ratio-quick-assets: 3176
+    ebitda-to-interest: 3177
+    ebit-to-interest: 3178
+    ebitda-less-capex-to-interest: 3179
+    fixed-charge-coverage: 3180
   Retail:
     current-ratio: 1640
     quick-ratio: 1641
@@ -664,6 +2120,42 @@ industryIds:
     burn-rate: 1652
     runway: 1653
     headcount: 1654
+    derived-gross-profit: 3361
+    derived-ebitda: 3362
+    derived-effective-tax-rate: 3363
+    derived-nopat: 3364
+    derived-net-debt: 3365
+    derived-invested-capital: 3366
+    derived-tangible-net-worth: 3367
+    derived-quick-assets: 3368
+    return-on-equity: 3369
+    return-on-assets: 3370
+    return-on-invested-capital: 3371
+    operating-profit-margin: 3372
+    net-profit-margin: 3373
+    effective-interest-rate: 3374
+    interest-burden: 3375
+    tax-burden: 3376
+    total-asset-turnover: 3377
+    ppe-turnover: 3378
+    cash-turnover: 3379
+    cash-days: 3380
+    accounts-receivable-turnover: 3381
+    accounts-receivable-days: 3382
+    inventory-turnover: 3383
+    inventory-days: 3384
+    accounts-payable-turnover: 3385
+    accounts-payable-days: 3386
+    total-assets-to-equity: 3387
+    debt-to-equity: 3388
+    debt-to-tangible-net-worth: 3389
+    debt-to-ebitda: 3390
+    net-debt-to-ebitda: 3391
+    quick-ratio-quick-assets: 3392
+    ebitda-to-interest: 3393
+    ebit-to-interest: 3394
+    ebitda-less-capex-to-interest: 3395
+    fixed-charge-coverage: 3396
   Consumer Finance:
     current-ratio: 1700
     quick-ratio: 1701
@@ -680,6 +2172,42 @@ industryIds:
     burn-rate: 1712
     runway: 1713
     headcount: 1714
+    derived-gross-profit: 2965
+    derived-ebitda: 2966
+    derived-effective-tax-rate: 2967
+    derived-nopat: 2968
+    derived-net-debt: 2969
+    derived-invested-capital: 2970
+    derived-tangible-net-worth: 2971
+    derived-quick-assets: 2972
+    return-on-equity: 2973
+    return-on-assets: 2974
+    return-on-invested-capital: 2975
+    operating-profit-margin: 2976
+    net-profit-margin: 2977
+    effective-interest-rate: 2978
+    interest-burden: 2979
+    tax-burden: 2980
+    total-asset-turnover: 2981
+    ppe-turnover: 2982
+    cash-turnover: 2983
+    cash-days: 2984
+    accounts-receivable-turnover: 2985
+    accounts-receivable-days: 2986
+    inventory-turnover: 2987
+    inventory-days: 2988
+    accounts-payable-turnover: 2989
+    accounts-payable-days: 2990
+    total-assets-to-equity: 2991
+    debt-to-equity: 2992
+    debt-to-tangible-net-worth: 2993
+    debt-to-ebitda: 2994
+    net-debt-to-ebitda: 2995
+    quick-ratio-quick-assets: 2996
+    ebitda-to-interest: 2997
+    ebit-to-interest: 2998
+    ebitda-less-capex-to-interest: 2999
+    fixed-charge-coverage: 3000
   Commercial Finance:
     current-ratio: 1740
     quick-ratio: 1741
@@ -696,6 +2224,42 @@ industryIds:
     burn-rate: 1752
     runway: 1753
     headcount: 1754
+    derived-gross-profit: 2893
+    derived-ebitda: 2894
+    derived-effective-tax-rate: 2895
+    derived-nopat: 2896
+    derived-net-debt: 2897
+    derived-invested-capital: 2898
+    derived-tangible-net-worth: 2899
+    derived-quick-assets: 2900
+    return-on-equity: 2901
+    return-on-assets: 2902
+    return-on-invested-capital: 2903
+    operating-profit-margin: 2904
+    net-profit-margin: 2905
+    effective-interest-rate: 2906
+    interest-burden: 2907
+    tax-burden: 2908
+    total-asset-turnover: 2909
+    ppe-turnover: 2910
+    cash-turnover: 2911
+    cash-days: 2912
+    accounts-receivable-turnover: 2913
+    accounts-receivable-days: 2914
+    inventory-turnover: 2915
+    inventory-days: 2916
+    accounts-payable-turnover: 2917
+    accounts-payable-days: 2918
+    total-assets-to-equity: 2919
+    debt-to-equity: 2920
+    debt-to-tangible-net-worth: 2921
+    debt-to-ebitda: 2922
+    net-debt-to-ebitda: 2923
+    quick-ratio-quick-assets: 2924
+    ebitda-to-interest: 2925
+    ebit-to-interest: 2926
+    ebitda-less-capex-to-interest: 2927
+    fixed-charge-coverage: 2928
   Credit Granting:
     current-ratio: 1700
     quick-ratio: 1701
@@ -712,6 +2276,42 @@ industryIds:
     burn-rate: 1712
     runway: 1713
     headcount: 1714
+    derived-gross-profit: 3001
+    derived-ebitda: 3002
+    derived-effective-tax-rate: 3003
+    derived-nopat: 3004
+    derived-net-debt: 3005
+    derived-invested-capital: 3006
+    derived-tangible-net-worth: 3007
+    derived-quick-assets: 3008
+    return-on-equity: 3009
+    return-on-assets: 3010
+    return-on-invested-capital: 3011
+    operating-profit-margin: 3012
+    net-profit-margin: 3013
+    effective-interest-rate: 3014
+    interest-burden: 3015
+    tax-burden: 3016
+    total-asset-turnover: 3017
+    ppe-turnover: 3018
+    cash-turnover: 3019
+    cash-days: 3020
+    accounts-receivable-turnover: 3021
+    accounts-receivable-days: 3022
+    inventory-turnover: 3023
+    inventory-days: 3024
+    accounts-payable-turnover: 3025
+    accounts-payable-days: 3026
+    total-assets-to-equity: 3027
+    debt-to-equity: 3028
+    debt-to-tangible-net-worth: 3029
+    debt-to-ebitda: 3030
+    net-debt-to-ebitda: 3031
+    quick-ratio-quick-assets: 3032
+    ebitda-to-interest: 3033
+    ebit-to-interest: 3034
+    ebitda-less-capex-to-interest: 3035
+    fixed-charge-coverage: 3036
   Software (SaaS):
     current-ratio: 2040
     quick-ratio: 2041
@@ -728,6 +2328,42 @@ industryIds:
     burn-rate: 2052
     runway: 2053
     headcount: 2054
+    derived-gross-profit: 3397
+    derived-ebitda: 3398
+    derived-effective-tax-rate: 3399
+    derived-nopat: 3400
+    derived-net-debt: 3401
+    derived-invested-capital: 3402
+    derived-tangible-net-worth: 3403
+    derived-quick-assets: 3404
+    return-on-equity: 3405
+    return-on-assets: 3406
+    return-on-invested-capital: 3407
+    operating-profit-margin: 3408
+    net-profit-margin: 3409
+    effective-interest-rate: 3410
+    interest-burden: 3411
+    tax-burden: 3412
+    total-asset-turnover: 3413
+    ppe-turnover: 3414
+    cash-turnover: 3415
+    cash-days: 3416
+    accounts-receivable-turnover: 3417
+    accounts-receivable-days: 3418
+    inventory-turnover: 3419
+    inventory-days: 3420
+    accounts-payable-turnover: 3421
+    accounts-payable-days: 3422
+    total-assets-to-equity: 3423
+    debt-to-equity: 3424
+    debt-to-tangible-net-worth: 3425
+    debt-to-ebitda: 3426
+    net-debt-to-ebitda: 3427
+    quick-ratio-quick-assets: 3428
+    ebitda-to-interest: 3429
+    ebit-to-interest: 3430
+    ebitda-less-capex-to-interest: 3431
+    fixed-charge-coverage: 3432
   Passenger Transit:
     current-ratio: 2020
     quick-ratio: 2021
@@ -744,6 +2380,42 @@ industryIds:
     burn-rate: 2032
     runway: 2033
     headcount: 2034
+    derived-gross-profit: 3253
+    derived-ebitda: 3254
+    derived-effective-tax-rate: 3255
+    derived-nopat: 3256
+    derived-net-debt: 3257
+    derived-invested-capital: 3258
+    derived-tangible-net-worth: 3259
+    derived-quick-assets: 3260
+    return-on-equity: 3261
+    return-on-assets: 3262
+    return-on-invested-capital: 3263
+    operating-profit-margin: 3264
+    net-profit-margin: 3265
+    effective-interest-rate: 3266
+    interest-burden: 3267
+    tax-burden: 3268
+    total-asset-turnover: 3269
+    ppe-turnover: 3270
+    cash-turnover: 3271
+    cash-days: 3272
+    accounts-receivable-turnover: 3273
+    accounts-receivable-days: 3274
+    inventory-turnover: 3275
+    inventory-days: 3276
+    accounts-payable-turnover: 3277
+    accounts-payable-days: 3278
+    total-assets-to-equity: 3279
+    debt-to-equity: 3280
+    debt-to-tangible-net-worth: 3281
+    debt-to-ebitda: 3282
+    net-debt-to-ebitda: 3283
+    quick-ratio-quick-assets: 3284
+    ebitda-to-interest: 3285
+    ebit-to-interest: 3286
+    ebitda-less-capex-to-interest: 3287
+    fixed-charge-coverage: 3288
   Aviation:
     current-ratio: 1800
     quick-ratio: 1801
@@ -760,6 +2432,42 @@ industryIds:
     burn-rate: 1812
     runway: 1813
     headcount: 1814
+    derived-gross-profit: 2821
+    derived-ebitda: 2822
+    derived-effective-tax-rate: 2823
+    derived-nopat: 2824
+    derived-net-debt: 2825
+    derived-invested-capital: 2826
+    derived-tangible-net-worth: 2827
+    derived-quick-assets: 2828
+    return-on-equity: 2829
+    return-on-assets: 2830
+    return-on-invested-capital: 2831
+    operating-profit-margin: 2832
+    net-profit-margin: 2833
+    effective-interest-rate: 2834
+    interest-burden: 2835
+    tax-burden: 2836
+    total-asset-turnover: 2837
+    ppe-turnover: 2838
+    cash-turnover: 2839
+    cash-days: 2840
+    accounts-receivable-turnover: 2841
+    accounts-receivable-days: 2842
+    inventory-turnover: 2843
+    inventory-days: 2844
+    accounts-payable-turnover: 2845
+    accounts-payable-days: 2846
+    total-assets-to-equity: 2847
+    debt-to-equity: 2848
+    debt-to-tangible-net-worth: 2849
+    debt-to-ebitda: 2850
+    net-debt-to-ebitda: 2851
+    quick-ratio-quick-assets: 2852
+    ebitda-to-interest: 2853
+    ebit-to-interest: 2854
+    ebitda-less-capex-to-interest: 2855
+    fixed-charge-coverage: 2856
   Funds:
     current-ratio: 1970
     quick-ratio: 1971
@@ -776,6 +2484,42 @@ industryIds:
     burn-rate: 1982
     runway: 1983
     headcount: 1984
+    derived-gross-profit: 3073
+    derived-ebitda: 3074
+    derived-effective-tax-rate: 3075
+    derived-nopat: 3076
+    derived-net-debt: 3077
+    derived-invested-capital: 3078
+    derived-tangible-net-worth: 3079
+    derived-quick-assets: 3080
+    return-on-equity: 3081
+    return-on-assets: 3082
+    return-on-invested-capital: 3083
+    operating-profit-margin: 3084
+    net-profit-margin: 3085
+    effective-interest-rate: 3086
+    interest-burden: 3087
+    tax-burden: 3088
+    total-asset-turnover: 3089
+    ppe-turnover: 3090
+    cash-turnover: 3091
+    cash-days: 3092
+    accounts-receivable-turnover: 3093
+    accounts-receivable-days: 3094
+    inventory-turnover: 3095
+    inventory-days: 3096
+    accounts-payable-turnover: 3097
+    accounts-payable-days: 3098
+    total-assets-to-equity: 3099
+    debt-to-equity: 3100
+    debt-to-tangible-net-worth: 3101
+    debt-to-ebitda: 3102
+    net-debt-to-ebitda: 3103
+    quick-ratio-quick-assets: 3104
+    ebitda-to-interest: 3105
+    ebit-to-interest: 3106
+    ebitda-less-capex-to-interest: 3107
+    fixed-charge-coverage: 3108
   Trusts:
     current-ratio: 1985
     quick-ratio: 1986
@@ -792,6 +2536,42 @@ industryIds:
     burn-rate: 1997
     runway: 1998
     headcount: 1999
+    derived-gross-profit: 3469
+    derived-ebitda: 3470
+    derived-effective-tax-rate: 3471
+    derived-nopat: 3472
+    derived-net-debt: 3473
+    derived-invested-capital: 3474
+    derived-tangible-net-worth: 3475
+    derived-quick-assets: 3476
+    return-on-equity: 3477
+    return-on-assets: 3478
+    return-on-invested-capital: 3479
+    operating-profit-margin: 3480
+    net-profit-margin: 3481
+    effective-interest-rate: 3482
+    interest-burden: 3483
+    tax-burden: 3484
+    total-asset-turnover: 3485
+    ppe-turnover: 3486
+    cash-turnover: 3487
+    cash-days: 3488
+    accounts-receivable-turnover: 3489
+    accounts-receivable-days: 3490
+    inventory-turnover: 3491
+    inventory-days: 3492
+    accounts-payable-turnover: 3493
+    accounts-payable-days: 3494
+    total-assets-to-equity: 3495
+    debt-to-equity: 3496
+    debt-to-tangible-net-worth: 3497
+    debt-to-ebitda: 3498
+    net-debt-to-ebitda: 3499
+    quick-ratio-quick-assets: 3500
+    ebitda-to-interest: 3501
+    ebit-to-interest: 3502
+    ebitda-less-capex-to-interest: 3503
+    fixed-charge-coverage: 3504
   Construction:
     current-ratio: 2070
     quick-ratio: 2071
@@ -808,3 +2588,39 @@ industryIds:
     burn-rate: 2082
     runway: 2083
     headcount: 2084
+    derived-gross-profit: 2929
+    derived-ebitda: 2930
+    derived-effective-tax-rate: 2931
+    derived-nopat: 2932
+    derived-net-debt: 2933
+    derived-invested-capital: 2934
+    derived-tangible-net-worth: 2935
+    derived-quick-assets: 2936
+    return-on-equity: 2937
+    return-on-assets: 2938
+    return-on-invested-capital: 2939
+    operating-profit-margin: 2940
+    net-profit-margin: 2941
+    effective-interest-rate: 2942
+    interest-burden: 2943
+    tax-burden: 2944
+    total-asset-turnover: 2945
+    ppe-turnover: 2946
+    cash-turnover: 2947
+    cash-days: 2948
+    accounts-receivable-turnover: 2949
+    accounts-receivable-days: 2950
+    inventory-turnover: 2951
+    inventory-days: 2952
+    accounts-payable-turnover: 2953
+    accounts-payable-days: 2954
+    total-assets-to-equity: 2955
+    debt-to-equity: 2956
+    debt-to-tangible-net-worth: 2957
+    debt-to-ebitda: 2958
+    net-debt-to-ebitda: 2959
+    quick-ratio-quick-assets: 2960
+    ebitda-to-interest: 2961
+    ebit-to-interest: 2962
+    ebitda-less-capex-to-interest: 2963
+    fixed-charge-coverage: 2964

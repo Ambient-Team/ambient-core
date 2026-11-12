@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Healthcare**
 - Metrics: **22**
 - Data options: **15**
-- Benchmark keys: **22**
+- Benchmark keys: **58**
 
 ## Data options
 

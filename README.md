@@ -57,7 +57,7 @@ Generated 2026-09-09 from dependency metadata in this repository.
 - **`ambient_pipeline/`** — pandas Bronze→Silver→Gold (`notebook_bootstrap`, `notebook_smoke`, `pandas_provenance`).
 - **`lib/ambient_pipeline/`** — optional Spark/Delta governance helpers (local lakehouse; not required for the notebook demo).
 - **`contracts/`** — data-product YAML including `manufacturing-demo-raw-v1.yaml` (no binary data).
-- **`catalog/`** — industries, metrics, benchmarks; generator → `manifest.json` + `runtime/` JS.
+- **`catalog/`** — industries, metrics, benchmarks; generator → `manifest.json` + `runtime/` JS. Standard corporate ratio pack: [docs/ratios/corporate-ratios.md](docs/ratios/corporate-ratios.md).
 - **`data/raw/.gitkeep`**, **`data/processed/.gitkeep`** — placeholders only. Copy demo CSVs from [`demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).
 - **`notebooks/00_notebook_demo.ipynb`** — entry notebook. See `notebooks/COMMERCIAL_ONLY.txt` for Databricks/UC skips.
 - **`lib/ambient_contracts`**, **`ambient_cli`**, **`ambient_calc`** — load, validate, ship, and reference formulas.

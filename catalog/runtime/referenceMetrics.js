@@ -57,7 +57,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -389,6 +389,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 974,
       "industry": "Real Estate",
       "segment": "core",
@@ -433,6 +434,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 980,
       "industry": "Real Estate",
       "segment": "core",
@@ -635,6 +637,1412 @@ export const REFERENCE_DATA = {
       "industry": "Real Estate",
       "segment": "core",
       "slug": "headcount"
+    },
+    "real_estate.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3289,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3290,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3291,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3292,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3293,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3294,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3295,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3296,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3297,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3298,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3299,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3300,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3301,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3302,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3303,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3304,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3305,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3306,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3307,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3308,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3309,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3310,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3311,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3312,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3313,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3314,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3315,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3316,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3317,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3318,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3319,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3320,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3321,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3322,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3323,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3324,
+      "industry": "Real Estate",
+      "segment": "core"
     },
     "1cvcTcHNt1VYX867UUG7": {
       "datasource": [
@@ -1447,7 +2855,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -1779,6 +3187,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 975,
       "industry": "Vertical Farming",
       "segment": "core",
@@ -1823,6 +3232,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 981,
       "industry": "Vertical Farming",
       "segment": "core",
@@ -2025,6 +3435,1412 @@ export const REFERENCE_DATA = {
       "industry": "Vertical Farming",
       "segment": "core",
       "slug": "headcount"
+    },
+    "vertical_farming.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3505,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3506,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3507,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3508,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3509,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3510,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3511,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3512,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3513,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3514,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3515,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3516,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3517,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3518,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3519,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3520,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3521,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3522,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3523,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3524,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3525,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3526,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3527,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3528,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3529,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3530,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3531,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3532,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3533,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3534,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3535,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3536,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3537,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3538,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3539,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3540,
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
     "0MJiYgAPcgkzE3xEgOFE": {
       "datasource": [
@@ -2670,7 +5486,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -3002,6 +5818,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 976,
       "industry": "Transportation",
       "segment": "core",
@@ -3046,6 +5863,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 982,
       "industry": "Transportation",
       "segment": "core",
@@ -3248,6 +6066,1412 @@ export const REFERENCE_DATA = {
       "industry": "Transportation",
       "segment": "core",
       "slug": "headcount"
+    },
+    "transportation.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3433,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3434,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3435,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3436,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3437,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3438,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3439,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3440,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3441,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3442,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3443,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3444,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3445,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3446,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3447,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3448,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3449,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3450,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3451,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3452,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3453,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3454,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3455,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3456,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3457,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3458,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3459,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3460,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3461,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3462,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3463,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3464,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3465,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3466,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3467,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3468,
+      "industry": "Transportation",
+      "segment": "core"
     },
     "DtBqsvp9S9HBlcxsvAgd": {
       "datasource": [
@@ -3710,7 +7934,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -4042,6 +8266,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 2028,
       "industry": "Passenger Transit",
       "segment": "core",
@@ -4086,6 +8311,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 2029,
       "industry": "Passenger Transit",
       "segment": "core",
@@ -4288,6 +8514,1412 @@ export const REFERENCE_DATA = {
       "industry": "Passenger Transit",
       "segment": "core",
       "slug": "headcount"
+    },
+    "passenger_transit.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3253,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3254,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3255,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3256,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3257,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3258,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3259,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3260,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3261,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3262,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3263,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3264,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3265,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3266,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3267,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3268,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3269,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3270,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3271,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3272,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3273,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3274,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3275,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3276,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3277,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3278,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3279,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3280,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3281,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3282,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3283,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3284,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3285,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3286,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3287,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3288,
+      "industry": "Passenger Transit",
+      "segment": "core"
     },
     "passenger_transit.rail_passenger.ridership_per_train_mile": {
       "id": 1863,
@@ -4498,7 +10130,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -4830,6 +10462,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1808,
       "industry": "Aviation",
       "segment": "core",
@@ -4874,6 +10507,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1809,
       "industry": "Aviation",
       "segment": "core",
@@ -5076,6 +10710,1412 @@ export const REFERENCE_DATA = {
       "industry": "Aviation",
       "segment": "core",
       "slug": "headcount"
+    },
+    "aviation.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 2821,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 2822,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2823,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 2824,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 2825,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 2826,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 2827,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 2828,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2829,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2830,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 2831,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2832,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2833,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 2834,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 2835,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 2836,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 2837,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 2838,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 2839,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 2840,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 2841,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 2842,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 2843,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 2844,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 2845,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 2846,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 2847,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 2848,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 2849,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 2850,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 2851,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2852,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 2853,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 2854,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 2855,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 2856,
+      "industry": "Aviation",
+      "segment": "core"
     },
     "aviation.network_carrier.load_factor": {
       "id": 1820,
@@ -5504,7 +12544,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -5836,6 +12876,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 977,
       "industry": "Manufacturing",
       "segment": "core",
@@ -5880,6 +12921,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 983,
       "industry": "Manufacturing",
       "segment": "core",
@@ -6082,6 +13124,1412 @@ export const REFERENCE_DATA = {
       "industry": "Manufacturing",
       "segment": "core",
       "slug": "headcount"
+    },
+    "manufacturing.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3217,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3218,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3219,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3220,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3221,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3222,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3223,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3224,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3225,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3226,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3227,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3228,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3229,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3230,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3231,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3232,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3233,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3234,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3235,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3236,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3237,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3238,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3239,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3240,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3241,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3242,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3243,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3244,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3245,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3246,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3247,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3248,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3249,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3250,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3251,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3252,
+      "industry": "Manufacturing",
+      "segment": "core"
     },
     "MfgOee901CatalogMetricKey01": {
       "id": 901,
@@ -6341,7 +14789,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -6673,6 +15121,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 2078,
       "industry": "Construction",
       "segment": "core",
@@ -6717,6 +15166,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 2079,
       "industry": "Construction",
       "segment": "core",
@@ -6919,6 +15369,1412 @@ export const REFERENCE_DATA = {
       "industry": "Construction",
       "segment": "core",
       "slug": "headcount"
+    },
+    "construction.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 2929,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 2930,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2931,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 2932,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 2933,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 2934,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 2935,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 2936,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2937,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2938,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 2939,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2940,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2941,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 2942,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 2943,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 2944,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 2945,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 2946,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 2947,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 2948,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 2949,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 2950,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 2951,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 2952,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 2953,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 2954,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 2955,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 2956,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 2957,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 2958,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 2959,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2960,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 2961,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 2962,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 2963,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 2964,
+      "industry": "Construction",
+      "segment": "core"
     },
     "construction.building_construction.schedule_performance_index": {
       "id": 2100,
@@ -7266,7 +17122,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -7598,6 +17454,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 978,
       "industry": "Healthcare",
       "segment": "core",
@@ -7642,6 +17499,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 984,
       "industry": "Healthcare",
       "segment": "core",
@@ -7844,6 +17702,1412 @@ export const REFERENCE_DATA = {
       "industry": "Healthcare",
       "segment": "core",
       "slug": "headcount"
+    },
+    "healthcare.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3109,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3110,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3111,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3112,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3113,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3114,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3115,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3116,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3117,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3118,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3119,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3120,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3121,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3122,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3123,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3124,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3125,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3126,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3127,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3128,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3129,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3130,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3131,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3132,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3133,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3134,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3135,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3136,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3137,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3138,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3139,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3140,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3141,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3142,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3143,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3144,
+      "industry": "Healthcare",
+      "segment": "core"
     },
     "HcVol911CatalogMetricKey01": {
       "id": 911,
@@ -8623,7 +19887,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -8955,6 +20219,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 979,
       "industry": "Restaurants",
       "segment": "core",
@@ -8999,6 +20264,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 985,
       "industry": "Restaurants",
       "segment": "core",
@@ -9201,6 +20467,1412 @@ export const REFERENCE_DATA = {
       "industry": "Restaurants",
       "segment": "core",
       "slug": "headcount"
+    },
+    "restaurants.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3325,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3326,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3327,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3328,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3329,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3330,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3331,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3332,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3333,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3334,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3335,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3336,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3337,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3338,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3339,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3340,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3341,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3342,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3343,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3344,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3345,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3346,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3347,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3348,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3349,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3350,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3351,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3352,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3353,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3354,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3355,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3356,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3357,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3358,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3359,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3360,
+      "industry": "Restaurants",
+      "segment": "core"
     },
     "RestFood921CatalogMetricKey01": {
       "id": 921,
@@ -9736,7 +22408,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -10068,6 +22740,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1308,
       "industry": "Life Sciences",
       "segment": "core",
@@ -10112,6 +22785,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1309,
       "industry": "Life Sciences",
       "segment": "core",
@@ -10315,6 +22989,1412 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
+    "life_sciences.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3181,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3182,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3183,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3184,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3185,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3186,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3187,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3188,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3189,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3190,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3191,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3192,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3193,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3194,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3195,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3196,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3197,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3198,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3199,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3200,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3201,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3202,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3203,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3204,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3205,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3206,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3207,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3208,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3209,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3210,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3211,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3212,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3213,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3214,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3215,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3216,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
     "life_sciences.rnd.pipeline_active_count": {
       "id": 1330,
       "name": "Active Pipeline Programs",
@@ -10498,7 +24578,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -10830,6 +24910,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1508,
       "industry": "Banking",
       "segment": "core",
@@ -10874,6 +24955,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1509,
       "industry": "Banking",
       "segment": "core",
@@ -11076,6 +25158,1412 @@ export const REFERENCE_DATA = {
       "industry": "Banking",
       "segment": "core",
       "slug": "headcount"
+    },
+    "banking.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 2857,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 2858,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2859,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 2860,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 2861,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 2862,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 2863,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 2864,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2865,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2866,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 2867,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2868,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2869,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 2870,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 2871,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 2872,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 2873,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 2874,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 2875,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 2876,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 2877,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 2878,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 2879,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 2880,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 2881,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 2882,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 2883,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 2884,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 2885,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 2886,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 2887,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 2888,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 2889,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 2890,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 2891,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 2892,
+      "industry": "Banking",
+      "segment": "core"
     },
     "banking.depository.net_interest_margin": {
       "id": 1530,
@@ -11442,7 +26930,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -11774,6 +27262,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1608,
       "industry": "Financial Services",
       "segment": "core",
@@ -11818,6 +27307,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1609,
       "industry": "Financial Services",
       "segment": "core",
@@ -12020,6 +27510,1412 @@ export const REFERENCE_DATA = {
       "industry": "Financial Services",
       "segment": "core",
       "slug": "headcount"
+    },
+    "financial_services.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3037,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3038,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3039,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3040,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3041,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3042,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3043,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3044,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3045,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3046,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3047,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3048,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3049,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3050,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3051,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3052,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3053,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3054,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3055,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3056,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3057,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3058,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3059,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3060,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3061,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3062,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3063,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3064,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3065,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3066,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3067,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3068,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3069,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3070,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3071,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3072,
+      "industry": "Financial Services",
+      "segment": "core"
     },
     "financial_services.investment_banking.trading_revenue_ratio": {
       "id": 1535,
@@ -12272,7 +29168,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -12604,6 +29500,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1978,
       "industry": "Funds",
       "segment": "core",
@@ -12648,6 +29545,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1979,
       "industry": "Funds",
       "segment": "core",
@@ -12850,6 +29748,1412 @@ export const REFERENCE_DATA = {
       "industry": "Funds",
       "segment": "core",
       "slug": "headcount"
+    },
+    "funds.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3073,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3074,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3075,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3076,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3077,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3078,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3079,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3080,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3081,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3082,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3083,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3084,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3085,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3086,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3087,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3088,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3089,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3090,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3091,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3092,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3093,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3094,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3095,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3096,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3097,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3098,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3099,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3100,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3101,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3102,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3103,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3104,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3105,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3106,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3107,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3108,
+      "industry": "Funds",
+      "segment": "core"
     },
     "funds.fund.assets_under_management": {
       "id": 1900,
@@ -13657,7 +31961,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -13989,6 +32293,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1993,
       "industry": "Trusts",
       "segment": "core",
@@ -14033,6 +32338,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1994,
       "industry": "Trusts",
       "segment": "core",
@@ -14236,6 +32542,1412 @@ export const REFERENCE_DATA = {
       "segment": "core",
       "slug": "headcount"
     },
+    "trusts.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3469,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3470,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3471,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3472,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3473,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3474,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3475,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3476,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3477,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3478,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3479,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3480,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3481,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3482,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3483,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3484,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3485,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3486,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3487,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3488,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3489,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3490,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3491,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3492,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3493,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3494,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3495,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3496,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3497,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3498,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3499,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3500,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3501,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3502,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3503,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3504,
+      "industry": "Trusts",
+      "segment": "core"
+    },
     "trusts.trust.trust_assets_under_administration": {
       "id": 1943,
       "name": "Trust Assets Under Administration",
@@ -14337,7 +34049,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -14669,6 +34381,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1628,
       "industry": "Insurance",
       "segment": "core",
@@ -14713,6 +34426,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1629,
       "industry": "Insurance",
       "segment": "core",
@@ -14915,6 +34629,1412 @@ export const REFERENCE_DATA = {
       "industry": "Insurance",
       "segment": "core",
       "slug": "headcount"
+    },
+    "insurance.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3145,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3146,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3147,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3148,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3149,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3150,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3151,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3152,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3153,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3154,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3155,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3156,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3157,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3158,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3159,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3160,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3161,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3162,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3163,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3164,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3165,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3166,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3167,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3168,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3169,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3170,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3171,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3172,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3173,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3174,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3175,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3176,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3177,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3178,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3179,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3180,
+      "industry": "Insurance",
+      "segment": "core"
     },
     "insurance.property_casualty.combined_ratio": {
       "id": 1547,
@@ -15128,7 +36248,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -15460,6 +36580,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1708,
       "industry": "Credit Granting",
       "segment": "core",
@@ -15504,6 +36625,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1709,
       "industry": "Credit Granting",
       "segment": "core",
@@ -15706,6 +36828,1412 @@ export const REFERENCE_DATA = {
       "industry": "Credit Granting",
       "segment": "core",
       "slug": "headcount"
+    },
+    "credit_granting.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3001,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3002,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3003,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3004,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3005,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3006,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3007,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3008,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3009,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3010,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3011,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3012,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3013,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3014,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3015,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3016,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3017,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3018,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3019,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3020,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3021,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3022,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3023,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3024,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3025,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3026,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3027,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3028,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3029,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3030,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3031,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3032,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3033,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3034,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3035,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3036,
+      "industry": "Credit Granting",
+      "segment": "core"
     },
     "credit_granting.consumer_lending.portfolio_yield": {
       "id": 1720,
@@ -16474,7 +39002,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -16806,6 +39334,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 2048,
       "industry": "Software (SaaS)",
       "segment": "core",
@@ -16850,6 +39379,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 2049,
       "industry": "Software (SaaS)",
       "segment": "core",
@@ -17052,6 +39582,1412 @@ export const REFERENCE_DATA = {
       "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "headcount"
+    },
+    "software_saas.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3397,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3398,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3399,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3400,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3401,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3402,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3403,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3404,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3405,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3406,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3407,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3408,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3409,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3410,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3411,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3412,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3413,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3414,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3415,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3416,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3417,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3418,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3419,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3420,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3421,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3422,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3423,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3424,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3425,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3426,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3427,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3428,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3429,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3430,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3431,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3432,
+      "industry": "Software (SaaS)",
+      "segment": "core"
     },
     "software_saas.subscription.mrr": {
       "datasource": [
@@ -17428,7 +41364,7 @@ export const REFERENCE_DATA = {
         "Trial balance",
         "Balance sheet"
       ],
-      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view.",
+      "description": "Acid-test liquidity excluding inventory — most conservative short-term solvency view. Default formula: current assets minus inventory. See quick_ratio_quick_assets for the alternate convention (cash + marketable securities + receivables).",
       "industryTags": [
         "Corporate Finance",
         "All"
@@ -17760,6 +41696,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DSO (credit sales and caller-supplied days). Standard convention: accounts_receivable_days (revenue, 365-day year).",
       "id": 1648,
       "industry": "Retail",
       "segment": "core",
@@ -17804,6 +41741,7 @@ export const REFERENCE_DATA = {
           "days"
         ]
       },
+      "standardRatioNote": "Parameterized DPO (caller-supplied days). Standard convention: accounts_payable_days (365-day year).",
       "id": 1649,
       "industry": "Retail",
       "segment": "core",
@@ -18006,6 +41944,1412 @@ export const REFERENCE_DATA = {
       "industry": "Retail",
       "segment": "core",
       "slug": "headcount"
+    },
+    "retail.core.derived_gross_profit": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Gross Profit (derived)",
+      "description": "Revenue minus COGS; building block for margins",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "gross_profit",
+      "slug": "gross_profit",
+      "calc": {
+        "expr": "revenue - cogs",
+        "inputs": [
+          "revenue",
+          "cogs"
+        ]
+      },
+      "methodology": "Gross Profit (derived)",
+      "corporateRatioPack": true,
+      "id": 3361,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA (derived)",
+      "description": "EBIT plus depreciation and amortization",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "ebitda_derived",
+      "slug": "ebitda_derived",
+      "calc": {
+        "expr": "operating_income + depreciation + amortization",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization"
+        ]
+      },
+      "methodology": "EBITDA (derived)",
+      "corporateRatioPack": true,
+      "id": 3362,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_effective_tax_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Tax Rate",
+      "description": "Tax expense divided by earnings before tax",
+      "methodology": "Effective Tax Rate = Tax Expense / Earnings Before Tax",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_tax_rate",
+      "slug": "effective_tax_rate",
+      "calc": {
+        "expr": "tax_expense / max(earnings_before_tax, 0)",
+        "inputs": [
+          "tax_expense",
+          "earnings_before_tax"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3363,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_nopat": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Operating Profit After Tax (NOPAT)",
+      "description": "EBIT adjusted for cash taxes using the effective tax rate (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "nopat",
+      "slug": "nopat",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate)",
+        "inputs": [
+          "operating_income"
+        ]
+      },
+      "methodology": "Net Operating Profit After Tax (NOPAT)",
+      "corporateRatioPack": true,
+      "id": 3364,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_net_debt": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt",
+      "description": "Interest-bearing liabilities minus cash",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "net_debt",
+      "slug": "net_debt",
+      "calc": {
+        "expr": "interest_bearing_liabilities - cash",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "cash"
+        ]
+      },
+      "methodology": "Net Debt",
+      "corporateRatioPack": true,
+      "id": 3365,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Invested Capital",
+      "description": "Net debt plus total shareholders' equity",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "invested_capital",
+      "slug": "invested_capital",
+      "calc": {
+        "expr": "net_debt + total_shareholders_equity",
+        "inputs": [
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Invested Capital",
+      "corporateRatioPack": true,
+      "id": 3366,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tangible Net Worth",
+      "description": "Shareholders' equity minus intangible assets",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "tangible_net_worth",
+      "slug": "tangible_net_worth",
+      "calc": {
+        "expr": "total_shareholders_equity - intangible_assets",
+        "inputs": [
+          "total_shareholders_equity",
+          "intangible_assets"
+        ]
+      },
+      "methodology": "Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3367,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.derived_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Assets (strict)",
+      "description": "Cash, marketable securities, and accounts receivable (Ambient corporate ratio pack).",
+      "unit": "Currency (e.g., USD)",
+      "validationRule": "currency_signed",
+      "benchmarkKey": "quick_assets",
+      "slug": "quick_assets",
+      "calc": {
+        "expr": "cash + marketable_securities + accounts_receivable",
+        "inputs": [
+          "cash",
+          "marketable_securities",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Quick Assets (strict)",
+      "corporateRatioPack": true,
+      "id": 3368,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.return_on_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Equity (ROE)",
+      "description": "Net income divided by shareholders' equity",
+      "methodology": "ROE = Net Income / Total Shareholders' Equity",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_equity",
+      "slug": "return_on_equity",
+      "calc": {
+        "expr": "net_income / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "net_income",
+          "total_shareholders_equity"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3369,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.return_on_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Assets (ROA)",
+      "description": "Net income divided by total assets",
+      "methodology": "ROA = Net Income / Total Assets",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_assets",
+      "slug": "return_on_assets",
+      "calc": {
+        "expr": "net_income / max(total_assets, 0)",
+        "inputs": [
+          "net_income",
+          "total_assets"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3370,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.return_on_invested_capital": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Return on Invested Capital (ROIC)",
+      "description": "NOPAT divided by invested capital",
+      "methodology": "ROIC = NOPAT / (Net Debt + Equity)",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "return_on_invested_capital",
+      "slug": "return_on_invested_capital",
+      "calc": {
+        "expr": "nopat / max(invested_capital, 0)",
+        "inputs": []
+      },
+      "corporateRatioPack": true,
+      "id": 3371,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.operating_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Operating Profit Margin (EBIT)",
+      "description": "EBIT divided by revenue as a decimal quotient. Alias of operating_margin at percent scale; see docs/ratios/corporate-ratios.md. Alias of operating_margin at percent scale.",
+      "methodology": "Operating Profit Margin = EBIT / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "operating_profit_margin",
+      "slug": "operating_profit_margin",
+      "relatedBenchmarkKeys": [
+        "operating_margin"
+      ],
+      "calc": {
+        "expr": "operating_income / max(revenue, 0)",
+        "inputs": [
+          "operating_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3372,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.net_profit_margin": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Profit Margin (decimal quotient)",
+      "description": "Net income divided by revenue as a decimal quotient. Alias of net_margin at percent scale; see docs/ratios/corporate-ratios.md.",
+      "methodology": "Net Profit Margin = Net Income / Revenue",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "net_profit_margin",
+      "slug": "net_profit_margin",
+      "relatedBenchmarkKeys": [
+        "net_margin"
+      ],
+      "calc": {
+        "expr": "net_income / max(revenue, 0)",
+        "inputs": [
+          "net_income",
+          "revenue"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3373,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.effective_interest_rate": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Effective Interest Rate",
+      "description": "Gross interest expense divided by interest-bearing liabilities (Ambient corporate ratio pack).",
+      "unit": "%",
+      "higherIsBetter": false,
+      "validationRule": "percentage",
+      "benchmarkKey": "effective_interest_rate",
+      "slug": "effective_interest_rate",
+      "calc": {
+        "expr": "interest_expense / max(interest_bearing_liabilities, 0)",
+        "inputs": [
+          "interest_expense",
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Effective Interest Rate",
+      "corporateRatioPack": true,
+      "id": 3374,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.interest_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Interest Burden",
+      "description": "EBT relative to EBIT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "interest_burden",
+      "slug": "interest_burden",
+      "calc": {
+        "expr": "earnings_before_tax / max(operating_income, 0)",
+        "inputs": [
+          "earnings_before_tax",
+          "operating_income"
+        ]
+      },
+      "methodology": "Interest Burden",
+      "corporateRatioPack": true,
+      "id": 3375,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.tax_burden": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Tax Burden",
+      "description": "Net income relative to EBT; DuPont lever",
+      "unit": "%",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "tax_burden",
+      "slug": "tax_burden",
+      "calc": {
+        "expr": "net_income / max(earnings_before_tax, 0)",
+        "inputs": [
+          "net_income",
+          "earnings_before_tax"
+        ]
+      },
+      "methodology": "Tax Burden",
+      "corporateRatioPack": true,
+      "id": 3376,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.total_asset_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Asset Turnover",
+      "description": "Revenue divided by total assets",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_asset_turnover",
+      "slug": "total_asset_turnover",
+      "calc": {
+        "expr": "revenue / max(total_assets, 0)",
+        "inputs": [
+          "revenue",
+          "total_assets"
+        ]
+      },
+      "methodology": "Total Asset Turnover",
+      "corporateRatioPack": true,
+      "id": 3377,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.ppe_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "PP&E Turnover",
+      "description": "Revenue divided by net PP&E",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ppe_turnover",
+      "slug": "ppe_turnover",
+      "calc": {
+        "expr": "revenue / max(ppe_net, 0)",
+        "inputs": [
+          "revenue",
+          "ppe_net"
+        ]
+      },
+      "methodology": "PP&E Turnover",
+      "corporateRatioPack": true,
+      "id": 3378,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.cash_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Turnover",
+      "description": "Revenue divided by cash",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "cash_turnover",
+      "slug": "cash_turnover",
+      "calc": {
+        "expr": "revenue / max(cash, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Turnover",
+      "corporateRatioPack": true,
+      "id": 3379,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.cash_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Cash Days",
+      "description": "Cash balance expressed as days of revenue at a 365-day year (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "cash_days",
+      "slug": "cash_days",
+      "calc": {
+        "expr": "cash * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "cash"
+        ]
+      },
+      "methodology": "Cash Days",
+      "corporateRatioPack": true,
+      "id": 3380,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.accounts_receivable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Turnover",
+      "description": "Revenue divided by accounts receivable  Not parameterized DSO.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_receivable_turnover",
+      "slug": "accounts_receivable_turnover",
+      "calc": {
+        "expr": "revenue / max(accounts_receivable, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Turnover",
+      "corporateRatioPack": true,
+      "id": 3381,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.accounts_receivable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Receivable Days",
+      "description": "Receivable balance in days of revenue; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DSO.",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_receivable_days",
+      "slug": "accounts_receivable_days",
+      "relatedBenchmarkKeys": [
+        "dso"
+      ],
+      "calc": {
+        "expr": "accounts_receivable * 365 / max(revenue, 0)",
+        "inputs": [
+          "revenue",
+          "accounts_receivable"
+        ]
+      },
+      "methodology": "Accounts Receivable Days",
+      "corporateRatioPack": true,
+      "id": 3382,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.inventory_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Turnover (ending balance)",
+      "description": "COGS divided by ending inventory  Distinct from average-inventory variants.",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "inventory_turnover",
+      "slug": "inventory_turnover",
+      "relatedBenchmarkKeys": [
+        "inventory_turnover"
+      ],
+      "calc": {
+        "expr": "cogs / max(inventory, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Turnover (ending balance)",
+      "corporateRatioPack": true,
+      "id": 3383,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.inventory_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Inventory Days",
+      "description": "Inventory held in days of COGS; 365-day convention (Ambient corporate ratio pack).",
+      "unit": "Days",
+      "higherIsBetter": false,
+      "validationRule": "days",
+      "benchmarkKey": "inventory_days",
+      "slug": "inventory_days",
+      "calc": {
+        "expr": "inventory * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "inventory"
+        ]
+      },
+      "methodology": "Inventory Days",
+      "corporateRatioPack": true,
+      "id": 3384,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.accounts_payable_turnover": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Turnover",
+      "description": "COGS divided by accounts payable",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "accounts_payable_turnover",
+      "slug": "accounts_payable_turnover",
+      "calc": {
+        "expr": "cogs / max(accounts_payable, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Turnover",
+      "corporateRatioPack": true,
+      "id": 3385,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.accounts_payable_days": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Accounts Payable Days",
+      "description": "Payables expressed as days of COGS; 365-day convention (Ambient corporate ratio pack). Distinct from catalog DPO.",
+      "unit": "Days",
+      "higherIsBetter": true,
+      "validationRule": "days",
+      "benchmarkKey": "accounts_payable_days",
+      "slug": "accounts_payable_days",
+      "relatedBenchmarkKeys": [
+        "dpo"
+      ],
+      "calc": {
+        "expr": "accounts_payable * 365 / max(cogs, 0)",
+        "inputs": [
+          "cogs",
+          "accounts_payable"
+        ]
+      },
+      "methodology": "Accounts Payable Days",
+      "corporateRatioPack": true,
+      "id": 3386,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.total_assets_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Total Assets to Equity (Equity Multiplier)",
+      "description": "Financial leverage lever in DuPont",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "total_assets_to_equity",
+      "slug": "total_assets_to_equity",
+      "calc": {
+        "expr": "total_assets / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "total_assets",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Total Assets to Equity (Equity Multiplier)",
+      "corporateRatioPack": true,
+      "id": 3387,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.debt_to_equity": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Equity",
+      "description": "Interest-bearing liabilities divided by equity",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_equity",
+      "slug": "debt_to_equity",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(total_shareholders_equity, 0)",
+        "inputs": [
+          "interest_bearing_liabilities",
+          "total_shareholders_equity"
+        ]
+      },
+      "methodology": "Debt to Equity",
+      "corporateRatioPack": true,
+      "id": 3388,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.debt_to_tangible_net_worth": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to Tangible Net Worth",
+      "description": "Interest-bearing debt divided by tangible net worth (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_tangible_net_worth",
+      "slug": "debt_to_tangible_net_worth",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(tangible_net_worth, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to Tangible Net Worth",
+      "corporateRatioPack": true,
+      "id": 3389,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Debt to EBITDA",
+      "description": "Gross interest-bearing debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "debt_to_ebitda",
+      "slug": "debt_to_ebitda",
+      "calc": {
+        "expr": "interest_bearing_liabilities / max(ebitda_derived, 0)",
+        "inputs": [
+          "interest_bearing_liabilities"
+        ]
+      },
+      "methodology": "Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3390,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.net_debt_to_ebitda": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Net Debt to EBITDA",
+      "description": "Net debt divided by EBITDA",
+      "unit": "x",
+      "higherIsBetter": false,
+      "validationRule": "ratio",
+      "benchmarkKey": "net_debt_to_ebitda",
+      "slug": "net_debt_to_ebitda",
+      "calc": {
+        "expr": "net_debt / max(ebitda_derived, 0)",
+        "inputs": []
+      },
+      "methodology": "Net Debt to EBITDA",
+      "corporateRatioPack": true,
+      "id": 3391,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.quick_ratio_quick_assets": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Quick Ratio (Quick Assets)",
+      "description": "Strict quick assets over current liabilities Formula-box quick_ratio remains default.",
+      "methodology": "Quick Ratio = (Cash + Marketable Securities + A/R) / Current Liabilities",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "quick_ratio_quick_assets",
+      "slug": "quick_ratio_quick_assets",
+      "relatedBenchmarkKeys": [
+        "quick_ratio"
+      ],
+      "calc": {
+        "expr": "quick_assets / max(current_liabilities, 0)",
+        "inputs": [
+          "current_liabilities"
+        ]
+      },
+      "corporateRatioPack": true,
+      "id": 3392,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.ebitda_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA to Interest (Interest Coverage)",
+      "description": "EBITDA divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_to_interest",
+      "slug": "ebitda_to_interest",
+      "calc": {
+        "expr": "ebitda_derived / max(interest_expense, 0)",
+        "inputs": [
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA to Interest (Interest Coverage)",
+      "corporateRatioPack": true,
+      "id": 3393,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.ebit_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBIT to Interest",
+      "description": "EBIT divided by gross interest expense",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebit_to_interest",
+      "slug": "ebit_to_interest",
+      "calc": {
+        "expr": "operating_income / max(interest_expense, 0)",
+        "inputs": [
+          "operating_income",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBIT to Interest",
+      "corporateRatioPack": true,
+      "id": 3394,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.ebitda_less_capex_to_interest": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "EBITDA Less Capex to Interest",
+      "description": "Capex-adjusted EBITDA coverage",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "ebitda_less_capex_to_interest",
+      "slug": "ebitda_less_capex_to_interest",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense"
+        ]
+      },
+      "methodology": "EBITDA Less Capex to Interest",
+      "corporateRatioPack": true,
+      "id": 3395,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.fixed_charge_coverage": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "name": "Fixed Charge Coverage",
+      "description": "Capex-adjusted EBITDA over interest plus current debt maturities (Ambient corporate ratio pack).",
+      "unit": "x",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fixed_charge_coverage",
+      "slug": "fixed_charge_coverage",
+      "calc": {
+        "expr": "(ebitda_derived - capital_expenditures) / max(interest_expense + current_portion_long_term_debt, 0)",
+        "inputs": [
+          "capital_expenditures",
+          "interest_expense",
+          "current_portion_long_term_debt"
+        ]
+      },
+      "methodology": "Fixed Charge Coverage",
+      "corporateRatioPack": true,
+      "id": 3396,
+      "industry": "Retail",
+      "segment": "core"
     },
     "retail.operations.same_store_sales_growth": {
       "id": 1670,

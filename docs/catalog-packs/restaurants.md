@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Restaurants**
 - Metrics: **13**
 - Data options: **13**
-- Benchmark keys: **24**
+- Benchmark keys: **60**
 
 ## Data options
 

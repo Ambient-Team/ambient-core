@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Standard corporate financial ratios** — 27 primary ratios, five variants, and derived line-item templates in `catalog/shared/metrics.yaml`, documented in `docs/ratios/corporate-ratios.md`, Gold contract `contracts/finance-corporate-ratios-v1.yaml`, and golden tests in `tests/test_corporate_ratios.py` (synthetic Harbor Ridge fixture). Legacy `dso`, `dpo`, and industry average `inventory_turnover` metrics are unchanged; standard companions use separate ids.
+
 ## [0.3.11] - 2026-11-09
 
 ### Added

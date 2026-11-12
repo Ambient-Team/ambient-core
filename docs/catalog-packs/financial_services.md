@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Financial Services**
 - Metrics: **8**
 - Data options: **1**
-- Benchmark keys: **22**
+- Benchmark keys: **58**
 
 ## Data options
 
