@@ -829,7 +829,8 @@ templates:
     frequency: annual
     balanceBasisDefault: ending
     name: Operating Profit Margin (EBIT)
-    description: EBIT divided by revenue, decimal quotient 
+    description: EBIT divided by revenue as a decimal quotient. Alias of operating_margin
+      at percent scale; see docs/ratios/corporate-ratios.md.
       Alias of operating_margin at percent scale.
     methodology: Operating Profit Margin = EBIT / Revenue
     unit: '%'
@@ -862,8 +863,8 @@ templates:
     frequency: annual
     balanceBasisDefault: ending
     name: Net Profit Margin (decimal quotient)
-    description: Net income divided by revenue, decimal quotient (Ambient corporate ratio
-      pack). Alias of net_margin at percent scale.
+    description: Net income divided by revenue as a decimal quotient. Alias of net_margin
+      at percent scale; see docs/ratios/corporate-ratios.md.
     methodology: Net Profit Margin = Net Income / Revenue
     unit: '%'
     higherIsBetter: true
