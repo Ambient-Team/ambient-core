@@ -24,6 +24,21 @@ class IntegrityResult:
 
     @property
     def failed_ids(self) -> frozenset[str]:
+        """Set of check ids that failed for this period.
+
+        Args:
+            None: This property takes no arguments.
+
+        Returns:
+            frozenset[str].
+
+        Raises:
+            None: This property does not raise.
+
+        Example:
+            >>> IntegrityResult((), ()).failed_ids
+            frozenset()
+        """
         return frozenset(f.check_id for f in self.failed)
 
 
@@ -44,6 +59,20 @@ def _close(diff: float) -> bool:
 
 
 def operating_nwc(sheet: Mapping[str, Any]) -> float:
+    """Operating net working capital per the corporate statements contract (excludes cash and ST debt).
+
+    Args:
+        sheet: Balance sheet mapping for one date.
+
+    Returns:
+        float.
+
+    Raises:
+        KeyError: Required operating NWC leaves are missing.
+
+    Example:
+        >>> operating_nwc({"accounts_receivable": 10, "inventory": 0, "prepaid_expenses": 0, "accounts_payable": 3, "accrued_expenses": 0, "deferred_revenue": 0, "income_tax_payable": 0})
+    """
     oca = (
         _req(sheet, "accounts_receivable")
         + _req(sheet, "inventory")
@@ -136,7 +165,21 @@ def run_period_checks(
     dataset: Mapping[str, Any],
     period_id: str,
 ) -> IntegrityResult:
-    """Run integrity checks for one reporting period in a three-statement bundle."""
+    """Run integrity checks for one reporting period in a three-statement bundle.
+
+    Args:
+        dataset: Parsed fixture or upload bundle with balance_sheets and periods.
+        period_id: Key under ``periods`` (for example ``fy2025``).
+
+    Returns:
+        IntegrityResult.
+
+    Raises:
+        KeyError: Required paths missing from the dataset.
+
+    Example:
+        >>> run_period_checks({"balance_sheets": {}, "periods": {}}, "fy2025")
+    """
     periods = dataset["periods"]
     period = periods[period_id]
     balance_sheets = dataset["balance_sheets"]
@@ -454,6 +497,20 @@ def run_period_checks(
 
 
 def run_all_checks(dataset: Mapping[str, Any]) -> dict[str, IntegrityResult]:
+    """Run integrity checks for every period entry in the bundle.
+
+    Args:
+        dataset: Parsed fixture or upload bundle.
+
+    Returns:
+        dict[str, IntegrityResult].
+
+    Raises:
+        KeyError: ``periods`` missing from the dataset.
+
+    Example:
+        >>> run_all_checks({"periods": {}})
+    """
     return {pid: run_period_checks(dataset, pid) for pid in dataset["periods"]}
 
 
@@ -479,7 +536,21 @@ def _resolve_patch_root(out: dict[str, Any], parts: list[str]) -> tuple[Any, str
 
 
 def apply_json_patch(dataset: Mapping[str, Any], patch: Mapping[str, Any]) -> dict[str, Any]:
-    """Apply dotted-path patches (as in the accounting essentials fixture)."""
+    """Apply dotted-path patches (as in the accounting essentials fixture).
+
+    Args:
+        dataset: Original statement bundle.
+        patch: Map of dotted paths to replacement values.
+
+    Returns:
+        Deep copy with patches applied.
+
+    Raises:
+        KeyError: Path does not exist in the bundle.
+
+    Example:
+        >>> apply_json_patch({"balance_sheets": {}}, {})
+    """
     out: dict[str, Any] = copy.deepcopy(dict(dataset))
     for path, value in patch.items():
         parts = path.split(".")

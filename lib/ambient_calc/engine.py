@@ -91,7 +91,22 @@ def safe_eval(expr: str, variables: Mapping[str, Any]) -> float | None:
 
 
 def safe_eval_result(expr: str, variables: Mapping[str, Any]) -> EvalResult:
-    """Evaluate an expression and return a value with an optional structured null reason."""
+    """Evaluate an expression and return a value with an optional structured null reason.
+
+    Args:
+        expr: str.
+        variables: Mapping[str, Any].
+
+    Returns:
+        EvalResult.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> safe_eval_result("a / b", {"a": 1.0, "b": 0.0}).null_reason
+        'zero_denominator'
+    """
     tree = _parse(expr)
     return _eval_result(tree.body, variables)
 
@@ -101,7 +116,22 @@ def compute_metric_result(
     inputs: Mapping[str, Any],
     computed: Mapping[str, Any] | None = None,
 ) -> EvalResult:
-    """Like :func:`compute_metric` but attaches null reason codes when evaluation is undefined."""
+    """Compute one metric and attach null reason codes when evaluation is undefined.
+
+    Args:
+        metric: Mapping[str, Any].
+        inputs: Mapping[str, Any].
+        computed: Mapping[str, Any] | None.
+
+    Returns:
+        EvalResult.
+
+    Raises:
+        CalcError: Invalid or cyclic metric definitions.
+
+    Example:
+        >>> compute_metric_result({"calc": {"expr": "1", "inputs": []}}, {})
+    """
     calc = metric.get("calc")
     if not calc:
         raise CalcError("metric has no calc block (it is a measured input)")
@@ -121,7 +151,21 @@ def compute_all_results(
     metrics: Iterable[Mapping[str, Any]],
     inputs: Mapping[str, Any],
 ) -> dict[str, EvalResult]:
-    """Compute metrics in dependency order with structured null reasons."""
+    """Compute metrics in dependency order with structured null reasons.
+
+    Args:
+        metrics: Iterable[Mapping[str, Any]].
+        inputs: Mapping[str, Any].
+
+    Returns:
+        dict[str, EvalResult].
+
+    Raises:
+        CalcError: Dependency cycle or invalid metric definition.
+
+    Example:
+        >>> compute_all_results([], {})
+    """
     by_slug: dict[str, Mapping[str, Any]] = {}
     for m in metrics:
         slug = (m.get("slug") or slug_of(m)).replace("-", "_")
