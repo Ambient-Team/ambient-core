@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Construction**
 - Metrics: **8**
 - Data options: **3**
-- Benchmark keys: **22**
+- Benchmark keys: **58**
 
 ## Data options
 

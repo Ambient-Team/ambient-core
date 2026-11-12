@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Passenger Transit**
 - Metrics: **5**
 - Data options: **2**
-- Benchmark keys: **22**
+- Benchmark keys: **58**
 
 ## Data options
 

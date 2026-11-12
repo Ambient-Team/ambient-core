@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Vertical Farming**
 - Metrics: **17**
 - Data options: **14**
-- Benchmark keys: **22**
+- Benchmark keys: **58**
 
 ## Data options
 

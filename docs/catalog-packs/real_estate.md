@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Real Estate**
 - Metrics: **23**
 - Data options: **19**
-- Benchmark keys: **27**
+- Benchmark keys: **63**
 
 ## Data options
 
