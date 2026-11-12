@@ -9,10 +9,14 @@ import pytest
 
 from ambient_calc import (
     CalcError,
+    ZERO_DENOMINATOR,
+    EvalResult,
     compute_all,
     compute_metric,
+    compute_metric_result,
     formula_names,
     safe_eval,
+    safe_eval_result,
     slug_of,
 )
 
@@ -26,6 +30,17 @@ def test_safe_eval_basic_arithmetic() -> None:
 
 def test_safe_eval_div_by_zero_returns_none() -> None:
     assert safe_eval("a / b", {"a": 1, "b": 0}) is None
+
+
+def test_safe_eval_result_zero_denominator_reason() -> None:
+    assert safe_eval_result("a / b", {"a": 1, "b": 0}) == EvalResult(None, ZERO_DENOMINATOR)
+
+
+def test_compute_metric_result_missing_input_reason() -> None:
+    metric = {"calc": {"expr": "x / y", "inputs": ["x", "y"]}}
+    res = compute_metric_result(metric, {"x": 1.0})
+    assert res.value is None
+    assert res.null_reason == "missing_input"
 
 
 def test_safe_eval_none_operand_propagates() -> None:

@@ -10,17 +10,33 @@ directly or reimplement against the same spec.
 from ambient_calc.engine import (
     CalcError,
     compute_all,
+    compute_all_results,
     compute_metric,
+    compute_metric_result,
     formula_names,
     safe_eval,
+    safe_eval_result,
     slug_of,
+)
+from ambient_calc.results import (
+    MISSING_INPUT,
+    NULL_OPERAND,
+    ZERO_DENOMINATOR,
+    EvalResult,
 )
 
 __all__ = [
     "CalcError",
+    "EvalResult",
+    "MISSING_INPUT",
+    "NULL_OPERAND",
+    "ZERO_DENOMINATOR",
     "compute_all",
+    "compute_all_results",
     "compute_metric",
+    "compute_metric_result",
     "formula_names",
     "safe_eval",
+    "safe_eval_result",
     "slug_of",
 ]

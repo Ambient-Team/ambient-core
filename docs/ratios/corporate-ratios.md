@@ -55,7 +55,7 @@ A commonly circulated worked example that lists cash, securities, and receivable
 
 ### Undefined and edge cases
 
-The reference evaluator (`ambient_calc`) returns **null** for divide-by-zero and missing operands (never infinity). Structured reason codes (`zero_denominator`, `missing_input`) are follow-up work for downstream APIs; null is the contract today.
+The reference evaluator (`ambient_calc`) returns **null** for divide-by-zero and missing operands (never infinity). Use `safe_eval_result` or `compute_metric_result` when you need structured `null_reason` codes (`zero_denominator`, `missing_input`, `null_operand`); bare `safe_eval` remains value-only for backward compatibility.
 
 ### IFRS / HKFRS vs US GAAP
 

@@ -1,0 +1,232 @@
+product:
+  name: Finance Corporate Statements
+  version: 1.0
+  owner: analytics
+  consumption_id: FINANCE_CORPORATE_STATEMENTS
+  description: >
+    Corporate three-statement line-item taxonomy for non-financial entities. Default
+    reporting framework is ifrs_hkfrs. Reuses existing catalog ids (revenue, cogs,
+    net_income, accounts_receivable, current_assets, cash_and_cash_equivalents as
+    current_cash_balance alias, and others). Primary Ambient metrics remain defaults;
+    this contract adds structure and integrity checks when a full statement set exists.
+  domain: Corporate Finance
+  type: Source
+
+schema:
+  table: gold.finance_corporate_statements
+  primary_key: corporate_statement_id
+  partition_key: _bronze_org_id
+  columns:
+    - name: corporate_statement_id
+      type: string
+      required: true
+    - name: _bronze_org_id
+      type: string
+      required: true
+    - name: period_end
+      type: date
+      required: true
+    - name: reporting_framework
+      type: string
+      required: true
+      enum: [ifrs_hkfrs, us_gaap, other]
+    - name: revenue
+      type: double
+      required: false
+    - name: net_income
+      type: double
+      required: false
+    - name: total_assets
+      type: double
+      required: false
+    - name: total_equity
+      type: double
+      required: false
+    - name: cash_and_cash_equivalents
+      type: double
+      required: false
+    - name: cash_from_operations
+      type: double
+      required: false
+    - name: integrity_passed
+      type: boolean
+      required: true
+    - name: failed_integrity_checks
+      type: array<string>
+      required: false
+    - name: _gold_run_id
+      type: string
+      required: true
+
+statement_taxonomy:
+  income_statement_leaves:
+    - revenue
+    - cogs_excluding_depreciation
+    - depreciation_in_cogs
+    - sga_excluding_da
+    - research_and_development
+    - depreciation_not_in_cogs
+    - right_of_use_depreciation
+    - amortization
+    - other_operating_income
+    - other_operating_expense
+    - interest_income
+    - interest_expense
+    - other_nonoperating_income
+    - other_nonoperating_expense
+    - gain_on_disposal
+    - current_tax_expense
+    - deferred_tax_expense
+    - preferred_dividends
+    - weighted_average_shares_outstanding
+    - diluted_weighted_average_shares
+  income_statement_derived:
+    - cogs
+    - gross_profit
+    - ppe_depreciation
+    - depreciation
+    - depreciation_and_amortization
+    - operating_income
+    - ebit
+    - earnings_before_tax
+    - tax_expense
+    - net_income
+    - ebitda
+    - income_available_to_common
+    - basic_eps
+    - diluted_eps
+  balance_sheet_leaves:
+    - cash
+    - cash_equivalents
+    - marketable_securities
+    - accounts_receivable_gross
+    - allowance_for_credit_losses
+    - inventory
+    - prepaid_expenses
+    - ppe_gross
+    - accumulated_depreciation
+    - right_of_use_assets
+    - intangible_assets_gross
+    - accumulated_amortization
+    - goodwill
+    - deferred_tax_assets
+    - other_noncurrent_assets
+    - accounts_payable
+    - accrued_expenses
+    - deferred_revenue
+    - income_tax_payable
+    - dividends_payable
+    - short_term_debt
+    - current_portion_long_term_debt
+    - current_portion_of_lease_liability
+    - long_term_debt
+    - lease_liability_noncurrent
+    - deferred_tax_liabilities
+    - other_noncurrent_liabilities
+    - share_capital
+    - additional_paid_in_capital
+    - retained_earnings
+    - accumulated_other_comprehensive_income
+    - treasury_stock
+    - preferred_stock
+    - non_controlling_interest
+  balance_sheet_derived:
+    - cash_and_cash_equivalents
+    - accounts_receivable
+    - ppe_net
+    - intangible_assets
+    - current_assets
+    - noncurrent_assets
+    - total_assets
+    - current_liabilities
+    - noncurrent_liabilities
+    - total_liabilities
+    - total_shareholders_equity
+    - total_equity
+    - total_liabilities_and_equity
+    - interest_bearing_debt_ex_leases
+    - lease_liability_total
+    - interest_bearing_liabilities
+    - operating_current_assets
+    - operating_current_liabilities
+    - operating_nwc
+  cash_flow_leaves:
+    - capital_expenditures
+    - proceeds_from_disposals
+    - nbv_of_disposals
+    - gross_disposals
+    - accumulated_depreciation_on_disposals
+    - business_acquisitions
+    - long_term_investments_purchased
+    - share_issuance_proceeds
+    - share_buybacks
+    - debt_issuance
+    - debt_principal_repayment
+    - lease_principal_repayment
+    - dividends_declared
+    - dividends_paid
+    - interest_paid
+    - interest_received
+    - taxes_paid
+    - effect_of_exchange_rates_on_cash
+    - other_operating_adjustments
+    - other_investing_flows
+    - other_financing_flows
+  cash_flow_derived:
+    - increase_in_operating_nwc
+    - non_cash_charges
+    - cash_from_operations
+    - cash_from_investing
+    - cash_from_financing
+    - net_change_in_cash
+    - opening_cash_and_cash_equivalents
+    - closing_cash_and_cash_equivalents
+  catalog_aliases:
+    current_cash_balance: cash_and_cash_equivalents
+    equity: total_equity
+    increase_in_working_capital: increase_in_operating_nwc
+    cost_of_goods: cogs
+    cost_of_goods_sold: cogs
+  integrity_check_ids:
+    - balance_sheet_balances
+    - opening_balance_sheet_balances
+    - current_assets_footing
+    - noncurrent_assets_footing
+    - current_liabilities_footing
+    - equity_footing
+    - gross_profit_identity
+    - operating_income_identity
+    - ebt_identity
+    - net_income_identity
+    - tax_expense_split
+    - ebitda_construction
+    - retained_earnings_rollforward
+    - share_capital_rollforward
+    - oci_rollforward
+    - cash_flow_footing
+    - cash_ties_to_balance_sheet
+    - indirect_cfo_reconciliation
+    - operating_nwc_definition
+    - ppe_rollforward
+    - ppe_gross_rollforward
+    - ppe_accum_dep_rollforward
+    - intangible_rollforward
+    - rou_rollforward
+    - lease_liability_rollforward
+    - debt_rollforward
+    - deferred_tax_rollforward
+    - dividends_declared_vs_paid
+    - taxes_paid_reconciliation
+    - existing_ocf_metric_identity
+    - basic_eps
+
+lineage:
+  bcbs239: true
+  provenance_columns: ["_bronze_run_id", "_bronze_row_hash", "_gold_run_id"]
+
+governance:
+  multi_tenant: true
+  rls_enforced: true
+  pii_pseudonymized: true
+  phi_present: false
+  retention_days: 2555
