@@ -480,7 +480,7 @@ def _resolve_patch_root(out: dict[str, Any], parts: list[str]) -> tuple[Any, str
 
 def apply_json_patch(dataset: Mapping[str, Any], patch: Mapping[str, Any]) -> dict[str, Any]:
     """Apply dotted-path patches (as in the accounting essentials fixture)."""
-    out = copy.deepcopy(dataset)
+    out: dict[str, Any] = copy.deepcopy(dict(dataset))
     for path, value in patch.items():
         parts = path.split(".")
         node, leaf = _resolve_patch_root(out, parts)
