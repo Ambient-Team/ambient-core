@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.12] - 2026-11-12
+
 ### Added
 
-- **Standard corporate financial ratios** — 27 primary ratios, five variants, and derived line-item templates in `catalog/shared/metrics.yaml`, documented in `docs/ratios/corporate-ratios.md`, Gold contract `contracts/finance-corporate-ratios-v1.yaml`, and golden tests in `tests/test_corporate_ratios.py` (synthetic Harbor Ridge fixture). Legacy `dso`, `dpo`, and industry average `inventory_turnover` metrics are unchanged; standard companions use separate ids.
-- **Corporate three-statement essentials** — `contracts/finance-corporate-statements-v1.yaml`, `lib/ambient_statements` integrity runner (30 checks), docs in `docs/statements/corporate-three-statements.md`, and golden tests in `tests/test_accounting_essentials.py` (synthetic Harborfield fixture). Structured `null_reason` codes on `ambient_calc` via `safe_eval_result` / `compute_metric_result`.
+- **Corporate financial ratio pack** — Shared catalog templates, `docs/ratios/corporate-ratios.md`, Gold contract `contracts/finance-corporate-ratios-v1.yaml`, and golden tests (`tests/test_corporate_ratios.py`, synthetic Harbor Ridge fixture). Existing `dso`, `dpo`, and industry `inventory_turnover` metrics stay primary; additional ratio ids sit alongside them.
+- **Corporate three-statement essentials** — Gold contract `contracts/finance-corporate-statements-v1.yaml`, `lib/ambient_statements` integrity checks (30 identities), `docs/statements/corporate-three-statements.md`, and golden tests (`tests/test_accounting_essentials.py`, synthetic Harborfield fixture). Structured `null_reason` codes on `ambient_calc` via `safe_eval_result` and `compute_metric_result`.
 
 ## [0.3.11] - 2026-11-09
 
