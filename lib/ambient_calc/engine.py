@@ -201,58 +201,6 @@ def compute_all_results(
     return results
 
 
-def _eval(node: ast.AST, variables: Mapping[str, Any]) -> Any:
-    if isinstance(node, ast.Constant):
-        if isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
-            return node.value
-        raise CalcError(f"non-numeric constant {node.value!r}")
-    if isinstance(node, ast.Name):
-        if node.id not in variables:
-            raise CalcError(f"unknown variable {node.id!r}")
-        return variables[node.id]
-    if isinstance(node, ast.BinOp):
-        left = _eval(node.left, variables)
-        right = _eval(node.right, variables)
-        if left is None or right is None:
-            return None
-        if isinstance(node.op, ast.Add):
-            return left + right
-        if isinstance(node.op, ast.Sub):
-            return left - right
-        if isinstance(node.op, ast.Mult):
-            return left * right
-        if isinstance(node.op, ast.Div):
-            if right == 0:
-                return None
-            return left / right
-        if isinstance(node.op, ast.Pow):
-            # Bound exponentiation to avoid CPU/memory exhaustion (e.g. 9**9**9).
-            if not isinstance(right, (int, float)) or abs(right) > 100:
-                raise CalcError("exponent out of allowed range")
-            if not isinstance(left, (int, float)) or abs(left) > 1e6:
-                raise CalcError("base out of allowed range for exponentiation")
-            return left ** right
-        raise CalcError(f"operator not allowed: {type(node.op).__name__}")
-    if isinstance(node, ast.UnaryOp):
-        operand = _eval(node.operand, variables)
-        if operand is None:
-            return None
-        if isinstance(node.op, ast.USub):
-            return -operand
-        if isinstance(node.op, ast.UAdd):
-            return operand
-        raise CalcError(f"unary operator not allowed: {type(node.op).__name__}")
-    if isinstance(node, ast.Call):
-        func = node.func
-        if not isinstance(func, ast.Name) or func.id not in _ALLOWED_FUNCS:
-            raise CalcError("only whitelisted numeric functions are allowed")
-        args = [_eval(a, variables) for a in node.args]
-        if any(a is None for a in args):
-            return None
-        return _ALLOWED_FUNCS[func.id](*args)
-    raise CalcError(f"expression element not allowed: {type(node).__name__}")
-
-
 def _eval_result(node: ast.AST, variables: Mapping[str, Any]) -> EvalResult:
     if isinstance(node, ast.Constant):
         if isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
