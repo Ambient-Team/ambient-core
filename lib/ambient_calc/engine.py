@@ -5,6 +5,8 @@ from __future__ import annotations
 import ast
 from typing import Any, Iterable, Mapping, cast
 
+from ambient_calc.results import MISSING_INPUT, ZERO_DENOMINATOR, EvalResult
+
 _ALLOWED_FUNCS = {"min": min, "max": max, "abs": abs, "round": round}
 
 
@@ -85,8 +87,74 @@ def safe_eval(expr: str, variables: Mapping[str, Any]) -> float | None:
     Example:
         >>> safe_eval(...)
     """
+    return safe_eval_result(expr, variables).value
+
+
+def safe_eval_result(expr: str, variables: Mapping[str, Any]) -> EvalResult:
+    """Evaluate an expression and return a value with an optional structured null reason."""
     tree = _parse(expr)
-    return cast(float | None, _eval(tree.body, variables))
+    return _eval_result(tree.body, variables)
+
+
+def compute_metric_result(
+    metric: Mapping[str, Any],
+    inputs: Mapping[str, Any],
+    computed: Mapping[str, Any] | None = None,
+) -> EvalResult:
+    """Like :func:`compute_metric` but attaches null reason codes when evaluation is undefined."""
+    calc = metric.get("calc")
+    if not calc:
+        raise CalcError("metric has no calc block (it is a measured input)")
+    expr = calc.get("expr")
+    if not expr:
+        raise CalcError("calc block missing expr")
+    context: dict[str, Any] = dict(computed or {})
+    context.update({k: v for k, v in inputs.items()})
+    declared = set(calc.get("inputs") or [])
+    for name in declared:
+        if name not in inputs:
+            return EvalResult(None, MISSING_INPUT)
+    return safe_eval_result(expr, context)
+
+
+def compute_all_results(
+    metrics: Iterable[Mapping[str, Any]],
+    inputs: Mapping[str, Any],
+) -> dict[str, EvalResult]:
+    """Compute metrics in dependency order with structured null reasons."""
+    by_slug: dict[str, Mapping[str, Any]] = {}
+    for m in metrics:
+        slug = (m.get("slug") or slug_of(m)).replace("-", "_")
+        by_slug[slug] = m
+    slugs = set(by_slug)
+    visited: dict[str, int] = {}
+    order: list[str] = []
+
+    def visit(slug: str) -> None:
+        state = visited.get(slug)
+        if state == 2:
+            return
+        if state == 1:
+            raise CalcError(f"dependency cycle through {slug!r}")
+        visited[slug] = 1
+        for dep in _depends_on(by_slug[slug], slugs):
+            visit(dep)
+        visited[slug] = 2
+        order.append(slug)
+
+    for slug in by_slug:
+        visit(slug)
+
+    numeric_computed: dict[str, Any] = {}
+    results: dict[str, EvalResult] = {}
+    for slug in order:
+        metric = by_slug[slug]
+        if not metric.get("calc"):
+            continue
+        res = compute_metric_result(metric, inputs, numeric_computed)
+        results[slug] = res
+        numeric_computed[slug] = res.value
+    return results
 
 
 def _eval(node: ast.AST, variables: Mapping[str, Any]) -> Any:
@@ -138,6 +206,68 @@ def _eval(node: ast.AST, variables: Mapping[str, Any]) -> Any:
         if any(a is None for a in args):
             return None
         return _ALLOWED_FUNCS[func.id](*args)
+    raise CalcError(f"expression element not allowed: {type(node).__name__}")
+
+
+def _eval_result(node: ast.AST, variables: Mapping[str, Any]) -> EvalResult:
+    if isinstance(node, ast.Constant):
+        if isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
+            return EvalResult(float(node.value))
+        raise CalcError(f"non-numeric constant {node.value!r}")
+    if isinstance(node, ast.Name):
+        if node.id not in variables:
+            raise CalcError(f"unknown variable {node.id!r}")
+        raw = variables[node.id]
+        if raw is None:
+            return EvalResult(None, MISSING_INPUT)
+        return EvalResult(float(raw))
+    if isinstance(node, ast.BinOp):
+        left = _eval_result(node.left, variables)
+        if left.null_reason:
+            return left
+        right = _eval_result(node.right, variables)
+        if right.null_reason:
+            return right
+        lv, rv = left.value, right.value
+        assert lv is not None and rv is not None
+        if isinstance(node.op, ast.Add):
+            return EvalResult(lv + rv)
+        if isinstance(node.op, ast.Sub):
+            return EvalResult(lv - rv)
+        if isinstance(node.op, ast.Mult):
+            return EvalResult(lv * rv)
+        if isinstance(node.op, ast.Div):
+            if rv == 0:
+                return EvalResult(None, ZERO_DENOMINATOR)
+            return EvalResult(lv / rv)
+        if isinstance(node.op, ast.Pow):
+            if not isinstance(rv, (int, float)) or abs(rv) > 100:
+                raise CalcError("exponent out of allowed range")
+            if not isinstance(lv, (int, float)) or abs(lv) > 1e6:
+                raise CalcError("base out of allowed range for exponentiation")
+            return EvalResult(lv**rv)
+        raise CalcError(f"operator not allowed: {type(node.op).__name__}")
+    if isinstance(node, ast.UnaryOp):
+        operand = _eval_result(node.operand, variables)
+        if operand.null_reason:
+            return operand
+        assert operand.value is not None
+        if isinstance(node.op, ast.USub):
+            return EvalResult(-operand.value)
+        if isinstance(node.op, ast.UAdd):
+            return EvalResult(operand.value)
+        raise CalcError(f"unary operator not allowed: {type(node.op).__name__}")
+    if isinstance(node, ast.Call):
+        func = node.func
+        if not isinstance(func, ast.Name) or func.id not in _ALLOWED_FUNCS:
+            raise CalcError("only whitelisted numeric functions are allowed")
+        arg_results = [_eval_result(a, variables) for a in node.args]
+        for ar in arg_results:
+            if ar.null_reason:
+                return EvalResult(None, ar.null_reason)
+        args = [ar.value for ar in arg_results]
+        assert all(a is not None for a in args)
+        return EvalResult(float(_ALLOWED_FUNCS[func.id](*args)))
     raise CalcError(f"expression element not allowed: {type(node).__name__}")
 
 

@@ -65,6 +65,7 @@ include = [
     "ambient_contracts*",
     "ambient_cli*",
     "ambient_calc*",
+    "ambient_statements*",
     "ambient_pipeline*",
 ]
 
@@ -72,6 +73,7 @@ include = [
 ambient_contracts = ["bundled/*.yaml", "py.typed"]
 ambient_cli = ["py.typed"]
 ambient_calc = ["py.typed"]
+ambient_statements = ["py.typed"]
 ambient_pipeline = ["py.typed"]
 
 [tool.pytest.ini_options]
