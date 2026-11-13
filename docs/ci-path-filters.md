@@ -13,7 +13,7 @@ Related pins from the same module:
 - **`pathsFilterPin`** — commit SHA for `dorny/paths-filter@…`
 - **`actionlintVersion`**, **`actionlintCommitSha`**, **`actionlintLinuxAmd64Sha256`** — actionlint install pins in the `ci-policy` job
 
-Branching reminders for contributors: [`docs/hub/branching.md`](hub/branching.md) (short local notes only).
+Branching and CI policy: [docs/ci.md](ci.md).
 
 ## When heavy CI runs
 

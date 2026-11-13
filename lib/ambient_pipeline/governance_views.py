@@ -1,4 +1,4 @@
-"""Unity Catalog org-scoped view DDL for tenant metrics."""
+"""Org-scoped view DDL for tenant metrics."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ def _require_safe_catalog(catalog: str) -> str:
     name = str(catalog).strip()
     if not _SAFE_CATALOG.match(name):
         raise ValueError(
-            f"unsafe Unity Catalog name {catalog!r}: expected identifier [A-Za-z_][A-Za-z0-9_]*"
+            f"unsafe catalog name {catalog!r}: expected identifier [A-Za-z_][A-Za-z0-9_]*"
         )
     return name
 

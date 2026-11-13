@@ -40,6 +40,27 @@ FORBIDDEN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("GitHub Pages host", re.compile(r"github\.io/", re.IGNORECASE)),
 )
 
+# Product-split phrasing. Historical CHANGELOG sections may keep old integrator names.
+PRODUCT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("commercial platform", re.compile(r"\bcommercial\s+platform\b", re.IGNORECASE)),
+    (
+        "ambient-systems-platform",
+        re.compile(r"ambient[\s-]+systems[\s-]+platform", re.IGNORECASE),
+    ),
+    ("product-site CTA", re.compile(r"ambientsystems\.ai", re.IGNORECASE)),
+)
+_CHANGELOG_HEADING = re.compile(r"^## \[([^\]]+)\]")
+_CURRENT_CHANGELOG = frozenset({"Unreleased", "0.4.0"})
+
+_CANONICAL_REPO = re.compile(r"github\.com/Ambient-Team/ambient-core", re.IGNORECASE)
+
+
+def _readme_repo_url_allowed(rel: str, line: str) -> bool:
+    if rel != "README.md" or _CANONICAL_REPO.search(line) is None:
+        return False
+    return bool(re.search(r"git\+https://|git clone|pip install", line, re.IGNORECASE))
+
+
 COLAB_ALLOWED = re.compile(
     r"colab\s*=|[,_\[]colab|colab[_\-\./\],]|\[colab\]|optional-notebook|"
     r"00_colab|/colab|\.colab|colab_smoke|colab_bootstrap",
@@ -55,10 +76,21 @@ def _colab_violation(line: str) -> bool:
 
 def _scan_text(rel: str, text: str, *, line_offset: int = 1) -> list[str]:
     errors: list[str] = []
+    section = ""
     for lineno, line in enumerate(text.splitlines(), start=line_offset):
+        heading = _CHANGELOG_HEADING.match(line)
+        if rel == "CHANGELOG.md" and heading:
+            section = heading.group(1)
         for label, pattern in FORBIDDEN_PATTERNS:
             if pattern.search(line):
+                if label == "Ambient-Team forge URL" and _readme_repo_url_allowed(rel, line):
+                    continue
                 errors.append(f"{rel}:{lineno}: forbidden {label!r}")
+        apply_product = rel != "CHANGELOG.md" or section in _CURRENT_CHANGELOG
+        if apply_product:
+            for label, pattern in PRODUCT_PATTERNS:
+                if pattern.search(line):
+                    errors.append(f"{rel}:{lineno}: forbidden {label!r}")
         if _colab_violation(line):
             errors.append(f"{rel}:{lineno}: forbidden bare Colab vendor copy")
     return errors

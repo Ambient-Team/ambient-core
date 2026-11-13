@@ -1,10 +1,10 @@
 product:
-  name: Manufacturing Demo Raw (academic samples)
+  name: Manufacturing Demo Raw (synthetic sample)
   version: 1.0
   owner: ambient-core
   description: >
-    Contract for Allmanufacturingds-* demo CSVs under data/raw/.
-    These are academic sample rows for hosted notebook smoke runs — not live tenant data.
+    Contract for fictional CSV rows under examples/sample/.
+    These rows exercise notebook smoke — not live tenant data.
   domain: Manufacturing
   type: Source-aligned
 
@@ -12,7 +12,7 @@ schema:
   tables:
     - id: ar_aging
       table: raw.ar_aging
-      file: Allmanufacturingds-ar-aging.csv
+      file: ar-aging.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: customer_name, type: string, required: true }
@@ -22,7 +22,7 @@ schema:
         - { name: aging_bucket, type: string, required: false }
     - id: ap_aging
       table: raw.ap_aging
-      file: Allmanufacturingds-ap-aging.csv
+      file: ap-aging.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: supplier_name, type: string, required: true }
@@ -30,7 +30,7 @@ schema:
         - { name: amount_due, type: double, required: true }
     - id: crm_pipeline
       table: raw.crm_pipeline
-      file: Allmanufacturingds-crm-pipeline.csv
+      file: crm-pipeline.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: opportunity_id, type: string, required: true }
@@ -38,21 +38,21 @@ schema:
         - { name: amount, type: double, required: true }
     - id: bank_statements
       table: raw.bank_statements
-      file: Allmanufacturingds-bank-statements.csv
+      file: bank-statements.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: amount, type: double, required: true }
         - { name: current_cash_balance, type: double, required: false }
     - id: balance_sheet
       table: raw.balance_sheet
-      file: Allmanufacturingds-balance-sheet.csv
+      file: balance-sheet.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: period_end_date, type: string, required: false }
         - { name: inventory, type: string, required: false }
     - id: general_ledger
       table: raw.general_ledger
-      file: Allmanufacturingds-general-ledger.csv
+      file: general-ledger.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: account_code, type: string, required: true }
@@ -60,7 +60,7 @@ schema:
         - { name: credit, type: double, required: false }
     - id: marketing_spend
       table: raw.marketing_spend
-      file: Allmanufacturingds-marketing-spend.csv
+      file: marketing-spend.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: channel, type: string, required: false }
@@ -68,7 +68,7 @@ schema:
         - { name: new_customers, type: double, required: false }
     - id: inventory_records
       table: raw.inventory_records
-      file: Allmanufacturingds-inventory-records.csv
+      file: inventory-records.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: sku, type: string, required: true }
@@ -88,4 +88,4 @@ lineage:
 governance:
   multi_tenant: true
   demo_only: true
-  note: Replace with fuller Allmanufacturingds extracts when available; keep filenames stable.
+  note: Fictional rows live under examples/sample. Filenames match this contract.

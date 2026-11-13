@@ -1,0 +1,4 @@
+date,supplier_name,bill_id,amount_due
+2024-01-15,Harbor Yarn Wholesale,BILL-2001,40.00
+2024-02-02,Sample Bolt Co,BILL-2002,80.00
+2024-03-11,Fictional Mill Supply,BILL-2003,30.00

@@ -11,7 +11,7 @@ Many catalog metrics describe KPI **intent** before a Gold product exists. When 
 ## When to add a link
 
 - **Upload-backed metrics** that land in Silver — usually [tenant-metrics-v1.yaml](../contracts/tenant-metrics-v1.yaml) with `contractProductId` such as `TENANT_METRICS`.
-- **Gold rollups** with dedicated schema — point `contractFile` at the matching vertical product (for example `finance-commercial-finance-v1.yaml`, `healthcare-provider-ops-v1.yaml`). Several catalog industry packs can share one `finance-*` file; use the product id your platform binds to org entitlements.
+- **Gold rollups** with dedicated schema — point `contractFile` at the matching vertical product (for example `finance-commercial-finance-v1.yaml`, `healthcare-provider-ops-v1.yaml`). Several catalog industry packs can share one `finance-*` file; use the product id your application binds to org entitlements.
 - **Skip the crosswalk** when the metric is catalog-only (methodology, benchmarks) and no persisted contract column set exists yet.
 
 After catalog metric or id changes, confirm `catalogMetricKey` and `metricId` still match a row in `manifest.json` before release.

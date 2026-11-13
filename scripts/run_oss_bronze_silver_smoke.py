@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-"""Optional Spark smoke: map one manufacturing demo CSV Bronze → Silver.
+"""Optional Spark smoke: map one synthetic sample CSV Bronze → Silver.
 
-Prefer the pandas smoke path (``ambient_pipeline.notebook_smoke``) for the core happy
-path. This script needs Spark + Delta and an **externally supplied** CSV under
-``data/raw/`` (Drive / Ambient Systems demo assets — not shipped in git)::
+Prefer the pandas smoke path (``ambient_pipeline.notebook_smoke``). This script
+needs Spark + Delta and the in-repo sample under ``examples/sample/``::
 
-    # place Allmanufacturingds-*.csv into data/raw/ first
     pip install -e ".[pipeline,dev]"
     python scripts/run_oss_bronze_silver_smoke.py
 
 Optional env:
 
 - ``AMBIENT_SMOKE_OUT`` — output lakehouse dir (default ``.lakehouse/smoke``)
-- ``AMBIENT_SMOKE_CSV`` — CSV under ``data/raw/`` (default inventory-records)
+- ``AMBIENT_SMOKE_CSV`` — CSV under ``examples/sample/`` (default inventory-records.csv)
 - ``AMBIENT_SMOKE_OPTION`` — catalog option key (default Allmanufacturingds-inventory-records)
 """
 
@@ -42,19 +40,19 @@ def main() -> int:
 
     csv_name = os.environ.get(
         "AMBIENT_SMOKE_CSV",
-        "Allmanufacturingds-inventory-records.csv",
+        "inventory-records.csv",
     )
     option_key = os.environ.get(
         "AMBIENT_SMOKE_OPTION",
         "Allmanufacturingds-inventory-records",
     )
     out_dir = Path(os.environ.get("AMBIENT_SMOKE_OUT", str(root / ".lakehouse" / "smoke")))
-    raw_dir = (root / "data" / "raw").resolve()
+    raw_dir = (root / "examples" / "sample").resolve()
     csv_path = (raw_dir / csv_name).resolve()
     try:
         csv_path.relative_to(raw_dir)
     except ValueError:
-        print(f"AMBIENT_SMOKE_CSV escapes data/raw: {csv_name!r}", file=sys.stderr)
+        print(f"AMBIENT_SMOKE_CSV escapes examples/sample: {csv_name!r}", file=sys.stderr)
         return 1
     if not csv_path.is_file():
         print(f"missing demo CSV: {csv_path}", file=sys.stderr)

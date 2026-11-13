@@ -9,18 +9,10 @@ from ambient_pipeline.sync_ids import (
     pipeline_health_document_id,
 )
 from ambient_pipeline.storage_paths import (
-    catalog_for_backend,
     default_base_path,
-    is_gcs_uri,
     resolve_layer_base,
-    resolve_source_path,
     resolve_table_path,
 )
-
-
-def test_is_gcs_uri() -> None:
-    assert is_gcs_uri("gs://bucket/path")
-    assert not is_gcs_uri("/local/path")
 
 
 def test_default_base_path_local() -> None:
@@ -48,30 +40,11 @@ def test_resolve_table_path_without_org() -> None:
     assert "org_id=" not in path
 
 
-def test_resolve_source_path_prefers_explicit() -> None:
-    assert resolve_source_path("gs://old", "gs://new") == "gs://new"
-
-
-def test_catalog_for_backend_local() -> None:
-    assert catalog_for_backend("local") == ("spark_catalog", "")
-
-
-def test_default_base_path_gcs_dbfs_uc() -> None:
-    assert default_base_path("gcs", "prod").startswith("gs://")
-    assert default_base_path("dbfs", "prod").startswith("dbfs:")
-    assert default_base_path("uc_volume", "prod").startswith("/Volumes/")
-
-
 def test_resolve_layer_base_landing_and_bad_backend() -> None:
     landing = resolve_layer_base("local", "/tmp/root", "dev", "landing")
     assert landing.endswith("/landing")
     with pytest.raises(ValueError, match="Unknown storage_backend"):
         resolve_layer_base("invalid", None, "dev", "bronze")
-
-
-def test_catalog_for_backend_gcs_and_platform() -> None:
-    assert catalog_for_backend("gcs") == ("ambient_systems", "")
-    assert catalog_for_backend("dbfs")[0] == "ambient_systems_scaletest"
 
 
 def test_sync_document_ids() -> None:

@@ -86,7 +86,7 @@ Run your application repository’s CI as well.
 
 Follow-up details: [CONTRIBUTING.md](CONTRIBUTING.md#consumer-follow-up-after-a-release).
 
-## Product work cycles (platform)
+## Product work cycles
 
 If you ship workflows on governed KPIs, pin ambient-core for catalog metrics, per-pack `benchmarks.yaml`, industry packs (`industryCodes`), `ambient_calc`, and contracts (`quality-v1`, `operational-financial-bridge-v1`, and others). Implement tenancy, UI, and cycle-specific logic in your application repository:
 

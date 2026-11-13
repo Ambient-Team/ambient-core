@@ -1,21 +1,27 @@
 # Notebooks
 
-## Core happy path (hosted notebook)
+## Pandas demo
 
-- **Entry notebook:** [`00_notebook_demo.ipynb`](00_notebook_demo.ipynb)
-- **`00_notebook_demo.ipynb`** — entry notebook. Sets `PLATFORM_ROOT` to a local clone (or runtime checkout) with **external** `data/raw/` samples from `demos/ambient-core/`. Pandas Bronze → Silver → Gold. No Databricks.
+- **`00_notebook_demo.ipynb`** — entry notebook. Resolves the checkout with `ensure_pipeline_on_path` and runs Bronze to Silver to Gold on `examples/sample/`.
 
-Install: `pip install -e ".[notebook]"` from the repo root (or `%pip install pandas PyYAML` in a kernel).
-
-## Optional / legacy
-
-- **`Master-Orchestrator.ipynb`** — legacy Spark sketch; prefer the hosted notebook entry.
-- **`01b_bronze_streaming.ipynb`**, **`01d_bronze_autoloader_spike.ipynb`**, **`04_unity_catalog_governance.ipynb`** — commercial / Databricks-only (see `COMMERCIAL_ONLY.txt`).
-
-## Local smoke (no notebook UI)
+Install from the repo root:
 
 ```bash
 pip install -e ".[notebook]"
-# copy demo CSVs into data/raw/
+```
+
+## Optional local Spark
+
+- **`01_bronze_ingestion.ipynb`** — stamp the synthetic CSVs and write local Delta.
+- **`02_silver_transformation.ipynb`** — map the inventory sample to tenant-metrics.
+- **`03_gold_metrics.ipynb`** — compact Gold summary from the local Silver table.
+- **`04_local_delta_governance.ipynb`** — contract columns and Bronze provenance on local Delta.
+
+These need `pip install -e ".[pipeline]"` and Java 17. They read `examples/sample/` and write under `.lakehouse/demo/`.
+
+## Local smoke without a notebook UI
+
+```bash
+pip install -e ".[notebook]"
 python -c "from pathlib import Path; from ambient_pipeline.notebook_smoke import run_notebook_smoke; run_notebook_smoke(Path('.'))"
 ```

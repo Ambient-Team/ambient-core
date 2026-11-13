@@ -17,7 +17,7 @@ def _seed_demo_tree(root: Path) -> None:
     src_contract = Path(__file__).resolve().parents[1] / "contracts" / "manufacturing-demo-raw-v1.yaml"
     shutil.copy(src_contract, contracts / src_contract.name)
 
-    raw = root / "data" / "raw"
+    raw = root / "examples" / "sample"
     raw.mkdir(parents=True)
 
     frames: dict[str, pd.DataFrame] = {
@@ -88,7 +88,9 @@ def test_run_notebook_smoke_processes_tmp_demo_csvs(tmp_path: Path) -> None:
     assert result.silver_tables
     assert result.gold_kpis.get("ar_amount_due_sum") == 100.0
     assert result.gold_kpis.get("sample_working_capital_proxy") is not None
-    summary = json.loads((tmp_path / "data" / "processed" / "gold" / "run_summary.json").read_text())
+    summary = json.loads(
+        (tmp_path / ".lakehouse" / "notebook-smoke" / "gold" / "run_summary.json").read_text()
+    )
     assert summary["run_id"] == "run-test"
 
 
@@ -99,6 +101,6 @@ def test_run_notebook_smoke_notes_missing_raw_files(tmp_path: Path) -> None:
         Path(__file__).resolve().parents[1] / "contracts" / "manufacturing-demo-raw-v1.yaml",
         contracts / "manufacturing-demo-raw-v1.yaml",
     )
-    (tmp_path / "data" / "raw").mkdir(parents=True)
+    (tmp_path / "examples" / "sample").mkdir(parents=True)
     result = run_notebook_smoke(tmp_path, run_id="run-empty")
     assert any("SKIP missing raw file" in note for note in result.notes)

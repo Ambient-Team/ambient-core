@@ -1,8 +1,8 @@
-# Investor disclosure and fundraising lifecycle: core vs platform
+# Investor disclosure and fundraising lifecycle
 
 **Investor disclosure** (and related **fundraising** readiness) is the work cycle that asks whether an organization meets **stakeholder mandates** for reporting—so capital remains available from listed markets, limited partners, sponsors, or lenders with climate or sustainability expectations. It is not the same as [benchmarking](benchmarking-lifecycle.md) (peer performance) or [assurance](assurance-lifecycle.md) (defensibility of numbers)—but published metrics should be traceable through assurance, and operational definitions should match those used in benchmarks.
 
-ambient-core supplies **metric vocabulary** and contract shapes; the **paid platform** maps mandates, computes gap-to-requirement, and supports remediation narratives and data rooms.
+ambient-core supplies **metric vocabulary** and contract shapes; the consuming application maps mandates, computes gap-to-requirement, and supports remediation narratives and data rooms.
 
 Index of all cycles: [work-cycles.md](work-cycles.md).
 
@@ -17,7 +17,7 @@ flowchart LR
     EnergyOpts[energy_data_options]
     OpportunityShape[opportunity_v1]
   end
-  subgraph platform [paid_platform]
+  subgraph app [consuming_application]
     Mandates[disclosure_mandate_mapping]
     Boundary[GHG_and_scope_policy]
     ReqGap[gap_vs_requirement]
@@ -35,29 +35,29 @@ flowchart LR
 ### 1. Audience and mandate mapping
 
 - **Core** — Analysis lens per org ([governed-data.md](governed-data.md)); industry packs and benchmark guardrails for comparison **design**, not legal obligation lists.
-- **Platform** — `disclosure_mandate_id`, `investor_audience` (listed exchange, LP, sponsor, lender); checklist per jurisdiction or fund policy (for example exchange sustainability reporting expectations for listed real estate, portfolio-level carbon disclosure demanded by institutional LPs). Map mandates to catalog metric ids and contract products.
+- **Application** — `disclosure_mandate_id`, `investor_audience` (listed exchange, LP, sponsor, lender); checklist per jurisdiction or fund policy (for example exchange sustainability reporting expectations for listed real estate, portfolio-level carbon disclosure demanded by institutional LPs). Map mandates to catalog metric ids and contract products.
 
 ### 2. Metric pack selection
 
 - **Core** — Real Estate operating metrics (NOI, cap rate, occupancy where defined); listed REIT investor metrics under `financial_services.reits.*` in [financial_services pack](../catalog/industries/financial_services/metrics.yaml); energy consumption fields on Real Estate data options (`energy_consumed`, `energy_cost`). Bridge rules link energy signals to financial impact narratives.
-- **Platform** — Curated “investor pack” per mandate; effectiveness metrics (growth, distributions) versus efficiency and environmental intensity grouped for disclosure schedules.
+- **Application** — Curated “investor pack” per mandate; effectiveness metrics (growth, distributions) versus efficiency and environmental intensity grouped for disclosure schedules.
 
-**Catalog gap (v1):** There is no dedicated `sustainability` segment or native GHG metrics in core yet. Intensity-style environmental KPIs (for example per megawatt, PUE) are expected to be platform-normalized or added in a future catalog band—not invented in prompts.
+**Catalog gap (v1):** There is no dedicated `sustainability` segment or native GHG metrics in core yet. Intensity-style environmental KPIs (for example per megawatt, PUE) are expected to be normalized by the consuming application or added in a future catalog band—not invented in prompts.
 
 ### 3. Boundaries and harmonization
 
 - **Core** — Documented methodologies and `calc` boundaries per metric; intensity metrics where authored in catalog.
-- **Platform** — GHG scope boundaries, tenant versus landlord energy, currency and period alignment, restatement and versioned disclosure files.
+- **Application** — GHG scope boundaries, tenant versus landlord energy, currency and period alignment, restatement and versioned disclosure files.
 
 ### 4. Gap versus requirement
 
 - **Core** — Per-industry `catalog/industries/<pack>/benchmarks.yaml` healthy bands are **planning guardrails**, not exchange or LP thresholds.
-- **Platform** — Required versus actual versus prior period; optional peer percentile for **narrative** only when mandate references market practice. Success criterion is **compliance or mandate gap**, not pace-setter rank.
+- **Application** — Required versus actual versus prior period; optional peer percentile for **narrative** only when mandate references market practice. Success criterion is **compliance or mandate gap**, not pace-setter rank.
 
 ### 5. Remediation, fundraising, and data room
 
 - **Core** — `fpaWorkflow` hints on metrics guide where remediation recommendations map.
-- **Platform** — CapEx and retrofit roadmaps, sustainability action owners, data-room exports, equity or debt storytelling tied to catalog metric keys.
+- **Application** — CapEx and retrofit roadmaps, sustainability action owners, data-room exports, equity or debt storytelling tied to catalog metric keys.
 
 ## Overlap: benchmark cycle vs disclosure cycle on the same org
 
@@ -71,11 +71,11 @@ Listed issuers may face **regulatory or exchange** sustainability disclosure pre
 
 **Definitions (core).** Occupancy and NOI margin semantics from Real Estate pack; FFO and payout from `financial_services.reits.*`; energy uploads from Real Estate data options where available.
 
-**Mandates (platform).** Exchange-style sustainability schedule plus fund policy fields not fully enumerated in core.
+**Mandates (application).** Exchange-style sustainability schedule plus fund policy fields not fully enumerated in core.
 
-**Gap (platform).** Missing intensity metrics or undisclosed PUE where mandate requires them—gap to **requirement**, not to a peer REIT.
+**Gap (application).** Missing intensity metrics or undisclosed PUE where mandate requires them—gap to **requirement**, not to a peer REIT.
 
-**Remediation (platform).** Efficiency and procurement initiatives tracked in the platform. Empirical filings and figures remain in external research or issuer disclosures.
+**Remediation (application).** Efficiency and procurement initiatives tracked in the consuming application. Empirical filings and figures remain in external research or issuer disclosures.
 
 ## Related
 

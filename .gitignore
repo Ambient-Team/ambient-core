@@ -77,14 +77,8 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Local OSS lakehouse output (notebooks / smoke runner)
+# Local lakehouse output (notebooks / smoke runner)
 .lakehouse/
-
-# Demo sample CSVs are external (Drive / Ambient Systems assets) — never commit
-data/raw/*.csv
-data/processed/**
-!data/processed/.gitkeep
-!data/raw/.gitkeep
 
 # IPython
 profile_default/

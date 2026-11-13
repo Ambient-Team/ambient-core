@@ -11,7 +11,9 @@ import pytest
 import ambient_pipeline.notebook_bootstrap as notebook_bootstrap
 from ambient_pipeline.notebook_bootstrap import (
     apply_spark_tuning,
+    ensure_checkout_on_path,
     ensure_pipeline_on_path,
+    find_checkout_root,
     find_repo_root,
 )
 
@@ -72,3 +74,106 @@ def test_apply_spark_tuning_skips_failing_keys(capsys: pytest.CaptureFixture[str
     out = capsys.readouterr().out
     assert "[spark conf] skipped" in out
     assert "skewJoin" in out
+
+
+def _fake_checkout(root: Path) -> Path:
+    (root / "lib" / "ambient_pipeline").mkdir(parents=True)
+    return root
+
+
+def test_find_checkout_root_explicit(tmp_path: Path) -> None:
+    root = _fake_checkout(tmp_path)
+    assert find_checkout_root(root) == root.resolve()
+
+
+def test_find_checkout_root_from_ambient_core_root_env(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = _fake_checkout(tmp_path)
+    monkeypatch.delenv("AMBIENT_CORE_ROOT", raising=False)
+    monkeypatch.setenv("AMBIENT_CORE_ROOT", str(root))
+    assert find_checkout_root() == root.resolve()
+
+
+def test_find_checkout_root_explicit_missing_package_raises(tmp_path: Path) -> None:
+    root = tmp_path / "empty"
+    root.mkdir()
+    with pytest.raises(FileNotFoundError, match="missing lib/ambient_pipeline"):
+        find_checkout_root(root)
+
+
+def test_find_checkout_root_module_at_fs_root_uses_cwd(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    checkout = _fake_checkout(tmp_path / "ambient-core")
+    monkeypatch.setattr(
+        "ambient_pipeline.notebook_bootstrap.__file__",
+        "/notebook_bootstrap.py",
+    )
+    monkeypatch.setattr(
+        "ambient_pipeline.notebook_bootstrap.Path.cwd",
+        lambda: checkout,
+    )
+    assert find_checkout_root() == checkout.resolve()
+
+
+def test_find_checkout_root_not_found(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    isolated = tmp_path / "isolated_module" / "notebook_bootstrap.py"
+    isolated.parent.mkdir(parents=True)
+    monkeypatch.delenv("AMBIENT_CORE_ROOT", raising=False)
+    monkeypatch.setattr("ambient_pipeline.notebook_bootstrap.__file__", str(isolated))
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    monkeypatch.setattr(
+        "ambient_pipeline.notebook_bootstrap.Path.cwd",
+        lambda: empty,
+    )
+    with pytest.raises(FileNotFoundError, match="Could not find"):
+        find_checkout_root()
+
+
+def test_ensure_checkout_on_path_inserts_root_and_lib(tmp_path: Path) -> None:
+    root = _fake_checkout(tmp_path)
+    initial_path = list(sys.path)
+    try:
+        sys.path[:] = [p for p in sys.path if p not in {str(root.resolve()), str((root / "lib").resolve())}]
+        assert ensure_checkout_on_path(root) == root.resolve()
+        assert str(root.resolve()) in sys.path
+        assert str((root / "lib").resolve()) in sys.path
+    finally:
+        sys.path[:] = initial_path
+
+
+def test_ensure_checkout_on_path_skips_missing_lib(tmp_path: Path) -> None:
+    root = tmp_path / "no-lib"
+    root.mkdir()
+    initial_path = list(sys.path)
+    try:
+        assert ensure_checkout_on_path(root) == root.resolve()
+        assert str(root.resolve()) in sys.path
+        assert str((root / "lib").resolve()) not in sys.path
+    finally:
+        sys.path[:] = initial_path
+
+
+def test_find_checkout_root_ignores_blank_env_and_duplicate_candidates(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module_file = tmp_path / "notlib" / "notebook_bootstrap.py"
+    module_file.parent.mkdir(parents=True)
+    (tmp_path / "lib" / "ambient_pipeline").mkdir(parents=True)
+    monkeypatch.setenv("AMBIENT_CORE_ROOT", "   ")
+    monkeypatch.setattr("ambient_pipeline.notebook_bootstrap.__file__", str(module_file))
+    monkeypatch.setattr(
+        "ambient_pipeline.notebook_bootstrap.Path.cwd",
+        lambda: module_file.parent,
+    )
+    assert find_checkout_root() == tmp_path.resolve()
+
+
+def test_ensure_checkout_on_path_idempotent(tmp_path: Path) -> None:
+    root = _fake_checkout(tmp_path)
+    ensure_checkout_on_path(root)
+    before = list(sys.path)
+    assert ensure_checkout_on_path(root) == root.resolve()
+    assert sys.path == before

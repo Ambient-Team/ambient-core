@@ -11,7 +11,7 @@ from ambient_contracts.paths import resolve_contracts_dir
 
 
 def contract_store_section(doc: dict[str, Any]) -> dict[str, Any] | None:
-    """Return store config from ``store`` (preferred) or deprecated legacy key.
+    """Return store config from the ``store`` key.
 
     Args:
         doc: Parsed contract document.
@@ -28,9 +28,6 @@ def contract_store_section(doc: dict[str, Any]) -> dict[str, Any] | None:
     store = doc.get("store")
     if isinstance(store, dict):
         return store
-    legacy = doc.get("firestore")
-    if isinstance(legacy, dict):
-        return legacy
     return None
 
 REQUIRED_TOP_LEVEL = {"product", "schema", "lineage", "governance"}

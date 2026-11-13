@@ -11,23 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 ALLOWED_PREFIXES = (
     "CHANGELOG.md",
-    "lib/ambient_pipeline/colab_smoke.py",
-    "lib/ambient_pipeline/colab_bootstrap.py",
-    "lib/ambient_pipeline/firestore_sync_ids.py",
-    "ambient_pipeline/colab_smoke.py",
-    "ambient_pipeline/colab_bootstrap.py",
     "scripts/check_vendor_marketing.py",
     "scripts/check_neutral_naming.py",
-    "tests/test_check_vendor_marketing.py",
-    "tests/test_deprecated_aliases.py",
-    "docs/hub/",
-    "lib/ambient_pipeline/bronze_catalog_map.py",
-    "lib/ambient_contracts/validate.py",
-    "scripts/check_crosswalk.py",
     "scripts/check_markdown_prose.py",
-    "scripts/check_vendor_marketing.py",
-    "scripts/check_mypy_strict.py",
-    "tests/test_deprecated_aliases.py",
     "tests/test_check_vendor_marketing.py",
     "tests/test_check_markdown_prose.py",
 )

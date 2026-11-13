@@ -75,7 +75,7 @@ The manifest generator derives `section` (letter A-U), `division` (2-digit), and
 
 - **Manufacturing** -- one pack cannot represent all of ISIC section C; plan division-level packs (e.g. food and beverage, chemicals, electronics) or NAICS 3-digit groups.
 - **Transportation vs aviation** -- separate packs are correct; align peer comparison on NAICS/GICS.
-- **Financial_services vs banking vs funds vs credit_granting** -- overlapping ISIC 64-66; use primary and secondary codes and separate tenant orgs in the platform.
+- **Financial_services vs banking vs funds vs credit_granting** -- overlapping ISIC 64-66; use primary and secondary codes and separate tenant orgs in the consuming application.
 - **Healthcare vs life_sciences** -- distinct ISIC sections (Q vs M); keep separate packs.
 
 ## Provisional / needs class review
@@ -91,7 +91,7 @@ The manifest generator derives `section` (letter A-U), `division` (2-digit), and
 
 ## Former sector profiles
 
-Legacy `catalog/sector_profiles/` (financial and transportation comparison YAML) and manifest `financialSectorProfiles` were removed in favor of official taxonomy tags. Narrative comparison fields (revenue driver, regulation intensity) belong in the platform or future optional metadata -- not duplicate taxonomies in core.
+Legacy `catalog/sector_profiles/` (financial and transportation comparison YAML) and manifest `financialSectorProfiles` were removed in favor of official taxonomy tags. Narrative comparison fields (revenue driver, regulation intensity) belong in the consuming application or future optional metadata -- not duplicate taxonomies in core.
 
 ## Metric inputs and data options
 

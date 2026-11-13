@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Session branch hygiene
 
-Local short form: docs/hub/branching.md. CI policy: docs/ci.md.
+Local short form: docs/ci.md. CI policy: docs/ci.md.
 
 ## Main safety
 

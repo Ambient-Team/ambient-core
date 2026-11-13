@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://www.ambientsystems.ai/
-    about: Usage, integration, and architecture guides
-  - name: Security advisory
-    url: https://www.ambientsystems.ai/
-    about: Report a vulnerability (do not use public issues for exploits)
+    url: https://github.com/Ambient-Team/ambient-core/blob/main/docs/USAGE.md
+    about: Usage, integration, and architecture guides in this repository
+  - name: Private security advisory
+    url: https://github.com/Ambient-Team/ambient-core/security/advisories/new
+    about: Report a vulnerability in private. Do not use public issues for exploits.

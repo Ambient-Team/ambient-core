@@ -1,4 +1,4 @@
-# Planning and variance lifecycle: core vs platform
+# Planning and variance lifecycle
 
 **Planning and variance** asks how **actuals** compare to the organization’s own **plan**—budget, forecast, or board case—and what explains the gap. The baseline is internal intent, not a peer ([benchmarking-lifecycle.md](benchmarking-lifecycle.md)).
 
@@ -14,7 +14,7 @@ flowchart LR
     Catalog[fpaWorkflow_and_core_metrics]
     Calc[ambient_calc_inputs]
   end
-  subgraph platform [paid_platform]
+  subgraph app [consuming_application]
     Plans[plan_versions_and_scenarios]
     Variance[variance_bridges]
     Accountability[owners_and_commentary]
@@ -30,22 +30,22 @@ flowchart LR
 ### 1. Metric and calendar alignment
 
 - **Core** — `*.core.*` close metrics (margins, growth, working capital, cash flow); segment operational metrics per analysis lens; `fpaWorkflow` strings describing typical FP&A use on each row in catalog YAML.
-- **Platform** — Fiscal calendar, plan version locking, mapping actuals period to plan period; metadata `plan_version_id`, optional `scenario_id` (base, upside, downside).
+- **Application** — Fiscal calendar, plan version locking, mapping actuals period to plan period; metadata `plan_version_id`, optional `scenario_id` (base, upside, downside).
 
 ### 2. Plan storage and scenarios
 
-- **Core** — No plan SSOT in ambient-core; plans are tenant data in the platform OLTP or lakehouse.
-- **Platform** — Versioned budgets and forecasts at catalog metric id granularity (or mapped account trees); scenario comparison UI.
+- **Core** — No plan SSOT in ambient-core; plans are tenant data in the consuming application's store.
+- **Application** — Versioned budgets and forecasts at catalog metric id granularity (or mapped account trees); scenario comparison UI.
 
 ### 3. Variance computation and decomposition
 
-- **Core** — `calc.expr` and `calc.inputs` define how a KPI is built from components; platform uses the same graph for variance bridges (price vs volume vs mix) where inputs exist.
-- **Platform** — Variance waterfalls, commentary, accountability by department; not peer-ranked.
+- **Core** — `calc.expr` and `calc.inputs` define how a KPI is built from components; the consuming application uses the same graph for variance bridges (price vs volume vs mix) where inputs exist.
+- **Application** — Variance waterfalls, commentary, accountability by department; not peer-ranked.
 
 ### 4. Close integration
 
 - **Core** — Assurance and bridge products may explain why actuals moved before variance is finalized.
-- **Platform** — Tie variance cycle to close status, reforecast triggers, board deck export.
+- **Application** — Tie variance cycle to close status, reforecast triggers, board deck export.
 
 ## Distinct from benchmarking
 

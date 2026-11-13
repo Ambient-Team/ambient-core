@@ -2,7 +2,7 @@
 
 **Ambient Core is the governed data-product substrate** — versioned contracts, a reference catalog, and lakehouse governance helpers — not an agent framework and not a hosted AI product.
 
-For how this repository relates to a full product repo, see [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md). For components and releases, see [ECOSYSTEM.md](ECOSYSTEM.md).
+For what belongs in this repository, see [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). For components and releases, see [ECOSYSTEM.md](ECOSYSTEM.md).
 
 ## At a glance
 
@@ -21,7 +21,7 @@ Canonical edit rules: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Embedding a rele
 
 ## The unique angle
 
-Governed Gold-layer interfaces and reference catalog semantics in a **small, pinnable, inspectable** open-source repository — with a hard line: **neutral and canonical here; tenancy, secrets, UI, and vendor code strictly downstream.** Commercial suites sell the whole product; frameworks never draw that line. Future proprietary AI/ML, if any, belongs only in the commercial platform application, never in Ambient Core.
+Governed Gold-layer interfaces and reference catalog semantics in a **small, pinnable, inspectable** open-source repository. Tenancy, secrets, UI, and vendor-specific code stay in the consuming application. Do not add customer-facing AI to Ambient Core.
 
 ## When it fits — and when it does not
 

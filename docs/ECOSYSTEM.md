@@ -23,7 +23,7 @@ Integrator guides for governed data and pipeline helpers: [governed-data.md](gov
 ### Maintainer priorities
 
 1. **`contracts/`** — foundational single source of truth.
-2. **`ambient_pipeline/`** — governance primitives.
+2. **`lib/ambient_pipeline/`** — governance primitives.
 3. **`catalog/`** — reference data (mature; follows contracts when capacity is tight).
 
 ### How the pieces fit together
@@ -51,7 +51,7 @@ flowchart LR
 - **`catalog/`** — reference KPIs and industries; UI templates, auto-mapping, `manifest.json` in notebooks
 - **`lib/ambient_pipeline/`** — shared governance modules for lakehouse jobs; app-specific glue stays in the consumer repo
 
-Details: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md), [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) (foundation vs full product).
+Details: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md), [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) (what belongs in this repository).
 
 ## Where to make changes
 
@@ -72,4 +72,4 @@ After merge here, tag on `main`, then follow [CONTRIBUTING.md — Consumer follo
 
 ## Product AI boundary
 
-Ambient Core does not ship inference, model registry, council workflows, or customer agent runtimes. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable. Future patented proprietary AI/ML, if any, belongs only in the commercial platform application — not in Ambient Core, and not as resale of third-party models.
+Ambient Core does not ship inference, model registry, council workflows, or customer agent runtimes. Internal operator AI (Cursor Agent / IDE) is not an Ambient Core deliverable. Future patented proprietary AI/ML, if any, belongs only in another repository — not in Ambient Core, and not as resale of third-party models.

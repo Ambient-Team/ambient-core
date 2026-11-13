@@ -1,6 +1,6 @@
 # Security Policy
 
-**Ambient Core** is an open-source library and schema foundation under the MIT License (contracts, catalog, governance). Report security issues **in this codebase** here; deployment and tenant isolation for a specific product are out of scope unless the flaw is in shipped library defaults in this tree.
+**Ambient Core** is an open-source library under the MIT License (contracts, catalog, calculations, and pipeline helpers). Report security issues in this codebase. Deployment choices in a consuming application are out of scope unless the flaw is in library defaults shipped here.
 
 ## Supported versions
 
@@ -10,10 +10,8 @@ Security fixes are applied to the latest tagged release on `main`. Older tags ar
 
 If you discover a security issue in **this repository** (for example credential leakage in examples, unsafe defaults in library code, or a dependency concern):
 
-1. Prefer **private security advisories** on your forge (if available).
-2. If advisories are unavailable, open a private channel with the maintainers via the contact listed on [ambientsystems.ai](https://www.ambientsystems.ai/).
-
-Do not open a public issue with exploit details for unfixed vulnerabilities.
+1. Open a private security advisory with the repository maintainers. The issue-template contact list points at that form.
+2. Do not open a public issue with exploit details for an unfixed vulnerability.
 
 Please include:
 
@@ -23,6 +21,6 @@ Please include:
 
 ## Scope notes
 
-This repo does not host live multi-tenant applications or cloud workspaces. Reports about production tenant isolation or cloud configuration should go to the **repository that deploys** those services, in addition to any issue in library code defined here.
+This repository does not host live multi-tenant applications. Reports about a deployed service should go to the repository that runs that service, in addition to any issue in library code defined here.
 
-Operator AI tools (Cursor Agent / IDE) used by maintainers are not Ambient Core product surfaces.
+Operator AI tools used by maintainers are not Ambient Core product surfaces.

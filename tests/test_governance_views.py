@@ -18,5 +18,5 @@ def test_silver_view_sql_contains_catalog() -> None:
 
 
 def test_unsafe_catalog_rejected() -> None:
-    with pytest.raises(ValueError, match="unsafe Unity Catalog name"):
+    with pytest.raises(ValueError, match="unsafe catalog name"):
         bronze_raw_metrics_org_view_sql("bad-name")

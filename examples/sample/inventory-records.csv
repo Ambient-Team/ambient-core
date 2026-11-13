@@ -1,0 +1,4 @@
+date,sku,warehouse,quantity_on_hand,unit_cost,reorder_point,inventory_value
+2024-01-15,SKU-1,North Shed,10,50.00,4,500.00
+2024-02-02,SKU-2,South Shed,8,30.00,3,240.00
+2024-03-11,SKU-3,North Shed,6,20.00,2,120.00

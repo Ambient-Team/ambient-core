@@ -40,7 +40,7 @@ def test_pii_pseudonymizer_eq() -> None:
 
 def test_get_secret_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("AMBIENT_PII_SALT", "from-env")
-    assert get_secret("ambient-systems", "pii_salt") == "from-env"
+    assert get_secret("ambient-core", "pii_salt") == "from-env"
 
 
 def test_get_secret_simple_env_key(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -50,8 +50,14 @@ def test_get_secret_simple_env_key(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_get_secret_scoped_env_key(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("AMBIENT_API_TOKEN", raising=False)
-    monkeypatch.setenv("AMBIENT_AMBIENT_SYSTEMS_API_TOKEN", "scoped")
-    assert get_secret("ambient-systems", "api_token") == "scoped"
+    monkeypatch.setenv("AMBIENT_AMBIENT_CORE_API_TOKEN", "scoped")
+    assert get_secret("ambient-core", "api_token") == "scoped"
+
+
+def test_get_secret_legacy_scoped_env_still_resolves(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("AMBIENT_AMBIENT_CORE_API_TOKEN", raising=False)
+    monkeypatch.setenv("AMBIENT_AMBIENT_SYSTEMS_API_TOKEN", "legacy-scoped")
+    assert get_secret("ambient-core", "api_token") == "legacy-scoped"
 
 
 def test_get_secret_missing_raises(monkeypatch: pytest.MonkeyPatch) -> None:

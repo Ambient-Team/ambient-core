@@ -45,8 +45,6 @@ def consumption_id_from_contract(doc: dict[str, Any]) -> str | None:
         if isinstance(raw, str) and raw.strip():
             return raw.strip()
     store = doc.get("store")
-    if not isinstance(store, dict):
-        store = doc.get("firestore")
     if isinstance(store, dict):
         paths = store.get("paths")
         if isinstance(paths, list):

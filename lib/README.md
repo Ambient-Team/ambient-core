@@ -68,7 +68,7 @@ ISO 8000 / BCBS 239 governance helpers for lakehouse pipelines.
 - `PipelineRunConfig` — Configuration for a local Bronze → Silver → Gold run.
 
 ### `notebook_smoke` module
-- `run_notebook_smoke` — Execute Bronze → Silver → Gold against data/raw samples.
+- `run_notebook_smoke` — Execute Bronze → Silver → Gold against ``examples/sample``.
 - `SmokeResult` — SmokeResult(run_id: 'str', org_id: 'str', bronze_tables: 'dict[str, int]' = <factory>, silver_tables: 'dict[str, int]' = <factory>, gold_kpis: 'dict[str, Any]' = <factory>, output_dir: 'str' = '', notes: 'list[str]' = <factory>)
 
 ### `pipeline_logging` module

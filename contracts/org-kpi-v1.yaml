@@ -97,11 +97,6 @@ residency:
     type: string
     required: false
     description: "Primary sovereign boundary for this org KPI snapshot"
-  dab_stamp_id:
-    type: string
-    required: false
-    description: "Declarative Automation Bundle deployment stamp identifier"
-
 delta_sharing:
   enabled: true
   share_name: ambient_org_kpis
@@ -111,20 +106,10 @@ delta_sharing:
 
 consumption_contract:
   allowed_paths:
-    - "Direct: read-only service principal on Unity Catalog Gold tables/views"
+    - "Direct: read-only Gold tables and views"
     - "Adapter: document store sync (explicit consumption adapter contract only)"
-    - "Delta Sharing: Power BI, Snowflake, Tableau, ERP adapters (Gold only)"
-    - "BI tools: Tableau, Power BI, Looker (Gold schema access)"
-    - "OneLake shortcut to Gold ADLS external location; Direct Lake semantic model (read-only)"
+    - "Sharing: Gold extracts for BI and ERP readers"
   forbidden: "Any direct Silver/Bronze access or embedding of KPI logic in consumption layers"
-
-consumption:
-  fabric:
-    enabled: false
-    direct_lake: true
-    shortcut_paths: []
-    rls_mapping: unity_catalog_to_semantic_model
-    purview_catalog: optional
 
 store:
   paths:

@@ -21,7 +21,7 @@ def test_find_forbidden_drive_links_detects_hosts(tmp_path: Path) -> None:
 def test_find_forbidden_drive_links_allows_github_demos(tmp_path: Path) -> None:
     sample = tmp_path / "ok.md"
     sample.write_text(
-        "Demos: https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core\n",
+        "Demos: see examples/sample in this repository.\n",
         encoding="utf-8",
     )
     assert find_forbidden_drive_links(sample) == []

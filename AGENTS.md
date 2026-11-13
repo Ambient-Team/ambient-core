@@ -4,17 +4,16 @@ Repository-wide guidance for AI agents working on this codebase (operator toolin
 
 ## Open source
 
-This repository is **Ambient Core**, fully **open source** (not an open-core product).
+Ambient Core is open source under the MIT License.
 
-- The **MIT License** is the usage license that governs how the software may be used: use, copy, modify, merge, publish, and distribute, including commercially, provided the copyright notice and license text are included. It is not a university or program brand.
-- Prefer: "Ambient Core is open source under the MIT License." Never write "open core". Never write "Ambient Core (MIT)", "MIT Ambient Core", or "MIT open core".
-- Commercial platform features live in a separate repository. That split does not make this repo open-core.
+- The **MIT License** governs how the software may be used: use, copy, modify, merge, publish, and distribute, including commercially, provided the copyright notice and license text are included. It is not a university or program brand.
+- Prefer: "Ambient Core is open source under the MIT License." Do not nickname the project with its license, and do not describe it as a split product.
 
 ## Product AI boundary
 
-- **Customer / product AI:** none in Ambient Core. No hosted agent orchestration products, no open-weight model hosting, no agent runtime for end users, no re-sale of third-party models.
+- **Customer / product AI:** none in Ambient Core. No hosted agent orchestration, no model hosting, and no agent runtime for end users.
 - **Internal AI only:** Cursor Agent / IDE for maintainers editing this repo.
-- **Future proprietary AI/ML:** if revived, lives in the commercial platform application — never in this repository, and never as commodity model resale. Do not invent product AI features here.
+- Do not invent product AI features in this repository.
 
 ## Cursor Cloud specific instructions
 
@@ -23,7 +22,7 @@ Ambient Core is a Python foundation library (contracts, catalog, pipeline govern
 ### Build tool and JDK
 
 - No Maven project (`pom.xml`) and no Gradle project (`build.gradle`, `settings.gradle`, or `gradlew`).
-- Build tool: setuptools via `pyproject.toml`. `pip install -e ".[all]"` fetches dependencies and installs the package. `.cursor/install.sh` then byte-compiles `lib/` and `ambient_pipeline/`.
+- Build tool: setuptools via `pyproject.toml`. `pip install -e ".[all]"` fetches dependencies and installs the package. `.cursor/install.sh` then byte-compiles `lib/`.
 - JDK declared by CI (`.github/workflows/ci.yml`, `java-version`): **17** (Temurin). Install pins Ubuntu OpenJDK 17 at `/usr/lib/jvm/java-17-openjdk-amd64` and sets `JAVA_HOME`. The base image may ship JDK 21; use 17 so local Spark matches CI.
 - Python: `.python-version` is 3.12 (`requires-python` is `>=3.10,<3.13`). PR CI installs Python 3.11, which is inside that range.
 
@@ -67,7 +66,7 @@ Markdown under `docs/`, `examples/`, and the README files must not use pipe tabl
 
 ### Tests that do not call external services
 
-- Demo CSV tests skip when `data/raw/` has no external sample file (`external demo CSV not supplied`).
+- Demo CSV tests use the synthetic rows in `examples/sample/`. They do not download an external pack.
 - Secret-store tests set env vars in-process. They do not call Databricks or any live secret backend.
 - Spark tests use a local `local[1]` session. They skip if that session cannot start. They do not use a remote cluster.
 
@@ -83,7 +82,6 @@ Names the code or workflows refer to:
 - `AMBIENT_CATALOG_DIR`
 - `AMBIENT_ALLOW_DEV_SECRETS`
 - `AMBIENT_SMOKE_OUT`
-- `PLATFORM_ROOT`
 - `PYSPARK_PYTHON`
 - `PYSPARK_DRIVER_PYTHON`
 - `HADOOP_HOME`
@@ -97,14 +95,12 @@ CI triggers, draft vs heavy jobs, and path filters: [docs/ci.md](docs/ci.md).
 - `contracts/` — data-product YAML source of truth
 - `lib/ambient_contracts/bundled/` — copies of those YAML files shipped in the wheel; CI checks they match
 - `catalog/` — reference metrics, industry packs, benchmarks; generator CLI is `ambient-catalog-generate` (wraps `scripts/generate_reference_catalog.py`)
-- `lib/` — installable packages `ambient_contracts`, `ambient_cli`, `ambient_calc`, `ambient_pipeline`
-- `ambient_pipeline/` — notebook/pandas Bronze to Silver to Gold path used from a checkout
+- `lib/` — installable packages `ambient_contracts`, `ambient_cli`, `ambient_calc`, `ambient_statements`, `ambient_pipeline`
 - `tests/` — pytest
 - `scripts/` — contract, catalog, and markdown checks
-- `docs/` — manuals; `docs/hub/` holds archived coordination notes (not maintained for public consumers)
+- `docs/` — manuals
 - `notebooks/` — Jupyter demo entry and optional local Spark notebooks
-- `examples/` — small pipeline examples
-- `data/raw/`, `data/processed/` — empty placeholders; demo CSVs are not in git
+- `examples/` — small pipeline examples and the synthetic sample under `examples/sample/`
 - `.github/workflows/ci.yml` — `changes`, `ci-policy`, `quality-static`, and `build-test` jobs (see [docs/ci.md](docs/ci.md))
 - `.github/workflows/release.yml` and `cut-release.yml` — owner release publish; not part of PR CI
 - `.cursor/environment.json` — Cloud Agent install; no `start` command

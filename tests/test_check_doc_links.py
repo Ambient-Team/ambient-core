@@ -18,7 +18,7 @@ def test_find_broken_links_flags_missing_relative(tmp_path: Path) -> None:
 def test_find_broken_links_ignores_external_urls(tmp_path: Path) -> None:
     doc = tmp_path / "doc.md"
     doc.write_text(
-        "See [hub](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/).\n",
+        "See [notes](https://example.com/demos).\n",
         encoding="utf-8",
     )
     assert find_broken_links(doc) == []

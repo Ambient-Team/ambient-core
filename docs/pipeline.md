@@ -1,6 +1,6 @@
 # Pipeline governance helpers
 
-Ambient Core ships **contracts**, **catalog** semantics, a **pandas notebook path** (`ambient_pipeline/notebook_smoke.py`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. Demo CSVs are external — copy `Allmanufacturingds-*.csv` from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) into `data/raw/` — **storage = none** in this repo. That pack is not for scale testing; enterprise deployments run scalable tests separately. Demo recordings, screenshots, and synthetic demo data live in the same tree (not in git here). Hosted notebook entry: [`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb). Commercial deploy glue (DABs, Unity Catalog materialization, optional document store sync) belongs in your application repository.
+Ambient Core ships **contracts**, **catalog** semantics, a **pandas notebook path** (`ambient_pipeline.notebook_smoke`), and optional Spark/Delta helpers under `lib/ambient_pipeline/`. It does **not** require Databricks. The fictional sample lives in [`examples/sample/`](../examples/sample/). Notebook entry: [`notebooks/00_notebook_demo.ipynb`](../notebooks/00_notebook_demo.ipynb). Job definitions and deploy bindings belong in your application repository.
 
 For catalog vs contracts and path env vars, see [governed-data.md](governed-data.md). Product inventory and catalog linkage: [contracts/README.md](../contracts/README.md). For pinning core in a monorepo, see [INTEGRATING.md](INTEGRATING.md). Bronze uploads use **CSV/TSV** at the ingestion boundary; governed Gold output is typically **Parquet/Delta** in your lakehouse — see [CONVENTIONS.md](CONVENTIONS.md#data-formats-and-storage).
 
@@ -8,11 +8,11 @@ For catalog vs contracts and path env vars, see [governed-data.md](governed-data
 
 ## What lives where
 
-**In core:** `contracts/*.yaml`; `catalog/` + `manifest.json`; pandas helpers under `ambient_pipeline/`; optional Spark helpers under `lib/ambient_pipeline/`; OSS notebooks (`00_notebook_demo.ipynb`); `data/raw/.gitkeep` only (samples outside git); `validate-contracts` and the catalog generator CLIs.
+**In this repository:** `contracts/*.yaml`; `catalog/` + `manifest.json`; pandas and Spark helpers under `lib/ambient_pipeline/`; notebooks (`00_notebook_demo.ipynb`); the sample under `examples/sample/`; `validate-contracts` and the catalog generator CLIs.
 
-**In your app repo (optional platform):** job definitions, DABs, orchestration; tenant upload UX and entitlements; document-store sync, OLAP queries, commercial APIs; CI that calls the same CLIs.
+**In your application repository:** job definitions and orchestration; upload UX; document-store sync and OLAP queries; CI that calls the same CLIs.
 
-[observability-pipeline-v1.yaml](../contracts/observability-pipeline-v1.yaml) describes pipeline health products and may reference SQL, bundles, or notebooks that are maintained **downstream** — treat it as the interface contract, not as code in this repo.
+Pipeline run logs in this repository are structured events from `ambient_pipeline.pipeline_logging`. They are not a separate data-product contract.
 
 ## Install and test
 
@@ -25,9 +25,9 @@ pytest tests/pipeline/
 python scripts/run_oss_bronze_silver_smoke.py
 ```
 
-Java 17+ is required for Spark tests. Prefer the pandas notebook smoke (`ambient_pipeline.notebook_smoke`) with samples from [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/). The optional Spark script maps an externally supplied `data/raw/Allmanufacturingds-inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`.
+Java 17+ is required for Spark tests. Prefer the pandas notebook smoke (`ambient_pipeline.notebook_smoke`) with [`examples/sample/`](../examples/sample/). The optional Spark script maps `examples/sample/inventory-records.csv` through Bronze → Silver with local Delta under `.lakehouse/smoke/`. The catalog option key remains `Allmanufacturingds-inventory-records`.
 
-**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, `ambient_calc`, and `ambient_pipeline`. Notebooks call `ambient_pipeline.notebook_bootstrap.ensure_pipeline_on_path()` so a git checkout resolves `lib/` without Databricks or platform paths.
+**Packaging note:** The published wheel includes `ambient_contracts`, `ambient_cli`, `ambient_calc`, `ambient_statements`, and `ambient_pipeline`. Notebooks call `ambient_pipeline.notebook_bootstrap.ensure_pipeline_on_path()` so a git checkout resolves `lib/`.
 
 ## Typical job flow (Bronze → Silver tenant-metrics)
 
@@ -63,11 +63,11 @@ flowchart LR
 
 **Orchestration helper:** `bronze_to_tenant_metrics(...)` runs steps 2–4 in order. See [tests/pipeline/test_bronze_to_tenant_metrics_contract.py](../tests/pipeline/test_bronze_to_tenant_metrics_contract.py).
 
-Platform-only document-store sync belongs in your application repository (not shipped here). Secrets prefer environment variables; Databricks `dbutils` is optional when present.
+Document-store sync belongs in your application repository (not shipped here). Secrets prefer environment variables; Databricks `dbutils` is optional when present.
 
 ## Silver → Gold (catalog, calc, and vertical contracts)
 
-Ambient Core **does not** ship Spark jobs that write `finance-*-v1` or healthcare Gold tables. Recommended platform pattern:
+Ambient Core **does not** ship Spark jobs that write `finance-*-v1` or healthcare Gold tables. Recommended pattern in the consuming application:
 
 1. Read Silver long metrics from `tenant-metrics-v1` shape (or query your lakehouse Silver table).
 2. Evaluate catalog formulas with [`ambient_calc`](../lib/ambient_calc/__init__.py) (`compute_all` on manifest metrics + measured inputs).
@@ -159,11 +159,11 @@ See [examples/pipeline/README.md](../examples/pipeline/README.md).
 
 ## Related
 
-- [../notebooks/README.md](../notebooks/README.md) — OSS Jupyter medallion flow
-- [../data/README.md](../data/README.md) — external demo samples; no CSVs in git
+- [../notebooks/README.md](../notebooks/README.md) — pandas demo and optional local Spark notebooks
+- [../examples/sample/README.md](../examples/sample/README.md) — fictional CSV sample
 - [USAGE.md](USAGE.md) — recipe 3 (pipeline pytest)
 - [governed-data.md](governed-data.md) — catalog + contracts consumption
 - [contracts/README.md](../contracts/README.md) — SSOT products and catalog → contract flow
 - [catalog-consumption.md](catalog-consumption.md) — optional assist before Bronze (mapping, units)
 - [CONVENTIONS.md](CONVENTIONS.md) — formats, bronze boundary, forward stores
-- [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md) — scope split
+- [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md) — scope split

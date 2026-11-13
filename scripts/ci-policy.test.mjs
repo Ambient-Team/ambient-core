@@ -63,7 +63,7 @@ test('ci-policy script', async (t) => {
   await t.test('pathsFilterPin matches ci.yml pin', () => {
     assert.equal(
       pathsFilterPin,
-      '7b450fff21473bca461d4b92ce414b9d0420d706',
+      'ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d',
     );
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     assert.match(ci, new RegExp(`dorny/paths-filter@${pathsFilterPin}`));
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d
   ci-policy:
     runs-on: ubuntu-latest
     timeout-minutes: 5

@@ -54,6 +54,6 @@ python -m pip install --upgrade pip
 pip install -e ".[all]"
 
 # Byte-compile the packages. There is no Maven/Gradle compile step.
-python -m compileall -q lib ambient_pipeline
+python -m compileall -q lib
 
 echo "Ambient Core environment ready: $(python --version); JAVA_HOME=${JAVA_HOME}; $(java -version 2>&1 | head -n 1)"
