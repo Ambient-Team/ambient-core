@@ -3,7 +3,8 @@ title: Ambient Core
 message: If you use this software, please cite it as below.
 type: software
 authors:
-  - name: Ambient Core maintainers
+  - family-names: Damnjanovic
+    given-names: Ivan
 repository-code: https://github.com/Ambient-Team/ambient-core
 license: MIT
 version: 0.4.0
