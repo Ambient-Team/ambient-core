@@ -25,7 +25,7 @@ from ambient_pipeline.pipeline_logging import log_pipeline_event
 from ambient_pipeline.perf import PipelinePerfRecorder, create_local_spark
 from ambient_pipeline.pii import PiiPseudonymizer
 from ambient_pipeline.provenance import BronzeProvenanceStamper
-from ambient_pipeline.secrets import get_secret_or_warn
+from ambient_pipeline.secrets import DEFAULT_SECRET_SCOPE, get_secret_or_warn
 from ambient_pipeline.validation import SilverValidator
 
 
@@ -224,7 +224,7 @@ def run_local_pipeline(
     validator = SilverValidator(completeness_threshold=0.95)
     deduped = validator.deduplicate_metrics(bronze_metrics)
     salt = get_secret_or_warn(
-        "ambient-core",
+        DEFAULT_SECRET_SCOPE,
         "pii_salt",
         dev_fallback="dev-only-salt-do-not-use-in-prod",
     )

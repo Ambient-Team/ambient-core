@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Default secret scope for pipeline salt lookup is `ambient-core` (renamed from the previous default scope slug). Scoped env vars use `AMBIENT_<SCOPE>_<KEY>`; older scoped prefixes still resolve when the new name is unset.
 - Checkout discovery uses `AMBIENT_CORE_ROOT` and a `lib/ambient_pipeline` marker.
 - Kept contracts `manufacturing-demo-raw-v1`, `tenant-metrics-v1`, `org-kpi-v1`, and `quality-v1` describe the in-repo sample and read-only Gold outputs.
 - CI action pins move forward with `pathsFilterPin` (checkout, paths-filter, setup-node, setup-python, setup-java). Release workflows use the matching floating tags. SHA pins stay commit-locked.
@@ -55,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Colab pip extra and `requirements-colab.txt`** — pandas notebook deps live under the `notebook` optional extra in `pyproject.toml`.
 - **`google.colab` notebook cells** — entry notebook is local/Jupyter only (`notebooks/00_notebook_demo.ipynb`).
 
-### Deprecated (remove after ambient-systems-platform migrates)
+### Deprecated (remove after downstream integrators migrate)
 
 - **`ambient_pipeline.colab_smoke`** / **`colab_bootstrap`** — thin re-exports of `notebook_smoke` / `notebook_bootstrap`.
 - **`ambient_pipeline.firestore_sync_ids`** — re-exports `sync_ids`.
@@ -82,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0] - 2026-10-02
 
-Baseline semver release for integrators (for example **ambient-systems-platform**) that pin a single git tag for contracts, catalog, and shared pipeline code.
+Baseline semver release for integrators that pin a single git tag for contracts, catalog, and shared pipeline code.
 
 ### Added
 

@@ -39,19 +39,21 @@ def test_contract_loader_rejects_path_traversal(tmp_path: Path) -> None:
 
 def test_secret_fallback_fail_closed(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("AMBIENT_PII_SALT", raising=False)
+    monkeypatch.delenv("AMBIENT_AMBIENT_CORE_PII_SALT", raising=False)
     monkeypatch.delenv("AMBIENT_AMBIENT_SYSTEMS_PII_SALT", raising=False)
     monkeypatch.delenv("AMBIENT_ALLOW_DEV_SECRETS", raising=False)
     with pytest.raises(RuntimeError, match="Secret not found"):
-        get_secret_or_warn("ambient-systems", "pii_salt", dev_fallback="dev-only")
+        get_secret_or_warn("ambient-core", "pii_salt", dev_fallback="dev-only")
 
 
 def test_secret_fallback_opt_in(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("AMBIENT_PII_SALT", raising=False)
+    monkeypatch.delenv("AMBIENT_AMBIENT_CORE_PII_SALT", raising=False)
     monkeypatch.delenv("AMBIENT_AMBIENT_SYSTEMS_PII_SALT", raising=False)
     monkeypatch.setenv("AMBIENT_ALLOW_DEV_SECRETS", "1")
     with pytest.warns(UserWarning, match="dev-only"):
         assert (
-            get_secret_or_warn("ambient-systems", "pii_salt", dev_fallback="dev-only")
+            get_secret_or_warn("ambient-core", "pii_salt", dev_fallback="dev-only")
             == "dev-only"
         )
 

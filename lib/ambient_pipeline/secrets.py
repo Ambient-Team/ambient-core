@@ -6,12 +6,27 @@ import os
 import warnings
 from typing import cast
 
+DEFAULT_SECRET_SCOPE = "ambient-core"
+_LEGACY_SCOPE_ENV_ALIASES: dict[str, str] = {DEFAULT_SECRET_SCOPE: "ambient-systems"}
+
 
 def _env_key(scope: str, key: str, env_prefix: str) -> str:
     """Build env var name: AMBIENT_PII_SALT or AMBIENT_<SCOPE>_PII_SALT."""
     simple = f"{env_prefix}_{key.upper().replace('-', '_')}"
+    simple_val = os.environ.get(simple) or ""
+    if simple_val:
+        return simple_val
     scoped = f"{env_prefix}_{scope.upper().replace('-', '_')}_{key.upper().replace('-', '_')}"
-    return os.environ.get(simple) or os.environ.get(scoped) or ""
+    scoped_val = os.environ.get(scoped) or ""
+    if scoped_val:
+        return scoped_val
+    legacy_scope = _LEGACY_SCOPE_ENV_ALIASES.get(scope)
+    if legacy_scope:
+        legacy_scoped = (
+            f"{env_prefix}_{legacy_scope.upper().replace('-', '_')}_{key.upper().replace('-', '_')}"
+        )
+        return os.environ.get(legacy_scoped) or ""
+    return ""
 
 
 def _try_dbutils_secret(scope: str, key: str) -> str | None:

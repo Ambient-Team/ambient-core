@@ -45,7 +45,7 @@ def test_try_dbutils_notebook_path_when_pyspark_import_ok_but_no_session(
 
     class FakeSecrets:
         def get(self, scope: str, key: str) -> str:
-            assert scope == "ambient-systems"
+            assert scope == "ambient-core"
             assert key == "api_token"
             return "notebook-secret"
 
@@ -61,7 +61,7 @@ def test_try_dbutils_notebook_path_when_pyspark_import_ok_but_no_session(
     monkeypatch.setitem(sys.modules, "pyspark.dbutils", fake_module)
     monkeypatch.setattr("pyspark.sql.SparkSession.getActiveSession", lambda: None)
 
-    assert _try_dbutils_secret("ambient-systems", "api_token") == "notebook-secret"
+    assert _try_dbutils_secret("ambient-core", "api_token") == "notebook-secret"
 
 
 def test_get_secret_raises_when_dbutils_returns_empty_string(

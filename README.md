@@ -13,7 +13,7 @@ Ambient Core is open source under the MIT License.
 Python 3.10–3.12. Pin a git tag:
 
 ```bash
-pip install "ambient-core[notebook] @ git+<repository-url>@vX.Y.Z"
+pip install "ambient-core[notebook] @ git+https://github.com/Ambient-Team/ambient-core@vX.Y.Z"
 ```
 
 Extras:
@@ -26,7 +26,7 @@ Extras:
 From a clone:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Ambient-Team/ambient-core
 cd ambient-core
 python3.12 -m venv .venv
 source .venv/bin/activate

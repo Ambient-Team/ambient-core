@@ -52,6 +52,15 @@ PRODUCT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
 _CHANGELOG_HEADING = re.compile(r"^## \[([^\]]+)\]")
 _CURRENT_CHANGELOG = frozenset({"Unreleased", "0.4.0"})
 
+_CANONICAL_REPO = re.compile(r"github\.com/Ambient-Team/ambient-core", re.IGNORECASE)
+
+
+def _readme_repo_url_allowed(rel: str, line: str) -> bool:
+    if rel != "README.md" or _CANONICAL_REPO.search(line) is None:
+        return False
+    return bool(re.search(r"git\+https://|git clone|pip install", line, re.IGNORECASE))
+
+
 COLAB_ALLOWED = re.compile(
     r"colab\s*=|[,_\[]colab|colab[_\-\./\],]|\[colab\]|optional-notebook|"
     r"00_colab|/colab|\.colab|colab_smoke|colab_bootstrap",
@@ -74,6 +83,8 @@ def _scan_text(rel: str, text: str, *, line_offset: int = 1) -> list[str]:
             section = heading.group(1)
         for label, pattern in FORBIDDEN_PATTERNS:
             if pattern.search(line):
+                if label == "Ambient-Team forge URL" and _readme_repo_url_allowed(rel, line):
+                    continue
                 errors.append(f"{rel}:{lineno}: forbidden {label!r}")
         apply_product = rel != "CHANGELOG.md" or section in _CURRENT_CHANGELOG
         if apply_product:
