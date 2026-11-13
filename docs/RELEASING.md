@@ -1,6 +1,6 @@
 # Releasing ambient-core
 
-Ambient Core ships as **semver git tags** (`vX.Y.Z`). Downstream repos (especially **ambient-systems-platform**) pin that tag for pip, submodules, and container build args. Release order in the hub is: **core tag first**, then **platform dev**, then **platform prod**, then the **website** (see [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md)).
+Ambient Core ships as **semver git tags** (`vX.Y.Z`). Downstream checkouts pin that tag for pip, submodules, and container build args. Tag this repository first, then bump consumer pins (see [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md)).
 
 Only **Ivan** merges release PRs to `main` and runs the **Cut release** workflow. CI and agents do not merge for you.
 
@@ -16,7 +16,7 @@ Ambient-core ships a **monthly** semver tag on the **last Friday** of each calen
 
 **No freeze days** on any track — integration, quality, and feature work continue through release day. Keep the monthly release PR green with local verification when CI is throttled: [`scripts/run_local_pr_ci.sh`](../scripts/run_local_pr_ci.sh) (see [running-ci-locally.md](running-ci-locally.md)); avoid extra workflow dispatches.
 
-Hub chain order (**core → platform dev → platform prod → website**), the **2026–27** last-Friday schedule, version-bump rules, and the November **`v0.3.11`** note (`v0.3.10` already exists and cannot be re-cut) are in **[MONTHLY-RELEASE.md](MONTHLY-RELEASE.md)**.
+The **2026–27** last-Friday schedule, version-bump rules, and the November **`v0.3.11`** note (`v0.3.10` already exists and cannot be re-cut) are in **[MONTHLY-RELEASE.md](MONTHLY-RELEASE.md)**.
 
 - **Merge:** Ivan merges the version PR on `main` on or before the last Friday when the branch is ready.
 - **Cut:** Ivan runs **Actions → Cut release** after `main` carries the bumped `__version__` and CHANGELOG for that month (usually that last Friday).
@@ -55,7 +55,7 @@ Use the **same tag everywhere** you depend on core:
 - **Pip from git:** `ambient-core @ git+<repository-url>@vX.Y.Z`
 - **Built wheel:** download the wheel from the release for that tag and `pip install ambient_core-X.Y.Z-py3-none-any.whl` (verify hash in your supply chain process).
 
-Then re-run consumer CI (contract validation, `ambient-catalog-generate --check`, tests). On **ambient-systems-platform**, roll **dev** first, then **prod**, then update the **website** — same tag at each step. Details: [INTEGRATING.md](INTEGRATING.md), [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md), and [CONTRIBUTING.md — Consumer follow-up](CONTRIBUTING.md#consumer-follow-up-after-a-release).
+Then re-run consumer CI (contract validation, `ambient-catalog-generate --check`, tests) against the same tag. Details: [INTEGRATING.md](INTEGRATING.md), [MONTHLY-RELEASE.md](MONTHLY-RELEASE.md), and [CONTRIBUTING.md — Consumer follow-up](CONTRIBUTING.md#consumer-follow-up-after-a-release).
 
 ## Historical tags
 

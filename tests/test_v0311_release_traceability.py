@@ -37,7 +37,7 @@ V0311_TEST_PATHS: tuple[str, ...] = (
 
 
 def test_package_version_is_0312() -> None:
-    assert ambient_contracts.__version__ == "0.3.12"
+    assert ambient_contracts.__version__ == "0.4.0"
 
 
 def test_changelog_documents_0311() -> None:

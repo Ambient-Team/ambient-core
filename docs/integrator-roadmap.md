@@ -19,18 +19,12 @@ Release **`v0.3.11`** / package **`0.3.11`** ([CHANGELOG.md](../CHANGELOG.md)). 
 - **Pipeline helpers** — [pipeline.md](pipeline.md), `bronze_to_tenant_metrics`, `gold_contract_map`, `ambient_pipeline` (checkout), examples under [examples/pipeline/](../examples/pipeline/)
 - **Crosswalk** — YAML SSOT + `load_crosswalk_links()`; CI `scripts/check_crosswalk.py`; `tests/test_crosswalk_loader.py`
 
-## Deferred (not in core yet)
+## Deferred (not in this repository)
 
-- **Product agent runtime** — plan-execute workers, `register_tool` registry, and hosted agent HTTP APIs live in the commercial platform; Ambient Core documents maintainer-only IDE agents in [AGENTS.md](../AGENTS.md)
-- **`ambient_pipeline` on the wheel** — still requires git checkout / `pythonpath=lib`; `pipeline` extra installs PySpark only
-- **Per-tenant `register_tool` registry** — process-global namespace; isolate in platform workers
-- **ReAct / `max_tool_rounds`** — profile field reserved; v1 runs each `tool_ids` once
-- **Full JSON Schema for tool args** — builtins: required + simple types only
-- **Crosswalk agent tool** — load crosswalk in app code or future core tool
-- **Live Gold / OLAP reads in core agents** — platform `register_tool()` handlers
-- **Hosted catalog API** — catalog folder remains SSOT; transport TBD
-- **Gold lakehouse writers** — Spark jobs that materialize `finance-*` / healthcare Gold tables from Silver + `ambient_calc` (platform repo); core supplies `gold_contract_map` and contracts only
-- **Optional local scripts** — for example `scripts/export_catalog_wiki.py` is not part of CI; keep untracked or maintain in your fork
+- **Customer agent runtime** — this repository does not ship plan-execute workers or a hosted agent API. Maintainer IDE notes stay in [AGENTS.md](../AGENTS.md).
+- **Hosted catalog API** — the `catalog/` folder remains the source of truth.
+- **Gold lakehouse writers** — Spark jobs that materialize `finance-*` or healthcare Gold tables live in the consuming application. This repository supplies `gold_contract_map` and the contracts.
+- **Optional local scripts** — `scripts/export_catalog_wiki.py` is not part of CI.
 
 ## Suggested integrator order
 

@@ -65,7 +65,7 @@ governance:
 consumption_contract:
   allowed_paths:
     - "Internal: Gold KPI calculators"
-    - "Direct: read-only service principal on Unity Catalog views"
+    - "Direct: read-only Gold views"
     - "Adapter: document store sync (explicit contract only — see consumption-adapter-v1)"
   forbidden: "Direct Bronze access by any consumer"
 

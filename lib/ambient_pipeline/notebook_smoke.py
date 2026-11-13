@@ -1,9 +1,8 @@
 """
-Local pandas smoke: Bronze → Silver → Gold against data/raw demo CSVs.
+Local pandas smoke: Bronze → Silver → Gold against the in-repo synthetic sample.
 
-No Databricks. No Unity Catalog. Works from a local clone or Jupyter notebook.
-Demo CSVs under data/raw/ are academic samples (Allmanufacturingds-*), not live tenants.
-Samples are supplied externally — not shipped in this GitHub repo.
+Works from a local clone or Jupyter notebook after ``pip install -e ".[notebook]"``.
+CSV rows under ``examples/sample/`` are fictional. They are not live tenants.
 """
 
 from __future__ import annotations
@@ -20,16 +19,18 @@ import yaml
 from ambient_pipeline.pandas_provenance import PandasBronzeStamper
 from ambient_pipeline.pipeline_logging import log_pipeline_event
 
-# Expected raw demo files (external demo pack; do not invent live customers).
+# Synthetic rows shipped in the repository. Filenames match manufacturing-demo-raw-v1.
+SAMPLE_REL = Path("examples") / "sample"
+OUTPUT_REL = Path(".lakehouse") / "notebook-smoke"
 DEMO_TABLES = {
-    "ar_aging": "Allmanufacturingds-ar-aging.csv",
-    "ap_aging": "Allmanufacturingds-ap-aging.csv",
-    "crm_pipeline": "Allmanufacturingds-crm-pipeline.csv",
-    "bank_statements": "Allmanufacturingds-bank-statements.csv",
-    "balance_sheet": "Allmanufacturingds-balance-sheet.csv",
-    "general_ledger": "Allmanufacturingds-general-ledger.csv",
-    "marketing_spend": "Allmanufacturingds-marketing-spend.csv",
-    "inventory_records": "Allmanufacturingds-inventory-records.csv",
+    "ar_aging": "ar-aging.csv",
+    "ap_aging": "ap-aging.csv",
+    "crm_pipeline": "crm-pipeline.csv",
+    "bank_statements": "bank-statements.csv",
+    "balance_sheet": "balance-sheet.csv",
+    "general_ledger": "general-ledger.csv",
+    "marketing_spend": "marketing-spend.csv",
+    "inventory_records": "inventory-records.csv",
 }
 
 CONTRACT_FILE = "manufacturing-demo-raw-v1.yaml"
@@ -84,10 +85,10 @@ def _to_numeric(series: pd.Series) -> pd.Series:
 def run_notebook_smoke(
     root: Path,
     *,
-    org_id: str = "demo-org-allmanufacturingds",
+    org_id: str = "demo-org",
     run_id: str | None = None,
 ) -> SmokeResult:
-    """Execute Bronze → Silver → Gold against data/raw samples.
+    """Execute Bronze → Silver → Gold against ``examples/sample``.
 
     Args:
         root: Path.
@@ -110,9 +111,9 @@ def run_notebook_smoke(
         org_id=org_id,
         root=str(root),
     )
-    raw_dir = root / "data" / "raw"
+    raw_dir = root / SAMPLE_REL
     contracts_dir = root / "contracts"
-    out = root / "data" / "processed"
+    out = root / OUTPUT_REL
     bronze_dir = out / "bronze"
     silver_dir = out / "silver"
     gold_dir = out / "gold"
@@ -126,7 +127,7 @@ def run_notebook_smoke(
 
     result = SmokeResult(run_id=run_id, org_id=org_id, output_dir=str(out))
     result.notes.append(
-        "Inputs are academic demo CSVs (Allmanufacturingds-*). "
+        "Inputs are fictional rows in examples/sample. "
         "KPI values are derived only from those rows — not live tenant metrics."
     )
 

@@ -224,7 +224,7 @@ def run_local_pipeline(
     validator = SilverValidator(completeness_threshold=0.95)
     deduped = validator.deduplicate_metrics(bronze_metrics)
     salt = get_secret_or_warn(
-        "ambient-systems",
+        "ambient-core",
         "pii_salt",
         dev_fallback="dev-only-salt-do-not-use-in-prod",
     )

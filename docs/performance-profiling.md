@@ -34,7 +34,7 @@ print(metrics.wall_seconds, metrics.plan_excerpt[:200])
 - Input/output row counts when provided
 - Shuffle read/write and spill bytes (best-effort from Spark status tracker)
 - Truncated physical plan text (max 2000 characters in JSON export)
-- Environment label (platform, Python version, Spark master)
+- Environment label (operating system, Python version, Spark master)
 
 ## Output destinations
 

@@ -1,6 +1,6 @@
 # Using ambient-core
 
-Quick start for contracts, catalog, and governance helpers. For embedding in another repo, see [INTEGRATING.md](INTEGRATING.md). Foundation vs full product: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
+Quick start for contracts, catalog, and governance helpers. For embedding in another repo, see [INTEGRATING.md](INTEGRATING.md). What belongs here: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md).
 
 ## Install
 
@@ -17,12 +17,12 @@ pip install -e ".[all]"
 **From a pinned git URL (downstream apps):**
 
 ```bash
-pip install "ambient-core[dev] @ git+<repository-url>@v0.3.11"
+pip install "ambient-core[notebook] @ git+<repository-url>@vX.Y.Z"
 ```
 
 PyPI is **not** the documented distribution path unless publishing is added later.
 
-**Extras:** `.[pipeline,dev]` (Spark tests, Java 17) · `.[postgres]` · `.[all]` (pipeline + postgres + dev)
+**Extras:** `.[notebook]` (pandas smoke) · `.[pipeline,dev]` (Spark tests, Java 17) · `.[postgres]` · `.[all]` (notebook + pipeline + postgres + dev)
 
 ## Recipes
 

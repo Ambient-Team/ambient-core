@@ -62,17 +62,15 @@ def ensure_pipeline_on_path(start: Path | None = None) -> Path | None:
     return root
 
 
-FOLDER_MARKERS = (
-    "Ambient-Systems-Platform",
-    "ambient-core",
-)
+def _is_checkout(root: Path) -> bool:
+    return (root / "lib" / "ambient_pipeline").is_dir()
 
 
 def find_checkout_root(explicit: str | Path | None = None) -> Path:
-    """Return a checkout root containing ``ambient_pipeline/`` and ``data/``.
+    """Return a checkout root containing ``lib/ambient_pipeline``.
 
     Args:
-        explicit: Optional path or ``PLATFORM_ROOT`` override.
+        explicit: Optional path or ``AMBIENT_CORE_ROOT`` override.
 
     Returns:
         Resolved repository root.
@@ -84,14 +82,14 @@ def find_checkout_root(explicit: str | Path | None = None) -> Path:
         >>> find_checkout_root("/path/to/ambient-core")
     """
     if explicit is None:
-        env_root = os.environ.get("PLATFORM_ROOT", "").strip()
+        env_root = os.environ.get("AMBIENT_CORE_ROOT", "").strip()
         if env_root:
             explicit = env_root
 
     if explicit:
         root = Path(explicit).expanduser().resolve()
-        if not (root / "ambient_pipeline").is_dir():
-            raise FileNotFoundError(f"explicit root missing ambient_pipeline/: {root}")
+        if not _is_checkout(root):
+            raise FileNotFoundError(f"explicit root missing lib/ambient_pipeline: {root}")
         return root
 
     seen: set[str] = set()
@@ -109,12 +107,12 @@ def find_checkout_root(explicit: str | Path | None = None) -> Path:
         if key in seen:
             continue
         seen.add(key)
-        if (root / "ambient_pipeline").is_dir() and (root / "data").is_dir():
+        if _is_checkout(root):
             return root
 
     raise FileNotFoundError(
         "Could not find ambient-core checkout root. "
-        "Set PLATFORM_ROOT to your clone or run from the repository directory."
+        "Set AMBIENT_CORE_ROOT to your clone or run from the repository directory."
     )
 
 
@@ -133,7 +131,7 @@ def ensure_checkout_on_path(root: Path | None = None) -> Path:
     Example:
         >>> ensure_checkout_on_path()
     """
-    root = root or find_checkout_root()
+    root = (root or find_checkout_root()).resolve()
     root_str = str(root)
     if root_str not in sys.path:
         sys.path.insert(0, root_str)
@@ -143,17 +141,11 @@ def ensure_checkout_on_path(root: Path | None = None) -> Path:
     return root
 
 
-# Deprecated names kept for notebooks and ambient-systems-platform imports.
-find_platform_root = find_checkout_root
-ensure_package_on_path = ensure_checkout_on_path
-
 __all__ = [
     "apply_spark_tuning",
     "ensure_checkout_on_path",
-    "ensure_package_on_path",
     "ensure_pipeline_on_path",
     "find_checkout_root",
-    "find_platform_root",
     "find_repo_root",
 ]
 

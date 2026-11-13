@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export expanded catalog metrics (with calc) for ambientsystems.ai wiki generation."""
+"""Export expanded catalog metrics (with calc) as wiki markdown."""
 from __future__ import annotations
 
 import argparse

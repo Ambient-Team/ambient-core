@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-13
+
+### Removed
+
+- Top-level checkout shims (`ambient_pipeline/` next to `lib/`) and the empty `data/` tree. Notebooks import the installed `ambient_pipeline` package.
+- Deprecated 0.3.11 aliases: `find_platform_root`, `PLATFORM_ROOT`, the `firestore_fetcher` argument, the legacy contract key `firestore`, `colab_bootstrap`, `colab_smoke`, and `firestore_sync_ids`.
+- Contracts `commercial-usage-v1` and `observability-pipeline-v1`.
+- `notebooks/Master-Orchestrator.ipynb` and `notebooks/COMMERCIAL_ONLY.txt`.
+- Storage backends other than `local`.
+
+### Added
+
+- Fictional CSV sample under `examples/sample/` so clone, `pip install -e ".[notebook]"`, and the pandas smoke need no external download.
+- `CITATION.cff` and a root `CONTRIBUTING.md` pointer.
+- Vendor-marketing patterns for product-site and split-product phrasing. Historical changelog sections are unchanged.
+
+### Changed
+
+- Checkout discovery uses `AMBIENT_CORE_ROOT` and a `lib/ambient_pipeline` marker.
+- Kept contracts `manufacturing-demo-raw-v1`, `tenant-metrics-v1`, `org-kpi-v1`, and `quality-v1` describe the in-repo sample and read-only Gold outputs.
+- CI action pins move forward with `pathsFilterPin` (checkout, paths-filter, setup-node, setup-python, setup-java). Release workflows use the matching floating tags. SHA pins stay commit-locked.
+
 ## [0.3.12] - 2026-11-12
 
 ### Added

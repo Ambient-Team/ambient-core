@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 # Table separator: | --- | or |:---:| etc.
 TABLE_SEP = re.compile(r"^\s*\|(?:\s*:?-+:?\s*\|)+\s*$")
 
-# Public Drive/Docs URLs must not appear in repo docs (use GitHub demos/ambient-core instead).
+# Public Drive/Docs URLs must not appear in repo docs.
 FORBIDDEN_DRIVE_LINK = re.compile(
     r"(?:https?://)?(?:[a-z0-9.-]+\.)?(?:drive|docs)\.google\.com",
     re.IGNORECASE,
@@ -23,7 +23,6 @@ SCAN_ROOTS = [
     ROOT / "examples",
     ROOT / "contracts" / "README.md",
     ROOT / "catalog" / "README.md",
-    ROOT / "data" / "README.md",
     ROOT / "notebooks" / "README.md",
     ROOT / "README.md",
 ]
@@ -102,7 +101,7 @@ def main() -> int:
             file=sys.stderr,
         )
         print(
-            "Use https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core",
+            "Use the in-repo sample under examples/sample instead of a file-sharing link.",
             file=sys.stderr,
         )
         for item in link_violations:

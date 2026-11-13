@@ -156,7 +156,6 @@ def resolve_mapping_spec(
     gcs_path: str,
     catalog_manifest_version: str,
     source_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
-    firestore_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
 ) -> MappingSpec:
     """Resolve mapping spec.
 
@@ -172,10 +171,6 @@ def resolve_mapping_spec(
     Example:
         >>> resolve_mapping_spec()
     """
-    if firestore_fetcher is not None:
-        if source_fetcher is not None and source_fetcher is not firestore_fetcher:
-            raise TypeError("pass only one of source_fetcher or firestore_fetcher")
-        source_fetcher = firestore_fetcher
     mapping = parse_mapping_json(mapping_json)
     resolved_source_id = source_id.strip() or (
         parse_source_id_from_gcs_path(gcs_path, org_id) or ""
@@ -443,7 +438,6 @@ def bronze_to_tenant_metrics(
     ingestion_status_reason: str | None = None,
     default_type: str = "Operational",
     source_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
-    firestore_fetcher: Callable[[str, str], dict[str, Any] | None] | None = None,
     spec: MappingSpec | None = None,
 ) -> DataFrame:
     """Map Bronze upload columns → catalog shape → unpivot → lineage stamp (Silver-ready).
@@ -468,7 +462,6 @@ def bronze_to_tenant_metrics(
         gcs_path=gcs_path,
         catalog_manifest_version=catalog_manifest_version,
         source_fetcher=source_fetcher,
-        firestore_fetcher=firestore_fetcher,
     )
     option = load_data_option(resolved.catalog_option_key) if resolved.catalog_option_key else None
     mapped = apply_column_mapping(df, resolved.catalog_field_to_csv_header)

@@ -5,10 +5,18 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ambient-core"
 dynamic = ["version"]
-description = "Governed data-product contracts, reference catalog, and lakehouse governance (MIT)."
+description = "Industry metric and benchmark catalog packs, data contracts, three-statement and ratio calculations, a pandas Bronze/Silver/Gold pipeline, and a CLI."
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 license = { text = "MIT" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
 keywords = [
     "data-contracts",
     "data-catalog",
@@ -22,8 +30,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://www.ambientsystems.ai/"
-Documentation = "https://www.ambientsystems.ai/"
+Changelog = "CHANGELOG.md"
+Documentation = "docs/USAGE.md"
+Contributing = "CONTRIBUTING.md"
+Security = "SECURITY.md"
 
 [project.optional-dependencies]
 pipeline = [
@@ -105,7 +115,6 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 check_untyped_defs = true
 disallow_untyped_defs = false
-exclude = ["^ambient_pipeline/runner\\.py$"]
 
 [[tool.mypy.overrides]]
 module = "ambient_calc.engine"

@@ -91,9 +91,9 @@ Hand-edit only `catalog/runtime/catalogEnrichment.js` when documented in catalog
 
 ## Analysis lens and metric filtering
 
-The core agent tool **`catalog_list_metrics`** filters manifest rows by **`industry`** (the pack display label, for example `Banking`), not by metric `segment`. For a business-line tenant org, your platform should further filter the manifest (or industry YAML) by **segment** and by **`industryCodes`** from each pack’s `pack.yaml` / manifest industry row so users only see KPIs for that org’s lens. Peer comparison should use the same official code cohort, not the legal entity’s marketing name. See [catalog-industry-coverage.md](catalog-industry-coverage.md).
+Filter manifest rows by **`industry`** (the pack display label, for example `Banking`), not by metric `segment`. For a business-line tenant org, your application should further filter the manifest (or industry YAML) by **segment** and by **`industryCodes`** from each pack’s `pack.yaml` / manifest industry row so users only see KPIs for that org’s lens. Peer comparison should use the same official code cohort, not the legal entity’s marketing name. See [catalog-industry-coverage.md](catalog-industry-coverage.md).
 
-### Recommended `AgentRunContext.metadata` keys (platform convention)
+### Recommended `AgentRunContext.metadata` keys
 
 Core does not validate these; document them in your worker so synthesis and logging stay consistent:
 
@@ -101,7 +101,7 @@ Core does not validate these; document them in your worker so synthesis and logg
 - **`catalog_industry`** — resolved pack label for this org’s lens.
 - **`industry_code_system`** — optional: `isic` | `naics` | `nace` | `gics` (which taxonomy the tenant treats as primary for cohorting).
 - **`industry_code_primary`** — optional primary code from the pack’s manifest `industryCodes` block for that system.
-- **`peer_group_id`** — platform-defined cohort for benchmarking.
+- **`peer_group_id`** — application-defined cohort for benchmarking.
 - **`assurance_framework`** or **`control_pack_id`** — assurance scope.
 - **`disclosure_mandate_id`** — investor or exchange mandate set.
 - **`investor_audience`** — coarse audience (listed, LP, lender, internal).

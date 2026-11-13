@@ -6,7 +6,7 @@ Thank you for improving governed analytics foundations. Read [CODE_OF_CONDUCT.md
 
 All foundational work—contracts, catalog, shared pipeline governance—belongs in **this** repository. Application UI, deploy bindings, and tenant-specific tooling belong in **separate repos** that pin a release here. Customer-facing AI is out of scope for Ambient Core.
 
-Start with [ECOSYSTEM.md](ECOSYSTEM.md) and [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Quick start: [USAGE.md](USAGE.md). Foundation vs full product: [CORE_VS_PLATFORM.md](CORE_VS_PLATFORM.md).
+Start with [ECOSYSTEM.md](ECOSYSTEM.md) and [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md). Quick start: [USAGE.md](USAGE.md). What belongs here: [CANONICAL_SCOPE.md](CANONICAL_SCOPE.md).
 
 Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make changes](ECOSYSTEM.md#where-to-make-changes).
 
@@ -14,7 +14,7 @@ Unsure whether a change belongs here? See [ECOSYSTEM.md — Where to make change
 
 Do **not** use markdown pipe tables (`| col |` with `|---|` separators) in `docs/`, any `README.md`, or `examples/**/*.md`. Use short paragraphs and bullet lists instead (for example `- **term** — definition`). Mermaid diagrams and code fences are fine.
 
-Do **not** link to public cloud file-sharing URLs blocked by `scripts/check_markdown_prose.py`. Point demo CSVs, recordings, and synthetic bundles at [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) instead. CI enforces that policy and relative links via `scripts/check_doc_links.py`.
+Do **not** link to public cloud file-sharing URLs blocked by `scripts/check_markdown_prose.py`. Point demo CSVs, recordings, and synthetic bundles at [`examples/sample/`](../examples/sample/) instead. CI enforces that policy and relative links via `scripts/check_doc_links.py`.
 
 CI runs `python scripts/check_markdown_prose.py` on pull requests. When editing docs as an agent, follow [../AGENTS.md](../AGENTS.md).
 

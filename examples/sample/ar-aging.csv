@@ -1,0 +1,4 @@
+date,customer_name,invoice_id,amount_due,days_outstanding,aging_bucket
+2024-01-15,Cedar Loom Goods,INV-1001,1200.50,12,0-30
+2024-02-02,Bright Kiln Supply,INV-1002,450.00,40,31-60
+2024-03-11,Example Fixture Co,INV-1003,75.25,5,0-30

@@ -22,7 +22,7 @@ flowchart TB
   subgraph contractsSSOT [contracts SSOT]
     TenantSilver[tenant-metrics-v1 Silver]
     FinanceGold[finance-*-v1 Gold]
-    PlatformProducts[quality bridge usage observability]
+    QualityBridge[quality and operational financial bridge]
   end
   Bronze[Bronze CSV upload]
   Map[bronze_catalog_map plus field types]
@@ -48,20 +48,18 @@ flowchart TB
 
 End-to-end job steps: [docs/pipeline.md](../docs/pipeline.md).
 
-**Silver → Gold (platform):** Core supplies [`ambient_calc`](../lib/ambient_calc/__init__.py) and [`gold_contract_map`](../lib/ambient_pipeline/gold_contract_map.py) to relate crosswalk metric keys to Gold contract columns; Spark jobs that write `finance-*` or healthcare tables live in your application repo.
+**Silver → Gold:** This repository supplies [`ambient_calc`](../lib/ambient_calc/__init__.py) and [`gold_contract_map`](../lib/ambient_pipeline/gold_contract_map.py) to relate crosswalk metric keys to Gold contract columns. Spark jobs that write `finance-*` or healthcare tables live in your application repository.
 
 Gold **finance-*-v1** contracts map to metrics across Banking, Commercial Finance, Consumer Finance, Financial Services, Funds, Trusts, and Insurance catalog packs. Credit, liquidity, market, and payment-volume metrics are columns on the matching `finance-*` product for that economic engine — not separate risk or payments contract files.
 
 ## Current data products
 
-### Platform and medallion
+### Medallion products
 
-- **`tenant-metrics-v1.yaml`** — Silver tenant metrics; multi-tenant isolation; bronze provenance
+- **`tenant-metrics-v1.yaml`** — Silver tenant metrics; bronze provenance
 - **`org-kpi-v1.yaml`** — Gold org KPIs; business-level outcomes by vertical
-- **`quality-v1.yaml`** — Data quality and lineage; observability product
+- **`quality-v1.yaml`** — Data quality and lineage
 - **`operational-financial-bridge-v1.yaml`** — Operational–financial bridge; cross-domain reconciliation
-- **`commercial-usage-v1.yaml`** — Commercial usage snapshot; billing and consumption metering
-- **`observability-pipeline-v1.yaml`** — Pipeline and medallion observability; may reference platform deploy assets
 
 ### Healthcare
 
@@ -84,7 +82,7 @@ Gold **finance-*-v1** contracts map to metrics across Banking, Commercial Financ
 - **`finance-trusts-v1.yaml`** — Trust and listed REIT vehicles; FFO, payout, vehicle same-store NOI, trustee administration
 - **`finance-insurance-v1.yaml`** — P&C and life underwriting; reserve development and catastrophe loss ratio
 
-For table names, required columns, and consumption rules, read each product YAML. Structural validation does not replace pipeline semantics or platform entitlements.
+For table names, required columns, and consumption rules, read each product YAML. Structural validation does not replace pipeline semantics or application entitlements.
 
 ## Authoring and validation
 

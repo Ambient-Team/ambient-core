@@ -8,7 +8,7 @@ from typing import cast
 
 
 def _env_key(scope: str, key: str, env_prefix: str) -> str:
-    """Build env var name: AMBIENT_PII_SALT or AMBIENT_AMBIENT_SYSTEMS_PII_SALT."""
+    """Build env var name: AMBIENT_PII_SALT or AMBIENT_<SCOPE>_PII_SALT."""
     simple = f"{env_prefix}_{key.upper().replace('-', '_')}"
     scoped = f"{env_prefix}_{scope.upper().replace('-', '_')}_{key.upper().replace('-', '_')}"
     return os.environ.get(simple) or os.environ.get(scoped) or ""

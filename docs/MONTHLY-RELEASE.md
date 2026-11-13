@@ -27,16 +27,14 @@ Hub monthly cuts on **ambient-core** (UTC), last Friday unless noted:
 - **26 Nov 2027** — November 2027
 - **18 Dec 2027** — December 2027
 
-## Release chain (hub order)
+## Release order
 
-Ship downstream only **after** the upstream artifact exists. Same **`vX.Y.Z`** everywhere in a given monthly wave:
+Ship a consumer pin only **after** the tag exists. Use the same **`vX.Y.Z`** in every consumer of that monthly wave:
 
 1. **ambient-core** — Ivan merges the version PR to `main`, then runs **Cut release** → annotated tag `vX.Y.Z` and release wheel/sdist ([RELEASING.md](RELEASING.md)).
-2. **ambient-systems-platform (dev)** — bump core pin (submodule, pip git ref, container build args); deploy or validate in **dev**; run consumer CI.
-3. **ambient-systems-platform (prod)** — promote the same pin to **prod** after dev is green.
-4. **Website / spokes** — publish messaging and docs that reference the **prod** platform pin (no price tables in this open-source repo).
+2. **Consumers** — bump the pin (submodule, pip git ref, or container build arg) and re-run consumer CI.
 
-Core is always first. Platform **dev** before **prod**. The site must not advertise a core tag that is not published, or a platform build that has not passed dev.
+The tag is always first. Do not document a tag that Cut release has not published.
 
 ## Version bumps
 

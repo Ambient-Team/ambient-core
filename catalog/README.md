@@ -78,7 +78,7 @@ Validation enforces globally unique ids, same-industry `metricIds` on data optio
 
 ## Terminology
 
-**Industry (vertical pack)** — Real Estate, Manufacturing, Funds, … One row in `packs.yaml`. **Analysis lens** = pack + metric `segment` + official `industryCodes` (and platform-chosen primary code system).
+**Industry (vertical pack)** — Real Estate, Manufacturing, Funds, … One row in `packs.yaml`. **Analysis lens** = pack + metric `segment` + official `industryCodes` (and a chosen primary code system).
 
 **Shared layer** — `segment: core` metrics and common data options expanded from `catalog/shared/`; not a separate catalog industry.
 

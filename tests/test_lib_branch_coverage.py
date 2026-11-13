@@ -13,7 +13,7 @@ from pyspark.sql import SparkSession
 from ambient_pipeline.bronze_catalog_map import filter_raw_uploads, resolve_mapping_spec
 from ambient_pipeline.catalog_field_rules import strictest_linked_metric_frequency
 from ambient_pipeline.catalog_loader import load_metric_by_numeric_id
-from ambient_pipeline.notebook_bootstrap import find_platform_root
+from ambient_pipeline.notebook_bootstrap import find_checkout_root
 from ambient_pipeline.notebook_smoke import run_notebook_smoke
 from ambient_pipeline.join_guards import assert_unique_keys, log_left_join_audit
 from ambient_pipeline.pandas_provenance import PandasBronzeStamper
@@ -80,12 +80,10 @@ def test_load_metric_from_manifest_when_pack_metrics_miss_id(tmp_path: Path) -> 
     assert metric.get("name") == "Manifest only"
 
 
-def test_find_platform_root_honors_explicit_path(tmp_path: Path) -> None:
+def test_find_checkout_root_honors_explicit_path(tmp_path: Path) -> None:
     root = tmp_path / "checkout"
-    root.mkdir()
-    (root / "ambient_pipeline").mkdir()
-    (root / "data").mkdir()
-    assert find_platform_root(explicit=root) == root.resolve()
+    (root / "lib" / "ambient_pipeline").mkdir(parents=True)
+    assert find_checkout_root(explicit=root) == root.resolve()
 
 
 def test_notebook_bootstrap_lib_install_layout_adds_repo_root_candidate(
@@ -95,14 +93,12 @@ def test_notebook_bootstrap_lib_install_layout_adds_repo_root_candidate(
     module_file = repo / "lib" / "ambient_pipeline" / "notebook_bootstrap.py"
     module_file.parent.mkdir(parents=True)
     module_file.write_text("# stub\n", encoding="utf-8")
-    (repo / "ambient_pipeline").mkdir()
-    (repo / "data").mkdir()
     monkeypatch.setattr("ambient_pipeline.notebook_bootstrap.__file__", str(module_file))
     monkeypatch.setattr(
         "ambient_pipeline.notebook_bootstrap.Path.cwd",
         lambda: tmp_path / "elsewhere",
     )
-    assert find_platform_root() == repo.resolve()
+    assert find_checkout_root() == repo.resolve()
 
 
 def test_notebook_bootstrap_parent_candidate_skips_lib_grandparent(
@@ -112,14 +108,13 @@ def test_notebook_bootstrap_parent_candidate_skips_lib_grandparent(
     module_file.parent.mkdir(parents=True)
     module_file.write_text("# stub\n", encoding="utf-8")
     platform = tmp_path / "ambient-core"
-    (platform / "ambient_pipeline").mkdir(parents=True)
-    (platform / "data").mkdir()
+    (platform / "lib" / "ambient_pipeline").mkdir(parents=True)
     monkeypatch.setattr("ambient_pipeline.notebook_bootstrap.__file__", str(module_file))
     monkeypatch.setattr(
         "ambient_pipeline.notebook_bootstrap.Path.cwd",
         lambda: platform,
     )
-    assert find_platform_root() == platform.resolve()
+    assert find_checkout_root() == platform.resolve()
 
 
 def test_notebook_smoke_skips_required_check_when_no_required_columns(
@@ -135,7 +130,7 @@ schema:
   tables:
     - id: marketing_spend
       table: raw.marketing_spend
-      file: Allmanufacturingds-marketing-spend.csv
+      file: marketing-spend.csv
       columns:
         - { name: date, type: string, required: false }
         - { name: spend, type: double, required: false }
@@ -143,11 +138,9 @@ schema:
     (contracts / "manufacturing-demo-raw-v1.yaml").write_text(
         contract, encoding="utf-8"
     )
-    raw = tmp_path / "data" / "raw"
+    raw = tmp_path / "examples" / "sample"
     raw.mkdir(parents=True)
-    (tmp_path / "data" / "processed").mkdir()
-    (tmp_path / "ambient_pipeline").mkdir()
-    raw.joinpath("Allmanufacturingds-marketing-spend.csv").write_text(
+    raw.joinpath("marketing-spend.csv").write_text(
         "date,spend\n2024-01-01,1.0\n",
         encoding="utf-8",
     )
@@ -168,7 +161,7 @@ schema:
   tables:
     - id: inventory_records
       table: raw.inventory_records
-      file: Allmanufacturingds-inventory-records.csv
+      file: inventory-records.csv
       columns:
         - { name: date, type: string, required: true }
         - { name: sku, type: string, required: true }
@@ -178,11 +171,9 @@ schema:
     (contracts / "manufacturing-demo-raw-v1.yaml").write_text(
         contract, encoding="utf-8"
     )
-    raw = tmp_path / "data" / "raw"
+    raw = tmp_path / "examples" / "sample"
     raw.mkdir(parents=True)
-    (tmp_path / "data" / "processed").mkdir()
-    (tmp_path / "ambient_pipeline").mkdir()
-    raw.joinpath("Allmanufacturingds-inventory-records.csv").write_text(
+    raw.joinpath("inventory-records.csv").write_text(
         "date,sku,quantity_on_hand\n2024-01-01,A1,2\n",
         encoding="utf-8",
     )
@@ -196,11 +187,9 @@ def test_notebook_smoke_optional_kpi_branches(tmp_path: Path) -> None:
     contracts.mkdir()
     src = Path(__file__).resolve().parents[1] / "contracts" / "manufacturing-demo-raw-v1.yaml"
     (contracts / src.name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
-    raw = tmp_path / "data" / "raw"
+    raw = tmp_path / "examples" / "sample"
     raw.mkdir(parents=True)
-    (tmp_path / "data" / "processed").mkdir()
-    (tmp_path / "ambient_pipeline").mkdir()
-    raw.joinpath("Allmanufacturingds-marketing-spend.csv").write_text(
+    raw.joinpath("marketing-spend.csv").write_text(
         "date,channel,spend,new_customers\n2024-01-01,web,25.0,0\n",
         encoding="utf-8",
     )
@@ -213,7 +202,7 @@ def test_notebook_smoke_bank_kpi_skips_missing_cash_balance_column(tmp_path: Pat
     from tests.test_notebook_smoke_run_tmp import _seed_demo_tree
 
     _seed_demo_tree(tmp_path)
-    bank = tmp_path / "data" / "raw" / "Allmanufacturingds-bank-statements.csv"
+    bank = tmp_path / "examples" / "sample" / "bank-statements.csv"
     bank.write_text("date,amount\n2024-01-01,-10.0\n", encoding="utf-8")
     result = run_notebook_smoke(tmp_path, org_id="org", run_id="run-bank-kpi")
     assert result.gold_kpis.get("bank_current_cash_balance_last") is None

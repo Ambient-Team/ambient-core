@@ -7,7 +7,7 @@ Use this page to see what changed recently and which verify commands apply. Upda
 ## CI and policy
 
 - [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — `changes`, `ci-policy`, `quality-static`, `build-test` (CI cost policy; [docs/ci.md](ci.md)).
-- **`pathsFilterPin`** — `7b450fff21473bca461d4b92ce414b9d0420d706`; **`heavyCiPathFilters`** — SSOT for dorny `heavy:` globs ([`docs/ci-path-filters.md`](ci-path-filters.md)).
+- **`pathsFilterPin`** — `ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d`; **`heavyCiPathFilters`** — SSOT for dorny `heavy:` globs ([`docs/ci-path-filters.md`](ci-path-filters.md)).
 - **actionlint** — `actionlintVersion` + `actionlintCommitSha` + `actionlintLinuxAmd64Sha256` with `sha256sum -c` on the linux_amd64 tarball (exported from [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs); tested in [`scripts/ci-policy.test.mjs`](../scripts/ci-policy.test.mjs)).
 - [`docs/ci.md`](ci.md) — triggers, `run_heavy`, Dependabot limits, concurrency group rules.
 - [`scripts/ci-policy.mjs`](../scripts/ci-policy.mjs) — structural workflow policy; no workflow-level `paths:` filters; push to `main` only.
@@ -44,5 +44,5 @@ pip wheel . -w dist --no-deps
 
 ## Out of scope for this repo
 
-- Demo recordings and synthetic demo CSVs — [EngineerID/ambient-systems `demos/ambient-core/`](https://github.com/EngineerID/ambient-systems/tree/main/demos/ambient-core/) (or your own samples under `data/raw/`); not stored in git.
+- Synthetic demo CSVs ship in [`examples/sample/`](../examples/sample/).
 - Remote CI minutes (org quota) — run verify locally when CI fails instantly.
