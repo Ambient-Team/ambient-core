@@ -3,7 +3,7 @@
  * Repository CI policy checks (workflow shape, pins, timeouts, triggers).
  * Run in CI and locally: node scripts/ci-policy.mjs
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -205,18 +205,10 @@ function checkCiWorkflow(text) {
   }
 }
 
-function checkDependabot(text) {
-  if (!/groups:/m.test(text)) {
-    fail('dependabot.yml: must define update groups');
-  }
-  const limits = [...text.matchAll(/open-pull-requests-limit:\s*(\d+)/g)].map((m) => Number(m[1]));
-  if (limits.length === 0) {
-    fail('dependabot.yml: must set open-pull-requests-limit');
-  }
-  for (const limit of limits) {
-    if (limit > 2) {
-      fail(`dependabot.yml: open-pull-requests-limit ${limit} exceeds policy maximum of 2`);
-    }
+function checkDependabotAbsent() {
+  const dependabotPath = join(ROOT, '.github', 'dependabot.yml');
+  if (existsSync(dependabotPath)) {
+    fail('.github/dependabot.yml must not be present; dependency updates are handled in regular work');
   }
 }
 
@@ -228,12 +220,7 @@ function main() {
     checkCiWorkflow(readWorkflow('ci.yml'));
   }
 
-  const dependabotPath = join(ROOT, '.github', 'dependabot.yml');
-  try {
-    checkDependabot(readFileSync(dependabotPath, 'utf8'));
-  } catch {
-    fail('missing .github/dependabot.yml');
-  }
+  checkDependabotAbsent();
 
   if (errors.length > 0) {
     console.error('CI policy check failed:\n');
