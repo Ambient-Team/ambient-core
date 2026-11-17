@@ -72,7 +72,6 @@ test('ci-policy script', async (t) => {
   await t.test('fails when paths-filter pin is wrong', () => {
     const dir = mkdtempSync(join(tmpdir(), 'ci-policy-pin-'));
     mkdirSync(join(dir, '.github', 'workflows'), { recursive: true });
-    cpSync(join(ROOT, '.github', 'dependabot.yml'), join(dir, '.github', 'dependabot.yml'));
     const badCi = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8').replace(
       pathsFilterPin,
       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -86,7 +85,6 @@ test('ci-policy script', async (t) => {
   await t.test('fails when build-test job is missing', () => {
     const dir = mkdtempSync(join(tmpdir(), 'ci-policy-'));
     mkdirSync(join(dir, '.github', 'workflows'), { recursive: true });
-    cpSync(join(ROOT, '.github', 'dependabot.yml'), join(dir, '.github', 'dependabot.yml'));
     writeFileSync(join(dir, '.github/workflows/ci.yml'), readMinimalCiMissingBuildTest());
     const result = runPolicy(dir);
     assert.notEqual(result.status, 0, result.stdout);

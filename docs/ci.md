@@ -66,7 +66,7 @@ Pip cache is keyed on `pyproject.toml`. JDK **17** (Temurin) is installed for Sp
 
 ## Dependabot
 
-[`.github/dependabot.yml`](../.github/dependabot.yml) uses **grouped** updates and a low **open-pull-requests-limit** (2 per ecosystem) to limit PR noise.
+Dependency updates are handled in regular work.
 
 ## Local parity
 
