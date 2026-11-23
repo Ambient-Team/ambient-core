@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Transportation**
 - Metrics: **13**
 - Data options: **15**
-- Benchmark keys: **58**
+- Benchmark keys: **63**
 
 ## Data options
 
@@ -13,7 +13,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - `Alltransportationds-ap-aging` — Accounts payable aging (12 fields)
 - `Alltransportationds-ar-aging` — Accounts receivable aging (12 fields)
 - `Alltransportationds-balance-sheet` — Balance sheet (8 fields)
-- `Alltransportationds-bank-statements` — Bank statements (14 fields)
+- `Alltransportationds-bank-statements` — Bank statements (16 fields)
 - `Alltransportationds-general-ledger` — General ledger (8 fields)
 - `Alltransportationds-trial-balance` — Trial balance (6 fields)
 - `DclVZaLbyz6Pwxt5Ctr1` — Maintenance logs (8 fields)

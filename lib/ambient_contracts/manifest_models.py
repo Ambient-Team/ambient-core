@@ -143,6 +143,7 @@ class CatalogMetric:
     inputs: tuple[MetricInput, ...] = ()
     input_coverage: str | None = None
     frequency: str | None = None
+    also_known_as: tuple[str, ...] = ()
 
     def to_tool_dict(self) -> dict[str, Any]:
         """To tool dict for CatalogMetric.to_tool_dict."""
@@ -163,6 +164,8 @@ class CatalogMetric:
             out["inputCoverage"] = self.input_coverage
         if self.frequency is not None:
             out["frequency"] = self.frequency
+        if self.also_known_as:
+            out["alsoKnownAs"] = list(self.also_known_as)
         return out
 
 
@@ -240,6 +243,40 @@ class CatalogManifest:
         want = str(metric_id).strip()
         for metric in self.metrics:
             if str(metric.id) == want:
+                return metric
+        return None
+
+    def resolve_metric_by_label(
+        self,
+        label: str,
+        *,
+        industry: str | None = None,
+    ) -> CatalogMetric | None:
+        """Resolve a metric by canonical name, catalog key, or alsoKnownAs synonym.
+
+        Args:
+            label: Human-readable metric name or synonym.
+            industry: Optional industry scope when labels repeat across packs.
+
+        Returns:
+            CatalogMetric | None.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> resolve_metric_by_label("CFO", industry="Healthcare")
+        """
+        from ambient_contracts.metric_synonyms import normalize_synonym
+
+        want = normalize_synonym(label)
+        if not want:
+            return None
+        for metric in self.metrics:
+            if industry is not None and metric.industry != industry:
+                continue
+            names = [metric.name, metric.catalog_metric_key, *metric.also_known_as]
+            if any(normalize_synonym(n) == want for n in names):
                 return metric
         return None
 
@@ -335,6 +372,12 @@ def _parse_metric(raw: object, path: str) -> CatalogMetric:
     freq_val = obj.get("frequency")
     if freq_val is not None and not isinstance(freq_val, str):
         raise ValueError(f"{path}.frequency: expected string or null")
+    aka_raw = obj.get("alsoKnownAs")
+    if aka_raw is None:
+        also_known: tuple[str, ...] = ()
+    else:
+        aka_list = _expect_list(aka_raw, f"{path}.alsoKnownAs")
+        also_known = tuple(str(a) for a in aka_list)
 
     return CatalogMetric(
         catalog_metric_key=key,
@@ -350,6 +393,7 @@ def _parse_metric(raw: object, path: str) -> CatalogMetric:
         inputs=inputs,
         input_coverage=coverage_val,
         frequency=freq_val,
+        also_known_as=also_known,
     )
 
 

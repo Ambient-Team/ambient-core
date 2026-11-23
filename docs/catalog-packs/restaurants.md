@@ -5,14 +5,14 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Restaurants**
 - Metrics: **13**
 - Data options: **13**
-- Benchmark keys: **60**
+- Benchmark keys: **65**
 
 ## Data options
 
 - `Allrestaurantsds-ap-aging` — Accounts payable aging (12 fields)
 - `Allrestaurantsds-ar-aging` — Accounts receivable aging (12 fields)
 - `Allrestaurantsds-balance-sheet` — Balance sheet (8 fields)
-- `Allrestaurantsds-bank-statements` — Bank statements (14 fields)
+- `Allrestaurantsds-bank-statements` — Bank statements (16 fields)
 - `Allrestaurantsds-crm-pipeline` — CRM / Sales pipeline (12 fields)
 - `Allrestaurantsds-general-ledger` — General ledger (8 fields)
 - `Allrestaurantsds-marketing-spend` — Marketing spend records (8 fields)

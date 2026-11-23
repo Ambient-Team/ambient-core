@@ -2,7 +2,8 @@ dataOptionTemplates:
   financial_statements:
     keySuffix: GvoI0Vg2YijGfgoBaqqe
     name: Financial statements
-    description: Records of a company's financial activities (income, expenses, assets, liabilities).
+    description: Records of a company's financial activities (income, expenses, assets,
+      liabilities).
     format: Document
     template: Financial Statement Template
     lastUpdated: '2024-07-31 14:25:05'
@@ -31,6 +32,11 @@ dataOptionTemplates:
       - Cash Conversion Cycle
       - Monthly Burn Rate
       - Cash Runway
+      - Free Cash Flow
+      - Free Cash Flow to Firm (FCFF)
+      - Free Cash Flow to Equity (FCFE)
+      - FCF Margin
+      - FCF Conversion
       Real Estate:
       - Return on Investment (ROI)
       - Net Operating Income (NOI)

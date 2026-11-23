@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Shared core free cash flow metrics (`free_cash_flow`, `fcff`, `fcfe`, `fcf_margin`, `fcf_conversion`) expanded to every industry pack alongside `operating_cash_flow`.
+- Metric schema field `alsoKnownAs` plus `catalog/metric_also_known_as.yaml` for human-readable synonyms; lookup via `CatalogManifest.resolve_metric_by_label` and `ambient_contracts.metric_synonyms`.
+- Generated synonym index at `docs/generated/catalog-metric-synonyms.md`.
+- Tests: `tests/test_fcf_metrics.py`, `tests/test_metric_synonyms.py`; CI gate `scripts/check_metric_synonyms.py`.
+
+### Changed
+
+- `levered free cash flow` synonym moved from `free_cash_flow` to `fcfe`; FCF conversion returns null (zero denominator) when net income is not positive.
+
 ## [0.4.0] - 2026-11-13
 
 ### Removed

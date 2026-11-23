@@ -2,7 +2,8 @@ dataOptions:
   retail.operations.store_sales_summary:
     id: 1680
     name: Store sales summary export
-    description: Aggregated comp and total sales, traffic, and selling area by store or banner. No payment instrument detail.
+    description: Aggregated comp and total sales, traffic, and selling area by store
+      or banner. No payment instrument detail.
     industry: Retail
     segment: operations
     format: Document

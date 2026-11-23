@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Insurance**
 - Metrics: **6**
 - Data options: **1**
-- Benchmark keys: **50**
+- Benchmark keys: **55**
 
 ## Data options
 

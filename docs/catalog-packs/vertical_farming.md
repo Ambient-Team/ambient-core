@@ -5,14 +5,14 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Vertical Farming**
 - Metrics: **17**
 - Data options: **14**
-- Benchmark keys: **58**
+- Benchmark keys: **63**
 
 ## Data options
 
 - `Allverticalfarmingds-ap-aging` — Accounts payable aging (12 fields)
 - `Allverticalfarmingds-ar-aging` — Accounts receivable aging (12 fields)
 - `Allverticalfarmingds-balance-sheet` — Balance sheet (8 fields)
-- `Allverticalfarmingds-bank-statements` — Bank statements (14 fields)
+- `Allverticalfarmingds-bank-statements` — Bank statements (16 fields)
 - `Allverticalfarmingds-crm-pipeline` — CRM / Sales pipeline (12 fields)
 - `Allverticalfarmingds-general-ledger` — General ledger (8 fields)
 - `Allverticalfarmingds-marketing-spend` — Marketing spend records (8 fields)

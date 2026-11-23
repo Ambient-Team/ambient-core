@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Real Estate**
 - Metrics: **23**
 - Data options: **19**
-- Benchmark keys: **63**
+- Benchmark keys: **68**
 
 ## Data options
 
@@ -13,7 +13,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - `Allrealestateds-ap-aging` — Accounts payable aging (12 fields)
 - `Allrealestateds-ar-aging` — Accounts receivable aging (12 fields)
 - `Allrealestateds-balance-sheet` — Balance sheet (8 fields)
-- `Allrealestateds-bank-statements` — Bank statements (14 fields)
+- `Allrealestateds-bank-statements` — Bank statements (16 fields)
 - `Allrealestateds-crm-pipeline` — CRM / Sales pipeline (12 fields)
 - `Allrealestateds-general-ledger` — General ledger (8 fields)
 - `Allrealestateds-marketing-spend` — Marketing spend records (8 fields)

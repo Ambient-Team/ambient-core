@@ -5,14 +5,14 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Healthcare**
 - Metrics: **22**
 - Data options: **15**
-- Benchmark keys: **58**
+- Benchmark keys: **63**
 
 ## Data options
 
 - `Allhealthcareds-ap-aging` — Accounts payable aging (12 fields)
 - `Allhealthcareds-ar-aging` — Accounts receivable aging (12 fields)
 - `Allhealthcareds-balance-sheet` — Balance sheet (8 fields)
-- `Allhealthcareds-bank-statements` — Bank statements (14 fields)
+- `Allhealthcareds-bank-statements` — Bank statements (16 fields)
 - `Allhealthcareds-crm-pipeline` — CRM / Sales pipeline (12 fields)
 - `Allhealthcareds-general-ledger` — General ledger (8 fields)
 - `Allhealthcareds-marketing-spend` — Marketing spend records (8 fields)

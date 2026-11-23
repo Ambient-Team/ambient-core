@@ -280,7 +280,8 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Allrealestateds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart of accounts.
+    description: Complete record of all financial transactions posted to the chart
+      of accounts.
     fields:
     - name: date
       type: date
@@ -487,6 +488,10 @@ dataOptions:
       type: string
     - name: current_cash_balance
       type: string
+    - name: capital_expenditures
+      type: decimal
+    - name: net_borrowing
+      type: decimal
     format: Transactional Data Template
     id: 1130
     industry: Real Estate
@@ -592,7 +597,8 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Allrealestateds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn analysis.
+    description: Product engagement and usage telemetry used for retention and churn
+      analysis.
     fields:
     - name: date
       type: date
@@ -660,7 +666,8 @@ dataOptions:
   real_estate.reit.reit_supplemental:
     id: 1950
     name: REIT supplemental reporting
-    description: REIT FFO, distributions, and same-store NOI (vehicle reporting). No beneficiary identifiers.
+    description: REIT FFO, distributions, and same-store NOI (vehicle reporting).
+      No beneficiary identifiers.
     industry: Real Estate
     segment: reit
     format: Document

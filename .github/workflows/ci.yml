@@ -241,6 +241,10 @@ jobs:
         if: env.RUN_HEAVY == 'true'
         run: python scripts/check_naming.py
 
+      - name: Metric synonym uniqueness
+        if: env.RUN_HEAVY == 'true'
+        run: python scripts/check_metric_synonyms.py
+
       - name: Contract meta-schema and versions
         if: env.RUN_HEAVY == 'true'
         run: python scripts/check_contract_schema.py

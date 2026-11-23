@@ -49,7 +49,11 @@ export const REFERENCE_DATA = {
       "id": 926,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "real_estate.core.quick_ratio": {
       "datasource": [
@@ -93,7 +97,11 @@ export const REFERENCE_DATA = {
       "id": 932,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "real_estate.core.gross_margin": {
       "datasource": [
@@ -136,7 +144,10 @@ export const REFERENCE_DATA = {
       "id": 938,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "real_estate.core.operating_margin": {
       "datasource": [
@@ -178,7 +189,11 @@ export const REFERENCE_DATA = {
       "id": 944,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "real_estate.core.ebitda_margin": {
       "datasource": [
@@ -220,7 +235,10 @@ export const REFERENCE_DATA = {
       "id": 950,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "real_estate.core.net_margin": {
       "datasource": [
@@ -259,6 +277,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 956,
       "industry": "Real Estate",
       "segment": "core",
@@ -305,7 +327,12 @@ export const REFERENCE_DATA = {
       "id": 962,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "real_estate.core.working_capital": {
       "datasource": [
@@ -348,7 +375,10 @@ export const REFERENCE_DATA = {
       "id": 968,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "real_estate.core.dso": {
       "datasource": [
@@ -393,7 +423,11 @@ export const REFERENCE_DATA = {
       "id": 974,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "real_estate.core.dpo": {
       "datasource": [
@@ -438,7 +472,11 @@ export const REFERENCE_DATA = {
       "id": 980,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "real_estate.core.ccc": {
       "datasource": [
@@ -480,7 +518,10 @@ export const REFERENCE_DATA = {
       "id": 986,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "real_estate.core.operating_cash_flow": {
       "datasource": [
@@ -521,10 +562,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 992,
       "industry": "Real Estate",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "real_estate.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3551,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3552,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3553,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3554,
+      "industry": "Real Estate",
+      "segment": "core"
+    },
+    "real_estate.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3555,
+      "industry": "Real Estate",
+      "segment": "core"
     },
     "real_estate.core.burn_rate": {
       "datasource": [
@@ -568,7 +830,11 @@ export const REFERENCE_DATA = {
       "id": 998,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "real_estate.core.runway": {
       "datasource": [
@@ -610,7 +876,11 @@ export const REFERENCE_DATA = {
       "id": 1004,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "real_estate.core.headcount": {
       "name": "Headcount (FTE)",
@@ -636,7 +906,10 @@ export const REFERENCE_DATA = {
       "id": 1082,
       "industry": "Real Estate",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "real_estate.core.derived_gross_profit": {
       "datasource": [
@@ -674,7 +947,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3289,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "real_estate.core.derived_ebitda": {
       "datasource": [
@@ -713,7 +989,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3290,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "real_estate.core.derived_effective_tax_rate": {
       "datasource": [
@@ -752,7 +1032,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3291,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "real_estate.core.derived_nopat": {
       "datasource": [
@@ -789,7 +1072,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3292,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "real_estate.core.derived_net_debt": {
       "datasource": [
@@ -827,7 +1113,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3293,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "real_estate.core.derived_invested_capital": {
       "datasource": [
@@ -864,7 +1153,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3294,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "real_estate.core.derived_tangible_net_worth": {
       "datasource": [
@@ -902,7 +1194,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3295,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "real_estate.core.derived_quick_assets": {
       "datasource": [
@@ -941,7 +1236,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3296,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "real_estate.core.return_on_equity": {
       "datasource": [
@@ -980,7 +1278,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3297,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "real_estate.core.return_on_assets": {
       "datasource": [
@@ -1019,7 +1320,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3298,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "real_estate.core.return_on_invested_capital": {
       "datasource": [
@@ -1055,7 +1359,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3299,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "real_estate.core.operating_profit_margin": {
       "datasource": [
@@ -1097,7 +1404,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3300,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "real_estate.core.net_profit_margin": {
       "datasource": [
@@ -1139,7 +1449,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3301,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "real_estate.core.effective_interest_rate": {
       "datasource": [
@@ -1178,7 +1492,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3302,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "real_estate.core.interest_burden": {
       "datasource": [
@@ -1217,7 +1534,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3303,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "real_estate.core.tax_burden": {
       "datasource": [
@@ -1256,7 +1576,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3304,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "real_estate.core.total_asset_turnover": {
       "datasource": [
@@ -1295,7 +1618,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3305,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "real_estate.core.ppe_turnover": {
       "datasource": [
@@ -1334,7 +1660,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3306,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "real_estate.core.cash_turnover": {
       "datasource": [
@@ -1373,7 +1702,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3307,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "real_estate.core.cash_days": {
       "datasource": [
@@ -1412,7 +1744,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3308,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "real_estate.core.accounts_receivable_turnover": {
       "datasource": [
@@ -1451,7 +1786,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3309,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "real_estate.core.accounts_receivable_days": {
       "datasource": [
@@ -1493,7 +1831,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3310,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "real_estate.core.inventory_turnover": {
       "datasource": [
@@ -1535,7 +1876,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3311,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "real_estate.core.inventory_days": {
       "datasource": [
@@ -1574,7 +1918,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3312,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "real_estate.core.accounts_payable_turnover": {
       "datasource": [
@@ -1613,7 +1960,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3313,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "real_estate.core.accounts_payable_days": {
       "datasource": [
@@ -1655,7 +2005,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3314,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "real_estate.core.total_assets_to_equity": {
       "datasource": [
@@ -1694,7 +2047,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3315,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "real_estate.core.debt_to_equity": {
       "datasource": [
@@ -1733,7 +2089,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3316,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "real_estate.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -1771,7 +2130,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3317,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "real_estate.core.debt_to_ebitda": {
       "datasource": [
@@ -1809,7 +2171,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3318,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "real_estate.core.net_debt_to_ebitda": {
       "datasource": [
@@ -1845,7 +2210,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3319,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "real_estate.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -1886,7 +2254,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3320,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "real_estate.core.ebitda_to_interest": {
       "datasource": [
@@ -1924,7 +2295,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3321,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "real_estate.core.ebit_to_interest": {
       "datasource": [
@@ -1963,7 +2338,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3322,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "real_estate.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -2002,7 +2380,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3323,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "real_estate.core.fixed_charge_coverage": {
       "datasource": [
@@ -2042,7 +2423,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3324,
       "industry": "Real Estate",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "1cvcTcHNt1VYX867UUG7": {
       "datasource": [
@@ -2074,7 +2458,10 @@ export const REFERENCE_DATA = {
         "inputs": [
           "annual_debt_service"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Debt Service Coverage Ratio (DSCR)"
+      ]
     },
     "EDCn8khPJg44trzt4JTA": {
       "datasource": [
@@ -2103,7 +2490,10 @@ export const REFERENCE_DATA = {
           "vacant_units",
           "total_units"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Vacancy Rate"
+      ]
     },
     "Ob4nc825yNcKAA91kCua": {
       "datasource": [
@@ -2132,7 +2522,10 @@ export const REFERENCE_DATA = {
           "mortgage_amount",
           "appraised_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Loan-to-Value Ratio (LTV)"
+      ]
     },
     "VLDD4ijNDixuJ7EDJtw3": {
       "datasource": [
@@ -2161,7 +2554,10 @@ export const REFERENCE_DATA = {
           "property_price",
           "gross_rental_income"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Rent Multiplier (GRM)"
+      ]
     },
     "YsoV0l2DLsptgTldBESm": {
       "datasource": [
@@ -2190,7 +2586,10 @@ export const REFERENCE_DATA = {
           "gross_rental_income",
           "operating_expenses"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Operating Income (NOI)"
+      ]
     },
     "o4HkbNgvPm6RAPEcAzHV": {
       "datasource": [
@@ -2220,7 +2619,10 @@ export const REFERENCE_DATA = {
           "net_profit",
           "cost_of_investment"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Return on Investment (ROI)"
+      ]
     },
     "o5PSXR0Vw3Jy35QyRrJ8": {
       "datasource": [
@@ -2250,7 +2652,10 @@ export const REFERENCE_DATA = {
           "operating_expenses",
           "debt_service"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cash Flow"
+      ]
     },
     "rbIvVbYWRuUUr4rzZGRH": {
       "datasource": [
@@ -2282,7 +2687,10 @@ export const REFERENCE_DATA = {
         "inputs": [
           "property_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Capitalization Rate (Cap Rate)"
+      ]
     },
     "wCpkOtGniudQu8pSh22k": {
       "datasource": [
@@ -2311,7 +2719,10 @@ export const REFERENCE_DATA = {
           "net_cash_flow",
           "initial_cash_investment"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cash-on-Cash Return"
+      ]
     },
     "Allrealestatesaas-mrr": {
       "datasource": [
@@ -2352,7 +2763,10 @@ export const REFERENCE_DATA = {
           "active_subscriptions",
           "avg_monthly_price"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Monthly Recurring Revenue (MRR)"
+      ]
     },
     "Allrealestatesaas-arr": {
       "datasource": [
@@ -2390,7 +2804,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "mrr * 12",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "Annual Recurring Revenue (ARR)"
+      ]
     },
     "Allrealestatesaas-nrr": {
       "datasource": [
@@ -2433,7 +2850,10 @@ export const REFERENCE_DATA = {
           "contraction_mrr",
           "churned_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Revenue Retention (NRR)"
+      ]
     },
     "Allrealestatesaas-gross-churn": {
       "datasource": [
@@ -2474,7 +2894,10 @@ export const REFERENCE_DATA = {
           "churned_mrr",
           "starting_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Revenue Churn Rate"
+      ]
     },
     "Allrealestatesaas-cac": {
       "datasource": [
@@ -2516,7 +2939,10 @@ export const REFERENCE_DATA = {
           "sales_marketing_spend",
           "new_customers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Acquisition Cost (CAC)"
+      ]
     },
     "Allrealestatesaas-ltv": {
       "datasource": [
@@ -2558,7 +2984,10 @@ export const REFERENCE_DATA = {
           "gross_margin_pct",
           "churn_rate"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Lifetime Value (LTV)"
+      ]
     },
     "Allrealestatesaas-ltv-cac": {
       "datasource": [
@@ -2596,7 +3025,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "ltv / cac",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "LTV : CAC Ratio"
+      ]
     },
     "Allrealestatesaas-rule-of-40": {
       "datasource": [
@@ -2637,7 +3069,10 @@ export const REFERENCE_DATA = {
           "revenue_growth_pct",
           "profit_margin_pct"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Rule of 40"
+      ]
     },
     "real_estate.operations.same_store_noi_growth": {
       "id": 1058,
@@ -2660,7 +3095,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Operating performance — excludes acquisition/disposition noise.",
       "segment": "operations",
       "slug": "same_store_noi_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Same-Store NOI Growth"
+      ]
     },
     "real_estate.operations.operating_expense_ratio": {
       "id": 1059,
@@ -2689,7 +3127,10 @@ export const REFERENCE_DATA = {
           "operating_expenses",
           "effective_gross_income"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Operating Expense Ratio"
+      ]
     },
     "real_estate.operations.energy_cost_per_sf": {
       "id": 1060,
@@ -2718,7 +3159,10 @@ export const REFERENCE_DATA = {
           "total_energy_cost",
           "rentable_square_feet"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Energy Cost per Square Foot"
+      ]
     },
     "real_estate.reit.funds_from_operations": {
       "id": 1940,
@@ -2741,7 +3185,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Trust earnings — dividend coverage for vehicle investors.",
       "segment": "reit",
       "slug": "funds_from_operations",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Funds From Operations"
+      ]
     },
     "real_estate.reit.ffo_payout_ratio": {
       "id": 1941,
@@ -2775,7 +3222,10 @@ export const REFERENCE_DATA = {
           "distributions",
           "ffo"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "FFO Payout Ratio"
+      ]
     },
     "real_estate.reit.same_store_noi_growth": {
       "id": 1942,
@@ -2804,7 +3254,10 @@ export const REFERENCE_DATA = {
           "current_noi",
           "prior_noi"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "REIT Same-Store NOI Growth"
+      ]
     },
     "vertical_farming.core.current_ratio": {
       "datasource": [
@@ -2847,7 +3300,11 @@ export const REFERENCE_DATA = {
       "id": 927,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "vertical_farming.core.quick_ratio": {
       "datasource": [
@@ -2891,7 +3348,11 @@ export const REFERENCE_DATA = {
       "id": 933,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "vertical_farming.core.gross_margin": {
       "datasource": [
@@ -2934,7 +3395,10 @@ export const REFERENCE_DATA = {
       "id": 939,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "vertical_farming.core.operating_margin": {
       "datasource": [
@@ -2976,7 +3440,11 @@ export const REFERENCE_DATA = {
       "id": 945,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "vertical_farming.core.ebitda_margin": {
       "datasource": [
@@ -3018,7 +3486,10 @@ export const REFERENCE_DATA = {
       "id": 951,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "vertical_farming.core.net_margin": {
       "datasource": [
@@ -3057,6 +3528,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 957,
       "industry": "Vertical Farming",
       "segment": "core",
@@ -3103,7 +3578,12 @@ export const REFERENCE_DATA = {
       "id": 963,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "vertical_farming.core.working_capital": {
       "datasource": [
@@ -3146,7 +3626,10 @@ export const REFERENCE_DATA = {
       "id": 969,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "vertical_farming.core.dso": {
       "datasource": [
@@ -3191,7 +3674,11 @@ export const REFERENCE_DATA = {
       "id": 975,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "vertical_farming.core.dpo": {
       "datasource": [
@@ -3236,7 +3723,11 @@ export const REFERENCE_DATA = {
       "id": 981,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "vertical_farming.core.ccc": {
       "datasource": [
@@ -3278,7 +3769,10 @@ export const REFERENCE_DATA = {
       "id": 987,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "vertical_farming.core.operating_cash_flow": {
       "datasource": [
@@ -3319,10 +3813,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 993,
       "industry": "Vertical Farming",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "vertical_farming.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3566,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3567,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3568,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3569,
+      "industry": "Vertical Farming",
+      "segment": "core"
+    },
+    "vertical_farming.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3570,
+      "industry": "Vertical Farming",
+      "segment": "core"
     },
     "vertical_farming.core.burn_rate": {
       "datasource": [
@@ -3366,7 +4081,11 @@ export const REFERENCE_DATA = {
       "id": 999,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "vertical_farming.core.runway": {
       "datasource": [
@@ -3408,7 +4127,11 @@ export const REFERENCE_DATA = {
       "id": 1005,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "vertical_farming.core.headcount": {
       "name": "Headcount (FTE)",
@@ -3434,7 +4157,10 @@ export const REFERENCE_DATA = {
       "id": 1085,
       "industry": "Vertical Farming",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "vertical_farming.core.derived_gross_profit": {
       "datasource": [
@@ -3472,7 +4198,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3505,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "vertical_farming.core.derived_ebitda": {
       "datasource": [
@@ -3511,7 +4240,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3506,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "vertical_farming.core.derived_effective_tax_rate": {
       "datasource": [
@@ -3550,7 +4283,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3507,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "vertical_farming.core.derived_nopat": {
       "datasource": [
@@ -3587,7 +4323,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3508,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "vertical_farming.core.derived_net_debt": {
       "datasource": [
@@ -3625,7 +4364,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3509,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "vertical_farming.core.derived_invested_capital": {
       "datasource": [
@@ -3662,7 +4404,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3510,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "vertical_farming.core.derived_tangible_net_worth": {
       "datasource": [
@@ -3700,7 +4445,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3511,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "vertical_farming.core.derived_quick_assets": {
       "datasource": [
@@ -3739,7 +4487,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3512,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "vertical_farming.core.return_on_equity": {
       "datasource": [
@@ -3778,7 +4529,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3513,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "vertical_farming.core.return_on_assets": {
       "datasource": [
@@ -3817,7 +4571,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3514,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "vertical_farming.core.return_on_invested_capital": {
       "datasource": [
@@ -3853,7 +4610,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3515,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "vertical_farming.core.operating_profit_margin": {
       "datasource": [
@@ -3895,7 +4655,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3516,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "vertical_farming.core.net_profit_margin": {
       "datasource": [
@@ -3937,7 +4700,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3517,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "vertical_farming.core.effective_interest_rate": {
       "datasource": [
@@ -3976,7 +4743,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3518,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "vertical_farming.core.interest_burden": {
       "datasource": [
@@ -4015,7 +4785,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3519,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "vertical_farming.core.tax_burden": {
       "datasource": [
@@ -4054,7 +4827,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3520,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "vertical_farming.core.total_asset_turnover": {
       "datasource": [
@@ -4093,7 +4869,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3521,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "vertical_farming.core.ppe_turnover": {
       "datasource": [
@@ -4132,7 +4911,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3522,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "vertical_farming.core.cash_turnover": {
       "datasource": [
@@ -4171,7 +4953,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3523,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "vertical_farming.core.cash_days": {
       "datasource": [
@@ -4210,7 +4995,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3524,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "vertical_farming.core.accounts_receivable_turnover": {
       "datasource": [
@@ -4249,7 +5037,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3525,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "vertical_farming.core.accounts_receivable_days": {
       "datasource": [
@@ -4291,7 +5082,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3526,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "vertical_farming.core.inventory_turnover": {
       "datasource": [
@@ -4333,7 +5127,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3527,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "vertical_farming.core.inventory_days": {
       "datasource": [
@@ -4372,7 +5169,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3528,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "vertical_farming.core.accounts_payable_turnover": {
       "datasource": [
@@ -4411,7 +5211,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3529,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "vertical_farming.core.accounts_payable_days": {
       "datasource": [
@@ -4453,7 +5256,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3530,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "vertical_farming.core.total_assets_to_equity": {
       "datasource": [
@@ -4492,7 +5298,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3531,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "vertical_farming.core.debt_to_equity": {
       "datasource": [
@@ -4531,7 +5340,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3532,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "vertical_farming.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -4569,7 +5381,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3533,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "vertical_farming.core.debt_to_ebitda": {
       "datasource": [
@@ -4607,7 +5422,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3534,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "vertical_farming.core.net_debt_to_ebitda": {
       "datasource": [
@@ -4643,7 +5461,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3535,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "vertical_farming.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -4684,7 +5505,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3536,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "vertical_farming.core.ebitda_to_interest": {
       "datasource": [
@@ -4722,7 +5546,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3537,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "vertical_farming.core.ebit_to_interest": {
       "datasource": [
@@ -4761,7 +5589,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3538,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "vertical_farming.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -4800,7 +5631,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3539,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "vertical_farming.core.fixed_charge_coverage": {
       "datasource": [
@@ -4840,7 +5674,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3540,
       "industry": "Vertical Farming",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "0MJiYgAPcgkzE3xEgOFE": {
       "datasource": [
@@ -4870,7 +5707,10 @@ export const REFERENCE_DATA = {
           "repair_cost_avoided",
           "predictive_maintenance_cost"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Predictive Maintenance Cost Savings"
+      ]
     },
     "6IfrKxlTi9pbGzpuLL5u": {
       "datasource": [
@@ -4899,7 +5739,10 @@ export const REFERENCE_DATA = {
           "total_production_cost",
           "total_operational_cost"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cost per Kilogram of Produce"
+      ]
     },
     "8B9bFHS6GSsjzHx9ppKu": {
       "datasource": [
@@ -4931,7 +5774,10 @@ export const REFERENCE_DATA = {
           "energy_consumed",
           "total_light_delivered"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Energy Cost per Unit of Light Delivered"
+      ]
     },
     "E5khIDv93onvwtXBUsJH": {
       "datasource": [
@@ -4961,7 +5807,10 @@ export const REFERENCE_DATA = {
           "sum_health_scores",
           "total_crops"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Crop Health Index"
+      ]
     },
     "F6IlgQNV6qNtUhk3BVtT": {
       "datasource": [
@@ -4991,7 +5840,10 @@ export const REFERENCE_DATA = {
           "total_production_cost",
           "total_operational_cost"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Profit Margin"
+      ]
     },
     "WeTkxvZyeWX51XfBGsuR": {
       "datasource": [
@@ -5021,7 +5873,10 @@ export const REFERENCE_DATA = {
           "total_labor_costs",
           "total_harvested_kg"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Labor Cost per Kilogram of Produce"
+      ]
     },
     "f3yEk5mEWwKhAFFQFyje": {
       "datasource": [
@@ -5051,7 +5906,10 @@ export const REFERENCE_DATA = {
           "total_harvested_kg",
           "total_water_liters"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Water Usage Efficiency"
+      ]
     },
     "jnQw1pD0motTKBZ9csPD": {
       "datasource": [
@@ -5080,7 +5938,10 @@ export const REFERENCE_DATA = {
           "total_harvested_kg",
           "total_growing_area"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Yield per Square Meter"
+      ]
     },
     "yGoqLDC3Mrk1OeH36jkB": {
       "datasource": [
@@ -5109,7 +5970,10 @@ export const REFERENCE_DATA = {
           "total_energy_kwh",
           "total_growing_area"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Energy Consumption per Square Meter"
+      ]
     },
     "Allverticalfarmingsaas-mrr": {
       "datasource": [
@@ -5150,7 +6014,10 @@ export const REFERENCE_DATA = {
           "active_subscriptions",
           "avg_monthly_price"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Monthly Recurring Revenue (MRR)"
+      ]
     },
     "Allverticalfarmingsaas-arr": {
       "datasource": [
@@ -5188,7 +6055,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "mrr * 12",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "Annual Recurring Revenue (ARR)"
+      ]
     },
     "Allverticalfarmingsaas-nrr": {
       "datasource": [
@@ -5231,7 +6101,10 @@ export const REFERENCE_DATA = {
           "contraction_mrr",
           "churned_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Revenue Retention (NRR)"
+      ]
     },
     "Allverticalfarmingsaas-gross-churn": {
       "datasource": [
@@ -5272,7 +6145,10 @@ export const REFERENCE_DATA = {
           "churned_mrr",
           "starting_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Revenue Churn Rate"
+      ]
     },
     "Allverticalfarmingsaas-cac": {
       "datasource": [
@@ -5314,7 +6190,10 @@ export const REFERENCE_DATA = {
           "sales_marketing_spend",
           "new_customers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Acquisition Cost (CAC)"
+      ]
     },
     "Allverticalfarmingsaas-ltv": {
       "datasource": [
@@ -5356,7 +6235,10 @@ export const REFERENCE_DATA = {
           "gross_margin_pct",
           "churn_rate"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Lifetime Value (LTV)"
+      ]
     },
     "Allverticalfarmingsaas-ltv-cac": {
       "datasource": [
@@ -5394,7 +6276,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "ltv / cac",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "LTV : CAC Ratio"
+      ]
     },
     "Allverticalfarmingsaas-rule-of-40": {
       "datasource": [
@@ -5435,7 +6320,10 @@ export const REFERENCE_DATA = {
           "revenue_growth_pct",
           "profit_margin_pct"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Rule of 40"
+      ]
     },
     "transportation.core.current_ratio": {
       "datasource": [
@@ -5478,7 +6366,11 @@ export const REFERENCE_DATA = {
       "id": 928,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "transportation.core.quick_ratio": {
       "datasource": [
@@ -5522,7 +6414,11 @@ export const REFERENCE_DATA = {
       "id": 934,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "transportation.core.gross_margin": {
       "datasource": [
@@ -5565,7 +6461,10 @@ export const REFERENCE_DATA = {
       "id": 940,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "transportation.core.operating_margin": {
       "datasource": [
@@ -5607,7 +6506,11 @@ export const REFERENCE_DATA = {
       "id": 946,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "transportation.core.ebitda_margin": {
       "datasource": [
@@ -5649,7 +6552,10 @@ export const REFERENCE_DATA = {
       "id": 952,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "transportation.core.net_margin": {
       "datasource": [
@@ -5688,6 +6594,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 958,
       "industry": "Transportation",
       "segment": "core",
@@ -5734,7 +6644,12 @@ export const REFERENCE_DATA = {
       "id": 964,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "transportation.core.working_capital": {
       "datasource": [
@@ -5777,7 +6692,10 @@ export const REFERENCE_DATA = {
       "id": 970,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "transportation.core.dso": {
       "datasource": [
@@ -5822,7 +6740,11 @@ export const REFERENCE_DATA = {
       "id": 976,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "transportation.core.dpo": {
       "datasource": [
@@ -5867,7 +6789,11 @@ export const REFERENCE_DATA = {
       "id": 982,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "transportation.core.ccc": {
       "datasource": [
@@ -5909,7 +6835,10 @@ export const REFERENCE_DATA = {
       "id": 988,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "transportation.core.operating_cash_flow": {
       "datasource": [
@@ -5950,10 +6879,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 994,
       "industry": "Transportation",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "transportation.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3561,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3562,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3563,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3564,
+      "industry": "Transportation",
+      "segment": "core"
+    },
+    "transportation.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3565,
+      "industry": "Transportation",
+      "segment": "core"
     },
     "transportation.core.burn_rate": {
       "datasource": [
@@ -5997,7 +7147,11 @@ export const REFERENCE_DATA = {
       "id": 1000,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "transportation.core.runway": {
       "datasource": [
@@ -6039,7 +7193,11 @@ export const REFERENCE_DATA = {
       "id": 1006,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "transportation.core.headcount": {
       "name": "Headcount (FTE)",
@@ -6065,7 +7223,10 @@ export const REFERENCE_DATA = {
       "id": 1084,
       "industry": "Transportation",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "transportation.core.derived_gross_profit": {
       "datasource": [
@@ -6103,7 +7264,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3433,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "transportation.core.derived_ebitda": {
       "datasource": [
@@ -6142,7 +7306,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3434,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "transportation.core.derived_effective_tax_rate": {
       "datasource": [
@@ -6181,7 +7349,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3435,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "transportation.core.derived_nopat": {
       "datasource": [
@@ -6218,7 +7389,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3436,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "transportation.core.derived_net_debt": {
       "datasource": [
@@ -6256,7 +7430,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3437,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "transportation.core.derived_invested_capital": {
       "datasource": [
@@ -6293,7 +7470,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3438,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "transportation.core.derived_tangible_net_worth": {
       "datasource": [
@@ -6331,7 +7511,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3439,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "transportation.core.derived_quick_assets": {
       "datasource": [
@@ -6370,7 +7553,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3440,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "transportation.core.return_on_equity": {
       "datasource": [
@@ -6409,7 +7595,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3441,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "transportation.core.return_on_assets": {
       "datasource": [
@@ -6448,7 +7637,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3442,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "transportation.core.return_on_invested_capital": {
       "datasource": [
@@ -6484,7 +7676,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3443,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "transportation.core.operating_profit_margin": {
       "datasource": [
@@ -6526,7 +7721,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3444,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "transportation.core.net_profit_margin": {
       "datasource": [
@@ -6568,7 +7766,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3445,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "transportation.core.effective_interest_rate": {
       "datasource": [
@@ -6607,7 +7809,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3446,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "transportation.core.interest_burden": {
       "datasource": [
@@ -6646,7 +7851,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3447,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "transportation.core.tax_burden": {
       "datasource": [
@@ -6685,7 +7893,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3448,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "transportation.core.total_asset_turnover": {
       "datasource": [
@@ -6724,7 +7935,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3449,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "transportation.core.ppe_turnover": {
       "datasource": [
@@ -6763,7 +7977,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3450,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "transportation.core.cash_turnover": {
       "datasource": [
@@ -6802,7 +8019,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3451,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "transportation.core.cash_days": {
       "datasource": [
@@ -6841,7 +8061,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3452,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "transportation.core.accounts_receivable_turnover": {
       "datasource": [
@@ -6880,7 +8103,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3453,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "transportation.core.accounts_receivable_days": {
       "datasource": [
@@ -6922,7 +8148,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3454,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "transportation.core.inventory_turnover": {
       "datasource": [
@@ -6964,7 +8193,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3455,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "transportation.core.inventory_days": {
       "datasource": [
@@ -7003,7 +8235,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3456,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "transportation.core.accounts_payable_turnover": {
       "datasource": [
@@ -7042,7 +8277,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3457,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "transportation.core.accounts_payable_days": {
       "datasource": [
@@ -7084,7 +8322,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3458,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "transportation.core.total_assets_to_equity": {
       "datasource": [
@@ -7123,7 +8364,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3459,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "transportation.core.debt_to_equity": {
       "datasource": [
@@ -7162,7 +8406,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3460,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "transportation.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -7200,7 +8447,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3461,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "transportation.core.debt_to_ebitda": {
       "datasource": [
@@ -7238,7 +8488,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3462,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "transportation.core.net_debt_to_ebitda": {
       "datasource": [
@@ -7274,7 +8527,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3463,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "transportation.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -7315,7 +8571,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3464,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "transportation.core.ebitda_to_interest": {
       "datasource": [
@@ -7353,7 +8612,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3465,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "transportation.core.ebit_to_interest": {
       "datasource": [
@@ -7392,7 +8655,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3466,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "transportation.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -7431,7 +8697,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3467,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "transportation.core.fixed_charge_coverage": {
       "datasource": [
@@ -7471,7 +8740,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3468,
       "industry": "Transportation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "DtBqsvp9S9HBlcxsvAgd": {
       "datasource": [
@@ -7501,7 +8773,10 @@ export const REFERENCE_DATA = {
           "drivers_left",
           "total_drivers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Driver Turnover Rate"
+      ]
     },
     "SAZkxRxYFtf1EIxBXWMk": {
       "datasource": [
@@ -7532,7 +8807,10 @@ export const REFERENCE_DATA = {
           "total_miles",
           "total_fuel"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Fuel Efficiency"
+      ]
     },
     "biA3oIK816fwfInBKg2e": {
       "datasource": [
@@ -7563,7 +8841,10 @@ export const REFERENCE_DATA = {
           "on_time_deliveries",
           "total_deliveries"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "On-Time Delivery Rate"
+      ]
     },
     "iIaKhCCf0BGvHX1W1i7n": {
       "datasource": [
@@ -7594,7 +8875,10 @@ export const REFERENCE_DATA = {
           "fleet_time_in_use",
           "fleet_available_time"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Fleet Utilization Rate"
+      ]
     },
     "vXlB5QC3mZJw1auWaIfK": {
       "datasource": [
@@ -7625,7 +8909,10 @@ export const REFERENCE_DATA = {
           "total_maintenance_costs",
           "total_miles"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Maintenance Cost per Mile"
+      ]
     },
     "transportation.rail_freight.train_utilization": {
       "id": 1860,
@@ -7659,7 +8946,10 @@ export const REFERENCE_DATA = {
           "loaded_train_miles",
           "available_train_miles"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Train Utilization"
+      ]
     },
     "transportation.rail_freight.cost_per_ton_mile": {
       "id": 1861,
@@ -7688,7 +8978,10 @@ export const REFERENCE_DATA = {
           "total_operating_cost",
           "ton_miles_moved"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cost per Ton-Mile"
+      ]
     },
     "transportation.rail_freight.on_time_train_performance": {
       "id": 1862,
@@ -7722,7 +9015,10 @@ export const REFERENCE_DATA = {
           "on_time_shipments",
           "total_shipments"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "On-Time Train Performance"
+      ]
     },
     "transportation.maritime_shipping.vessel_utilization": {
       "id": 1865,
@@ -7756,7 +9052,10 @@ export const REFERENCE_DATA = {
           "operating_days",
           "available_days"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Vessel Utilization"
+      ]
     },
     "transportation.maritime_shipping.time_charter_equivalent": {
       "id": 1866,
@@ -7786,7 +9085,10 @@ export const REFERENCE_DATA = {
           "voyage_costs",
           "on_hire_days"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Time Charter Equivalent (TCE)"
+      ]
     },
     "transportation.maritime_shipping.schedule_reliability": {
       "id": 1867,
@@ -7820,7 +9122,10 @@ export const REFERENCE_DATA = {
           "on_schedule_voyages",
           "total_voyages"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Schedule Reliability"
+      ]
     },
     "transportation.freight_forwarding.gross_margin_per_shipment": {
       "id": 1871,
@@ -7849,7 +9154,10 @@ export const REFERENCE_DATA = {
           "gross_profit",
           "shipments_handled"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Margin per Shipment"
+      ]
     },
     "transportation.freight_forwarding.on_time_delivery_shipper": {
       "id": 1872,
@@ -7883,7 +9191,10 @@ export const REFERENCE_DATA = {
           "on_time_shipments",
           "total_shipments"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "On-Time Delivery (Shipper SLA)"
+      ]
     },
     "passenger_transit.core.current_ratio": {
       "datasource": [
@@ -7926,7 +9237,11 @@ export const REFERENCE_DATA = {
       "id": 2020,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "passenger_transit.core.quick_ratio": {
       "datasource": [
@@ -7970,7 +9285,11 @@ export const REFERENCE_DATA = {
       "id": 2021,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "passenger_transit.core.gross_margin": {
       "datasource": [
@@ -8013,7 +9332,10 @@ export const REFERENCE_DATA = {
       "id": 2022,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "passenger_transit.core.operating_margin": {
       "datasource": [
@@ -8055,7 +9377,11 @@ export const REFERENCE_DATA = {
       "id": 2023,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "passenger_transit.core.ebitda_margin": {
       "datasource": [
@@ -8097,7 +9423,10 @@ export const REFERENCE_DATA = {
       "id": 2024,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "passenger_transit.core.net_margin": {
       "datasource": [
@@ -8136,6 +9465,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 2025,
       "industry": "Passenger Transit",
       "segment": "core",
@@ -8182,7 +9515,12 @@ export const REFERENCE_DATA = {
       "id": 2026,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "passenger_transit.core.working_capital": {
       "datasource": [
@@ -8225,7 +9563,10 @@ export const REFERENCE_DATA = {
       "id": 2027,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "passenger_transit.core.dso": {
       "datasource": [
@@ -8270,7 +9611,11 @@ export const REFERENCE_DATA = {
       "id": 2028,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "passenger_transit.core.dpo": {
       "datasource": [
@@ -8315,7 +9660,11 @@ export const REFERENCE_DATA = {
       "id": 2029,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "passenger_transit.core.ccc": {
       "datasource": [
@@ -8357,7 +9706,10 @@ export const REFERENCE_DATA = {
       "id": 2030,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "passenger_transit.core.operating_cash_flow": {
       "datasource": [
@@ -8398,10 +9750,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 2031,
       "industry": "Passenger Transit",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "passenger_transit.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3616,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3617,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3618,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3619,
+      "industry": "Passenger Transit",
+      "segment": "core"
+    },
+    "passenger_transit.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3620,
+      "industry": "Passenger Transit",
+      "segment": "core"
     },
     "passenger_transit.core.burn_rate": {
       "datasource": [
@@ -8445,7 +10018,11 @@ export const REFERENCE_DATA = {
       "id": 2032,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "passenger_transit.core.runway": {
       "datasource": [
@@ -8487,7 +10064,11 @@ export const REFERENCE_DATA = {
       "id": 2033,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "passenger_transit.core.headcount": {
       "name": "Headcount (FTE)",
@@ -8513,7 +10094,10 @@ export const REFERENCE_DATA = {
       "id": 2034,
       "industry": "Passenger Transit",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "passenger_transit.core.derived_gross_profit": {
       "datasource": [
@@ -8551,7 +10135,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3253,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "passenger_transit.core.derived_ebitda": {
       "datasource": [
@@ -8590,7 +10177,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3254,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "passenger_transit.core.derived_effective_tax_rate": {
       "datasource": [
@@ -8629,7 +10220,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3255,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "passenger_transit.core.derived_nopat": {
       "datasource": [
@@ -8666,7 +10260,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3256,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "passenger_transit.core.derived_net_debt": {
       "datasource": [
@@ -8704,7 +10301,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3257,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "passenger_transit.core.derived_invested_capital": {
       "datasource": [
@@ -8741,7 +10341,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3258,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "passenger_transit.core.derived_tangible_net_worth": {
       "datasource": [
@@ -8779,7 +10382,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3259,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "passenger_transit.core.derived_quick_assets": {
       "datasource": [
@@ -8818,7 +10424,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3260,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "passenger_transit.core.return_on_equity": {
       "datasource": [
@@ -8857,7 +10466,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3261,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "passenger_transit.core.return_on_assets": {
       "datasource": [
@@ -8896,7 +10508,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3262,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "passenger_transit.core.return_on_invested_capital": {
       "datasource": [
@@ -8932,7 +10547,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3263,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "passenger_transit.core.operating_profit_margin": {
       "datasource": [
@@ -8974,7 +10592,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3264,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "passenger_transit.core.net_profit_margin": {
       "datasource": [
@@ -9016,7 +10637,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3265,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "passenger_transit.core.effective_interest_rate": {
       "datasource": [
@@ -9055,7 +10680,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3266,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "passenger_transit.core.interest_burden": {
       "datasource": [
@@ -9094,7 +10722,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3267,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "passenger_transit.core.tax_burden": {
       "datasource": [
@@ -9133,7 +10764,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3268,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "passenger_transit.core.total_asset_turnover": {
       "datasource": [
@@ -9172,7 +10806,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3269,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "passenger_transit.core.ppe_turnover": {
       "datasource": [
@@ -9211,7 +10848,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3270,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "passenger_transit.core.cash_turnover": {
       "datasource": [
@@ -9250,7 +10890,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3271,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "passenger_transit.core.cash_days": {
       "datasource": [
@@ -9289,7 +10932,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3272,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "passenger_transit.core.accounts_receivable_turnover": {
       "datasource": [
@@ -9328,7 +10974,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3273,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "passenger_transit.core.accounts_receivable_days": {
       "datasource": [
@@ -9370,7 +11019,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3274,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "passenger_transit.core.inventory_turnover": {
       "datasource": [
@@ -9412,7 +11064,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3275,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "passenger_transit.core.inventory_days": {
       "datasource": [
@@ -9451,7 +11106,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3276,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "passenger_transit.core.accounts_payable_turnover": {
       "datasource": [
@@ -9490,7 +11148,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3277,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "passenger_transit.core.accounts_payable_days": {
       "datasource": [
@@ -9532,7 +11193,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3278,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "passenger_transit.core.total_assets_to_equity": {
       "datasource": [
@@ -9571,7 +11235,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3279,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "passenger_transit.core.debt_to_equity": {
       "datasource": [
@@ -9610,7 +11277,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3280,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "passenger_transit.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -9648,7 +11318,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3281,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "passenger_transit.core.debt_to_ebitda": {
       "datasource": [
@@ -9686,7 +11359,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3282,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "passenger_transit.core.net_debt_to_ebitda": {
       "datasource": [
@@ -9722,7 +11398,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3283,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "passenger_transit.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -9763,7 +11442,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3284,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "passenger_transit.core.ebitda_to_interest": {
       "datasource": [
@@ -9801,7 +11483,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3285,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "passenger_transit.core.ebit_to_interest": {
       "datasource": [
@@ -9840,7 +11526,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3286,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "passenger_transit.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -9879,7 +11568,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3287,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "passenger_transit.core.fixed_charge_coverage": {
       "datasource": [
@@ -9919,7 +11611,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3288,
       "industry": "Passenger Transit",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "passenger_transit.rail_passenger.ridership_per_train_mile": {
       "id": 1863,
@@ -9948,7 +11643,10 @@ export const REFERENCE_DATA = {
           "total_boardings",
           "train_miles_operated"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Ridership per Train-Mile"
+      ]
     },
     "passenger_transit.rail_passenger.farebox_recovery": {
       "id": 1864,
@@ -9982,7 +11680,10 @@ export const REFERENCE_DATA = {
           "fare_revenue",
           "operating_cost"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Rail Farebox Recovery Ratio"
+      ]
     },
     "passenger_transit.public_transit.farebox_recovery_ratio": {
       "id": 1868,
@@ -10016,7 +11717,10 @@ export const REFERENCE_DATA = {
           "operating_revenue",
           "operating_expenses"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Transit Farebox Recovery Ratio"
+      ]
     },
     "passenger_transit.public_transit.ridership_per_vehicle_hour": {
       "id": 1869,
@@ -10045,7 +11749,10 @@ export const REFERENCE_DATA = {
           "unlinked_trips",
           "vehicle_revenue_hours"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Ridership per Vehicle Hour"
+      ]
     },
     "passenger_transit.public_transit.on_time_performance": {
       "id": 1870,
@@ -10079,7 +11786,10 @@ export const REFERENCE_DATA = {
           "on_time_trips",
           "total_trips"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "On-Time Performance"
+      ]
     },
     "aviation.core.current_ratio": {
       "datasource": [
@@ -10122,7 +11832,11 @@ export const REFERENCE_DATA = {
       "id": 1800,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "aviation.core.quick_ratio": {
       "datasource": [
@@ -10166,7 +11880,11 @@ export const REFERENCE_DATA = {
       "id": 1801,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "aviation.core.gross_margin": {
       "datasource": [
@@ -10209,7 +11927,10 @@ export const REFERENCE_DATA = {
       "id": 1802,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "aviation.core.operating_margin": {
       "datasource": [
@@ -10251,7 +11972,11 @@ export const REFERENCE_DATA = {
       "id": 1803,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "aviation.core.ebitda_margin": {
       "datasource": [
@@ -10293,7 +12018,10 @@ export const REFERENCE_DATA = {
       "id": 1804,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "aviation.core.net_margin": {
       "datasource": [
@@ -10332,6 +12060,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1805,
       "industry": "Aviation",
       "segment": "core",
@@ -10378,7 +12110,12 @@ export const REFERENCE_DATA = {
       "id": 1806,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "aviation.core.working_capital": {
       "datasource": [
@@ -10421,7 +12158,10 @@ export const REFERENCE_DATA = {
       "id": 1807,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "aviation.core.dso": {
       "datasource": [
@@ -10466,7 +12206,11 @@ export const REFERENCE_DATA = {
       "id": 1808,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "aviation.core.dpo": {
       "datasource": [
@@ -10511,7 +12255,11 @@ export const REFERENCE_DATA = {
       "id": 1809,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "aviation.core.ccc": {
       "datasource": [
@@ -10553,7 +12301,10 @@ export const REFERENCE_DATA = {
       "id": 1810,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "aviation.core.operating_cash_flow": {
       "datasource": [
@@ -10594,10 +12345,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1811,
       "industry": "Aviation",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "aviation.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3621,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3622,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3623,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3624,
+      "industry": "Aviation",
+      "segment": "core"
+    },
+    "aviation.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3625,
+      "industry": "Aviation",
+      "segment": "core"
     },
     "aviation.core.burn_rate": {
       "datasource": [
@@ -10641,7 +12613,11 @@ export const REFERENCE_DATA = {
       "id": 1812,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "aviation.core.runway": {
       "datasource": [
@@ -10683,7 +12659,11 @@ export const REFERENCE_DATA = {
       "id": 1813,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "aviation.core.headcount": {
       "name": "Headcount (FTE)",
@@ -10709,7 +12689,10 @@ export const REFERENCE_DATA = {
       "id": 1814,
       "industry": "Aviation",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "aviation.core.derived_gross_profit": {
       "datasource": [
@@ -10747,7 +12730,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2821,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "aviation.core.derived_ebitda": {
       "datasource": [
@@ -10786,7 +12772,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2822,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "aviation.core.derived_effective_tax_rate": {
       "datasource": [
@@ -10825,7 +12815,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2823,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "aviation.core.derived_nopat": {
       "datasource": [
@@ -10862,7 +12855,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2824,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "aviation.core.derived_net_debt": {
       "datasource": [
@@ -10900,7 +12896,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2825,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "aviation.core.derived_invested_capital": {
       "datasource": [
@@ -10937,7 +12936,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2826,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "aviation.core.derived_tangible_net_worth": {
       "datasource": [
@@ -10975,7 +12977,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2827,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "aviation.core.derived_quick_assets": {
       "datasource": [
@@ -11014,7 +13019,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2828,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "aviation.core.return_on_equity": {
       "datasource": [
@@ -11053,7 +13061,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2829,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "aviation.core.return_on_assets": {
       "datasource": [
@@ -11092,7 +13103,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2830,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "aviation.core.return_on_invested_capital": {
       "datasource": [
@@ -11128,7 +13142,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2831,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "aviation.core.operating_profit_margin": {
       "datasource": [
@@ -11170,7 +13187,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2832,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "aviation.core.net_profit_margin": {
       "datasource": [
@@ -11212,7 +13232,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2833,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "aviation.core.effective_interest_rate": {
       "datasource": [
@@ -11251,7 +13275,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2834,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "aviation.core.interest_burden": {
       "datasource": [
@@ -11290,7 +13317,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2835,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "aviation.core.tax_burden": {
       "datasource": [
@@ -11329,7 +13359,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2836,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "aviation.core.total_asset_turnover": {
       "datasource": [
@@ -11368,7 +13401,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2837,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "aviation.core.ppe_turnover": {
       "datasource": [
@@ -11407,7 +13443,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2838,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "aviation.core.cash_turnover": {
       "datasource": [
@@ -11446,7 +13485,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2839,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "aviation.core.cash_days": {
       "datasource": [
@@ -11485,7 +13527,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2840,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "aviation.core.accounts_receivable_turnover": {
       "datasource": [
@@ -11524,7 +13569,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2841,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "aviation.core.accounts_receivable_days": {
       "datasource": [
@@ -11566,7 +13614,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2842,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "aviation.core.inventory_turnover": {
       "datasource": [
@@ -11608,7 +13659,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2843,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "aviation.core.inventory_days": {
       "datasource": [
@@ -11647,7 +13701,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2844,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "aviation.core.accounts_payable_turnover": {
       "datasource": [
@@ -11686,7 +13743,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2845,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "aviation.core.accounts_payable_days": {
       "datasource": [
@@ -11728,7 +13788,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2846,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "aviation.core.total_assets_to_equity": {
       "datasource": [
@@ -11767,7 +13830,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2847,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "aviation.core.debt_to_equity": {
       "datasource": [
@@ -11806,7 +13872,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2848,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "aviation.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -11844,7 +13913,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2849,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "aviation.core.debt_to_ebitda": {
       "datasource": [
@@ -11882,7 +13954,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2850,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "aviation.core.net_debt_to_ebitda": {
       "datasource": [
@@ -11918,7 +13993,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2851,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "aviation.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -11959,7 +14037,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2852,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "aviation.core.ebitda_to_interest": {
       "datasource": [
@@ -11997,7 +14078,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2853,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "aviation.core.ebit_to_interest": {
       "datasource": [
@@ -12036,7 +14121,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2854,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "aviation.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -12075,7 +14163,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2855,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "aviation.core.fixed_charge_coverage": {
       "datasource": [
@@ -12115,7 +14206,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2856,
       "industry": "Aviation",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "aviation.network_carrier.load_factor": {
       "id": 1820,
@@ -12149,7 +14243,10 @@ export const REFERENCE_DATA = {
           "revenue_capacity_units",
           "available_capacity_units"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Load Factor"
+      ]
     },
     "aviation.network_carrier.casm": {
       "id": 1821,
@@ -12179,7 +14276,10 @@ export const REFERENCE_DATA = {
           "total_operating_cost",
           "available_seat_kilometers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cost per Available Seat Kilometer (CASM)"
+      ]
     },
     "aviation.network_carrier.rasm": {
       "id": 1822,
@@ -12208,7 +14308,10 @@ export const REFERENCE_DATA = {
           "total_operating_revenue",
           "available_seat_kilometers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Revenue per Available Seat Kilometer (RASM)"
+      ]
     },
     "aviation.network_carrier.on_time_performance": {
       "id": 1823,
@@ -12242,7 +14345,10 @@ export const REFERENCE_DATA = {
           "on_time_arrivals",
           "total_arrivals"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "On-Time Performance (OTP)"
+      ]
     },
     "aviation.network_carrier.fuel_cost_pct_operating": {
       "id": 1824,
@@ -12276,7 +14382,10 @@ export const REFERENCE_DATA = {
           "fuel_expense",
           "total_operating_cost"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Fuel Cost Percent of Operating Cost"
+      ]
     },
     "aviation.airport.passengers_enplaned_growth": {
       "id": 1825,
@@ -12299,7 +14408,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Traffic volume — drives aeronautical and commercial revenue.",
       "segment": "airport",
       "slug": "passengers_enplaned_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Passengers Enplaned Growth"
+      ]
     },
     "aviation.airport.aeronautical_revenue_per_passenger": {
       "id": 1826,
@@ -12328,7 +14440,10 @@ export const REFERENCE_DATA = {
           "aeronautical_revenue",
           "enplaned_passengers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Aeronautical Revenue per Passenger"
+      ]
     },
     "aviation.airport.commercial_revenue_share": {
       "id": 1827,
@@ -12362,7 +14477,10 @@ export const REFERENCE_DATA = {
           "commercial_revenue",
           "total_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Commercial Revenue Share"
+      ]
     },
     "aviation.travel_distribution.gbv_take_rate": {
       "id": 1828,
@@ -12396,7 +14514,10 @@ export const REFERENCE_DATA = {
           "platform_revenue",
           "gross_booking_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Booking Value Take Rate"
+      ]
     },
     "aviation.travel_distribution.look_to_book_conversion": {
       "id": 1829,
@@ -12430,7 +14551,10 @@ export const REFERENCE_DATA = {
           "completed_bookings",
           "qualified_sessions"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Look-to-Book Conversion"
+      ]
     },
     "aviation.air_cargo.cargo_load_factor": {
       "id": 1830,
@@ -12464,7 +14588,10 @@ export const REFERENCE_DATA = {
           "cargo_tonne_km_carried",
           "available_tonne_km"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cargo Load Factor"
+      ]
     },
     "aviation.air_cargo.cargo_yield_per_tonne_km": {
       "id": 1831,
@@ -12493,7 +14620,10 @@ export const REFERENCE_DATA = {
           "cargo_revenue",
           "cargo_tonne_km_carried"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cargo Yield per Tonne-Kilometer"
+      ]
     },
     "manufacturing.core.current_ratio": {
       "datasource": [
@@ -12536,7 +14666,11 @@ export const REFERENCE_DATA = {
       "id": 929,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "manufacturing.core.quick_ratio": {
       "datasource": [
@@ -12580,7 +14714,11 @@ export const REFERENCE_DATA = {
       "id": 935,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "manufacturing.core.gross_margin": {
       "datasource": [
@@ -12623,7 +14761,10 @@ export const REFERENCE_DATA = {
       "id": 941,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "manufacturing.core.operating_margin": {
       "datasource": [
@@ -12665,7 +14806,11 @@ export const REFERENCE_DATA = {
       "id": 947,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "manufacturing.core.ebitda_margin": {
       "datasource": [
@@ -12707,7 +14852,10 @@ export const REFERENCE_DATA = {
       "id": 953,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "manufacturing.core.net_margin": {
       "datasource": [
@@ -12746,6 +14894,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 959,
       "industry": "Manufacturing",
       "segment": "core",
@@ -12792,7 +14944,12 @@ export const REFERENCE_DATA = {
       "id": 965,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "manufacturing.core.working_capital": {
       "datasource": [
@@ -12835,7 +14992,10 @@ export const REFERENCE_DATA = {
       "id": 971,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "manufacturing.core.dso": {
       "datasource": [
@@ -12880,7 +15040,11 @@ export const REFERENCE_DATA = {
       "id": 977,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "manufacturing.core.dpo": {
       "datasource": [
@@ -12925,7 +15089,11 @@ export const REFERENCE_DATA = {
       "id": 983,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "manufacturing.core.ccc": {
       "datasource": [
@@ -12967,7 +15135,10 @@ export const REFERENCE_DATA = {
       "id": 989,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "manufacturing.core.operating_cash_flow": {
       "datasource": [
@@ -13008,10 +15179,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 995,
       "industry": "Manufacturing",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "manufacturing.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3546,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3547,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3548,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3549,
+      "industry": "Manufacturing",
+      "segment": "core"
+    },
+    "manufacturing.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3550,
+      "industry": "Manufacturing",
+      "segment": "core"
     },
     "manufacturing.core.burn_rate": {
       "datasource": [
@@ -13055,7 +15447,11 @@ export const REFERENCE_DATA = {
       "id": 1001,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "manufacturing.core.runway": {
       "datasource": [
@@ -13097,7 +15493,11 @@ export const REFERENCE_DATA = {
       "id": 1007,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "manufacturing.core.headcount": {
       "name": "Headcount (FTE)",
@@ -13123,7 +15523,10 @@ export const REFERENCE_DATA = {
       "id": 1081,
       "industry": "Manufacturing",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "manufacturing.core.derived_gross_profit": {
       "datasource": [
@@ -13161,7 +15564,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3217,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "manufacturing.core.derived_ebitda": {
       "datasource": [
@@ -13200,7 +15606,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3218,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "manufacturing.core.derived_effective_tax_rate": {
       "datasource": [
@@ -13239,7 +15649,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3219,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "manufacturing.core.derived_nopat": {
       "datasource": [
@@ -13276,7 +15689,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3220,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "manufacturing.core.derived_net_debt": {
       "datasource": [
@@ -13314,7 +15730,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3221,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "manufacturing.core.derived_invested_capital": {
       "datasource": [
@@ -13351,7 +15770,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3222,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "manufacturing.core.derived_tangible_net_worth": {
       "datasource": [
@@ -13389,7 +15811,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3223,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "manufacturing.core.derived_quick_assets": {
       "datasource": [
@@ -13428,7 +15853,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3224,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "manufacturing.core.return_on_equity": {
       "datasource": [
@@ -13467,7 +15895,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3225,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "manufacturing.core.return_on_assets": {
       "datasource": [
@@ -13506,7 +15937,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3226,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "manufacturing.core.return_on_invested_capital": {
       "datasource": [
@@ -13542,7 +15976,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3227,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "manufacturing.core.operating_profit_margin": {
       "datasource": [
@@ -13584,7 +16021,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3228,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "manufacturing.core.net_profit_margin": {
       "datasource": [
@@ -13626,7 +16066,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3229,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "manufacturing.core.effective_interest_rate": {
       "datasource": [
@@ -13665,7 +16109,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3230,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "manufacturing.core.interest_burden": {
       "datasource": [
@@ -13704,7 +16151,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3231,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "manufacturing.core.tax_burden": {
       "datasource": [
@@ -13743,7 +16193,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3232,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "manufacturing.core.total_asset_turnover": {
       "datasource": [
@@ -13782,7 +16235,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3233,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "manufacturing.core.ppe_turnover": {
       "datasource": [
@@ -13821,7 +16277,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3234,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "manufacturing.core.cash_turnover": {
       "datasource": [
@@ -13860,7 +16319,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3235,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "manufacturing.core.cash_days": {
       "datasource": [
@@ -13899,7 +16361,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3236,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "manufacturing.core.accounts_receivable_turnover": {
       "datasource": [
@@ -13938,7 +16403,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3237,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "manufacturing.core.accounts_receivable_days": {
       "datasource": [
@@ -13980,7 +16448,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3238,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "manufacturing.core.inventory_turnover": {
       "datasource": [
@@ -14022,7 +16493,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3239,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "manufacturing.core.inventory_days": {
       "datasource": [
@@ -14061,7 +16535,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3240,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "manufacturing.core.accounts_payable_turnover": {
       "datasource": [
@@ -14100,7 +16577,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3241,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "manufacturing.core.accounts_payable_days": {
       "datasource": [
@@ -14142,7 +16622,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3242,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "manufacturing.core.total_assets_to_equity": {
       "datasource": [
@@ -14181,7 +16664,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3243,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "manufacturing.core.debt_to_equity": {
       "datasource": [
@@ -14220,7 +16706,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3244,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "manufacturing.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -14258,7 +16747,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3245,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "manufacturing.core.debt_to_ebitda": {
       "datasource": [
@@ -14296,7 +16788,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3246,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "manufacturing.core.net_debt_to_ebitda": {
       "datasource": [
@@ -14332,7 +16827,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3247,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "manufacturing.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -14373,7 +16871,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3248,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "manufacturing.core.ebitda_to_interest": {
       "datasource": [
@@ -14411,7 +16912,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3249,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "manufacturing.core.ebit_to_interest": {
       "datasource": [
@@ -14450,7 +16955,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3250,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "manufacturing.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -14489,7 +16997,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3251,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "manufacturing.core.fixed_charge_coverage": {
       "datasource": [
@@ -14529,7 +17040,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3252,
       "industry": "Manufacturing",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "MfgOee901CatalogMetricKey01": {
       "id": 901,
@@ -14569,7 +17083,10 @@ export const REFERENCE_DATA = {
           "performance",
           "quality"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Overall Equipment Effectiveness (OEE)"
+      ]
     },
     "MfgScrap902CatalogMetricKey02": {
       "id": 902,
@@ -14606,7 +17123,10 @@ export const REFERENCE_DATA = {
           "scrapped_units",
           "total_units"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Scrap Rate"
+      ]
     },
     "MfgInvTurn903CatalogMetricKey03": {
       "id": 903,
@@ -14639,7 +17159,10 @@ export const REFERENCE_DATA = {
           "cogs",
           "average_inventory"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Inventory Turnover"
+      ]
     },
     "MfgDownt904CatalogMetricKey04": {
       "id": 904,
@@ -14665,7 +17188,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Ops-to-finance bridge — downtime explains revenue and labor efficiency gaps.",
       "segment": "operations",
       "slug": "unplanned_downtime",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Unplanned Downtime"
+      ]
     },
     "MfgUnitCogs905CatalogMetricKey05": {
       "id": 905,
@@ -14698,7 +17224,10 @@ export const REFERENCE_DATA = {
           "total_manufacturing_cogs",
           "units_produced"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Unit Cost of Goods Sold"
+      ]
     },
     "Allmanufacturingmfg-capacity-utilization": {
       "datasource": [
@@ -14738,7 +17267,10 @@ export const REFERENCE_DATA = {
           "actual_output",
           "max_output"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Capacity Utilization"
+      ]
     },
     "construction.core.current_ratio": {
       "datasource": [
@@ -14781,7 +17313,11 @@ export const REFERENCE_DATA = {
       "id": 2070,
       "industry": "Construction",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "construction.core.quick_ratio": {
       "datasource": [
@@ -14825,7 +17361,11 @@ export const REFERENCE_DATA = {
       "id": 2071,
       "industry": "Construction",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "construction.core.gross_margin": {
       "datasource": [
@@ -14868,7 +17408,10 @@ export const REFERENCE_DATA = {
       "id": 2072,
       "industry": "Construction",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "construction.core.operating_margin": {
       "datasource": [
@@ -14910,7 +17453,11 @@ export const REFERENCE_DATA = {
       "id": 2073,
       "industry": "Construction",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "construction.core.ebitda_margin": {
       "datasource": [
@@ -14952,7 +17499,10 @@ export const REFERENCE_DATA = {
       "id": 2074,
       "industry": "Construction",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "construction.core.net_margin": {
       "datasource": [
@@ -14991,6 +17541,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 2075,
       "industry": "Construction",
       "segment": "core",
@@ -15037,7 +17591,12 @@ export const REFERENCE_DATA = {
       "id": 2076,
       "industry": "Construction",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "construction.core.working_capital": {
       "datasource": [
@@ -15080,7 +17639,10 @@ export const REFERENCE_DATA = {
       "id": 2077,
       "industry": "Construction",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "construction.core.dso": {
       "datasource": [
@@ -15125,7 +17687,11 @@ export const REFERENCE_DATA = {
       "id": 2078,
       "industry": "Construction",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "construction.core.dpo": {
       "datasource": [
@@ -15170,7 +17736,11 @@ export const REFERENCE_DATA = {
       "id": 2079,
       "industry": "Construction",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "construction.core.ccc": {
       "datasource": [
@@ -15212,7 +17782,10 @@ export const REFERENCE_DATA = {
       "id": 2080,
       "industry": "Construction",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "construction.core.operating_cash_flow": {
       "datasource": [
@@ -15253,10 +17826,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 2081,
       "industry": "Construction",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "construction.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3636,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3637,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3638,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3639,
+      "industry": "Construction",
+      "segment": "core"
+    },
+    "construction.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3640,
+      "industry": "Construction",
+      "segment": "core"
     },
     "construction.core.burn_rate": {
       "datasource": [
@@ -15300,7 +18094,11 @@ export const REFERENCE_DATA = {
       "id": 2082,
       "industry": "Construction",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "construction.core.runway": {
       "datasource": [
@@ -15342,7 +18140,11 @@ export const REFERENCE_DATA = {
       "id": 2083,
       "industry": "Construction",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "construction.core.headcount": {
       "name": "Headcount (FTE)",
@@ -15368,7 +18170,10 @@ export const REFERENCE_DATA = {
       "id": 2084,
       "industry": "Construction",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "construction.core.derived_gross_profit": {
       "datasource": [
@@ -15406,7 +18211,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2929,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "construction.core.derived_ebitda": {
       "datasource": [
@@ -15445,7 +18253,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2930,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "construction.core.derived_effective_tax_rate": {
       "datasource": [
@@ -15484,7 +18296,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2931,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "construction.core.derived_nopat": {
       "datasource": [
@@ -15521,7 +18336,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2932,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "construction.core.derived_net_debt": {
       "datasource": [
@@ -15559,7 +18377,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2933,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "construction.core.derived_invested_capital": {
       "datasource": [
@@ -15596,7 +18417,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2934,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "construction.core.derived_tangible_net_worth": {
       "datasource": [
@@ -15634,7 +18458,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2935,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "construction.core.derived_quick_assets": {
       "datasource": [
@@ -15673,7 +18500,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2936,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "construction.core.return_on_equity": {
       "datasource": [
@@ -15712,7 +18542,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2937,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "construction.core.return_on_assets": {
       "datasource": [
@@ -15751,7 +18584,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2938,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "construction.core.return_on_invested_capital": {
       "datasource": [
@@ -15787,7 +18623,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2939,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "construction.core.operating_profit_margin": {
       "datasource": [
@@ -15829,7 +18668,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2940,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "construction.core.net_profit_margin": {
       "datasource": [
@@ -15871,7 +18713,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2941,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "construction.core.effective_interest_rate": {
       "datasource": [
@@ -15910,7 +18756,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2942,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "construction.core.interest_burden": {
       "datasource": [
@@ -15949,7 +18798,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2943,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "construction.core.tax_burden": {
       "datasource": [
@@ -15988,7 +18840,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2944,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "construction.core.total_asset_turnover": {
       "datasource": [
@@ -16027,7 +18882,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2945,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "construction.core.ppe_turnover": {
       "datasource": [
@@ -16066,7 +18924,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2946,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "construction.core.cash_turnover": {
       "datasource": [
@@ -16105,7 +18966,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2947,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "construction.core.cash_days": {
       "datasource": [
@@ -16144,7 +19008,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2948,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "construction.core.accounts_receivable_turnover": {
       "datasource": [
@@ -16183,7 +19050,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2949,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "construction.core.accounts_receivable_days": {
       "datasource": [
@@ -16225,7 +19095,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2950,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "construction.core.inventory_turnover": {
       "datasource": [
@@ -16267,7 +19140,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2951,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "construction.core.inventory_days": {
       "datasource": [
@@ -16306,7 +19182,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2952,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "construction.core.accounts_payable_turnover": {
       "datasource": [
@@ -16345,7 +19224,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2953,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "construction.core.accounts_payable_days": {
       "datasource": [
@@ -16387,7 +19269,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2954,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "construction.core.total_assets_to_equity": {
       "datasource": [
@@ -16426,7 +19311,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2955,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "construction.core.debt_to_equity": {
       "datasource": [
@@ -16465,7 +19353,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2956,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "construction.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -16503,7 +19394,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2957,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "construction.core.debt_to_ebitda": {
       "datasource": [
@@ -16541,7 +19435,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2958,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "construction.core.net_debt_to_ebitda": {
       "datasource": [
@@ -16577,7 +19474,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2959,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "construction.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -16618,7 +19518,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2960,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "construction.core.ebitda_to_interest": {
       "datasource": [
@@ -16656,7 +19559,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2961,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "construction.core.ebit_to_interest": {
       "datasource": [
@@ -16695,7 +19602,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2962,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "construction.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -16734,7 +19644,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2963,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "construction.core.fixed_charge_coverage": {
       "datasource": [
@@ -16774,7 +19687,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2964,
       "industry": "Construction",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "construction.building_construction.schedule_performance_index": {
       "id": 2100,
@@ -16811,7 +19727,10 @@ export const REFERENCE_DATA = {
           "earned_value",
           "planned_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Schedule Performance Index (SPI)"
+      ]
     },
     "construction.building_construction.cost_performance_index": {
       "id": 2101,
@@ -16848,7 +19767,10 @@ export const REFERENCE_DATA = {
           "earned_value",
           "actual_cost"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cost Performance Index (CPI)"
+      ]
     },
     "construction.civil_engineering.earned_value_ratio": {
       "id": 2102,
@@ -16885,7 +19807,10 @@ export const REFERENCE_DATA = {
           "civil_earned_value",
           "civil_planned_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Civil Earned Value Ratio"
+      ]
     },
     "construction.civil_engineering.percent_complete_physical": {
       "id": 2103,
@@ -16922,7 +19847,10 @@ export const REFERENCE_DATA = {
           "installed_quantity",
           "budgeted_quantity"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Percent Complete (Physical)"
+      ]
     },
     "construction.operations.change_order_rate": {
       "id": 2104,
@@ -16959,7 +19887,10 @@ export const REFERENCE_DATA = {
           "approved_change_order_value",
           "original_contract_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Change Order Rate"
+      ]
     },
     "construction.operations.safety_trir": {
       "id": 2105,
@@ -16996,7 +19927,10 @@ export const REFERENCE_DATA = {
           "recordable_incidents",
           "hours_worked"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Total Recordable Incident Rate (TRIR)"
+      ]
     },
     "construction.financial.work_in_progress_ratio": {
       "id": 2106,
@@ -17033,7 +19967,10 @@ export const REFERENCE_DATA = {
           "work_in_progress_balance",
           "contract_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Work-in-Progress Ratio"
+      ]
     },
     "construction.financial.retention_receivable_days": {
       "id": 2107,
@@ -17071,7 +20008,10 @@ export const REFERENCE_DATA = {
           "contract_revenue",
           "days"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Retention Receivable Days"
+      ]
     },
     "healthcare.core.current_ratio": {
       "datasource": [
@@ -17114,7 +20054,11 @@ export const REFERENCE_DATA = {
       "id": 930,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "healthcare.core.quick_ratio": {
       "datasource": [
@@ -17158,7 +20102,11 @@ export const REFERENCE_DATA = {
       "id": 936,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "healthcare.core.gross_margin": {
       "datasource": [
@@ -17201,7 +20149,10 @@ export const REFERENCE_DATA = {
       "id": 942,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "healthcare.core.operating_margin": {
       "datasource": [
@@ -17243,7 +20194,11 @@ export const REFERENCE_DATA = {
       "id": 948,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "healthcare.core.ebitda_margin": {
       "datasource": [
@@ -17285,7 +20240,10 @@ export const REFERENCE_DATA = {
       "id": 954,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "healthcare.core.net_margin": {
       "datasource": [
@@ -17324,6 +20282,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 960,
       "industry": "Healthcare",
       "segment": "core",
@@ -17370,7 +20332,12 @@ export const REFERENCE_DATA = {
       "id": 966,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "healthcare.core.working_capital": {
       "datasource": [
@@ -17413,7 +20380,10 @@ export const REFERENCE_DATA = {
       "id": 972,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "healthcare.core.dso": {
       "datasource": [
@@ -17458,7 +20428,11 @@ export const REFERENCE_DATA = {
       "id": 978,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "healthcare.core.dpo": {
       "datasource": [
@@ -17503,7 +20477,11 @@ export const REFERENCE_DATA = {
       "id": 984,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "healthcare.core.ccc": {
       "datasource": [
@@ -17545,7 +20523,10 @@ export const REFERENCE_DATA = {
       "id": 990,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "healthcare.core.operating_cash_flow": {
       "datasource": [
@@ -17586,10 +20567,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 996,
       "industry": "Healthcare",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "healthcare.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3541,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3542,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3543,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3544,
+      "industry": "Healthcare",
+      "segment": "core"
+    },
+    "healthcare.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3545,
+      "industry": "Healthcare",
+      "segment": "core"
     },
     "healthcare.core.burn_rate": {
       "datasource": [
@@ -17633,7 +20835,11 @@ export const REFERENCE_DATA = {
       "id": 1002,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "healthcare.core.runway": {
       "datasource": [
@@ -17675,7 +20881,11 @@ export const REFERENCE_DATA = {
       "id": 1008,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "healthcare.core.headcount": {
       "name": "Headcount (FTE)",
@@ -17701,7 +20911,10 @@ export const REFERENCE_DATA = {
       "id": 1080,
       "industry": "Healthcare",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "healthcare.core.derived_gross_profit": {
       "datasource": [
@@ -17739,7 +20952,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3109,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "healthcare.core.derived_ebitda": {
       "datasource": [
@@ -17778,7 +20994,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3110,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "healthcare.core.derived_effective_tax_rate": {
       "datasource": [
@@ -17817,7 +21037,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3111,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "healthcare.core.derived_nopat": {
       "datasource": [
@@ -17854,7 +21077,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3112,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "healthcare.core.derived_net_debt": {
       "datasource": [
@@ -17892,7 +21118,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3113,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "healthcare.core.derived_invested_capital": {
       "datasource": [
@@ -17929,7 +21158,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3114,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "healthcare.core.derived_tangible_net_worth": {
       "datasource": [
@@ -17967,7 +21199,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3115,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "healthcare.core.derived_quick_assets": {
       "datasource": [
@@ -18006,7 +21241,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3116,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "healthcare.core.return_on_equity": {
       "datasource": [
@@ -18045,7 +21283,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3117,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "healthcare.core.return_on_assets": {
       "datasource": [
@@ -18084,7 +21325,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3118,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "healthcare.core.return_on_invested_capital": {
       "datasource": [
@@ -18120,7 +21364,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3119,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "healthcare.core.operating_profit_margin": {
       "datasource": [
@@ -18162,7 +21409,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3120,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "healthcare.core.net_profit_margin": {
       "datasource": [
@@ -18204,7 +21454,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3121,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "healthcare.core.effective_interest_rate": {
       "datasource": [
@@ -18243,7 +21497,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3122,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "healthcare.core.interest_burden": {
       "datasource": [
@@ -18282,7 +21539,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3123,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "healthcare.core.tax_burden": {
       "datasource": [
@@ -18321,7 +21581,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3124,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "healthcare.core.total_asset_turnover": {
       "datasource": [
@@ -18360,7 +21623,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3125,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "healthcare.core.ppe_turnover": {
       "datasource": [
@@ -18399,7 +21665,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3126,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "healthcare.core.cash_turnover": {
       "datasource": [
@@ -18438,7 +21707,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3127,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "healthcare.core.cash_days": {
       "datasource": [
@@ -18477,7 +21749,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3128,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "healthcare.core.accounts_receivable_turnover": {
       "datasource": [
@@ -18516,7 +21791,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3129,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "healthcare.core.accounts_receivable_days": {
       "datasource": [
@@ -18558,7 +21836,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3130,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "healthcare.core.inventory_turnover": {
       "datasource": [
@@ -18600,7 +21881,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3131,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "healthcare.core.inventory_days": {
       "datasource": [
@@ -18639,7 +21923,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3132,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "healthcare.core.accounts_payable_turnover": {
       "datasource": [
@@ -18678,7 +21965,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3133,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "healthcare.core.accounts_payable_days": {
       "datasource": [
@@ -18720,7 +22010,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3134,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "healthcare.core.total_assets_to_equity": {
       "datasource": [
@@ -18759,7 +22052,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3135,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "healthcare.core.debt_to_equity": {
       "datasource": [
@@ -18798,7 +22094,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3136,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "healthcare.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -18836,7 +22135,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3137,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "healthcare.core.debt_to_ebitda": {
       "datasource": [
@@ -18874,7 +22176,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3138,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "healthcare.core.net_debt_to_ebitda": {
       "datasource": [
@@ -18910,7 +22215,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3139,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "healthcare.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -18951,7 +22259,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3140,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "healthcare.core.ebitda_to_interest": {
       "datasource": [
@@ -18989,7 +22300,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3141,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "healthcare.core.ebit_to_interest": {
       "datasource": [
@@ -19028,7 +22343,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3142,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "healthcare.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -19067,7 +22385,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3143,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "healthcare.core.fixed_charge_coverage": {
       "datasource": [
@@ -19107,7 +22428,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3144,
       "industry": "Healthcare",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "HcVol911CatalogMetricKey01": {
       "id": 911,
@@ -19133,7 +22457,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Capacity planning — volume drives staffing ratios and revenue forecasts.",
       "segment": "provider",
       "slug": "patient_volume",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Patient Volume"
+      ]
     },
     "HcLos912CatalogMetricKey02": {
       "id": 912,
@@ -19165,7 +22492,10 @@ export const REFERENCE_DATA = {
           "inpatient_days",
           "discharges"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Average Length of Stay"
+      ]
     },
     "HcReadmit913CatalogMetricKey03": {
       "id": 913,
@@ -19201,7 +22531,10 @@ export const REFERENCE_DATA = {
           "readmissions",
           "eligible_discharges"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Readmission Rate (30-day proxy)"
+      ]
     },
     "HcStaff914CatalogMetricKey04": {
       "id": 914,
@@ -19233,7 +22566,10 @@ export const REFERENCE_DATA = {
           "staff_hours",
           "occupied_beds"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Staffing Ratio"
+      ]
     },
     "HcDenial915CatalogMetricKey05": {
       "id": 915,
@@ -19269,7 +22605,10 @@ export const REFERENCE_DATA = {
           "denied_claims",
           "submitted_claims"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Claim Denial Rate"
+      ]
     },
     "Allhealthcaresaas-mrr": {
       "datasource": [
@@ -19310,7 +22649,10 @@ export const REFERENCE_DATA = {
           "active_subscriptions",
           "avg_monthly_price"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Monthly Recurring Revenue (MRR)"
+      ]
     },
     "Allhealthcaresaas-arr": {
       "datasource": [
@@ -19348,7 +22690,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "mrr * 12",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "Annual Recurring Revenue (ARR)"
+      ]
     },
     "Allhealthcaresaas-nrr": {
       "datasource": [
@@ -19391,7 +22736,10 @@ export const REFERENCE_DATA = {
           "contraction_mrr",
           "churned_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Revenue Retention (NRR)"
+      ]
     },
     "Allhealthcaresaas-gross-churn": {
       "datasource": [
@@ -19432,7 +22780,10 @@ export const REFERENCE_DATA = {
           "churned_mrr",
           "starting_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Revenue Churn Rate"
+      ]
     },
     "Allhealthcaresaas-cac": {
       "datasource": [
@@ -19474,7 +22825,10 @@ export const REFERENCE_DATA = {
           "sales_marketing_spend",
           "new_customers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Acquisition Cost (CAC)"
+      ]
     },
     "Allhealthcaresaas-ltv": {
       "datasource": [
@@ -19516,7 +22870,10 @@ export const REFERENCE_DATA = {
           "gross_margin_pct",
           "churn_rate"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Lifetime Value (LTV)"
+      ]
     },
     "Allhealthcaresaas-ltv-cac": {
       "datasource": [
@@ -19554,7 +22911,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "ltv / cac",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "LTV : CAC Ratio"
+      ]
     },
     "Allhealthcaresaas-rule-of-40": {
       "datasource": [
@@ -19595,7 +22955,10 @@ export const REFERENCE_DATA = {
           "revenue_growth_pct",
           "profit_margin_pct"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Rule of 40"
+      ]
     },
     "healthcare.provider.bed_occupancy_rate": {
       "id": 1400,
@@ -19623,7 +22986,10 @@ export const REFERENCE_DATA = {
           "occupied_beds",
           "available_beds"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Bed Occupancy Rate"
+      ]
     },
     "healthcare.provider.or_utilization": {
       "id": 1401,
@@ -19651,7 +23017,10 @@ export const REFERENCE_DATA = {
           "or_time_used",
           "or_time_available"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Operating Room Utilization"
+      ]
     },
     "healthcare.provider.ed_wait_time": {
       "id": 1402,
@@ -19673,7 +23042,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "DEEP TECH",
       "higherIsBetter": true,
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "ED Wait Time"
+      ]
     },
     "healthcare.provider.case_mix_index": {
       "id": 1403,
@@ -19695,7 +23067,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "DEEP TECH",
       "higherIsBetter": true,
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Case Mix Index"
+      ]
     },
     "healthcare.provider.cost_per_discharge": {
       "id": 1404,
@@ -19723,7 +23098,10 @@ export const REFERENCE_DATA = {
           "total_operating_cost",
           "discharges"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Cost per Discharge"
+      ]
     },
     "healthcare.revenue_cycle.ar_days": {
       "id": 1405,
@@ -19752,7 +23130,10 @@ export const REFERENCE_DATA = {
           "net_patient_revenue",
           "days"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "AR Days"
+      ]
     },
     "healthcare.revenue_cycle.clean_claim_rate": {
       "id": 1406,
@@ -19780,7 +23161,10 @@ export const REFERENCE_DATA = {
           "clean_claims",
           "total_claims"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Clean Claim Rate"
+      ]
     },
     "healthcare.quality.mortality_rate": {
       "id": 1407,
@@ -19808,7 +23192,10 @@ export const REFERENCE_DATA = {
           "inpatient_deaths",
           "discharges"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Inpatient Mortality Rate"
+      ]
     },
     "healthcare.quality.infection_rate": {
       "id": 1408,
@@ -19836,7 +23223,10 @@ export const REFERENCE_DATA = {
           "infections",
           "patient_days"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Healthcare-Associated Infection Rate"
+      ]
     },
     "restaurants.core.current_ratio": {
       "datasource": [
@@ -19879,7 +23269,11 @@ export const REFERENCE_DATA = {
       "id": 931,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "restaurants.core.quick_ratio": {
       "datasource": [
@@ -19923,7 +23317,11 @@ export const REFERENCE_DATA = {
       "id": 937,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "restaurants.core.gross_margin": {
       "datasource": [
@@ -19966,7 +23364,10 @@ export const REFERENCE_DATA = {
       "id": 943,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "restaurants.core.operating_margin": {
       "datasource": [
@@ -20008,7 +23409,11 @@ export const REFERENCE_DATA = {
       "id": 949,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "restaurants.core.ebitda_margin": {
       "datasource": [
@@ -20050,7 +23455,10 @@ export const REFERENCE_DATA = {
       "id": 955,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "restaurants.core.net_margin": {
       "datasource": [
@@ -20089,6 +23497,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 961,
       "industry": "Restaurants",
       "segment": "core",
@@ -20135,7 +23547,12 @@ export const REFERENCE_DATA = {
       "id": 967,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "restaurants.core.working_capital": {
       "datasource": [
@@ -20178,7 +23595,10 @@ export const REFERENCE_DATA = {
       "id": 973,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "restaurants.core.dso": {
       "datasource": [
@@ -20223,7 +23643,11 @@ export const REFERENCE_DATA = {
       "id": 979,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "restaurants.core.dpo": {
       "datasource": [
@@ -20268,7 +23692,11 @@ export const REFERENCE_DATA = {
       "id": 985,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "restaurants.core.ccc": {
       "datasource": [
@@ -20310,7 +23738,10 @@ export const REFERENCE_DATA = {
       "id": 991,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "restaurants.core.operating_cash_flow": {
       "datasource": [
@@ -20351,10 +23782,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 997,
       "industry": "Restaurants",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "restaurants.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3556,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3557,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3558,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3559,
+      "industry": "Restaurants",
+      "segment": "core"
+    },
+    "restaurants.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3560,
+      "industry": "Restaurants",
+      "segment": "core"
     },
     "restaurants.core.burn_rate": {
       "datasource": [
@@ -20398,7 +24050,11 @@ export const REFERENCE_DATA = {
       "id": 1003,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "restaurants.core.runway": {
       "datasource": [
@@ -20440,7 +24096,11 @@ export const REFERENCE_DATA = {
       "id": 1009,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "restaurants.core.headcount": {
       "name": "Headcount (FTE)",
@@ -20466,7 +24126,10 @@ export const REFERENCE_DATA = {
       "id": 1083,
       "industry": "Restaurants",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "restaurants.core.derived_gross_profit": {
       "datasource": [
@@ -20504,7 +24167,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3325,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "restaurants.core.derived_ebitda": {
       "datasource": [
@@ -20543,7 +24209,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3326,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "restaurants.core.derived_effective_tax_rate": {
       "datasource": [
@@ -20582,7 +24252,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3327,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "restaurants.core.derived_nopat": {
       "datasource": [
@@ -20619,7 +24292,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3328,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "restaurants.core.derived_net_debt": {
       "datasource": [
@@ -20657,7 +24333,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3329,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "restaurants.core.derived_invested_capital": {
       "datasource": [
@@ -20694,7 +24373,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3330,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "restaurants.core.derived_tangible_net_worth": {
       "datasource": [
@@ -20732,7 +24414,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3331,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "restaurants.core.derived_quick_assets": {
       "datasource": [
@@ -20771,7 +24456,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3332,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "restaurants.core.return_on_equity": {
       "datasource": [
@@ -20810,7 +24498,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3333,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "restaurants.core.return_on_assets": {
       "datasource": [
@@ -20849,7 +24540,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3334,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "restaurants.core.return_on_invested_capital": {
       "datasource": [
@@ -20885,7 +24579,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3335,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "restaurants.core.operating_profit_margin": {
       "datasource": [
@@ -20927,7 +24624,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3336,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "restaurants.core.net_profit_margin": {
       "datasource": [
@@ -20969,7 +24669,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3337,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "restaurants.core.effective_interest_rate": {
       "datasource": [
@@ -21008,7 +24712,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3338,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "restaurants.core.interest_burden": {
       "datasource": [
@@ -21047,7 +24754,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3339,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "restaurants.core.tax_burden": {
       "datasource": [
@@ -21086,7 +24796,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3340,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "restaurants.core.total_asset_turnover": {
       "datasource": [
@@ -21125,7 +24838,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3341,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "restaurants.core.ppe_turnover": {
       "datasource": [
@@ -21164,7 +24880,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3342,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "restaurants.core.cash_turnover": {
       "datasource": [
@@ -21203,7 +24922,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3343,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "restaurants.core.cash_days": {
       "datasource": [
@@ -21242,7 +24964,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3344,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "restaurants.core.accounts_receivable_turnover": {
       "datasource": [
@@ -21281,7 +25006,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3345,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "restaurants.core.accounts_receivable_days": {
       "datasource": [
@@ -21323,7 +25051,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3346,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "restaurants.core.inventory_turnover": {
       "datasource": [
@@ -21365,7 +25096,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3347,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "restaurants.core.inventory_days": {
       "datasource": [
@@ -21404,7 +25138,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3348,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "restaurants.core.accounts_payable_turnover": {
       "datasource": [
@@ -21443,7 +25180,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3349,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "restaurants.core.accounts_payable_days": {
       "datasource": [
@@ -21485,7 +25225,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3350,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "restaurants.core.total_assets_to_equity": {
       "datasource": [
@@ -21524,7 +25267,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3351,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "restaurants.core.debt_to_equity": {
       "datasource": [
@@ -21563,7 +25309,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3352,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "restaurants.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -21601,7 +25350,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3353,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "restaurants.core.debt_to_ebitda": {
       "datasource": [
@@ -21639,7 +25391,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3354,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "restaurants.core.net_debt_to_ebitda": {
       "datasource": [
@@ -21675,7 +25430,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3355,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "restaurants.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -21716,7 +25474,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3356,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "restaurants.core.ebitda_to_interest": {
       "datasource": [
@@ -21754,7 +25515,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3357,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "restaurants.core.ebit_to_interest": {
       "datasource": [
@@ -21793,7 +25558,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3358,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "restaurants.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -21832,7 +25600,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3359,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "restaurants.core.fixed_charge_coverage": {
       "datasource": [
@@ -21872,7 +25643,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3360,
       "industry": "Restaurants",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "RestFood921CatalogMetricKey01": {
       "id": 921,
@@ -21910,7 +25684,10 @@ export const REFERENCE_DATA = {
           "food_cogs",
           "food_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Food Cost Percentage"
+      ]
     },
     "RestLabor922CatalogMetricKey02": {
       "id": 922,
@@ -21948,7 +25725,10 @@ export const REFERENCE_DATA = {
           "total_labor",
           "total_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Labor Cost Percentage"
+      ]
     },
     "RestTurn923CatalogMetricKey03": {
       "id": 923,
@@ -21973,7 +25753,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Throughput — turn time drives covers and revenue per seat hour.",
       "segment": "operations",
       "slug": "table_turnover",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Table Turn Time"
+      ]
     },
     "RestWaste924CatalogMetricKey04": {
       "id": 924,
@@ -21999,7 +25782,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Cost control — waste directly inflates food cost percentage.",
       "segment": "operations",
       "slug": "food_waste",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Food Waste and Spoilage"
+      ]
     },
     "RestSss925CatalogMetricKey05": {
       "id": 925,
@@ -22031,7 +25817,10 @@ export const REFERENCE_DATA = {
           "current_sss",
           "prior_sss"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Same-Store Sales Growth"
+      ]
     },
     "Allrestaurantssaas-mrr": {
       "datasource": [
@@ -22072,7 +25861,10 @@ export const REFERENCE_DATA = {
           "active_subscriptions",
           "avg_monthly_price"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Monthly Recurring Revenue (MRR)"
+      ]
     },
     "Allrestaurantssaas-arr": {
       "datasource": [
@@ -22110,7 +25902,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "mrr * 12",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "Annual Recurring Revenue (ARR)"
+      ]
     },
     "Allrestaurantssaas-nrr": {
       "datasource": [
@@ -22153,7 +25948,10 @@ export const REFERENCE_DATA = {
           "contraction_mrr",
           "churned_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Revenue Retention (NRR)"
+      ]
     },
     "Allrestaurantssaas-gross-churn": {
       "datasource": [
@@ -22194,7 +25992,10 @@ export const REFERENCE_DATA = {
           "churned_mrr",
           "starting_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Revenue Churn Rate"
+      ]
     },
     "Allrestaurantssaas-cac": {
       "datasource": [
@@ -22236,7 +26037,10 @@ export const REFERENCE_DATA = {
           "sales_marketing_spend",
           "new_customers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Acquisition Cost (CAC)"
+      ]
     },
     "Allrestaurantssaas-ltv": {
       "datasource": [
@@ -22278,7 +26082,10 @@ export const REFERENCE_DATA = {
           "gross_margin_pct",
           "churn_rate"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Lifetime Value (LTV)"
+      ]
     },
     "Allrestaurantssaas-ltv-cac": {
       "datasource": [
@@ -22316,7 +26123,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "ltv / cac",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "LTV : CAC Ratio"
+      ]
     },
     "Allrestaurantssaas-rule-of-40": {
       "datasource": [
@@ -22357,7 +26167,10 @@ export const REFERENCE_DATA = {
           "revenue_growth_pct",
           "profit_margin_pct"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Rule of 40"
+      ]
     },
     "life_sciences.core.current_ratio": {
       "datasource": [
@@ -22400,7 +26213,11 @@ export const REFERENCE_DATA = {
       "id": 1300,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "life_sciences.core.quick_ratio": {
       "datasource": [
@@ -22444,7 +26261,11 @@ export const REFERENCE_DATA = {
       "id": 1301,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "life_sciences.core.gross_margin": {
       "datasource": [
@@ -22487,7 +26308,10 @@ export const REFERENCE_DATA = {
       "id": 1302,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "life_sciences.core.operating_margin": {
       "datasource": [
@@ -22529,7 +26353,11 @@ export const REFERENCE_DATA = {
       "id": 1303,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "life_sciences.core.ebitda_margin": {
       "datasource": [
@@ -22571,7 +26399,10 @@ export const REFERENCE_DATA = {
       "id": 1304,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "life_sciences.core.net_margin": {
       "datasource": [
@@ -22610,6 +26441,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1305,
       "industry": "Life Sciences",
       "segment": "core",
@@ -22656,7 +26491,12 @@ export const REFERENCE_DATA = {
       "id": 1306,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "life_sciences.core.working_capital": {
       "datasource": [
@@ -22699,7 +26539,10 @@ export const REFERENCE_DATA = {
       "id": 1307,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "life_sciences.core.dso": {
       "datasource": [
@@ -22744,7 +26587,11 @@ export const REFERENCE_DATA = {
       "id": 1308,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "life_sciences.core.dpo": {
       "datasource": [
@@ -22789,7 +26636,11 @@ export const REFERENCE_DATA = {
       "id": 1309,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "life_sciences.core.ccc": {
       "datasource": [
@@ -22831,7 +26682,10 @@ export const REFERENCE_DATA = {
       "id": 1310,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "life_sciences.core.operating_cash_flow": {
       "datasource": [
@@ -22872,10 +26726,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1311,
       "industry": "Life Sciences",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "life_sciences.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3571,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3572,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3573,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3574,
+      "industry": "Life Sciences",
+      "segment": "core"
+    },
+    "life_sciences.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3575,
+      "industry": "Life Sciences",
+      "segment": "core"
     },
     "life_sciences.core.burn_rate": {
       "datasource": [
@@ -22919,7 +26994,11 @@ export const REFERENCE_DATA = {
       "id": 1312,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "life_sciences.core.runway": {
       "datasource": [
@@ -22961,7 +27040,11 @@ export const REFERENCE_DATA = {
       "id": 1313,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "life_sciences.core.headcount": {
       "name": "Headcount (FTE)",
@@ -22987,7 +27070,10 @@ export const REFERENCE_DATA = {
       "id": 1314,
       "industry": "Life Sciences",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "life_sciences.core.derived_gross_profit": {
       "datasource": [
@@ -23025,7 +27111,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3181,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "life_sciences.core.derived_ebitda": {
       "datasource": [
@@ -23064,7 +27153,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3182,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "life_sciences.core.derived_effective_tax_rate": {
       "datasource": [
@@ -23103,7 +27196,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3183,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "life_sciences.core.derived_nopat": {
       "datasource": [
@@ -23140,7 +27236,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3184,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "life_sciences.core.derived_net_debt": {
       "datasource": [
@@ -23178,7 +27277,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3185,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "life_sciences.core.derived_invested_capital": {
       "datasource": [
@@ -23215,7 +27317,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3186,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "life_sciences.core.derived_tangible_net_worth": {
       "datasource": [
@@ -23253,7 +27358,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3187,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "life_sciences.core.derived_quick_assets": {
       "datasource": [
@@ -23292,7 +27400,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3188,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "life_sciences.core.return_on_equity": {
       "datasource": [
@@ -23331,7 +27442,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3189,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "life_sciences.core.return_on_assets": {
       "datasource": [
@@ -23370,7 +27484,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3190,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "life_sciences.core.return_on_invested_capital": {
       "datasource": [
@@ -23406,7 +27523,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3191,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "life_sciences.core.operating_profit_margin": {
       "datasource": [
@@ -23448,7 +27568,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3192,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "life_sciences.core.net_profit_margin": {
       "datasource": [
@@ -23490,7 +27613,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3193,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "life_sciences.core.effective_interest_rate": {
       "datasource": [
@@ -23529,7 +27656,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3194,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "life_sciences.core.interest_burden": {
       "datasource": [
@@ -23568,7 +27698,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3195,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "life_sciences.core.tax_burden": {
       "datasource": [
@@ -23607,7 +27740,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3196,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "life_sciences.core.total_asset_turnover": {
       "datasource": [
@@ -23646,7 +27782,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3197,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "life_sciences.core.ppe_turnover": {
       "datasource": [
@@ -23685,7 +27824,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3198,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "life_sciences.core.cash_turnover": {
       "datasource": [
@@ -23724,7 +27866,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3199,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "life_sciences.core.cash_days": {
       "datasource": [
@@ -23763,7 +27908,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3200,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "life_sciences.core.accounts_receivable_turnover": {
       "datasource": [
@@ -23802,7 +27950,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3201,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "life_sciences.core.accounts_receivable_days": {
       "datasource": [
@@ -23844,7 +27995,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3202,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "life_sciences.core.inventory_turnover": {
       "datasource": [
@@ -23886,7 +28040,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3203,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "life_sciences.core.inventory_days": {
       "datasource": [
@@ -23925,7 +28082,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3204,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "life_sciences.core.accounts_payable_turnover": {
       "datasource": [
@@ -23964,7 +28124,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3205,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "life_sciences.core.accounts_payable_days": {
       "datasource": [
@@ -24006,7 +28169,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3206,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "life_sciences.core.total_assets_to_equity": {
       "datasource": [
@@ -24045,7 +28211,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3207,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "life_sciences.core.debt_to_equity": {
       "datasource": [
@@ -24084,7 +28253,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3208,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "life_sciences.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -24122,7 +28294,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3209,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "life_sciences.core.debt_to_ebitda": {
       "datasource": [
@@ -24160,7 +28335,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3210,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "life_sciences.core.net_debt_to_ebitda": {
       "datasource": [
@@ -24196,7 +28374,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3211,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "life_sciences.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -24237,7 +28418,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3212,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "life_sciences.core.ebitda_to_interest": {
       "datasource": [
@@ -24275,7 +28459,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3213,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "life_sciences.core.ebit_to_interest": {
       "datasource": [
@@ -24314,7 +28502,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3214,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "life_sciences.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -24353,7 +28544,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3215,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "life_sciences.core.fixed_charge_coverage": {
       "datasource": [
@@ -24393,7 +28587,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3216,
       "industry": "Life Sciences",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "life_sciences.rnd.pipeline_active_count": {
       "id": 1330,
@@ -24415,7 +28612,10 @@ export const REFERENCE_DATA = {
       "frequency": "monthly",
       "tech": "DEEP TECH",
       "higherIsBetter": true,
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Active Pipeline Programs"
+      ]
     },
     "life_sciences.rnd.trial_cost_per_patient": {
       "id": 1331,
@@ -24443,7 +28643,10 @@ export const REFERENCE_DATA = {
           "total_trial_cost",
           "patients_enrolled"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Trial Cost per Patient"
+      ]
     },
     "life_sciences.rnd.phase_success_rate": {
       "id": 1332,
@@ -24471,7 +28674,10 @@ export const REFERENCE_DATA = {
           "phases_passed",
           "phases_attempted"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Phase Success Rate"
+      ]
     },
     "life_sciences.supply_chain.batch_yield": {
       "id": 1333,
@@ -24499,7 +28705,10 @@ export const REFERENCE_DATA = {
           "good_units",
           "total_units"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Batch Yield"
+      ]
     },
     "life_sciences.supply_chain.cogs_per_unit": {
       "id": 1334,
@@ -24527,7 +28736,10 @@ export const REFERENCE_DATA = {
           "total_cogs",
           "units_produced"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "COGS per Unit"
+      ]
     },
     "banking.core.current_ratio": {
       "datasource": [
@@ -24570,7 +28782,11 @@ export const REFERENCE_DATA = {
       "id": 1500,
       "industry": "Banking",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "banking.core.quick_ratio": {
       "datasource": [
@@ -24614,7 +28830,11 @@ export const REFERENCE_DATA = {
       "id": 1501,
       "industry": "Banking",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "banking.core.gross_margin": {
       "datasource": [
@@ -24657,7 +28877,10 @@ export const REFERENCE_DATA = {
       "id": 1502,
       "industry": "Banking",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "banking.core.operating_margin": {
       "datasource": [
@@ -24699,7 +28922,11 @@ export const REFERENCE_DATA = {
       "id": 1503,
       "industry": "Banking",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "banking.core.ebitda_margin": {
       "datasource": [
@@ -24741,7 +28968,10 @@ export const REFERENCE_DATA = {
       "id": 1504,
       "industry": "Banking",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "banking.core.net_margin": {
       "datasource": [
@@ -24780,6 +29010,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1505,
       "industry": "Banking",
       "segment": "core",
@@ -24826,7 +29060,12 @@ export const REFERENCE_DATA = {
       "id": 1506,
       "industry": "Banking",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "banking.core.working_capital": {
       "datasource": [
@@ -24869,7 +29108,10 @@ export const REFERENCE_DATA = {
       "id": 1507,
       "industry": "Banking",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "banking.core.dso": {
       "datasource": [
@@ -24914,7 +29156,11 @@ export const REFERENCE_DATA = {
       "id": 1508,
       "industry": "Banking",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "banking.core.dpo": {
       "datasource": [
@@ -24959,7 +29205,11 @@ export const REFERENCE_DATA = {
       "id": 1509,
       "industry": "Banking",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "banking.core.ccc": {
       "datasource": [
@@ -25001,7 +29251,10 @@ export const REFERENCE_DATA = {
       "id": 1510,
       "industry": "Banking",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "banking.core.operating_cash_flow": {
       "datasource": [
@@ -25042,10 +29295,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1511,
       "industry": "Banking",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "banking.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3576,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3577,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3578,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3579,
+      "industry": "Banking",
+      "segment": "core"
+    },
+    "banking.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3580,
+      "industry": "Banking",
+      "segment": "core"
     },
     "banking.core.burn_rate": {
       "datasource": [
@@ -25089,7 +29563,11 @@ export const REFERENCE_DATA = {
       "id": 1512,
       "industry": "Banking",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "banking.core.runway": {
       "datasource": [
@@ -25131,7 +29609,11 @@ export const REFERENCE_DATA = {
       "id": 1513,
       "industry": "Banking",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "banking.core.headcount": {
       "name": "Headcount (FTE)",
@@ -25157,7 +29639,10 @@ export const REFERENCE_DATA = {
       "id": 1514,
       "industry": "Banking",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "banking.core.derived_gross_profit": {
       "datasource": [
@@ -25195,7 +29680,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2857,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "banking.core.derived_ebitda": {
       "datasource": [
@@ -25234,7 +29722,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2858,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "banking.core.derived_effective_tax_rate": {
       "datasource": [
@@ -25273,7 +29765,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2859,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "banking.core.derived_nopat": {
       "datasource": [
@@ -25310,7 +29805,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2860,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "banking.core.derived_net_debt": {
       "datasource": [
@@ -25348,7 +29846,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2861,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "banking.core.derived_invested_capital": {
       "datasource": [
@@ -25385,7 +29886,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2862,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "banking.core.derived_tangible_net_worth": {
       "datasource": [
@@ -25423,7 +29927,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2863,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "banking.core.derived_quick_assets": {
       "datasource": [
@@ -25462,7 +29969,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2864,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "banking.core.return_on_equity": {
       "datasource": [
@@ -25501,7 +30011,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2865,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "banking.core.return_on_assets": {
       "datasource": [
@@ -25540,7 +30053,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2866,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "banking.core.return_on_invested_capital": {
       "datasource": [
@@ -25576,7 +30092,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2867,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "banking.core.operating_profit_margin": {
       "datasource": [
@@ -25618,7 +30137,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2868,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "banking.core.net_profit_margin": {
       "datasource": [
@@ -25660,7 +30182,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2869,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "banking.core.effective_interest_rate": {
       "datasource": [
@@ -25699,7 +30225,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2870,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "banking.core.interest_burden": {
       "datasource": [
@@ -25738,7 +30267,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2871,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "banking.core.tax_burden": {
       "datasource": [
@@ -25777,7 +30309,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2872,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "banking.core.total_asset_turnover": {
       "datasource": [
@@ -25816,7 +30351,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2873,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "banking.core.ppe_turnover": {
       "datasource": [
@@ -25855,7 +30393,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2874,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "banking.core.cash_turnover": {
       "datasource": [
@@ -25894,7 +30435,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2875,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "banking.core.cash_days": {
       "datasource": [
@@ -25933,7 +30477,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2876,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "banking.core.accounts_receivable_turnover": {
       "datasource": [
@@ -25972,7 +30519,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2877,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "banking.core.accounts_receivable_days": {
       "datasource": [
@@ -26014,7 +30564,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2878,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "banking.core.inventory_turnover": {
       "datasource": [
@@ -26056,7 +30609,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2879,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "banking.core.inventory_days": {
       "datasource": [
@@ -26095,7 +30651,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2880,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "banking.core.accounts_payable_turnover": {
       "datasource": [
@@ -26134,7 +30693,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2881,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "banking.core.accounts_payable_days": {
       "datasource": [
@@ -26176,7 +30738,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2882,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "banking.core.total_assets_to_equity": {
       "datasource": [
@@ -26215,7 +30780,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2883,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "banking.core.debt_to_equity": {
       "datasource": [
@@ -26254,7 +30822,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2884,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "banking.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -26292,7 +30863,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2885,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "banking.core.debt_to_ebitda": {
       "datasource": [
@@ -26330,7 +30904,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2886,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "banking.core.net_debt_to_ebitda": {
       "datasource": [
@@ -26366,7 +30943,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2887,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "banking.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -26407,7 +30987,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2888,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "banking.core.ebitda_to_interest": {
       "datasource": [
@@ -26445,7 +31028,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2889,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "banking.core.ebit_to_interest": {
       "datasource": [
@@ -26484,7 +31071,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2890,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "banking.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -26523,7 +31113,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2891,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "banking.core.fixed_charge_coverage": {
       "datasource": [
@@ -26563,7 +31156,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 2892,
       "industry": "Banking",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "banking.depository.net_interest_margin": {
       "id": 1530,
@@ -26592,7 +31188,10 @@ export const REFERENCE_DATA = {
           "net_interest_income",
           "average_earning_assets"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Interest Margin"
+      ]
     },
     "banking.depository.non_performing_loan_ratio": {
       "id": 1531,
@@ -26626,7 +31225,10 @@ export const REFERENCE_DATA = {
           "non_performing_loans",
           "total_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Non-Performing Loan Ratio"
+      ]
     },
     "banking.depository.loan_to_deposit_ratio": {
       "id": 1532,
@@ -26655,7 +31257,10 @@ export const REFERENCE_DATA = {
           "total_loans",
           "total_deposits"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Loan-to-Deposit Ratio"
+      ]
     },
     "banking.depository.efficiency_ratio": {
       "id": 1533,
@@ -26689,7 +31294,10 @@ export const REFERENCE_DATA = {
           "operating_expense",
           "total_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Efficiency Ratio"
+      ]
     },
     "banking.depository.tier1_capital_ratio": {
       "id": 1534,
@@ -26712,7 +31320,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Capital adequacy — covenant and dividend capacity.",
       "segment": "depository",
       "slug": "tier1_capital_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Tier 1 Capital Ratio"
+      ]
     },
     "banking.depository.cost_of_funds": {
       "id": 1554,
@@ -26735,7 +31346,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Funding cost — margin pressure vs asset yields.",
       "segment": "depository",
       "slug": "cost_of_funds",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Cost of Funds"
+      ]
     },
     "banking.depository.stable_funding_ratio": {
       "id": 1556,
@@ -26758,7 +31372,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Liability structure — run risk and NIM stability.",
       "segment": "depository",
       "slug": "stable_funding_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Stable Funding Ratio"
+      ]
     },
     "banking.depository.liquidity_coverage_ratio": {
       "id": 1557,
@@ -26781,7 +31398,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Liquidity risk — regulatory and stress readiness.",
       "segment": "depository",
       "slug": "liquidity_coverage_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Liquidity Coverage Ratio"
+      ]
     },
     "banking.depository.net_stable_funding_ratio": {
       "id": 1558,
@@ -26804,7 +31424,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Structural liquidity — long-term funding adequacy.",
       "segment": "depository",
       "slug": "net_stable_funding_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Net Stable Funding Ratio"
+      ]
     },
     "banking.depository.interest_rate_risk_eve_sensitivity": {
       "id": 1559,
@@ -26827,7 +31450,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "ALM — rate risk to capital and NIM.",
       "segment": "depository",
       "slug": "interest_rate_risk_eve_sensitivity",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Interest Rate Risk EVE Sensitivity"
+      ]
     },
     "banking.depository.operational_risk_loss_ratio": {
       "id": 1567,
@@ -26856,7 +31482,10 @@ export const REFERENCE_DATA = {
           "operational_losses",
           "gross_income"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Operational Risk Loss Ratio"
+      ]
     },
     "banking.depository.stress_test_cet1_delta": {
       "id": 1568,
@@ -26879,7 +31508,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Capital planning — dividend and buffer capacity under stress.",
       "segment": "depository",
       "slug": "stress_test_cet1_delta",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Stress Test CET1 Delta"
+      ]
     },
     "financial_services.core.current_ratio": {
       "datasource": [
@@ -26922,7 +31554,11 @@ export const REFERENCE_DATA = {
       "id": 1600,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "financial_services.core.quick_ratio": {
       "datasource": [
@@ -26966,7 +31602,11 @@ export const REFERENCE_DATA = {
       "id": 1601,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "financial_services.core.gross_margin": {
       "datasource": [
@@ -27009,7 +31649,10 @@ export const REFERENCE_DATA = {
       "id": 1602,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "financial_services.core.operating_margin": {
       "datasource": [
@@ -27051,7 +31694,11 @@ export const REFERENCE_DATA = {
       "id": 1603,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "financial_services.core.ebitda_margin": {
       "datasource": [
@@ -27093,7 +31740,10 @@ export const REFERENCE_DATA = {
       "id": 1604,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "financial_services.core.net_margin": {
       "datasource": [
@@ -27132,6 +31782,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1605,
       "industry": "Financial Services",
       "segment": "core",
@@ -27178,7 +31832,12 @@ export const REFERENCE_DATA = {
       "id": 1606,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "financial_services.core.working_capital": {
       "datasource": [
@@ -27221,7 +31880,10 @@ export const REFERENCE_DATA = {
       "id": 1607,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "financial_services.core.dso": {
       "datasource": [
@@ -27266,7 +31928,11 @@ export const REFERENCE_DATA = {
       "id": 1608,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "financial_services.core.dpo": {
       "datasource": [
@@ -27311,7 +31977,11 @@ export const REFERENCE_DATA = {
       "id": 1609,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "financial_services.core.ccc": {
       "datasource": [
@@ -27353,7 +32023,10 @@ export const REFERENCE_DATA = {
       "id": 1610,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "financial_services.core.operating_cash_flow": {
       "datasource": [
@@ -27394,10 +32067,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1611,
       "industry": "Financial Services",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "financial_services.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3581,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3582,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3583,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3584,
+      "industry": "Financial Services",
+      "segment": "core"
+    },
+    "financial_services.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3585,
+      "industry": "Financial Services",
+      "segment": "core"
     },
     "financial_services.core.burn_rate": {
       "datasource": [
@@ -27441,7 +32335,11 @@ export const REFERENCE_DATA = {
       "id": 1612,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "financial_services.core.runway": {
       "datasource": [
@@ -27483,7 +32381,11 @@ export const REFERENCE_DATA = {
       "id": 1613,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "financial_services.core.headcount": {
       "name": "Headcount (FTE)",
@@ -27509,7 +32411,10 @@ export const REFERENCE_DATA = {
       "id": 1614,
       "industry": "Financial Services",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "financial_services.core.derived_gross_profit": {
       "datasource": [
@@ -27547,7 +32452,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3037,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "financial_services.core.derived_ebitda": {
       "datasource": [
@@ -27586,7 +32494,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3038,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "financial_services.core.derived_effective_tax_rate": {
       "datasource": [
@@ -27625,7 +32537,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3039,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "financial_services.core.derived_nopat": {
       "datasource": [
@@ -27662,7 +32577,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3040,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "financial_services.core.derived_net_debt": {
       "datasource": [
@@ -27700,7 +32618,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3041,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "financial_services.core.derived_invested_capital": {
       "datasource": [
@@ -27737,7 +32658,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3042,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "financial_services.core.derived_tangible_net_worth": {
       "datasource": [
@@ -27775,7 +32699,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3043,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "financial_services.core.derived_quick_assets": {
       "datasource": [
@@ -27814,7 +32741,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3044,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "financial_services.core.return_on_equity": {
       "datasource": [
@@ -27853,7 +32783,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3045,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "financial_services.core.return_on_assets": {
       "datasource": [
@@ -27892,7 +32825,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3046,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "financial_services.core.return_on_invested_capital": {
       "datasource": [
@@ -27928,7 +32864,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3047,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "financial_services.core.operating_profit_margin": {
       "datasource": [
@@ -27970,7 +32909,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3048,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "financial_services.core.net_profit_margin": {
       "datasource": [
@@ -28012,7 +32954,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3049,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "financial_services.core.effective_interest_rate": {
       "datasource": [
@@ -28051,7 +32997,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3050,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "financial_services.core.interest_burden": {
       "datasource": [
@@ -28090,7 +33039,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3051,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "financial_services.core.tax_burden": {
       "datasource": [
@@ -28129,7 +33081,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3052,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "financial_services.core.total_asset_turnover": {
       "datasource": [
@@ -28168,7 +33123,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3053,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "financial_services.core.ppe_turnover": {
       "datasource": [
@@ -28207,7 +33165,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3054,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "financial_services.core.cash_turnover": {
       "datasource": [
@@ -28246,7 +33207,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3055,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "financial_services.core.cash_days": {
       "datasource": [
@@ -28285,7 +33249,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3056,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "financial_services.core.accounts_receivable_turnover": {
       "datasource": [
@@ -28324,7 +33291,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3057,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "financial_services.core.accounts_receivable_days": {
       "datasource": [
@@ -28366,7 +33336,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3058,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "financial_services.core.inventory_turnover": {
       "datasource": [
@@ -28408,7 +33381,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3059,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "financial_services.core.inventory_days": {
       "datasource": [
@@ -28447,7 +33423,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3060,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "financial_services.core.accounts_payable_turnover": {
       "datasource": [
@@ -28486,7 +33465,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3061,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "financial_services.core.accounts_payable_days": {
       "datasource": [
@@ -28528,7 +33510,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3062,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "financial_services.core.total_assets_to_equity": {
       "datasource": [
@@ -28567,7 +33552,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3063,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "financial_services.core.debt_to_equity": {
       "datasource": [
@@ -28606,7 +33594,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3064,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "financial_services.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -28644,7 +33635,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3065,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "financial_services.core.debt_to_ebitda": {
       "datasource": [
@@ -28682,7 +33676,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3066,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "financial_services.core.net_debt_to_ebitda": {
       "datasource": [
@@ -28718,7 +33715,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3067,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "financial_services.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -28759,7 +33759,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3068,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "financial_services.core.ebitda_to_interest": {
       "datasource": [
@@ -28797,7 +33800,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3069,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "financial_services.core.ebit_to_interest": {
       "datasource": [
@@ -28836,7 +33843,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3070,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "financial_services.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -28875,7 +33885,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3071,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "financial_services.core.fixed_charge_coverage": {
       "datasource": [
@@ -28915,7 +33928,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3072,
       "industry": "Financial Services",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "financial_services.investment_banking.trading_revenue_ratio": {
       "id": 1535,
@@ -28944,7 +33960,10 @@ export const REFERENCE_DATA = {
           "trading_revenue",
           "total_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Trading Revenue Ratio"
+      ]
     },
     "financial_services.investment_banking.advisory_fee_ratio": {
       "id": 1553,
@@ -28973,7 +33992,10 @@ export const REFERENCE_DATA = {
           "advisory_fee_revenue",
           "total_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Advisory Fee Ratio"
+      ]
     },
     "financial_services.investment_banking.value_at_risk_99": {
       "id": 1590,
@@ -28996,7 +34018,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Market risk — capital and limit utilization.",
       "segment": "investment_banking",
       "slug": "value_at_risk_99",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Value at Risk 99%"
+      ]
     },
     "financial_services.investment_banking.stressed_var_99": {
       "id": 1591,
@@ -29019,7 +34044,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Tail risk — regulatory and internal stress overlays.",
       "segment": "investment_banking",
       "slug": "stressed_var_99",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Stressed VaR 99%"
+      ]
     },
     "financial_services.investment_banking.counterparty_exposure_ratio": {
       "id": 1592,
@@ -29042,7 +34070,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Credit risk — concentration to single counterparties.",
       "segment": "investment_banking",
       "slug": "counterparty_exposure_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Counterparty Exposure Ratio"
+      ]
     },
     "financial_services.investment_banking.market_making_revenue_share": {
       "id": 1593,
@@ -29071,7 +34102,10 @@ export const REFERENCE_DATA = {
           "market_making_revenue",
           "total_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Market Making Revenue Share"
+      ]
     },
     "financial_services.investment_banking.prime_brokerage_balance_growth": {
       "id": 1594,
@@ -29094,7 +34128,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Hedge fund wallet — financing and custody attach.",
       "segment": "investment_banking",
       "slug": "prime_brokerage_balance_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Prime Brokerage Balance Growth"
+      ]
     },
     "financial_services.investment_banking.trading_venue_volume_growth": {
       "id": 1615,
@@ -29117,7 +34154,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Market share — electronic and voice flow trends.",
       "segment": "investment_banking",
       "slug": "trading_venue_volume_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Trading Venue Volume Growth"
+      ]
     },
     "funds.core.current_ratio": {
       "datasource": [
@@ -29160,7 +34200,11 @@ export const REFERENCE_DATA = {
       "id": 1970,
       "industry": "Funds",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "funds.core.quick_ratio": {
       "datasource": [
@@ -29204,7 +34248,11 @@ export const REFERENCE_DATA = {
       "id": 1971,
       "industry": "Funds",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "funds.core.gross_margin": {
       "datasource": [
@@ -29247,7 +34295,10 @@ export const REFERENCE_DATA = {
       "id": 1972,
       "industry": "Funds",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "funds.core.operating_margin": {
       "datasource": [
@@ -29289,7 +34340,11 @@ export const REFERENCE_DATA = {
       "id": 1973,
       "industry": "Funds",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "funds.core.ebitda_margin": {
       "datasource": [
@@ -29331,7 +34386,10 @@ export const REFERENCE_DATA = {
       "id": 1974,
       "industry": "Funds",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "funds.core.net_margin": {
       "datasource": [
@@ -29370,6 +34428,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1975,
       "industry": "Funds",
       "segment": "core",
@@ -29416,7 +34478,12 @@ export const REFERENCE_DATA = {
       "id": 1976,
       "industry": "Funds",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "funds.core.working_capital": {
       "datasource": [
@@ -29459,7 +34526,10 @@ export const REFERENCE_DATA = {
       "id": 1977,
       "industry": "Funds",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "funds.core.dso": {
       "datasource": [
@@ -29504,7 +34574,11 @@ export const REFERENCE_DATA = {
       "id": 1978,
       "industry": "Funds",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "funds.core.dpo": {
       "datasource": [
@@ -29549,7 +34623,11 @@ export const REFERENCE_DATA = {
       "id": 1979,
       "industry": "Funds",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "funds.core.ccc": {
       "datasource": [
@@ -29591,7 +34669,10 @@ export const REFERENCE_DATA = {
       "id": 1980,
       "industry": "Funds",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "funds.core.operating_cash_flow": {
       "datasource": [
@@ -29632,10 +34713,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1981,
       "industry": "Funds",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "funds.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3626,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3627,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3628,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3629,
+      "industry": "Funds",
+      "segment": "core"
+    },
+    "funds.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3630,
+      "industry": "Funds",
+      "segment": "core"
     },
     "funds.core.burn_rate": {
       "datasource": [
@@ -29679,7 +34981,11 @@ export const REFERENCE_DATA = {
       "id": 1982,
       "industry": "Funds",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "funds.core.runway": {
       "datasource": [
@@ -29721,7 +35027,11 @@ export const REFERENCE_DATA = {
       "id": 1983,
       "industry": "Funds",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "funds.core.headcount": {
       "name": "Headcount (FTE)",
@@ -29747,7 +35057,10 @@ export const REFERENCE_DATA = {
       "id": 1984,
       "industry": "Funds",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "funds.core.derived_gross_profit": {
       "datasource": [
@@ -29785,7 +35098,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3073,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "funds.core.derived_ebitda": {
       "datasource": [
@@ -29824,7 +35140,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3074,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "funds.core.derived_effective_tax_rate": {
       "datasource": [
@@ -29863,7 +35183,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3075,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "funds.core.derived_nopat": {
       "datasource": [
@@ -29900,7 +35223,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3076,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "funds.core.derived_net_debt": {
       "datasource": [
@@ -29938,7 +35264,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3077,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "funds.core.derived_invested_capital": {
       "datasource": [
@@ -29975,7 +35304,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3078,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "funds.core.derived_tangible_net_worth": {
       "datasource": [
@@ -30013,7 +35345,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3079,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "funds.core.derived_quick_assets": {
       "datasource": [
@@ -30052,7 +35387,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3080,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "funds.core.return_on_equity": {
       "datasource": [
@@ -30091,7 +35429,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3081,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "funds.core.return_on_assets": {
       "datasource": [
@@ -30130,7 +35471,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3082,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "funds.core.return_on_invested_capital": {
       "datasource": [
@@ -30166,7 +35510,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3083,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "funds.core.operating_profit_margin": {
       "datasource": [
@@ -30208,7 +35555,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3084,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "funds.core.net_profit_margin": {
       "datasource": [
@@ -30250,7 +35600,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3085,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "funds.core.effective_interest_rate": {
       "datasource": [
@@ -30289,7 +35643,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3086,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "funds.core.interest_burden": {
       "datasource": [
@@ -30328,7 +35685,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3087,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "funds.core.tax_burden": {
       "datasource": [
@@ -30367,7 +35727,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3088,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "funds.core.total_asset_turnover": {
       "datasource": [
@@ -30406,7 +35769,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3089,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "funds.core.ppe_turnover": {
       "datasource": [
@@ -30445,7 +35811,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3090,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "funds.core.cash_turnover": {
       "datasource": [
@@ -30484,7 +35853,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3091,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "funds.core.cash_days": {
       "datasource": [
@@ -30523,7 +35895,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3092,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "funds.core.accounts_receivable_turnover": {
       "datasource": [
@@ -30562,7 +35937,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3093,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "funds.core.accounts_receivable_days": {
       "datasource": [
@@ -30604,7 +35982,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3094,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "funds.core.inventory_turnover": {
       "datasource": [
@@ -30646,7 +36027,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3095,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "funds.core.inventory_days": {
       "datasource": [
@@ -30685,7 +36069,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3096,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "funds.core.accounts_payable_turnover": {
       "datasource": [
@@ -30724,7 +36111,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3097,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "funds.core.accounts_payable_days": {
       "datasource": [
@@ -30766,7 +36156,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3098,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "funds.core.total_assets_to_equity": {
       "datasource": [
@@ -30805,7 +36198,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3099,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "funds.core.debt_to_equity": {
       "datasource": [
@@ -30844,7 +36240,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3100,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "funds.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -30882,7 +36281,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3101,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "funds.core.debt_to_ebitda": {
       "datasource": [
@@ -30920,7 +36322,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3102,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "funds.core.net_debt_to_ebitda": {
       "datasource": [
@@ -30956,7 +36361,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3103,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "funds.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -30997,7 +36405,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3104,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "funds.core.ebitda_to_interest": {
       "datasource": [
@@ -31035,7 +36446,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3105,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "funds.core.ebit_to_interest": {
       "datasource": [
@@ -31074,7 +36489,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3106,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "funds.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -31113,7 +36531,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3107,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "funds.core.fixed_charge_coverage": {
       "datasource": [
@@ -31153,7 +36574,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3108,
       "industry": "Funds",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "funds.fund.assets_under_management": {
       "id": 1900,
@@ -31176,7 +36600,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Scale — base for fees, flows, and custody.",
       "segment": "fund",
       "slug": "assets_under_management",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Assets Under Management"
+      ]
     },
     "funds.fund.net_flow_rate": {
       "id": 1901,
@@ -31206,7 +36633,10 @@ export const REFERENCE_DATA = {
           "outflows",
           "beginning_aum"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Flow Rate"
+      ]
     },
     "funds.fund.management_fee_yield": {
       "id": 1902,
@@ -31235,7 +36665,10 @@ export const REFERENCE_DATA = {
           "management_fees",
           "average_aum"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Management Fee Yield"
+      ]
     },
     "funds.fund.performance_fee_share": {
       "id": 1903,
@@ -31264,7 +36697,10 @@ export const REFERENCE_DATA = {
           "performance_fees",
           "total_fund_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Performance Fee Share"
+      ]
     },
     "funds.fund.fund_irr": {
       "id": 1904,
@@ -31287,7 +36723,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Closed-end performance — LP reporting.",
       "segment": "fund",
       "slug": "fund_irr",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Fund IRR"
+      ]
     },
     "funds.fund.tvpi": {
       "id": 1905,
@@ -31317,7 +36756,10 @@ export const REFERENCE_DATA = {
           "nav",
           "paid_in_capital"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "TVPI"
+      ]
     },
     "funds.fund.dpi": {
       "id": 1906,
@@ -31346,7 +36788,10 @@ export const REFERENCE_DATA = {
           "distributions",
           "paid_in_capital"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "DPI"
+      ]
     },
     "funds.fund.capital_deployment_rate": {
       "id": 1907,
@@ -31375,7 +36820,10 @@ export const REFERENCE_DATA = {
           "called_capital",
           "committed_capital"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Capital Deployment Rate"
+      ]
     },
     "funds.fund.fund_leverage_ratio": {
       "id": 1908,
@@ -31398,7 +36846,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Fund risk — gearing and margin sensitivity.",
       "segment": "fund",
       "slug": "fund_leverage_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Fund Leverage Ratio"
+      ]
     },
     "funds.fund.liquidity_gate_frequency": {
       "id": 1909,
@@ -31421,7 +36872,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Investor liquidity risk — redemptions and fund structures.",
       "segment": "fund",
       "slug": "liquidity_gate_frequency",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Liquidity Gate Frequency"
+      ]
     },
     "funds.fund.strategy_return_volatility": {
       "id": 1910,
@@ -31444,7 +36898,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Risk limits — allocator due diligence.",
       "segment": "fund",
       "slug": "strategy_return_volatility",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Strategy Return Volatility"
+      ]
     },
     "funds.fund.assets_under_custody": {
       "id": 1911,
@@ -31467,7 +36924,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Securities services scale — safekeeping attach.",
       "segment": "fund",
       "slug": "assets_under_custody",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Assets Under Custody"
+      ]
     },
     "funds.fund.custody_fee_yield": {
       "id": 1912,
@@ -31496,7 +36956,10 @@ export const REFERENCE_DATA = {
           "custody_fees",
           "average_auc"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Custody Fee Yield"
+      ]
     },
     "funds.fund.settlement_fail_rate": {
       "id": 1913,
@@ -31525,7 +36988,10 @@ export const REFERENCE_DATA = {
           "failed_settlements",
           "total_settlement_instructions"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Settlement Fail Rate"
+      ]
     },
     "funds.fund.safekeeping_asset_growth": {
       "id": 1914,
@@ -31548,7 +37014,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Wallet growth — custody-led relationships.",
       "segment": "fund",
       "slug": "safekeeping_asset_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Safekeeping Asset Growth"
+      ]
     },
     "funds.fund.rvpi": {
       "id": 1922,
@@ -31577,7 +37046,10 @@ export const REFERENCE_DATA = {
           "nav",
           "paid_in_capital"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "RVPI"
+      ]
     },
     "funds.operations.investment_close_rate": {
       "id": 1923,
@@ -31607,7 +37079,10 @@ export const REFERENCE_DATA = {
           "closed_investments",
           "qualified_opportunities"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Investment Close Rate"
+      ]
     },
     "funds.operations.average_investment_size": {
       "id": 1924,
@@ -31636,7 +37111,10 @@ export const REFERENCE_DATA = {
           "deployed_capital",
           "new_investments"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Average Investment Size"
+      ]
     },
     "funds.operations.new_investments_count": {
       "id": 1925,
@@ -31659,7 +37137,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Deployment volume — deal velocity.",
       "segment": "operations",
       "slug": "new_investments_count",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "New Investments Count"
+      ]
     },
     "funds.operations.qualified_opportunities_count": {
       "id": 1926,
@@ -31682,7 +37163,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Pipeline depth — sourcing funnel numerator/denominator.",
       "segment": "operations",
       "slug": "qualified_opportunities_count",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Qualified Opportunities Count"
+      ]
     },
     "funds.operations.active_portfolio_company_count": {
       "id": 1927,
@@ -31705,7 +37189,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Portfolio scale — support and monitoring load.",
       "segment": "operations",
       "slug": "active_portfolio_company_count",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Active Portfolio Company Count"
+      ]
     },
     "funds.operations.follow_on_investment_rate": {
       "id": 1928,
@@ -31734,7 +37221,10 @@ export const REFERENCE_DATA = {
           "follow_on_investments",
           "eligible_portfolio_companies"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Follow-On Investment Rate"
+      ]
     },
     "funds.operations.portfolio_write_down_rate": {
       "id": 1929,
@@ -31763,7 +37253,10 @@ export const REFERENCE_DATA = {
           "impaired_carrying_value",
           "portfolio_cost_basis"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Portfolio Write-Down Rate"
+      ]
     },
     "funds.operations.co_investment_participation_rate": {
       "id": 1930,
@@ -31792,7 +37285,10 @@ export const REFERENCE_DATA = {
           "deals_with_co_investors",
           "total_closed_deals"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Co-Investment Participation Rate"
+      ]
     },
     "funds.operations.fundraising_commitment_progress": {
       "id": 1931,
@@ -31821,7 +37317,10 @@ export const REFERENCE_DATA = {
           "committed_capital",
           "fundraising_target"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Fundraising Commitment Progress"
+      ]
     },
     "funds.operations.management_fee_operating_coverage": {
       "id": 1932,
@@ -31850,7 +37349,10 @@ export const REFERENCE_DATA = {
           "management_fees",
           "operating_expenses"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Management Fee Operating Coverage"
+      ]
     },
     "funds.operations.program_investment_conversion_rate": {
       "id": 1933,
@@ -31880,7 +37382,10 @@ export const REFERENCE_DATA = {
           "program_investments",
           "program_participants"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Program Investment Conversion Rate"
+      ]
     },
     "funds.operations.inbound_attributed_pipeline_share": {
       "id": 1934,
@@ -31910,7 +37415,10 @@ export const REFERENCE_DATA = {
           "inbound_qualified_opportunities",
           "total_qualified_opportunities"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Inbound Attributed Pipeline Share"
+      ]
     },
     "trusts.core.current_ratio": {
       "datasource": [
@@ -31953,7 +37461,11 @@ export const REFERENCE_DATA = {
       "id": 1985,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "trusts.core.quick_ratio": {
       "datasource": [
@@ -31997,7 +37509,11 @@ export const REFERENCE_DATA = {
       "id": 1986,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "trusts.core.gross_margin": {
       "datasource": [
@@ -32040,7 +37556,10 @@ export const REFERENCE_DATA = {
       "id": 1987,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "trusts.core.operating_margin": {
       "datasource": [
@@ -32082,7 +37601,11 @@ export const REFERENCE_DATA = {
       "id": 1988,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "trusts.core.ebitda_margin": {
       "datasource": [
@@ -32124,7 +37647,10 @@ export const REFERENCE_DATA = {
       "id": 1989,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "trusts.core.net_margin": {
       "datasource": [
@@ -32163,6 +37689,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1990,
       "industry": "Trusts",
       "segment": "core",
@@ -32209,7 +37739,12 @@ export const REFERENCE_DATA = {
       "id": 1991,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "trusts.core.working_capital": {
       "datasource": [
@@ -32252,7 +37787,10 @@ export const REFERENCE_DATA = {
       "id": 1992,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "trusts.core.dso": {
       "datasource": [
@@ -32297,7 +37835,11 @@ export const REFERENCE_DATA = {
       "id": 1993,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "trusts.core.dpo": {
       "datasource": [
@@ -32342,7 +37884,11 @@ export const REFERENCE_DATA = {
       "id": 1994,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "trusts.core.ccc": {
       "datasource": [
@@ -32384,7 +37930,10 @@ export const REFERENCE_DATA = {
       "id": 1995,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "trusts.core.operating_cash_flow": {
       "datasource": [
@@ -32425,10 +37974,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1996,
       "industry": "Trusts",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "trusts.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3631,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3632,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3633,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3634,
+      "industry": "Trusts",
+      "segment": "core"
+    },
+    "trusts.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3635,
+      "industry": "Trusts",
+      "segment": "core"
     },
     "trusts.core.burn_rate": {
       "datasource": [
@@ -32472,7 +38242,11 @@ export const REFERENCE_DATA = {
       "id": 1997,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "trusts.core.runway": {
       "datasource": [
@@ -32514,7 +38288,11 @@ export const REFERENCE_DATA = {
       "id": 1998,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "trusts.core.headcount": {
       "name": "Headcount (FTE)",
@@ -32540,7 +38318,10 @@ export const REFERENCE_DATA = {
       "id": 1999,
       "industry": "Trusts",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "trusts.core.derived_gross_profit": {
       "datasource": [
@@ -32578,7 +38359,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3469,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "trusts.core.derived_ebitda": {
       "datasource": [
@@ -32617,7 +38401,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3470,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "trusts.core.derived_effective_tax_rate": {
       "datasource": [
@@ -32656,7 +38444,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3471,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "trusts.core.derived_nopat": {
       "datasource": [
@@ -32693,7 +38484,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3472,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "trusts.core.derived_net_debt": {
       "datasource": [
@@ -32731,7 +38525,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3473,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "trusts.core.derived_invested_capital": {
       "datasource": [
@@ -32768,7 +38565,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3474,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "trusts.core.derived_tangible_net_worth": {
       "datasource": [
@@ -32806,7 +38606,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3475,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "trusts.core.derived_quick_assets": {
       "datasource": [
@@ -32845,7 +38648,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3476,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "trusts.core.return_on_equity": {
       "datasource": [
@@ -32884,7 +38690,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3477,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "trusts.core.return_on_assets": {
       "datasource": [
@@ -32923,7 +38732,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3478,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "trusts.core.return_on_invested_capital": {
       "datasource": [
@@ -32959,7 +38771,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3479,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "trusts.core.operating_profit_margin": {
       "datasource": [
@@ -33001,7 +38816,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3480,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "trusts.core.net_profit_margin": {
       "datasource": [
@@ -33043,7 +38861,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3481,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "trusts.core.effective_interest_rate": {
       "datasource": [
@@ -33082,7 +38904,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3482,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "trusts.core.interest_burden": {
       "datasource": [
@@ -33121,7 +38946,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3483,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "trusts.core.tax_burden": {
       "datasource": [
@@ -33160,7 +38988,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3484,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "trusts.core.total_asset_turnover": {
       "datasource": [
@@ -33199,7 +39030,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3485,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "trusts.core.ppe_turnover": {
       "datasource": [
@@ -33238,7 +39072,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3486,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "trusts.core.cash_turnover": {
       "datasource": [
@@ -33277,7 +39114,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3487,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "trusts.core.cash_days": {
       "datasource": [
@@ -33316,7 +39156,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3488,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "trusts.core.accounts_receivable_turnover": {
       "datasource": [
@@ -33355,7 +39198,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3489,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "trusts.core.accounts_receivable_days": {
       "datasource": [
@@ -33397,7 +39243,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3490,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "trusts.core.inventory_turnover": {
       "datasource": [
@@ -33439,7 +39288,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3491,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "trusts.core.inventory_days": {
       "datasource": [
@@ -33478,7 +39330,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3492,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "trusts.core.accounts_payable_turnover": {
       "datasource": [
@@ -33517,7 +39372,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3493,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "trusts.core.accounts_payable_days": {
       "datasource": [
@@ -33559,7 +39417,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3494,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "trusts.core.total_assets_to_equity": {
       "datasource": [
@@ -33598,7 +39459,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3495,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "trusts.core.debt_to_equity": {
       "datasource": [
@@ -33637,7 +39501,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3496,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "trusts.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -33675,7 +39542,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3497,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "trusts.core.debt_to_ebitda": {
       "datasource": [
@@ -33713,7 +39583,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3498,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "trusts.core.net_debt_to_ebitda": {
       "datasource": [
@@ -33749,7 +39622,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3499,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "trusts.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -33790,7 +39666,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3500,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "trusts.core.ebitda_to_interest": {
       "datasource": [
@@ -33828,7 +39707,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3501,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "trusts.core.ebit_to_interest": {
       "datasource": [
@@ -33867,7 +39750,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3502,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "trusts.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -33906,7 +39792,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3503,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "trusts.core.fixed_charge_coverage": {
       "datasource": [
@@ -33946,7 +39835,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3504,
       "industry": "Trusts",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "trusts.trust.trust_assets_under_administration": {
       "id": 1943,
@@ -33969,7 +39861,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Trust administration scale — fiduciary book size.",
       "segment": "trust",
       "slug": "trust_assets_under_administration",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Trust Assets Under Administration"
+      ]
     },
     "trusts.trust.trustee_fee_yield": {
       "id": 1944,
@@ -33998,7 +39893,10 @@ export const REFERENCE_DATA = {
           "trustee_fees",
           "average_trust_aua"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Trustee Fee Yield"
+      ]
     },
     "insurance.core.current_ratio": {
       "datasource": [
@@ -34041,7 +39939,11 @@ export const REFERENCE_DATA = {
       "id": 1620,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "insurance.core.quick_ratio": {
       "datasource": [
@@ -34085,7 +39987,11 @@ export const REFERENCE_DATA = {
       "id": 1621,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "insurance.core.gross_margin": {
       "datasource": [
@@ -34128,7 +40034,10 @@ export const REFERENCE_DATA = {
       "id": 1622,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "insurance.core.operating_margin": {
       "datasource": [
@@ -34170,7 +40079,11 @@ export const REFERENCE_DATA = {
       "id": 1623,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "insurance.core.ebitda_margin": {
       "datasource": [
@@ -34212,7 +40125,10 @@ export const REFERENCE_DATA = {
       "id": 1624,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "insurance.core.net_margin": {
       "datasource": [
@@ -34251,6 +40167,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1625,
       "industry": "Insurance",
       "segment": "core",
@@ -34297,7 +40217,12 @@ export const REFERENCE_DATA = {
       "id": 1626,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "insurance.core.working_capital": {
       "datasource": [
@@ -34340,7 +40265,10 @@ export const REFERENCE_DATA = {
       "id": 1627,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "insurance.core.dso": {
       "datasource": [
@@ -34385,7 +40313,11 @@ export const REFERENCE_DATA = {
       "id": 1628,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "insurance.core.dpo": {
       "datasource": [
@@ -34430,7 +40362,11 @@ export const REFERENCE_DATA = {
       "id": 1629,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "insurance.core.ccc": {
       "datasource": [
@@ -34472,7 +40408,10 @@ export const REFERENCE_DATA = {
       "id": 1630,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "insurance.core.operating_cash_flow": {
       "datasource": [
@@ -34513,10 +40452,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1631,
       "industry": "Insurance",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "insurance.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3586,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3587,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3588,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3589,
+      "industry": "Insurance",
+      "segment": "core"
+    },
+    "insurance.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3590,
+      "industry": "Insurance",
+      "segment": "core"
     },
     "insurance.core.burn_rate": {
       "datasource": [
@@ -34560,7 +40720,11 @@ export const REFERENCE_DATA = {
       "id": 1632,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "insurance.core.runway": {
       "datasource": [
@@ -34602,7 +40766,11 @@ export const REFERENCE_DATA = {
       "id": 1633,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "insurance.core.headcount": {
       "name": "Headcount (FTE)",
@@ -34628,7 +40796,10 @@ export const REFERENCE_DATA = {
       "id": 1634,
       "industry": "Insurance",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "insurance.core.derived_gross_profit": {
       "datasource": [
@@ -34666,7 +40837,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3145,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "insurance.core.derived_ebitda": {
       "datasource": [
@@ -34705,7 +40879,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3146,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "insurance.core.derived_effective_tax_rate": {
       "datasource": [
@@ -34744,7 +40922,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3147,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "insurance.core.derived_nopat": {
       "datasource": [
@@ -34781,7 +40962,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3148,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "insurance.core.derived_net_debt": {
       "datasource": [
@@ -34819,7 +41003,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3149,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "insurance.core.derived_invested_capital": {
       "datasource": [
@@ -34856,7 +41043,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3150,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "insurance.core.derived_tangible_net_worth": {
       "datasource": [
@@ -34894,7 +41084,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3151,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "insurance.core.derived_quick_assets": {
       "datasource": [
@@ -34933,7 +41126,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3152,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "insurance.core.return_on_equity": {
       "datasource": [
@@ -34972,7 +41168,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3153,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "insurance.core.return_on_assets": {
       "datasource": [
@@ -35011,7 +41210,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3154,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "insurance.core.return_on_invested_capital": {
       "datasource": [
@@ -35047,7 +41249,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3155,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "insurance.core.operating_profit_margin": {
       "datasource": [
@@ -35089,7 +41294,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3156,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "insurance.core.net_profit_margin": {
       "datasource": [
@@ -35131,7 +41339,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3157,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "insurance.core.effective_interest_rate": {
       "datasource": [
@@ -35170,7 +41382,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3158,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "insurance.core.interest_burden": {
       "datasource": [
@@ -35209,7 +41424,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3159,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "insurance.core.tax_burden": {
       "datasource": [
@@ -35248,7 +41466,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3160,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "insurance.core.total_asset_turnover": {
       "datasource": [
@@ -35287,7 +41508,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3161,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "insurance.core.ppe_turnover": {
       "datasource": [
@@ -35326,7 +41550,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3162,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "insurance.core.cash_turnover": {
       "datasource": [
@@ -35365,7 +41592,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3163,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "insurance.core.cash_days": {
       "datasource": [
@@ -35404,7 +41634,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3164,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "insurance.core.accounts_receivable_turnover": {
       "datasource": [
@@ -35443,7 +41676,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3165,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "insurance.core.accounts_receivable_days": {
       "datasource": [
@@ -35485,7 +41721,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3166,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "insurance.core.inventory_turnover": {
       "datasource": [
@@ -35527,7 +41766,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3167,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "insurance.core.inventory_days": {
       "datasource": [
@@ -35566,7 +41808,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3168,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "insurance.core.accounts_payable_turnover": {
       "datasource": [
@@ -35605,7 +41850,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3169,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "insurance.core.accounts_payable_days": {
       "datasource": [
@@ -35647,7 +41895,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3170,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "insurance.core.total_assets_to_equity": {
       "datasource": [
@@ -35686,7 +41937,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3171,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "insurance.core.debt_to_equity": {
       "datasource": [
@@ -35725,7 +41979,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3172,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "insurance.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -35763,7 +42020,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3173,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "insurance.core.debt_to_ebitda": {
       "datasource": [
@@ -35801,7 +42061,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3174,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "insurance.core.net_debt_to_ebitda": {
       "datasource": [
@@ -35837,7 +42100,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3175,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "insurance.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -35878,7 +42144,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3176,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "insurance.core.ebitda_to_interest": {
       "datasource": [
@@ -35916,7 +42185,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3177,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "insurance.core.ebit_to_interest": {
       "datasource": [
@@ -35955,7 +42228,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3178,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "insurance.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -35994,7 +42270,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3179,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "insurance.core.fixed_charge_coverage": {
       "datasource": [
@@ -36034,7 +42313,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3180,
       "industry": "Insurance",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "insurance.property_casualty.combined_ratio": {
       "id": 1547,
@@ -36064,7 +42346,10 @@ export const REFERENCE_DATA = {
           "underwriting_expense",
           "earned_premiums"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Combined Ratio"
+      ]
     },
     "insurance.property_casualty.loss_ratio": {
       "id": 1548,
@@ -36093,7 +42378,10 @@ export const REFERENCE_DATA = {
           "incurred_losses",
           "earned_premiums"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Loss Ratio"
+      ]
     },
     "insurance.property_casualty.premium_growth": {
       "id": 1549,
@@ -36116,7 +42404,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Top-line momentum — new business and rate changes.",
       "segment": "property_casualty",
       "slug": "premium_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Premium Growth"
+      ]
     },
     "insurance.life.benefit_ratio": {
       "id": 1555,
@@ -36145,7 +42436,10 @@ export const REFERENCE_DATA = {
           "benefits_paid",
           "earned_premiums"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Benefit Ratio"
+      ]
     },
     "insurance.property_casualty.reserve_development_ratio": {
       "id": 1574,
@@ -36168,7 +42462,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Reserving risk — adverse development signal.",
       "segment": "property_casualty",
       "slug": "reserve_development_ratio",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Reserve Development Ratio"
+      ]
     },
     "insurance.property_casualty.catastrophe_loss_ratio": {
       "id": 1575,
@@ -36197,7 +42494,10 @@ export const REFERENCE_DATA = {
           "catastrophe_losses",
           "earned_premiums"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Catastrophe Loss Ratio"
+      ]
     },
     "credit_granting.core.current_ratio": {
       "datasource": [
@@ -36240,7 +42540,11 @@ export const REFERENCE_DATA = {
       "id": 1700,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "credit_granting.core.quick_ratio": {
       "datasource": [
@@ -36284,7 +42588,11 @@ export const REFERENCE_DATA = {
       "id": 1701,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "credit_granting.core.gross_margin": {
       "datasource": [
@@ -36327,7 +42635,10 @@ export const REFERENCE_DATA = {
       "id": 1702,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "credit_granting.core.operating_margin": {
       "datasource": [
@@ -36369,7 +42680,11 @@ export const REFERENCE_DATA = {
       "id": 1703,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "credit_granting.core.ebitda_margin": {
       "datasource": [
@@ -36411,7 +42726,10 @@ export const REFERENCE_DATA = {
       "id": 1704,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "credit_granting.core.net_margin": {
       "datasource": [
@@ -36450,6 +42768,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1705,
       "industry": "Credit Granting",
       "segment": "core",
@@ -36496,7 +42818,12 @@ export const REFERENCE_DATA = {
       "id": 1706,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "credit_granting.core.working_capital": {
       "datasource": [
@@ -36539,7 +42866,10 @@ export const REFERENCE_DATA = {
       "id": 1707,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "credit_granting.core.dso": {
       "datasource": [
@@ -36584,7 +42914,11 @@ export const REFERENCE_DATA = {
       "id": 1708,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "credit_granting.core.dpo": {
       "datasource": [
@@ -36629,7 +42963,11 @@ export const REFERENCE_DATA = {
       "id": 1709,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "credit_granting.core.ccc": {
       "datasource": [
@@ -36671,7 +43009,10 @@ export const REFERENCE_DATA = {
       "id": 1710,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "credit_granting.core.operating_cash_flow": {
       "datasource": [
@@ -36712,10 +43053,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1711,
       "industry": "Credit Granting",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "credit_granting.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3606,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3607,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3608,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3609,
+      "industry": "Credit Granting",
+      "segment": "core"
+    },
+    "credit_granting.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3610,
+      "industry": "Credit Granting",
+      "segment": "core"
     },
     "credit_granting.core.burn_rate": {
       "datasource": [
@@ -36759,7 +43321,11 @@ export const REFERENCE_DATA = {
       "id": 1712,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "credit_granting.core.runway": {
       "datasource": [
@@ -36801,7 +43367,11 @@ export const REFERENCE_DATA = {
       "id": 1713,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "credit_granting.core.headcount": {
       "name": "Headcount (FTE)",
@@ -36827,7 +43397,10 @@ export const REFERENCE_DATA = {
       "id": 1714,
       "industry": "Credit Granting",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "credit_granting.core.derived_gross_profit": {
       "datasource": [
@@ -36865,7 +43438,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3001,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "credit_granting.core.derived_ebitda": {
       "datasource": [
@@ -36904,7 +43480,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3002,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "credit_granting.core.derived_effective_tax_rate": {
       "datasource": [
@@ -36943,7 +43523,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3003,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "credit_granting.core.derived_nopat": {
       "datasource": [
@@ -36980,7 +43563,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3004,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "credit_granting.core.derived_net_debt": {
       "datasource": [
@@ -37018,7 +43604,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3005,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "credit_granting.core.derived_invested_capital": {
       "datasource": [
@@ -37055,7 +43644,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3006,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "credit_granting.core.derived_tangible_net_worth": {
       "datasource": [
@@ -37093,7 +43685,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3007,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "credit_granting.core.derived_quick_assets": {
       "datasource": [
@@ -37132,7 +43727,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3008,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "credit_granting.core.return_on_equity": {
       "datasource": [
@@ -37171,7 +43769,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3009,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "credit_granting.core.return_on_assets": {
       "datasource": [
@@ -37210,7 +43811,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3010,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "credit_granting.core.return_on_invested_capital": {
       "datasource": [
@@ -37246,7 +43850,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3011,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "credit_granting.core.operating_profit_margin": {
       "datasource": [
@@ -37288,7 +43895,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3012,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "credit_granting.core.net_profit_margin": {
       "datasource": [
@@ -37330,7 +43940,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3013,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "credit_granting.core.effective_interest_rate": {
       "datasource": [
@@ -37369,7 +43983,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3014,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "credit_granting.core.interest_burden": {
       "datasource": [
@@ -37408,7 +44025,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3015,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "credit_granting.core.tax_burden": {
       "datasource": [
@@ -37447,7 +44067,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3016,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "credit_granting.core.total_asset_turnover": {
       "datasource": [
@@ -37486,7 +44109,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3017,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "credit_granting.core.ppe_turnover": {
       "datasource": [
@@ -37525,7 +44151,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3018,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "credit_granting.core.cash_turnover": {
       "datasource": [
@@ -37564,7 +44193,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3019,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "credit_granting.core.cash_days": {
       "datasource": [
@@ -37603,7 +44235,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3020,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "credit_granting.core.accounts_receivable_turnover": {
       "datasource": [
@@ -37642,7 +44277,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3021,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "credit_granting.core.accounts_receivable_days": {
       "datasource": [
@@ -37684,7 +44322,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3022,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "credit_granting.core.inventory_turnover": {
       "datasource": [
@@ -37726,7 +44367,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3023,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "credit_granting.core.inventory_days": {
       "datasource": [
@@ -37765,7 +44409,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3024,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "credit_granting.core.accounts_payable_turnover": {
       "datasource": [
@@ -37804,7 +44451,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3025,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "credit_granting.core.accounts_payable_days": {
       "datasource": [
@@ -37846,7 +44496,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3026,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "credit_granting.core.total_assets_to_equity": {
       "datasource": [
@@ -37885,7 +44538,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3027,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "credit_granting.core.debt_to_equity": {
       "datasource": [
@@ -37924,7 +44580,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3028,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "credit_granting.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -37962,7 +44621,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3029,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "credit_granting.core.debt_to_ebitda": {
       "datasource": [
@@ -38000,7 +44662,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3030,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "credit_granting.core.net_debt_to_ebitda": {
       "datasource": [
@@ -38036,7 +44701,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3031,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "credit_granting.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -38077,7 +44745,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3032,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "credit_granting.core.ebitda_to_interest": {
       "datasource": [
@@ -38115,7 +44786,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3033,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "credit_granting.core.ebit_to_interest": {
       "datasource": [
@@ -38154,7 +44829,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3034,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "credit_granting.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -38193,7 +44871,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3035,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "credit_granting.core.fixed_charge_coverage": {
       "datasource": [
@@ -38233,7 +44914,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3036,
       "industry": "Credit Granting",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "credit_granting.consumer_lending.portfolio_yield": {
       "id": 1720,
@@ -38262,7 +44946,10 @@ export const REFERENCE_DATA = {
           "interest_income",
           "average_receivables"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Portfolio Yield"
+      ]
     },
     "credit_granting.consumer_lending.net_charge_off_rate": {
       "id": 1721,
@@ -38296,7 +44983,10 @@ export const REFERENCE_DATA = {
           "net_charge_offs",
           "average_receivables"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Charge-Off Rate"
+      ]
     },
     "credit_granting.consumer_lending.delinquency_rate_30d": {
       "id": 1722,
@@ -38330,7 +45020,10 @@ export const REFERENCE_DATA = {
           "delinquent_balance_30_plus",
           "total_receivables"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "30+ Day Delinquency Rate"
+      ]
     },
     "credit_granting.consumer_lending.origination_volume_growth": {
       "id": 1723,
@@ -38353,7 +45046,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Top-line momentum — market share and underwriting appetite.",
       "segment": "consumer_lending",
       "slug": "origination_volume_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Origination Volume Growth"
+      ]
     },
     "credit_granting.consumer_lending.payment_volume": {
       "id": 1724,
@@ -38376,7 +45072,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Interchange and transaction fee scale — cards and wallets.",
       "segment": "consumer_lending",
       "slug": "payment_volume",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Card Payment Volume"
+      ]
     },
     "credit_granting.consumer_lending.bnpl_origination_growth": {
       "id": 1725,
@@ -38399,7 +45098,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Embedded finance — BNPL wallet share and merchant partnerships.",
       "segment": "consumer_lending",
       "slug": "bnpl_origination_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "BNPL Origination Growth"
+      ]
     },
     "credit_granting.consumer_lending.embedded_finance_revenue_share": {
       "id": 1726,
@@ -38428,7 +45130,10 @@ export const REFERENCE_DATA = {
           "embedded_channel_revenue",
           "total_consumer_finance_revenue"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Embedded Finance Revenue Share"
+      ]
     },
     "credit_granting.consumer_lending.rtp_payment_volume": {
       "id": 1727,
@@ -38451,7 +45156,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Payments modernization — RTP adoption and fee scale.",
       "segment": "consumer_lending",
       "slug": "rtp_payment_volume",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "RTP Payment Volume"
+      ]
     },
     "credit_granting.consumer_lending.merchant_acquiring_volume": {
       "id": 1728,
@@ -38474,7 +45182,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Merchant services — interchange and acquiring economics.",
       "segment": "consumer_lending",
       "slug": "merchant_acquiring_volume",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Merchant Acquiring Volume"
+      ]
     },
     "credit_granting.residential_mortgage.portfolio_yield": {
       "id": 1790,
@@ -38503,7 +45214,10 @@ export const REFERENCE_DATA = {
           "interest_income",
           "average_mortgage_balances"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Residential Mortgage Portfolio Yield"
+      ]
     },
     "credit_granting.residential_mortgage.delinquency_rate_30d": {
       "id": 1791,
@@ -38537,7 +45251,10 @@ export const REFERENCE_DATA = {
           "delinquent_balance_30_plus",
           "total_mortgage_balances"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Residential Mortgage 30+ Day Delinquency"
+      ]
     },
     "credit_granting.residential_mortgage.weighted_average_ltv": {
       "id": 1792,
@@ -38566,7 +45283,10 @@ export const REFERENCE_DATA = {
           "weighted_ltv_numerator",
           "total_mortgage_balances"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Residential Mortgage Weighted Average LTV"
+      ]
     },
     "credit_granting.residential_mortgage.origination_volume_growth": {
       "id": 1793,
@@ -38589,7 +45309,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Production pipeline — purchase vs refi mix at portfolio level.",
       "segment": "residential_mortgage",
       "slug": "origination_volume_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Residential Mortgage Origination Growth"
+      ]
     },
     "credit_granting.commercial_lending.commercial_loan_growth": {
       "id": 1760,
@@ -38612,7 +45335,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Book momentum — market share and underwriting appetite on C&I and middle market.",
       "segment": "commercial_lending",
       "slug": "commercial_loan_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Commercial Loan Growth"
+      ]
     },
     "credit_granting.commercial_lending.portfolio_yield": {
       "id": 1761,
@@ -38641,7 +45367,10 @@ export const REFERENCE_DATA = {
           "interest_income",
           "average_commercial_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Commercial Portfolio Yield"
+      ]
     },
     "credit_granting.commercial_lending.non_performing_loan_ratio": {
       "id": 1762,
@@ -38675,7 +45404,10 @@ export const REFERENCE_DATA = {
           "non_performing_commercial_loans",
           "total_commercial_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Commercial NPL Ratio"
+      ]
     },
     "credit_granting.commercial_lending.net_charge_off_rate": {
       "id": 1763,
@@ -38709,7 +45441,10 @@ export const REFERENCE_DATA = {
           "net_charge_offs",
           "average_commercial_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Commercial Net Charge-Off Rate"
+      ]
     },
     "credit_granting.commercial_lending.origination_volume_growth": {
       "id": 1764,
@@ -38732,7 +45467,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Pipeline and production — relationship manager capacity and risk appetite.",
       "segment": "commercial_lending",
       "slug": "origination_volume_growth",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Commercial Origination Volume Growth"
+      ]
     },
     "credit_granting.commercial_lending.delinquency_rate_30d": {
       "id": 1765,
@@ -38766,7 +45504,10 @@ export const REFERENCE_DATA = {
           "delinquent_balance_30_plus",
           "total_commercial_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Commercial 30+ Day Delinquency Rate"
+      ]
     },
     "credit_granting.commercial_lending.weighted_average_ltv": {
       "id": 1771,
@@ -38795,7 +45536,10 @@ export const REFERENCE_DATA = {
           "weighted_ltv_numerator",
           "total_commercial_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Weighted Average LTV"
+      ]
     },
     "credit_granting.commercial_lending.portfolio_dscr": {
       "id": 1772,
@@ -38818,7 +45562,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Cash-flow coverage — covenant monitoring at portfolio level.",
       "segment": "commercial_lending",
       "slug": "portfolio_dscr",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Portfolio DSCR"
+      ]
     },
     "credit_granting.commercial_lending.sector_concentration_index": {
       "id": 1773,
@@ -38841,7 +45588,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Concentration risk — diversification vs single-sector stress.",
       "segment": "commercial_lending",
       "slug": "sector_concentration_index",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Sector Concentration Index"
+      ]
     },
     "credit_granting.commercial_lending.revolver_utilization_rate": {
       "id": 1774,
@@ -38870,7 +45620,10 @@ export const REFERENCE_DATA = {
           "drawn_commitments",
           "total_commitments"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Revolver Utilization Rate"
+      ]
     },
     "credit_granting.commercial_lending.treasury_fee_yield": {
       "id": 1775,
@@ -38899,7 +45652,10 @@ export const REFERENCE_DATA = {
           "treasury_fee_revenue",
           "average_commercial_deposits"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Treasury Fee Yield"
+      ]
     },
     "credit_granting.commercial_lending.commercial_payment_volume": {
       "id": 1776,
@@ -38922,7 +45678,10 @@ export const REFERENCE_DATA = {
       "fpaWorkflow": "Payments scale — embedded commercial flows and fee income.",
       "segment": "commercial_lending",
       "slug": "commercial_payment_volume",
-      "input": true
+      "input": true,
+      "alsoKnownAs": [
+        "Commercial Payment Volume"
+      ]
     },
     "credit_granting.commercial_lending.sustainable_finance_share": {
       "id": 1777,
@@ -38951,7 +45710,10 @@ export const REFERENCE_DATA = {
           "sustainable_loan_balance",
           "total_commercial_loans"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Sustainable Finance Share"
+      ]
     },
     "software_saas.core.current_ratio": {
       "datasource": [
@@ -38994,7 +45756,11 @@ export const REFERENCE_DATA = {
       "id": 2040,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "software_saas.core.quick_ratio": {
       "datasource": [
@@ -39038,7 +45804,11 @@ export const REFERENCE_DATA = {
       "id": 2041,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "software_saas.core.gross_margin": {
       "datasource": [
@@ -39081,7 +45851,10 @@ export const REFERENCE_DATA = {
       "id": 2042,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "software_saas.core.operating_margin": {
       "datasource": [
@@ -39123,7 +45896,11 @@ export const REFERENCE_DATA = {
       "id": 2043,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "software_saas.core.ebitda_margin": {
       "datasource": [
@@ -39165,7 +45942,10 @@ export const REFERENCE_DATA = {
       "id": 2044,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "software_saas.core.net_margin": {
       "datasource": [
@@ -39204,6 +45984,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 2045,
       "industry": "Software (SaaS)",
       "segment": "core",
@@ -39250,7 +46034,12 @@ export const REFERENCE_DATA = {
       "id": 2046,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "software_saas.core.working_capital": {
       "datasource": [
@@ -39293,7 +46082,10 @@ export const REFERENCE_DATA = {
       "id": 2047,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "software_saas.core.dso": {
       "datasource": [
@@ -39338,7 +46130,11 @@ export const REFERENCE_DATA = {
       "id": 2048,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "software_saas.core.dpo": {
       "datasource": [
@@ -39383,7 +46179,11 @@ export const REFERENCE_DATA = {
       "id": 2049,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "software_saas.core.ccc": {
       "datasource": [
@@ -39425,7 +46225,10 @@ export const REFERENCE_DATA = {
       "id": 2050,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "software_saas.core.operating_cash_flow": {
       "datasource": [
@@ -39466,10 +46269,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 2051,
       "industry": "Software (SaaS)",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "software_saas.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3611,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3612,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3613,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3614,
+      "industry": "Software (SaaS)",
+      "segment": "core"
+    },
+    "software_saas.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3615,
+      "industry": "Software (SaaS)",
+      "segment": "core"
     },
     "software_saas.core.burn_rate": {
       "datasource": [
@@ -39513,7 +46537,11 @@ export const REFERENCE_DATA = {
       "id": 2052,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "software_saas.core.runway": {
       "datasource": [
@@ -39555,7 +46583,11 @@ export const REFERENCE_DATA = {
       "id": 2053,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "software_saas.core.headcount": {
       "name": "Headcount (FTE)",
@@ -39581,7 +46613,10 @@ export const REFERENCE_DATA = {
       "id": 2054,
       "industry": "Software (SaaS)",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "software_saas.core.derived_gross_profit": {
       "datasource": [
@@ -39619,7 +46654,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3397,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "software_saas.core.derived_ebitda": {
       "datasource": [
@@ -39658,7 +46696,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3398,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "software_saas.core.derived_effective_tax_rate": {
       "datasource": [
@@ -39697,7 +46739,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3399,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "software_saas.core.derived_nopat": {
       "datasource": [
@@ -39734,7 +46779,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3400,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "software_saas.core.derived_net_debt": {
       "datasource": [
@@ -39772,7 +46820,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3401,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "software_saas.core.derived_invested_capital": {
       "datasource": [
@@ -39809,7 +46860,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3402,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "software_saas.core.derived_tangible_net_worth": {
       "datasource": [
@@ -39847,7 +46901,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3403,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "software_saas.core.derived_quick_assets": {
       "datasource": [
@@ -39886,7 +46943,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3404,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "software_saas.core.return_on_equity": {
       "datasource": [
@@ -39925,7 +46985,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3405,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "software_saas.core.return_on_assets": {
       "datasource": [
@@ -39964,7 +47027,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3406,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "software_saas.core.return_on_invested_capital": {
       "datasource": [
@@ -40000,7 +47066,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3407,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "software_saas.core.operating_profit_margin": {
       "datasource": [
@@ -40042,7 +47111,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3408,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "software_saas.core.net_profit_margin": {
       "datasource": [
@@ -40084,7 +47156,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3409,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "software_saas.core.effective_interest_rate": {
       "datasource": [
@@ -40123,7 +47199,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3410,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "software_saas.core.interest_burden": {
       "datasource": [
@@ -40162,7 +47241,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3411,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "software_saas.core.tax_burden": {
       "datasource": [
@@ -40201,7 +47283,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3412,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "software_saas.core.total_asset_turnover": {
       "datasource": [
@@ -40240,7 +47325,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3413,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "software_saas.core.ppe_turnover": {
       "datasource": [
@@ -40279,7 +47367,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3414,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "software_saas.core.cash_turnover": {
       "datasource": [
@@ -40318,7 +47409,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3415,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "software_saas.core.cash_days": {
       "datasource": [
@@ -40357,7 +47451,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3416,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "software_saas.core.accounts_receivable_turnover": {
       "datasource": [
@@ -40396,7 +47493,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3417,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "software_saas.core.accounts_receivable_days": {
       "datasource": [
@@ -40438,7 +47538,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3418,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "software_saas.core.inventory_turnover": {
       "datasource": [
@@ -40480,7 +47583,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3419,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "software_saas.core.inventory_days": {
       "datasource": [
@@ -40519,7 +47625,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3420,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "software_saas.core.accounts_payable_turnover": {
       "datasource": [
@@ -40558,7 +47667,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3421,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "software_saas.core.accounts_payable_days": {
       "datasource": [
@@ -40600,7 +47712,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3422,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "software_saas.core.total_assets_to_equity": {
       "datasource": [
@@ -40639,7 +47754,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3423,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "software_saas.core.debt_to_equity": {
       "datasource": [
@@ -40678,7 +47796,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3424,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "software_saas.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -40716,7 +47837,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3425,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "software_saas.core.debt_to_ebitda": {
       "datasource": [
@@ -40754,7 +47878,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3426,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "software_saas.core.net_debt_to_ebitda": {
       "datasource": [
@@ -40790,7 +47917,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3427,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "software_saas.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -40831,7 +47961,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3428,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "software_saas.core.ebitda_to_interest": {
       "datasource": [
@@ -40869,7 +48002,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3429,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "software_saas.core.ebit_to_interest": {
       "datasource": [
@@ -40908,7 +48045,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3430,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "software_saas.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -40947,7 +48087,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3431,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "software_saas.core.fixed_charge_coverage": {
       "datasource": [
@@ -40987,7 +48130,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3432,
       "industry": "Software (SaaS)",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "software_saas.subscription.mrr": {
       "datasource": [
@@ -41028,7 +48174,10 @@ export const REFERENCE_DATA = {
           "active_subscriptions",
           "avg_monthly_price"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Monthly Recurring Revenue (MRR)"
+      ]
     },
     "software_saas.subscription.arr": {
       "datasource": [
@@ -41066,7 +48215,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "mrr * 12",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "Annual Recurring Revenue (ARR)"
+      ]
     },
     "software_saas.subscription.nrr": {
       "datasource": [
@@ -41109,7 +48261,10 @@ export const REFERENCE_DATA = {
           "contraction_mrr",
           "churned_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Net Revenue Retention (NRR)"
+      ]
     },
     "software_saas.subscription.gross_churn": {
       "datasource": [
@@ -41150,7 +48305,10 @@ export const REFERENCE_DATA = {
           "churned_mrr",
           "starting_mrr"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Gross Revenue Churn Rate"
+      ]
     },
     "software_saas.subscription.cac": {
       "datasource": [
@@ -41192,7 +48350,10 @@ export const REFERENCE_DATA = {
           "sales_marketing_spend",
           "new_customers"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Acquisition Cost (CAC)"
+      ]
     },
     "software_saas.subscription.ltv": {
       "datasource": [
@@ -41234,7 +48395,10 @@ export const REFERENCE_DATA = {
           "gross_margin_pct",
           "churn_rate"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Customer Lifetime Value (LTV)"
+      ]
     },
     "software_saas.subscription.ltv_cac": {
       "datasource": [
@@ -41272,7 +48436,10 @@ export const REFERENCE_DATA = {
       "calc": {
         "expr": "ltv / cac",
         "inputs": []
-      }
+      },
+      "alsoKnownAs": [
+        "LTV : CAC Ratio"
+      ]
     },
     "software_saas.subscription.rule_of_40": {
       "datasource": [
@@ -41313,7 +48480,10 @@ export const REFERENCE_DATA = {
           "revenue_growth_pct",
           "profit_margin_pct"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Rule of 40"
+      ]
     },
     "retail.core.current_ratio": {
       "datasource": [
@@ -41356,7 +48526,11 @@ export const REFERENCE_DATA = {
       "id": 1640,
       "industry": "Retail",
       "segment": "core",
-      "slug": "current_ratio"
+      "slug": "current_ratio",
+      "alsoKnownAs": [
+        "working capital ratio",
+        "liquidity ratio"
+      ]
     },
     "retail.core.quick_ratio": {
       "datasource": [
@@ -41400,7 +48574,11 @@ export const REFERENCE_DATA = {
       "id": 1641,
       "industry": "Retail",
       "segment": "core",
-      "slug": "quick_ratio"
+      "slug": "quick_ratio",
+      "alsoKnownAs": [
+        "acid test ratio",
+        "acid-test ratio"
+      ]
     },
     "retail.core.gross_margin": {
       "datasource": [
@@ -41443,7 +48621,10 @@ export const REFERENCE_DATA = {
       "id": 1642,
       "industry": "Retail",
       "segment": "core",
-      "slug": "gross_margin"
+      "slug": "gross_margin",
+      "alsoKnownAs": [
+        "gross profit margin"
+      ]
     },
     "retail.core.operating_margin": {
       "datasource": [
@@ -41485,7 +48666,11 @@ export const REFERENCE_DATA = {
       "id": 1643,
       "industry": "Retail",
       "segment": "core",
-      "slug": "operating_margin"
+      "slug": "operating_margin",
+      "alsoKnownAs": [
+        "EBIT margin",
+        "operating profit margin percent"
+      ]
     },
     "retail.core.ebitda_margin": {
       "datasource": [
@@ -41527,7 +48712,10 @@ export const REFERENCE_DATA = {
       "id": 1644,
       "industry": "Retail",
       "segment": "core",
-      "slug": "ebitda_margin"
+      "slug": "ebitda_margin",
+      "alsoKnownAs": [
+        "EBITDA margin"
+      ]
     },
     "retail.core.net_margin": {
       "datasource": [
@@ -41566,6 +48754,10 @@ export const REFERENCE_DATA = {
           "revenue"
         ]
       },
+      "alsoKnownAs": [
+        "net profit margin",
+        "net income margin"
+      ],
       "id": 1645,
       "industry": "Retail",
       "segment": "core",
@@ -41612,7 +48804,12 @@ export const REFERENCE_DATA = {
       "id": 1646,
       "industry": "Retail",
       "segment": "core",
-      "slug": "revenue_growth"
+      "slug": "revenue_growth",
+      "alsoKnownAs": [
+        "sales growth",
+        "top line growth",
+        "revenue growth rate"
+      ]
     },
     "retail.core.working_capital": {
       "datasource": [
@@ -41655,7 +48852,10 @@ export const REFERENCE_DATA = {
       "id": 1647,
       "industry": "Retail",
       "segment": "core",
-      "slug": "working_capital"
+      "slug": "working_capital",
+      "alsoKnownAs": [
+        "net working capital"
+      ]
     },
     "retail.core.dso": {
       "datasource": [
@@ -41700,7 +48900,11 @@ export const REFERENCE_DATA = {
       "id": 1648,
       "industry": "Retail",
       "segment": "core",
-      "slug": "dso"
+      "slug": "dso",
+      "alsoKnownAs": [
+        "days sales outstanding",
+        "debtor days"
+      ]
     },
     "retail.core.dpo": {
       "datasource": [
@@ -41745,7 +48949,11 @@ export const REFERENCE_DATA = {
       "id": 1649,
       "industry": "Retail",
       "segment": "core",
-      "slug": "dpo"
+      "slug": "dpo",
+      "alsoKnownAs": [
+        "days payable outstanding",
+        "creditor days"
+      ]
     },
     "retail.core.ccc": {
       "datasource": [
@@ -41787,7 +48995,10 @@ export const REFERENCE_DATA = {
       "id": 1650,
       "industry": "Retail",
       "segment": "core",
-      "slug": "ccc"
+      "slug": "ccc",
+      "alsoKnownAs": [
+        "cash conversion cycle days"
+      ]
     },
     "retail.core.operating_cash_flow": {
       "datasource": [
@@ -41828,10 +49039,231 @@ export const REFERENCE_DATA = {
           "increase_in_working_capital"
         ]
       },
+      "alsoKnownAs": [
+        "CFO",
+        "cash from operations",
+        "cash flow from operating activities",
+        "net cash from operating activities"
+      ],
       "id": 1651,
       "industry": "Retail",
       "segment": "core",
       "slug": "operating_cash_flow"
+    },
+    "retail.core.free_cash_flow": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash left after funding operating activities and capital expenditures.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "Free Cash Flow = Operating Cash Flow − Capital Expenditures",
+      "name": "Free Cash Flow",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "targetRangeHigh": 800000,
+      "targetRangeLow": 100000,
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "monthly",
+      "higherIsBetter": true,
+      "validRange": {
+        "hardMin": -1000000000,
+        "hardMax": 1000000000
+      },
+      "validationRule": "currency_signed",
+      "benchmarkKey": "free_cash_flow",
+      "slug": "free_cash_flow",
+      "fpaWorkflow": "Capital allocation — residual cash available for debt paydown, dividends, and reinvestment after maintenance capex.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures",
+        "inputs": [
+          "capital_expenditures"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF",
+        "free cashflow"
+      ],
+      "id": 3591,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.fcff": {
+      "datasource": [
+        "Financial statements",
+        "Trial balance",
+        "Balance sheet",
+        "General ledger"
+      ],
+      "description": "Cash generated for all capital providers before financing cash flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures − Increase in Net Working Capital",
+      "name": "Free Cash Flow to Firm (FCFF)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcff",
+      "slug": "fcff",
+      "fpaWorkflow": "Enterprise valuation — unlevered cash flow before interest and net borrowing.",
+      "calc": {
+        "expr": "operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital",
+        "inputs": [
+          "operating_income",
+          "depreciation",
+          "amortization",
+          "capital_expenditures",
+          "increase_in_working_capital"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to the firm",
+        "unlevered free cash flow",
+        "UFCF"
+      ],
+      "id": 3592,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.fcfe": {
+      "datasource": [
+        "Financial statements",
+        "Bank statements",
+        "General ledger"
+      ],
+      "description": "Cash available to equity holders after operating investment and financing flows.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing",
+      "name": "Free Cash Flow to Equity (FCFE)",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Currency (e.g., USD)",
+      "frequency": "annual",
+      "balanceBasisDefault": "ending",
+      "higherIsBetter": true,
+      "validationRule": "currency_signed",
+      "benchmarkKey": "fcfe",
+      "slug": "fcfe",
+      "fpaWorkflow": "Equity valuation — levered residual after capex and net debt issuance.",
+      "calc": {
+        "expr": "operating_cash_flow - capital_expenditures + net_borrowing",
+        "inputs": [
+          "capital_expenditures",
+          "net_borrowing"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
+        "levered free cash flow to equity"
+      ],
+      "id": 3593,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.fcf_margin": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Free cash flow expressed as a percentage of revenue.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Margin = (Free Cash Flow / Revenue) × 100",
+      "name": "FCF Margin",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "%",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "percentage",
+      "benchmarkKey": "fcf_margin",
+      "slug": "fcf_margin",
+      "fpaWorkflow": "Cash-earnings quality — how much revenue converts to discretionary cash.",
+      "calc": {
+        "expr": "free_cash_flow / revenue * 100",
+        "inputs": [
+          "revenue"
+        ]
+      },
+      "alsoKnownAs": [
+        "free cash flow margin",
+        "FCF margin percent"
+      ],
+      "id": 3594,
+      "industry": "Retail",
+      "segment": "core"
+    },
+    "retail.core.fcf_conversion": {
+      "datasource": [
+        "Financial statements",
+        "General ledger"
+      ],
+      "description": "Share of accounting earnings that convert into free cash flow.",
+      "industryTags": [
+        "Corporate Finance",
+        "All"
+      ],
+      "methodology": "FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)",
+      "name": "FCF Conversion",
+      "sensorFieldData": [
+        "Not Applicable"
+      ],
+      "status": "data needed",
+      "tech": "FINTECH",
+      "type": "Financial",
+      "unit": "Ratio",
+      "frequency": "annual",
+      "higherIsBetter": true,
+      "validationRule": "ratio",
+      "benchmarkKey": "fcf_conversion",
+      "slug": "fcf_conversion",
+      "fpaWorkflow": "Earnings quality — flags accrual-heavy profit that does not fund capex.",
+      "calc": {
+        "expr": "free_cash_flow / max(net_income, 0)",
+        "inputs": [
+          "net_income"
+        ]
+      },
+      "alsoKnownAs": [
+        "FCF to net income",
+        "cash conversion ratio"
+      ],
+      "id": 3595,
+      "industry": "Retail",
+      "segment": "core"
     },
     "retail.core.burn_rate": {
       "datasource": [
@@ -41875,7 +49307,11 @@ export const REFERENCE_DATA = {
       "id": 1652,
       "industry": "Retail",
       "segment": "core",
-      "slug": "burn_rate"
+      "slug": "burn_rate",
+      "alsoKnownAs": [
+        "monthly burn",
+        "cash burn rate"
+      ]
     },
     "retail.core.runway": {
       "datasource": [
@@ -41917,7 +49353,11 @@ export const REFERENCE_DATA = {
       "id": 1653,
       "industry": "Retail",
       "segment": "core",
-      "slug": "runway"
+      "slug": "runway",
+      "alsoKnownAs": [
+        "cash runway months",
+        "months of runway"
+      ]
     },
     "retail.core.headcount": {
       "name": "Headcount (FTE)",
@@ -41943,7 +49383,10 @@ export const REFERENCE_DATA = {
       "id": 1654,
       "industry": "Retail",
       "segment": "core",
-      "slug": "headcount"
+      "slug": "headcount",
+      "alsoKnownAs": [
+        "Headcount (FTE)"
+      ]
     },
     "retail.core.derived_gross_profit": {
       "datasource": [
@@ -41981,7 +49424,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3361,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "gross margin dollars"
+      ]
     },
     "retail.core.derived_ebitda": {
       "datasource": [
@@ -42020,7 +49466,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3362,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA",
+        "earnings before interest taxes depreciation amortization"
+      ]
     },
     "retail.core.derived_effective_tax_rate": {
       "datasource": [
@@ -42059,7 +49509,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3363,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Tax Rate"
+      ]
     },
     "retail.core.derived_nopat": {
       "datasource": [
@@ -42096,7 +49549,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3364,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Operating Profit After Tax (NOPAT)"
+      ]
     },
     "retail.core.derived_net_debt": {
       "datasource": [
@@ -42134,7 +49590,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3365,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Net Debt"
+      ]
     },
     "retail.core.derived_invested_capital": {
       "datasource": [
@@ -42171,7 +49630,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3366,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Invested Capital"
+      ]
     },
     "retail.core.derived_tangible_net_worth": {
       "datasource": [
@@ -42209,7 +49671,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3367,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tangible Net Worth"
+      ]
     },
     "retail.core.derived_quick_assets": {
       "datasource": [
@@ -42248,7 +49713,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3368,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Assets (strict)"
+      ]
     },
     "retail.core.return_on_equity": {
       "datasource": [
@@ -42287,7 +49755,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3369,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROE"
+      ]
     },
     "retail.core.return_on_assets": {
       "datasource": [
@@ -42326,7 +49797,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3370,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROA"
+      ]
     },
     "retail.core.return_on_invested_capital": {
       "datasource": [
@@ -42362,7 +49836,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3371,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "ROIC"
+      ]
     },
     "retail.core.operating_profit_margin": {
       "datasource": [
@@ -42404,7 +49881,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3372,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Operating Profit Margin (EBIT)"
+      ]
     },
     "retail.core.net_profit_margin": {
       "datasource": [
@@ -42446,7 +49926,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3373,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net profit margin decimal",
+        "net income margin decimal"
+      ]
     },
     "retail.core.effective_interest_rate": {
       "datasource": [
@@ -42485,7 +49969,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3374,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Effective Interest Rate"
+      ]
     },
     "retail.core.interest_burden": {
       "datasource": [
@@ -42524,7 +50011,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3375,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Interest Burden"
+      ]
     },
     "retail.core.tax_burden": {
       "datasource": [
@@ -42563,7 +50053,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3376,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Tax Burden"
+      ]
     },
     "retail.core.total_asset_turnover": {
       "datasource": [
@@ -42602,7 +50095,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3377,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Asset Turnover"
+      ]
     },
     "retail.core.ppe_turnover": {
       "datasource": [
@@ -42641,7 +50137,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3378,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "PP&E Turnover"
+      ]
     },
     "retail.core.cash_turnover": {
       "datasource": [
@@ -42680,7 +50179,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3379,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Turnover"
+      ]
     },
     "retail.core.cash_days": {
       "datasource": [
@@ -42719,7 +50221,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3380,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Cash Days"
+      ]
     },
     "retail.core.accounts_receivable_turnover": {
       "datasource": [
@@ -42758,7 +50263,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3381,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Turnover"
+      ]
     },
     "retail.core.accounts_receivable_days": {
       "datasource": [
@@ -42800,7 +50308,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3382,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Receivable Days"
+      ]
     },
     "retail.core.inventory_turnover": {
       "datasource": [
@@ -42842,7 +50353,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3383,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Turnover (ending balance)"
+      ]
     },
     "retail.core.inventory_days": {
       "datasource": [
@@ -42881,7 +50395,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3384,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Inventory Days"
+      ]
     },
     "retail.core.accounts_payable_turnover": {
       "datasource": [
@@ -42920,7 +50437,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3385,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Turnover"
+      ]
     },
     "retail.core.accounts_payable_days": {
       "datasource": [
@@ -42962,7 +50482,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3386,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Accounts Payable Days"
+      ]
     },
     "retail.core.total_assets_to_equity": {
       "datasource": [
@@ -43001,7 +50524,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3387,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Total Assets to Equity (Equity Multiplier)"
+      ]
     },
     "retail.core.debt_to_equity": {
       "datasource": [
@@ -43040,7 +50566,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3388,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Equity"
+      ]
     },
     "retail.core.debt_to_tangible_net_worth": {
       "datasource": [
@@ -43078,7 +50607,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3389,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Debt to Tangible Net Worth"
+      ]
     },
     "retail.core.debt_to_ebitda": {
       "datasource": [
@@ -43116,7 +50648,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3390,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "leverage ratio EBITDA"
+      ]
     },
     "retail.core.net_debt_to_ebitda": {
       "datasource": [
@@ -43152,7 +50687,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3391,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "net leverage"
+      ]
     },
     "retail.core.quick_ratio_quick_assets": {
       "datasource": [
@@ -43193,7 +50731,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3392,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "Quick Ratio (Quick Assets)"
+      ]
     },
     "retail.core.ebitda_to_interest": {
       "datasource": [
@@ -43231,7 +50772,11 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3393,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "interest coverage",
+        "EBITDA interest coverage"
+      ]
     },
     "retail.core.ebit_to_interest": {
       "datasource": [
@@ -43270,7 +50815,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3394,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBIT to Interest"
+      ]
     },
     "retail.core.ebitda_less_capex_to_interest": {
       "datasource": [
@@ -43309,7 +50857,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3395,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "EBITDA Less Capex to Interest"
+      ]
     },
     "retail.core.fixed_charge_coverage": {
       "datasource": [
@@ -43349,7 +50900,10 @@ export const REFERENCE_DATA = {
       "corporateRatioPack": true,
       "id": 3396,
       "industry": "Retail",
-      "segment": "core"
+      "segment": "core",
+      "alsoKnownAs": [
+        "FCCR"
+      ]
     },
     "retail.operations.same_store_sales_growth": {
       "id": 1670,
@@ -43378,7 +50932,10 @@ export const REFERENCE_DATA = {
           "current_period_sales",
           "prior_period_sales"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Same-Store Sales Growth"
+      ]
     },
     "retail.financial.inventory_turnover": {
       "id": 1671,
@@ -43408,7 +50965,10 @@ export const REFERENCE_DATA = {
           "cogs",
           "average_inventory_value"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Inventory Turnover"
+      ]
     },
     "retail.operations.shrink_rate": {
       "id": 1672,
@@ -43442,7 +51002,10 @@ export const REFERENCE_DATA = {
           "shrinkage_value",
           "sales"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Shrink Rate"
+      ]
     },
     "retail.financial.sales_per_square_foot": {
       "id": 1673,
@@ -43471,7 +51034,10 @@ export const REFERENCE_DATA = {
           "net_sales",
           "selling_square_footage"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Sales per Square Foot"
+      ]
     },
     "retail.operations.conversion_rate": {
       "id": 1674,
@@ -43505,7 +51071,10 @@ export const REFERENCE_DATA = {
           "transactions",
           "visitors"
         ]
-      }
+      },
+      "alsoKnownAs": [
+        "Conversion Rate"
+      ]
     }
   }
 };

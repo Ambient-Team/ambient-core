@@ -53,6 +53,11 @@ export const REFERENCE_DATA = {
         986,
         998,
         1004,
+        3551,
+        3552,
+        3553,
+        3554,
+        3555,
         1,
         2,
         3,
@@ -1028,6 +1033,14 @@ export const REFERENCE_DATA = {
         {
           "name": "current_cash_balance",
           "type": "string"
+        },
+        {
+          "name": "capital_expenditures",
+          "type": "decimal"
+        },
+        {
+          "name": "net_borrowing",
+          "type": "decimal"
         }
       ],
       "format": "Transactional Data Template",
@@ -1414,7 +1427,12 @@ export const REFERENCE_DATA = {
         981,
         987,
         999,
-        1005
+        1005,
+        3566,
+        3567,
+        3568,
+        3569,
+        3570
       ]
     },
     "vertical_farming.core.hr_records": {
@@ -2174,6 +2192,14 @@ export const REFERENCE_DATA = {
         {
           "name": "current_cash_balance",
           "type": "string"
+        },
+        {
+          "name": "capital_expenditures",
+          "type": "decimal"
+        },
+        {
+          "name": "net_borrowing",
+          "type": "decimal"
         }
       ],
       "format": "Transactional Data Template",
@@ -2496,7 +2522,12 @@ export const REFERENCE_DATA = {
         982,
         988,
         1000,
-        1006
+        1006,
+        3561,
+        3562,
+        3563,
+        3564,
+        3565
       ]
     },
     "transportation.core.hr_records": {
@@ -3293,6 +3324,14 @@ export const REFERENCE_DATA = {
         {
           "name": "current_cash_balance",
           "type": "string"
+        },
+        {
+          "name": "capital_expenditures",
+          "type": "decimal"
+        },
+        {
+          "name": "net_borrowing",
+          "type": "decimal"
         }
       ],
       "format": "Transactional Data Template",
@@ -3486,7 +3525,12 @@ export const REFERENCE_DATA = {
         2029,
         2030,
         2032,
-        2033
+        2033,
+        3616,
+        3617,
+        3618,
+        3619,
+        3620
       ]
     },
     "passenger_transit.core.hr_records": {
@@ -3801,7 +3845,12 @@ export const REFERENCE_DATA = {
         1809,
         1810,
         1812,
-        1813
+        1813,
+        3621,
+        3622,
+        3623,
+        3624,
+        3625
       ]
     },
     "aviation.core.hr_records": {
@@ -4194,7 +4243,12 @@ export const REFERENCE_DATA = {
         983,
         989,
         1001,
-        1007
+        1007,
+        3546,
+        3547,
+        3548,
+        3549,
+        3550
       ]
     },
     "manufacturing.core.hr_records": {
@@ -4898,6 +4952,14 @@ export const REFERENCE_DATA = {
         {
           "name": "current_cash_balance",
           "type": "string"
+        },
+        {
+          "name": "capital_expenditures",
+          "type": "decimal"
+        },
+        {
+          "name": "net_borrowing",
+          "type": "decimal"
         }
       ],
       "format": "Transactional Data Template",
@@ -5051,7 +5113,12 @@ export const REFERENCE_DATA = {
         2079,
         2080,
         2082,
-        2083
+        2083,
+        3636,
+        3637,
+        3638,
+        3639,
+        3640
       ]
     },
     "construction.core.hr_records": {
@@ -5426,7 +5493,12 @@ export const REFERENCE_DATA = {
         984,
         990,
         1002,
-        1008
+        1008,
+        3541,
+        3542,
+        3543,
+        3544,
+        3545
       ]
     },
     "healthcare.core.hr_records": {
@@ -6185,6 +6257,14 @@ export const REFERENCE_DATA = {
         {
           "name": "current_cash_balance",
           "type": "string"
+        },
+        {
+          "name": "capital_expenditures",
+          "type": "decimal"
+        },
+        {
+          "name": "net_borrowing",
+          "type": "decimal"
         }
       ],
       "format": "Transactional Data Template",
@@ -6507,7 +6587,12 @@ export const REFERENCE_DATA = {
         985,
         991,
         1003,
-        1009
+        1009,
+        3556,
+        3557,
+        3558,
+        3559,
+        3560
       ]
     },
     "restaurants.core.hr_records": {
@@ -7185,6 +7270,14 @@ export const REFERENCE_DATA = {
         {
           "name": "current_cash_balance",
           "type": "string"
+        },
+        {
+          "name": "capital_expenditures",
+          "type": "decimal"
+        },
+        {
+          "name": "net_borrowing",
+          "type": "decimal"
         }
       ],
       "format": "Transactional Data Template",
@@ -7507,7 +7600,12 @@ export const REFERENCE_DATA = {
         1309,
         1310,
         1312,
-        1313
+        1313,
+        3571,
+        3572,
+        3573,
+        3574,
+        3575
       ]
     },
     "life_sciences.core.hr_records": {
@@ -7828,7 +7926,12 @@ export const REFERENCE_DATA = {
         1509,
         1510,
         1512,
-        1513
+        1513,
+        3576,
+        3577,
+        3578,
+        3579,
+        3580
       ]
     },
     "banking.core.hr_records": {
@@ -8121,7 +8224,12 @@ export const REFERENCE_DATA = {
         1609,
         1610,
         1612,
-        1613
+        1613,
+        3581,
+        3582,
+        3583,
+        3584,
+        3585
       ]
     },
     "financial_services.core.hr_records": {
@@ -8414,7 +8522,12 @@ export const REFERENCE_DATA = {
         1979,
         1980,
         1982,
-        1983
+        1983,
+        3626,
+        3627,
+        3628,
+        3629,
+        3630
       ]
     },
     "funds.core.hr_records": {
@@ -8913,7 +9026,12 @@ export const REFERENCE_DATA = {
         1994,
         1995,
         1997,
-        1998
+        1998,
+        3631,
+        3632,
+        3633,
+        3634,
+        3635
       ]
     },
     "trusts.core.hr_records": {
@@ -9204,7 +9322,12 @@ export const REFERENCE_DATA = {
         1629,
         1630,
         1632,
-        1633
+        1633,
+        3586,
+        3587,
+        3588,
+        3589,
+        3590
       ]
     },
     "insurance.core.hr_records": {
@@ -9495,7 +9618,12 @@ export const REFERENCE_DATA = {
         1709,
         1710,
         1712,
-        1713
+        1713,
+        3606,
+        3607,
+        3608,
+        3609,
+        3610
       ]
     },
     "credit_granting.core.hr_records": {
@@ -9981,7 +10109,12 @@ export const REFERENCE_DATA = {
         2049,
         2050,
         2052,
-        2053
+        2053,
+        3611,
+        3612,
+        3613,
+        3614,
+        3615
       ]
     },
     "software_saas.core.hr_records": {
@@ -10472,7 +10605,12 @@ export const REFERENCE_DATA = {
         1649,
         1650,
         1652,
-        1653
+        1653,
+        3591,
+        3592,
+        3593,
+        3594,
+        3595
       ]
     },
     "retail.core.hr_records": {
