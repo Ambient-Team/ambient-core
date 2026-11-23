@@ -2,7 +2,8 @@ dataOptions:
   insurance.property_casualty.loss_summary:
     id: 1565
     name: Aggregated insurance loss summary
-    description: Earned premiums, losses, and expenses by line_of_business (property_casualty, life, health, reinsurance).
+    description: Earned premiums, losses, and expenses by line_of_business (property_casualty,
+      life, health, reinsurance).
     industry: Insurance
     segment: property_casualty
     format: Document

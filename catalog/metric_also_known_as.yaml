@@ -1,0 +1,67 @@
+# Human-readable metric names (also known as). Legacy slug remaps stay in aliases.yaml.
+#
+# Keys in byBenchmarkKey apply to every expanded core metric with that benchmarkKey.
+# Keys in byCatalogKey apply to a single catalogMetricKey (industry.segment.slug).
+
+byBenchmarkKey:
+  revenue_growth:
+    - sales growth
+    - top line growth
+    - revenue growth rate
+  current_ratio:
+    - working capital ratio
+    - liquidity ratio
+  quick_ratio:
+    - acid test ratio
+    - acid-test ratio
+  gross_margin:
+    - gross profit margin
+  operating_margin:
+    - EBIT margin
+    - operating profit margin percent
+  net_profit_margin:
+    - net profit margin decimal
+    - net income margin decimal
+  ebitda_margin:
+    - EBITDA margin
+  working_capital:
+    - net working capital
+  dso:
+    - days sales outstanding
+    - debtor days
+  dpo:
+    - days payable outstanding
+    - creditor days
+  ccc:
+    - cash conversion cycle days
+  burn_rate:
+    - monthly burn
+    - cash burn rate
+  runway:
+    - cash runway months
+    - months of runway
+  revenue:
+    - sales
+    - turnover
+    - top line
+  gross_profit:
+    - gross margin dollars
+  ebitda_derived:
+    - EBITDA
+    - earnings before interest taxes depreciation amortization
+  return_on_equity:
+    - ROE
+  return_on_assets:
+    - ROA
+  return_on_invested_capital:
+    - ROIC
+  debt_to_ebitda:
+    - leverage ratio EBITDA
+  net_debt_to_ebitda:
+    - net leverage
+  ebitda_to_interest:
+    - interest coverage
+    - EBITDA interest coverage
+  fixed_charge_coverage:
+    - FCCR
+byCatalogKey: {}

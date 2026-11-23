@@ -20,6 +20,7 @@ This pack is **additional coverage** for corporate, non-financial companies when
 
 - **Signs:** expenses and cash outflows are positive amounts subtracted in formulas; contra-assets are positive amounts subtracted from gross balances.
 - **Cash tie:** `cash_and_cash_equivalents` on the balance sheet matches the cash flow close; aliases `current_cash_balance` in the runway metric.
+- **Free cash flow family:** `capital_expenditures` and `net_borrowing` cash-flow leaves support catalog `free_cash_flow`, `fcff`, `fcfe`, `fcf_margin`, and `fcf_conversion` on the shared core layer. FCFF uses EBIT, tax rate, depreciation, amortization, capex, and change in working capital; FCFE uses operating cash flow, capex, and net borrowing.
 - **Operating NWC (indirect CFO):** receivables, inventory, prepaids and operating payables/accruals **excluding** cash, marketable securities, and interest-bearing current debt (including current lease liability). Not the same as catalog `working_capital` (which includes cash and all current liabilities).
 - **EBITDA:** `operating_income + depreciation_and_amortization` (includes depreciation embedded in COGS). Not a naive net-income add-back.
 - **Current portion of debt:** principal due within twelve months; accrued interest sits in `accrued_expenses`.

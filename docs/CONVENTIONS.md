@@ -107,6 +107,8 @@ Some KPI themes recur (utilization, energy, punctuality, unit economics), but **
 
 When a key is renamed, the old key is recorded in `catalog/aliases.yaml` mapping the legacy key to the canonical key. Aliases are retained for at least one minor release so downstream consumers keyed on the old identifier keep resolving, then removed in a subsequent release. Alias targets must be unique.
 
+**Also known as (human names).** `catalog/metric_also_known_as.yaml` and per-metric `alsoKnownAs` fields carry display synonyms (for example CFO for operating cash flow). They are not slug remaps. `scripts/check_metric_synonyms.py` enforces that no normalized synonym maps to two metrics. Generated documentation: `docs/generated/catalog-metric-synonyms.md`.
+
 ## Contract files and versions
 
 Contract files live in `contracts/` and are named `product-slug-vMAJOR.yaml` (for example `healthcare-provider-ops-v1.yaml`). The major version in the filename must match the major component of `product.version` inside the file. Backward-incompatible schema changes (removing a column, narrowing a type, making an optional column required) require a major-version bump and a new file; backward-compatible additions are minor bumps recorded only in `product.version`. This relationship is checked by `scripts/check_contract_schema.py`.

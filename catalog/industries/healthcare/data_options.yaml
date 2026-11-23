@@ -2,7 +2,8 @@ dataOptions:
   HcCensus911CatalogOptionKey01:
     id: 911
     name: De-identified operational census export
-    description: Aggregated admissions, discharges, and bed days by service line. No patient names or MRNs in catalog templates.
+    description: Aggregated admissions, discharges, and bed days by service line.
+      No patient names or MRNs in catalog templates.
     industry: Healthcare
     format: Document
     template: Document
@@ -88,7 +89,8 @@ dataOptions:
   HcSched912CatalogOptionKey02:
     id: 912
     name: Scheduling utilization summary
-    description: Shift-level staffed hours and utilization by department (aggregated counts only).
+    description: Shift-level staffed hours and utilization by department (aggregated
+      counts only).
     industry: Healthcare
     format: Document
     template: Document
@@ -113,7 +115,8 @@ dataOptions:
   HcRcm913CatalogOptionKey03:
     id: 913
     name: Revenue cycle summary export
-    description: Claim submission, denial, and payment totals by payer category (no member identifiers).
+    description: Claim submission, denial, and payment totals by payer category (no
+      member identifiers).
     industry: Healthcare
     format: Document
     template: Financial Statement Template
@@ -139,7 +142,8 @@ dataOptions:
   HcQual914CatalogOptionKey04:
     id: 914
     name: De-identified quality outcomes summary
-    description: Cohort-level readmission and outcome indicators without PHI field names.
+    description: Cohort-level readmission and outcome indicators without PHI field
+      names.
     industry: Healthcare
     format: Document
     template: Document
@@ -159,7 +163,8 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Allhealthcareds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart of accounts.
+    description: Complete record of all financial transactions posted to the chart
+      of accounts.
     fields:
     - name: date
       type: date
@@ -366,6 +371,10 @@ dataOptions:
       type: string
     - name: current_cash_balance
       type: string
+    - name: capital_expenditures
+      type: decimal
+    - name: net_borrowing
+      type: decimal
     format: Transactional Data Template
     id: 1134
     industry: Healthcare
@@ -471,7 +480,8 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Allhealthcareds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn analysis.
+    description: Product engagement and usage telemetry used for retention and churn
+      analysis.
     fields:
     - name: date
       type: date

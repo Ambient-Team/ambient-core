@@ -19,3 +19,7 @@ rules:
   flags: i
   financial: "Core profitability \u2014 DSCR and cap rate driver"
   operational: Ops efficiency flows to NOI
+- pattern: free cash flow|\bfcf\b|fcff|fcfe
+  flags: i
+  financial: "Valuation and capex planning \u2014 FCF, FCFF, and FCFE after operating cash and capex"
+  operational: "Capex and working-capital drivers \u2014 feeds discretionary cash metrics"

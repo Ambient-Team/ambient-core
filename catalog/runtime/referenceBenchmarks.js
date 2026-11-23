@@ -99,6 +99,46 @@ export const BENCHMARKS = {
     "higherIsBetter": true,
     "source": "Scale-dependent guidance"
   },
+  "free_cash_flow": {
+    "label": "Free Cash Flow",
+    "unit": "Currency",
+    "healthyLow": 100000,
+    "healthyHigh": 800000,
+    "higherIsBetter": true,
+    "source": "Scale-dependent guidance"
+  },
+  "fcff": {
+    "label": "Free Cash Flow to Firm (FCFF)",
+    "unit": "Currency",
+    "healthyLow": 100000,
+    "healthyHigh": 800000,
+    "higherIsBetter": true,
+    "source": "Scale-dependent guidance"
+  },
+  "fcfe": {
+    "label": "Free Cash Flow to Equity (FCFE)",
+    "unit": "Currency",
+    "healthyLow": 80000,
+    "healthyHigh": 700000,
+    "higherIsBetter": true,
+    "source": "Scale-dependent guidance"
+  },
+  "fcf_margin": {
+    "label": "FCF Margin",
+    "unit": "%",
+    "healthyLow": 5,
+    "healthyHigh": 25,
+    "higherIsBetter": true,
+    "source": "Cross-industry median bands"
+  },
+  "fcf_conversion": {
+    "label": "FCF Conversion",
+    "unit": "Ratio",
+    "healthyLow": 0.5,
+    "healthyHigh": 1.2,
+    "higherIsBetter": true,
+    "source": "Cross-industry median bands"
+  },
   "burn_rate": {
     "label": "Monthly Burn Rate",
     "unit": "Currency/month",

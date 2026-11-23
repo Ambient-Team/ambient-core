@@ -2,7 +2,8 @@ dataOptions:
   RestPos921CatalogOptionKey01:
     id: 921
     name: POS daily close
-    description: End-of-day sales, tender, labor punches summary, and check times by location.
+    description: End-of-day sales, tender, labor punches summary, and check times
+      by location.
     industry: Restaurants
     format: Document
     template: Transactional Data Template
@@ -51,7 +52,8 @@ dataOptions:
   RestInv922CatalogOptionKey02:
     id: 922
     name: Inventory count export
-    description: Periodic stock counts, usage, and waste/spoilage adjustments by SKU category.
+    description: Periodic stock counts, usage, and waste/spoilage adjustments by SKU
+      category.
     industry: Restaurants
     format: Document
     template: Document
@@ -80,7 +82,8 @@ dataOptions:
   RestLabor923CatalogOptionKey03:
     id: 923
     name: Labor scheduling export
-    description: Scheduled vs actual hours and labor cost by role and location (aggregated staff counts only).
+    description: Scheduled vs actual hours and labor cost by role and location (aggregated
+      staff counts only).
     industry: Restaurants
     format: Document
     template: Document
@@ -104,7 +107,8 @@ dataOptions:
     collectionFrequency: weekly
     grain: week
   Allrestaurantsds-general-ledger:
-    description: Complete record of all financial transactions posted to the chart of accounts.
+    description: Complete record of all financial transactions posted to the chart
+      of accounts.
     fields:
     - name: date
       type: date
@@ -311,6 +315,10 @@ dataOptions:
       type: string
     - name: current_cash_balance
       type: string
+    - name: capital_expenditures
+      type: decimal
+    - name: net_borrowing
+      type: decimal
     format: Transactional Data Template
     id: 1135
     industry: Restaurants
@@ -416,7 +424,8 @@ dataOptions:
     collectionFrequency: monthly
     grain: month
   Allrestaurantsds-product-usage:
-    description: Product engagement and usage telemetry used for retention and churn analysis.
+    description: Product engagement and usage telemetry used for retention and churn
+      analysis.
     fields:
     - name: date
       type: date

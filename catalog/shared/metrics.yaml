@@ -199,6 +199,9 @@ templates:
       inputs:
       - net_income
       - revenue
+    alsoKnownAs:
+    - net profit margin
+    - net income margin
   revenue-growth:
     datasource:
     - Financial statements
@@ -403,6 +406,176 @@ templates:
       - net_income
       - non_cash_charges
       - increase_in_working_capital
+    alsoKnownAs:
+    - CFO
+    - cash from operations
+    - cash flow from operating activities
+    - net cash from operating activities
+  free-cash-flow:
+    datasource:
+    - Financial statements
+    - Bank statements
+    - General ledger
+    description: Cash left after funding operating activities and capital expenditures.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: Free Cash Flow = Operating Cash Flow − Capital Expenditures
+    name: Free Cash Flow
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    targetRangeHigh: 800000
+    targetRangeLow: 100000
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: monthly
+    higherIsBetter: true
+    validRange:
+      hardMin: -1000000000
+      hardMax: 1000000000
+    validationRule: currency_signed
+    benchmarkKey: free_cash_flow
+    slug: free_cash_flow
+    fpaWorkflow: Capital allocation — residual cash available for debt paydown, dividends, and
+      reinvestment after maintenance capex.
+    calc:
+      expr: operating_cash_flow - capital_expenditures
+      inputs:
+      - capital_expenditures
+    alsoKnownAs:
+    - FCF
+    - free cashflow
+    - levered free cash flow
+  fcff:
+    datasource:
+    - Financial statements
+    - Trial balance
+    - Balance sheet
+    - General ledger
+    description: Cash generated for all capital providers before financing cash flows.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: FCFF = EBIT × (1 − Tax Rate) + Depreciation + Amortization − Capital Expenditures −
+      Increase in Net Working Capital
+    name: Free Cash Flow to Firm (FCFF)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: annual
+    balanceBasisDefault: ending
+    higherIsBetter: true
+    validationRule: currency_signed
+    benchmarkKey: fcff
+    slug: fcff
+    fpaWorkflow: Enterprise valuation — unlevered cash flow before interest and net borrowing.
+    calc:
+      expr: operating_income * (1 - effective_tax_rate) + depreciation + amortization - capital_expenditures - increase_in_working_capital
+      inputs:
+      - operating_income
+      - depreciation
+      - amortization
+      - capital_expenditures
+      - increase_in_working_capital
+    alsoKnownAs:
+    - free cash flow to the firm
+    - unlevered free cash flow
+    - UFCF
+  fcfe:
+    datasource:
+    - Financial statements
+    - Bank statements
+    - General ledger
+    description: Cash available to equity holders after operating investment and financing flows.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: FCFE = Operating Cash Flow − Capital Expenditures + Net Borrowing
+    name: Free Cash Flow to Equity (FCFE)
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    unit: Currency (e.g., USD)
+    frequency: annual
+    balanceBasisDefault: ending
+    higherIsBetter: true
+    validationRule: currency_signed
+    benchmarkKey: fcfe
+    slug: fcfe
+    fpaWorkflow: Equity valuation — levered residual after capex and net debt issuance.
+    calc:
+      expr: operating_cash_flow - capital_expenditures + net_borrowing
+      inputs:
+      - capital_expenditures
+      - net_borrowing
+    alsoKnownAs:
+    - free cash flow to shareholders
+    - levered free cash flow to equity
+  fcf-margin:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Free cash flow expressed as a percentage of revenue.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: FCF Margin = (Free Cash Flow / Revenue) × 100
+    name: FCF Margin
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    unit: '%'
+    frequency: annual
+    higherIsBetter: true
+    validationRule: percentage
+    benchmarkKey: fcf_margin
+    slug: fcf_margin
+    fpaWorkflow: Cash-earnings quality — how much revenue converts to discretionary cash.
+    calc:
+      expr: free_cash_flow / revenue * 100
+      inputs:
+      - revenue
+    alsoKnownAs:
+    - free cash flow margin
+    - FCF margin percent
+  fcf-conversion:
+    datasource:
+    - Financial statements
+    - General ledger
+    description: Share of accounting earnings that convert into free cash flow.
+    industryTags:
+    - Corporate Finance
+    - All
+    methodology: FCF Conversion = Free Cash Flow / Net Income (denominator is net income, not EBITDA)
+    name: FCF Conversion
+    sensorFieldData:
+    - Not Applicable
+    status: data needed
+    tech: FINTECH
+    type: Financial
+    unit: Ratio
+    frequency: annual
+    higherIsBetter: true
+    validationRule: ratio
+    benchmarkKey: fcf_conversion
+    slug: fcf_conversion
+    fpaWorkflow: Earnings quality — flags accrual-heavy profit that does not fund capex.
+    calc:
+      expr: free_cash_flow / max(net_income, 0)
+      inputs:
+      - net_income
+    alsoKnownAs:
+    - FCF to net income
+    - cash conversion ratio
   burn-rate:
     datasource:
     - Bank statements
@@ -1636,6 +1809,11 @@ industryIds:
     ebit-to-interest: 3142
     ebitda-less-capex-to-interest: 3143
     fixed-charge-coverage: 3144
+    free-cash-flow: 3541
+    fcff: 3542
+    fcfe: 3543
+    fcf-margin: 3544
+    fcf-conversion: 3545
   Manufacturing:
     current-ratio: 929
     quick-ratio: 935
@@ -1688,6 +1866,11 @@ industryIds:
     ebit-to-interest: 3250
     ebitda-less-capex-to-interest: 3251
     fixed-charge-coverage: 3252
+    free-cash-flow: 3546
+    fcff: 3547
+    fcfe: 3548
+    fcf-margin: 3549
+    fcf-conversion: 3550
   Real Estate:
     current-ratio: 926
     quick-ratio: 932
@@ -1740,6 +1923,11 @@ industryIds:
     ebit-to-interest: 3322
     ebitda-less-capex-to-interest: 3323
     fixed-charge-coverage: 3324
+    free-cash-flow: 3551
+    fcff: 3552
+    fcfe: 3553
+    fcf-margin: 3554
+    fcf-conversion: 3555
   Restaurants:
     current-ratio: 931
     quick-ratio: 937
@@ -1792,6 +1980,11 @@ industryIds:
     ebit-to-interest: 3358
     ebitda-less-capex-to-interest: 3359
     fixed-charge-coverage: 3360
+    free-cash-flow: 3556
+    fcff: 3557
+    fcfe: 3558
+    fcf-margin: 3559
+    fcf-conversion: 3560
   Transportation:
     current-ratio: 928
     quick-ratio: 934
@@ -1844,6 +2037,11 @@ industryIds:
     ebit-to-interest: 3466
     ebitda-less-capex-to-interest: 3467
     fixed-charge-coverage: 3468
+    free-cash-flow: 3561
+    fcff: 3562
+    fcfe: 3563
+    fcf-margin: 3564
+    fcf-conversion: 3565
   Vertical Farming:
     current-ratio: 927
     quick-ratio: 933
@@ -1896,6 +2094,11 @@ industryIds:
     ebit-to-interest: 3538
     ebitda-less-capex-to-interest: 3539
     fixed-charge-coverage: 3540
+    free-cash-flow: 3566
+    fcff: 3567
+    fcfe: 3568
+    fcf-margin: 3569
+    fcf-conversion: 3570
   Life Sciences:
     current-ratio: 1300
     quick-ratio: 1301
@@ -1948,6 +2151,11 @@ industryIds:
     ebit-to-interest: 3214
     ebitda-less-capex-to-interest: 3215
     fixed-charge-coverage: 3216
+    free-cash-flow: 3571
+    fcff: 3572
+    fcfe: 3573
+    fcf-margin: 3574
+    fcf-conversion: 3575
   Banking:
     current-ratio: 1500
     quick-ratio: 1501
@@ -2000,6 +2208,11 @@ industryIds:
     ebit-to-interest: 2890
     ebitda-less-capex-to-interest: 2891
     fixed-charge-coverage: 2892
+    free-cash-flow: 3576
+    fcff: 3577
+    fcfe: 3578
+    fcf-margin: 3579
+    fcf-conversion: 3580
   Financial Services:
     current-ratio: 1600
     quick-ratio: 1601
@@ -2052,6 +2265,11 @@ industryIds:
     ebit-to-interest: 3070
     ebitda-less-capex-to-interest: 3071
     fixed-charge-coverage: 3072
+    free-cash-flow: 3581
+    fcff: 3582
+    fcfe: 3583
+    fcf-margin: 3584
+    fcf-conversion: 3585
   Insurance:
     current-ratio: 1620
     quick-ratio: 1621
@@ -2104,6 +2322,11 @@ industryIds:
     ebit-to-interest: 3178
     ebitda-less-capex-to-interest: 3179
     fixed-charge-coverage: 3180
+    free-cash-flow: 3586
+    fcff: 3587
+    fcfe: 3588
+    fcf-margin: 3589
+    fcf-conversion: 3590
   Retail:
     current-ratio: 1640
     quick-ratio: 1641
@@ -2156,6 +2379,11 @@ industryIds:
     ebit-to-interest: 3394
     ebitda-less-capex-to-interest: 3395
     fixed-charge-coverage: 3396
+    free-cash-flow: 3591
+    fcff: 3592
+    fcfe: 3593
+    fcf-margin: 3594
+    fcf-conversion: 3595
   Consumer Finance:
     current-ratio: 1700
     quick-ratio: 1701
@@ -2208,6 +2436,11 @@ industryIds:
     ebit-to-interest: 2998
     ebitda-less-capex-to-interest: 2999
     fixed-charge-coverage: 3000
+    free-cash-flow: 3596
+    fcff: 3597
+    fcfe: 3598
+    fcf-margin: 3599
+    fcf-conversion: 3600
   Commercial Finance:
     current-ratio: 1740
     quick-ratio: 1741
@@ -2260,6 +2493,11 @@ industryIds:
     ebit-to-interest: 2926
     ebitda-less-capex-to-interest: 2927
     fixed-charge-coverage: 2928
+    free-cash-flow: 3601
+    fcff: 3602
+    fcfe: 3603
+    fcf-margin: 3604
+    fcf-conversion: 3605
   Credit Granting:
     current-ratio: 1700
     quick-ratio: 1701
@@ -2312,6 +2550,11 @@ industryIds:
     ebit-to-interest: 3034
     ebitda-less-capex-to-interest: 3035
     fixed-charge-coverage: 3036
+    free-cash-flow: 3606
+    fcff: 3607
+    fcfe: 3608
+    fcf-margin: 3609
+    fcf-conversion: 3610
   Software (SaaS):
     current-ratio: 2040
     quick-ratio: 2041
@@ -2364,6 +2607,11 @@ industryIds:
     ebit-to-interest: 3430
     ebitda-less-capex-to-interest: 3431
     fixed-charge-coverage: 3432
+    free-cash-flow: 3611
+    fcff: 3612
+    fcfe: 3613
+    fcf-margin: 3614
+    fcf-conversion: 3615
   Passenger Transit:
     current-ratio: 2020
     quick-ratio: 2021
@@ -2416,6 +2664,11 @@ industryIds:
     ebit-to-interest: 3286
     ebitda-less-capex-to-interest: 3287
     fixed-charge-coverage: 3288
+    free-cash-flow: 3616
+    fcff: 3617
+    fcfe: 3618
+    fcf-margin: 3619
+    fcf-conversion: 3620
   Aviation:
     current-ratio: 1800
     quick-ratio: 1801
@@ -2468,6 +2721,11 @@ industryIds:
     ebit-to-interest: 2854
     ebitda-less-capex-to-interest: 2855
     fixed-charge-coverage: 2856
+    free-cash-flow: 3621
+    fcff: 3622
+    fcfe: 3623
+    fcf-margin: 3624
+    fcf-conversion: 3625
   Funds:
     current-ratio: 1970
     quick-ratio: 1971
@@ -2520,6 +2778,11 @@ industryIds:
     ebit-to-interest: 3106
     ebitda-less-capex-to-interest: 3107
     fixed-charge-coverage: 3108
+    free-cash-flow: 3626
+    fcff: 3627
+    fcfe: 3628
+    fcf-margin: 3629
+    fcf-conversion: 3630
   Trusts:
     current-ratio: 1985
     quick-ratio: 1986
@@ -2572,6 +2835,11 @@ industryIds:
     ebit-to-interest: 3502
     ebitda-less-capex-to-interest: 3503
     fixed-charge-coverage: 3504
+    free-cash-flow: 3631
+    fcff: 3632
+    fcfe: 3633
+    fcf-margin: 3634
+    fcf-conversion: 3635
   Construction:
     current-ratio: 2070
     quick-ratio: 2071
@@ -2624,3 +2892,8 @@ industryIds:
     ebit-to-interest: 2962
     ebitda-less-capex-to-interest: 2963
     fixed-charge-coverage: 2964
+    free-cash-flow: 3636
+    fcff: 3637
+    fcfe: 3638
+    fcf-margin: 3639
+    fcf-conversion: 3640

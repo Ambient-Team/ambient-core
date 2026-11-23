@@ -2,7 +2,8 @@ dataOptions:
   banking.depository.regulatory_summary:
     id: 1560
     name: Aggregated regulatory and financial summary
-    description: Period-level depository bank aggregates (NIM, credit, deposits, capital). Not investment banking.
+    description: Period-level depository bank aggregates (NIM, credit, deposits, capital).
+      Not investment banking.
     industry: Banking
     segment: depository
     format: Document

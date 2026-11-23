@@ -2,7 +2,8 @@ dataOptions:
   funds.fund.fund_summary:
     id: 1916
     name: Aggregated fund summary
-    description: AUM, flows, fees, and custody aggregates by book_type. No LP or client identifiers.
+    description: AUM, flows, fees, and custody aggregates by book_type. No LP or client
+      identifiers.
     industry: Funds
     segment: fund
     format: Document
@@ -96,7 +97,8 @@ dataOptions:
   funds.operations.investment_program_summary:
     id: 1936
     name: Aggregated investment program summary
-    description: Private-capital GP sourcing, deployment, portfolio, and funnel aggregates. No LP, founder, or deal identifiers.
+    description: Private-capital GP sourcing, deployment, portfolio, and funnel aggregates.
+      No LP, founder, or deal identifiers.
     industry: Funds
     segment: operations
     format: Document

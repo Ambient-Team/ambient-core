@@ -19,7 +19,7 @@ benchmarks:
     healthyLow: 100
     healthyHigh: 120
     higherIsBetter: true
-    source: "Best-in-class SaaS \u2265 120%"
+    source: Best-in-class SaaS ≥ 120%
   gross_churn:
     label: Gross Revenue Churn
     unit: '%'
@@ -47,14 +47,14 @@ benchmarks:
     healthyLow: 3
     healthyHigh: 5
     higherIsBetter: true
-    source: "SaaS guardrail (\u2265 3:1)"
+    source: SaaS guardrail (≥ 3:1)
   rule_of_40:
     label: Rule of 40
     unit: '%'
     healthyLow: 40
     healthyHigh: 60
     higherIsBetter: true
-    source: "SaaS composite health (\u2265 40%)"
+    source: SaaS composite health (≥ 40%)
   current_ratio:
     label: Current Ratio
     unit: Ratio
@@ -139,6 +139,41 @@ benchmarks:
     healthyHigh: 1000000
     higherIsBetter: true
     source: Scale-dependent guidance
+  free_cash_flow:
+    label: Free Cash Flow
+    unit: Currency
+    healthyLow: 100000
+    healthyHigh: 800000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  fcff:
+    label: Free Cash Flow to Firm (FCFF)
+    unit: Currency
+    healthyLow: 100000
+    healthyHigh: 800000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  fcfe:
+    label: Free Cash Flow to Equity (FCFE)
+    unit: Currency
+    healthyLow: 80000
+    healthyHigh: 700000
+    higherIsBetter: true
+    source: Scale-dependent guidance
+  fcf_margin:
+    label: FCF Margin
+    unit: '%'
+    healthyLow: 5
+    healthyHigh: 25
+    higherIsBetter: true
+    source: Cross-industry median bands
+  fcf_conversion:
+    label: FCF Conversion
+    unit: Ratio
+    healthyLow: 0.5
+    healthyHigh: 1.2
+    higherIsBetter: true
+    source: Cross-industry median bands
   burn_rate:
     label: Monthly Burn Rate
     unit: Currency/month
@@ -152,7 +187,7 @@ benchmarks:
     healthyLow: 12
     healthyHigh: 24
     higherIsBetter: true
-    source: "Venture norms (target \u2265 18 months)"
+    source: Venture norms (target ≥ 18 months)
   gross_profit:
     label: Gross Profit
     unit: Currency

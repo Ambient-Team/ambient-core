@@ -14,7 +14,12 @@
     "methodology": { "type": "string" },
     "datasource": { "type": "array", "items": { "type": "string" } },
     "metricIds": { "type": "array", "items": { "type": "integer" } },
-    "benchmarkKey": { "type": "string" }
+    "benchmarkKey": { "type": "string" },
+    "alsoKnownAs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Human-readable alternate names for lookup and documentation (not legacy slug remaps)."
+    }
   },
   "additionalProperties": true
 }

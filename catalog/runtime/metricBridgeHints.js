@@ -31,6 +31,12 @@ const BRIDGE_RULES = [
     "flags": "i",
     "financial": "Core profitability — DSCR and cap rate driver",
     "operational": "Ops efficiency flows to NOI"
+  },
+  {
+    "pattern": "free cash flow|\\bfcf\\b|fcff|fcfe",
+    "flags": "i",
+    "financial": "Valuation and capex planning — FCF, FCFF, and FCFE after operating cash and capex",
+    "operational": "Capex and working-capital drivers — feeds discretionary cash metrics"
   }
 ].map((rule) => ({
   test: new RegExp(rule.pattern, rule.flags || 'i'),
