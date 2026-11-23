@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Credit Granting**
 - Metrics: **26**
 - Data options: **4**
-- Benchmark keys: **50**
+- Benchmark keys: **55**
 
 ## Data options
 

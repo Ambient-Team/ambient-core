@@ -7,7 +7,21 @@ from typing import Any
 
 
 def normalize_synonym(label: str) -> str:
-    """Lowercase, collapse whitespace; suitable for index keys."""
+    """Normalize a human-readable metric label for index keys.
+
+    Args:
+        label: Raw label or synonym string.
+
+    Returns:
+        Lowercase string with collapsed whitespace.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> normalize_synonym("  Days Sales   Outstanding  ")
+        'days sales outstanding'
+    """
     return re.sub(r"\s+", " ", str(label or "").strip().lower())
 
 
@@ -16,7 +30,23 @@ def merge_also_known_as(
     catalog_key: str,
     overlay: dict[str, Any] | None,
 ) -> list[str]:
-    """Merge explicit, overlay, and fallback (canonical name) synonyms."""
+    """Merge explicit, overlay, and fallback synonyms for one metric record.
+
+    Args:
+        metric: Catalog metric dict from the generator.
+        catalog_key: Expanded catalog metric key.
+        overlay: Optional ``catalog/metric_also_known_as.yaml`` content.
+
+    Returns:
+        Deduplicated list of display synonyms.
+
+    Raises:
+        None: This callable does not raise.
+
+    Example:
+        >>> merge_also_known_as({"name": "Free Cash Flow"}, "x.core.free_cash_flow", None)
+        ['Free Cash Flow']
+    """
     combined: list[str] = []
     explicit = metric.get("alsoKnownAs") or []
     if isinstance(explicit, list):
@@ -38,7 +68,22 @@ def build_synonym_index(
     *,
     industry: str | None = None,
 ) -> dict[str, str]:
-    """Map normalized synonym -> catalogMetricKey within one industry (or all if industry is None)."""
+    """Build a normalized synonym to catalogMetricKey map.
+
+    Args:
+        metrics: Expanded catalog metrics keyed by catalogMetricKey.
+        industry: When set, only metrics for this industry pack are indexed.
+
+    Returns:
+        Mapping from normalized synonym to catalogMetricKey.
+
+    Raises:
+        ValueError: When a synonym maps to more than one metric in the scope.
+
+    Example:
+        >>> build_synonym_index({}, industry="Healthcare")
+        {}
+    """
     index: dict[str, str] = {}
     for key, metric in metrics.items():
         if industry is not None and str(metric.get("industry", "")) != industry:
@@ -60,7 +105,20 @@ def build_synonym_index(
 
 
 def validate_synonyms_globally(metrics: dict[str, dict[str, Any]]) -> None:
-    """Ensure synonyms are unique within each industry pack."""
+    """Validate that alsoKnownAs synonyms do not collide within any industry pack.
+
+    Args:
+        metrics: Expanded catalog metrics keyed by catalogMetricKey.
+
+    Returns:
+        None.
+
+    Raises:
+        ValueError: When any industry pack contains a duplicate synonym.
+
+    Example:
+        >>> validate_synonyms_globally({})
+    """
     industries = {str(m.get("industry", "")) for m in metrics.values()}
     for ind in sorted(industries):
         if not ind:
@@ -75,7 +133,24 @@ def resolve_metric_by_name(
     industry: str | None = None,
     index: dict[str, str] | None = None,
 ) -> str | None:
-    """Resolve a human label or legacy slug to a catalogMetricKey."""
+    """Resolve a human label or slug to a catalogMetricKey.
+
+    Args:
+        metrics: Expanded catalog metrics keyed by catalogMetricKey.
+        query: Human-readable label, synonym, or slug fragment.
+        industry: Optional industry scope when labels repeat across packs.
+        index: Optional precomputed synonym index for the industry scope.
+
+    Returns:
+        Matching catalogMetricKey, or None when no match exists.
+
+    Raises:
+        ValueError: When building the synonym index detects a duplicate synonym.
+
+    Example:
+        >>> resolve_metric_by_name({}, "CFO", industry="Healthcare") is None
+        True
+    """
     want = normalize_synonym(query)
     if not want:
         return None

@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Life Sciences**
 - Metrics: **5**
 - Data options: **2**
-- Benchmark keys: **50**
+- Benchmark keys: **55**
 
 ## Data options
 

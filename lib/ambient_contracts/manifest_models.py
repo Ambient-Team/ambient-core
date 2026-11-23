@@ -252,7 +252,21 @@ class CatalogManifest:
         *,
         industry: str | None = None,
     ) -> CatalogMetric | None:
-        """Resolve a metric by canonical name, catalog key, or alsoKnownAs synonym."""
+        """Resolve a metric by canonical name, catalog key, or alsoKnownAs synonym.
+
+        Args:
+            label: Human-readable metric name or synonym.
+            industry: Optional industry scope when labels repeat across packs.
+
+        Returns:
+            CatalogMetric | None.
+
+        Raises:
+            None: This callable does not raise.
+
+        Example:
+            >>> resolve_metric_by_label("CFO", industry="Healthcare")
+        """
         from ambient_contracts.metric_synonyms import normalize_synonym
 
         want = normalize_synonym(label)

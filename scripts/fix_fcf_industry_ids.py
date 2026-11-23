@@ -40,7 +40,6 @@ def main() -> int:
     lines = METRICS.read_text(encoding="utf-8").splitlines()
     out: list[str] = []
     current_industry: str | None = None
-    skip = False
     for line in lines:
         if line.strip() == "industryIds:":
             out.append(line)

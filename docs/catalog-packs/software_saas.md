@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Software (SaaS)**
 - Metrics: **8**
 - Data options: **4**
-- Benchmark keys: **58**
+- Benchmark keys: **63**
 
 ## Data options
 

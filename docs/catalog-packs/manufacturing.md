@@ -5,14 +5,14 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Manufacturing**
 - Metrics: **6**
 - Data options: **12**
-- Benchmark keys: **60**
+- Benchmark keys: **65**
 
 ## Data options
 
 - `Allmanufacturingds-ap-aging` — Accounts payable aging (12 fields)
 - `Allmanufacturingds-ar-aging` — Accounts receivable aging (12 fields)
 - `Allmanufacturingds-balance-sheet` — Balance sheet (8 fields)
-- `Allmanufacturingds-bank-statements` — Bank statements (14 fields)
+- `Allmanufacturingds-bank-statements` — Bank statements (16 fields)
 - `Allmanufacturingds-general-ledger` — General ledger (8 fields)
 - `Allmanufacturingds-inventory-records` — Inventory records (7 fields)
 - `Allmanufacturingds-production-output` — Production output logs (7 fields)

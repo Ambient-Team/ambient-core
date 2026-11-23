@@ -5,7 +5,7 @@ Auto-generated from `catalog/industries/` YAML. Do not edit by hand.
 - Industry label: **Aviation**
 - Metrics: **12**
 - Data options: **3**
-- Benchmark keys: **50**
+- Benchmark keys: **55**
 
 ## Data options
 
