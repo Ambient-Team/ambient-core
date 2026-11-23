@@ -299,6 +299,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`aviation.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`aviation.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -312,7 +314,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`aviation.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`aviation.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -511,6 +512,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`banking.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`banking.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -524,7 +527,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`banking.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`banking.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -753,6 +755,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`construction.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`construction.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -766,7 +770,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`construction.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`construction.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -1022,6 +1025,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`credit_granting.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`credit_granting.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -1035,7 +1040,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`credit_granting.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`credit_granting.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -1228,6 +1232,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`financial_services.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`financial_services.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -1241,7 +1247,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`financial_services.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`financial_services.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -1443,6 +1448,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`funds.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`funds.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -1456,7 +1463,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`funds.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`funds.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -1718,6 +1724,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`healthcare.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`healthcare.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -1731,7 +1739,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`healthcare.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`healthcare.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -1939,6 +1946,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`insurance.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`insurance.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -1952,7 +1961,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`insurance.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`insurance.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -2151,6 +2159,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`life_sciences.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`life_sciences.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -2164,7 +2174,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`life_sciences.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`life_sciences.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -2357,6 +2366,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`manufacturing.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`manufacturing.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -2370,7 +2381,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`manufacturing.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`manufacturing.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -2554,6 +2564,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`passenger_transit.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`passenger_transit.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -2567,7 +2579,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`passenger_transit.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`passenger_transit.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -2763,6 +2774,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`real_estate.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`real_estate.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -2776,7 +2789,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`real_estate.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`real_estate.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -2972,6 +2984,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`restaurants.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`restaurants.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -2985,7 +2999,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`restaurants.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`restaurants.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -3163,6 +3176,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`retail.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`retail.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -3176,7 +3191,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`retail.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`retail.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -3369,6 +3383,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`software_saas.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`software_saas.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -3382,7 +3398,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`software_saas.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`software_saas.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -3584,6 +3599,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`transportation.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`transportation.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -3597,7 +3614,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`transportation.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`transportation.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -3799,6 +3815,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`trusts.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`trusts.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -3812,7 +3830,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`trusts.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`trusts.core.gross_margin`** — Gross Profit Margin
   - gross profit margin
@@ -3999,6 +4016,8 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 
 - **`vertical_farming.core.fcfe`** — Free Cash Flow to Equity (FCFE)
   - free cash flow to shareholders
+  - free cash flow to equity
+  - levered free cash flow
   - levered free cash flow to equity
 
 - **`vertical_farming.core.fcff`** — Free Cash Flow to Firm (FCFF)
@@ -4012,7 +4031,6 @@ Each bullet lists alternate names that resolve to the same canonical metric.
 - **`vertical_farming.core.free_cash_flow`** — Free Cash Flow
   - FCF
   - free cashflow
-  - levered free cash flow
 
 - **`vertical_farming.core.gross_margin`** — Gross Profit Margin
   - gross profit margin

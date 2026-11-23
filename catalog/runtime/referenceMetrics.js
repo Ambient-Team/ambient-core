@@ -613,8 +613,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3551,
       "industry": "Real Estate",
@@ -703,6 +702,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3553,
@@ -3863,8 +3864,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3566,
       "industry": "Vertical Farming",
@@ -3953,6 +3953,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3568,
@@ -6928,8 +6930,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3561,
       "industry": "Transportation",
@@ -7018,6 +7019,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3563,
@@ -9798,8 +9801,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3616,
       "industry": "Passenger Transit",
@@ -9888,6 +9890,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3618,
@@ -12392,8 +12396,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3621,
       "industry": "Aviation",
@@ -12482,6 +12485,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3623,
@@ -15225,8 +15230,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3546,
       "industry": "Manufacturing",
@@ -15315,6 +15319,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3548,
@@ -17871,8 +17877,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3636,
       "industry": "Construction",
@@ -17961,6 +17966,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3638,
@@ -20611,8 +20618,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3541,
       "industry": "Healthcare",
@@ -20701,6 +20707,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3543,
@@ -23825,8 +23833,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3556,
       "industry": "Restaurants",
@@ -23915,6 +23922,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3558,
@@ -26768,8 +26777,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3571,
       "industry": "Life Sciences",
@@ -26858,6 +26866,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3573,
@@ -29336,8 +29346,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3576,
       "industry": "Banking",
@@ -29426,6 +29435,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3578,
@@ -32107,8 +32118,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3581,
       "industry": "Financial Services",
@@ -32197,6 +32207,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3583,
@@ -34752,8 +34764,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3626,
       "industry": "Funds",
@@ -34842,6 +34853,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3628,
@@ -38012,8 +38025,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3631,
       "industry": "Trusts",
@@ -38102,6 +38114,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3633,
@@ -40489,8 +40503,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3586,
       "industry": "Insurance",
@@ -40579,6 +40592,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3588,
@@ -43089,8 +43104,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3606,
       "industry": "Credit Granting",
@@ -43179,6 +43193,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3608,
@@ -46304,8 +46320,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3611,
       "industry": "Software (SaaS)",
@@ -46394,6 +46409,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3613,
@@ -49073,8 +49090,7 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "FCF",
-        "free cashflow",
-        "levered free cash flow"
+        "free cashflow"
       ],
       "id": 3591,
       "industry": "Retail",
@@ -49163,6 +49179,8 @@ export const REFERENCE_DATA = {
       },
       "alsoKnownAs": [
         "free cash flow to shareholders",
+        "free cash flow to equity",
+        "levered free cash flow",
         "levered free cash flow to equity"
       ],
       "id": 3593,

@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from ambient_calc import compute_all
+from ambient_calc import compute_all, compute_metric_result
 
 FIXTURE = Path(__file__).resolve().parent / "fixtures" / "ratios" / "harbor_ridge_ratio_test_cases.json"
 CORE = Path(__file__).resolve().parents[1] / "catalog" / "shared" / "metrics.yaml"
@@ -84,6 +84,25 @@ def test_fcf_metrics_compute(template_key: str) -> None:
     slug = templates[template_key].get("slug") or template_key.replace("-", "_")
     assert slug in results
     assert results[slug] is not None
+
+
+@pytest.mark.parametrize("net_income", [0.0, -50_000.0])
+def test_fcf_conversion_null_when_net_income_not_positive(net_income: float) -> None:
+    templates = yaml.safe_load(CORE.read_text(encoding="utf-8"))["templates"]
+    metrics = [
+        {
+            **templates[k],
+            "slug": templates[k].get("slug") or k.replace("-", "_"),
+        }
+        for k in ("operating-cash-flow", "free-cash-flow", "fcf-conversion")
+    ]
+    inputs = {**_fixture_inputs(), "net_income": net_income}
+    results = compute_all(metrics, inputs)
+    assert results["fcf_conversion"] is None
+    conversion = templates["fcf-conversion"]
+    res = compute_metric_result(conversion, inputs, results)
+    assert res.value is None
+    assert res.null_reason == "zero_denominator"
 
 
 def test_free_cash_flow_identity() -> None:

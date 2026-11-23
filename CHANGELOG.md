@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Generated synonym index at `docs/generated/catalog-metric-synonyms.md`.
 - Tests: `tests/test_fcf_metrics.py`, `tests/test_metric_synonyms.py`; CI gate `scripts/check_metric_synonyms.py`.
 
+### Changed
+
+- `levered free cash flow` synonym moved from `free_cash_flow` to `fcfe`; FCF conversion returns null (zero denominator) when net income is not positive.
+
 ## [0.4.0] - 2026-11-13
 
 ### Removed

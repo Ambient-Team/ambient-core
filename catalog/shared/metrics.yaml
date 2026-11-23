@@ -447,7 +447,6 @@ templates:
     alsoKnownAs:
     - FCF
     - free cashflow
-    - levered free cash flow
   fcff:
     datasource:
     - Financial statements
@@ -517,6 +516,8 @@ templates:
       - net_borrowing
     alsoKnownAs:
     - free cash flow to shareholders
+    - free cash flow to equity
+    - levered free cash flow
     - levered free cash flow to equity
   fcf-margin:
     datasource:
